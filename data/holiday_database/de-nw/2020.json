@@ -1,0 +1,23 @@
+{
+    "2020-ostern": {
+        "id": "2020-ostern",
+        "name": "Osterferien",
+        "start": "2020-04-06",
+        "end": "2020-04-18",
+        "type": "holiday",
+    },
+    "2020-pfingsten": {
+        "id": "2020-pfingsten",
+        "name": "Pfingstferien",
+        "start": "2020-06-02",
+        "end": "2020-06-02",
+        "type": "holiday",
+    },
+    "2020-sommer": {
+        "id": "2020-sommer",
+        "name": "Weihnachtsferien",
+        "start": "2020-06-29",
+        "end": "2020-08-11",
+        "type": "holiday",
+    }
+}
