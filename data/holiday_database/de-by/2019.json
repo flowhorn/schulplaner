@@ -1,0 +1,9 @@
+{
+    "2019-sommer": {
+        "id": "2019-sommer",
+        "name": "Sommerferien",
+        "start": "2019-07-29",
+        "end": "2019-09-09",
+        "type": "holiday",
+    },
+}

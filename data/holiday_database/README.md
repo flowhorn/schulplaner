@@ -14,6 +14,8 @@ Beispiel NRW:
         "2019",
         "2020",
     ],
+    "isOfficial": true,
+    "published": true,
 }
 ```
 

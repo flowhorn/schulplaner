@@ -12,6 +12,7 @@ class Region {
   final Country country;
   final Date lastRefreshed;
   final List<String> years;
+  final bool isOfficial;
 
   const Region({
     @required this.id,
@@ -19,6 +20,7 @@ class Region {
     @required this.country,
     @required this.lastRefreshed,
     @required this.years,
+    @required this.isOfficial,
   });
 }
 
@@ -31,6 +33,7 @@ class RegionConverter {
       country: countryFromJson(json['country']),
       lastRefreshed: Date(json['lastRefreshed']),
       years: decodeList(json['years'], (it) => it),
+      isOfficial: json['isOfficial'],
     );
   }
 
@@ -41,6 +44,7 @@ class RegionConverter {
       'country': countryToJson(region.country),
       'lastRefreshed': region.lastRefreshed.toDateString,
       'years': region.years,
+      'isOfficial': region.isOfficial,
     };
   }
 }
