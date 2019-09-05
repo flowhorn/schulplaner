@@ -1,2 +1,30 @@
 {
+    "2020-winter": {
+        "id": "2020-winter",
+        "name": "Winterferien",
+        "start": "2020-02-10",
+        "end": "2020-02-14",
+        "type": "holiday"
+    },
+    "2020-ostern": {
+        "id": "2020-ostern",
+        "name": "Osterferien",
+        "start": "2020-04-06",
+        "end": "2020-04-17",
+        "type": "holiday"
+    },
+    "2020-pfingsten": {
+        "id": "2020-pfingsten",
+        "name": "Pfingstferien",
+        "start": "2020-05-22",
+        "end": "2020-05-22",
+        "type": "holiday"
+    },
+    "2020-sommer": {
+        "id": "2020-sommer",
+        "name": "Sommerferien",
+        "start": "2020-07-20",
+        "end": "2020-08-28",
+        "type": "holiday"
+    }
 }
