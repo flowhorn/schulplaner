@@ -6,15 +6,15 @@
         "end": "2019-10-26",
         "type": "holiday"
     },
-    "2019-herbst": {
-        "id": "2019-herbst",
+    "2019-herbst2": {
+        "id": "2019-herbst2",
         "name": "Tag der Deutschen Einheit",
         "start": "2019-10-03",
         "end": "2019-10-03",
         "type": "holiday"
     },
-    "2019-herbst": {
-        "id": "2019-herbst",
+    "2019-herbst3": {
+        "id": "2019-herbst3",
         "name": "Allerheiligen",
         "start": "2019-11-01",
         "end": "2019-11-01",
