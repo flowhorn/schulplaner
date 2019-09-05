@@ -1,0 +1,11 @@
+{
+    "id": "at-7",
+    "name": "Tirol",
+    "country": "austria",
+    "lastRefreshed": "2019-01-01",
+    "years": [
+        "2019"
+    ],
+    "isOfficial": true,
+    "published": true
+}

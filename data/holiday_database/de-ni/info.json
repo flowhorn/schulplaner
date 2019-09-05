@@ -1,8 +1,8 @@
 {
-    "id": "de-th",
-    "name": "Thüringen",
+    "id": "de-ni",
+    "name": "Niedersachsen",
     "country": "germany",
-    "lastRefreshed": "2019-09-04",
+    "lastRefreshed": "2019-08-29",
     "years": [
         "2019"
     ],

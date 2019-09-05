@@ -3,7 +3,9 @@
     "name": "Hamburg",
     "country": "germany",
     "lastRefreshed": "2019-09-04",
-    "years": [],
+    "years": [
+        "2019"
+    ],
     "isOfficial": true,
     "published": true
 }
