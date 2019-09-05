@@ -1,1 +1,23 @@
-{}
+{
+    "2019-sommer": {
+        "id": "2019-sommer",
+        "name": "Sommerferien",
+        "start": "2019-07-29",
+        "end": "2019-09-10",
+        "type": "holiday"
+    },
+    "2019-herbst": {
+        "id": "2019-herbst",
+        "name": "Herbstferien",
+        "start": "2019-10-28",
+        "end": "2019-10-30",
+        "type": "holiday"
+    },
+    "2019-weihnachten": {
+        "id": "2019-weihnachten",
+        "name": "Weihnachtsferien",
+        "start": "2019-12-23",
+        "end": "2020-01-04",
+        "type": "holiday"
+    }
+}

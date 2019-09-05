@@ -1,11 +1,4 @@
 {
-    "2020-winter": {
-        "id": "2020-winter",
-        "name": "Winterferien",
-        "start": "2020-02-24",
-        "end": "2020-02-28",
-        "type": "holiday"
-    },
     "2020-ostern": {
         "id": "2020-ostern",
         "name": "Osterferien",
@@ -23,8 +16,8 @@
     "2020-sommer": {
         "id": "2020-sommer",
         "name": "Sommerferien",
-        "start": "2020-07-27",
-        "end": "2020-09-07",
+        "start": "2020-07-30",
+        "end": "2020-09-12",
         "type": "holiday"
     }
 }
