@@ -28,14 +28,14 @@
         "type": "holiday"
     },
     "2020-pfingsten2": {
-        "id": "2020-pfingsten",
+        "id": "2020-pfingsten2",
         "name": "Pfingstferien",
         "start": "2020-06-02",
         "end": "2020-06-02",
         "type": "holiday"
     },
     "2020-pfingsten3": {
-        "id": "2020-pfingsten",
+        "id": "2020-pfingsten3",
         "name": "Fronleichnam",
         "start": "2020-06-11",
         "end": "2020-06-11",
