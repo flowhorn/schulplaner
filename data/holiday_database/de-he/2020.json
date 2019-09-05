@@ -1,0 +1,16 @@
+{
+    "2020-ostern": {
+        "id": "2020-ostern",
+        "name": "Osterferien",
+        "start": "2020-04-06",
+        "end": "2020-04-17",
+        "type": "holiday"
+    },
+    "2020-sommer": {
+        "id": "2020-sommer",
+        "name": "Sommerferien",
+        "start": "2020-07-06",
+        "end": "2020-08-14",
+        "type": "holiday"
+    }
+}
