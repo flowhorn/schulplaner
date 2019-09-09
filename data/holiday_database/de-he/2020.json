@@ -6,6 +6,34 @@
         "end": "2020-04-17",
         "type": "holiday"
     },
+    "2020-ostern2": {
+        "id": "2020-ostern2",
+        "name": "Tag der Arbeit",
+        "start": "2020-05-01",
+        "end": "2020-05-01",
+        "type": "holiday"
+    },
+    "2020-ostern3": {
+        "id": "2020-ostern3",
+        "name": "Christi Himmelfahrt",
+        "start": "2020-05-21",
+        "end": "2020-05-21",
+        "type": "holiday"
+    },
+    "2020-pfingsten": {
+        "id": "2020-pfingsten",
+        "name": "Pfingstmontag",
+        "start": "2020-06-01",
+        "end": "2020-06-01",
+        "type": "holiday"
+    },
+    "2020-pfingsten2": {
+        "id": "2020-pfingsten2",
+        "name": "Fronleichnam",
+        "start": "2020-06-11",
+        "end": "2020-06-11",
+        "type": "holiday"
+    },
     "2020-sommer": {
         "id": "2020-sommer",
         "name": "Sommerferien",
