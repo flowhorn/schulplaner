@@ -2,10 +2,11 @@
     "id": "de-mv",
     "name": "Mecklenburg-Vorpommern",
     "country": "germany",
-    "lastRefreshed": "2019-09-09",
+    "lastRefreshed": "2020-09-05",
     "years": [
         "2019",
-        "2020"
+        "2020",
+        "2021"
     ],
     "isOfficial": true,
     "published": true
