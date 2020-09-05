@@ -54,5 +54,33 @@
         "start": "2020-07-16",
         "end": "2020-08-26",
         "type": "holiday"
+    },
+    "2020-herbst": {
+        "id": "2020-herbst",
+        "name": "Tag der Deutschen Einheit",
+        "start": "2020-10-03",
+        "end": "2020-10-03",
+        "type": "holiday"
+    },
+    "2020-herbst2": {
+        "id": "2020-herbst2",
+        "name": "Herbstferien",
+        "start": "2020-10-12",
+        "end": "2020-10-24",
+        "type": "holiday"
+    },
+    "2020-herbst3": {
+        "id": "2020-herbst3",
+        "name": "Reformationstag",
+        "start": "2020-10-31",
+        "end": "2020-10-31",
+        "type": "holiday"
+    },
+    "2020-weihnachten": {
+        "id": "2020-weihnachten",
+        "name": "Weihnachtsferien",
+        "start": "2020-12-23",
+        "end": "2021-01-08",
+        "type": "holiday"
     }
 }

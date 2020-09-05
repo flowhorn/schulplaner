@@ -47,5 +47,33 @@
         "start": "2020-07-30",
         "end": "2020-09-12",
         "type": "holiday"
+    },
+    "2020-herbst": {
+        "id": "2020-herbst",
+        "name": "Herbstferien",
+        "start": "2020-10-26",
+        "end": "2020-10-30",
+        "type": "holiday"
+    },
+    "2020-herbst2": {
+        "id": "2020-herbst2",
+        "name": "Tag der Deutschen Einheit",
+        "start": "2019-10-03",
+        "end": "2019-10-03",
+        "type": "holiday"
+    },
+    "2020-herbst3": {
+        "id": "2020-herbst3",
+        "name": "Allerheiligen",
+        "start": "2019-11-01",
+        "end": "2019-11-01",
+        "type": "holiday"
+    },
+    "2020-weihnachten": {
+        "id": "2020-weihnachten",
+        "name": "Weihnachtsferien",
+        "start": "2020-12-23",
+        "end": "2021-01-09",
+        "type": "holiday"
     }
 }
