@@ -48,13 +48,6 @@
         "end": "2020-10-31",
         "type": "holiday"
     },
-    "2020-sommer": {
-        "id": "2020-sommer",
-        "name": "Sommerferien",
-        "start": "2020-07-20",
-        "end": "2020-08-28",
-        "type": "holiday"
-    },
     "2020-weihnachten": {
         "id": "2020-weihnachten",
         "name": "Weihnachtsferien",
