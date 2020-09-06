@@ -50,7 +50,7 @@
     },
     "2021-pfingsten2": {
         "id": "2021-pfingsten2",
-        "name": "Pfingstmontag"
+        "name": "Pfingstmontag",
         "start": "2021-05-24",
         "end": "2021-05-24",
         "type": "holiday"
@@ -61,5 +61,5 @@
         "start": "2021-07-22",
         "end": "2021-09-01",
         "type": "holiday"
-    },
+    }
 }
