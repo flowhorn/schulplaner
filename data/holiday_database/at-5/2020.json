@@ -1,0 +1,51 @@
+{
+    "2020-sommer": {
+        "id": "2020-sommer",
+        "name": "Sommerferien",
+        "start": "2020-07-11",
+        "end": "2020-09-13",
+        "type": "holiday"
+    },
+    "2020-sommer2": {
+        "id": "2020-sommer2",
+        "name": "Sommerferien",
+        "start": "2020-09-24",
+        "end": "2020-09-24",
+        "type": "holiday"
+    },
+    "2020-herbst": {
+        "id": "2020-herbst",
+        "name": "Herbstferien",
+        "start": "2020-10-27",
+        "end": "2020-10-31",
+        "type": "holiday"
+    },
+    "2020-herbst2": {
+        "id": "2020-herbst2",
+        "name": "Herbstferien",
+        "start": "2020-11-02",
+        "end": "2020-11-02",
+        "type": "holiday"
+    },
+    "2020-herbst2": {
+        "id": "2020-herbst2",
+        "name": "Nationalfeiertag",
+        "start": "2020-10-26",
+        "end": "2020-10-26",
+        "type": "holiday"
+    },
+    "2020-weihnachten": {
+        "id": "2020-weihnachten",
+        "name": "Mariä Empfängnis",
+        "start": "2020-12-08",
+        "end": "2020-12-08",
+        "type": "holiday"
+    },
+    "2020-weihnachten2": {
+        "id": "2020-weihnachten2",
+        "name": "Weihnachtsferien",
+        "start": "2020-12-24",
+        "end": "2021-01-06",
+        "type": "holiday"
+    }
+}
