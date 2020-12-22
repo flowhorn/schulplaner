@@ -1,6 +1,6 @@
 {
-    "2020-weihnachten": {
-        "id": "2020-weihnachten",
+    "2020-weihnachten1": {
+        "id": "2020-weihnachten1",
         "name": "Heilige drei Könige",
         "start": "2020-01-06",
         "end": "2020-01-06",
@@ -53,6 +53,41 @@
         "name": "Sommerferien",
         "start": "2020-07-27",
         "end": "2020-09-07",
+        "type": "holiday"
+    },
+    "2020-herbst": {
+        "id": "2020-herbst",
+        "name": "Herbstferien",
+        "start": "2020-11-31",
+        "end": "2020-11-06",
+        "type": "holiday"
+    },
+    "2020-herbst2": {
+        "id": "2020-herbst2",
+        "name": "Herbstferien",
+        "start": "2020-11-18",
+        "end": "2020-11-18",
+        "type": "holiday"
+    },
+    "2020-herbst3": {
+        "id": "2020-herbst3",
+        "name": "Tag der deutschen Einheit",
+        "start": "2020-10-03",
+        "end": "2020-10-03",
+        "type": "holiday"
+    },
+    "2020-herbst4": {
+        "id": "2020-herbst4",
+        "name": "Allerheiligen",
+        "start": "2020-11-01",
+        "end": "2020-11-01",
+        "type": "holiday"
+    },
+    "2020-weihnachten2": {
+        "id": "2020-weihnachten2",
+        "name": "Weihnachtsferien",
+        "start": "2020-12-23",
+        "end": "2021-01-09",
         "type": "holiday"
     }
 }

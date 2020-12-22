@@ -2,9 +2,11 @@
     "id": "at-3",
     "name": "Niederösterreich",
     "country": "austria",
-    "lastRefreshed": "2019-01-01",
+    "lastRefreshed": "2020-09-06",
     "years": [
-        "2019"
+        "2019",
+        "2020",
+        "2021"
     ],
     "isOfficial": true,
     "published": true
