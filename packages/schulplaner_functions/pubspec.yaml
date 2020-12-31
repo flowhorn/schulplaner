@@ -1,0 +1,26 @@
+name: schulplaner_functions
+description: A new Flutter package project.
+version: 0.0.1
+author:
+homepage:
+publish_to: none
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+  flutter: ">=1.17.0 <2.0.0"
+
+dependencies:
+  app_functions:
+    path: ../app_functions
+  schulplaner_models:
+    path: ../schulplaner_models
+  bloc:
+    path: ../bloc
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:

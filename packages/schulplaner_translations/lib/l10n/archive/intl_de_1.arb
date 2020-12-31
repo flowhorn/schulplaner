@@ -1,0 +1,389 @@
+{
+  "informations": "Informationen",
+  "@informations": {
+    "description": "_",
+    "type": "text",
+    "placeholders": {}
+  },
+  "apptitle": "Schulplaner",
+  "@apptitle": {
+    "description": "Title for application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "settings": "Einstellungen",
+  "@settings": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "appearance": "Aussehen",
+  "@appearance": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "version": "Version",
+  "@version": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "language": "Sprache",
+  "@language": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "navigation": "Navigation",
+  "@navigation": {
+    "description": "_",
+    "type": "text",
+    "placeholders": {}
+  },
+  "home": "Home",
+  "@home": {
+    "description": "_",
+    "type": "text",
+    "placeholders": {}
+  },
+  "timetable": "Stundenplan",
+  "@timetable": {
+    "description": "_",
+    "type": "text",
+    "placeholders": {}
+  },
+  "upcoming": "Anstehend",
+  "@upcoming": {
+    "description": "_",
+    "type": "text",
+    "placeholders": {}
+  },
+  "courses": "Fächer",
+  "@courses": {
+    "description": "_",
+    "type": "text",
+    "placeholders": {}
+  },
+  "library": "Bibliothek",
+  "@library": {
+    "description": "_",
+    "type": "text",
+    "placeholders": {}
+  },
+  "selected": "Ausgewählt",
+  "@selected": {
+    "description": "_",
+    "type": "text",
+    "placeholders": {}
+  },
+  "manage": "Verwalten",
+  "@manage": {
+    "description": "_",
+    "type": "text",
+    "placeholders": {}
+  },
+  "accept": "Akzeptieren",
+  "@accept": {
+    "description": "_",
+    "type": "text",
+    "placeholders": {}
+  },
+  "done": "Fertig",
+  "@done": {
+    "description": "_",
+    "type": "text",
+    "placeholders": {}
+  },
+  "further": "Weiteres",
+  "@further": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "automatic": "Automatisch",
+  "@automatic": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "failed": "Fehlgeschlagen",
+  "@failed": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "error": "Error",
+  "@error": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "confirm": "Bestätigen",
+  "@confirm": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "cancel": "Abbrechen",
+  "@cancel": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ok": "Ok",
+  "@ok": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "set": "Festlegen",
+  "@set": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "general": "Allgemein",
+  "@general": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "personal": "Persönlich",
+  "@personal": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "configure": "Konfigurieren",
+  "@configure": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "functionnotavailable": "In diesem Moment ist diese Funktion nicht verfügbar",
+  "@functionnotavailable": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "create_quickly": "Schnell erstellen",
+  "@create_quickly": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "task": "Aufgabe",
+  "@task": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "tasks": "Aufgaben",
+  "@tasks": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "event": "Veranstaltung",
+  "@event": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "events": "Veranstaltungen",
+  "@events": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "note": "Notiz",
+  "@note": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "notes": "Notizen",
+  "@notes": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "grade": "Note",
+  "@grade": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "grades": "Noten",
+  "@grades": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "lessoninfo": "Stundeninfo",
+  "@lessoninfo": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "lessoninfos": "Stundeninfos",
+  "@lessoninfos": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "absenttime": "Fehlzeit",
+  "@absenttime": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "absenttimes": "Fehlzeiten",
+  "@absenttimes": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "timeline": "Timeline",
+  "@timeline": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "calendar": "Kalender",
+  "@calendar": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "privacy": "Datenschutz",
+  "@privacy": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "privacy_policy": "Datenschutzerklärung",
+  "@privacy_policy": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "viewcompleteprivacypolicy": "Komplette Datenschutzerklärung ansehen",
+  "@viewcompleteprivacypolicy": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "policy_text_header": "Wir nehmen den Schutz Ihrer persönlichen Daten sehr ernst.",
+  "@policy_text_header": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "policy_text_1": "Die Daten werden sicher gespeichert und über https und SSL-Verschlüsselung mit Google Firebase übertragen",
+  "@policy_text_1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "policy_text_2": "Die Daten werden nur gespeichert und nicht verarbeitet.",
+  "@policy_text_2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "policy_text_3": "Es werden keine Daten an Dritte übertragen.",
+  "@policy_text_3": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "policy_text_4": "Zusätzliche Dienste sind Google Sign-In und Firebase.",
+  "@policy_text_4": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "contact_data_protection_commissioner": "Datenschutzbeauftragten kontaktieren",
+  "@contact_data_protection_commissioner": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "actions": "Aktionen",
+  "@actions": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "remove_data": "Daten vollständig löschen",
+  "@remove_data": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "retrieve_data": "Gespeicherte Daten abrufen",
+  "@retrieve_data": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "help": "Hilfe",
+  "@help": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "help_wait": "In den folgenden Updates werden sie hier hilfreiche Tipps und Anleitungen finden!",
+  "@help_wait": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "guidelines": "Richtlinien",
+  "@guidelines": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "about": "Über",
+  "@about": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "contact_us": "Kontaktiere uns",
+  "@contact_us": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "rate_us": "Bewerte uns",
+  "@rate_us": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "licenses": "Lizenzen",
+  "@licenses": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "advantages": "Vorteile",
+  "@advantages": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "registration": "Anmeldung",
+  "@registration": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "signinmethodes": "Anmeldemethoden",
+  "@signinmethodes": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "anonymuser": "Anonymer Benutzer",
+  "@anonymuser": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "gotoprofile": "Gehe zu Profil",
+  "@gotoprofile": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "logout": "Ausloggen",
+  "@logout": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "monday": "Montag",
+  "@monday": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "tuesday": "Dienstag",
+  "@tuesday": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "wednesday": "Mittwoch",
+  "@wednesday": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "thursday": "Donnerstag",
+  "@thursday": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "friday": "Freitag",
+  "@friday": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "saturday": "Samstag",
+  "@saturday": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sunday": "Sonntag",
+  "@sunday": {
+    "type": "text",
+    "placeholders": {}
+  }
+}

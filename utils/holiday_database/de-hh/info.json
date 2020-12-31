@@ -1,0 +1,13 @@
+{
+    "id": "de-hh",
+    "name": "Hamburg",
+    "country": "germany",
+    "lastRefreshed": "2020-09-05",
+    "years": [
+        "2019",
+        "2020",
+        "2021"
+    ],
+    "isOfficial": true,
+    "published": true
+}

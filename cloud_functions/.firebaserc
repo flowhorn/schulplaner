@@ -1,0 +1,7 @@
+{
+  "projects": {
+    "development": "schulplaner-debug",
+    "production": "mainprojects-32581",
+    "default": "mainprojects-32581"
+  }
+}

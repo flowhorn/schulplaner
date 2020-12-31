@@ -1,0 +1,16 @@
+{
+    "2019-herbst": {
+        "id": "2019-herbst",
+        "name": "Herbstferien",
+        "start": "2019-10-01",
+        "end": "2019-10-11",
+        "type": "holiday"
+    },
+    "2019-weihnachten": {
+        "id": "2019-weihnachten",
+        "name": "Weihnachtsferien",
+        "start": "2019-12-23",
+        "end": "2020-01-10",
+        "type": "holiday"
+    }
+}

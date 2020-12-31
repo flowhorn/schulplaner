@@ -1,0 +1,214 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // USER
+    match /users/{userID} {
+      allow write,get: if userID == currentUID();
+      match /planner/{document=**} {
+        allow read, write: if userID == currentUID();
+      }
+      match /data/info {
+        allow read: if isLoggedIn();
+        allow write: if userID == currentUID();
+      }
+      match /data/{document=**} {
+        allow write: if userID == currentUID();
+        allow read: if userID == currentUID();
+      }
+      match /files/{document=**} {
+        allow read, write: if userID == currentUID();
+      }
+    }
+
+
+    // Courses
+    match /courses/{courseID} {
+      allow get: if isLoggedIn();
+      allow create: if isLoggedIn();
+      allow update: if isCourseMemberAndIsCreator(courseID);
+
+      match /lessons/{document=**} {
+        allow read: if isCourseMember(courseID); 
+        allow write: if isCourseMemberAndIsCreator(courseID);
+      }
+      match /grades/{document=**} {
+        allow read: if isCourseMember(courseID); 
+        allow write:if isCourseMemberAndIsCreator(courseID);
+      }
+      match /tasks/{document=**} {
+        allow read: if isCourseMember(courseID); 
+        allow write:if isCourseMemberAndIsCreator(courseID);
+      }
+      match /events/{document=**} {
+        allow read: if isCourseMember(courseID); 
+        allow write:if isCourseMemberAndIsCreator(courseID);
+      }
+      match /letter/{document=**} {
+        allow read: if isCourseMember(courseID); 
+        allow write:if isCourseMemberAndIsCreator(courseID);
+      }
+      match /lessoninfos/{document=**} {
+        allow read: if isCourseMember(courseID); 
+        allow write:if isCourseMemberAndIsCreator(courseID);
+      }
+    }
+
+    // SCHOOLCLASSES
+    match /schoolclasses/{schoolClassID} {
+      allow create: if isLoggedIn();
+      allow update: if isSchoolClassMemberAndIsCreator(schoolClassID);
+      allow get: if isLoggedIn();
+
+      match /events/{document=**} {
+        allow read: if isSchoolClassMember(schoolClassID);
+        allow write: if isSchoolClassMemberAndIsCreator(schoolClassID);
+      }
+      match /letter/{document=**} {
+        allow read: if isSchoolClassMember(schoolClassID);
+        allow write: if isSchoolClassMemberAndIsCreator(schoolClassID);
+      }
+      match /tasks/{document=**} {
+        allow read: if isSchoolClassMember(schoolClassID);
+        allow write: if isSchoolClassMemberAndIsCreator(schoolClassID);
+      }
+    }
+
+    // NOTIFICATIONS
+    match /notifications/{notificationID} {
+      allow write, get: if isLoggedIn() && getUIDfromMemberID(notificationID) == currentUID();
+    }
+
+    // REPORTS
+    match /reports/{reportID} {
+      allow create: if isLoggedIn();
+    }
+
+    // Problems
+    match /problems/{problemID} {
+      allow create, update: if isLoggedIn();
+    }
+
+    // PublicCodes
+    match /publiccodes/{publicCode} {
+      allow get: if isLoggedIn();
+    }
+
+    // Problems
+    match /Regions/{document=**} {
+      allow read: if isLoggedIn();
+    }
+
+    //Functions
+
+    function isOwnerAdminOrCreator(role) {
+      return role == 'owner' || role == 'admin' || role == 'creator';
+    }
+
+    function isCourseMember(courseId){
+      let courseData = getDataFromDocument('courses', courseId);
+      let isGroupVersionV3 = 'groupVersion' in courseData ? (courseData['groupVersion'] == 'v3') : false;
+      let userRolesArray = (courseData != null ? 'userRoles' in courseData : false) == true ? courseData['userRoles'] : null;
+      let userRole = userRolesArray == null ? null : (currentUID() in userRolesArray ? userRolesArray[currentUID()] : null);
+      return  isGroupVersionV3 == true ? vcheckIsCourseMember(courseData, userRole) : isLoggedIn();
+    }
+
+    function isCourseMemberAndIsCreator(courseId) {
+      let courseData = getDataFromDocument('courses', courseId);
+      let isGroupVersionV3 = 'groupVersion' in courseData ? (courseData['groupVersion'] == 'v3') : false;
+      let userRolesArray = (courseData != null ? 'userRoles' in courseData : false) == true ? courseData['userRoles'] : null;
+      let userRole = userRolesArray == null ? null :(currentUID() in userRolesArray ? userRolesArray[currentUID()] : null);
+      return isGroupVersionV3 == true ?  vcheckIsCourseMemberAndIsCreator(courseData, userRole) : isLoggedIn();
+    }
+
+    function vcheckIsCourseMember(courseData, userRole){
+      return userRole != null ? true : isCourseMemberInConnectedSchoolClass(courseData);
+    }
+
+    function vcheckIsCourseMemberAndIsCreator(courseData, userRole){
+      return isOwnerAdminOrCreator(userRole)? true : isCourseMemberAndIsCreatorInConnectedSchoolClass(courseData);
+    }
+
+    function isCourseMemberInConnectedSchoolClass(courseData) {
+      let class1 = 'class1' in courseData ? courseData['class1'] : null;
+      let class2 = 'class2' in courseData == true ? courseData['class2'] : null;
+      let class3 = 'class3' in courseData == true ? courseData['class3'] : null;
+      let memberInClass1 = class1 != null ? isSchoolClassMember(class1) : false;
+      let memberInClass2 = memberInClass1 == true ? (class2 != null ? isSchoolClassMember(class2) : false) : false;
+      let memberInClass3 = (memberInClass1 == true || memberInClass2 == true) ? (class3 != null ? isSchoolClassMember(class3) : false): false;
+      return memberInClass1 ? true : (memberInClass2 ? true : memberInClass3 ? true : false);
+    }
+
+    function isCourseMemberAndIsCreatorInConnectedSchoolClass(courseData){
+      let class1 = 'class1' in courseData ? courseData['class1'] : null;
+      let class2 = 'class2' in courseData == true ? courseData['class2'] : null;
+      let class3 = 'class3' in courseData == true ? courseData['class3'] : null;
+      let memberInClass1 = class1 != null ? isSchoolClassMemberAndIsCreator(class1) : false;
+      let memberInClass2 = memberInClass1 == true ? (class2 != null ? isSchoolClassMemberAndIsCreator(class2) : false) : false;
+      let memberInClass3 = (memberInClass1 == true || memberInClass2 == true) ? (class3 != null ? isSchoolClassMemberAndIsCreator(class3) : false): false;
+      return memberInClass1 ? true : (memberInClass2 ? true : memberInClass3 ? true : false);
+    }
+
+
+    function isSchoolClassMember(schoolClassId) {
+      let schoolClassData = getDataFromDocument('schoolclasses', schoolClassId);
+      let isGroupVersionV3 = 'groupVersion' in schoolClassData ? (schoolClassData['groupVersion'] == 'v3') : false;
+      let userRolesArray = (schoolClassData != null ? 'userRoles' in schoolClassData : false) == true ? schoolClassData['userRoles'] : null;
+      let userRole = userRolesArray == null ? null : (currentUID() in userRolesArray ? userRolesArray[currentUID()] : null);
+      return isGroupVersionV3 == true ? 
+      (userRolesArray == null ? isLoggedIn() : (userRole != null)) : isLoggedIn();
+    }
+
+    function isSchoolClassMemberAndIsCreator(schoolClassId) {
+      let schoolClassData = getDataFromDocument('schoolclasses', schoolClassId);
+      let isGroupVersionV3 = 'groupVersion' in schoolClassData ? (schoolClassData['groupVersion'] == 'v3') : false;
+      let userRolesArray = (schoolClassData != null ? 'userRoles' in schoolClassData : false) == true ? schoolClassData['userRoles'] : null;
+      let userRole = userRolesArray == null ? null : (currentUID() in userRolesArray ? userRolesArray[currentUID()] : null);
+      return isGroupVersionV3 == true ? 
+      (userRolesArray == null ? isLoggedIn() : isOwnerAdminOrCreator(userRole)) : isLoggedIn();
+    }
+
+    function wasNullBefore(){
+      return existingData() == null;
+    }
+
+    function getDataFromDocument(collection, baseID) {
+      let document = get(/databases/$(database)/documents/$(collection)/$(baseID));
+      return document != null ? document.data : null;
+    }
+
+    function getDataFromDocumentField(collection, baseID, field) {
+      let document = get(/databases/$(database)/documents/$(collection)/$(baseID));
+      return document != null ? document.data[field] : null;
+    }
+
+    function mapContainsKey(data, key) {
+      return key in data.keys();
+    }
+
+    function arrayContains(data, key) {
+      return key in data;
+    }
+
+    function isLoggedIn() {
+      return (request != null && request.auth != null) ? (request.auth.uid != null) : false;
+    }
+
+    function currentUID() {
+      return request.auth.uid;
+    }
+
+    function getUIDfromMemberID(memberID) {
+      return memberID.split('::')[0];
+    }
+
+    function existingData() {
+      return resource != null ? resource.data : null;
+    }
+
+    function incomingData() {
+      return request.resource.data;
+    }
+
+  }
+}
