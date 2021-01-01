@@ -1,6 +1,4 @@
 
-google-services.json
-GoogleService-Info.plist
 # Miscellaneous
 *.class
 *.lock
@@ -39,7 +37,6 @@ build/
 **/android/gradlew.bat
 **/android/local.properties
 **/android/**/GeneratedPluginRegistrant.java
-**/android/app/google-services.json
 
 # iOS/XCode related
 **/ios/**/*.mode1v3
