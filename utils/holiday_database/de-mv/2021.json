@@ -1,0 +1,44 @@
+{
+  "2020-winter": {
+    "id": "2020-winter",
+    "name": "Winterferien",
+    "start": "2021-02-06",
+    "end": "2021-02-18",
+    "type": "holiday"
+  },
+  "2020-ostern": {
+    "id": "2021-ostern",
+    "name": "Osterferien",
+    "start": "2021-03-29",
+    "end": "2021-04-07",
+    "type": "holiday"
+  },
+  "2021-ostern2": {
+    "id": "2021-ostern2",
+    "name": "Tag der Arbeit",
+    "start": "2021-05-01",
+    "end": "2021-05-01",
+    "type": "holiday"
+  },
+  "2021-ostern3": {
+    "id": "2021-ostern3",
+    "name": "Christi Himmelfahrt",
+    "start": "2021-05-13",
+    "end": "2021-05-13",
+    "type": "holiday"
+  },
+  "2021-pfingsten": {
+    "id": "2021-pfingsten",
+    "name": "Pfingstferien",
+    "start": "2021-05-21",
+    "end": "2021-05-25",
+    "type": "holiday"
+  },
+  "2021-sommer": {
+    "id": "2021-sommer",
+    "name": "Sommerferien",
+    "start": "2021-06-21",
+    "end": "2021-07-31",
+    "type": "holiday"
+  }
+}

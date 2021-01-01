@@ -1,0 +1,1883 @@
+{
+  "languagecode": "de",
+  "@languagecode": {
+    "description": "_",
+    "type": "text",
+    "placeholders": {}
+  },
+  "informations": "Informationen",
+  "@informations": {
+    "description": "_",
+    "type": "text",
+    "placeholders": {}
+  },
+  "lessons": "Stunden",
+  "@lessons": {
+    "description": "_",
+    "type": "text",
+    "placeholders": {}
+  },
+  "vacationdatabase": "Feriendatenbank",
+  "@vacationdatabase": {
+    "description": "_",
+    "type": "text",
+    "placeholders": {}
+  },
+  "lesson": "Stunde",
+  "@lesson": {
+    "description": "_",
+    "type": "text",
+    "placeholders": {}
+  },
+  "grades": "Noten",
+  "@grades": {
+    "description": "_",
+    "type": "text",
+    "placeholders": {}
+  },
+  "widgets": "Widgets",
+  "@widgets": {
+    "description": "_",
+    "type": "text",
+    "placeholders": {}
+  },
+  "advanced": "Erweitert",
+  "@advanced": {
+    "description": "_",
+    "type": "text",
+    "placeholders": {}
+  },
+  "discardchanges": "Änderungen verwerfen",
+  "@discardchanges": {
+    "description": "_",
+    "type": "text",
+    "placeholders": {}
+  },
+  "currentchangesnotsaved": "Aktuelle Änderungen werden nicht gespeichert!",
+  "@currentchangesnotsaved": {
+    "description": "_",
+    "type": "text",
+    "placeholders": {}
+  },
+  "timesoflessons": "Stundenzeiten",
+  "@timesoflessons": {
+    "description": "_",
+    "type": "text",
+    "placeholders": {}
+  },
+  "vacations": "Ferien",
+  "@vacations": {
+    "description": "_",
+    "type": "text",
+    "placeholders": {}
+  },
+  "from": "Von",
+  "@from": {
+    "description": "_",
+    "type": "text",
+    "placeholders": {}
+  },
+  "until": "Bis",
+  "@until": {
+    "description": "_",
+    "type": "text",
+    "placeholders": {}
+  },
+  "notifications": "Benachrichtigungen",
+  "@notifications": {
+    "description": "_",
+    "type": "text",
+    "placeholders": {}
+  },
+  "pleasewait": "Bitte warten...",
+  "@pleasewait": {
+    "description": "_",
+    "type": "text",
+    "placeholders": {}
+  },
+  "setstart": "Beginn setzen",
+  "@setstart": {
+    "description": "_",
+    "type": "text",
+    "placeholders": {}
+  },
+  "setend": "Ende setzen",
+  "@setend": {
+    "description": "_",
+    "type": "text",
+    "placeholders": {}
+  },
+  "manageplanner": "Planer verwalten",
+  "@manageplanner": {
+    "description": "_",
+    "type": "text",
+    "placeholders": {}
+  },
+  "nothingselected": "Nichts ausgewählt",
+  "@nothingselected": {
+    "description": "_",
+    "type": "text",
+    "placeholders": {}
+  },
+  "colours": "Farben",
+  "@colours": {
+    "description": "_",
+    "type": "text",
+    "placeholders": {}
+  },
+  "primary": "Primär",
+  "@primary": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "accent": "Akzent",
+  "@accent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "darkmode": "Dunkler Modus",
+  "@darkmode": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "automaticdarkmode": "Automatischer Dunkler Modus",
+  "@automaticdarkmode": {
+    "description": "_",
+    "type": "text",
+    "placeholders": {}
+  },
+  "coloredappbar": "Farbige Appbar",
+  "@coloredappbar": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "weekend": "Wochenende",
+  "@weekend": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "testsandexams": "Tests und Klausuren",
+  "@testsandexams": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "favorites": "Favoriten",
+  "@favorites": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "learnmore": "Mehr erfahren",
+  "@learnmore": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "selectmethode": "Anmeldemethode auswählen",
+  "@selectmethode": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "skip": "Überspringen",
+  "@skip": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "signinhasadvantages": "Anmelden hat viele Vorteile",
+  "@signinhasadvantages": {
+    "description": "_",
+    "type": "text",
+    "placeholders": {}
+  },
+  "signinhasadvantages_desc": "Synchronisation auf mehreren Geräten, Teilen von Stundenplan und Hausaufgaben",
+  "@signinhasadvantages_desc": {
+    "description": "_",
+    "type": "text",
+    "placeholders": {}
+  },
+  "noplannersavailable": "Keine Planer verfügbar",
+  "@noplannersavailable": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "password": "Passwort",
+  "@password": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "selectplanner": "Planer auswählen",
+  "@selectplanner": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "data": "Daten",
+  "@data": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "newexam": "Neue Klausur",
+  "@newexam": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "all": "Alles",
+  "@all": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "in_": "in",
+  "@in_": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "briefly": "In Kürze",
+  "@briefly": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "noupcomingvacations": "Keine anstehenden Ferien",
+  "@noupcomingvacations": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "days": "Tage",
+  "@days": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "periodoftime": "Stundenzeiten",
+  "@periodoftime": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "register": "Registrieren",
+  "@register": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "signin": "Einloggen",
+  "@signin": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "newvacation": "Neue Ferien",
+  "@newvacation": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "editvacation": "Ferien bearbeiten",
+  "@editvacation": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "newplanner": "Neuer Planer",
+  "@newplanner": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "editplanner": "Planer bearbeiten",
+  "@editplanner": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "more": "Mehr",
+  "@more": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "name": "Name",
+  "@name": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "nofavoritesselected": "Keine Favoriten ausgewählt",
+  "@nofavoritesselected": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "linkit": "Verknüpfen",
+  "@linkit": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "linkemail": "E-Mail verknüpfen",
+  "@linkemail": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "pleasecheckdata": "Bitte überprüfen Sie die Daten",
+  "@pleasecheckdata": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "nextdays": "Die nächsten Tage",
+  "@nextdays": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "newtask": "Neue Aufgabe",
+  "@newtask": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "newevent": "Neuer Termin",
+  "@newevent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "newgrade": "Neue Note",
+  "@newgrade": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "newnote": "Neue Notiz",
+  "@newnote": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "newlessoninfo": "Neue Stundeninfo",
+  "@newlessoninfo": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "newabsenttime": "Neue Fehlzeit",
+  "@newabsenttime": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "edittask": "Aufgabe bearbeiten",
+  "@edittask": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "editevent": "Termin bearbeiten",
+  "@editevent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "editgrade": "Note bearbeiten",
+  "@editgrade": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "editnote": "Notiz bearbeiten",
+  "@editnote": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "editlessoninfo": "Stundeninfo",
+  "@editlessoninfo": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "editabsenttime": "Fehlzeit bearbeiten",
+  "@editabsenttime": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "finished": "Fertig",
+  "@finished": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "notyetfinished": "Noch nicht fertig",
+  "@notyetfinished": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "open": "Offen",
+  "@open": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "due": "Bis",
+  "@due": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "savein": "Speichern in",
+  "@savein": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "title": "Titel",
+  "@title": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "course": "Fach",
+  "@course": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "archive": "Archiv",
+  "@archive": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "unarchive": "Nicht archivieren",
+  "@unarchive": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "private": "Privat",
+  "@private": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "edit": "Bearbeiten",
+  "@edit": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "delete": "Löschen",
+  "@delete": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "detail": "Detail",
+  "@detail": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "date": "Datum",
+  "@date": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "saveprivately": "Privat speichern",
+  "@saveprivately": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "weekday": "Wochentag",
+  "@weekday": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "start": "Beginn",
+  "@start": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "end": "Ende",
+  "@end": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "weektype": "Wochentyp",
+  "@weektype": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "nolessoninfos": "Kein Stundeninfos",
+  "@nolessoninfos": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "place": "Ort",
+  "@place": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "teacher": "Lehrer",
+  "@teacher": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "places": "Orte",
+  "@places": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "teachers": "Lehrer",
+  "@teachers": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "export": "Export",
+  "@export": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "schoolclass": "Schulklasse",
+  "@schoolclass": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "allfunctions": "Alle Funktionen",
+  "@allfunctions": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "allevents": "Alle Termine",
+  "@allevents": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "exams": "Klausuren",
+  "@exams": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "addons": "Addons",
+  "@addons": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "join": "Beitreten",
+  "@join": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "create": "Erstellen",
+  "@create": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "schoolreports": "Zeugnisse",
+  "@schoolreports": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "indays": "Tagen",
+  "@indays": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "individual": "Individuell",
+  "@individual": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "overritetimes": "Zeiten überschreiben",
+  "@overritetimes": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "defaultused": "Verwendet Standard",
+  "@defaultused": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "nextlesson": "Nächste Stunde",
+  "@nextlesson": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "amountoflessons": "Stundenanzahl",
+  "@amountoflessons": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "absentlessons": "Fehlstunden",
+  "@absentlessons": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "unexcused": "Unentschuldigt",
+  "@unexcused": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "excused": "Entschuldigt",
+  "@excused": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "today": "Heute",
+  "@today": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "tomorrow": "Morgen",
+  "@tomorrow": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "profilepicture": "Profilbild",
+  "@profilepicture": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "profile": "Profil",
+  "@profile": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "editlesson": "Stunde bearbeiten",
+  "@editlesson": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "editprofile": "Profil bearbeiten",
+  "@editprofile": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "newlesson": "Neue Stunde",
+  "@newlesson": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "type": "Typ",
+  "@type": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "schoolreport": "Zeugnis",
+  "@schoolreport": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "newschoolreport": "Neues Zeugnis",
+  "@newschoolreport": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "editschoolreport": "Zeugnis bearbeiten",
+  "@editschoolreport": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "oralexam": "Mündliche Prüfung",
+  "@oralexam": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "generalparticipation": "Sonstige Mitarbeit",
+  "@generalparticipation": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "other": "Andere",
+  "@other": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "addcoursein": "Kurs hinzufügen in",
+  "@addcoursein": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "addcourse": "Kurs hinzufügen",
+  "@addcourse": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "newschoolclass": "Neue Schulklasse",
+  "@newschoolclass": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "editschoolclass": "Schulklasse bearbeiten",
+  "@editschoolclass": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "timetoremember": "Zeit zum Erinnern",
+  "@timetoremember": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "assistnotifications": "Assist-Benachrichtigungen",
+  "@assistnotifications": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "createnotifications": "Erstell-Notifications",
+  "@createnotifications": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "dailynotifications": "Tägliche Benachrichtigungen",
+  "@dailynotifications": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "rememberdaysbefore": "Tage im Voraus erinnern",
+  "@rememberdaysbefore": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "addthisdevice": "Dieses Gerät hinzufügen",
+  "@addthisdevice": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "thisdeviceisactive": "Dieses Gerät ist aktiv",
+  "@thisdeviceisactive": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "fromexistingcourses": "Aus bestehenden Kursen",
+  "@fromexistingcourses": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "onlyadmincancreate": "Nur der Administrator kann Aufgaben, Stunden usw. erstellen.",
+  "@onlyadmincancreate": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "cantfindpreviousdata": "Kannst du vorherige Daten nicht finden?",
+  "@cantfindpreviousdata": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "reportissue": "Problem melden",
+  "@reportissue": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "info": "Info",
+  "@info": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "forgotpassword": "Passwort vergessen",
+  "@forgotpassword": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "resetpassword": "Passwort zurücksetzen",
+  "@resetpassword": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "change": "Änderung",
+  "@change": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "out_lessoninfo": "Entfall",
+  "@out_lessoninfo": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "navigate": "Navigieren",
+  "@navigate": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "letters": "Buchstaben",
+  "@letters": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "activate_forme": "Für mich aktivieren",
+  "@activate_forme": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "deactivate_forme": "Für mich deaktivieren",
+  "@deactivate_forme": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "amount_of_letters_forshortname": "Anzahl der Buchstaben für den Kurznamen",
+  "@amount_of_letters_forshortname": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "showfavorites": "Favoriten anzeigen",
+  "@showfavorites": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "centertext": "Text zentrieren",
+  "@centertext": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "showgrid": "Raster anzeigen",
+  "@showgrid": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "useshortname": "Kurznamen verwenden",
+  "@useshortname": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "addtoclipboard": "Zur Zwischenablage hinzufügen",
+  "@addtoclipboard": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "lessonheight": "Stundenhöhe",
+  "@lessonheight": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "weeks": "Wochen",
+  "@weeks": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "use_tendencies": "Tendenzen bewerten",
+  "@use_tendencies": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "use_tendencies_desc": "Wie in der Oberstufe, z.B. 2+ als 1,7 und 2- als 2,3. Falls ausgeschaltet, werden + und - nicht gewertet, heißt z.B. eine 3- wird als 3 gewertet.",
+  "@use_tendencies_desc": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "openinbrowser": "Im Browser öffnen",
+  "@openinbrowser": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "compressfile": "Datei komprimieren",
+  "@compressfile": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "chat": "Chat",
+  "@chat": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "entermessage": "Nachricht eingeben...",
+  "@entermessage": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "adminenablechat": "Sie müssen die Chat-Funktion aktivieren, um sie verwenden zu können!",
+  "@adminenablechat": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "timeofday": "Uhrzeit",
+  "@timeofday": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "starttime": "Startzeit",
+  "@starttime": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "endtime": "Endzeit",
+  "@endtime": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "donotshow": "Nicht mehr anzeigen",
+  "@donotshow": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "hide": "Ausblenden",
+  "@hide": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "wholetimespan": "Gesamter Zeitraum",
+  "@wholetimespan": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "custom": "Benutzerdefiniert",
+  "@custom": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "timespan": "Zeitraum",
+  "@timespan": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "selecttimespan": "Zeitraum auswählen",
+  "@selecttimespan": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "lessonafternext": "Übernächste Stunde",
+  "@lessonafternext": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "amount_of_days_home": "Anzahl der Tage in Home",
+  "@amount_of_days_home": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "days_normal": "Tage",
+  "@days_normal": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "changelog": "Changelog",
+  "@changelog": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "checkforupdates": "Auf Updates prüfen",
+  "@checkforupdates": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "gradeprofiles": "Notenprofile",
+  "@gradeprofiles": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "newgradeprofile": "Neues Profil",
+  "@newgradeprofile": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "editgradeprofile": "Profil bearbeiten",
+  "@editgradeprofile": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "types": "Kategorien",
+  "@types": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "newtype": "Neue Kategorie",
+  "@newtype": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "gradetypes": "Notentypen",
+  "@gradetypes": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "mygradeprofile": "Mein Notenprofil",
+  "@mygradeprofile": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "averageforschoolreport": "Durchschnitt für's Zeugnis",
+  "@averageforschoolreport": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "averagebytype": "Durchschnitt nach Kategorie",
+  "@averagebytype": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "averageofallgrades": "Durchschnitt aus alle Noten (einfache Berechnung)",
+  "@averageofallgrades": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "extras": "Extras",
+  "@extras": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "testsasoneexam": "Alle Tests als eine Prüfung",
+  "@testsasoneexam": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "mystorage": "Mein Speicher",
+  "@mystorage": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "personalstorage": "Persönlicher Speicher",
+  "@personalstorage": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "coursestorage": "Fach-Speicher",
+  "@coursestorage": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "files": "Dateien",
+  "@files": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "schoolletters": "Briefe",
+  "@schoolletters": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "newletter": "Neuer Brief",
+  "@newletter": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "editletter": "Brief bearbeiten",
+  "@editletter": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "pushnotifications": "Push-Mitteilungen",
+  "@pushnotifications": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "allowreply": "Antworten zulassen",
+  "@allowreply": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "readby": "Gelesen von",
+  "@readby": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "markasread": "Als gelesen markieren",
+  "@markasread": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "reply": "Antworten",
+  "@reply": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "justnow": "Gerade eben",
+  "@justnow": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "yesterday": "Gestern",
+  "@yesterday": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "details": "Details",
+  "@details": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "content": "Inhalt",
+  "@content": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "resetresponses": "Antworten/Lesebestätigungen zurücksetzen",
+  "@resetresponses": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "reset": "Zurücksetzen",
+  "@reset": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "none": "Keine",
+  "@none": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "apptitle": "Schulplaner",
+  "@apptitle": {
+    "description": "Title for application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "settings": "Einstellungen",
+  "@settings": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "appearance": "Aussehen",
+  "@appearance": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "version": "Version",
+  "@version": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "language": "Sprache",
+  "@language": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "navigation": "Navigation",
+  "@navigation": {
+    "description": "_",
+    "type": "text",
+    "placeholders": {}
+  },
+  "devices": "Geräte",
+  "@devices": {
+    "description": "_",
+    "type": "text",
+    "placeholders": {}
+  },
+  "home": "Home",
+  "@home": {
+    "description": "_",
+    "type": "text",
+    "placeholders": {}
+  },
+  "timetable": "Stundenplan",
+  "@timetable": {
+    "description": "_",
+    "type": "text",
+    "placeholders": {}
+  },
+  "upcoming": "Anstehend",
+  "@upcoming": {
+    "description": "_",
+    "type": "text",
+    "placeholders": {}
+  },
+  "courses": "Fächer",
+  "@courses": {
+    "description": "_",
+    "type": "text",
+    "placeholders": {}
+  },
+  "library": "Bibliothek",
+  "@library": {
+    "description": "_",
+    "type": "text",
+    "placeholders": {}
+  },
+  "selected": "Ausgewählt",
+  "@selected": {
+    "description": "_",
+    "type": "text",
+    "placeholders": {}
+  },
+  "manage": "Verwalten",
+  "@manage": {
+    "description": "_",
+    "type": "text",
+    "placeholders": {}
+  },
+  "accept": "Akzeptieren",
+  "@accept": {
+    "description": "_",
+    "type": "text",
+    "placeholders": {}
+  },
+  "done": "Fertig",
+  "@done": {
+    "description": "_",
+    "type": "text",
+    "placeholders": {}
+  },
+  "further": "Weiteres",
+  "@further": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "automatic": "Automatisch",
+  "@automatic": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "failed": "Fehlgeschlagen",
+  "@failed": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "error": "Error",
+  "@error": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "confirm": "Bestätigen",
+  "@confirm": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "cancel": "Abbrechen",
+  "@cancel": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ok": "Ok",
+  "@ok": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "set": "Festlegen",
+  "@set": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "general": "Allgemein",
+  "@general": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "personal": "Persönlich",
+  "@personal": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "configure": "Konfigurieren",
+  "@configure": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "refreshed": "Aktualisiert",
+  "@refreshed": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "refreshdata": "Daten aktualisieren",
+  "@refreshdata": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "refreshdata_desc": "Aktualisieren Sie Fächer, Stundenplan und Zeiten für das Widget",
+  "@refreshdata_desc": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "functionnotavailable": "In diesem Moment ist diese Funktion nicht verfügbar",
+  "@functionnotavailable": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "timebasedtimetable": "Zeitbasierter Stundenplan",
+  "@timebasedtimetable": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "zerolesson": "0.Stunde",
+  "@zerolesson": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "weektypes": "Wochentypen",
+  "@weektypes": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "lessonsperday": "Stunden pro Tag",
+  "@lessonsperday": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "multipleweektypes": "Mehrere Wochentypen",
+  "@multipleweektypes": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "amountofweektypes": "Anzahl der Wochentypen",
+  "@amountofweektypes": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "currentweektype": "Aktueller Wochentyp",
+  "@currentweektype": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "averagedisplay": "Durchschnittsanzeige",
+  "@averagedisplay": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "automaticaverage": "Automatischer Durchschnitt",
+  "@automaticaverage": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "compositionofaverage": "Zusammensetzung des Durchschnitts",
+  "@compositionofaverage": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "create_quickly": "Schnell erstellen",
+  "@create_quickly": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "task": "Aufgabe",
+  "@task": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "tasks": "Aufgaben",
+  "@tasks": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "event": "Termin",
+  "@event": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "events": "Termine",
+  "@events": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "note": "Notiz",
+  "@note": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "notes": "Notizen",
+  "@notes": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "grade": "Note",
+  "@grade": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "gradesystem": "Notensystem",
+  "@gradesystem": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "lessoninfo": "Stundeninfo",
+  "@lessoninfo": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "lessoninfos": "Stundeninfos",
+  "@lessoninfos": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "absenttime": "Fehlzeit",
+  "@absenttime": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "absenttimes": "Fehlzeiten",
+  "@absenttimes": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "timeline": "Timeline",
+  "@timeline": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "calendar": "Kalender",
+  "@calendar": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "privacy": "Datenschutz",
+  "@privacy": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "privacy_policy": "Datenschutzerklärung",
+  "@privacy_policy": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "viewcompleteprivacypolicy": "Komplette Datenschutzerklärung ansehen",
+  "@viewcompleteprivacypolicy": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "policy_text_header": "Wir nehmen den Schutz Ihrer persönlichen Daten sehr ernst.",
+  "@policy_text_header": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "policy_text_1": "Die Daten werden sicher gespeichert und mittels https und SSL-Verschlüsselung mit Google Firebase übertragen",
+  "@policy_text_1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "policy_text_2": "Die Daten werden nur gespeichert und nicht verarbeitet.",
+  "@policy_text_2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "policy_text_3": "Es werden keine Daten an Dritte übertragen.",
+  "@policy_text_3": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "policy_text_4": "Zusätzliche Dienste sind Google Sign-In und Firebase.",
+  "@policy_text_4": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "contact_data_protection_commissioner": "Datenschutzbeauftragten kontaktieren",
+  "@contact_data_protection_commissioner": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "actions": "Aktionen",
+  "@actions": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "remove_data": "Daten vollständig löschen",
+  "@remove_data": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "retrieve_data": "Gespeicherte Daten abrufen",
+  "@retrieve_data": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "help": "Hilfe",
+  "@help": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "help_wait": "In den folgenden Updates werden sie hier hilfreiche Tipps und Anleitungen finden!",
+  "@help_wait": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "guidelines": "Richtlinien",
+  "@guidelines": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "about": "Über",
+  "@about": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "contact_us": "Kontaktiere uns",
+  "@contact_us": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "rate_us": "Bewerte uns",
+  "@rate_us": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "licenses": "Lizenzen",
+  "@licenses": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "advantages": "Vorteile",
+  "@advantages": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "registration": "Anmeldung",
+  "@registration": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "signinmethodes": "Anmeldemethoden",
+  "@signinmethodes": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "anonymoususer": "Anonymer Benutzer",
+  "@anonymoususer": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "gotoprofile": "Gehe zu Profil",
+  "@gotoprofile": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "logout": "Ausloggen",
+  "@logout": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "monday": "Montag",
+  "@monday": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "tuesday": "Dienstag",
+  "@tuesday": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "wednesday": "Mittwoch",
+  "@wednesday": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "thursday": "Donnerstag",
+  "@thursday": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "friday": "Freitag",
+  "@friday": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "saturday": "Samstag",
+  "@saturday": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sunday": "Sonntag",
+  "@sunday": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "archivedplanners": "Archivierte Planer",
+  "@archivedplanners": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "value": "Wert",
+  "@value": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "weight": "Gewichtung",
+  "@weight": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "average": "Durchschnitt",
+  "@average": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "nogrades": "Keine Noten",
+  "@nogrades": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "newcourse": "Neues Fach",
+  "@newcourse": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "editcourse": "Fach bearbeiten",
+  "@editcourse": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "createcourse": "Fach erstellen",
+  "@createcourse": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "joincourse": "Fach beitreten",
+  "@joincourse": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "usetemplate": "Vorlagen verwenden",
+  "@usetemplate": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "myplanners": "Meine Planer",
+  "@myplanners": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "view": "Ansehen",
+  "@view": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "select": "Auswählen",
+  "@select": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "enter": "Eingeben",
+  "@enter": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "qrcode": "QR-Code",
+  "@qrcode": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "permissionretrieved": "Berechtigung erhalten",
+  "@permissionretrieved": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "nopermissionretrieved": "Keine Berechtigung erhalten",
+  "@nopermissionretrieved": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "attachments": "Anhänge",
+  "@attachments": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "newattachment": "Neuer Anhang",
+  "@newattachment": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "newfile": "Neue Datei",
+  "@newfile": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "editfile": "Datei bearbeiten",
+  "@editfile": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "newdesign": "Neues Design",
+  "@newdesign": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "editdesign": "Design bearbeiten",
+  "@editdesign": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "current": "Aktuell",
+  "@current": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "upload": "Hochladen",
+  "@upload": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "of_": "von",
+  "@of_": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "selectfile": "Datei aussuchen",
+  "@selectfile": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "uploading": "Hochladen",
+  "@uploading": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "eventtype": "Termintyp",
+  "@eventtype": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "default_": "Standard",
+  "@default_": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "exam": "Klausur",
+  "@exam": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "test": "Test",
+  "@test": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "trip": "Ausflug",
+  "@trip": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "members": "Mitglieder",
+  "@members": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "security": "Sicherheit",
+  "@security": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "connectedclasses": "Verbundene Klassen",
+  "@connectedclasses": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "mydesign": "Mein Design",
+  "@mydesign": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "design": "Design",
+  "@design": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "myshortname": "Mein Kurzname",
+  "@myshortname": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "shortname": "Kurzname",
+  "@shortname": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "options": "Optionen",
+  "@options": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "connect": "Connect",
+  "@connect": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "admin": "Admin",
+  "@admin": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "connected": "Verbunden",
+  "@connected": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "share": "Teilen",
+  "@share": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "addteacher": "Lehrer hinzufügen",
+  "@addteacher": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "addplace": "Ort hinzufügen",
+  "@addplace": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "templates": "Vorlagen",
+  "@templates": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "description": "Beschreibung",
+  "@description": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "generate": "Generieren",
+  "@generate": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "removecode": "Code entfernen",
+  "@removecode": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sharecode": "Code teilen",
+  "@sharecode": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "search": "Suche",
+  "@search": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "smalldevice": "Kleines Gerät",
+  "@smalldevice": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "noresultfor": "Kein Ergebnis für",
+  "@noresultfor": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "resultfor": "Ergebnis für",
+  "@resultfor": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "add": "Hinzufügen",
+  "@add": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "added": "Hinzugefügt",
+  "@added": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "addto": "Hinzufügen zu",
+  "@addto": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "addtocourses": "Zu Fächern hinzufügen",
+  "@addtocourses": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "addtoclass": "Zur Klasse hinzufügen",
+  "@addtoclass": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "leave": "Verlassen",
+  "@leave": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "remove": "Entfernen",
+  "@remove": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "leavecourse": "Fach verlassen",
+  "@leavecourse": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "publiccode": "Öffentlicher Code",
+  "@publiccode": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "newteacher": "Neuer Lehrer",
+  "@newteacher": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "editteacher": "Lehrer bearbeiten",
+  "@editteacher": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "newplace": "Neuer Ort",
+  "@newplace": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "editplace": "Ort bearbeiten",
+  "@editplace": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "address": "Adresse",
+  "@address": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "scancode": "Code scannen",
+  "@scancode": {
+    "type": "text",
+    "placeholders": {}
+  }
+}

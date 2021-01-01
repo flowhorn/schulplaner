@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Schulplaner</string>
+
+    <string name="timetable">Stundenplan</string>
+    <string name="monday">Montag</string>
+    <string name="tuesday">Dienstag</string>
+    <string name="wednesday">Mittwoch</string>
+    <string name="thursday">Donnerstag</string>
+    <string name="friday">Freitag</string>
+    <string name="saturday">Samstag</string>
+    <string name="sunday">Sonntag</string>
+
+    <string name="channel_name">Tägliche Benachrichtigungen</string>
+    <string name="channel_description">Benachrichtigungen über Aufgaben wie Hausaufgaben oder Klausuren</string>
+
+    <string name="today">Heute</string>
+    <string name="tomorrow">Morgen</string>
+    <string name="yesterday">Gestern</string>
+
+    <string name="upcoming_tasks">Anstehende Aufgaben</string>
+
+    <string name="pleaserefresh">Bitte Widget in den App-Einstellungen aktualisieren...</string>
+    <string name="refresh">Aktualisieren</string>
+    <string name="refreshed">Aktualisiert</string>
+    <string name="due">Bis</string>
+    <string name="always">Immer</string>
+
+    <string name="week_a">A-Woche</string>
+    <string name="week_b">B-Woche</string>
+    <string name="week_c">C-Woche</string>
+    <string name="week_d">D-Woche</string>
+
+    <string name="period">Schulstunde</string>
+    <string name="notasks">Keine Aufgaben...</string>
+
+</resources>

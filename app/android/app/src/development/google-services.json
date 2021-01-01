@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "824135008215",
+    "firebase_url": "https://schulplaner-debug.firebaseio.com",
+    "project_id": "schulplaner-debug",
+    "storage_bucket": "schulplaner-debug.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:824135008215:android:931c715ab72f95f5f55592",
+        "android_client_info": {
+          "package_name": "com.xla.school"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "824135008215-i6ro9pbqk81c78m53qolgtvfi5skbd4d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCveQQB9DA0BXueccUbRrNNVqTa9FJ-kno"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "824135008215-i6ro9pbqk81c78m53qolgtvfi5skbd4d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

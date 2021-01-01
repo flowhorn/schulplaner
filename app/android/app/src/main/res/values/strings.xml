@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Schoolplanner</string>
+
+    <string name="timetable">Timetable</string>
+
+    <string name="monday">Monday</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="wednesday">Wednesday</string>
+    <string name="thursday">Thursday</string>
+    <string name="friday">Friday</string>
+    <string name="saturday">Saturday</string>
+    <string name="sunday">Sunday</string>
+
+    <string name="channel_name">Daily Notifications</string>
+    <string name="channel_description">Notifications about Tasks like Homework and Exams</string>
+
+    <string name="today">Today</string>
+    <string name="tomorrow">Tomorrow</string>
+    <string name="yesterday">Yesterday</string>
+
+    <string name="upcoming_tasks">Upcoming Tasks</string>
+    <string name="pleaserefresh">Please Refresh...</string>
+    <string name="refresh">Refresh</string>
+    <string name="refreshed">Refreshed</string>
+    <string name="due">Due</string>
+    <string name="always">Always</string>
+
+    <string name="week_a">Week A</string>
+    <string name="week_b">Week B</string>
+    <string name="week_c">Week C</string>
+    <string name="week_d">Week D</string>
+
+    <string name="period">Period</string>
+    <string name="notasks">No Tasks...</string>
+
+
+</resources>

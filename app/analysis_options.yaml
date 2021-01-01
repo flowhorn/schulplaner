@@ -1,0 +1,8 @@
+include: package:pedantic/analysis_options.yaml
+
+
+analyzer:
+    errors:
+      non_constant_identifier_names: ignore
+#   exclude:
+#     - path/to/excluded/files/**

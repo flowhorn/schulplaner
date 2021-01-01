@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="google-signin-client_id" content="534742216584-dbebcrs0o8cptgjqfhhvkrpsprhml53o.apps.googleusercontent.com">
+  <title>Schulplaner</title>
+  <meta name="description"  content="Der intelligente Schulplaner. Hausaufgaben, Stundenplan und mehr, alles dabei!">
+
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="manifest" href="manifest.json">
+
+</head>
+
+
+
+<body>
+
+    <!-- This script installs service_worker.js to provide PWA functionality to
+       application. For more information, see:
+       https://developers.google.com/web/fundamentals/primers/service-workers -->
+       <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/flutter_service_worker.js');
+            });
+        }
+    </script>
+
+  <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-analytics.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-storage.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-messaging.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-remote-config.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-performance.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-functions.js"></script>
+
+  <script src="firebase_init_debug.js"></script>
+
+  <script src="main.dart.js" type="application/javascript"></script>
+</body>
+
+</html>

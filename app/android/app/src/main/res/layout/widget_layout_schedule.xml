@@ -1,0 +1,135 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/widget_timetable_toolbar"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimary">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="32dp"
+            android:gravity="center_vertical"
+            android:text="@string/timetable"
+            android:textColor="@color/white"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Widget.ActionBar.Title"
+            android:layout_marginLeft="32dp" />
+
+
+        <LinearLayout
+            android:id="@+id/widget_ab_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_alignParentEnd="true"
+            >
+            <Button
+                android:id="@+id/widget_button_a"
+                android:layout_width="90dp"
+                android:layout_height="match_parent"
+                android:text="A-Woche"
+                android:textSize="12sp"
+                style="@style/Button.Outlined"
+                />
+            <Button
+                android:id="@+id/widget_button_b"
+                android:layout_width="90dp"
+                android:layout_height="match_parent"
+                android:text="B-Woche"
+                android:textSize="12sp"
+                style="@style/Button.Outlined"
+                />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textview_updatewidget"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pleaserefresh"
+            android:layout_centerInParent="true"
+            />
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/topPanel"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
+        android:background="@color/colorPrimary"
+        >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/monday"
+            android:maxLength="2"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/tuesday"
+            android:maxLength="2"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/wednesday"
+            android:maxLength="2"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/thursday"
+            android:maxLength="2"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/friday"
+            android:maxLength="2"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            />
+
+
+    </LinearLayout>
+
+    <GridView
+        android:id="@+id/widget_listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#8c898f"
+        android:numColumns="6"
+        android:horizontalSpacing="1dp"
+        android:verticalSpacing="1dp"
+        />
+
+
+
+</LinearLayout>

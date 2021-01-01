@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "mainprojects-32581"
+  },
+  "targets": {
+    "mainprojects-32581": {
+      "hosting": {
+        "beta-web-app": [
+          "schulplaner-beta"
+        ]
+      }
+    }
+  }
+}

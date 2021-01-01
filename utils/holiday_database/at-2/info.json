@@ -1,0 +1,13 @@
+{
+    "id": "at-2",
+    "name": "Kärnten",
+    "country": "austria",
+    "lastRefreshed": "2020-09-06",
+    "years": [
+        "2019",
+        "2020",
+        "2021"
+    ],
+    "isOfficial": true,
+    "published": true
+}

@@ -1,0 +1,1 @@
+# Nützliche Ergänzungen zur Schulplaner App

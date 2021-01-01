@@ -1,0 +1,4 @@
+"CFBundleDisplayName" = "Schulplaner";
+"CFBundleName" = "Schulplaner";
+"NSCameraUsageDescription" = "Schulplaner benötigt diese Berechtigung um Bilder oder Dokumente and Aufgaben anzuhängen. Die Berechtigung wird nicht für andere Funktionen der App benötigt.";
+"NSPhotoLibraryUsageDescription" = "Schulplaner benötigt diese Berechtigung um Bilder oder Dokumente and Aufgaben anzuhängen. Die Berechtigung wird nicht für andere Funktionen der App benötigt.";

@@ -1,0 +1,84 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/widget_toolbar"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimary">
+
+        <TextView
+            android:id="@+id/widget_toolbar_text1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:gravity="center_vertical"
+            android:text="@string/upcoming_tasks"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            />
+        <TextView
+            android:id="@+id/widget_toolbar_text2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_below="@+id/widget_toolbar_text1"
+            android:gravity="center_vertical"
+            android:text="@string/pleaserefresh"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+             />
+
+
+        <LinearLayout
+            android:id="@+id/widget_refresh_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="16dp"
+            >
+            <Button
+                android:id="@+id/widget_button_refresh"
+                android:layout_width="130dp"
+                android:layout_height="match_parent"
+                android:text="@string/refresh"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                style="@style/Button.Outlined"
+                />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ListView
+            android:id="@+id/widget_listview_tasks"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            />
+
+        <TextView
+            android:id="@+id/widget_centertext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/notasks"
+            android:layout_centerInParent="true"
+            />
+
+
+    </RelativeLayout>
+
+
+
+
+
+
+</LinearLayout>

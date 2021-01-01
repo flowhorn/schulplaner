@@ -1,0 +1,30 @@
+{
+      "2019-herbst": {
+        "id": "2019-herbst",
+        "name": "Tag der Deutschen Einheit",
+        "start": "2019-10-03",
+        "end": "2019-10-03",
+        "type": "holiday"
+    },
+      "2019-herbst2": {
+        "id": "2019-herbst2",
+        "name": "Herbstferien",
+        "start": "2019-10-04",
+        "end": "2019-10-18",
+        "type": "holiday"
+    },
+      "2019-herbst3": {
+        "id": "2019-herbst3",
+        "name": "Reformationstag",
+        "start": "2019-10-31",
+        "end": "2019-10-31",
+        "type": "holiday"
+    },
+    "2019-weihnachten": {
+        "id": "2019-weihnachten",
+        "name": "Weihnachtsferien",
+        "start": "2019-12-23",
+        "end": "2020-01-06",
+        "type": "holiday"
+    }
+}
