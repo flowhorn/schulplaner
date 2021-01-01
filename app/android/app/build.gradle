@@ -15,6 +15,10 @@ def keystorePropertiesFile = rootProject.file("../../keys/key-release.properties
 def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
+def keystoreDebugPropertiesFile = rootProject.file("./key-debug.properties")
+def keystoreDebugProperties = new Properties()
+keystoreDebugProperties.load(new FileInputStream(keystoreDebugPropertiesFile))
+
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
@@ -26,6 +30,12 @@ android {
             keyPassword keystoreProperties['keyPassword']
             storeFile file(keystoreProperties['storeFile'])
             storePassword keystoreProperties['storePassword']
+        }
+        config2 {
+            keyAlias keystoreDebugProperties['keyAlias']
+            keyPassword keystoreDebugProperties['keyPassword']
+            storeFile file(keystoreDebugProperties['storeFile'])
+            storePassword keystoreDebugProperties['storePassword']
         }
     }
 
@@ -57,7 +67,7 @@ android {
             signingConfig signingConfigs.config1
         }
         debug {
-            signingConfig signingConfigs.config1
+            
         }
     }
 
@@ -65,12 +75,14 @@ android {
 
     productFlavors {
         production {
+            signingConfig signingConfigs.config1
             dimension "flavor-type"
         }
         development {
             dimension "flavor-type"
             //applicationIdSuffix ".dev"
             versionNameSuffix "-dev"
+            //signingConfig signingConfigs.config2
         }
 
     }
