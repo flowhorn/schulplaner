@@ -1,3 +1,4 @@
+
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
@@ -77,6 +78,20 @@ It's the upgrade for your school day. From now on, you no longer have to tedious
 
 <!-- GETTING STARTED -->
 ## Getting Started
+
+### Structure
+
+- *app:* This is the app itself, a cross-platform project based on flutter.
+- *cloud_functions:* Scripts that handle the server-side functions of the app.
+- *packages:* Outsourced Flutter Packages from /app. By moving functions to /packages, we can achieve a tidier code base.
+- *schulplaner_website:* The official website.
+- *web_app:* Temporary only, this is where the web version of /app is saved and finally uploaded.
+- *utils:* The vacation databases in JSON format.
+- *security_rules:* Security rules for Google's Firestore and Firebase
+
+  
+
+<br><br>
 
 To get a local copy up and running follow these simple steps.
 

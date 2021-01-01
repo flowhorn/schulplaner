@@ -2,9 +2,6 @@
 // Generated file. Do not edit.
 //
 
-// ignore: unused_import
-import 'dart:ui';
-
 import 'package:cloud_firestore_web/cloud_firestore_web.dart';
 import 'package:cloud_functions_web/cloud_functions_web.dart';
 import 'package:file_picker/src/file_picker_web.dart';
@@ -20,17 +17,17 @@ import 'package:url_launcher_web/url_launcher_web.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 
 // ignore: public_member_api_docs
-void registerPlugins(PluginRegistry registry) {
-  FirebaseFirestoreWeb.registerWith(registry.registrarFor(FirebaseFirestoreWeb));
-  FirebaseFunctionsWeb.registerWith(registry.registrarFor(FirebaseFunctionsWeb));
-  FilePickerWeb.registerWith(registry.registrarFor(FilePickerWeb));
-  FirebaseAnalyticsWeb.registerWith(registry.registrarFor(FirebaseAnalyticsWeb));
-  FirebaseAuthOAuthWeb.registerWith(registry.registrarFor(FirebaseAuthOAuthWeb));
-  FirebaseAuthWeb.registerWith(registry.registrarFor(FirebaseAuthWeb));
-  FirebaseCoreWeb.registerWith(registry.registrarFor(FirebaseCoreWeb));
-  GoogleSignInPlugin.registerWith(registry.registrarFor(GoogleSignInPlugin));
-  PrintingPlugin.registerWith(registry.registrarFor(PrintingPlugin));
-  SharedPreferencesPlugin.registerWith(registry.registrarFor(SharedPreferencesPlugin));
-  UrlLauncherPlugin.registerWith(registry.registrarFor(UrlLauncherPlugin));
-  registry.registerMessageHandler();
+void registerPlugins(Registrar registrar) {
+  FirebaseFirestoreWeb.registerWith(registrar);
+  FirebaseFunctionsWeb.registerWith(registrar);
+  FilePickerWeb.registerWith(registrar);
+  FirebaseAnalyticsWeb.registerWith(registrar);
+  FirebaseAuthOAuthWeb.registerWith(registrar);
+  FirebaseAuthWeb.registerWith(registrar);
+  FirebaseCoreWeb.registerWith(registrar);
+  GoogleSignInPlugin.registerWith(registrar);
+  PrintingPlugin.registerWith(registrar);
+  SharedPreferencesPlugin.registerWith(registrar);
+  UrlLauncherPlugin.registerWith(registrar);
+  registrar.registerMessageHandler();
 }
