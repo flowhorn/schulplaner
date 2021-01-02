@@ -44,13 +44,13 @@ class ShortSchoolClassView extends StatelessWidget {
           children: data.values.map<Widget>((classinfo) {
             return ListTile(
               leading: Hero(
-                  tag: "classtag:" + classinfo.id,
+                  tag: 'classtag:' + classinfo.id,
                   child: ColoredCircleText(
                       text: toShortNameLength(
                           context, classinfo.getShortname_full()),
                       color: classinfo.getDesign().primary,
                       radius: 22.0)),
-              title: Text(classinfo.name ?? "-"),
+              title: Text(classinfo.name ?? '-'),
               trailing: IconButton(
                   icon: Icon(Icons.more_horiz),
                   onPressed: () {
@@ -65,7 +65,7 @@ class ShortSchoolClassView extends StatelessWidget {
                       classid: classinfo.id,
                       database: plannerDatabase,
                     ),
-                    routname: "schoolclass");
+                    routname: 'schoolclass');
               },
             );
           }).toList()
@@ -119,13 +119,13 @@ class LibraryView extends StatelessWidget {
                     children: data.values.map<Widget>((classinfo) {
                       return ListTile(
                         leading: Hero(
-                            tag: "classtag:" + classinfo.id,
+                            tag: 'classtag:' + classinfo.id,
                             child: ColoredCircleText(
                                 text: toShortNameLength(
                                     context, classinfo.getShortname_full()),
                                 color: classinfo.getDesign().primary,
                                 radius: 22.0)),
-                        title: Text(classinfo.name ?? "-"),
+                        title: Text(classinfo.name ?? '-'),
                         trailing: IconButton(
                             icon: Icon(Icons.more_horiz),
                             onPressed: () {
@@ -140,7 +140,7 @@ class LibraryView extends StatelessWidget {
                                 classid: classinfo.id,
                                 database: plannerDatabase,
                               ),
-                              routname: "schoolclass");
+                              routname: 'schoolclass');
                         },
                       );
                     }).toList()
@@ -180,7 +180,7 @@ class LibraryView extends StatelessWidget {
                       name: getString(context).allevents,
                       iconData: Icons.event_note, onTap: () {
                     navigationBloc.openSubChild(
-                      "allevents",
+                      'allevents',
                       MyEventsList(),
                       getString(context).allevents,
                       actions: (context) {
@@ -199,7 +199,7 @@ class LibraryView extends StatelessWidget {
                       name: getString(context).tasks,
                       iconData: Icons.book, onTap: () {
                     navigationBloc.openSubChild(
-                      "tasks",
+                      'tasks',
                       MyTasksList(),
                       getString(context).tasks,
                       actions: (context) {
@@ -222,7 +222,7 @@ class LibraryView extends StatelessWidget {
                       name: getString(context).exams,
                       iconData: Icons.stars, onTap: () {
                     navigationBloc.openSubChild(
-                      "exams",
+                      'exams',
                       MyEventsOnlyExams(),
                       getString(context).exams,
                       navigationItem: NavigationItem.eventsExamsList,
@@ -240,7 +240,7 @@ class LibraryView extends StatelessWidget {
                       iconData: CommunityMaterialIcons.trophy_outline,
                       onTap: () {
                     navigationBloc.openSubChild(
-                      "grades",
+                      'grades',
                       GradeDetailList(plannerDatabase),
                       getString(context).grades,
                       navigationItem: NavigationItem.grades,
@@ -250,7 +250,7 @@ class LibraryView extends StatelessWidget {
                       name: getString(context).teachers,
                       iconData: Icons.people_outline, onTap: () {
                     navigationBloc.openSubChild(
-                      "teachers",
+                      'teachers',
                       TeacherList(plannerDatabase: plannerDatabase),
                       getString(context).teachers,
                       navigationItem: NavigationItem.teachers,
@@ -260,7 +260,7 @@ class LibraryView extends StatelessWidget {
                       name: getString(context).places,
                       iconData: Icons.room, onTap: () {
                     navigationBloc.openSubChild(
-                      "places",
+                      'places',
                       PlaceList(plannerDatabase: plannerDatabase),
                       getString(context).places,
                       navigationItem: NavigationItem.places,
@@ -270,7 +270,7 @@ class LibraryView extends StatelessWidget {
                       name: getString(context).lessoninfos,
                       iconData: Icons.event_busy, onTap: () {
                     navigationBloc.openSubChild(
-                      "lessoninfos",
+                      'lessoninfos',
                       LessonInfosList(plannerDatabase: plannerDatabase),
                       getString(context).lessoninfos,
                       navigationItem: NavigationItem.lessonInfos,
@@ -282,7 +282,7 @@ class LibraryView extends StatelessWidget {
                     iconData: Icons.event,
                     onTap: () {
                       navigationBloc.openSubChild(
-                        "timetable",
+                        'timetable',
                         TimetableView(),
                         getString(context).timetable,
                         navigationItem: NavigationItem.timetable,
@@ -293,7 +293,7 @@ class LibraryView extends StatelessWidget {
                       name: getString(context).absenttimes,
                       iconData: Icons.not_interested, onTap: () {
                     navigationBloc.openSubChild(
-                      "absenttimes",
+                      'absenttimes',
                       MyAbsentList(plannerDatabase: plannerDatabase),
                       getString(context).absenttimes,
                       navigationItem: NavigationItem.absentTimes,
@@ -303,7 +303,7 @@ class LibraryView extends StatelessWidget {
                       name: getString(context).courses,
                       iconData: Icons.widgets, onTap: () {
                     navigationBloc.openSubChild(
-                      "courses",
+                      'courses',
                       CourseList(),
                       getString(context).courses,
                       navigationItem: NavigationItem.courseList,
@@ -313,7 +313,7 @@ class LibraryView extends StatelessWidget {
                       name: getString(context).vacations,
                       iconData: Icons.wb_sunny, onTap: () {
                     navigationBloc.openSubChild(
-                      "vacations",
+                      'vacations',
                       HolidayList(
                         plannerDatabase: plannerDatabase,
                       ),
@@ -325,7 +325,7 @@ class LibraryView extends StatelessWidget {
                       name: getString(context).calendar,
                       iconData: Icons.event, onTap: () {
                     navigationBloc.openSubChild(
-                      "calendar",
+                      'calendar',
                       CalendarView(
                         plannerDatabase,
                       ),
@@ -337,7 +337,7 @@ class LibraryView extends StatelessWidget {
                       name: getString(context).timeline,
                       iconData: Icons.timeline, onTap: () {
                     navigationBloc.openSubChild(
-                      "timeline",
+                      'timeline',
                       TimelineView(
                         plannerDatabase,
                       ),
@@ -356,7 +356,7 @@ class LibraryView extends StatelessWidget {
                       name: getString(context).schoolreports,
                       iconData: Icons.assignment, onTap: () {
                     navigationBloc.openSubChild(
-                      "schoolreports",
+                      'schoolreports',
                       SchoolReportList(plannerDatabase: plannerDatabase),
                       getString(context).schoolreports,
                       navigationItem: NavigationItem.schoolreports,
@@ -366,19 +366,19 @@ class LibraryView extends StatelessWidget {
                       name: getString(context).files,
                       iconData: Icons.attach_file, onTap: () {
                     navigationBloc.openSubChild(
-                      "files",
+                      'files',
                       FileHub(database: plannerDatabase),
                       getString(context).files,
                       navigationItem: NavigationItem.files,
                     );
                   }),
                   getFunctionTile(context,
-                      name: bothlang(context, en: "Print", de: "Drucken"),
+                      name: bothlang(context, en: 'Print', de: 'Drucken'),
                       iconData: Icons.print, onTap: () {
                     navigationBloc.openSubChild(
-                      "print",
+                      'print',
                       PrintPage(database: plannerDatabase),
-                      bothlang(context, en: "Print", de: "Drucken"),
+                      bothlang(context, en: 'Print', de: 'Drucken'),
                       navigationItem: NavigationItem.files,
                     );
                   }),
@@ -412,7 +412,7 @@ class LibraryTabletView extends StatelessWidget {
                 iconData: Icons.event_note,
                 onTap: () {
                   navigationBloc.openSubChild(
-                    "allevents",
+                    'allevents',
                     MyEventsList(),
                     getString(context).allevents,
                     actions: (context) {
@@ -435,7 +435,7 @@ class LibraryTabletView extends StatelessWidget {
                 iconData: Icons.book,
                 onTap: () {
                   navigationBloc.openSubChild(
-                    "tasks",
+                    'tasks',
                     MyTasksList(),
                     getString(context).tasks,
                     actions: (context) {
@@ -462,7 +462,7 @@ class LibraryTabletView extends StatelessWidget {
                 iconData: Icons.stars,
                 onTap: () {
                   navigationBloc.openSubChild(
-                    "exams",
+                    'exams',
                     MyEventsOnlyExams(),
                     getString(context).exams,
                     navigationItem: NavigationItem.eventsExamsList,
@@ -481,7 +481,7 @@ class LibraryTabletView extends StatelessWidget {
                 iconData: CommunityMaterialIcons.trophy_outline,
                 onTap: () {
                   navigationBloc.openSubChild(
-                    "grades",
+                    'grades',
                     GradeDetailList(plannerDatabase),
                     getString(context).grades,
                     navigationItem: NavigationItem.grades,
@@ -495,7 +495,7 @@ class LibraryTabletView extends StatelessWidget {
                 iconData: Icons.people_outline,
                 onTap: () {
                   navigationBloc.openSubChild(
-                    "teachers",
+                    'teachers',
                     TeacherList(plannerDatabase: plannerDatabase),
                     getString(context).teachers,
                     navigationItem: NavigationItem.teachers,
@@ -509,7 +509,7 @@ class LibraryTabletView extends StatelessWidget {
                 iconData: Icons.room,
                 onTap: () {
                   navigationBloc.openSubChild(
-                    "places",
+                    'places',
                     PlaceList(plannerDatabase: plannerDatabase),
                     getString(context).places,
                     navigationItem: NavigationItem.places,
@@ -523,7 +523,7 @@ class LibraryTabletView extends StatelessWidget {
                 iconData: Icons.event_busy,
                 onTap: () {
                   navigationBloc.openSubChild(
-                    "lessoninfos",
+                    'lessoninfos',
                     LessonInfosList(plannerDatabase: plannerDatabase),
                     getString(context).lessoninfos,
                     navigationItem: NavigationItem.lessonInfos,
@@ -537,7 +537,7 @@ class LibraryTabletView extends StatelessWidget {
                 iconData: Icons.event,
                 onTap: () {
                   navigationBloc.openSubChild(
-                    "timetable",
+                    'timetable',
                     TimetableView(),
                     getString(context).timetable,
                     navigationItem: NavigationItem.timetable,
@@ -551,7 +551,7 @@ class LibraryTabletView extends StatelessWidget {
                 iconData: Icons.not_interested,
                 onTap: () {
                   navigationBloc.openSubChild(
-                    "absenttimes",
+                    'absenttimes',
                     MyAbsentList(plannerDatabase: plannerDatabase),
                     getString(context).absenttimes,
                     navigationItem: NavigationItem.absentTimes,
@@ -565,7 +565,7 @@ class LibraryTabletView extends StatelessWidget {
                 iconData: Icons.widgets,
                 onTap: () {
                   navigationBloc.openSubChild(
-                    "courses",
+                    'courses',
                     CourseList(),
                     getString(context).courses,
                     navigationItem: NavigationItem.courseList,
@@ -579,7 +579,7 @@ class LibraryTabletView extends StatelessWidget {
                 iconData: Icons.wb_sunny,
                 onTap: () {
                   navigationBloc.openSubChild(
-                    "vacations",
+                    'vacations',
                     HolidayList(
                       plannerDatabase: plannerDatabase,
                     ),
@@ -595,7 +595,7 @@ class LibraryTabletView extends StatelessWidget {
                 iconData: Icons.event,
                 onTap: () {
                   navigationBloc.openSubChild(
-                    "calendar",
+                    'calendar',
                     CalendarView(
                       plannerDatabase,
                     ),
@@ -611,7 +611,7 @@ class LibraryTabletView extends StatelessWidget {
                 iconData: Icons.timeline,
                 onTap: () {
                   navigationBloc.openSubChild(
-                    "timeline",
+                    'timeline',
                     TimelineView(
                       plannerDatabase,
                     ),
@@ -632,7 +632,7 @@ class LibraryTabletView extends StatelessWidget {
                 iconData: Icons.assignment,
                 onTap: () {
                   navigationBloc.openSubChild(
-                    "schoolreports",
+                    'schoolreports',
                     SchoolReportList(plannerDatabase: plannerDatabase),
                     getString(context).schoolreports,
                     navigationItem: NavigationItem.schoolreports,
@@ -646,7 +646,7 @@ class LibraryTabletView extends StatelessWidget {
                 iconData: Icons.attach_file,
                 onTap: () {
                   navigationBloc.openSubChild(
-                    "files",
+                    'files',
                     FileHub(database: plannerDatabase),
                     getString(context).files,
                     navigationItem: NavigationItem.files,
@@ -656,11 +656,11 @@ class LibraryTabletView extends StatelessWidget {
               ),
               getDrawerFunctionTile(
                 context,
-                name: bothlang(context, en: "Print", de: "Drucken"),
+                name: bothlang(context, en: 'Print', de: 'Drucken'),
                 iconData: Icons.print,
                 onTap: () {
                   navigationBloc.openSubChild(
-                    "print",
+                    'print',
                     PrintPage(database: plannerDatabase),
                     getString(context).files,
                     navigationItem: NavigationItem.print,
@@ -747,13 +747,13 @@ class _SchoolClassSection extends StatelessWidget {
                   children: data.values.map<Widget>((classinfo) {
                     return ListTile(
                       leading: Hero(
-                          tag: "classtag:" + classinfo.id,
+                          tag: 'classtag:' + classinfo.id,
                           child: ColoredCircleText(
                               text: toShortNameLength(
                                   context, classinfo.getShortname_full()),
                               color: classinfo.getDesign().primary,
                               radius: 22.0)),
-                      title: Text(classinfo.name ?? "-"),
+                      title: Text(classinfo.name ?? '-'),
                       trailing: IconButton(
                           icon: Icon(Icons.more_horiz),
                           onPressed: () {
@@ -768,7 +768,7 @@ class _SchoolClassSection extends StatelessWidget {
                               classid: classinfo.id,
                               database: plannerDatabase,
                             ),
-                            routname: "schoolclass");
+                            routname: 'schoolclass');
                       },
                     );
                   }).toList()

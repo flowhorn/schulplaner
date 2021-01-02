@@ -95,7 +95,7 @@ class ChatThreadState extends State<ChatThread> {
   Future uploadImage(File imageFile) async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
     final reference =
-        FirebaseStorage.instance.ref().child("chat").child(fileName);
+        FirebaseStorage.instance.ref().child('chat').child(fileName);
     final uploadTask = reference.putFile(imageFile);
     final storageTaskSnapshot = await uploadTask;
     try {
@@ -116,7 +116,7 @@ class ChatThreadState extends State<ChatThread> {
   Future uploadFile(File documentFile) async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
     final reference =
-        FirebaseStorage.instance.ref().child("chat").child(fileName);
+        FirebaseStorage.instance.ref().child('chat').child(fileName);
     final uploadTask = reference.putFile(documentFile);
     final storageTaskSnapshot = await uploadTask;
     try {
@@ -143,7 +143,7 @@ class ChatThreadState extends State<ChatThread> {
           .reference()
           .child('chats')
           .child(groupid)
-          .child("messages")
+          .child('messages')
           .push();
 
       documentReference.set(Message(
@@ -171,20 +171,20 @@ class ChatThreadState extends State<ChatThread> {
     } else {
       widget.database.dataManager
           .userOtherRoot(uid)
-          .collection("data")
-          .doc("info")
+          .collection('data')
+          .doc('info')
           .get()
           .then((it) {
         if (it.exists) {
-          String name = it.get("name");
+          String name = it.get('name');
           setState(() {
             nameDatabase[uid] = name ?? it.id;
           });
         } else {
-          nameDatabase[uid] = "Anonymer Nutzer";
+          nameDatabase[uid] = 'Anonymer Nutzer';
         }
       });
-      return "...";
+      return '...';
     }
   }
 
@@ -202,7 +202,7 @@ class ChatThreadState extends State<ChatThread> {
                       .reference()
                       .child('chats')
                       .child(groupid)
-                      .child("messages")
+                      .child('messages')
                       .orderByChild('timestamp')
                       .limitToLast(50)
                       .onValue
@@ -232,7 +232,7 @@ class ChatThreadState extends State<ChatThread> {
                       return ChatThreadList.build(
                         messages: listMessage
                             .map((message) => message2.Message(
-                                text: message.type == 0 ? message.content : "",
+                                text: message.type == 0 ? message.content : '',
                                 contentType: message.type == 1
                                     ? message2.ContentType.imageURL
                                     : (message.type == 2
@@ -250,7 +250,7 @@ class ChatThreadState extends State<ChatThread> {
                             isMe: element.message.uID == uid,
                             isSingleChat: false,
                             name: getFromNameDatabase(element.message.uID) ??
-                                "???",
+                                '???',
                           );
                         },
                         loadMore: () {},

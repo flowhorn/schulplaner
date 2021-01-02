@@ -32,8 +32,8 @@ class NoteData {
 
     if (data['olddata'] != null) {
       try {
-        if (data['olddata']["att"] != null) {
-          Map<dynamic, dynamic> rawdata = data['olddata']["att"];
+        if (data['olddata']['att'] != null) {
+          Map<dynamic, dynamic> rawdata = data['olddata']['att'];
           Map<String, CloudFile> attachments =
               rawdata.map((key, value) => MapEntry<String, CloudFile>(
                   key,
@@ -45,8 +45,8 @@ class NoteData {
                   )));
           files.addAll(attachments);
         }
-        if (data['olddata']["attachments"] != null) {
-          Map<dynamic, dynamic> rawdata = data['olddata']["attachments"];
+        if (data['olddata']['attachments'] != null) {
+          Map<dynamic, dynamic> rawdata = data['olddata']['attachments'];
           Map<String, CloudFile> attachments =
               rawdata.map((key, value) => MapEntry<String, CloudFile>(
                   key,
@@ -89,7 +89,7 @@ class NoteData {
 
   bool validate() {
     if (noteid == null) return false;
-    if (title == null || title == "") return false;
+    if (title == null || title == '') return false;
     return true;
   }
 }

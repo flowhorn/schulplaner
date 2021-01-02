@@ -17,7 +17,7 @@ class AppSettingsBloc extends BlocBase {
   Future<void> _initializeAppSettings() async {
     final instance = await SharedPreferences.getInstance();
 
-    final sharedPrefData = instance.getString("appsettings");
+    final sharedPrefData = instance.getString('appsettings');
     if (sharedPrefData != null) {
       final newData = AppSettingsData.fromString(sharedPrefData);
       if (newData != null) {
@@ -42,7 +42,7 @@ class AppSettingsBloc extends BlocBase {
     SharedPreferences.getInstance().then((instance) {
       String newdatastring = newData.toJsonString();
       if (newdatastring != null) {
-        instance.setString("appsettings", newdatastring);
+        instance.setString('appsettings', newdatastring);
       }
     });
   }

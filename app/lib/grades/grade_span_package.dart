@@ -13,10 +13,10 @@ class GradeSpanPackage {
 
   final _currentGradeSpanSubject = BehaviorSubject<GradeSpan>.seeded(
     GradeSpan(
-      id: "full",
+      id: 'full',
       start: null,
       end: null,
-      name: "Gesamter Zeitraum",
+      name: 'Gesamter Zeitraum',
       activated: true,
     ),
   );
@@ -57,19 +57,19 @@ class GradeSpanPackage {
         fullList.insert(
             0,
             GradeSpan(
-                id: "full",
+                id: 'full',
                 start: null,
                 end: null,
-                name: "Gesamter Zeitraum",
-                activated: (_current?.id ?? "full") == "full"));
+                name: 'Gesamter Zeitraum',
+                activated: (_current?.id ?? 'full') == 'full'));
         fullList.insert(
             fullList.length,
             GradeSpan(
-                id: "custom",
+                id: 'custom',
                 start: null,
                 end: null,
-                name: "Benutzerdefiniert",
-                activated: _current?.id == "custom"));
+                name: 'Benutzerdefiniert',
+                activated: _current?.id == 'custom'));
         return fullList;
       },
     );
@@ -103,6 +103,6 @@ class GradeSpanPackage {
 
 extension on List<GradeSpan> {
   void sortGradeSpans() {
-    sort((i1, i2) => (i1.name ?? "").compareTo(i2.name ?? ""));
+    sort((i1, i2) => (i1.name ?? '').compareTo(i2.name ?? ''));
   }
 }

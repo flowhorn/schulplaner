@@ -62,8 +62,8 @@ class UpdateData {
     final appSettingsData = appSettingsBloc.currentValue;
     this.settings = WidgetSettings(
       appdesign: Design(
-        id: "widgetdesign",
-        name: "WidgetDesign",
+        id: 'widgetdesign',
+        name: 'WidgetDesign',
         primary: appSettingsData.primary,
         accent: appSettingsData.accent,
       ).toWidgetJson()
@@ -97,11 +97,11 @@ class UpdateData {
       return entry.value.toWidgetJson(entry.key);
     }).toList();
     return {
-      "courses": _internalcourselist,
-      "lessons": _internallessonlist,
-      "periods": _internalperiodlist,
-      "settings": settings.toJson(),
-      "memberid": memberid,
+      'courses': _internalcourselist,
+      'lessons': _internallessonlist,
+      'periods': _internalperiodlist,
+      'settings': settings.toJson(),
+      'memberid': memberid,
     };
   }
 }

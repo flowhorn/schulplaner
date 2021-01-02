@@ -68,28 +68,28 @@ class Grade {
     );
   }
 
-  String getKey() => courseid + "--" + id;
+  String getKey() => courseid + '--' + id;
 
   Grade.fromData(Map<String, dynamic> data) {
-    id = data["gradeid"] ?? data["id"];
-    courseid = data["courseid"] ?? data['coursid'];
-    title = data["title"] ?? data["name"];
-    date = data["date"];
-    valuekey = data["valueid"];
+    id = data['gradeid'] ?? data['id'];
+    courseid = data['courseid'] ?? data['coursid'];
+    title = data['title'] ?? data['name'];
+    date = data['date'];
+    valuekey = data['valueid'];
 
-    weight = double.parse(data["weight"].toString());
+    weight = double.parse(data['weight'].toString());
     type = GradeType.values[data['type'] - 1];
   }
 
   Map<String, Object> toJson() {
     return {
-      "gradeid": id,
-      "courseid": courseid,
-      "title": title,
-      "date": date,
-      "valueid": valuekey,
-      "weight": weight,
-      "type": type.index + 1,
+      'gradeid': id,
+      'courseid': courseid,
+      'title': title,
+      'date': date,
+      'valueid': valuekey,
+      'weight': weight,
+      'type': type.index + 1,
     };
   }
 
@@ -98,12 +98,12 @@ class Grade {
   }
 
   bool validate() {
-    if (id == null || id == "") return false;
-    if (courseid == null || courseid == "") return false;
-    if (date == null || date == "") return false;
-    if (title == null || title == "") return false;
+    if (id == null || id == '') return false;
+    if (courseid == null || courseid == '') return false;
+    if (date == null || date == '') return false;
+    if (title == null || title == '') return false;
     if (weight == null) return false;
-    if (valuekey == null || valuekey == "") return false;
+    if (valuekey == null || valuekey == '') return false;
     return true;
   }
 }
@@ -112,7 +112,7 @@ class DataUtil_Grade {
   String getKey(Grade item) => item.getKey();
 
   static String getKeyBy(String courseid, String gradeid) {
-    return courseid + "--" + gradeid;
+    return courseid + '--' + gradeid;
   }
 
   int sort(Grade item1, Grade item2) {
@@ -124,7 +124,7 @@ class DataUtil_Grade {
   }
 
   GradePackage getGradePackageOf(String gradevaluekey) {
-    return getGradePackage(int.parse(gradevaluekey.split("-")[0]));
+    return getGradePackage(int.parse(gradevaluekey.split('-')[0]));
   }
 }
 
@@ -144,7 +144,7 @@ class GradeValue {
     if (name2 == null) {
       return name;
     } else {
-      return name + " (${name2})";
+      return name + ' (${name2})';
     }
   }
 
@@ -158,7 +158,7 @@ typedef String AverageInput(double value);
 class AverageDisplay {
   AverageInput input;
   String name;
-  AverageDisplay(this.input, {this.name = "Standard"});
+  AverageDisplay(this.input, {this.name = 'Standard'});
 
   String getAverageString(double value) {
     return input(value);
@@ -181,13 +181,13 @@ class AverageSettings {
     }
   }
   AverageSettings.fromJson(dynamic json) {
-    automatic = json != null ? json["automatic"] : true;
-    List<dynamic> weightlist = json != null ? json["weightpertype"] : null;
+    automatic = json != null ? json['automatic'] : true;
+    List<dynamic> weightlist = json != null ? json['weightpertype'] : null;
     if (weightlist != null) {
       weightperType = weightlist.asMap().map((int key, dynamic value) {
         return MapEntry<GradeType, double>(
-            GradeType.values[int.parse(value.split("-")[0])],
-            double.parse(value.split("-")[1]));
+            GradeType.values[int.parse(value.split('-')[0])],
+            double.parse(value.split('-')[1]));
       });
     } else {
       weightperType = {
@@ -203,10 +203,10 @@ class AverageSettings {
 
   Map<String, Object> toJson() {
     return {
-      "automatic": automatic,
-      "weightpertype":
+      'automatic': automatic,
+      'weightpertype':
           weightperType.entries.map((MapEntry<GradeType, double> entry) {
-        return entry.key.index.toString() + "-" + entry.value.toString();
+        return entry.key.index.toString() + '-' + entry.value.toString();
       }).toList(),
     };
   }
@@ -257,7 +257,7 @@ class GradeSpan {
       id: data['id'],
       start: data['start'],
       end: data['end'],
-      name: data['name'] ?? "-",
+      name: data['name'] ?? '-',
       activated: false,
     );
   }
@@ -272,9 +272,9 @@ class GradeSpan {
   }
 
   String getName(BuildContext context) {
-    if (id == "custom") {
+    if (id == 'custom') {
       return getString(context).custom;
-    } else if (id == "full") {
+    } else if (id == 'full') {
       return getString(context).wholetimespan;
     } else {
       return name;

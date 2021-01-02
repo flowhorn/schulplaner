@@ -62,11 +62,11 @@ class LetterResponse {
   }
 
   String getUid() {
-    return id.split("::")[0];
+    return id.split('::')[0];
   }
 
   String getPlannerId() {
-    return id.split("::")[1];
+    return id.split('::')[1];
   }
 }
 
@@ -97,8 +97,8 @@ class Letter {
   factory Letter.Create({@required String id, @required String authorid}) {
     return Letter._(
       id: id,
-      title: "",
-      content: "",
+      title: '',
+      content: '',
       authorid: authorid,
       published: Timestamp.now(),
       lastchanged: Timestamp.now(),
@@ -184,8 +184,8 @@ class Letter {
   }
 
   bool validate() {
-    if (id == null || id == "") return false;
-    if (title == null || title == "") return false;
+    if (id == null || id == '') return false;
+    if (title == null || title == '') return false;
     if (savedin == null) return false;
     return true;
   }

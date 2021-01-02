@@ -24,7 +24,7 @@ void showGradeSpanSheet(BuildContext context, PlannerDatabase database) {
               List<GradeSpan> gradespanlist = snapshot.data ?? [];
               return getFlexList(gradespanlist.map((gradespan) {
                 return ListTile(
-                  title: Text(gradespan.getName(context) ?? "-"),
+                  title: Text(gradespan.getName(context) ?? '-'),
                   trailing: gradespan.activated
                       ? Icon(
                           Icons.done,
@@ -32,11 +32,11 @@ void showGradeSpanSheet(BuildContext context, PlannerDatabase database) {
                         )
                       : null,
                   onTap: () {
-                    if (gradespan.id == "custom") {
+                    if (gradespan.id == 'custom') {
                       selectDateRange(context).then((daterange) {
                         if (daterange != null) {
                           database.gradespanpackage.setGradeSpan(GradeSpan(
-                              id: "custom",
+                              id: 'custom',
                               start: daterange.start,
                               end: daterange.end,
                               name: getString(context).custom,
@@ -144,7 +144,7 @@ void showGradeInfoSheet(PlannerDatabase database,
             return Expanded(
                 child: Column(
               children: <Widget>[
-                getSheetText(context, item.title ?? "-"),
+                getSheetText(context, item.title ?? '-'),
                 getExpandList([
                   ListTile(
                     leading: Icon(
@@ -154,7 +154,7 @@ void showGradeInfoSheet(PlannerDatabase database,
                           : courseInfo?.getDesign()?.primary,
                     ),
                     title: Text(courseInfo == null
-                        ? "???"
+                        ? '???'
                         : courseInfo?.getName() ?? getString(context).error),
                     onTap: () {},
                   ),
@@ -219,7 +219,7 @@ void showGradeInfoSheet(PlannerDatabase database,
                                               database.dataManager
                                                   .DeleteGrade(item);
                                               popNavigatorBy(context,
-                                                  text: "gradeid");
+                                                  text: 'gradeid');
                                             }
                                           });
                                         },
@@ -228,7 +228,7 @@ void showGradeInfoSheet(PlannerDatabase database,
                                   );
                                 },
                                 title: getString(context).more,
-                                routname: "gradeidview");
+                                routname: 'gradeidview');
                           },
                           iconData: Icons.more_horiz),
                     ],
@@ -240,7 +240,7 @@ void showGradeInfoSheet(PlannerDatabase database,
             ));
           });
     },
-    routname: "gradeidview",
+    routname: 'gradeidview',
   );
 }
 

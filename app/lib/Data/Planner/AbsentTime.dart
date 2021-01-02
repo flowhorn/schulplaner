@@ -15,11 +15,11 @@ class AbsentTime {
       this.files});
 
   AbsentTime.fromData(Map<String, dynamic> data) {
-    id = data["id"];
-    date = data["date"] ?? data["datestring"];
-    detail = data["detail"];
-    unexcused = data["unexcused"];
-    amount = data["amount"];
+    id = data['id'];
+    date = data['date'] ?? data['datestring'];
+    detail = data['detail'];
+    unexcused = data['unexcused'];
+    amount = data['amount'];
     //datamaps:
     Map<String, dynamic> premap_files =
         data['files']?.cast<String, dynamic>() ?? {};
@@ -29,17 +29,17 @@ class AbsentTime {
   }
 
   Map<String, Object> toJson() => {
-        "id": id,
-        "date": date,
-        "detail": detail,
-        "unexcused": unexcused,
-        "amount": amount,
+        'id': id,
+        'date': date,
+        'detail': detail,
+        'unexcused': unexcused,
+        'amount': amount,
         'files': files?.map((key, value) => MapEntry(key, value.toJson())),
       };
 
   bool validate() {
-    if (id == null || id == "") return false;
-    if (date == null || date == "") return false;
+    if (id == null || id == '') return false;
+    if (date == null || date == '') return false;
     if (unexcused == null) return false;
     if (amount == null || amount < 0) return false;
     return true;

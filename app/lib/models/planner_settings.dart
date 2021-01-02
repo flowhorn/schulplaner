@@ -53,7 +53,7 @@ class PlannerSettingsData {
       weekTypeFixPoint = data['weektype_fixpoint'] != null
           ? WeekTypeFixPoint.fromData(
               data['weektype_fixpoint']?.cast<String, dynamic>())
-          : WeekTypeFixPoint(date: "2019-01-01", weektype: 1);
+          : WeekTypeFixPoint(date: '2019-01-01', weektype: 1);
       //data
       vacationpackageid = data['vacationpackageid'];
       gradedataid = data['gradedataid'];
@@ -81,20 +81,20 @@ class PlannerSettingsData {
       }
 
       try {
-        if (gradeprofiles["default"].types["1"] != null &&
-            gradeprofiles["default"].types["1"].id == "0") {
+        if (gradeprofiles['default'].types['1'] != null &&
+            gradeprofiles['default'].types['1'].id == '0') {
           Map<String, GradeTypeItem> datamap = gradeprofiles['default'].types;
-          datamap["1"] = datamap["1"].copyWith(id: "1");
-          gradeprofiles["default"] =
-              gradeprofiles["default"].copyWith(types: datamap);
+          datamap['1'] = datamap['1'].copyWith(id: '1');
+          gradeprofiles['default'] =
+              gradeprofiles['default'].copyWith(types: datamap);
         }
       } catch (e) {
         print(e);
       }
 
-      weight_tendencies = data["weight_tendencies"] ?? true;
-      average_display_id = data["average_display_id"] ?? 0;
-      gradepackageid = data["grade_type"] ?? 1;
+      weight_tendencies = data['weight_tendencies'] ?? true;
+      average_display_id = data['average_display_id'] ?? 0;
+      gradepackageid = data['grade_type'] ?? 1;
     } else {
       maxlessons = 12;
       weektypes_amount = 2;
@@ -103,16 +103,16 @@ class PlannerSettingsData {
       saturday_enabled = false;
       sunday_enabled = false;
       timetable_timemode = false;
-      weekTypeFixPoint = WeekTypeFixPoint(date: "2019-01-01", weektype: 1);
+      weekTypeFixPoint = WeekTypeFixPoint(date: '2019-01-01', weektype: 1);
       lessontimes = {
-        1: LessonTime(start: "8:00", end: "9:00"),
-        2: LessonTime(start: "9:00", end: "10:00"),
-        3: LessonTime(start: "10:00", end: "11:00"),
-        4: LessonTime(start: "11:00", end: "12:00"),
-        5: LessonTime(start: "12:00", end: "13:00"),
-        6: LessonTime(start: "13:00", end: "14:00"),
-        7: LessonTime(start: "14:00", end: "15:00"),
-        8: LessonTime(start: "15:00", end: "16:00"),
+        1: LessonTime(start: '8:00', end: '9:00'),
+        2: LessonTime(start: '9:00', end: '10:00'),
+        3: LessonTime(start: '10:00', end: '11:00'),
+        4: LessonTime(start: '11:00', end: '12:00'),
+        5: LessonTime(start: '12:00', end: '13:00'),
+        6: LessonTime(start: '13:00', end: '14:00'),
+        7: LessonTime(start: '14:00', end: '15:00'),
+        8: LessonTime(start: '15:00', end: '16:00'),
       };
       gradespans = {};
       gradeprofiles = {

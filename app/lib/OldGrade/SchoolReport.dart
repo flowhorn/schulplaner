@@ -19,21 +19,21 @@ class ReportValue {
   ReportValue({this.grade_key, this.weight});
 
   ReportValue.fromData(Map<String, dynamic> data) {
-    grade_key = data["grade_key"];
-    var internalweight = data["weight"];
+    grade_key = data['grade_key'];
+    var internalweight = data['weight'];
     weight = double.parse(internalweight.toString());
   }
 
   bool validate() {
-    if (grade_key == null || grade_key == "") return false;
+    if (grade_key == null || grade_key == '') return false;
     if (weight == null) return false;
     return true;
   }
 
   Map<String, Object> toJson() {
     return {
-      "grade_key": grade_key,
-      "weight": weight,
+      'grade_key': grade_key,
+      'weight': weight,
     };
   }
 }
@@ -45,8 +45,8 @@ class SchoolReport {
   SchoolReport({this.id, this.name, this.values});
 
   SchoolReport.fromData(Map<String, dynamic> data) {
-    id = data["id"];
-    name = data["name"];
+    id = data['id'];
+    name = data['name'];
 
     //DATAMAPS
     Map<String, dynamic> premap_data =
@@ -65,16 +65,16 @@ class SchoolReport {
   }
 
   bool validate() {
-    if (id == null || id == "") return false;
-    if (name == null || name == "") return false;
+    if (id == null || id == '') return false;
+    if (name == null || name == '') return false;
     return true;
   }
 
   Map<String, Object> toJson() {
     return {
-      "id": id,
-      "name": name,
-      "values": values?.map((key, value) => MapEntry(key, value?.toJson())),
+      'id': id,
+      'name': name,
+      'values': values?.map((key, value) => MapEntry(key, value?.toJson())),
     };
   }
 
@@ -136,7 +136,7 @@ class ReportViewState extends State<ReportView> {
             height: 50.0,
             child: ListTile(
               title: Text(
-                myreport?.name ?? "",
+                myreport?.name ?? '',
                 style: TextStyle(color: getTextColor(getPrimaryColor(context))),
               ),
               leading: Icon(
@@ -144,13 +144,13 @@ class ReportViewState extends State<ReportView> {
                 color: getTextColor(getPrimaryColor(context)),
               ),
               trailing: Text(
-                "Ø" +
+                'Ø' +
                     (averageReport.totalaverage != null
                         ? database
                             .getSettings()
                             .getCurrentAverageDisplay(context: context)
                             .input(averageReport.totalaverage)
-                        : "/"),
+                        : '/'),
                 style: TextStyle(
                     color: getTextColor(getPrimaryColor(context)),
                     fontWeight: FontWeight.bold,
@@ -163,26 +163,26 @@ class ReportViewState extends State<ReportView> {
           IconButton(
             icon: Icon(Icons.share),
             onPressed: () {
-              String firstpart = (myreport?.name ?? "-") +
-                  ": \n " +
+              String firstpart = (myreport?.name ?? '-') +
+                  ': \n ' +
                   getString(context).average +
-                  ": " +
+                  ': ' +
                   database
                       .getSettings()
                       .getCurrentAverageDisplay(context: context)
                       .input(averageReport.totalaverage)
                       .toString() +
-                  "\n";
+                  '\n';
               for (Course c in courses) {
                 firstpart = firstpart +
                     c.name +
-                    ": " +
+                    ': ' +
                     (myreport?.getValue(c.id)?.grade_key != null
                         ? (DataUtil_Grade()
                             .getGradeValueOf(myreport.getValue(c.id).grade_key)
                             .name)
-                        : "/") +
-                    "\n";
+                        : '/') +
+                    '\n';
               }
               Share.share(firstpart);
             },
@@ -214,7 +214,7 @@ class ReportViewState extends State<ReportView> {
                   ? (DataUtil_Grade()
                       .getGradeValueOf(myreport.getValue(course.id).grade_key)
                       .name)
-                  : "/",
+                  : '/',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
             ),
           );
@@ -295,7 +295,7 @@ void showSchoolReportMoreSheet(BuildContext context,
               if (item == null) return loadedView();
               return Column(
                 children: <Widget>[
-                  getSheetText(context, item.name ?? "-"),
+                  getSheetText(context, item.name ?? '-'),
                   ListTile(
                     leading: Icon(Icons.edit),
                     title: Text(getString(context).edit),
@@ -320,7 +320,7 @@ void showSchoolReportMoreSheet(BuildContext context,
                               richtext: null)
                           .then((value) {
                         if (value == true) {
-                          popNavigatorBy(context, text: "schoolreportid");
+                          popNavigatorBy(context, text: 'schoolreportid');
                           plannerdatabase.dataManager.DeleteSchoolReport(item);
                         }
                       });
@@ -331,5 +331,5 @@ void showSchoolReportMoreSheet(BuildContext context,
               );
             });
       },
-      routname: "schoolreportid");
+      routname: 'schoolreportid');
 }

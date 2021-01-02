@@ -31,11 +31,11 @@ void showSchoolLetterMoreSheet(BuildContext context,
             stream: database.letters.getItemStream(initialData.id),
             initialData: initialData,
             builder: (context, snapshot) {
-              Letter letter = snapshot.data;
+              final letter = snapshot.data;
               if (letter == null) return loadedView();
               return Column(
                 children: <Widget>[
-                  getSheetText(context, letter.title ?? "-"),
+                  getSheetText(context, letter.title ?? '-'),
                   ListTile(
                     leading: Icon(Icons.edit),
                     title: Text(getString(context).edit),
@@ -52,7 +52,7 @@ void showSchoolLetterMoreSheet(BuildContext context,
                     leading: Icon(Icons.share),
                     title: Text(getString(context).share),
                     onTap: () {
-                      Share.share(letter.title + "\n" + letter.content);
+                      Share.share(letter.title + '\n' + letter.content);
                     },
                   ),
                   ListTile(
@@ -75,7 +75,7 @@ void showSchoolLetterMoreSheet(BuildContext context,
                             if (result == true) {
                               Navigator.popUntil(context, (Route predicate) {
                                 return (predicate?.settings?.name
-                                            ?.startsWith("schoollettermore") ??
+                                            ?.startsWith('schoollettermore') ??
                                         true) ==
                                     false;
                               });
@@ -106,7 +106,7 @@ void showSchoolLetterMoreSheet(BuildContext context,
                             if (result == true) {
                               Navigator.popUntil(context, (Route predicate) {
                                 return (predicate?.settings?.name
-                                            ?.startsWith("schoollettermore") ??
+                                            ?.startsWith('schoollettermore') ??
                                         true) ==
                                     false;
                               });
@@ -122,18 +122,18 @@ void showSchoolLetterMoreSheet(BuildContext context,
               );
             });
       },
-      routname: "schoollettermore");
+      routname: 'schoollettermore');
 }
 
 String getSavedInValue(SavedIn savedin, PlannerDatabase database) {
-  if (savedin == null) return "???";
+  if (savedin == null) return '???';
   if (savedin.type == SavedInType.CLASS) {
     return database.getClassInfo(savedin.id).getName();
   }
   if (savedin.type == SavedInType.COURSE) {
     return database.getCourseInfo(savedin.id).getName();
   }
-  throw Exception("Saved in value error!");
+  throw Exception('Saved in value error!');
 }
 
 class NewLetterView extends StatelessWidget {
@@ -215,7 +215,7 @@ class NewLetterView extends StatelessWidget {
                       leading: Icon(Icons.widgets),
                       title: Text(data.savedin != null
                           ? (getSavedInValue(data.savedin, database))
-                          : "-"),
+                          : '-'),
                       onTap: editmode
                           ? null
                           : () {
@@ -352,7 +352,7 @@ class NewLetterView extends StatelessWidget {
             category: PermissionAccessType.creator,
             classid: data.savedin.id);
       }
-      throw Exception("SOMETHING WENT WRONG???");
+      throw Exception('SOMETHING WENT WRONG???');
     }
   }
 }
@@ -396,7 +396,7 @@ class LetterCard extends StatelessWidget {
                     left: 8.0, right: 8.0, top: 8.0, bottom: 8.0),
                 child: RichText(
                   text: TextSpan(
-                      text: letter.content ?? "-",
+                      text: letter.content ?? '-',
                       style: TextStyle(
                           color: getClearTextColor(context),
                           fontWeight: FontWeight.w400)),
@@ -416,7 +416,7 @@ class LetterCard extends StatelessWidget {
                 ? Card(
                     child: ListTile(
                       title: Text(letter.getMyResponse(database)?.message ??
-                          getString(context).reply + "..."),
+                          getString(context).reply + '...'),
                       trailing: Icon(Icons.reply),
                       onTap: () {
                         getTextFromInput(
@@ -505,7 +505,7 @@ class LetterDetailedView extends StatelessWidget {
             body: ListView(
               children: <Widget>[
                 Hero(
-                  tag: "lettercard:${letter.id}",
+                  tag: 'lettercard:${letter.id}',
                   flightShuttleBuilder: (
                     BuildContext flightContext,
                     Animation<double> animation,
@@ -544,7 +544,7 @@ class LetterDetailedView extends StatelessWidget {
                                 left: 8.0, right: 8.0, top: 8.0, bottom: 8.0),
                             child: RichText(
                               text: TextSpan(
-                                  text: letter.content ?? "-",
+                                  text: letter.content ?? '-',
                                   style: TextStyle(
                                       color: getClearTextColor(context),
                                       fontWeight: FontWeight.w400)),
@@ -576,7 +576,7 @@ class LetterDetailedView extends StatelessWidget {
                                 child: ListTile(
                                   title: Text(
                                       letter.getMyResponse(database)?.message ??
-                                          getString(context).reply + "..."),
+                                          getString(context).reply + '...'),
                                   trailing: Icon(Icons.reply),
                                   onTap: () {
                                     getTextFromInput(
@@ -670,7 +670,7 @@ class LetterDetailedView extends StatelessWidget {
                   leading: Icon(Icons.share),
                   title: Text(getString(context).share),
                   onTap: () {
-                    Share.share(letter.title + "\n" + letter.content);
+                    Share.share(letter.title + '\n' + letter.content);
                   },
                 ),
                 ListTile(
@@ -718,7 +718,7 @@ class LetterDetailedView extends StatelessWidget {
                           if (result == true) {
                             Navigator.popUntil(context, (Route predicate) {
                               return (predicate?.settings?.name
-                                          ?.startsWith("schoollettermore") ??
+                                          ?.startsWith('schoollettermore') ??
                                       true) ==
                                   false;
                             });
@@ -784,7 +784,7 @@ class LetterResponsesView extends StatelessWidget {
             body: ListView(
               children: <Widget>[
                 Hero(
-                  tag: "lettercard:${letter.id}",
+                  tag: 'lettercard:${letter.id}',
                   flightShuttleBuilder: (
                     BuildContext flightContext,
                     Animation<double> animation,
@@ -823,7 +823,7 @@ class LetterResponsesView extends StatelessWidget {
                                 left: 8.0, right: 8.0, top: 8.0, bottom: 8.0),
                             child: RichText(
                               text: TextSpan(
-                                  text: letter.content ?? "-",
+                                  text: letter.content ?? '-',
                                   style: TextStyle(
                                       color: getClearTextColor(context),
                                       fontWeight: FontWeight.w400)),
@@ -865,7 +865,7 @@ class LetterResponsesView extends StatelessWidget {
                   ),
                 ),
                 FormHeader2(
-                    bothlang(context, de: "Beantwortet", en: "Replied")),
+                    bothlang(context, de: 'Beantwortet', en: 'Replied')),
                 Column(
                   children: letter.responses.values
                       .where((it) => it.type == ResponseType.REPLY)
@@ -890,7 +890,7 @@ class LetterResponsesView extends StatelessWidget {
                                           icon: Icon(Icons.content_copy),
                                           onPressed: () {
                                             Clipboard.setData(ClipboardData(
-                                                text: it.message ?? "-"));
+                                                text: it.message ?? '-'));
                                             showToastMessage(
                                                 msg: getString(context)
                                                     .addtoclipboard);
@@ -899,7 +899,7 @@ class LetterResponsesView extends StatelessWidget {
                                     Padding(
                                       padding: EdgeInsets.all(8.0),
                                       child: Text(
-                                        it.message ?? "-",
+                                        it.message ?? '-',
                                         textAlign: TextAlign.start,
                                         style: TextStyle(
                                           fontWeight: FontWeight.w300,

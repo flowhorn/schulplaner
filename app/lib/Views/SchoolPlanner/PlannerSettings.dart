@@ -149,7 +149,7 @@ Widget getSubSettingsLessons(BuildContext context, PlannerDatabase database) {
           ListTile(
             title: Text(getString(context).amountoflessons),
             subtitle: Text(settings.maxlessons.toString() +
-                " " +
+                ' ' +
                 getString(context).lessonsperday),
             onTap: () {
               selectItem(
@@ -158,7 +158,7 @@ Widget getSubSettingsLessons(BuildContext context, PlannerDatabase database) {
                   builder: (context, item) {
                     return ListTile(
                       title: Text(
-                          item.toString() + " " + getString(context).lessons),
+                          item.toString() + ' ' + getString(context).lessons),
                       trailing: selectedView(item == settings.maxlessons),
                       onTap: () {
                         PlannerSettingsData newdata = settings.copy();
@@ -182,7 +182,7 @@ Widget getSubSettingsLessons(BuildContext context, PlannerDatabase database) {
           ),
           FormDivider(),
           FormHeader(getString(context).weektype +
-              " (12/AB-)" +
+              ' (12/AB-)' +
               getString(context).weeks),
           SwitchListTile(
             value: settings.multiple_weektypes,
@@ -198,8 +198,8 @@ Widget getSubSettingsLessons(BuildContext context, PlannerDatabase database) {
               : ListTile(
                   title: Text(getString(context).amountofweektypes),
                   subtitle: Text(settings.weektypes_amount.toString() +
-                      " ${getString(context).weektypes}" +
-                      " (${weektypesamount_meaning(context)[settings.weektypes_amount]})"),
+                      ' ${getString(context).weektypes}' +
+                      ' (${weektypesamount_meaning(context)[settings.weektypes_amount]})'),
                   onTap: () {
                     selectItem(
                         context: context,
@@ -207,8 +207,8 @@ Widget getSubSettingsLessons(BuildContext context, PlannerDatabase database) {
                         builder: (context, item) {
                           return ListTile(
                             title: Text(item.toString() +
-                                " ${getString(context).weektypes}" +
-                                " (${weektypesamount_meaning(context)[item]})"),
+                                ' ${getString(context).weektypes}' +
+                                ' (${weektypesamount_meaning(context)[item]})'),
                             trailing: item == settings.weektypes_amount
                                 ? Icon(
                                     Icons.done,
@@ -331,9 +331,9 @@ Widget getSubSettingsGrades(BuildContext context, PlannerDatabase database) {
           ListTile(
             leading: Icon(Icons.data_usage),
             title: Text(getString(context).gradeprofiles +
-                " (" +
+                ' (' +
                 getString(context).average +
-                ")"),
+                ')'),
             onTap: () {
               pushWidget(
                   context,
@@ -373,7 +373,7 @@ Widget getSubSettingsWidget(BuildContext context, PlannerDatabase database) {
   final appSettingsBloc = BlocProvider.of<AppSettingsBloc>(context);
   return Scaffold(
       appBar: MyAppHeader(
-        title: getString(context).widgets + " (Android)",
+        title: getString(context).widgets + ' (Android)',
       ),
       body: StreamBuilder<AppSettingsData>(
         stream: appSettingsBloc.appSettingsData,
@@ -439,10 +439,10 @@ Widget getSubSettingsAdvanced(BuildContext context, PlannerDatabase database) {
         return Column(
           children: <Widget>[
             ListTile(
-              title: Text("UID: " + database.uid),
+              title: Text('UID: ' + database.uid),
             ),
             ListTile(
-              title: Text("PLANNERID: " + database.plannerid),
+              title: Text('PLANNERID: ' + database.plannerid),
             ),
             ButtonBar(
               children: <Widget>[
@@ -450,7 +450,7 @@ Widget getSubSettingsAdvanced(BuildContext context, PlannerDatabase database) {
                     text: getString(context).addtoclipboard,
                     onTap: () {
                       Clipboard.setData(ClipboardData(
-                          text: database.uid + "::" + database.plannerid));
+                          text: database.uid + '::' + database.plannerid));
                     },
                     iconData: Icons.content_copy),
               ],
@@ -569,16 +569,16 @@ class LessonTimeSettings extends StatelessWidget {
                         children: <Widget>[
                           ListTile(
                             title: Text(value.toString() +
-                                ". " +
+                                '. ' +
                                 getString(context).lesson),
                             subtitle: Column(
                               children: <Widget>[
                                 Text(getString(context).from +
-                                    ": " +
-                                    (time.start ?? "-")),
+                                    ': ' +
+                                    (time.start ?? '-')),
                                 Text(getString(context).until +
-                                    ": " +
-                                    (time.end ?? "-")),
+                                    ': ' +
+                                    (time.end ?? '-')),
                               ],
                               mainAxisSize: MainAxisSize.min,
                               mainAxisAlignment: MainAxisAlignment.start,
@@ -723,7 +723,7 @@ class GradeProfileSettings extends StatelessWidget {
                                 }),
                             IconButton(
                                 icon: Icon(Icons.delete_outline),
-                                onPressed: profile.profileid == "default"
+                                onPressed: profile.profileid == 'default'
                                     ? null
                                     : () {
                                         showConfirmDialog(
@@ -747,7 +747,7 @@ class GradeProfileSettings extends StatelessWidget {
                       ListTile(
                         leading: Icon(Icons.line_weight),
                         title: Text(
-                            "${getString(context).averageforschoolreport}: " +
+                            '${getString(context).averageforschoolreport}: ' +
                                 profile.weight_totalaverage.toString()),
                       ),
                       ListTile(
@@ -809,7 +809,7 @@ class EditGradeProfileSettings extends StatelessWidget {
                 return getDefaultList([
                   FormSpace(8.0),
                   FormTextField(
-                    text: gradeprofile.name ?? "",
+                    text: gradeprofile.name ?? '',
                     valueChanged: (newtext) {
                       gradeprofile = gradeprofile.copyWith(name: newtext);
                     },
@@ -873,8 +873,8 @@ class EditGradeProfileSettings extends StatelessWidget {
                                 return ListTile(
                                   leading: Text(
                                       gradetypeitem.weight.toString() +
-                                          "\n(${inPercent()}%)"),
-                                  title: Text(gradetypeitem.name ?? "-"),
+                                          '\n(${inPercent()}%)'),
+                                  title: Text(gradetypeitem.name ?? '-'),
                                   subtitle: Text(
                                     gradetypeitem.getGradeTypesListed(context),
                                     overflow: TextOverflow.ellipsis,
@@ -1005,7 +1005,7 @@ class EditGradeTypeItemSettings extends StatelessWidget {
                 return getDefaultList([
                   FormSpace(8.0),
                   FormTextField(
-                    text: gradetypeitem.name ?? "",
+                    text: gradetypeitem.name ?? '',
                     valueChanged: (newtext) {
                       gradetypeitem = gradetypeitem.copyWith(name: newtext);
                     },
@@ -1177,7 +1177,7 @@ class ShortPlannerSettings extends StatelessWidget {
             ListTile(
               title: Text(getString(context).amountoflessons),
               subtitle: Text(settings.maxlessons.toString() +
-                  " " +
+                  ' ' +
                   getString(context).lessonsperday),
               onTap: () {
                 selectItem(
@@ -1186,7 +1186,7 @@ class ShortPlannerSettings extends StatelessWidget {
                     builder: (context, item) {
                       return ListTile(
                         title: Text(
-                            item.toString() + " " + getString(context).lessons),
+                            item.toString() + ' ' + getString(context).lessons),
                         trailing: selectedView(item == settings.maxlessons),
                         onTap: () {
                           PlannerSettingsData newdata = settings.copy();
@@ -1210,7 +1210,7 @@ class ShortPlannerSettings extends StatelessWidget {
             ),
             FormDivider(),
             FormHeader(getString(context).weektype +
-                " (12/AB-)" +
+                ' (12/AB-)' +
                 getString(context).weeks),
             SwitchListTile(
               value: settings.multiple_weektypes,
@@ -1226,8 +1226,8 @@ class ShortPlannerSettings extends StatelessWidget {
                 : ListTile(
                     title: Text(getString(context).amountofweektypes),
                     subtitle: Text(settings.weektypes_amount.toString() +
-                        " ${getString(context).weektypes}" +
-                        " (${weektypesamount_meaning(context)[settings.weektypes_amount]})"),
+                        ' ${getString(context).weektypes}' +
+                        ' (${weektypesamount_meaning(context)[settings.weektypes_amount]})'),
                     onTap: () {
                       selectItem(
                           context: context,
@@ -1235,8 +1235,8 @@ class ShortPlannerSettings extends StatelessWidget {
                           builder: (context, item) {
                             return ListTile(
                               title: Text(item.toString() +
-                                  " ${getString(context).weektypes}" +
-                                  " (${weektypesamount_meaning(context)[item]})"),
+                                  ' ${getString(context).weektypes}' +
+                                  ' (${weektypesamount_meaning(context)[item]})'),
                               trailing: item == settings.weektypes_amount
                                   ? Icon(
                                       Icons.done,

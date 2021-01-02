@@ -138,7 +138,7 @@ class MyTaskListInnerState extends State<MyTaskListInner>
                     item.courseid != null
                         ? Text(
                             getString(context).course +
-                                ": " +
+                                ': ' +
                                 (courseInfo != null
                                     ? courseInfo.getName()
                                     : item.courseid),
@@ -147,7 +147,7 @@ class MyTaskListInnerState extends State<MyTaskListInner>
                           )
                         : nowidget(),
                     Text(
-                      getString(context).due + ": " + getDateText(item.due),
+                      getString(context).due + ': ' + getDateText(item.due),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -280,7 +280,7 @@ class MyTaskArchive extends StatelessWidget {
                     item.courseid != null
                         ? Text(
                             getString(context).course +
-                                ": " +
+                                ': ' +
                                 (courseInfo != null
                                     ? courseInfo.getName()
                                     : item.courseid),
@@ -289,7 +289,7 @@ class MyTaskArchive extends StatelessWidget {
                           )
                         : nowidget(),
                     Text(
-                      getString(context).due + ": " + getDateText(item.due),
+                      getString(context).due + ': ' + getDateText(item.due),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -353,7 +353,7 @@ Stream<Map<String, SchoolTask>> getArchiveStream(PlannerDatabase database) {
   database.courseinfo.data.keys.forEach((courseid) {
     subscriptions.add(database.dataManager
         .getTaskRefCourse(courseid)
-        .where("archived", isEqualTo: true)
+        .where('archived', isEqualTo: true)
         .snapshots()
         .listen((data) {
       unmergeddata_archived[courseid] = data.docs
@@ -363,8 +363,8 @@ Stream<Map<String, SchoolTask>> getArchiveStream(PlannerDatabase database) {
     }));
     subscriptions.add(database.dataManager
         .getTaskRefCourse(courseid)
-        .where("archived", isEqualTo: false)
-        .where("due", isLessThan: getDateTwoWeeksAgo())
+        .where('archived', isEqualTo: false)
+        .where('due', isLessThan: getDateTwoWeeksAgo())
         .snapshots()
         .listen((data) {
       unmergeddata_tooold[courseid] = data.docs
@@ -375,7 +375,7 @@ Stream<Map<String, SchoolTask>> getArchiveStream(PlannerDatabase database) {
   });
   subscriptions.add(database.dataManager
       .getTaskRefPrivate()
-      .where("archived", isEqualTo: true)
+      .where('archived', isEqualTo: true)
       .snapshots()
       .listen((data) {
     unmergeddata_archived['private'] = data.docs
@@ -385,8 +385,8 @@ Stream<Map<String, SchoolTask>> getArchiveStream(PlannerDatabase database) {
   }));
   subscriptions.add(database.dataManager
       .getTaskRefPrivate()
-      .where("archived", isEqualTo: false)
-      .where("due", isLessThan: getDateTwoWeeksAgo())
+      .where('archived', isEqualTo: false)
+      .where('due', isLessThan: getDateTwoWeeksAgo())
       .snapshots()
       .listen((data) {
     unmergeddata_tooold['private'] = data.docs
@@ -414,7 +414,7 @@ void showTaskDetailSheet(BuildContext context,
               return Expanded(
                   child: Column(
                 children: <Widget>[
-                  getSheetText(context, schoolTask.title ?? "-"),
+                  getSheetText(context, schoolTask.title ?? '-'),
                   getExpandList([
                     schoolTask.private == true
                         ? ListTile(
@@ -433,7 +433,7 @@ void showTaskDetailSheet(BuildContext context,
                     ListTile(
                       leading: Icon(Icons.event),
                       title: Text(getString(context).due +
-                          ": " +
+                          ': ' +
                           getDateText(schoolTask.due)),
                     ),
                     schoolTask.detail == null
@@ -527,18 +527,18 @@ void showTaskDetailSheet(BuildContext context,
                                                       .getCourseInfo(
                                                           schoolTask.courseid)
                                                       .getName()
-                                                  : "/";
+                                                  : '/';
                                           String msg = schoolTask.title +
                                               (schoolTask.detail != null
                                                   ? ('\n' + schoolTask.detail)
-                                                  : "") +
+                                                  : '') +
                                               '\n' +
                                               getString(context).course +
-                                              ": " +
+                                              ': ' +
                                               coursename +
                                               '\n' +
                                               getString(context).due +
-                                              ": " +
+                                              ': ' +
                                               getDateText(schoolTask.due);
 
                                           Share.share(msg);
@@ -567,7 +567,7 @@ void showTaskDetailSheet(BuildContext context,
                                                           id: schoolTask
                                                               .courseid,
                                                           routname:
-                                                              "schooltaskid")
+                                                              'schooltaskid')
                                                       .then((result) {
                                                     if (result == true) {
                                                       plannerdatabase
@@ -602,7 +602,7 @@ void showTaskDetailSheet(BuildContext context,
                                                           id: schoolTask
                                                               .courseid,
                                                           routname:
-                                                              "schooltaskid")
+                                                              'schooltaskid')
                                                       .then((result) {
                                                     if (result == true) {
                                                       plannerdatabase
@@ -642,7 +642,7 @@ void showTaskDetailSheet(BuildContext context,
                                                                 .creator,
                                                         id: schoolTask.courseid,
                                                         routname:
-                                                            "schooltaskid")
+                                                            'schooltaskid')
                                                     .then((result) {
                                                   if (result == true) {
                                                     plannerdatabase.dataManager
@@ -658,7 +658,7 @@ void showTaskDetailSheet(BuildContext context,
                                     ]);
                                   },
                                   title: getString(context).more,
-                                  routname: "schooltaskidmore");
+                                  routname: 'schooltaskidmore');
                             },
                             iconData: Icons.more_horiz),
                       ],
@@ -670,7 +670,7 @@ void showTaskDetailSheet(BuildContext context,
               ));
             });
       },
-      routname: "schooltaskid");
+      routname: 'schooltaskid');
 }
 
 void showTaskDetailSheetCritical(BuildContext context,
@@ -689,7 +689,7 @@ void showTaskDetailSheetCritical(BuildContext context,
               return Expanded(
                   child: Column(
                 children: <Widget>[
-                  getSheetText(context, schoolTask.title ?? "-"),
+                  getSheetText(context, schoolTask.title ?? '-'),
                   getExpandList([
                     schoolTask.private == true
                         ? ListTile(
@@ -708,7 +708,7 @@ void showTaskDetailSheetCritical(BuildContext context,
                     ListTile(
                       leading: Icon(Icons.event),
                       title: Text(getString(context).due +
-                          ": " +
+                          ': ' +
                           getDateText(schoolTask.due)),
                     ),
                     schoolTask.detail == null
@@ -785,17 +785,17 @@ void showTaskDetailSheetCritical(BuildContext context,
                                                       .getCourseInfo(
                                                           schoolTask.courseid)
                                                       .getName()
-                                                  : "/";
+                                                  : '/';
                                           String msg = schoolTask.title +
                                               '\n' +
                                               schoolTask.detail +
                                               '\n' +
                                               getString(context).course +
-                                              ": " +
+                                              ': ' +
                                               coursename +
                                               '\n' +
                                               getString(context).due +
-                                              ": " +
+                                              ': ' +
                                               getDateText(schoolTask.due);
 
                                           Share.share(msg);
@@ -824,7 +824,7 @@ void showTaskDetailSheetCritical(BuildContext context,
                                                           id: schoolTask
                                                               .courseid,
                                                           routname:
-                                                              "schooltaskid")
+                                                              'schooltaskid')
                                                       .then((result) {
                                                     if (result == true) {
                                                       plannerdatabase
@@ -866,7 +866,7 @@ void showTaskDetailSheetCritical(BuildContext context,
                                                                 .creator,
                                                         id: schoolTask.courseid,
                                                         routname:
-                                                            "schooltaskid")
+                                                            'schooltaskid')
                                                     .then((result) {
                                                   if (result == true) {
                                                     plannerdatabase.dataManager
@@ -882,7 +882,7 @@ void showTaskDetailSheetCritical(BuildContext context,
                                     ]);
                                   },
                                   title: getString(context).more,
-                                  routname: "schooltaskidmore");
+                                  routname: 'schooltaskidmore');
                             },
                             iconData: Icons.more_horiz),
                       ],
@@ -894,7 +894,7 @@ void showTaskDetailSheetCritical(BuildContext context,
               ));
             });
       },
-      routname: "schooltaskid");
+      routname: 'schooltaskid');
 }
 
 DocumentReference identifyTaskRef(
