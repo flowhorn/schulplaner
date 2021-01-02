@@ -701,8 +701,9 @@ class SchoolClassCourseTemplatesView extends StatelessWidget {
                                   );
                                   ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
-                                          content:
-                                              Text("${item.name} erstellt.")));
+                                          content: Text(bothlang(context,
+                                              de: "${item.name} erstellt",
+                                              en: "${item.name} created."))));
                                 }
                               : null,
                           tooltip: getString(context).add,

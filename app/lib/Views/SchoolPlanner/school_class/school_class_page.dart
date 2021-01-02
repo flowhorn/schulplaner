@@ -168,7 +168,7 @@ class SchoolClassView extends StatelessWidget {
                               leading: Icon(Icons.settings_applications),
                               title: Text(bothlang(context,
                                   de: "Geteilte Einstellungen",
-                                  en: "Shared Settings")),
+                                  en: "Shared settings")),
                               onTap: () {
                                 pushWidget(
                                     context,

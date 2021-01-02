@@ -56,7 +56,7 @@ class _PublicClass extends StatelessWidget {
     return SwitchListTile(
       value: schoolClass.settings.isPublic,
       title: Text(bothlang(context,
-          de: "Öffentliche Klasse", en: "Public Schoolclass")),
+          de: "Öffentliche Klasse", en: "Public school class")),
       onChanged: (newvalue) {
         ValueNotifier<bool> notifier =
             showPermissionStateSheet(context: context);

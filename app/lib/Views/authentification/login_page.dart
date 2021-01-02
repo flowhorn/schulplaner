@@ -119,7 +119,7 @@ class _SuccessfullSignInState extends StatelessWidget {
                 bothlang(
                   context,
                   de: "Anmeldung erfolgreich!",
-                  en: "Sign In successfull!",
+                  en: "Sign In successful!",
                 ),
                 style: TextStyle(
                   fontSize: 20.0,
@@ -168,7 +168,7 @@ class _FailedSignInState extends StatelessWidget {
               Text(
                 bothlang(
                   context,
-                  de: "Tippen um nochmal zu versuchen",
+                  de: "Tippe, um es nochmal zu versuchen",
                   en: "Tap to retry",
                 ),
                 textAlign: TextAlign.center,
@@ -249,7 +249,7 @@ class _LoadingSignInState extends StatelessWidget {
               bothlang(
                 context,
                 de: "Bitte habe einen Moment Geduld...",
-                en: "Please wait just a moment...",
+                en: "Please be patient for a moment...",
               ),
               style: TextStyle(
                 fontSize: 20.0,

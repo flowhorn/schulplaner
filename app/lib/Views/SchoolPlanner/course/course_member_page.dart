@@ -99,7 +99,7 @@ class _MemberItem extends StatelessWidget {
   void _tryReportMember(BuildContext context) async {
     final result = await showConfirmDialog(
         context: context,
-        title: bothlang(context, de: "Nutzer melden", en: "Report User"));
+        title: bothlang(context, de: "Nutzer melden", en: "Report user"));
 
     if (result == true) {
       await FirebaseFirestore.instance.collection('reports').doc().set({

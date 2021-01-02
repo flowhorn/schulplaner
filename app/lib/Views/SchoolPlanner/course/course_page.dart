@@ -161,7 +161,7 @@ class CourseView extends StatelessWidget {
                           leading: Icon(Icons.person_outline),
                           title: Text(
                             bothlang(context,
-                                en: "Own configuration",
+                                en: "Custom configuration",
                                 de: "Eigene Einstellungen"),
                           ),
                           onTap: () {

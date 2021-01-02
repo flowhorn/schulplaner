@@ -67,7 +67,7 @@ class _Inner extends StatelessWidget {
             value: notificationSettings.notifydaily,
             onChanged: (newvalue) {
               notificationSettings.notifydaily = newvalue;
-               _updateNotificationSettings(context, notificationSettings);
+              _updateNotificationSettings(context, notificationSettings);
             },
             title: Text(getString(context).dailynotifications),
           ),
@@ -105,8 +105,9 @@ class _Inner extends StatelessWidget {
                             loading: false,
                             iconData: Icons.warning,
                             color: Colors.orange,
-                            text:
-                                "Die Funktion befindet sich aktuell noch in der BETA. Alle Zeiten werden auf volle Stunden gerundet.");
+                            text: bothlang(context,
+                                de: "Die Funktion befindet sich aktuell noch in der BETA. Alle Zeiten werden auf volle Stunden gerundet.",
+                                en: "This feature is still in the BETA. All times are rounded to full hours."));
                       }
                     });
                   }
@@ -226,7 +227,9 @@ class _Devices extends StatelessWidget {
           return CircularProgressIndicator();
         }
       },
-      future: PlatformCheck.isMobile ? FirebaseMessaging().getToken() : Future.value(null),
+      future: PlatformCheck.isMobile
+          ? FirebaseMessaging().getToken()
+          : Future.value(null),
     );
   }
 }

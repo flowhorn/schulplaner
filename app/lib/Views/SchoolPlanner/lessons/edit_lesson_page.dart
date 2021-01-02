@@ -151,7 +151,9 @@ class NewLessonView extends StatelessWidget {
                                     leading: Icon(Icons.hourglass_full),
                                     title: Text(getString(context).end),
                                     subtitle: Text(data.end != null
-                                        ? (data.end.toString() + ". Stunde")
+                                        ? (data.end.toString() +
+                                            ". " +
+                                            getString(context).lesson)
                                         : "-"),
                                     trailing: IconButton(
                                         icon: Icon(Icons.expand_less),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:schulplaner8/Helper/helper_data.dart';
 
 class MessagingScreen extends StatelessWidget {
   @override
@@ -19,12 +20,15 @@ class MessagingScreen extends StatelessWidget {
               ),
             ),
             title: Text("Jessica"),
-            subtitle: Text("Hey wie gehts?"),
+            subtitle: Text(bothlang(context,
+                de: "Hey, wie geht's? 😉", en: "Hey, what's up? 😉")),
           )
         ],
       ),
       bottomNavigationBar: FlatButton.icon(
-          onPressed: () {}, icon: Icon(Icons.add), label: Text("Neuer Chat")),
+          onPressed: () {},
+          icon: Icon(Icons.add),
+          label: Text(bothlang(context, de: "Neuer Chat", en: "New chat"))),
     );
   }
 }
