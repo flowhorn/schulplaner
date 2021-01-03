@@ -239,8 +239,8 @@ class NewLessonInfoViewState extends State<NewLessonInfoView> {
                     } else {
                       showResultStateSheet(context: context).value = ResultItem(
                         text: bothlang(context,
-                            de: "Du musst vorher ein Fach auswählen!",
-                            en: "You have to select a subject!"),
+                            de: "Du musst vorher einen Kurs auswählen!",
+                            en: "You have to select a course!"),
                         iconData: Icons.warning,
                         loading: false,
                         color: Colors.orange,

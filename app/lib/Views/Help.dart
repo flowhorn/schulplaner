@@ -30,7 +30,7 @@ class HelpView extends StatelessWidget {
               FormSpace(12.0),
               ListTile(
                 leading: Icon(CommunityMaterialIcons.discord),
-                title: Text("Support-Server"),
+                title: Text("Discord-Server"),
                 trailing: RButton(
                     text: getString(context).openinbrowser,
                     onTap: () {

@@ -155,6 +155,7 @@ class ManagePlannerView extends StatelessWidget {
                                                         richtext: RichText(
                                                             text: TextSpan(
                                                                 children: [
+                                                              //todo(th3ph4nt0m): get this in 1 single TextSpan and add English translation
                                                               TextSpan(
                                                                   text:
                                                                       "Möchtest du den Planer "),
@@ -323,6 +324,7 @@ class ArchivedPlanner extends StatelessWidget {
                                                   },
                                                   richtext: RichText(
                                                     text: TextSpan(children: [
+                                                      //todo(th3ph4nt0m): Get this in 1 single TextSpan and add English translation
                                                       TextSpan(
                                                           text:
                                                               "Möchtest du den Planer "),

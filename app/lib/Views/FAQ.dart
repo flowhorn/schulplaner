@@ -127,6 +127,7 @@ Oder man geht unter Bibliothek/[Klassenname]/Fächer auf Kurs hinzufügen und er
 }
 
 List<FAQ_Entry> getFAQ_English() {
+  //todo(th3ph4nt0m): Improve FAQ translations
   return [
     FAQ_Entry(
       title:

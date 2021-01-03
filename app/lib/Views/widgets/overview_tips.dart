@@ -82,7 +82,7 @@ class _SocialMediaCard extends StatelessWidget {
       iconData: Icons.stars,
       title: BothLangString(
         de: 'Mehr Infos über Neuerungen',
-        en: 'More infos about features',
+        en: 'More infos about changes',
       ).getText(context),
       content: Column(
         children: <Widget>[
@@ -151,7 +151,7 @@ class _DonationCard extends StatelessWidget {
             Text(
               BothLangString(
                 de: 'Die Schulplaner-App ist zu 100% kostenlos und werbefrei. Damit dies auch weiterhin so bleibt, wäre ich für jegliche Unterstützung sehr dankbar.😊.',
-                en: 'The school planner app is 100% free and ad-free. In order for this to remain so, I would be very grateful for any support.😊.',
+                en: 'The school planner app is 100% free and ad-free. To keep it that way, I would be very appreciative for any support.😊.',
               ).getText(context),
             ),
             ListTile(
@@ -189,8 +189,8 @@ class _RateCard extends StatelessWidget {
     return _TipsCard(
       iconData: Icons.stars,
       title: BothLangString(
-        de: 'Gefällt dir Schulplaner?',
-        en: 'Do you like School Planner?',
+        de: 'Gefällt dir der Schulplaner?',
+        en: 'Do you like the school planner?',
       ).getText(context),
       content: Text(BothLangString(
         de: 'Wir würden uns sehr über eine gute Bewertung freuen :)',

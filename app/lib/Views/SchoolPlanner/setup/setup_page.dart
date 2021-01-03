@@ -75,10 +75,10 @@ class SetupView extends StatelessWidget {
             ),
           ),
           PageViewModel(
-            title: bothlang(context, de: "Schulklasse", en: "Schoolclass"),
+            title: bothlang(context, de: "Schulklasse", en: "School class"),
             bodytext: bothlang(context,
                 de: "Verbinde dich mit deinen Mitschülern und synchronisiere deine Fächer automatisch.",
-                en: "Connect with your class mates and sync your courses automatically."),
+                en: "Connect with your classmates and sync your courses automatically."),
             body: Card(
               child: ShortSchoolClassView(),
               shape: RoundedRectangleBorder(

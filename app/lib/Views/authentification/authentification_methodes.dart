@@ -66,7 +66,7 @@ class AuthenticationMethodes extends StatelessWidget {
                   FormDivider(),
                   FormHeader(bothlang(context,
                       de: 'Anmeldemethode hinzufügen',
-                      en: 'Add sign-in methode')),
+                      en: 'Add sign-in method')),
                   if (!authProviders.isLinkedWithEmailSignIn())
                     Card(
                       child: Column(
@@ -79,7 +79,7 @@ class AuthenticationMethodes extends StatelessWidget {
                             title: Text(getString(context).linkemail),
                             subtitle: Text(bothlang(context,
                                 de: 'Melde dich von all deinen Geräten mit deiner Email-Adresse und einem Passwort an',
-                                en: 'Sign in from all your devices using your email + password')),
+                                en: 'Sign in from all your devices using your email & password')),
                           ),
                           SizedBox(
                             height: 52.0,

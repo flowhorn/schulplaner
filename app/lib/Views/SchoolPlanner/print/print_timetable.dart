@@ -68,7 +68,8 @@ class TimetablePDFWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           if (weekType == 1)
-            Text("A-Woche", style: TextStyle(color: PdfColors.black)),
+            Text("A-Woche", //todo(th3ph4nt0m): remove hard-coded week names
+                style: TextStyle(color: PdfColors.black)),
           if (weekType == 2)
             Text("B-Woche", style: TextStyle(color: PdfColors.black)),
           SizedBox(
@@ -124,7 +125,7 @@ List<String> weekDays() {
     "Freitag",
     "Samstag",
     "Sonntag",
-  ];
+  ]; //todo(th3ph4nt0m): remove hard-coded weekday names
 }
 
 List<TimeTableElement> buildElements(

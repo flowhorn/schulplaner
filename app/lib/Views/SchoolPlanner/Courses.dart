@@ -280,7 +280,7 @@ class CourseSecurityView extends StatelessWidget {
                 SwitchListTile(
                   value: courseInfo.settings.isPublic,
                   title: Text(bothlang(context,
-                      de: "Öffentliches Fach", en: "Public Course")),
+                      de: "Öffentliches Fach", en: "Public course")),
                   onChanged: (newvalue) {
                     ValueNotifier<bool> notifier =
                         showPermissionStateSheet(context: context);
@@ -358,8 +358,9 @@ class CourseTemplatesView extends StatelessWidget {
 
                                   ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
-                                          content:
-                                              Text("${item.name} erstellt.")));
+                                          content: Text(bothlang(context,
+                                              de: "${item.name} erstellt",
+                                              en: "${item.name} created."))));
                                 }
                               : null,
                           tooltip: getString(context).add,
@@ -475,14 +476,15 @@ class CourseConnectedClassesView extends StatelessWidget {
                             title: Text(
                                 (mClassinfo?.membersData?.length?.toString() ??
                                         "?") +
-                                    " Mitglied(er)"),
+                                    bothlang(context,
+                                        de: "Mitglieder", en: "Members")),
                           ),
                           ListTile(
                             leading: Icon(Icons.widgets),
-                            title: Text(
-                                (mClassinfo?.courses?.length?.toString() ??
-                                        "?") +
-                                    " Fach/Fächer"),
+                            title: Text((mClassinfo?.courses?.length
+                                        ?.toString() ??
+                                    "?") +
+                                bothlang(context, de: "Fächer", en: "Courses")),
                           ),
                           ButtonBar(
                             children: <Widget>[
@@ -492,7 +494,9 @@ class CourseConnectedClassesView extends StatelessWidget {
                                   onTap: () {
                                     showConfirmDialog(
                                             context: context,
-                                            title: "Fach in Klasse entfernen",
+                                            title: bothlang(context,
+                                                de: "Aus Klasse entfernen",
+                                                en: "Remove from class"),
                                             action: getString(context).remove,
                                             richtext: null)
                                         .then((result) {
@@ -575,8 +579,9 @@ class CourseConnectedClassesView extends StatelessWidget {
                                       onTap: () {
                                         showConfirmDialog(
                                                 context: context,
-                                                title:
-                                                    "Fach in Klasse entfernen",
+                                                title: bothlang(context,
+                                                    de: "Aus Klasse entfernen",
+                                                    en: "Remove from class"),
                                                 action:
                                                     getString(context).remove,
                                                 richtext: null)

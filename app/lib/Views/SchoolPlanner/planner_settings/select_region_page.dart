@@ -62,7 +62,8 @@ class SelectRegionPage extends StatelessWidget {
                       },
                     ),
                     SwitchListTile.adaptive(
-                      title: Text("Nur offizielle"),
+                      title: Text(bothlang(context,
+                          de: "Nur offizielle", en: "Officials only")),
                       value: filterValue.isOfficial,
                       onChanged: (newValue) {
                         setRegionsFilter(RegionsFilter(

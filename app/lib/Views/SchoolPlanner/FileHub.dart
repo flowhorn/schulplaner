@@ -239,8 +239,8 @@ class CourseStorageView extends StatelessWidget {
             ),
             body: Center(
               child: Text(bothlang(context,
-                  de: 'Bald verfügbar. Benutze solange den persönlichen Speicher',
-                  en: 'Coming soon. Until then use the personal storage')),
+                  de: 'Hier kommt bald was 😏', en: 'Coming soon 😏')),
+                  de: 'Hier kommt bald was 😏', en: 'Coming soon 😏')),
             ),
           );
         }));
