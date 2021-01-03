@@ -69,10 +69,10 @@ class SchoolTask {
 
     if (data['olddata'] != null) {
       try {
-        if (data['olddata']["att"] != null) {
-          Map<dynamic, dynamic> rawdata = data['olddata']["att"];
-          Map<String, CloudFile> attachments =
-              rawdata.map((key, value) => MapEntry<String, CloudFile>(
+        if (data['olddata']['att'] != null) {
+          Map<dynamic, dynamic> rawdata = data['olddata']['att'];
+          final attachments = rawdata.map<String, CloudFile>(
+              (key, value) => MapEntry<String, CloudFile>(
                   key,
                   CloudFile(
                     fileid: key,
@@ -82,8 +82,8 @@ class SchoolTask {
                   )));
           files.addAll(attachments);
         }
-        if (data['olddata']["attachments"] != null) {
-          Map<dynamic, dynamic> rawdata = data['olddata']["attachments"];
+        if (data['olddata']['attachments'] != null) {
+          Map<dynamic, dynamic> rawdata = data['olddata']['attachments'];
           Map<String, CloudFile> attachments =
               rawdata.map((key, value) => MapEntry<String, CloudFile>(
                   key,
@@ -133,11 +133,11 @@ class SchoolTask {
 
   bool validateCreate() {
     if (private == true) {
-      if (title == null || title == "") return false;
+      if (title == null || title == '') return false;
       if (due == null) return false;
       return true;
     } else {
-      if (title == null || title == "") return false;
+      if (title == null || title == '') return false;
       if (due == null) return false;
       if (courseid == null && classid == null) return false;
       return true;
@@ -147,7 +147,7 @@ class SchoolTask {
   bool validate() {
     if (taskid == null) return false;
     if (due == null) return false;
-    if (title == null || title == "") return false;
+    if (title == null || title == '') return false;
     return true;
   }
 

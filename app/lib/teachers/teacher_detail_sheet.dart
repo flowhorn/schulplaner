@@ -9,11 +9,11 @@ import 'package:schulplaner_widgets/schulplaner_common.dart';
 import 'package:schulplaner_widgets/schulplaner_forms.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-showTeacherDetail(
+Future<void> showTeacherDetail(
     {@required BuildContext context,
     @required PlannerDatabase plannerdatabase,
-    @required String teacherid}) {
-  showDetailSheetBuilder(
+    @required String teacherid}) async{
+  await showDetailSheetBuilder(
       context: context,
       body: (BuildContext context) {
         return StreamBuilder<Teacher>(

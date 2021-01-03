@@ -33,7 +33,7 @@ class QrImage2 extends StatelessWidget {
       height: size,
       color: backgroundColor,
       child: Padding(
-        padding: this.padding,
+        padding: padding,
         child: CustomPaint(
           painter: _painter,
         ),

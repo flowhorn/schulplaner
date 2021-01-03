@@ -11,15 +11,15 @@ import 'package:schulplaner_translations/schulplaner_translations.dart';
 typedef T1 DynamicObjectBuilder<T1>(dynamic decodedMapValue);
 
 String getDateString(String date) {
-  return DateFormat.yMMMMEEEEd("de").format(DateTime.parse(date));
+  return DateFormat.yMMMMEEEEd('de').format(DateTime.parse(date));
 }
 
 String getDateStringSmall(String date) {
-  return DateFormat.yMMMd("de").format(DateTime.parse(date));
+  return DateFormat.yMMMd('de').format(DateTime.parse(date));
 }
 
 String parseDatetime(DateTime date) {
-  return DateFormat.yMMMMEEEEd("de").format(date);
+  return DateFormat.yMMMMEEEEd('de').format(date);
 }
 
 Map<String, dynamic> decodeMapNullable(dynamic data) {
@@ -45,21 +45,21 @@ Timestamp buildTimestamp(dynamic data) {
 TimeOfDay parseTimeOfDay(String timestring) {
   if (timestring == null) return TimeOfDay.now();
   return TimeOfDay(
-      hour: int.parse(timestring.split(":")[0]),
-      minute: int.parse(timestring.split(":")[1]));
+      hour: int.parse(timestring.split(':')[0]),
+      minute: int.parse(timestring.split(':')[1]));
 }
 
 String parseTimeString(TimeOfDay time) {
   NumberFormat format = NumberFormat(
-    "00",
+    '00',
   );
-  return format.format(time.hour) + ":" + format.format(time.minute);
+  return format.format(time.hour) + ':' + format.format(time.minute);
 }
 
 String parseDateToday() => parseDatetime(DateTime.now());
 
 String useOr(String s1, String s2) {
-  if (s1 == null || s1 == "") {
+  if (s1 == null || s1 == '') {
     return s2;
   } else {
     return s1;
@@ -69,11 +69,11 @@ String useOr(String s1, String s2) {
 String getGenderName(int gender) {
   switch (gender) {
     case 0:
-      return "Männlich";
+      return 'Männlich';
     case 1:
-      return "Weiblich";
+      return 'Weiblich';
     default:
-      return "Keine Angaben";
+      return 'Keine Angaben';
   }
 }
 
@@ -87,8 +87,8 @@ List<int> buildIntList(int length, {int start = 0}) {
 
 TimeOfDay getTimeOfDay(String time) {
   return TimeOfDay(
-    hour: time != null ? int.parse(time.split(":")[0]) : 12,
-    minute: time != null ? int.parse(time.split(":")[1]) : 0,
+    hour: time != null ? int.parse(time.split(':')[0]) : 12,
+    minute: time != null ? int.parse(time.split(':')[1]) : 0,
   );
 }
 
@@ -134,7 +134,7 @@ ConfigurationData getConfigurationData(BuildContext context) {
 
 String bothlang(BuildContext context,
     {@required String de, @required String en}) {
-  if (getString(context).languagecode == "de") {
+  if (getString(context).languagecode == 'de') {
     return de;
   } else {
     return en;

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Data/plannerdatabase.dart';
+import 'package:schulplaner8/grades/pages/edit_grade_page.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
 import 'package:schulplaner_widgets/schulplaner_common.dart';
 import 'package:schulplaner_widgets/schulplaner_forms.dart';
@@ -19,7 +20,7 @@ class NewSchoolReportView extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() =>
-      NewSchoolReportViewState(this.database, reportid, editmode);
+      NewSchoolReportViewState(database, reportid, editmode);
 }
 
 class NewSchoolReportViewState extends State<NewSchoolReportView> {
@@ -106,7 +107,7 @@ class NewReportValueView extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() =>
-      NewReportValueViewiewState(this.database, report, courseid);
+      NewReportValueViewiewState(database, report, courseid);
 }
 
 class NewReportValueViewiewState extends State<NewReportValueView> {
@@ -268,8 +269,4 @@ class NewReportValueViewiewState extends State<NewReportValueView> {
           ),
         ));
   }
-
-  void showGradeValuePicker(PlannerDatabase database, BuildContext context,
-      Null Function(GradeValue gradevalue) param2,
-      {String currentid}) {}
 }

@@ -61,12 +61,12 @@ class EditProfileView extends StatelessWidget {
             FormSpace(4.0),
             FormDivider(),
             FormSection(
-              title: bothlang(context, de: "Anzeigemodus", en: "Displaymode"),
+              title: bothlang(context, de: 'Anzeigemodus', en: 'Displaymode'),
               child: Column(
                 children: <Widget>[
                   RadioListTile<ProfileDisplayMode>(
                     title: Text(bothlang(context,
-                        de: "Profilbild", en: "Profilepicture")),
+                        de: 'Profilbild', en: 'Profilepicture')),
                     groupValue: data.displayMode,
                     value: ProfileDisplayMode.pic,
                     onChanged: (newvalue) {
@@ -76,7 +76,7 @@ class EditProfileView extends StatelessWidget {
                     },
                   ),
                   RadioListTile<ProfileDisplayMode>(
-                    title: Text("Avatar"),
+                    title: Text('Avatar'),
                     groupValue: data.displayMode,
                     value: ProfileDisplayMode.avatar,
                     onChanged: (newvalue) {
@@ -90,10 +90,10 @@ class EditProfileView extends StatelessWidget {
             FormSpace(16.0),
             Text(
               BothLangString(
-                de: "Aktuell werden keine Avatare mehr unterstützt aufgrund eines " +
-                    "Bugs bei der AvatarAPI. Dies wird in einem künftigen Update gefixt.",
-                en: "Currently Avatars are no longer supported, this will be fixed in" +
-                    " a future update.",
+                de: 'Aktuell werden keine Avatare mehr unterstützt aufgrund eines ' +
+                    'Bugs bei der AvatarAPI. Dies wird in einem künftigen Update gefixt.',
+                en: 'Currently Avatars are no longer supported, this will be fixed in' +
+                    ' a future update.',
               ).getText(context),
               textAlign: TextAlign.center,
             ),
@@ -111,20 +111,20 @@ class EditProfileView extends StatelessWidget {
                         children: <Widget>[
                           RButton(
                               text: bothlang(context,
-                                  de: "Neues Bild", en: "New Picture"),
+                                  de: 'Neues Bild', en: 'New Picture'),
                               onTap: () {
                                 selectItem<SimpleItem>(
                                     context: context,
                                     items: [
                                       SimpleItem(
-                                          id: "0",
+                                          id: '0',
                                           name: bothlang(context,
-                                              de: "Kamera", en: "Camera"),
+                                              de: 'Kamera', en: 'Camera'),
                                           iconData: Icons.camera),
                                       SimpleItem(
-                                          id: "1",
+                                          id: '1',
                                           name: bothlang(context,
-                                              de: "Galerie", en: "Gallery"),
+                                              de: 'Galerie', en: 'Gallery'),
                                           iconData: Icons.image),
                                     ],
                                     builder: (context, item) {
@@ -139,7 +139,7 @@ class EditProfileView extends StatelessWidget {
                               }),
                           RButton(
                               text: bothlang(context,
-                                  de: "Bild entfernen", en: "Remove Picture"),
+                                  de: 'Bild entfernen', en: 'Remove Picture'),
                               onTap: () {
                                 update(data.copyWithNoPic());
                               })
@@ -154,8 +154,8 @@ class EditProfileView extends StatelessWidget {
                           RButton(
                             text: bothlang(
                               context,
-                              de: "Zufällig",
-                              en: "Random",
+                              de: 'Zufällig',
+                              en: 'Random',
                             ),
                             onTap: () {
                               update(data.copyWith(
@@ -192,7 +192,7 @@ class EditProfileView extends StatelessWidget {
 
   Future<void> _selectImageMethod(BuildContext context, SimpleItem item) async {
     Navigator.pop(context);
-    if (item.id == "0") {
+    if (item.id == '0') {
       final file =
           await ImageHelper.pickImageCamera(maxWidth: 1024, maxHeight: 1024);
       if (file != null) {
@@ -201,20 +201,20 @@ class EditProfileView extends StatelessWidget {
         if (croppedFile != null) {
           final ref = FirebaseStorage.instance
               .ref()
-              .child("users")
+              .child('users')
               .child(data.uid)
-              .child("profilepicture")
-              .child("pic.jpg");
+              .child('profilepicture')
+              .child('pic.jpg');
           final upload = ref.putFile(croppedFile);
           await upload.then((result) async {
             final picurl = await ref.getDownloadURL();
             update(data.copyWith(pic: picurl));
           });
         } else {
-          print("croppedFile is null..");
+          print('croppedFile is null..');
         }
       }
-    } else if (item.id == "1") {
+    } else if (item.id == '1') {
       final file = await ImageHelper.pickImageGallery();
 
       if (file != null) {
@@ -223,17 +223,17 @@ class EditProfileView extends StatelessWidget {
         if (croppedFile != null) {
           final ref = FirebaseStorage.instance
               .ref()
-              .child("users")
+              .child('users')
               .child(data.uid)
-              .child("profilepicture")
-              .child("pic.jpg");
+              .child('profilepicture')
+              .child('pic.jpg');
           final upload = ref.putFile(croppedFile);
           await upload.then((result) async {
             final picurl = await ref.getDownloadURL();
             update(data.copyWith(pic: picurl));
           });
         } else {
-          print("croppedFile is null..");
+          print('croppedFile is null..');
         }
       }
     }
@@ -293,6 +293,6 @@ class MemberImageView extends StatelessWidget {
           );
         }
     }
-    throw "No DisplayMode selected";
+    throw 'No DisplayMode selected';
   }
 }

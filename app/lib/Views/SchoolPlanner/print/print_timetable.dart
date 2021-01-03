@@ -78,23 +78,25 @@ class TimetablePDFWidget extends StatelessWidget {
               children: <Widget>[
                 SizedBox(width: 40.0),
                 Expanded(
-                    child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: List.generate(
-                            database.getSettings().getAmountDaysOfWeek(),
-                            (d) => Expanded(
-                                  child: Container(
-                                      child: Center(
-                                        child: Text(weekDays()[d + 1]),
-                                      ),
-                                      decoration: BoxDecoration(
-                                          border: BoxBorder(
-                                        left: true,
-                                        right: true,
-                                        bottom: true,
-                                        color: PdfColors.grey600,
-                                      ))),
-                                ))))
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: List.generate(
+                      database.getSettings().getAmountDaysOfWeek(),
+                      (d) => Expanded(
+                        child: Container(
+                          child: Center(
+                            child: Text(weekDays()[d + 1]),
+                          ),
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: PdfColors.grey600,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
               ],
               mainAxisSize: MainAxisSize.max,
             ),
@@ -204,7 +206,7 @@ class WeekDayText extends StatelessWidget {
           bottom: true,
           top: true,
           color: PdfColors.grey600,
-        )));
+        ),),);
   }
 }
 

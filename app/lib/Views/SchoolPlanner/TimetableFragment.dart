@@ -242,8 +242,8 @@ class TimetableFragment extends StatelessWidget {
                       );
                     }).toList(),
                   ),
-                )
-              ]..addAll(List.generate(daysOfWeek, (d) {
+                ),
+                ...List.generate(daysOfWeek, (d) {
                   return Expanded(
                     child: Stack(
                       children: List.generate(
@@ -294,7 +294,8 @@ class TimetableFragment extends StatelessWidget {
                         })),
                     ),
                   );
-                })),
+                }),
+              ],
             ),
           ),
         ),

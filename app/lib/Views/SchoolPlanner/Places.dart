@@ -158,11 +158,11 @@ class NewPlaceView extends StatelessWidget {
   }
 }
 
-showPlaceDetail(
+Future<void> showPlaceDetail(
     {@required BuildContext context,
     @required PlannerDatabase plannerdatabase,
-    @required String placeid}) {
-  showDetailSheetBuilder(
+    @required String placeid}) async{
+  await showDetailSheetBuilder(
       context: context,
       body: (BuildContext context) {
         return StreamBuilder<Place>(

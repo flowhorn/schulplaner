@@ -57,13 +57,13 @@ class UpdateData {
     @required PlannerDatabase database,
     @required this.appSettingsBloc,
   }) {
-    this.courselist = database.courseinfo.data.values.toList();
-    this.lessonlist = database.getLessons().values.toList();
+    courselist = database.courseinfo.data.values.toList();
+    lessonlist = database.getLessons().values.toList();
     final appSettingsData = appSettingsBloc.currentValue;
-    this.settings = WidgetSettings(
+    settings = WidgetSettings(
       appdesign: Design(
-        id: "widgetdesign",
-        name: "WidgetDesign",
+        id: 'widgetdesign',
+        name: 'WidgetDesign',
         primary: appSettingsData.primary,
         accent: appSettingsData.accent,
       ).toWidgetJson()
@@ -79,16 +79,17 @@ class UpdateData {
       zero_lesson: database.getSettings().zero_lesson,
     );
 
-    this.periodmap = database.getSettings().lessontimes;
-    this.teacherslist = database.teachers.data;
-    this.memberid = database.getMemberId();
+    periodmap = database.getSettings().lessontimes;
+    teacherslist = database.teachers.data;
+    memberid = database.getMemberId();
   }
 
   Map<String, Object> toJson() {
-    List<Map<String, dynamic>> _internalcourselist = courselist.map((Course c) {
+    final _internalcourselist =
+        courselist.map<Map<String, dynamic>>((Course c) {
       return c.toPrimitiveJson();
     }).toList();
-    List<Map<String, dynamic>> _internallessonlist = lessonlist.map((Lesson l) {
+    final _internallessonlist = lessonlist.map<Map<String, dynamic>>((final l) {
       return l.toPrimitiveJson(
           courselist[courselist.indexWhere((c) => c.id == l.courseid)]);
     }).toList();
@@ -97,11 +98,11 @@ class UpdateData {
       return entry.value.toWidgetJson(entry.key);
     }).toList();
     return {
-      "courses": _internalcourselist,
-      "lessons": _internallessonlist,
-      "periods": _internalperiodlist,
-      "settings": settings.toJson(),
-      "memberid": memberid,
+      'courses': _internalcourselist,
+      'lessons': _internallessonlist,
+      'periods': _internalperiodlist,
+      'settings': settings.toJson(),
+      'memberid': memberid,
     };
   }
 }

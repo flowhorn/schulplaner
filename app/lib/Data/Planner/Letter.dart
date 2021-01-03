@@ -62,11 +62,11 @@ class LetterResponse {
   }
 
   String getUid() {
-    return id.split("::")[0];
+    return id.split('::')[0];
   }
 
   String getPlannerId() {
-    return id.split("::")[1];
+    return id.split('::')[1];
   }
 }
 
@@ -97,8 +97,8 @@ class Letter {
   factory Letter.Create({@required String id, @required String authorid}) {
     return Letter._(
       id: id,
-      title: "",
-      content: "",
+      title: '',
+      content: '',
       authorid: authorid,
       published: Timestamp.now(),
       lastchanged: Timestamp.now(),
@@ -167,25 +167,25 @@ class Letter {
     SavedIn savedin,
   }) {
     return Letter._(
-      id: id ?? this.id,
-      title: title ?? this.title,
-      content: content ?? this.content,
-      authorid: authorid ?? this.authorid,
+      id: id,
+      title: title,
+      content: content,
+      authorid: authorid,
       savedin: savedin,
-      published: published ?? this.published,
-      lastchanged: lastchanged ?? this.lastchanged,
-      archived: archived ?? this.archived,
-      sendpush: sendpush ?? this.sendpush,
-      allowreply: allowreply ?? this.allowreply,
-      deleted: deleted ?? this.deleted,
-      files: files ?? this.files,
-      responses: responses ?? this.responses,
+      published: published,
+      lastchanged: lastchanged,
+      archived: archived,
+      sendpush: sendpush,
+      allowreply: allowreply,
+      deleted: deleted,
+      files: files,
+      responses: responses,
     );
   }
 
   bool validate() {
-    if (id == null || id == "") return false;
-    if (title == null || title == "") return false;
+    if (id == null || id == '') return false;
+    if (title == null || title == '') return false;
     if (savedin == null) return false;
     return true;
   }

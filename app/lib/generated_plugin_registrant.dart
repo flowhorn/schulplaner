@@ -9,6 +9,7 @@ import 'package:firebase_analytics_web/firebase_analytics_web.dart';
 import 'package:firebase_auth_oauth_web/firebase_auth_oauth_web.dart';
 import 'package:firebase_auth_web/firebase_auth_web.dart';
 import 'package:firebase_core_web/firebase_core_web.dart';
+import 'package:firebase_storage_web/firebase_storage_web.dart';
 import 'package:google_sign_in_web/google_sign_in_web.dart';
 import 'package:printing/src/printing_web.dart';
 import 'package:shared_preferences_web/shared_preferences_web.dart';
@@ -25,6 +26,7 @@ void registerPlugins(Registrar registrar) {
   FirebaseAuthOAuthWeb.registerWith(registrar);
   FirebaseAuthWeb.registerWith(registrar);
   FirebaseCoreWeb.registerWith(registrar);
+  FirebaseStorageWeb.registerWith(registrar);
   GoogleSignInPlugin.registerWith(registrar);
   PrintingPlugin.registerWith(registrar);
   SharedPreferencesPlugin.registerWith(registrar);

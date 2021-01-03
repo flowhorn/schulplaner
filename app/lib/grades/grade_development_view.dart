@@ -40,15 +40,15 @@ class GradeDevelopmentView extends StatelessWidget {
       ..sort((item1, item2) => item1.compareTo(item2));
     final bool containsValues = rangevalues.isNotEmpty;
     final double lowest = containsValues ? rangevalues.first : lowestGradeValue;
-    print("LOWEST: $lowest");
+    print('LOWEST: $lowest');
     final double highest =
         containsValues ? rangevalues.last : highestGradeValue;
-    print("HIGHEST: $highest");
+    print('HIGHEST: $highest');
     if (grades.isEmpty) {
       return Card(
         child: Center(
           child:
-              Text(bothlang(context, de: "Keine Daten", en: "Fehlende Daten")),
+              Text(bothlang(context, de: 'Keine Daten', en: 'Fehlende Daten')),
         ),
       );
     }
@@ -62,7 +62,7 @@ class GradeDevelopmentView extends StatelessWidget {
             children: <Widget>[
               FormHeader(
                 bothlang(context,
-                    de: "Notenentwicklung", en: "Development of grades"),
+                    de: 'Notenentwicklung', en: 'Development of grades'),
                 color: Colors.white,
               ),
               AspectRatio(

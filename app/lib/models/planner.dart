@@ -63,6 +63,7 @@ class Planner {
             other.setup_done == setup_done);
   }
 
+  @override
   int get hashCode {
     return hashList([
       id,

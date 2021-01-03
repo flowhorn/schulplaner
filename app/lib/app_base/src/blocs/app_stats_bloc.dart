@@ -17,7 +17,7 @@ class AppStatsBloc extends BlocBase {
 
   Future<void> _initializeAppStats() async {
     final instance = await SharedPreferences.getInstance();
-    String statsstring = instance.getString("appstats");
+    final statsstring = instance.getString('appstats');
     if (statsstring != null) {
       _appStatsSubject.add(AppStats.fromString(statsstring));
     }
@@ -27,7 +27,7 @@ class AppStatsBloc extends BlocBase {
     _appStatsSubject.add(newAppStats);
 
     SharedPreferences.getInstance().then((pref) {
-      pref.setString("appstats", newAppStats.toJsonString());
+      pref.setString('appstats', newAppStats.toJsonString());
     });
   }
 
@@ -36,7 +36,7 @@ class AppStatsBloc extends BlocBase {
     currentStatsData.openedapp++;
 
     SharedPreferences.getInstance().then((pref) {
-      pref.setString("appstats", currentStatsData.toJsonString());
+      pref.setString('appstats', currentStatsData.toJsonString());
     });
   }
 
@@ -45,7 +45,7 @@ class AppStatsBloc extends BlocBase {
     currentStatsData.addedtask++;
 
     SharedPreferences.getInstance().then((pref) {
-      pref.setString("appstats", currentStatsData.toJsonString());
+      pref.setString('appstats', currentStatsData.toJsonString());
     });
   }
 

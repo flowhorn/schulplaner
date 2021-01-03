@@ -67,12 +67,12 @@ class UserProfile {
 
   UserProfile copyWithNoPic() {
     return UserProfile._(
-      uid: uid ?? this.uid,
-      name: name ?? this.name,
+      uid: uid ?? uid,
+      name: name ?? name,
       pic: null,
       picThumb: null,
-      avatar: avatar ?? this.avatar,
-      displayMode: displayMode ?? this.displayMode,
+      avatar: avatar ?? avatar,
+      displayMode: displayMode ?? displayMode,
     );
   }
 

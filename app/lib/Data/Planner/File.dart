@@ -69,7 +69,7 @@ class CloudFile {
 
   bool validate() {
     if (fileid == null) return false;
-    if (name == null || name == "") return false;
+    if (name == null || name == '') return false;
     if (savedin == null) return false;
     if (url == null) return false;
     return true;
@@ -77,16 +77,16 @@ class CloudFile {
 
   bool isImage() {
     if (type != null) {
-      if (type.contains("image")) {
+      if (type.contains('image')) {
         return true;
       } else {
         return false;
       }
     } else {
       if (url == null) return false;
-      String extension =
-          url.substring(url.lastIndexOf(".") + 1)?.toLowerCase() ?? "";
-      if (extension == "jpg" || extension == "png") {
+      final fileExtension =
+          url.substring(url.lastIndexOf('.') + 1)?.toLowerCase() ?? '';
+      if (fileExtension == 'jpg' || fileExtension == 'png') {
         return true;
       } else {
         return false;
@@ -101,8 +101,8 @@ void OpenCloudFile(BuildContext context, CloudFile cloudfile) {
       {
         FirebaseStorage.instance
             .ref()
-            .child("files")
-            .child("personal")
+            .child('files')
+            .child('personal')
             .child(cloudfile.savedin.id)
             .child(cloudfile.fileid)
             .getDownloadURL()
@@ -110,12 +110,12 @@ void OpenCloudFile(BuildContext context, CloudFile cloudfile) {
           if (url != null) {
             final metaData = await FirebaseStorage.instance
                 .ref()
-                .child("files")
-                .child("personal")
+                .child('files')
+                .child('personal')
                 .child(cloudfile.savedin.id)
                 .child(cloudfile.fileid)
                 .getMetadata();
-            if (metaData.contentType.contains("image")) {
+            if (metaData.contentType.contains('image')) {
               showImage(context, url, cloudfile.name);
             } else {
               final finalUrl = url.toString();
@@ -132,17 +132,17 @@ void OpenCloudFile(BuildContext context, CloudFile cloudfile) {
     case FileForm.WEBLINK:
       {
         try {
-          String extension = cloudfile.url
-                  .substring(cloudfile.url.lastIndexOf(".") + 1)
+          final fileExtension = cloudfile.url
+                  .substring(cloudfile.url.lastIndexOf('.') + 1)
                   ?.toLowerCase() ??
-              "";
-          if (extension == "jpg" || extension == "png") {
+              '';
+          if (fileExtension == 'jpg' || fileExtension == 'png') {
             showImage(context, cloudfile.url, cloudfile.name);
           } else {
-            launch("https:" + cloudfile.url);
+            launch('https:' + cloudfile.url);
           }
         } catch (e) {
-          launch("https:" + cloudfile.url);
+          launch('https:' + cloudfile.url);
         }
         break;
       }
@@ -150,11 +150,11 @@ void OpenCloudFile(BuildContext context, CloudFile cloudfile) {
       {
         FirebaseStorage.instance
             .ref()
-            .child("attachments")
+            .child('attachments')
             .child(cloudfile.fileid)
             .getDownloadURL()
             .then((url) {
-          if (url != null) launch("https:" + url);
+          if (url != null) launch('https:' + url);
         });
         break;
       }
@@ -167,7 +167,7 @@ void showImage(BuildContext context, String url, String name) {
     Theme(
       data: ThemeData.dark(),
       child: Scaffold(
-        appBar: MyAppHeader(title: name ?? "Image"),
+        appBar: MyAppHeader(title: name ?? 'Image'),
         backgroundColor: Colors.black,
         body: Center(
           child: PhotoView(imageProvider: NetworkImage(url)),

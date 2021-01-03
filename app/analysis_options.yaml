@@ -4,5 +4,17 @@ include: package:pedantic/analysis_options.yaml
 analyzer:
     errors:
       non_constant_identifier_names: ignore
+      invalid_use_of_protected_member: ignore
+      invalid_use_of_visible_for_testing_member: ignore
+
+linter:
+  rules: 
+    prefer_single_quotes: false
+    omit_local_variable_types: false
+    prefer_collection_literals: false
+    prefer_conditional_assignment: false
+    prefer_generic_function_type_aliases: false
+    prefer_if_null_operators: false
+
 #   exclude:
 #     - path/to/excluded/files/**

@@ -105,10 +105,10 @@ class TimetableView extends StatelessWidget {
           events: buildElements(plannerDatabase, datamap, weektype, true),
           starttime_calendar: getPositionForTimeString(settingsData
                   ?.lessontimes[(settingsData.zero_lesson ? 0 : 1)]?.start ??
-              "7:00"),
+              '7:00'),
           endtime_calendar: getPositionForTimeString(
               settingsData?.lessontimes[settingsData.maxlessons]?.end ??
-                  "18:30"),
+                  '18:30'),
           timemode: true,
           periods: buildPeriodElements(plannerDatabase, true),
           haszerolesson: settingsData.zero_lesson,
@@ -201,8 +201,8 @@ class TimetableView extends StatelessWidget {
     if (timemode) {
       var split_start = (lesson.overridentime != null
               ? lesson.overridentime.start
-              : (lessontimes[lesson.start]?.start ?? "8:00"))
-          .split(":");
+              : (lessontimes[lesson.start]?.start ?? '8:00'))
+          .split(':');
       double inhours_start =
           int.parse(split_start[0]) + (int.parse(split_start[1]) / 60);
       return inhours_start;
@@ -212,7 +212,7 @@ class TimetableView extends StatelessWidget {
   }
 
   double getPositionForTimeString(String timestring) {
-    var splitted = (timestring ?? "0:00").split(":");
+    var splitted = (timestring ?? '0:00').split(':');
     double inhours_start =
         int.parse(splitted[0] ?? 0) + (int.parse(splitted[1]) / 60) ?? 0;
     return inhours_start;
@@ -223,8 +223,8 @@ class TimetableView extends StatelessWidget {
     if (timemode) {
       var split_end = (lesson.overridentime != null
               ? lesson.overridentime.end
-              : (lessontimes[lesson.end]?.end ?? "9:00"))
-          .split(":");
+              : (lessontimes[lesson.end]?.end ?? '9:00'))
+          .split(':');
       double inhours_end =
           int.parse(split_end[0]) + (int.parse(split_end[1]) / 60);
       return inhours_end;
@@ -238,29 +238,29 @@ String getLessonTitle(BuildContext context, Lesson lesson) {
   String day = getWeekDays(context)[lesson.day].name;
   String periodtext = lesson.isMultiLesson()
       ? (lesson.start.toString() +
-          ". -" +
+          '. -' +
           lesson.end.toString() +
-          ". " +
+          '. ' +
           getString(context).lesson)
       : (lesson.start.toString() +
-          bothlang(context, en: ". lesson", de: ". Stunde"));
+          bothlang(context, en: '. lesson', de: '. Stunde'));
   String weektypetext = lesson.weektype != 0
-      ? (" (" +
+      ? (' (' +
           (weektypes(context)[lesson.weektype].name.substring(0, 1)) +
-          ")")
-      : "";
-  return day + ", " + periodtext + weektypetext;
+          ')')
+      : '';
+  return day + ', ' + periodtext + weektypetext;
 }
 
 String getLessonPeriodString(
     BuildContext context, Lesson lesson, PlannerDatabase database) {
   if (lesson.overridentime != null) {
-    return lesson.overridentime.start + ":" + lesson.overridentime.end;
+    return lesson.overridentime.start + ':' + lesson.overridentime.end;
   }
   Map<int, LessonTime> lessontimes = database.settings.data.lessontimes;
   String start_first = lessontimes[lesson.start]?.start;
   String end_last = lessontimes[lesson.end]?.end;
-  return (start_first ?? "?") + "-" + (end_last ?? "?");
+  return (start_first ?? '?') + '-' + (end_last ?? '?');
 }
 
 void showLessonDetailSheet(BuildContext context,
@@ -280,7 +280,7 @@ void showLessonDetailSheet(BuildContext context,
               return Expanded(
                   child: Column(
                 children: <Widget>[
-                  getSheetText(context, getLessonTitle(context, lesson) ?? "-"),
+                  getSheetText(context, getLessonTitle(context, lesson) ?? '-'),
                   getExpandList([
                     datestring == null
                         ? nowidget()
@@ -303,7 +303,7 @@ void showLessonDetailSheet(BuildContext context,
                                     title: Text(getLessonInfoTypes(
                                                 context)[mInfo.type.index]
                                             .name +
-                                        ": " +
+                                        ': ' +
                                         getDateStringSmall(datestring)),
                                     leading: Icon(
                                       getLessonInfoTypes(
@@ -330,16 +330,16 @@ void showLessonDetailSheet(BuildContext context,
                                       children: <Widget>[
                                         mInfo.type == LessonInfoType.CHANGED
                                             ? Text(getString(context).teacher +
-                                                ": " +
-                                                (mInfo.teacher?.name ?? "-") +
-                                                ", " +
+                                                ': ' +
+                                                (mInfo.teacher?.name ?? '-') +
+                                                ', ' +
                                                 getString(context).place +
-                                                ": " +
-                                                (mInfo.place?.name ?? "-"))
+                                                ': ' +
+                                                (mInfo.place?.name ?? '-'))
                                             : nowidget(),
                                         mInfo.note != null
                                             ? Text(getString(context).note +
-                                                ": " +
+                                                ': ' +
                                                 mInfo.note)
                                             : nowidget()
                                       ],
@@ -358,7 +358,7 @@ void showLessonDetailSheet(BuildContext context,
                                   return ListTile(
                                     title: Text(
                                         getString(context).nolessoninfos +
-                                            ": " +
+                                            ': ' +
                                             getDateStringSmall(datestring)),
                                     trailing: IconButton(
                                         icon: Icon(Icons.add),
@@ -391,7 +391,7 @@ void showLessonDetailSheet(BuildContext context,
                       leading: Icon(Icons.person_outline),
                       title: Text(lesson.teacher?.name ??
                           courseInfo.getTeacherFirst() ??
-                          "-"),
+                          '-'),
                       onTap: () {
                         String teacherid = lesson.teacher?.teacherid ??
                             courseInfo.getTeacherFirstItem()?.teacherid;
@@ -407,7 +407,7 @@ void showLessonDetailSheet(BuildContext context,
                       leading: Icon(Icons.place),
                       title: Text(lesson.place?.name ??
                           courseInfo.getPlaceFirst() ??
-                          "-"),
+                          '-'),
                       onTap: () {
                         String placeid = lesson.place?.placeid ??
                             courseInfo.getPlaceFirstItem()?.placeid;
@@ -465,7 +465,7 @@ void showLessonDetailSheet(BuildContext context,
                                                           PermissionAccessType
                                                               .creator,
                                                       id: lesson.courseid,
-                                                      routname: "lessonid")
+                                                      routname: 'lessonid')
                                                   .then((result) {
                                                 if (result == true) {
                                                   plannerdatabase.dataManager
@@ -479,7 +479,7 @@ void showLessonDetailSheet(BuildContext context,
                                     ]);
                                   },
                                   title: getString(context).more,
-                                  routname: "lessonid");
+                                  routname: 'lessonid');
                             },
                             iconData: Icons.more_horiz),
                       ],
@@ -491,7 +491,7 @@ void showLessonDetailSheet(BuildContext context,
               ));
             });
       },
-      routname: "lessonid");
+      routname: 'lessonid');
 }
 
 void showFastLessonCreator(BuildContext context, PlannerDatabase database,

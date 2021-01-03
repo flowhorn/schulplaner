@@ -320,12 +320,12 @@ Widget getEmptyView({String title, IconData icon}) {
     child: Column(
       children: <Widget>[
         Icon(
-          icon != null ? icon : Icons.wb_sunny,
+          icon ?? Icons.wb_sunny,
           size: 48.0,
         ),
         Padding(padding: const EdgeInsets.all(6.0)),
         Text(
-          title != null ? title : "-",
+          title ?? "-",
           style: TextStyle(fontSize: 17.0),
         )
       ],

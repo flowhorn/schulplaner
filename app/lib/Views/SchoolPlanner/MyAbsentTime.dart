@@ -81,7 +81,7 @@ class NewAbsentTimeView extends StatelessWidget {
                           leading: Icon(Icons.event),
                           title: Text(getString(context).date),
                           subtitle: Text(
-                              data.date != null ? getDateText(data.date) : "-"),
+                              data.date != null ? getDateText(data.date) : '-'),
                           onTap: () {
                             selectDateString(context, data.date)
                                 .then((newDateString) {
@@ -126,9 +126,9 @@ class NewAbsentTimeView extends StatelessWidget {
                         ListTile(
                           title: Text(getString(context).amountoflessons),
                           subtitle: Text(data.amount == null
-                              ? "-"
+                              ? '-'
                               : (data.amount.toString() +
-                                  " " +
+                                  ' ' +
                                   getString(context).lessons)),
                           onTap: () {
                             selectItem(
@@ -140,7 +140,7 @@ class NewAbsentTimeView extends StatelessWidget {
                                   bool isSelected = item == data.amount;
                                   return ListTile(
                                     title: Text(item.toString() +
-                                        " " +
+                                        ' ' +
                                         getString(context).lessons),
                                     enabled: !isSelected,
                                     trailing: isSelected
@@ -285,14 +285,14 @@ class MyAbsentListInnerState extends State<MyAbsentListInner>
                 color: getAccentColor(context),
               ),
               title: Text(
-                item.amount.toString() + " " + getString(context).absentlessons,
+                item.amount.toString() + ' ' + getString(context).absentlessons,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
               subtitle: Column(
                 children: <Widget>[
                   Text(
-                    getString(context).date + ": " + getDateText(item.date),
+                    getString(context).date + ': ' + getDateText(item.date),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -352,15 +352,15 @@ void showAbsentTimeDetailSheetCritical(
                   getSheetText(
                       context,
                       absenttime.amount.toString() +
-                              " ${getString(context).absentlessons}" ??
-                          "-"),
+                              ' ${getString(context).absentlessons}' ??
+                          '-'),
                   getExpandList([
                     absenttime.date == null
                         ? nowidget()
                         : ListTile(
                             leading: Icon(Icons.event),
                             title: Text(getString(context).date +
-                                ": " +
+                                ': ' +
                                 getDateText(absenttime.date)),
                           ),
                     absenttime.detail == null
@@ -447,7 +447,7 @@ void showAbsentTimeDetailSheetCritical(
                                     ]);
                                   },
                                   title: getString(context).more,
-                                  routname: "absenttimeid");
+                                  routname: 'absenttimeid');
                             },
                             iconData: Icons.more_horiz),
                       ],
@@ -459,5 +459,5 @@ void showAbsentTimeDetailSheetCritical(
               ));
             });
       },
-      routname: "absenttimeid");
+      routname: 'absenttimeid');
 }

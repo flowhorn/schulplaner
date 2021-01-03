@@ -27,9 +27,9 @@ class PublicCode {
 }
 
 Future<PublicCode> getPublicCodeValue(String publiccode) {
-  if (publiccode == null || publiccode == "") return null;
+  if (publiccode == null || publiccode == '') return null;
   return FirebaseFirestore.instance
-      .collection("publiccodes")
+      .collection('publiccodes')
       .doc(publiccode)
       .get()
       .then((snap) {
@@ -58,12 +58,11 @@ Future<PublicCode> getPublicCodeValue(String publiccode) {
 
 Future<PublicCode> generatePublicCode(
     {@required String id, @required int codetype}) {
-  return FirebaseFunctions.instance.httpsCallable("generatePublicCode").call({
+  return FirebaseFunctions.instance.httpsCallable('generatePublicCode').call({
     'codetype': codetype,
     'id': id,
   }).then((result) {
-    PublicCode newcode =
-        PublicCode.fromData(result.data.cast<String, dynamic>());
+    final newcode = PublicCode.fromData(result.data.cast<String, dynamic>());
     return newcode;
   }).catchError((error) {
     return Future.error(error);
@@ -71,7 +70,7 @@ Future<PublicCode> generatePublicCode(
 }
 
 Future<bool> removePublicCode({@required String id, @required int codetype}) {
-  return FirebaseFunctions.instance.httpsCallable("removePublicCode").call({
+  return FirebaseFunctions.instance.httpsCallable('removePublicCode').call({
     'codetype': codetype,
     'id': id,
   }).then((result) {

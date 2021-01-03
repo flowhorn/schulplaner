@@ -95,26 +95,24 @@ class CourseMember {
   }
 
   String getUid() {
-    return memberid.split("::")[0];
+    return memberid.split('::')[0];
   }
 
   String getPlannerId() {
-    return memberid.split("::")[1];
+    return memberid.split('::')[1];
   }
 
-  static getUidFromKey(String key) {
-    if (key.startsWith("ADVANCED=")) {
-      return key.split("=")[1].split(":")[0];
-    } else {
-      return key;
+  static String getUidFromKey(String key) {
+    if (key.startsWith('ADVANCED=')) {
+      return key.split('=')[1].split(':')[0];
     }
+    return key;
   }
 
-  static getPlannerIDFromKey(String key) {
-    if (key.startsWith("ADVANCED=")) {
-      return key.split("=")[1].split(":")[1];
-    } else {
-      return key;
+  static String getPlannerIDFromKey(String key) {
+    if (key.startsWith('ADVANCED=')) {
+      return key.split('=')[1].split(':')[1];
     }
+    return key;
   }
 }

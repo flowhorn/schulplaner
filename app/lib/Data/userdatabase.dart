@@ -11,9 +11,9 @@ class UserDatabase {
   DataDocumentPackage<UserProfile> userprofile;
   DataDocumentPackage<User> user;
   UserDatabase({@required this.uid}) {
-    _root = FirebaseFirestore.instance.collection("users").doc(uid);
+    _root = FirebaseFirestore.instance.collection('users').doc(uid);
     userprofile = DataDocumentPackage(
-        reference: _root.collection("data").doc("info"),
+        reference: _root.collection('data').doc('info'),
         objectBuilder: (key, it) => UserProfile.fromData(it),
         directlyLoad: true);
     user = DataDocumentPackage(
@@ -53,7 +53,7 @@ class User {
     } else {
       return User(
         id: id,
-        name: "Anonym",
+        name: 'Anonym',
         referralLink: null,
         referralScore: 0,
       );
