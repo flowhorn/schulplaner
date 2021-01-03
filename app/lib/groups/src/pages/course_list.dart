@@ -61,7 +61,7 @@ class _CourseTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final plannerDatabase =
         BlocProvider.of<PlannerDatabaseBloc>(context).plannerDatabase;
-    if (courseInfo == null) {
+    if (courseInfo == null || courseInfo.id == null) {
       return SizedBox(
         height: 52.0,
         child: Center(
