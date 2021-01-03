@@ -283,12 +283,12 @@ List<SimpleItem> availableLanguages(BuildContext context) {
         name: getString(context).automatic,
         iconData: Icons.brightness_auto),
     SimpleItem(
-      id: "de",
-      name: "Deutsch",
+      id: 'de',
+      name: 'Deutsch',
     ),
     SimpleItem(
-      id: "en",
-      name: "English",
+      id: 'en',
+      name: 'English',
     ),
   ];
 }
@@ -390,7 +390,7 @@ class AppConfigurationView extends StatelessWidget {
               subtitle: Text(configurationData.shortname_length == 0
                   ? getString(context).individual
                   : (configurationData.shortname_length.toString() +
-                      " " +
+                      ' ' +
                       getString(context).letters)),
               onTap: () {
                 selectItem(
@@ -415,7 +415,7 @@ class AppConfigurationView extends StatelessWidget {
             ListTile(
               title: Text(getString(context).amount_of_days_home),
               subtitle: Text((configurationData.general_daysinhome.toString() +
-                  " " +
+                  ' ' +
                   getString(context).days_normal)),
               onTap: () {
                 selectItem(
@@ -424,7 +424,7 @@ class AppConfigurationView extends StatelessWidget {
                     builder: (context, item) {
                       return ListTile(
                         title: Text((item.toString() +
-                            " " +
+                            ' ' +
                             getString(context).days_normal)),
                         onTap: () {
                           Navigator.pop(context);
@@ -478,7 +478,7 @@ class AppConfigurationView extends StatelessWidget {
             ),
             ListTile(
               title: Text(getString(context).lessonheight),
-              subtitle: Text("x" +
+              subtitle: Text('x' +
                   configurationData.timetablesettings.heightfactor.toString()),
               onTap: () {
                 getTextFromInput(
@@ -491,7 +491,7 @@ class AppConfigurationView extends StatelessWidget {
                     .then((newtext) {
                   if (newtext != null) {
                     try {
-                      newtext = newtext.replaceAll(",", ".");
+                      newtext = newtext.replaceAll(',', '.');
                       double value = double.parse(newtext);
                       assert(value is double && value > 0.0);
                       ConfigurationData newdata = configurationData.copyWith();
