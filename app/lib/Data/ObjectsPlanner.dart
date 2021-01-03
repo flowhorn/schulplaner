@@ -102,14 +102,14 @@ class CourseMember {
     return memberid.split('::')[1];
   }
 
-  static getUidFromKey(String key) {
+  static String getUidFromKey(String key) {
     if (key.startsWith('ADVANCED=')) {
       return key.split('=')[1].split(':')[0];
     }
     return key;
   }
 
-  static getPlannerIDFromKey(String key) {
+  static String getPlannerIDFromKey(String key) {
     if (key.startsWith('ADVANCED=')) {
       return key.split('=')[1].split(':')[1];
     }

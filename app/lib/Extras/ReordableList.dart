@@ -35,7 +35,7 @@ class _ReorderableListState extends State<ReorderableList>
     );
   }
 
-  get dragging => _dragging;
+  Key get dragging => _dragging;
 
   Key _dragging;
   _Recognizer _recognizer;
@@ -74,7 +74,7 @@ class _ReorderableListState extends State<ReorderableList>
     _dragProxy.setWidget(
         draggedItem.widget.childBuilder(draggedItem.context, true),
         draggedItem.context.findRenderObject());
-    this._scrollController.addListener(this._scrolled);
+    _scrollController.addListener(_scrolled);
   }
 
   void _scrolled() {
@@ -89,7 +89,7 @@ class _ReorderableListState extends State<ReorderableList>
 
   void maybeScroll() async {
     if (!_scrolling && _scrollController != null && _dragging != null) {
-      final position = this._scrollController.position;
+      final position = _scrollController.position;
       double newOffset;
       int duration = 14; // in ms
       double step = 1.0;
@@ -116,7 +116,7 @@ class _ReorderableListState extends State<ReorderableList>
 
       if (newOffset != null && (newOffset - position.pixels).abs() >= 1.0) {
         _scrolling = true;
-        await this._scrollController.animateTo(newOffset,
+        await _scrollController.animateTo(newOffset,
             duration: Duration(milliseconds: duration), curve: Curves.linear);
         _scrolling = false;
         if (_dragging != null) {
@@ -153,7 +153,7 @@ class _ReorderableListState extends State<ReorderableList>
       return;
     }
 
-    this._scrollController.removeListener(this._scrolled);
+    _scrollController.removeListener(_scrolled);
 
     var current = _items[_dragging];
     if (current == null) return;
@@ -399,7 +399,7 @@ class _ReorderableItemState extends State<ReorderableItem> {
   }
 
   void _routePointer(PointerEvent event) {
-    RenderBox ro = this.context.findRenderObject();
+    RenderBox ro = context.findRenderObject();
     final query = MediaQuery.of(context);
     Offset point = ro.globalToLocal(event.position);
     if (point.dx < 60 - (query?.padding?.left ?? 0.0) &&

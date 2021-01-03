@@ -47,12 +47,12 @@ class AbsentTime {
 
   AbsentTime copy() {
     return AbsentTime(
-      id: this.id,
-      date: this.date,
-      detail: this.detail,
-      unexcused: this.unexcused,
-      amount: this.amount,
-      files: this.files,
+      id: id,
+      date: date,
+      detail: detail,
+      unexcused: unexcused,
+      amount: amount,
+      files: files,
     );
   }
 }

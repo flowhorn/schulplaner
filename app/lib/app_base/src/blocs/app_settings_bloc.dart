@@ -31,7 +31,7 @@ class AppSettingsBloc extends BlocBase {
   Stream<AppSettingsData> get appSettingsData => _appSettingsDataSubject;
 
   void setAppConfiguration(ConfigurationData newdata) {
-    AppSettingsData newAppdata =
+    final newAppdata =
         currentValue.copyWith(configurationData: newdata);
     setAppSettings(newAppdata);
   }
@@ -40,7 +40,7 @@ class AppSettingsBloc extends BlocBase {
     _appSettingsDataSubject.add(newData);
 
     SharedPreferences.getInstance().then((instance) {
-      String newdatastring = newData.toJsonString();
+      final newdatastring = newData.toJsonString();
       if (newdatastring != null) {
         instance.setString('appsettings', newdatastring);
       }

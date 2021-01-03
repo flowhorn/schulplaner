@@ -40,7 +40,8 @@ class IntroContent extends StatelessWidget {
                     ? nowidget()
                     : Text(bodytext,
                         style: bodyStyle, textAlign: TextAlign.center),
-              ]..addAll(footerWidgets),
+                ...footerWidgets,
+              ],
             )
           : Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -56,7 +57,8 @@ class IntroContent extends StatelessWidget {
                         style: bodyStyle, textAlign: TextAlign.center),
                 bodytext == null ? nowidget() : const SizedBox(height: 24.0),
                 body,
-              ]..addAll(footerWidgets),
+                ...footerWidgets,
+              ],
             ),
     );
   }

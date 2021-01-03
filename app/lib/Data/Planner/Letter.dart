@@ -167,19 +167,19 @@ class Letter {
     SavedIn savedin,
   }) {
     return Letter._(
-      id: id ?? this.id,
-      title: title ?? this.title,
-      content: content ?? this.content,
-      authorid: authorid ?? this.authorid,
+      id: id,
+      title: title,
+      content: content,
+      authorid: authorid,
       savedin: savedin,
-      published: published ?? this.published,
-      lastchanged: lastchanged ?? this.lastchanged,
-      archived: archived ?? this.archived,
-      sendpush: sendpush ?? this.sendpush,
-      allowreply: allowreply ?? this.allowreply,
-      deleted: deleted ?? this.deleted,
-      files: files ?? this.files,
-      responses: responses ?? this.responses,
+      published: published,
+      lastchanged: lastchanged,
+      archived: archived,
+      sendpush: sendpush,
+      allowreply: allowreply,
+      deleted: deleted,
+      files: files,
+      responses: responses,
     );
   }
 

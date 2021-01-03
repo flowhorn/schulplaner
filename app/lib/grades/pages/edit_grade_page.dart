@@ -24,7 +24,7 @@ class NewGradeView extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() =>
-      NewGradeViewState(this.database, courseid, gradeid, editmode, date);
+      NewGradeViewState(database, courseid, gradeid, editmode, date);
 }
 
 class NewGradeViewState extends State<NewGradeView> {

@@ -170,7 +170,7 @@ class AverageSettings {
   Map<GradeType, double> weightperType;
   AverageSettings({this.automatic = true, this.weightperType}) {
     if (weightperType == null) {
-      this.weightperType = {
+      weightperType = {
         GradeType.HOMEWORK: 1.0,
         GradeType.EXAM: 1.0,
         GradeType.ORALEXAM: 1.0,

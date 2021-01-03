@@ -135,7 +135,7 @@ class Course {
     Map<String, PlaceLink> places,
   }) {
     return Course._(
-      id: id ?? this.id,
+      id: id,
       name: name ?? this.name,
       title: title ?? this.title,
       description: description ?? this.description,
@@ -155,7 +155,7 @@ class Course {
       connectedclasses: connectedclasses ?? this.connectedclasses,
       teachers: teachers ?? this.teachers,
       places: places ?? this.places,
-      groupVersion: this.groupVersion,
+      groupVersion: groupVersion,
     );
   }
 
@@ -165,27 +165,27 @@ class Course {
     String personalgradeprofile,
   }) {
     return Course._(
-      id: this.id,
-      name: this.name,
+      id: id,
+      name: name,
       title: title,
-      teachers: this.teachers,
-      places: this.places,
-      joinLink: this.joinLink,
-      shortname: this.shortname,
-      design: this.design,
+      teachers: teachers,
+      places: places,
+      joinLink: joinLink,
+      shortname: shortname,
+      design: design,
       personaldesign: personaldesign,
       personalshortname: personalshortname,
       personalgradeprofile: personalgradeprofile,
-      publiccode: this.publiccode,
-      description: this.description,
-      connectedclasses: this.connectedclasses,
-      lessons: this.lessons,
-      settings: this.settings,
-      createdOn: this.createdOn,
-      membersData: this.membersData,
-      membersList: this.membersList,
-      userRoles: this.userRoles,
-      groupVersion: this.groupVersion,
+      publiccode: publiccode,
+      description: description,
+      connectedclasses: connectedclasses,
+      lessons: lessons,
+      settings: settings,
+      createdOn: createdOn,
+      membersData: membersData,
+      membersList: membersList,
+      userRoles: userRoles,
+      groupVersion: groupVersion,
     );
   }
 

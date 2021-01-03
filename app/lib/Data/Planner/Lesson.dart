@@ -208,7 +208,7 @@ List<WeekType> getListOfWeekTypes(
 
 String getCurrentWeekTypeName(
     BuildContext context, PlannerSettingsData settingsdata) {
-  int weektype = settingsdata.getCurrentWeekType();
+  final weektype = settingsdata.getCurrentWeekType();
   if (weektype == 0) return '-';
   return weektypes(context)[weektype].name;
 }

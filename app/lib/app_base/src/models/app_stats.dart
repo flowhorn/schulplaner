@@ -42,6 +42,6 @@ class AppStats {
   }
 
   AppStats copy() {
-    return AppStats.fromString(this.toJsonString());
+    return AppStats.fromString(toJsonString());
   }
 }

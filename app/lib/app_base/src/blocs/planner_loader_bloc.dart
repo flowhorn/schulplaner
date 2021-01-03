@@ -56,7 +56,7 @@ class PlannerLoaderBloc extends BlocBase {
             _hasLoadedDataSubject.add(true);
             final plannerMap =
                 (snapshot.docs.asMap().map<String, Planner>((_, snapshot) {
-                      Planner mPlanner = Planner.fromData(snapshot.data());
+                      final mPlanner = Planner.fromData(snapshot.data());
                       return MapEntry(mPlanner.id, mPlanner);
                     })) ??
                     {};
@@ -144,8 +144,8 @@ class PlannerLoaderBloc extends BlocBase {
   }
 
   void createCopy(Planner planner) {
-    String plannerID = getPlannerRef(currentUserId).doc().id;
-    Planner copyPlanner =
+    final plannerID = getPlannerRef(currentUserId).doc().id;
+    final copyPlanner =
         planner.copyWith(id: plannerID, name: '(2)' + planner.name);
     getPlannerRef(currentUserId).doc(copyPlanner.id).set(
           copyPlanner.toJson(),
@@ -214,7 +214,7 @@ class LoadAllPlanner {
   }
 
   Stream<LoadAllPlannerStatus> get stream {
-    StreamController<LoadAllPlannerStatus> newcontroller = StreamController();
+    final newcontroller = StreamController<LoadAllPlannerStatus>();
     _list_streamcontroller.add(newcontroller);
     newcontroller.add(status);
     newcontroller.onCancel = () {

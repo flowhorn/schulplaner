@@ -43,7 +43,7 @@ class ItemList extends StatelessWidget {
   Widget build(BuildContext context) {
     return StreamBuilder<List<Item>>(
         stream: FirebaseFirestore.instance
-            .collection("items")
+            .collection('items')
             .snapshots()
             .map((snap) {
           return snap.docs.map((snap) => Item.fromData(snap.data)).toList();
@@ -58,7 +58,7 @@ class ItemList extends StatelessWidget {
                 itemBuilder: (context, index) {
                   Item item = items[index];
                   return ListTile(
-                    title: Text(item.name ?? "-"),
+                    title: Text(item.name ?? '-'),
                   );
                 });
           }
@@ -74,7 +74,7 @@ class DetailItemView extends StatelessWidget {
   Widget build(BuildContext context) {
     return StreamBuilder<Item>(
         stream: FirebaseFirestore.instance
-            .collection("tasks")
+            .collection('tasks')
             .doc(itemid)
             .snapshots()
             .map((snap) {
@@ -89,7 +89,7 @@ class DetailItemView extends StatelessWidget {
             return CircularProgressIndicator();
           } else {
             Item item = snapshot.data;
-            return Text(item.name ?? "-");
+            return Text(item.name ?? '-');
           }
         });
   }

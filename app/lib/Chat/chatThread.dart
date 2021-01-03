@@ -43,7 +43,7 @@ class ChatThreadState extends State<ChatThread> {
   final TextEditingController textEditingController = TextEditingController();
   final ScrollController listScrollController = ScrollController();
   final FocusNode focusNode = FocusNode();
-  final Map<String, String> nameDatabase = Map();
+  final Map<String, String> nameDatabase = {};
 
   @override
   void initState() {
@@ -61,7 +61,7 @@ class ChatThreadState extends State<ChatThread> {
   }
 
   Future getAttachment() async {
-    ChatAttachment attachment = await selectChatAttachment(context);
+    final attachment = await selectChatAttachment(context);
     if (attachment != null) {
       switch (attachment.type) {
         case ChatAttachmentType.image:
@@ -93,14 +93,14 @@ class ChatThreadState extends State<ChatThread> {
   }
 
   Future uploadImage(File imageFile) async {
-    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    final fileName = DateTime.now().millisecondsSinceEpoch.toString();
     final reference =
         FirebaseStorage.instance.ref().child('chat').child(fileName);
     final uploadTask = reference.putFile(imageFile);
     final storageTaskSnapshot = await uploadTask;
     try {
-      String downloadUrl = await storageTaskSnapshot.ref.getDownloadURL();
-      String imageUrl = downloadUrl;
+      final downloadUrl = await storageTaskSnapshot.ref.getDownloadURL();
+      final imageUrl = downloadUrl;
       setState(() {
         isLoading = false;
         onSendMessage(imageUrl, 1);
@@ -114,14 +114,14 @@ class ChatThreadState extends State<ChatThread> {
   }
 
   Future uploadFile(File documentFile) async {
-    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    final fileName = DateTime.now().millisecondsSinceEpoch.toString();
     final reference =
         FirebaseStorage.instance.ref().child('chat').child(fileName);
     final uploadTask = reference.putFile(documentFile);
     final storageTaskSnapshot = await uploadTask;
     try {
-      String downloadUrl = await storageTaskSnapshot.ref.getDownloadURL();
-      String imageUrl = downloadUrl;
+      final downloadUrl = await storageTaskSnapshot.ref.getDownloadURL();
+      final imageUrl = downloadUrl;
       setState(() {
         isLoading = false;
         onSendMessage(imageUrl, 2);

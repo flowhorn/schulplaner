@@ -84,9 +84,9 @@ class CloudFile {
       }
     } else {
       if (url == null) return false;
-      String extension =
+      final fileExtension =
           url.substring(url.lastIndexOf('.') + 1)?.toLowerCase() ?? '';
-      if (extension == 'jpg' || extension == 'png') {
+      if (fileExtension == 'jpg' || fileExtension == 'png') {
         return true;
       } else {
         return false;
@@ -132,11 +132,11 @@ void OpenCloudFile(BuildContext context, CloudFile cloudfile) {
     case FileForm.WEBLINK:
       {
         try {
-          String extension = cloudfile.url
+          final fileExtension = cloudfile.url
                   .substring(cloudfile.url.lastIndexOf('.') + 1)
                   ?.toLowerCase() ??
               '';
-          if (extension == 'jpg' || extension == 'png') {
+          if (fileExtension == 'jpg' || fileExtension == 'png') {
             showImage(context, cloudfile.url, cloudfile.name);
           } else {
             launch('https:' + cloudfile.url);

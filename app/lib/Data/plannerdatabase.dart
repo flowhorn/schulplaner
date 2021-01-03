@@ -273,7 +273,7 @@ class PlannerDatabase {
   Map<String, List<StreamSubscription>> _courselistener;
   Map<String, List<StreamSubscription>> _classlistener;
 
-  List<StreamSubscription> _otherlistener = [];
+  final List<StreamSubscription> _otherlistener = [];
   String _loadedvacationpackageid;
 
   void requestCourseLink(String courseID) {

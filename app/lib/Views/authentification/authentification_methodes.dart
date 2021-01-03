@@ -30,17 +30,17 @@ class AuthenticationMethodes extends StatelessWidget {
               return Column(
                 children: <Widget>[
                   FormHeader(bothlang(context,
-                      de: "Meine Anmeldemethoden", en: "My Sign-In methodes")),
+                      de: 'Meine Anmeldemethoden', en: 'My Sign-In methodes')),
                   if (!authProviders.containsLinkedProviders())
                     Card(
                       margin: EdgeInsets.all(8.0),
                       child: ListTile(
                         leading: Icon(Icons.person),
                         title: Text(bothlang(context,
-                            de: "Anmeldung übersprungen",
-                            en: "Sign-In skipped")),
+                            de: 'Anmeldung übersprungen',
+                            en: 'Sign-In skipped')),
                         subtitle: Text(bothlang(context,
-                            de: "Du hast noch keine Anmeldemethode hinzugefügt. Füge besser jetzt eine hinzu!",
+                            de: 'Du hast noch keine Anmeldemethode hinzugefügt. Füge besser jetzt eine hinzu!',
                             en: "You haven't added any Sign-In methode. Do it know!")),
                         /*
                             trailing: true ? null: FlatButton(
@@ -65,8 +65,8 @@ class AuthenticationMethodes extends StatelessWidget {
                   ),
                   FormDivider(),
                   FormHeader(bothlang(context,
-                      de: "Anmeldemethode hinzufügen",
-                      en: "Add sign-in methode")),
+                      de: 'Anmeldemethode hinzufügen',
+                      en: 'Add sign-in methode')),
                   if (!authProviders.isLinkedWithEmailSignIn())
                     Card(
                       child: Column(
@@ -78,8 +78,8 @@ class AuthenticationMethodes extends StatelessWidget {
                             ),
                             title: Text(getString(context).linkemail),
                             subtitle: Text(bothlang(context,
-                                de: "Melde dich von all deinen Geräten mit deiner Email-Adresse und einem Passwort an",
-                                en: "Sign in from all your devices using your email + password")),
+                                de: 'Melde dich von all deinen Geräten mit deiner Email-Adresse und einem Passwort an',
+                                en: 'Sign in from all your devices using your email + password')),
                           ),
                           SizedBox(
                             height: 52.0,
@@ -109,10 +109,10 @@ class AuthenticationMethodes extends StatelessWidget {
                               color: Colors.blue,
                             ),
                             title: Text(bothlang(context,
-                                de: "Google-Verknüpfung", en: "Google-Link")),
+                                de: 'Google-Verknüpfung', en: 'Google-Link')),
                             subtitle: Text(bothlang(context,
-                                de: "Melde dich von all deinen Geräten mit deinem Google-Konto an",
-                                en: "Sign in from all your devices using your Google account")),
+                                de: 'Melde dich von all deinen Geräten mit deinem Google-Konto an',
+                                en: 'Sign in from all your devices using your Google account')),
                           ),
                           SizedBox(
                             height: 52.0,

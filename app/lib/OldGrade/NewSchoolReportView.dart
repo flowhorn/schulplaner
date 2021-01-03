@@ -19,7 +19,7 @@ class NewSchoolReportView extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() =>
-      NewSchoolReportViewState(this.database, reportid, editmode);
+      NewSchoolReportViewState(database, reportid, editmode);
 }
 
 class NewSchoolReportViewState extends State<NewSchoolReportView> {
@@ -106,7 +106,7 @@ class NewReportValueView extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() =>
-      NewReportValueViewiewState(this.database, report, courseid);
+      NewReportValueViewiewState(database, report, courseid);
 }
 
 class NewReportValueViewiewState extends State<NewReportValueView> {
