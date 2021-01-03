@@ -205,7 +205,7 @@ class WeekDayText extends StatelessWidget {
           bottom: true,
           top: true,
           color: PdfColors.grey600,
-        )));
+        ),),);
   }
 }
 

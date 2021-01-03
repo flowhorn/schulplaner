@@ -51,6 +51,7 @@ class _CalendarState extends State<Calendar> {
 
   DateTime get selectedDate => _selectedDate;
 
+  @override
   void initState() {
     super.initState();
     if (widget.initialCalendarDateOverride != null) {
