@@ -28,7 +28,7 @@ class LoginPage extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Column(
                   children: <Widget>[
-                    SizedBox(height: 12.0),
+                    SizedBox(height: 24.0),
                     CircleAvatar(
                       child: Icon(
                         Icons.lock,
@@ -139,52 +139,46 @@ class _FailedSignInState extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final signInBloc = BlocProvider.of<SignInBloc>(context);
-    return
-        ElevatedButton(
-      child: InkWell(child: Column(
-          children: <Widget>[
-            Icon(
-              Icons.error_outline,
-              color: Colors.red,
-              size: 48.0,
-            ),
-            Text(bothlang(
-              context,
-              de: "Anmeldung fehlgeschlagen!",
-              en: "Sign In failed!",
-            ),
-            style: TextStyle(
-              color: Colors.black
-            ),),
-            Text(bothlang(
-              context,
-              de: "Tippen um nochmal zu versuchen",
-              en: "Tap to retry",
-            ),
-              style: TextStyle(
-                  color: Colors.black
-              ),),
-          ]
+    return Column(children: <Widget>[
+      SizedBox(height: 60.00),
+      Icon(
+        Icons.error_outline,
+        color: Colors.red,
+        size: 60.0,
       ),
-      ),
-      style:
-      ElevatedButton.styleFrom(
-
-          side: BorderSide(color: Colors.black, width: 1),
-        padding: EdgeInsets.only(
-          left: 20,
-          right: 20,
-          top: 10,
-          bottom: 10
-      ),
-        onPrimary: Colors.grey,
-        primary: Colors.white,
-        onSurface: Colors.grey,
-      ),
-      onPressed: () {
-        signInBloc.clear();
-      },
-    );
+      SizedBox(height: 100.0),
+      InkWell(
+          customBorder: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(5),
+              side: BorderSide(color: Colors.red)),
+          onTap: () {
+            signInBloc.clear();
+          },
+          child: Container(
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.red,
+                  width: 2,
+                ),
+                borderRadius: BorderRadius.circular(5),
+              ),
+              child: FlatButton.icon(
+                highlightColor: Colors.white,
+                icon: Icon(
+                  Icons.arrow_left_outlined,
+                  color: Colors.red,
+                ),
+                label: Text(
+                  bothlang(
+                    context,
+                    de: "Anmeldung fehlgeschlagen",
+                    en: "Login failed",
+                  ),
+                  style:
+                      TextStyle(color: Colors.red, fontWeight: FontWeight.w800),
+                ),
+              ))),
+    ]);
   }
 }
 
