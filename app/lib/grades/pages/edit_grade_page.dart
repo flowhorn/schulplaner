@@ -24,7 +24,7 @@ class NewGradeView extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() =>
-      NewGradeViewState(this.database, courseid, gradeid, editmode, date);
+      NewGradeViewState(database, courseid, gradeid, editmode, date);
 }
 
 class NewGradeViewState extends State<NewGradeView> {
@@ -43,7 +43,7 @@ class NewGradeViewState extends State<NewGradeView> {
           type: GradeType.EXAM,
           date: date);
     }
-    prefilled_title = grade.title ?? "";
+    prefilled_title = grade.title ?? '';
     prefilled_weight = grade.weight ?? 1.0;
     if (getGradePackage(database.getSettings().gradepackageid).inputSupport) {
       if (grade.valuekey != null) {
@@ -54,8 +54,8 @@ class NewGradeViewState extends State<NewGradeView> {
   }
   Grade grade;
 
-  String prefilled_title = "";
-  String prefilled_grade = "";
+  String prefilled_title = '';
+  String prefilled_grade = '';
   double prefilled_weight = 1.0;
   bool correct_double = true;
 
@@ -97,7 +97,7 @@ class NewGradeViewState extends State<NewGradeView> {
                                 .getCurrentGradePackage()
                                 .id
                                 .toString() +
-                            "-" +
+                            '-' +
                             mValue.toString());
                     if (newone.isValid() &&
                         newone.validate() &&
@@ -166,12 +166,12 @@ class NewGradeViewState extends State<NewGradeView> {
                         leading: Icon(Icons.grade),
                         title: Text(
                           getString(context).grade +
-                              ": " +
+                              ': ' +
                               (grade.valuekey != null
                                   ? DataUtil_Grade()
                                       .getGradeValueOf(grade.valuekey)
                                       .getLongName()
-                                  : "-"),
+                                  : '-'),
                         ),
                         enabled: true,
                         trailing: grade.valuekey != null
@@ -229,7 +229,7 @@ class NewGradeViewState extends State<NewGradeView> {
                     getString(context).type,
                   ),
                   subtitle: Text(
-                      getGradeTypes(context)[grade.type.index].name ?? "-"),
+                      getGradeTypes(context)[grade.type.index].name ?? '-'),
                   dense: false,
                   trailing:
                       Icon(getGradeTypes(context)[grade.type.index].iconData),

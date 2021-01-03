@@ -22,7 +22,7 @@ class FileHub extends StatelessWidget {
       color: getBackgroundColor(context),
       child: StreamBuilder<Map<String, Course>>(
         builder: (context, snapshot) {
-          List<Course> courses = snapshot.data.values.toList()
+          final courses = snapshot.data.values.toList()
             ..sort((c1, c2) => c1.getName().compareTo(c2.getName()));
           return SingleChildScrollView(
             child: Column(
@@ -31,10 +31,10 @@ class FileHub extends StatelessWidget {
                     title: getString(context).mystorage,
                     child: ListTile(
                       leading: Hero(
-                          tag: "personalstorage_icon",
+                          tag: 'personalstorage_icon',
                           child: Icon(Icons.person_outline)),
                       title: Hero(
-                          tag: "personalstorage_text",
+                          tag: 'personalstorage_text',
                           child: Material(
                             child: Text(
                               getString(context).personalstorage,
@@ -54,14 +54,14 @@ class FileHub extends StatelessWidget {
                       children: courses
                           .map((courseInfo) => ListTile(
                                 leading: Hero(
-                                    tag: "courseicon_" + courseInfo.id,
+                                    tag: 'courseicon_' + courseInfo.id,
                                     child: ColoredCircleText(
                                         text: toShortNameLength(context,
                                             courseInfo.getShortname_full()),
                                         color: courseInfo.getDesign().primary,
                                         radius: 22.0)),
                                 title: Hero(
-                                    tag: "coursetext_" + courseInfo.id,
+                                    tag: 'coursetext_' + courseInfo.id,
                                     child: Material(
                                       child: Text(
                                         courseInfo.getName(),
@@ -111,7 +111,7 @@ class PersonalStorageView extends StatelessWidget {
                 child: Column(
                   children: <Widget>[
                     Hero(
-                        tag: "personalstorage_icon",
+                        tag: 'personalstorage_icon',
                         child: ColoredCircleIcon(
                             icon: Icon(
                               Icons.person_outline,
@@ -121,7 +121,7 @@ class PersonalStorageView extends StatelessWidget {
                             radius: 26.0)),
                     FormSpace(6.0),
                     Hero(
-                        tag: "personalstorage_text",
+                        tag: 'personalstorage_text',
                         child: Material(
                           child: Text(
                             getString(context).personalstorage,
@@ -154,9 +154,9 @@ class PersonalStorageView extends StatelessWidget {
                       icon: Icon(
                           file.isImage() ? Icons.image : Icons.attach_file),
                     ),
-                    title: Text(file.name ?? "-"),
+                    title: Text(file.name ?? '-'),
                     subtitle: file.fileform == FileForm.WEBLINK
-                        ? Text(file.url ?? "?")
+                        ? Text(file.url ?? '?')
                         : null,
                     onTap: () {
                       OpenCloudFile(context, file);
@@ -208,7 +208,7 @@ class CourseStorageView extends StatelessWidget {
                       child: Column(
                         children: <Widget>[
                           Hero(
-                              tag: "courseicon_" + courseInfo.id,
+                              tag: 'courseicon_' + courseInfo.id,
                               child: ColoredCircleText(
                                   text: toShortNameLength(
                                       context, courseInfo.getShortname_full()),
@@ -216,7 +216,7 @@ class CourseStorageView extends StatelessWidget {
                                   radius: 22.0)),
                           FormSpace(6.0),
                           Hero(
-                              tag: "coursetext_" + courseInfo.id,
+                              tag: 'coursetext_' + courseInfo.id,
                               child: Material(
                                 child: Text(
                                   courseInfo.getName(),
@@ -239,8 +239,7 @@ class CourseStorageView extends StatelessWidget {
             ),
             body: Center(
               child: Text(bothlang(context,
-                  de: "Bald verfügbar. Benutze solange den persönlichen Speicher",
-                  en: "Coming soon. Until then use the personal storage")),
+                  de: 'Hier kommt bald was 😏', en: 'Coming soon 😏')),
             ),
           );
         }));
@@ -260,7 +259,7 @@ void showFilePersonalMoreSheet(BuildContext context,
               if (file == null) return loadedView();
               return Column(
                 children: <Widget>[
-                  getSheetText(context, file.name ?? "-"),
+                  getSheetText(context, file.name ?? '-'),
                   SingleChildScrollView(
                     child: Column(children: [
                       ListTile(

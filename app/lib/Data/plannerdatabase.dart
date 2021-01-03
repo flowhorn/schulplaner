@@ -41,7 +41,7 @@ class IndirectConnection {
   bool enabled;
   IndirectConnection({this.classid, this.courseid, this.enabled = true});
 
-  String getKey() => classid + "--" + courseid;
+  String getKey() => classid + '--' + courseid;
 }
 
 class ClassSettings {
@@ -144,7 +144,7 @@ class PlannerConnectionsState {
   }
 
   void checkConnections_class() {
-    print("CHECKING CLASS!!");
+    print('CHECKING CLASS!!');
     for (MapEntry<String, bool> entry in activeclasslistener.entries.toList()) {
       String classid = entry.key;
       if ((classconnections ?? {}).containsKey(classid)) {
@@ -177,9 +177,9 @@ class PlannerConnectionsState {
 
   void _addClassToDB(String classid) {
     activeclasslistener[classid] = true;
-    print("ADD CLASS");
+    print('ADD CLASS');
     mapofclasslisteners[classid] = FirebaseFirestore.instance
-        .collection("schoolclasses")
+        .collection('schoolclasses')
         .doc(classid)
         .snapshots()
         .listen((snapshot) {
@@ -197,8 +197,8 @@ class PlannerConnectionsState {
         }
       });
       schoolClassInfo.courses.forEach((key, value) {
-        print("ADDCLASS:" + key);
-        indirectconnections[classid + "--" + key] =
+        print('ADDCLASS:' + key);
+        indirectconnections[classid + '--' + key] =
             IndirectConnection(classid: classid, courseid: key, enabled: true);
       });
       checkConnections_course();
@@ -210,7 +210,7 @@ class PlannerConnectionsState {
 
   void _removeClassToDB(String classid) {
     activeclasslistener.remove(classid);
-    print("REMOVE CLASS");
+    print('REMOVE CLASS');
     mapofclasslisteners[classid]?.cancel();
     indirectconnections?.removeWhere((key, value) => value.classid == classid);
     checkConnections_course();
@@ -273,13 +273,13 @@ class PlannerDatabase {
   Map<String, List<StreamSubscription>> _courselistener;
   Map<String, List<StreamSubscription>> _classlistener;
 
-  List<StreamSubscription> _otherlistener = [];
+  final List<StreamSubscription> _otherlistener = [];
   String _loadedvacationpackageid;
 
   void requestCourseLink(String courseID) {
     FirebaseDatabase.instance
         .reference()
-        .child("requests/incoming")
+        .child('requests/incoming')
         .push()
         .set({'type': 'no_course_link', 'userID': uid, 'courseID': courseID});
   }
@@ -287,7 +287,7 @@ class PlannerDatabase {
   void requestClassLink(String classID) {
     FirebaseDatabase.instance
         .reference()
-        .child("requests/incoming")
+        .child('requests/incoming')
         .push()
         .set({'type': 'no_class_link', 'userID': uid, 'classID': classID});
   }
@@ -312,9 +312,9 @@ class PlannerDatabase {
     root = FirebaseFirestore.instance;
     dataManager = DataManager(plannerid: plannerid, uid: uid);
     _rootplanner =
-        root.collection("users").doc(uid).collection('planner').doc(plannerid);
+        root.collection('users').doc(uid).collection('planner').doc(plannerid);
     settings = DataDocumentPackage(
-        reference: _rootplanner.collection("data").doc("settings"),
+        reference: _rootplanner.collection('data').doc('settings'),
         objectBuilder: (key, value) => PlannerSettingsData.fromData(value),
         directlyLoad: true,
         loadNullData: true);
@@ -330,8 +330,8 @@ class PlannerDatabase {
           );
         });
     _rootplanner
-        .collection("data")
-        .doc("coursepersonal")
+        .collection('data')
+        .doc('coursepersonal')
         .snapshots()
         .listen((snapshot) {
       final data = snapshot.data();
@@ -360,14 +360,14 @@ class PlannerDatabase {
         objectBuilder: (key, it) => Teacher.fromData(it),
         getKey: (it) => it.teacherid,
         sorter: (item1, item2) {
-          return (item1.name ?? "").compareTo(item2.name ?? "");
+          return (item1.name ?? '').compareTo(item2.name ?? '');
         });
     places = DataCollectionPackage(
         reference: dataManager.placesRef,
         objectBuilder: (key, it) => Place.fromData(it),
         getKey: (it) => it.placeid,
         sorter: (item1, item2) {
-          return (item1.name ?? "").compareTo(item2.name ?? "");
+          return (item1.name ?? '').compareTo(item2.name ?? '');
         });
     notes = DataCollectionPackage(
       reference: dataManager.notesRef.where('archived', isEqualTo: false),
@@ -378,14 +378,14 @@ class PlannerDatabase {
       reference: dataManager.filesPersonalRef,
       objectBuilder: (key, it) => CloudFile.fromData(it),
       getKey: (it) => it.fileid,
-      sorter: (i1, i2) => (i1?.name ?? "").compareTo(i2?.name ?? ""),
+      sorter: (i1, i2) => (i1?.name ?? '').compareTo(i2?.name ?? ''),
     );
     grades = DataCollectionPackage(
         reference: dataManager.gradesRef,
         objectBuilder: (key, it) => Grade.fromData(it),
         getKey: (it) => it.id,
         sorter: (item1, item2) {
-          return (item1.date ?? "").compareTo(item2.date ?? "");
+          return (item1.date ?? '').compareTo(item2.date ?? '');
         });
     absentTime = DataCollectionPackage(
       reference: dataManager.absentTimeRef,
@@ -401,7 +401,7 @@ class PlannerDatabase {
     vacations = DataCombinedPackage(getKey: (it) => it.id.key);
     _otherlistener.add(dataManager
         .getTaskRefPrivate()
-        .where("due", isGreaterThanOrEqualTo: getDateTwoWeeksAgo())
+        .where('due', isGreaterThanOrEqualTo: getDateTwoWeeksAgo())
         .snapshots()
         .listen((snapshot) {
       snapshot.docChanges.forEach((change) {
@@ -411,7 +411,7 @@ class PlannerDatabase {
     }));
     _otherlistener.add(dataManager
         .getEventRefPrivate()
-        .where("date", isGreaterThanOrEqualTo: getDateTwoWeeksAgo())
+        .where('date', isGreaterThanOrEqualTo: getDateTwoWeeksAgo())
         .snapshots()
         .listen((snapshot) {
       snapshot.docChanges.forEach((change) {
@@ -493,7 +493,7 @@ class PlannerDatabase {
     }));
     mCourseListeners.add(dataManager
         .getTaskRefCourse(courseid)
-        .where("due", isGreaterThanOrEqualTo: getDateTwoWeeksAgo())
+        .where('due', isGreaterThanOrEqualTo: getDateTwoWeeksAgo())
         .snapshots()
         .listen((snapshot) {
       snapshot.docChanges.forEach((change) {
@@ -512,7 +512,7 @@ class PlannerDatabase {
     }));
     mCourseListeners.add(dataManager
         .getEventRefCourse(courseid)
-        .where("date", isGreaterThanOrEqualTo: getDateTwoWeeksAgo())
+        .where('date', isGreaterThanOrEqualTo: getDateTwoWeeksAgo())
         .snapshots()
         .listen((snapshot) {
       snapshot.docChanges.forEach((change) {
@@ -522,7 +522,7 @@ class PlannerDatabase {
     }));
     mCourseListeners.add(dataManager
         .getLessonInfoRefCourse(courseid)
-        .where("date", isGreaterThanOrEqualTo: getDateOneWeekAgo())
+        .where('date', isGreaterThanOrEqualTo: getDateOneWeekAgo())
         .snapshots()
         .listen((snapshot) {
       snapshot.docChanges.forEach((change) {
@@ -534,7 +534,7 @@ class PlannerDatabase {
     }));
     mCourseListeners.add(dataManager
         .getLetterRefCourse(courseid)
-        .where("deleted", isEqualTo: false)
+        .where('deleted', isEqualTo: false)
         .snapshots()
         .listen((snapshot) {
       snapshot.docChanges.forEach((change) {
@@ -565,7 +565,7 @@ class PlannerDatabase {
     }));
     mClassListeners.add(dataManager
         .getTaskRefClass(classid)
-        .where("due", isGreaterThanOrEqualTo: getDateTwoWeeksAgo())
+        .where('due', isGreaterThanOrEqualTo: getDateTwoWeeksAgo())
         .snapshots()
         .listen((snapshot) {
       snapshot.docChanges.forEach((change) {
@@ -575,7 +575,7 @@ class PlannerDatabase {
     }));
     mClassListeners.add(dataManager
         .getLetterRefClass(classid)
-        .where("deleted", isEqualTo: false)
+        .where('deleted', isEqualTo: false)
         .snapshots()
         .listen((snapshot) {
       snapshot.docChanges.forEach((change) {
@@ -616,15 +616,15 @@ class PlannerDatabase {
 
   Stream<Map<String, Lesson>> getLessonsStream() {
     return courseinfo.stream.map((it) {
-      List<Map<String, Lesson>> initialdata =
-          it.values.map((it) => it.lessons).toList();
-      Map<String, Lesson> newdata = {};
-      for (Map<String, Lesson> entry in initialdata) {
+      final initialdata =
+          it.values.map<Map<String, Lesson>>((it) => it.lessons).toList();
+      final newdata = <String, Lesson>{};
+      for (final entry in initialdata) {
         newdata.addAll((entry ?? {}).map((key, value) => MapEntry(key, value)));
       }
       return newdata;
     }).map((datamap) {
-      Map<String, Lesson> oldlessons = buildSingleMap(oldlessondata);
+      final oldlessons = buildSingleMap<Lesson>(oldlessondata);
       datamap.forEach((key, value) => oldlessons[key] = value);
       oldlessons.removeWhere((key, value) => value == null);
       return oldlessons;
@@ -637,8 +637,8 @@ class PlannerDatabase {
 }
 
 Map<String, T> buildSingleMap<T>(Map<String, Map<String, T>> initalData) {
-  Map<String, T> newdata = {};
-  for (Map<String, T> entry in initalData.values) {
+  final newdata = <String, T>{};
+  for (final entry in initalData.values) {
     newdata.addAll((entry ?? []));
   }
   return newdata;
@@ -656,69 +656,69 @@ class DataManager {
   String plannerid, uid;
 
   FirebaseFirestore get instance => FirebaseFirestore.instance;
-  DocumentReference get userRoot => instance.collection("users").doc(uid);
+  DocumentReference get userRoot => instance.collection('users').doc(uid);
 
   DocumentReference userOtherRoot(String userID) =>
-      instance.collection("users").doc(userID);
+      instance.collection('users').doc(userID);
   DocumentReference get plannerRoot =>
-      userRoot.collection("planner").doc(plannerid);
+      userRoot.collection('planner').doc(plannerid);
   DocumentReference get settingsReference =>
-      plannerRoot.collection("data").doc("settings");
+      plannerRoot.collection('data').doc('settings');
   DocumentReference courseRoot(String courseid) =>
-      instance.collection("courses").doc(courseid);
+      instance.collection('courses').doc(courseid);
   DocumentReference schoolClassRoot(String classid) =>
-      instance.collection("schoolclasses").doc(classid);
+      instance.collection('schoolclasses').doc(classid);
   DocumentReference get notificationSettings =>
-      instance.collection("notifications").doc(getMemberId());
+      instance.collection('notifications').doc(getMemberId());
 
   DataManager({@required this.plannerid, @required this.uid});
 
-  String generateCourseId() => instance.collection("courses").doc().id;
+  String generateCourseId() => instance.collection('courses').doc().id;
   String generateFileId() => filesPersonalRef.doc().id;
   String generateSchoolClassId() =>
-      instance.collection("schoolclasses").doc().id;
+      instance.collection('schoolclasses').doc().id;
   String generateTeacherId() => teachersRef.doc().id;
   String generatePlaceId() => placesRef.doc().id;
   String generateVacationId() => vacationsRef.doc().id;
 
   static CollectionReference get publiccodeRef {
-    return FirebaseFirestore.instance.collection("publiccodes");
+    return FirebaseFirestore.instance.collection('publiccodes');
   }
 
-  CollectionReference get filesPersonalRef => userRoot.collection("files");
+  CollectionReference get filesPersonalRef => userRoot.collection('files');
 
-  CollectionReference get teachersRef => plannerRoot.collection("teachers");
-  CollectionReference get placesRef => plannerRoot.collection("places");
-  CollectionReference get notesRef => plannerRoot.collection("notes");
-  CollectionReference get gradesRef => plannerRoot.collection("grades");
+  CollectionReference get teachersRef => plannerRoot.collection('teachers');
+  CollectionReference get placesRef => plannerRoot.collection('places');
+  CollectionReference get notesRef => plannerRoot.collection('notes');
+  CollectionReference get gradesRef => plannerRoot.collection('grades');
   CollectionReference get absentTimeRef =>
-      plannerRoot.collection("absenttimes");
+      plannerRoot.collection('absenttimes');
   CollectionReference get schoolReportsRef =>
-      plannerRoot.collection("schoolreports");
-  CollectionReference get vacationsRef => plannerRoot.collection("vacations");
+      plannerRoot.collection('schoolreports');
+  CollectionReference get vacationsRef => plannerRoot.collection('vacations');
   CollectionReference get vacationpackagesRef =>
-      instance.collection("vacationpackages");
+      instance.collection('vacationpackages');
   DocumentReference get coursePersonalRef =>
-      plannerRoot.collection("data").doc("coursepersonal");
+      plannerRoot.collection('data').doc('coursepersonal');
   DocumentReference get plannerConnections =>
-      plannerRoot.collection("data").doc("connections");
+      plannerRoot.collection('data').doc('connections');
 
   DocumentReference getMemberInfo(String memberid) =>
-      instance.collection("users").doc(memberid).collection("data").doc("info");
+      instance.collection('users').doc(memberid).collection('data').doc('info');
   DocumentReference getCourseInfo(String courseid) => courseRoot(courseid);
 
-  CollectionReference getTaskRefPrivate() => plannerRoot.collection("tasks");
+  CollectionReference getTaskRefPrivate() => plannerRoot.collection('tasks');
   CollectionReference getTaskRefCourse(String courseid) =>
-      courseRoot(courseid).collection("tasks");
+      courseRoot(courseid).collection('tasks');
   CollectionReference getLessonRefCourse(String courseid) =>
-      courseRoot(courseid).collection("lessons");
+      courseRoot(courseid).collection('lessons');
   CollectionReference getTaskRefClass(String classid) =>
-      schoolClassRoot(classid).collection("tasks");
+      schoolClassRoot(classid).collection('tasks');
 
   CollectionReference getLetterRefCourse(String courseid) =>
-      courseRoot(courseid).collection("letter");
+      courseRoot(courseid).collection('letter');
   CollectionReference getLetterRefClass(String classid) =>
-      schoolClassRoot(classid).collection("letter");
+      schoolClassRoot(classid).collection('letter');
 
   DocumentReference getLetterRef(Letter letter) {
     if (letter.savedin == null) return null;
@@ -732,19 +732,19 @@ class DataManager {
   }
 
   //EVENTS
-  CollectionReference getEventRefPrivate() => plannerRoot.collection("events");
+  CollectionReference getEventRefPrivate() => plannerRoot.collection('events');
   CollectionReference getEventRefCourse(String courseid) =>
-      courseRoot(courseid).collection("events");
+      courseRoot(courseid).collection('events');
   CollectionReference getEventRefClass(String courseid) =>
-      schoolClassRoot(courseid).collection("events");
+      schoolClassRoot(courseid).collection('events');
 
   CollectionReference getLessonInfoRefCourse(String courseid) =>
-      courseRoot(courseid).collection("lessoninfos");
+      courseRoot(courseid).collection('lessoninfos');
 
   DocumentReference getSchoolClassInfo(String classid) =>
       schoolClassRoot(classid);
 
-  String getMemberId() => uid + "::" + plannerid;
+  String getMemberId() => uid + '::' + plannerid;
 
   MemberId getMemberIdObject() =>
       MemberId(userId: UserId(uid), plannerId: plannerid);
@@ -753,8 +753,8 @@ class DataManager {
     if (savedin.type == SavedInType.PERSONAL) {
       return FirebaseStorage.instance
           .ref()
-          .child("files")
-          .child("personal")
+          .child('files')
+          .child('personal')
           .child(savedin.id)
           .child(fileid);
     }
@@ -932,7 +932,7 @@ class DataManager {
                 ),
               );
         } else {
-          throw Exception("NO PLACE TO SAVE TASK???");
+          throw Exception('NO PLACE TO SAVE TASK???');
         }
       }
     }
@@ -964,7 +964,7 @@ class DataManager {
                 ),
               );
         } else {
-          throw Exception("NO PLACE TO SAVE TASK???");
+          throw Exception('NO PLACE TO SAVE TASK???');
         }
       }
     }
@@ -1012,7 +1012,7 @@ class DataManager {
                 ),
               );
         } else {
-          throw Exception("NO PLACE TO SAVE TASK???");
+          throw Exception('NO PLACE TO SAVE TASK???');
         }
       }
     }
@@ -1050,7 +1050,7 @@ class DataManager {
                 ),
               );
         } else {
-          throw Exception("NO PLACE TO SAVE TASK???");
+          throw Exception('NO PLACE TO SAVE TASK???');
         }
       }
     }
@@ -1060,7 +1060,7 @@ class DataManager {
     if (lesson.courseid != null) {
       getCourseInfo(lesson.courseid).set(
         {
-          "lessons": {lesson.lessonid: lesson.toJson()},
+          'lessons': {lesson.lessonid: lesson.toJson()},
         },
         SetOptions(
           merge: true,
@@ -1072,7 +1072,7 @@ class DataManager {
         print(e);
       }
     } else {
-      throw Exception("NO PLACE TO SAVE TASK???");
+      throw Exception('NO PLACE TO SAVE TASK???');
     }
   }
 
@@ -1080,7 +1080,7 @@ class DataManager {
     if (lesson.courseid != null) {
       getCourseInfo(lesson.courseid).set(
         {
-          "lessons": {lesson.lessonid: FieldValue.delete()},
+          'lessons': {lesson.lessonid: FieldValue.delete()},
         },
         SetOptions(
           merge: true,
@@ -1092,7 +1092,7 @@ class DataManager {
         print(e);
       }
     } else {
-      throw Exception("NO PLACE TO SAVE TASK???");
+      throw Exception('NO PLACE TO SAVE TASK???');
     }
   }
 
@@ -1102,14 +1102,14 @@ class DataManager {
       lesson.lessonid = newlessonid;
       getCourseInfo(lesson.courseid).set(
         {
-          "lessons": {lesson.lessonid: lesson.toJson()},
+          'lessons': {lesson.lessonid: lesson.toJson()},
         },
         SetOptions(
           merge: true,
         ),
       );
     } else {
-      throw Exception("NO PLACE TO SAVE TASK???");
+      throw Exception('NO PLACE TO SAVE TASK???');
     }
   }
 
@@ -1122,7 +1122,7 @@ class DataManager {
             ),
           );
     } else {
-      throw Exception("NO PLACE TO SAVE TASK???");
+      throw Exception('NO PLACE TO SAVE TASK???');
     }
   }
 
@@ -1130,7 +1130,7 @@ class DataManager {
     if (lessoninfo.courseid != null) {
       getLessonInfoRefCourse(lessoninfo.courseid).doc(lessoninfo.id).delete();
     } else {
-      throw Exception("NO PLACE TO SAVE TASK???");
+      throw Exception('NO PLACE TO SAVE TASK???');
     }
   }
 
@@ -1146,7 +1146,7 @@ class DataManager {
             ),
           );
     } else {
-      throw Exception("NO PLACE TO SAVE TASK???");
+      throw Exception('NO PLACE TO SAVE TASK???');
     }
   }
 
@@ -1183,7 +1183,7 @@ class DataManager {
                 ),
               );
         } else {
-          throw Exception("NO PLACE TO SAVE TASK???");
+          throw Exception('NO PLACE TO SAVE TASK???');
         }
       }
     }
@@ -1215,7 +1215,7 @@ class DataManager {
                 ),
               );
         } else {
-          throw Exception("NO PLACE TO SAVE TASK???");
+          throw Exception('NO PLACE TO SAVE TASK???');
         }
       }
     }
@@ -1231,7 +1231,7 @@ class DataManager {
         if (schoolTask.classid != null) {
           getTaskRefClass(schoolTask.classid).doc(schoolTask.taskid).delete();
         } else {
-          throw Exception("NO PLACE TO SAVE TASK???");
+          throw Exception('NO PLACE TO SAVE TASK???');
         }
       }
     }
@@ -1264,7 +1264,7 @@ class DataManager {
                 ),
               );
         } else {
-          throw Exception("NO PLACE TO SAVE TASK???");
+          throw Exception('NO PLACE TO SAVE TASK???');
         }
       }
     }
@@ -1284,7 +1284,7 @@ class DataManager {
               .doc(schoolEvent.eventid)
               .delete();
         } else {
-          throw Exception("NO PLACE TO SAVE TASK???");
+          throw Exception('NO PLACE TO SAVE TASK???');
         }
       }
     }
@@ -1342,11 +1342,11 @@ class DataManager {
 
   void DeleteFile(CloudFile file) {
     if (file.savedin.type == SavedInType.PERSONAL) {
-      print("DELETING FILE");
+      print('DELETING FILE');
       filesPersonalRef.doc(file.fileid).delete();
       if (file.fileform == FileForm.STANDARD) {
         getFileStorageRef(file.fileid, file.savedin).delete().then((_) {
-          showToastMessage(msg: "Succesful/Erfolgreich");
+          showToastMessage(msg: 'Succesful/Erfolgreich');
         });
       }
     }

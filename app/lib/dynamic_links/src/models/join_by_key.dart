@@ -1,6 +1,6 @@
 import 'package:meta/meta.dart';
 
-const joinByKey = "joinbykey";
+const joinByKey = 'joinbykey';
 
 class DynamicLinkJoinByKey {
   final String publicKey;

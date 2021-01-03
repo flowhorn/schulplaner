@@ -192,28 +192,29 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
                         SizedBox(
                           width: 8.0,
                         ),
-                        gradeSpan?.id == "custom"
-                            ? Column(
-                                children: <Widget>[
-                                  Text(
-                                    gradeSpan?.getName(context) ?? "-?-",
-                                    style: TextStyle(fontSize: 15.0),
-                                  ),
-                                  Text(
-                                    gradeSpan.getStartText(context) +
-                                        " - " +
-                                        gradeSpan.getEndText(context),
-                                    style: TextStyle(
-                                        fontSize: 12.0,
-                                        fontWeight: FontWeight.w300),
-                                  ),
-                                ],
-                                mainAxisSize: MainAxisSize.min,
-                              )
-                            : Text(
-                                gradeSpan?.getName(context) ?? "-?-",
-                                style: TextStyle(fontSize: 16.0),
+                        if (gradeSpan?.id == 'custom')
+                          Column(
+                            children: <Widget>[
+                              Text(
+                                gradeSpan?.getName(context) ?? '-?-',
+                                style: TextStyle(fontSize: 15.0),
                               ),
+                              Text(
+                                gradeSpan.getStartText(context) +
+                                    ' - ' +
+                                    gradeSpan.getEndText(context),
+                                style: TextStyle(
+                                    fontSize: 12.0,
+                                    fontWeight: FontWeight.w300),
+                              ),
+                            ],
+                            mainAxisSize: MainAxisSize.min,
+                          )
+                        else
+                          Text(
+                            gradeSpan?.getName(context) ?? '-?-',
+                            style: TextStyle(fontSize: 16.0),
+                          ),
                         SizedBox(
                           width: 4.0,
                         ),
@@ -232,13 +233,13 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
                   borderRadius: BorderRadius.all(Radius.circular(16.0)),
                 ),
                 Text(
-                  "Ø" +
+                  'Ø' +
                       (averageCalculator.totalaverage != null
                           ? database
                               .getSettings()
                               .getCurrentAverageDisplay(context: context)
                               .input(averageCalculator.totalaverage)
-                          : "/"),
+                          : '/'),
                   style: TextStyle(
                       color: getTextColor(getBackgroundColor(context)),
                       fontWeight: FontWeight.w500,

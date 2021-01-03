@@ -181,19 +181,19 @@ class Weekday {
 
 Map<int, String> weektypesamount_meaning(BuildContext context) {
   return {
-    2: "AB-Wochen",
-    3: "ABC-Wochen",
-    4: "ABCD-Wochen",
+    2: 'AB-Wochen',
+    3: 'ABC-Wochen',
+    4: 'ABCD-Wochen',
   };
 }
 
 Map<int, WeekType> weektypes(BuildContext context) {
   return {
-    0: WeekType(type: 0, name: "Immer"),
-    1: WeekType(type: 1, name: "A-Woche"),
-    2: WeekType(type: 2, name: "B-Woche"),
-    3: WeekType(type: 3, name: "C-Woche"),
-    4: WeekType(type: 4, name: "D-Woche"),
+    0: WeekType(type: 0, name: 'Immer'),
+    1: WeekType(type: 1, name: 'A-Woche'),
+    2: WeekType(type: 2, name: 'B-Woche'),
+    3: WeekType(type: 3, name: 'C-Woche'),
+    4: WeekType(type: 4, name: 'D-Woche'),
   };
 }
 
@@ -208,8 +208,8 @@ List<WeekType> getListOfWeekTypes(
 
 String getCurrentWeekTypeName(
     BuildContext context, PlannerSettingsData settingsdata) {
-  int weektype = settingsdata.getCurrentWeekType();
-  if (weektype == 0) return "-";
+  final weektype = settingsdata.getCurrentWeekType();
+  if (weektype == 0) return '-';
   return weektypes(context)[weektype].name;
 }
 

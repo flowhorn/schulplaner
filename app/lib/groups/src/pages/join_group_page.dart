@@ -111,7 +111,7 @@ class _TextField extends StatelessWidget {
             return StatefulTextField.standard(
               initialText: text,
               onChanged: joinGroupBloc.changeEnteredCode,
-              prefixText: "#",
+              prefixText: '#',
               maxLines: 1,
               maxLengthEnforced: true,
               maxLength: 6,
@@ -148,9 +148,9 @@ class _Result extends StatelessWidget {
           children: <Widget>[
             Text(
               codeValue == null
-                  ? "${getString(context).noresultfor} #" +
-                      (enteredCodeValue ?? "??????")
-                  : ("${getString(context).resultfor} #" + enteredCodeValue),
+                  ? '${getString(context).noresultfor} #' +
+                      (enteredCodeValue ?? '??????')
+                  : ('${getString(context).resultfor} #' + enteredCodeValue),
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 20.0),
             ),
@@ -212,13 +212,13 @@ class _Course extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         getString(context).teacher +
-                            ": " +
+                            ': ' +
                             courseInfo.getTeachersListed(),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
                       Text(getString(context).place +
-                          ": " +
+                          ': ' +
                           courseInfo.getPlacesListed()),
                     ],
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -253,13 +253,13 @@ class _Course extends StatelessWidget {
                 ListTile(
                   leading: Icon(Icons.people),
                   title: Text(
-                      (courseInfo?.membersData?.length?.toString() ?? "?") +
-                          " ${getString(context).members}"),
+                      (courseInfo?.membersData?.length?.toString() ?? '?') +
+                          ' ${getString(context).members}'),
                 ),
                 ListTile(
                   leading: Icon(Icons.short_text),
                   title: Text(getString(context).description),
-                  subtitle: Text(courseInfo?.description ?? "-"),
+                  subtitle: Text(courseInfo?.description ?? '-'),
                 )
               ],
             ),
@@ -276,8 +276,8 @@ class _Course extends StatelessWidget {
     if (course.settings.isPublic == false) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text(bothlang(context,
-            de: "Dieses Fach ist nicht öffentlich",
-            en: "This course is not public!")),
+            de: 'Dieses Fach ist nicht öffentlich',
+            en: 'This course is not public!')),
       ));
       return;
     }
@@ -344,20 +344,20 @@ class _SchoolClass extends StatelessWidget {
                 ),
                 ListTile(
                   leading: Icon(Icons.people),
-                  title: Text((info?.membersData?.length?.toString() ?? "?") +
-                      " ${getString(context).members}"),
+                  title: Text((info?.membersData?.length?.toString() ?? '?') +
+                      ' ${getString(context).members}'),
                 ),
                 ListTile(
                   leading: Icon(Icons.widgets),
-                  title: Text((info?.courses?.length?.toString() ?? "?") +
-                      " ${getString(context).courses}"),
+                  title: Text((info?.courses?.length?.toString() ?? '?') +
+                      ' ${getString(context).courses}'),
                 ),
                 ListTile(
                   leading: Icon(Icons.short_text),
                   title: Text(
                     getString(context).description,
                   ),
-                  subtitle: Text(info?.description ?? "-"),
+                  subtitle: Text(info?.description ?? '-'),
                 )
               ],
             ),
@@ -375,8 +375,8 @@ class _SchoolClass extends StatelessWidget {
     if (schoolClass.settings.isPublic == false) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text(bothlang(context,
-            de: "Diese Klasse ist nicht öffentlich",
-            en: "This class is not public!")),
+            de: 'Diese Klasse ist nicht öffentlich',
+            en: 'This class is not public!')),
       ));
       return;
     }

@@ -8,5 +8,5 @@
 /build
 /captures
 GeneratedPluginRegistrant.java
-/app/google-services.json
+/app/src/production/google-services.json
 !/app/src/development/google-services.json

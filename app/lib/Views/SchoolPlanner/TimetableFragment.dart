@@ -157,7 +157,7 @@ class WeekView_LessonView extends StatelessWidget {
                   stepGranularity: 0.1,
                 ),
                 Text(
-                  item.place?.name ?? course.getPlaceFirst() ?? "-",
+                  item.place?.name ?? course.getPlaceFirst() ?? '-',
                   maxLines: 1,
                   style: TextStyle(
                       color: getTextColor(course.getDesign().primary),
@@ -242,8 +242,8 @@ class TimetableFragment extends StatelessWidget {
                       );
                     }).toList(),
                   ),
-                )
-              ]..addAll(List.generate(daysOfWeek, (d) {
+                ),
+                ...List.generate(daysOfWeek, (d) {
                   return Expanded(
                     child: Stack(
                       children: List.generate(
@@ -294,7 +294,8 @@ class TimetableFragment extends StatelessWidget {
                         })),
                     ),
                   );
-                })),
+                }),
+              ],
             ),
           ),
         ),

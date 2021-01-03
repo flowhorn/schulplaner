@@ -75,10 +75,10 @@ class SchoolEvent {
 
     if (data['olddata'] != null) {
       try {
-        if (data['olddata']["att"] != null) {
-          Map<dynamic, dynamic> rawdata = data['olddata']["att"];
-          Map<String, CloudFile> attachments =
-              rawdata.map((key, value) => MapEntry<String, CloudFile>(
+        if (data['olddata']['att'] != null) {
+          Map<dynamic, dynamic> rawdata = data['olddata']['att'];
+          final attachments =
+              rawdata.map<String, CloudFile>((key, value) => MapEntry<String, CloudFile>(
                   key,
                   CloudFile(
                     fileid: key,
@@ -88,8 +88,8 @@ class SchoolEvent {
                   )));
           files.addAll(attachments);
         }
-        if (data['olddata']["attachments"] != null) {
-          Map<dynamic, dynamic> rawdata = data['olddata']["attachments"];
+        if (data['olddata']['attachments'] != null) {
+          Map<dynamic, dynamic> rawdata = data['olddata']['attachments'];
           Map<String, CloudFile> attachments =
               rawdata.map((key, value) => MapEntry<String, CloudFile>(
                   key,
@@ -147,7 +147,7 @@ class SchoolEvent {
 
   bool validateCreate() {
     if (private == true) {
-      if (title == null || title == "") return false;
+      if (title == null || title == '') return false;
       if (date == null) return false;
       if (type == null) return false;
       if (enddate != null && date != null) {
@@ -156,7 +156,7 @@ class SchoolEvent {
       }
       return true;
     } else {
-      if (title == null || title == "") return false;
+      if (title == null || title == '') return false;
       if (date == null) return false;
       if (courseid == null && classid == null) return false;
       if (type == null) return false;
@@ -184,7 +184,7 @@ class SchoolEvent {
   bool validate() {
     if (eventid == null) return false;
     if (date == null) return false;
-    if (title == null || title == "") return false;
+    if (title == null || title == '') return false;
     if (type == null) return false;
     if (enddate != null && date != null) {
       var diff = parseDate(enddate).difference(parseDate(date)).abs();

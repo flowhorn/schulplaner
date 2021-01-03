@@ -14,20 +14,20 @@ class HolidayGateway {
   final FirebaseFirestore _firestore;
   final HolidayCacheManager holidayCacheManager;
 
-  CollectionReference get _regionsReference => _firestore.collection("Regions");
+  CollectionReference get _regionsReference => _firestore.collection('Regions');
   CollectionReference _regionsDataReference(String regionID) =>
-      _regionsReference.doc(regionID).collection("Data");
+      _regionsReference.doc(regionID).collection('Data');
 
   const HolidayGateway(this._firestore, this.holidayCacheManager);
 
   Stream<List<Region>> getRegions({bool isOfficial, Country country}) {
     var query =
-        _regionsReference.orderBy("name").where("published", isEqualTo: true);
+        _regionsReference.orderBy('name').where('published', isEqualTo: true);
     if (isOfficial == true) {
-      query = query.where("isOfficial", isEqualTo: true);
+      query = query.where('isOfficial', isEqualTo: true);
     }
     if (country != null) {
-      query = query.where("country", isEqualTo: countryToJson(country));
+      query = query.where('country', isEqualTo: countryToJson(country));
     }
     return query.snapshots().map((querySnapshot) => querySnapshot.docs
         .map((docSnapshot) => RegionConverter.fromJson(docSnapshot.data()))

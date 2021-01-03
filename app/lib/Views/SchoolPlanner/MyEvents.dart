@@ -105,7 +105,7 @@ class MyEventsListInnerState extends State<MyEventsListInner>
             final courseInfo = item.courseid != null
                 ? plannerDatabase.getCourseInfo(item.courseid)
                 : null;
-            ListTile listTile = ListTile(
+            final listTile = ListTile(
               leading: courseInfo != null
                   ? ColoredCircleText(
                       text: toShortNameLength(
@@ -126,7 +126,7 @@ class MyEventsListInnerState extends State<MyEventsListInner>
                   item.courseid != null
                       ? Text(
                           getString(context).course +
-                              ": " +
+                              ': ' +
                               (courseInfo != null
                                   ? courseInfo.getName()
                                   : item.courseid),
@@ -135,7 +135,7 @@ class MyEventsListInnerState extends State<MyEventsListInner>
                         )
                       : nowidget(),
                   Text(
-                    getString(context).date + ": " + getDateText(item.date),
+                    getString(context).date + ': ' + getDateText(item.date),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -214,7 +214,7 @@ class MyEventsArchive extends StatelessWidget {
                     item.courseid != null
                         ? Text(
                             getString(context).course +
-                                ": " +
+                                ': ' +
                                 (courseInfo != null
                                     ? courseInfo.getName()
                                     : item.courseid),
@@ -223,7 +223,7 @@ class MyEventsArchive extends StatelessWidget {
                           )
                         : nowidget(),
                     Text(
-                      getString(context).date + ": " + getDateText(item.date),
+                      getString(context).date + ': ' + getDateText(item.date),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -300,7 +300,7 @@ class MyEventsOnlyExams extends StatelessWidget {
                     item.courseid != null
                         ? Text(
                             getString(context).course +
-                                ": " +
+                                ': ' +
                                 (courseInfo != null
                                     ? courseInfo.getName()
                                     : item.courseid),
@@ -309,7 +309,7 @@ class MyEventsOnlyExams extends StatelessWidget {
                           )
                         : nowidget(),
                     Text(
-                      getString(context).date + ": " + getDateText(item.date),
+                      getString(context).date + ': ' + getDateText(item.date),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -363,7 +363,7 @@ Stream<Map<String, SchoolEvent>> getArchiveStreamEvents(
   database.courseinfo.data.keys.forEach((courseid) {
     subscriptions.add(database.dataManager
         .getEventRefCourse(courseid)
-        .where("archived", isEqualTo: true)
+        .where('archived', isEqualTo: true)
         .snapshots()
         .listen((data) {
       unmergeddata_archived[courseid] = data.docs
@@ -373,8 +373,8 @@ Stream<Map<String, SchoolEvent>> getArchiveStreamEvents(
     }));
     subscriptions.add(database.dataManager
         .getEventRefCourse(courseid)
-        .where("archived", isEqualTo: false)
-        .where("date", isLessThan: getDateTwoWeeksAgo())
+        .where('archived', isEqualTo: false)
+        .where('date', isLessThan: getDateTwoWeeksAgo())
         .snapshots()
         .listen((data) {
       unmergeddata_tooold[courseid] = data.docs
@@ -385,7 +385,7 @@ Stream<Map<String, SchoolEvent>> getArchiveStreamEvents(
   });
   subscriptions.add(database.dataManager
       .getEventRefPrivate()
-      .where("archived", isEqualTo: true)
+      .where('archived', isEqualTo: true)
       .snapshots()
       .listen((data) {
     unmergeddata_archived['private'] = data.docs
@@ -395,8 +395,8 @@ Stream<Map<String, SchoolEvent>> getArchiveStreamEvents(
   }));
   subscriptions.add(database.dataManager
       .getEventRefPrivate()
-      .where("archived", isEqualTo: false)
-      .where("date", isLessThan: getDateTwoWeeksAgo())
+      .where('archived', isEqualTo: false)
+      .where('date', isLessThan: getDateTwoWeeksAgo())
       .snapshots()
       .listen((data) {
     unmergeddata_tooold['private'] = data.docs
@@ -431,7 +431,7 @@ void showEventDetailSheet(
               return Expanded(
                   child: Column(
                 children: <Widget>[
-                  getSheetText(context, schoolEvent.title ?? "-"),
+                  getSheetText(context, schoolEvent.title ?? '-'),
                   getExpandList([
                     schoolEvent.private == true
                         ? ListTile(
@@ -450,11 +450,11 @@ void showEventDetailSheet(
                     ListTile(
                       leading: Icon(Icons.event),
                       title: Text(getString(context).date +
-                          ": " +
+                          ': ' +
                           getDateText(schoolEvent.date) +
                           (schoolEvent.enddate != null
-                              ? (" - " + getDateTextShort(schoolEvent.enddate))
-                              : "")),
+                              ? (' - ' + getDateTextShort(schoolEvent.enddate))
+                              : '')),
                     ),
                     ListTile(
                       leading: Icon(
@@ -467,10 +467,10 @@ void showEventDetailSheet(
                         ? ListTile(
                             leading: Icon(Icons.access_time),
                             title: Text(getString(context).timeofday +
-                                ": " +
-                                (schoolEvent.starttime ?? "?") +
-                                " - " +
-                                (schoolEvent.endtime ?? "-")),
+                                ': ' +
+                                (schoolEvent.starttime ?? '?') +
+                                ' - ' +
+                                (schoolEvent.endtime ?? '-')),
                           )
                         : nowidget(),
                     schoolEvent.detail == null
@@ -581,7 +581,7 @@ void showEventDetailSheet(
                                                           id: eventdata
                                                               .courseid,
                                                           routname:
-                                                              "schooleventid")
+                                                              'schooleventid')
                                                       .then((result) {
                                                     if (result == true) {
                                                       plannerdatabase
@@ -622,7 +622,7 @@ void showEventDetailSheet(
                                                         id: schoolEvent
                                                             .courseid,
                                                         routname:
-                                                            "schooleventid")
+                                                            'schooleventid')
                                                     .then((result) {
                                                   if (result == true) {
                                                     plannerdatabase.dataManager
@@ -638,7 +638,7 @@ void showEventDetailSheet(
                                     ]);
                                   },
                                   title: getString(context).more,
-                                  routname: "schooleventidmore");
+                                  routname: 'schooleventidmore');
                             },
                             iconData: Icons.more_horiz),
                       ],
@@ -650,7 +650,7 @@ void showEventDetailSheet(
               ));
             });
       },
-      routname: "schooleventid");
+      routname: 'schooleventid');
 }
 
 DocumentReference identifyEventRef(

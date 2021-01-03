@@ -32,7 +32,7 @@ class FormTextField extends StatelessWidget {
           data:
               newAppTheme(context, primaryColor: Theme.of(context).accentColor),
           child: TextField(
-            controller: TextEditingController(text: text ?? ""),
+            controller: TextEditingController(text: text ?? ''),
             onChanged: valueChanged,
             decoration: InputDecoration(
                 icon: iconData != null ? Icon(iconData) : null,

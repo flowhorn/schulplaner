@@ -118,8 +118,8 @@ class _SuccessfullSignInState extends StatelessWidget {
               Text(
                 bothlang(
                   context,
-                  de: "Anmeldung erfolgreich!",
-                  en: "Sign In successfull!",
+                  de: 'Anmeldung erfolgreich!',
+                  en: 'Sign In successful!',
                 ),
                 style: TextStyle(
                   fontSize: 20.0,
@@ -155,8 +155,8 @@ class _FailedSignInState extends StatelessWidget {
               Text(
                 bothlang(
                   context,
-                  de: "Anmeldung fehlgeschlagen!",
-                  en: "Sign In failed!",
+                  de: 'Anmeldung fehlgeschlagen!',
+                  en: 'Sign In failed!',
                 ),
                 style: TextStyle(
                   fontSize: 20.0,
@@ -168,8 +168,8 @@ class _FailedSignInState extends StatelessWidget {
               Text(
                 bothlang(
                   context,
-                  de: "Tippen um nochmal zu versuchen",
-                  en: "Tap to retry",
+                  de: 'Tippe, um es nochmal zu versuchen',
+                  en: 'Tap to retry',
                 ),
                 textAlign: TextAlign.center,
                 style: TextStyle(
@@ -215,7 +215,7 @@ class _SignInMethodes extends StatelessWidget {
               AuthentificationLoginTile(
                 iconData: Icons.email,
                 color: Colors.redAccent,
-                title: "Email",
+                title: 'Email',
                 onTap: () {
                   pushWidget(
                     context,
@@ -248,8 +248,8 @@ class _LoadingSignInState extends StatelessWidget {
             Text(
               bothlang(
                 context,
-                de: "Bitte habe einen Moment Geduld...",
-                en: "Please wait just a moment...",
+                de: 'Bitte habe einen Moment Geduld...',
+                en: 'Please be patient for a moment...',
               ),
               style: TextStyle(
                 fontSize: 20.0,

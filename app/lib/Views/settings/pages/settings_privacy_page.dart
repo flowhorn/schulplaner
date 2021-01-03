@@ -33,7 +33,7 @@ class PrivacyView extends StatelessWidget {
                         leading: Icon(Icons.delete_forever),
                         title: Text(getString(context).remove_data),
                         onTap: () {
-                          _launchURL() async {
+                          void _launchURL() async {
                             dynamic url =
                                 'mailto:danielfelixplay@gmail.com?subject=${getString(context).remove_data}&body= UID: ${userDatabase?.uid}';
                             if (await canLaunch(url)) {
@@ -50,7 +50,7 @@ class PrivacyView extends StatelessWidget {
                         leading: Icon(Icons.collections_bookmark),
                         title: Text(getString(context).retrieve_data),
                         onTap: () {
-                          _launchURL() async {
+                          void _launchURL() async {
                             dynamic url =
                                 'mailto:danielfelixplay@gmail.com?subject=${getString(context).retrieve_data}&body= UID: ${userDatabase?.uid}';
                             if (await canLaunch(url)) {
@@ -86,7 +86,7 @@ class PrivacyView extends StatelessWidget {
                         title: Text(getString(context)
                             .contact_data_protection_commissioner),
                         onTap: () {
-                          _launchURL() async {
+                          void _launchURL() async {
                             dynamic url =
                                 'mailto:danielfelixplay@gmail.com?subject=${getString(context).privacy}';
                             if (await canLaunch(url)) {

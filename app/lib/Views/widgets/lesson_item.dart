@@ -57,7 +57,7 @@ class LessonItemTimeline extends StatelessWidget {
                   child: Align(
                     alignment: Alignment.topCenter,
                     child: Text(
-                      start == end ? start.toString() : "$start-$end",
+                      start == end ? start.toString() : '$start-$end',
                       textAlign: TextAlign.center,
                       maxLines: 1,
                       style: TextStyle(

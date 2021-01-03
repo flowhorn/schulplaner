@@ -24,8 +24,7 @@ class EditAttachementsView extends StatelessWidget {
     return Column(
       children: <Widget>[
         FormHeader(getString(context).attachments),
-      ]
-        ..addAll((attachments?.values?.where((it) => it != null) ?? [])
+        ...((attachments?.values?.where((it) => it != null) ?? [])
             .map<Widget>((it) {
           return ListTile(
             leading: ColoredCircleIcon(
@@ -44,14 +43,15 @@ class EditAttachementsView extends StatelessWidget {
                   onRemoved(it);
                 }),
           );
-        }).toList())
-        ..add(FormButton(
+        }).toList()),
+        FormButton(
           getString(context).newattachment,
           () {
             showFileSheet(context);
           },
           iconData: Icons.add_circle,
-        )),
+        ),
+      ],
     );
   }
 

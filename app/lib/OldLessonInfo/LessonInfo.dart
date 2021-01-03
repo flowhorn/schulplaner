@@ -52,18 +52,18 @@ class LessonInfo {
       this.date});
 
   LessonInfo.fromData(Map<String, dynamic> data)
-      : id = data["id"],
-        courseid = data["cid"],
-        date = data["date"],
-        lessonid = data["lid"],
-        teacher = data["teacher"] != null
+      : id = data['id'],
+        courseid = data['cid'],
+        date = data['date'],
+        lessonid = data['lid'],
+        teacher = data['teacher'] != null
             ? TeacherLink.fromData(id: null, data: data['teacher'])
             : null,
-        place = data["place"] != null
+        place = data['place'] != null
             ? PlaceLink.fromData(id: null, data: data['place'])
             : null,
-        type = LessonInfoType.values[data["type"]],
-        note = data["note"];
+        type = LessonInfoType.values[data['type']],
+        note = data['note'];
 
   Map<String, Object> toJson() {
     return {
@@ -74,16 +74,16 @@ class LessonInfo {
       'teacher': teacher?.toJson(),
       'place': place?.toJson(),
       'type': type.index,
-      'note': note != "" ? note : null,
+      'note': note != '' ? note : null,
     };
   }
 
-  String getKey() => courseid + "--" + id;
+  String getKey() => courseid + '--' + id;
 
   bool validate() {
-    if (date == null || date == "") return false;
-    if (lessonid == null || lessonid == "") return false;
-    if (courseid == null || courseid == "") return false;
+    if (date == null || date == '') return false;
+    if (lessonid == null || lessonid == '') return false;
+    if (courseid == null || courseid == '') return false;
     if (type == null) return false;
     return true;
   }
@@ -162,13 +162,13 @@ class LessonInfosList extends StatelessWidget {
                     icon: Icon(
                         getLessonInfoTypes(context)[item.type.index].iconData),
                   ),
-                  title: Text(courseInfo?.getName() ?? "???"),
+                  title: Text(courseInfo?.getName() ?? '???'),
                   subtitle: Column(
                     children: <Widget>[
                       Text(getDateText(item.date)),
                       Text(lesson != null
                           ? getLessonTitle(context, lesson)
-                          : "-"),
+                          : '-'),
                     ],
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.start,

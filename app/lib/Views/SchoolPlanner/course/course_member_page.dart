@@ -36,7 +36,7 @@ class CourseMemberView extends StatelessWidget {
             child: Scaffold(
               appBar: MyAppHeader(
                   title:
-                      "${getString(context).members} ${getString(context).in_} " +
+                      '${getString(context).members} ${getString(context).in_} ' +
                           courseInfo.getName()),
               body: ListView(
                 children: [
@@ -99,7 +99,7 @@ class _MemberItem extends StatelessWidget {
   void _tryReportMember(BuildContext context) async {
     final result = await showConfirmDialog(
         context: context,
-        title: bothlang(context, de: "Nutzer melden", en: "Report User"));
+        title: bothlang(context, de: 'Nutzer melden', en: 'Report user'));
 
     if (result == true) {
       await FirebaseFirestore.instance.collection('reports').doc().set({
@@ -148,7 +148,7 @@ class CourseMemberTile extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.all(3.0),
                 child: Text(
-                  bothlang(context, de: "Ich", en: "Me"),
+                  bothlang(context, de: 'Ich', en: 'Me'),
                   style: TextStyle(color: Colors.white),
                 ),
               ),
@@ -180,7 +180,7 @@ Future<void> _showMemberSheet(
       return memberSheet.build(context);
     },
     title: userProfile?.name ?? getString(context).anonymoususer,
-    routname: "memberid",
+    routname: 'memberid',
   );
 }
 
@@ -205,7 +205,7 @@ class CourseMemberRoleCard extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.all(3.0),
           child: Text(
-            bothlang(context, de: "Ersteller", en: "Creator"),
+            bothlang(context, de: 'Ersteller', en: 'Creator'),
             style: TextStyle(color: Colors.white),
           ),
         ),

@@ -85,7 +85,7 @@ class AppSettingsData {
   }
 
   ThemeData getThemeData() {
-    Brightness newbrightness = darkmode == true
+    final newbrightness = darkmode == true
         ? Brightness.dark
         : (autodark ? autoBrightness() : Brightness.light);
     return ThemeData(

@@ -239,7 +239,7 @@ class MyAppLocalizations {
 
   String get coloredappbar {
     return Intl.message(
-      'Colored Appbar',
+      'Colored appbar',
       name: 'coloredappbar',
     );
   }
@@ -274,7 +274,7 @@ class MyAppLocalizations {
 
   String get selectmethode {
     return Intl.message(
-      'Select methode',
+      'Select method',
       name: 'selectmethode',
     );
   }
@@ -296,7 +296,7 @@ class MyAppLocalizations {
 
   String get signinhasadvantages_desc {
     return Intl.message(
-      'Synchronisation on multiple devices, Share Timetable and Homework',
+      'Synchronisation on multiple devices, share timetable and homework',
       name: 'signinhasadvantages_desc',
       desc: '_',
     );
@@ -318,7 +318,7 @@ class MyAppLocalizations {
 
   String get selectplanner {
     return Intl.message(
-      'Select Planner',
+      'Select planner',
       name: 'selectplanner',
     );
   }
@@ -332,7 +332,7 @@ class MyAppLocalizations {
 
   String get newexam {
     return Intl.message(
-      'New Exam',
+      'New exam',
       name: 'newexam',
     );
   }
@@ -395,28 +395,28 @@ class MyAppLocalizations {
 
   String get newvacation {
     return Intl.message(
-      'New Vacation',
+      'New vacation',
       name: 'newvacation',
     );
   }
 
   String get editvacation {
     return Intl.message(
-      'Edit Vacation',
+      'Edit vacation',
       name: 'editvacation',
     );
   }
 
   String get newplanner {
     return Intl.message(
-      'New Planner',
+      'New planner',
       name: 'newplanner',
     );
   }
 
   String get editplanner {
     return Intl.message(
-      'Edit Planner',
+      'Edit planner',
       name: 'editplanner',
     );
   }
@@ -472,84 +472,84 @@ class MyAppLocalizations {
 
   String get newtask {
     return Intl.message(
-      'New Task',
+      'New task',
       name: 'newtask',
     );
   }
 
   String get newevent {
     return Intl.message(
-      'New Event',
+      'New event',
       name: 'newevent',
     );
   }
 
   String get newgrade {
     return Intl.message(
-      'New Grade',
+      'New grade',
       name: 'newgrade',
     );
   }
 
   String get newnote {
     return Intl.message(
-      'New Note',
+      'New note',
       name: 'newnote',
     );
   }
 
   String get newlessoninfo {
     return Intl.message(
-      'New Lessoninfo',
+      'New lessoninfo',
       name: 'newlessoninfo',
     );
   }
 
   String get newabsenttime {
     return Intl.message(
-      'New Absenttime',
+      'New absenttime',
       name: 'newabsenttime',
     );
   }
 
   String get edittask {
     return Intl.message(
-      'Edit Task',
+      'Edit task',
       name: 'edittask',
     );
   }
 
   String get editevent {
     return Intl.message(
-      'Edit Event',
+      'Edit tvent',
       name: 'editevent',
     );
   }
 
   String get editgrade {
     return Intl.message(
-      'Edit Grade',
+      'Edit grade',
       name: 'editgrade',
     );
   }
 
   String get editnote {
     return Intl.message(
-      'Edit Note',
+      'Edit note',
       name: 'editnote',
     );
   }
 
   String get editlessoninfo {
     return Intl.message(
-      'Edit Lessoninfo',
+      'Edit lessoninfo',
       name: 'editlessoninfo',
     );
   }
 
   String get editabsenttime {
     return Intl.message(
-      'Edit Absenttime',
+      'Edit absenttime',
       name: 'editabsenttime',
     );
   }
@@ -801,7 +801,7 @@ class MyAppLocalizations {
 
   String get overritetimes {
     return Intl.message(
-      'Overrites times',
+      'Override times',
       name: 'overritetimes',
     );
   }
@@ -815,28 +815,28 @@ class MyAppLocalizations {
 
   String get nextlesson {
     return Intl.message(
-      'Next Lesson',
+      'Next lesson',
       name: 'nextlesson',
     );
   }
 
   String get amountoflessons {
     return Intl.message(
-      'Amount of Lessons',
+      'Amount of lessons',
       name: 'amountoflessons',
     );
   }
 
   String get absentlessons {
     return Intl.message(
-      'Absent lessons',
+      'Absent times',
       name: 'absentlessons',
     );
   }
 
   String get unexcused {
     return Intl.message(
-      'Unexcused',
+      'Without excuse',
       name: 'unexcused',
     );
   }
@@ -864,7 +864,7 @@ class MyAppLocalizations {
 
   String get profilepicture {
     return Intl.message(
-      'Profilepicture',
+      'Avatar',
       name: 'profilepicture',
     );
   }
@@ -885,7 +885,7 @@ class MyAppLocalizations {
 
   String get editprofile {
     return Intl.message(
-      'Edit Profile',
+      'Edit profile',
       name: 'editprofile',
     );
   }
@@ -913,14 +913,14 @@ class MyAppLocalizations {
 
   String get newschoolreport {
     return Intl.message(
-      'New Schoolreport',
+      'New schoolreport',
       name: 'newschoolreport',
     );
   }
 
   String get editschoolreport {
     return Intl.message(
-      'Edit Schoolreport',
+      'Edit schoolreport',
       name: 'editschoolreport',
     );
   }
@@ -934,7 +934,7 @@ class MyAppLocalizations {
 
   String get generalparticipation {
     return Intl.message(
-      'General Participation',
+      'General participation',
       name: 'generalparticipation',
     );
   }
@@ -948,28 +948,28 @@ class MyAppLocalizations {
 
   String get addcoursein {
     return Intl.message(
-      'Add Course in',
+      'Add course in',
       name: 'addcoursein',
     );
   }
 
   String get addcourse {
     return Intl.message(
-      'Add Course',
+      'Add course',
       name: 'addcourse',
     );
   }
 
   String get newschoolclass {
     return Intl.message(
-      'New Schoolclass',
+      'New schoolclass',
       name: 'newschoolclass',
     );
   }
 
   String get editschoolclass {
     return Intl.message(
-      'Edit Schoolclass',
+      'Edit schoolclass',
       name: 'editschoolclass',
     );
   }
@@ -1025,7 +1025,7 @@ class MyAppLocalizations {
 
   String get fromexistingcourses {
     return Intl.message(
-      'From existing Courses',
+      'From existing course',
       name: 'fromexistingcourses',
     );
   }
@@ -1060,14 +1060,14 @@ class MyAppLocalizations {
 
   String get forgotpassword {
     return Intl.message(
-      "Forgot Password",
+      "Forgot password",
       name: 'forgotpassword',
     );
   }
 
   String get resetpassword {
     return Intl.message(
-      "Reset Password",
+      "Reset password",
       name: 'resetpassword',
     );
   }
@@ -1130,21 +1130,21 @@ class MyAppLocalizations {
 
   String get centertext {
     return Intl.message(
-      "Center Text",
+      "Center text",
       name: 'centertext',
     );
   }
 
   String get showgrid {
     return Intl.message(
-      "Show Grid",
+      "Show grid",
       name: 'showgrid',
     );
   }
 
   String get useshortname {
     return Intl.message(
-      "Use Shortname",
+      "Use shortname",
       name: 'useshortname',
     );
   }
@@ -1172,14 +1172,14 @@ class MyAppLocalizations {
 
   String get use_tendencies {
     return Intl.message(
-      "Use Tendencies",
+      "Use tendencies",
       name: 'use_tendencies',
     );
   }
 
   String get use_tendencies_desc {
     return Intl.message(
-      "As in the upper level, e.g. 2+ as 1.7 and 2 as 2.3. If disabled, + and - are not rated, eg. a 3 is counted as 3.",
+      "As in the upper grades \(Germany\), e.g. 2+ as 1.7 and 2 as 2.3. If disabled, + and - are not rated, eg. a 3 is counted as 3.",
       name: 'use_tendencies_desc',
     );
   }
@@ -1193,7 +1193,7 @@ class MyAppLocalizations {
 
   String get compressfile {
     return Intl.message(
-      "Compress File",
+      "Compress file",
       name: 'compressfile',
     );
   }
@@ -1207,7 +1207,7 @@ class MyAppLocalizations {
 
   String get entermessage {
     return Intl.message(
-      "Enter Message...",
+      "Enter message...",
       name: 'entermessage',
     );
   }
@@ -1221,21 +1221,21 @@ class MyAppLocalizations {
 
   String get timeofday {
     return Intl.message(
-      "Time of Day",
+      "Time of day",
       name: 'timeofday',
     );
   }
 
   String get starttime {
     return Intl.message(
-      "Starttime",
+      "Start time",
       name: 'starttime',
     );
   }
 
   String get endtime {
     return Intl.message(
-      "Endtime",
+      "End time",
       name: 'endtime',
     );
   }
@@ -1319,21 +1319,21 @@ class MyAppLocalizations {
 
   String get gradeprofiles {
     return Intl.message(
-      "Gradeprofiles",
+      "Grade profiles",
       name: 'gradeprofiles',
     );
   }
 
   String get newgradeprofile {
     return Intl.message(
-      "New Profile",
+      "New profile",
       name: 'newgradeprofile',
     );
   }
 
   String get editgradeprofile {
     return Intl.message(
-      "Edit Profile",
+      "Edit profile",
       name: 'editgradeprofile',
     );
   }
@@ -1344,27 +1344,27 @@ class MyAppLocalizations {
       );
 
   String get newtype => Intl.message(
-        "New Type",
+        "New type",
         name: 'newtype',
       );
 
   String get gradetypes => Intl.message(
-        "Gradetypes",
+        "Grade types",
         name: 'gradetypes',
       );
 
   String get mygradeprofile => Intl.message(
-        "My Gradeprofile",
+        "My grade profile",
         name: 'mygradeprofile',
       );
 
   String get averageforschoolreport => Intl.message(
-        "Average for School Report",
+        "Average for schoolreport",
         name: 'averageforschoolreport',
       );
 
   String get averagebytype => Intl.message(
-        "Average by Type",
+        "Average by type",
         name: 'averagebytype',
       );
 
@@ -1409,11 +1409,11 @@ class MyAppLocalizations {
       );
 
   String get newletter => Intl.message(
-        "New Letter",
+        "New letter",
         name: 'newletter',
       );
   String get editletter => Intl.message(
-        "Edit Letter",
+        "Edit letter",
         name: 'editletter',
       );
   String get pushnotifications => Intl.message(
@@ -1421,7 +1421,7 @@ class MyAppLocalizations {
         name: 'pushnotifications',
       );
   String get allowreply => Intl.message(
-        "Allow Reply",
+        "Allow reply",
         name: 'allowreply',
       );
   String get readby => Intl.message(
@@ -1429,7 +1429,7 @@ class MyAppLocalizations {
         name: 'readby',
       );
   String get markasread => Intl.message(
-        "Mark as Read",
+        "Mark as read",
         name: 'markasread',
       );
   String get reply => Intl.message(
@@ -1735,14 +1735,14 @@ class MyAppLocalizations {
 
   String get functionnotavailable {
     return Intl.message(
-      'At this moment the function is not available',
+      'This feature is currently unavailable.',
       name: 'functionnotavailable',
     );
   }
 
   String get timebasedtimetable {
     return Intl.message(
-      'Time-based Timetable',
+      'Time-based timetable',
       name: 'timebasedtimetable',
     );
   }
@@ -1770,21 +1770,21 @@ class MyAppLocalizations {
 
   String get multipleweektypes {
     return Intl.message(
-      'Multiple Weektypes',
+      'Multiple weektypes',
       name: 'multipleweektypes',
     );
   }
 
   String get amountofweektypes {
     return Intl.message(
-      'Amount of Weektypes',
+      'Amount of weektypes',
       name: 'amountofweektypes',
     );
   }
 
   String get currentweektype {
     return Intl.message(
-      'Current Weektype',
+      'Current weektype',
       name: 'currentweektype',
     );
   }
@@ -1798,14 +1798,14 @@ class MyAppLocalizations {
 
   String get automaticaverage {
     return Intl.message(
-      'Automatic Average',
+      'Automatic average',
       name: 'automaticaverage',
     );
   }
 
   String get compositionofaverage {
     return Intl.message(
-      'Composition of Average',
+      'Composition of average',
       name: 'compositionofaverage',
     );
   }
@@ -1935,7 +1935,7 @@ class MyAppLocalizations {
 
   String get viewcompleteprivacypolicy {
     return Intl.message(
-      'View complete Privacy Policy',
+      'View full Privacy Policy',
       name: 'viewcompleteprivacypolicy',
     );
   }
@@ -1949,7 +1949,7 @@ class MyAppLocalizations {
 
   String get policy_text_1 {
     return Intl.message(
-      'The data is securely stored and transmitted via https and SSL encryption using Google Firebase',
+      'The data is securely stored and transmitted via https and SSL encryption using Google\'s Firebase',
       name: 'policy_text_1',
     );
   }
@@ -1963,7 +1963,7 @@ class MyAppLocalizations {
 
   String get policy_text_3 {
     return Intl.message(
-      'No data is transfered to thirds.',
+      'No data is transfered to third parties.',
       name: 'policy_text_3',
     );
   }
@@ -2062,7 +2062,7 @@ class MyAppLocalizations {
   //ADVANTAGES
   String get advantages {
     return Intl.message(
-      'Vorteile',
+      'Advantages',
       name: 'advantages',
     );
   }
@@ -2078,7 +2078,7 @@ class MyAppLocalizations {
 
   String get signinmethodes {
     return Intl.message(
-      'Sign-In methodes',
+      'Sign-In methods',
       name: 'signinmethodes',
     );
   }
@@ -2092,7 +2092,7 @@ class MyAppLocalizations {
 
   String get gotoprofile {
     return Intl.message(
-      'Go to Profile',
+      'Go to profile',
       name: 'gotoprofile',
     );
   }
@@ -2158,7 +2158,7 @@ class MyAppLocalizations {
 
   String get archivedplanners {
     return Intl.message(
-      'Archived Planners',
+      'Archived planners',
       name: 'archivedplanners',
     );
   }
@@ -2193,42 +2193,42 @@ class MyAppLocalizations {
 
   String get newcourse {
     return Intl.message(
-      'New Course',
+      'New course',
       name: 'newcourse',
     );
   }
 
   String get editcourse {
     return Intl.message(
-      'Edit Course',
+      'Edit course',
       name: 'editcourse',
     );
   }
 
   String get createcourse {
     return Intl.message(
-      'Create Course',
+      'Create course',
       name: 'createcourse',
     );
   }
 
   String get joincourse {
     return Intl.message(
-      'Join Course',
+      'Join course',
       name: 'joincourse',
     );
   }
 
   String get usetemplate {
     return Intl.message(
-      'Use Template',
+      'Choose from templates',
       name: 'usetemplate',
     );
   }
 
   String get myplanners {
     return Intl.message(
-      'My Planners',
+      'My planners',
       name: 'myplanners',
     );
   }
@@ -2270,7 +2270,7 @@ class MyAppLocalizations {
 
   String get nopermissionretrieved {
     return Intl.message(
-      'No Permission retrieved',
+      'No permission retrieved',
       name: 'nopermissionretrieved',
     );
   }
@@ -2284,35 +2284,35 @@ class MyAppLocalizations {
 
   String get newattachment {
     return Intl.message(
-      'New Attachment',
+      'New attachment',
       name: 'newattachment',
     );
   }
 
   String get newfile {
     return Intl.message(
-      'New File',
+      'New file',
       name: 'newfile',
     );
   }
 
   String get editfile {
     return Intl.message(
-      'Edit File',
+      'Edit file',
       name: 'editfile',
     );
   }
 
   String get newdesign {
     return Intl.message(
-      'New Design',
+      'New design',
       name: 'newdesign',
     );
   }
 
   String get editdesign {
     return Intl.message(
-      'Edit Design',
+      'Edit design',
       name: 'editdesign',
     );
   }
@@ -2340,7 +2340,7 @@ class MyAppLocalizations {
 
   String get selectfile {
     return Intl.message(
-      'Select File',
+      'Select file',
       name: 'selectfile',
     );
   }
@@ -2403,14 +2403,14 @@ class MyAppLocalizations {
 
   String get connectedclasses {
     return Intl.message(
-      'Connected Classes',
+      'Connected schoolclasses',
       name: 'connectedclasses',
     );
   }
 
   String get mydesign {
     return Intl.message(
-      'My Design',
+      'My design',
       name: 'mydesign',
     );
   }
@@ -2424,7 +2424,7 @@ class MyAppLocalizations {
 
   String get myshortname {
     return Intl.message(
-      'My Shortname',
+      'My shortname',
       name: 'myshortname',
     );
   }
@@ -2473,14 +2473,14 @@ class MyAppLocalizations {
 
   String get addteacher {
     return Intl.message(
-      'Add Teacher',
+      'Add teacher',
       name: 'addteacher',
     );
   }
 
   String get addplace {
     return Intl.message(
-      'Add Place',
+      'Add place',
       name: 'addplace',
     );
   }
@@ -2508,14 +2508,14 @@ class MyAppLocalizations {
 
   String get removecode {
     return Intl.message(
-      'Remove Code',
+      'Remove code',
       name: 'removecode',
     );
   }
 
   String get sharecode {
     return Intl.message(
-      'Share Code',
+      'Share code',
       name: 'sharecode',
     );
   }
@@ -2571,14 +2571,14 @@ class MyAppLocalizations {
 
   String get addtocourses {
     return Intl.message(
-      'Add to Courses',
+      'Add to courses',
       name: 'addtocourses',
     );
   }
 
   String get addtoclass {
     return Intl.message(
-      'Add to Class',
+      'Add to schoolclass',
       name: 'addtoclass',
     );
   }
@@ -2599,42 +2599,42 @@ class MyAppLocalizations {
 
   String get leavecourse {
     return Intl.message(
-      'Leave Course',
+      'Leave course',
       name: 'leavecourse',
     );
   }
 
   String get publiccode {
     return Intl.message(
-      'Public Code',
+      'Public code',
       name: 'publiccode',
     );
   }
 
   String get newteacher {
     return Intl.message(
-      'New Teacher',
+      'New teacher',
       name: 'newteacher',
     );
   }
 
   String get editteacher {
     return Intl.message(
-      'Edit Teacher',
+      'Edit teacher',
       name: 'editteacher',
     );
   }
 
   String get newplace {
     return Intl.message(
-      'New Place',
+      'New place',
       name: 'newplace',
     );
   }
 
   String get editplace {
     return Intl.message(
-      'Edit Place',
+      'Edit place',
       name: 'editplace',
     );
   }
@@ -2648,7 +2648,7 @@ class MyAppLocalizations {
 
   String get scancode {
     return Intl.message(
-      'Scan Code',
+      'Scan code',
       name: 'scancode',
     );
   }

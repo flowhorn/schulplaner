@@ -30,7 +30,7 @@ class Teacher {
 
   bool validate() {
     if (teacherid == null) return false;
-    if (name == null || name == "") return false;
+    if (name == null || name == '') return false;
     return true;
   }
 }

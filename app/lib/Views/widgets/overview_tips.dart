@@ -81,15 +81,15 @@ class _SocialMediaCard extends StatelessWidget {
     return _TipsCard(
       iconData: Icons.stars,
       title: BothLangString(
-        de: "Mehr Infos über Neuerungen",
-        en: "More infos about features",
+        de: 'Mehr Infos über Neuerungen',
+        en: 'More infos about changes',
       ).getText(context),
       content: Column(
         children: <Widget>[
           Text(
             BothLangString(
-              de: "Mit den letzten Updates gab es viele neue Funktionen und Verbesserungen in der App. Möchtest du mehr über neue Funktionen erfahren oder interessiert dich die Entwicklung der App? Dann kannst du uns gerne folgen😊.",
-              en: "With the latest updates, there have been many features and improvements in the app. Would you like to know more about features or are you interested in developing the app? Then you are welcome to follow us😊.",
+              de: 'Mit den letzten Updates gab es viele neue Funktionen und Verbesserungen in der App. Möchtest du mehr über neue Funktionen erfahren oder interessiert dich die Entwicklung der App? Dann kannst du uns gerne folgen😊.',
+              en: 'With the latest updates, there have been many features and improvements in the app. Would you like to know more about features or are you interested in developing the app? Then you are welcome to follow us😊.',
             ).getText(context),
           ),
           ListTile(
@@ -98,13 +98,13 @@ class _SocialMediaCard extends StatelessWidget {
               color: Colors.pink,
             ),
             title: Text(
-              "Instagram (@schulplaner.app)",
+              'Instagram (@schulplaner.app)',
               style: TextStyle(
                 color: Colors.pink,
               ),
             ),
             onTap: () {
-              launch("https://www.instagram.com/schulplaner.app");
+              launch('https://www.instagram.com/schulplaner.app');
             },
           ),
           ListTile(
@@ -113,13 +113,13 @@ class _SocialMediaCard extends StatelessWidget {
               color: Colors.lightBlue,
             ),
             title: Text(
-              "Twitter (@SchulplanerApp)",
+              'Twitter (@SchulplanerApp)',
               style: TextStyle(
                 color: Colors.lightBlue,
               ),
             ),
             onTap: () {
-              launch("https://twitter.com/SchulplanerApp");
+              launch('https://twitter.com/SchulplanerApp');
             },
           ),
         ],
@@ -143,15 +143,15 @@ class _DonationCard extends StatelessWidget {
     return _TipsCard(
         iconData: CommunityMaterialIcons.heart,
         title: BothLangString(
-          de: "Unterstütze Schulplaner",
-          en: "Support School Planner",
+          de: 'Unterstütze Schulplaner',
+          en: 'Support School Planner',
         ).getText(context),
         content: Column(
           children: <Widget>[
             Text(
               BothLangString(
-                de: "Die Schulplaner-App ist zu 100% kostenlos und werbefrei. Damit dies auch weiterhin so bleibt, wäre ich für jegliche Unterstützung sehr dankbar.😊.",
-                en: "The school planner app is 100% free and ad-free. In order for this to remain so, I would be very grateful for any support.😊.",
+                de: 'Die Schulplaner-App ist zu 100% kostenlos und werbefrei. Damit dies auch weiterhin so bleibt, wäre ich für jegliche Unterstützung sehr dankbar.😊.',
+                en: 'The school planner app is 100% free and ad-free. To keep it that way, I would be very appreciative for any support.😊.',
               ).getText(context),
             ),
             ListTile(
@@ -164,7 +164,7 @@ class _DonationCard extends StatelessWidget {
                     color: Colors.red,
                   )),
               onTap: () {
-                launch("https://schulplaner.firebaseapp.com/support");
+                launch('https://schulplaner.firebaseapp.com/support');
                 LogAnalytics.SupportAppClickMainScreen();
               },
             ),
@@ -189,12 +189,12 @@ class _RateCard extends StatelessWidget {
     return _TipsCard(
       iconData: Icons.stars,
       title: BothLangString(
-        de: "Gefällt dir Schulplaner?",
-        en: "Do you like School Planner?",
+        de: 'Gefällt dir der Schulplaner?',
+        en: 'Do you like the school planner?',
       ).getText(context),
       content: Text(BothLangString(
-        de: "Wir würden uns sehr über eine gute Bewertung freuen :)",
-        en: "We would be very happy about a good review :)",
+        de: 'Wir würden uns sehr über eine gute Bewertung freuen :)',
+        en: 'We would be very happy about a good review :)',
       ).getText(context)),
       bottom: <Widget>[
         RButton(

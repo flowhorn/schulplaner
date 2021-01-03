@@ -123,7 +123,9 @@ class CourseMemberSheet extends SchulplanerSheet {
       if (hasPermission == true) {
         notifier.value = ResultItem(
           loading: true,
-          text: "Authentifiziert. Bitte warten...",
+          text: bothlang(context,
+              de: "Authentifiziert, bitte waren...",
+              en: "Authenticated, please wait..."),
         );
         final removeResult = await _removeMemberFromCourse(context);
 
@@ -180,8 +182,12 @@ class CourseMemberSheet extends SchulplanerSheet {
             courseid: courseID)
         .then((result) {
       if (result == true) {
-        notifier.value =
-            ResultItem(loading: true, text: "Authentifiziert. Bitte warten...");
+        notifier.value = ResultItem(
+          loading: true,
+          text: bothlang(context,
+              de: "Authentifiziert, bitte waren...",
+              en: "Authenticated, please wait..."),
+        );
         changeMemberTypeUserCourse(
                 courseID: courseID, memberID: member.id, newRole: newRole)
             .then((newresult) {

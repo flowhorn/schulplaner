@@ -128,7 +128,7 @@ class DataCombinedPackage<T> {
 
   Stream<T> getItemStream(String id) {
     if (getKey == null) {
-      throw Exception("Missing Implementation for getKey");
+      throw Exception('Missing Implementation for getKey');
     } else {
       return getItemFilteredStream((item) => getKey(item) == id);
     }
@@ -264,7 +264,7 @@ class DataCombinedPackageSpecial<T, T2> {
 
   Stream<T> getItemStream(String id) {
     if (getKey == null) {
-      throw Exception("Missing Implementation for getKey");
+      throw Exception('Missing Implementation for getKey');
     } else {
       return getItemFilteredStream((item) => getKey(item) == id);
     }
@@ -450,7 +450,7 @@ class DataCollectionPackage<T> {
   T getItem(String id) {
     if (id == null) return null;
     if (getKey == null) {
-      throw Exception("Missing Implementation for getKey");
+      throw Exception('Missing Implementation for getKey');
     } else {
       return getItemByFilter((item) => getKey(item) == id);
     }
@@ -467,7 +467,7 @@ class DataCollectionPackage<T> {
 
   Stream<T> getItemStream(String id) {
     if (getKey == null) {
-      throw Exception("Missing Implementation for getKey");
+      throw Exception('Missing Implementation for getKey');
     } else {
       return getItemFilteredStream((item) => getKey(item) == id);
     }

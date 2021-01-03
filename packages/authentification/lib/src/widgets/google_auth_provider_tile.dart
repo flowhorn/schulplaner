@@ -35,7 +35,7 @@ class GoogleAuthProviderTile extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(Icons.alternate_email),
-            title: Text(authProviderType.email ?? "-"),
+            title: Text(authProviderType.email ?? '-'),
           )
         ],
         mainAxisSize: MainAxisSize.min,

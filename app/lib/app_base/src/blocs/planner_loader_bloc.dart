@@ -29,8 +29,8 @@ class PlannerLoaderBloc extends BlocBase {
     _plannerOrderSubject.add({});
     _plannerMapSubject.add({});
     SharedPreferences.getInstance().then((instance) {
-      var activePlanner = instance.getString("activeplanner") ?? "default";
-      if (activePlanner == "DEFAULT") activePlanner = "default";
+      var activePlanner = instance.getString('activeplanner') ?? 'default';
+      if (activePlanner == 'DEFAULT') activePlanner = 'default';
       _activePlannerSubject.add(activePlanner);
     });
   }
@@ -49,14 +49,14 @@ class PlannerLoaderBloc extends BlocBase {
             }
           }),
           getPlannerRef(userId)
-              .where("deleted", isEqualTo: false)
-              .where("archived", isEqualTo: false)
+              .where('deleted', isEqualTo: false)
+              .where('archived', isEqualTo: false)
               .snapshots()
               .listen((snapshot) {
             _hasLoadedDataSubject.add(true);
             final plannerMap =
                 (snapshot.docs.asMap().map<String, Planner>((_, snapshot) {
-                      Planner mPlanner = Planner.fromData(snapshot.data());
+                      final mPlanner = Planner.fromData(snapshot.data());
                       return MapEntry(mPlanner.id, mPlanner);
                     })) ??
                     {};
@@ -108,7 +108,7 @@ class PlannerLoaderBloc extends BlocBase {
       _activePlannerSubject.add(plannerId);
     }
     SharedPreferences.getInstance().then((instance) {
-      instance.setString("activeplanner", currentActivePlannerId);
+      instance.setString('activeplanner', currentActivePlannerId);
     });
   }
 
@@ -136,7 +136,7 @@ class PlannerLoaderBloc extends BlocBase {
 
   void archivePlanner(Planner planner, bool archive) {
     getPlannerRef(currentUserId).doc(planner.id).set(
-      {"archived": archive},
+      {'archived': archive},
       SetOptions(
         merge: true,
       ),
@@ -144,9 +144,9 @@ class PlannerLoaderBloc extends BlocBase {
   }
 
   void createCopy(Planner planner) {
-    String plannerID = getPlannerRef(currentUserId).doc().id;
-    Planner copyPlanner =
-        planner.copyWith(id: plannerID, name: "(2)" + planner.name);
+    final plannerID = getPlannerRef(currentUserId).doc().id;
+    final copyPlanner =
+        planner.copyWith(id: plannerID, name: '(2)' + planner.name);
     getPlannerRef(currentUserId).doc(copyPlanner.id).set(
           copyPlanner.toJson(),
           SetOptions(
@@ -155,21 +155,21 @@ class PlannerLoaderBloc extends BlocBase {
         );
     getPlannerRef(currentUserId)
         .doc(planner.id)
-        .collection("data")
-        .doc("settings")
+        .collection('data')
+        .doc('settings')
         .get()
         .then((result) {
       getPlannerRef(currentUserId)
           .doc(copyPlanner.id)
-          .collection("data")
-          .doc("settings")
+          .collection('data')
+          .doc('settings')
           .set(result.data());
     });
   }
 
   void deletePlanner(Planner planner) {
     getPlannerRef(currentUserId).doc(planner.id).set(
-      {"deleted": true},
+      {'deleted': true},
       SetOptions(
         merge: true,
       ),
@@ -214,7 +214,7 @@ class LoadAllPlanner {
   }
 
   Stream<LoadAllPlannerStatus> get stream {
-    StreamController<LoadAllPlannerStatus> newcontroller = StreamController();
+    final newcontroller = StreamController<LoadAllPlannerStatus>();
     _list_streamcontroller.add(newcontroller);
     newcontroller.add(status);
     newcontroller.onCancel = () {

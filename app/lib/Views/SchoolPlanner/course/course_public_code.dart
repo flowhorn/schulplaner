@@ -37,15 +37,15 @@ class CoursePublicCodeView extends StatelessWidget {
                 ListTile(
                   title: Text(
                     courseInfo.publiccode != null
-                        ? ("#" + courseInfo.publiccode)
-                        : ("#??????"),
+                        ? ('#' + courseInfo.publiccode)
+                        : ('#??????'),
                     style: TextStyle(fontSize: 22.0),
                   ),
                 ),
                 ListTile(
                   leading: Icon(Icons.link),
                   title: Text(
-                    courseInfo.joinLink ?? "???",
+                    courseInfo.joinLink ?? '???',
                     style: TextStyle(
                       fontSize: 18.0,
                       color: Colors.lightBlue,
@@ -112,7 +112,7 @@ class CoursePublicCodeView extends StatelessWidget {
                                           (value != null ? value : false);
                                     });
                                   } else {
-                                    print("NOT OERMISSION");
+                                    print('NOT OERMISSION');
                                     sheetnotifier.value = false;
                                   }
                                 });

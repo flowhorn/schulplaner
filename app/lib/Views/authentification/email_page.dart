@@ -16,7 +16,7 @@ class EmailView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppHeader(title: "Email"),
+      appBar: MyAppHeader(title: 'Email'),
       body: Column(
         children: <Widget>[
           Expanded(
@@ -50,7 +50,7 @@ class EmailView extends StatelessWidget {
                                   _email = newemail;
                                 },
                                 iconData: Icons.email,
-                                labeltext: "Email",
+                                labeltext: 'Email',
                                 keyBoardType: TextInputType.emailAddress,
                               ),
                               SizedBox(height: 16.0),
@@ -198,7 +198,7 @@ class RegisterEmailView extends StatelessWidget {
                                   _email = newemail;
                                 },
                                 iconData: Icons.email,
-                                labeltext: "Email",
+                                labeltext: 'Email',
                                 keyBoardType: TextInputType.emailAddress,
                               ),
                               SizedBox(height: 16.0),
@@ -287,8 +287,8 @@ class RegisterEmailView extends StatelessWidget {
               title: Text(getString(context).error),
               content: ListTile(
                 title: Text(bothlang(context,
-                    de: "Bitte überprüfe deine Registrierungsdaten!",
-                    en: "Please check your data!")),
+                    de: 'Bitte überprüfe deine Registrierungsdaten!',
+                    en: 'Please check your data!')),
               ),
               actions: <Widget>[
                 FlatButton(
@@ -377,7 +377,7 @@ class EmailHelpLinks extends StatelessWidget {
                       getTextFromInput(
                               context: context,
                               title: getString(context).forgotpassword,
-                              previousText: "")
+                              previousText: '')
                           .then((newtext) {
                         if (newtext != null) {
                           FirebaseAuth.instance

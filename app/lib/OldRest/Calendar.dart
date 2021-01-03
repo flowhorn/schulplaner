@@ -28,8 +28,8 @@ class CalValue {
   @override
   bool operator ==(other) {
     if (other is CalValue &&
-        this.enabled == other.enabled &&
-        getHex(this.color) == getHex(other.color)) return true;
+        enabled == other.enabled &&
+        getHex(color) == getHex(other.color)) return true;
     return false;
   }
 }
@@ -38,7 +38,7 @@ class CalendarSettings {
   Map<CalIndicator, CalValue> indicators;
   CalendarSettings({this.indicators}) {
     if (indicators == null) {
-      this.indicators = {
+      indicators = {
         CalIndicator.EVENT: CalValue(true, Colors.blueGrey),
         CalIndicator.TASK: CalValue(true, Colors.orange),
         CalIndicator.TESTANDEXAM: CalValue(true, Colors.red),

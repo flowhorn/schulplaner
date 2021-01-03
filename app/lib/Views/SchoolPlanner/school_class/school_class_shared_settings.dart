@@ -69,7 +69,7 @@ class SchoolClassSharedSettingsView extends StatelessWidget {
                             text: bothlang(
                               context,
                               de: "Übernehemen",
-                              en: "Use",
+                              en: "Apply",
                             ),
                             onTap: !enabled
                                 ? null

@@ -5,13 +5,12 @@ import 'package:schulplaner8/Data/plannerdatabase.dart';
 import 'package:schulplaner8/Helper/DateAPI.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
 import 'package:schulplaner_widgets/schulplaner_theme.dart';
-
 import 'calendar_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:tuple/tuple.dart';
 import 'package:schulplaner8/OldRest/flutter_calendar/date_utils.dart';
 
-typedef DayBuilder(BuildContext context, DateTime day);
+typedef Widget DayBuilder(BuildContext context, DateTime day);
 
 class Calendar extends StatefulWidget {
   final ValueChanged<DateTime> onDateSelected;
@@ -52,6 +51,7 @@ class _CalendarState extends State<Calendar> {
 
   DateTime get selectedDate => _selectedDate;
 
+  @override
   void initState() {
     super.initState();
     if (widget.initialCalendarDateOverride != null) {

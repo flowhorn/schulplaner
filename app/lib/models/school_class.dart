@@ -147,7 +147,7 @@ class SchoolClass {
 
   bool validate() {
     if (id == null) return false;
-    if (name == null || name == "") return false;
+    if (name == null || name == '') return false;
     if (design == null) return false;
     return true;
   }
@@ -188,12 +188,12 @@ class SchoolClass {
   }
 
   String getShortname({int length = 2}) {
-    String text = shortname ?? name ?? "-";
+    String text = shortname ?? name ?? '-';
     return text.substring(0, text.length > length ? length : text.length);
   }
 
   String getShortname_full() {
-    String text = shortname ?? name ?? "-";
+    String text = shortname ?? name ?? '-';
     return text;
   }
 

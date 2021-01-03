@@ -28,8 +28,8 @@ class PlaceList extends StatelessWidget {
                   subtitle: Column(
                     children: <Widget>[
                       Text(getString(context).address +
-                          ": " +
-                          (item.address ?? "-")),
+                          ': ' +
+                          (item.address ?? '-')),
                     ],
                     crossAxisAlignment: CrossAxisAlignment.start,
                   ),
@@ -158,11 +158,11 @@ class NewPlaceView extends StatelessWidget {
   }
 }
 
-showPlaceDetail(
+Future<void> showPlaceDetail(
     {@required BuildContext context,
     @required PlannerDatabase plannerdatabase,
-    @required String placeid}) {
-  showDetailSheetBuilder(
+    @required String placeid}) async {
+  await showDetailSheetBuilder(
       context: context,
       body: (BuildContext context) {
         return StreamBuilder<Place>(
@@ -176,7 +176,7 @@ showPlaceDetail(
                   FormSpace(12.0),
                   ListTile(
                     leading: Icon(Icons.map),
-                    title: Text(item.address ?? "-"),
+                    title: Text(item.address ?? '-'),
                   ),
                   ButtonBar(
                     children: <Widget>[

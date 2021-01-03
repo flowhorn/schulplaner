@@ -84,12 +84,12 @@ class AppSettingsView extends StatelessWidget {
                   ListTile(
                     leading: Icon(Icons.language),
                     title: Text(getString(context).language +
-                        ": " +
+                        ': ' +
                         (getLanguage(
                               context,
                               getAppSettingsData(context).languagecode,
                             )?.name ??
-                            "-")),
+                            '-')),
                     onTap: () {
                       selectItem<SimpleItem>(
                           context: context,
@@ -102,7 +102,7 @@ class AppSettingsView extends StatelessWidget {
                                   ? Icon(item.iconData)
                                   : null,
                               title: Text(
-                                item.name ?? "-",
+                                item.name ?? '-',
                               ),
                               trailing: item.id == languageCode
                                   ? Icon(
@@ -252,11 +252,15 @@ class AppSettingsView extends StatelessWidget {
                                 action: getString(context).confirm,
                                 richtext: RichText(
                                     text: TextSpan(
-                                        text:
-                                            "Möchtest du dich in dieser App ausloggen?")),
+                                        text: bothlang(context,
+                                            de:
+                                                'Möchtest du dich wirklich ausloggen?',
+                                            en:
+                                                'Do you really want to log out?'))),
                                 warning: true,
-                                warningtext:
-                                    "Solltest du deinen Account nicht mit einer Anmeldemethode verknüpft haben, gehen alle Daten verloren!");
+                                warningtext: bothlang(context,
+                                    de: 'Wenn du keine Anmeldemethode eingerichtet hast, gehen alle Daten verloren!',
+                                    en: 'If you did not set up a login method, all data will get lost.'));
                           },
                         )),
                   ],
@@ -279,12 +283,12 @@ List<SimpleItem> availableLanguages(BuildContext context) {
         name: getString(context).automatic,
         iconData: Icons.brightness_auto),
     SimpleItem(
-      id: "de",
-      name: "Deutsch",
+      id: 'de',
+      name: 'Deutsch',
     ),
     SimpleItem(
-      id: "en",
-      name: "English",
+      id: 'en',
+      name: 'English',
     ),
   ];
 }
@@ -386,7 +390,7 @@ class AppConfigurationView extends StatelessWidget {
               subtitle: Text(configurationData.shortname_length == 0
                   ? getString(context).individual
                   : (configurationData.shortname_length.toString() +
-                      " " +
+                      ' ' +
                       getString(context).letters)),
               onTap: () {
                 selectItem(
@@ -397,7 +401,7 @@ class AppConfigurationView extends StatelessWidget {
                         title: Text(item == 0
                             ? getString(context).individual
                             : (item.toString() +
-                                " " +
+                                ' ' +
                                 getString(context).letters)),
                         onTap: () {
                           Navigator.pop(context);
@@ -411,7 +415,7 @@ class AppConfigurationView extends StatelessWidget {
             ListTile(
               title: Text(getString(context).amount_of_days_home),
               subtitle: Text((configurationData.general_daysinhome.toString() +
-                  " " +
+                  ' ' +
                   getString(context).days_normal)),
               onTap: () {
                 selectItem(
@@ -420,7 +424,7 @@ class AppConfigurationView extends StatelessWidget {
                     builder: (context, item) {
                       return ListTile(
                         title: Text((item.toString() +
-                            " " +
+                            ' ' +
                             getString(context).days_normal)),
                         onTap: () {
                           Navigator.pop(context);
@@ -474,7 +478,7 @@ class AppConfigurationView extends StatelessWidget {
             ),
             ListTile(
               title: Text(getString(context).lessonheight),
-              subtitle: Text("x" +
+              subtitle: Text('x' +
                   configurationData.timetablesettings.heightfactor.toString()),
               onTap: () {
                 getTextFromInput(
@@ -487,7 +491,7 @@ class AppConfigurationView extends StatelessWidget {
                     .then((newtext) {
                   if (newtext != null) {
                     try {
-                      newtext = newtext.replaceAll(",", ".");
+                      newtext = newtext.replaceAll(',', '.');
                       double value = double.parse(newtext);
                       assert(value is double && value > 0.0);
                       ConfigurationData newdata = configurationData.copyWith();
@@ -522,7 +526,7 @@ class AppConfigurationView extends StatelessWidget {
                 appSettingsBloc.setAppConfiguration(newdata);
               },
               title: Text(bothlang(context,
-                  de: "Stunden anzeigen", en: "Show Lessons")),
+                  de: 'Stunden anzeigen', en: 'Show Lessons')),
             ),
           ],
         );
@@ -557,13 +561,13 @@ class AppConfigurationView extends StatelessWidget {
         return ListView(
           children: <Widget>[
             ListTile(
-              title: Text("1. Tab"),
+              title: Text('1. Tab'),
               leading: Icon(Icons.home),
               subtitle: Text(getString(context).home),
               enabled: false,
             ),
             ListTile(
-              title: Text("2. Tab"),
+              title: Text('2. Tab'),
               leading: Icon(allNavigationActions[getActionNumber(1)].iconData),
               subtitle: Text(allNavigationActions[getActionNumber(1)]
                   .name
@@ -603,7 +607,7 @@ class AppConfigurationView extends StatelessWidget {
               },
             ),
             ListTile(
-              title: Text("3. Tab"),
+              title: Text('3. Tab'),
               leading: Icon(allNavigationActions[getActionNumber(2)].iconData),
               subtitle: Text(allNavigationActions[getActionNumber(2)]
                   .name
@@ -643,7 +647,7 @@ class AppConfigurationView extends StatelessWidget {
               },
             ),
             ListTile(
-              title: Text("4. Tab"),
+              title: Text('4. Tab'),
               leading: Icon(allNavigationActions[getActionNumber(3)].iconData),
               subtitle: Text(allNavigationActions[getActionNumber(3)]
                   .name
@@ -683,7 +687,7 @@ class AppConfigurationView extends StatelessWidget {
               },
             ),
             ListTile(
-              title: Text("5. Tab"),
+              title: Text('5. Tab'),
               leading: Icon(Icons.folder),
               subtitle: Text(getString(context).library),
               enabled: false,

@@ -29,7 +29,7 @@ class QuickCreateView extends StatelessWidget {
               child: Row(
                 children: <Widget>[
                   Hero(
-                      tag: "fab",
+                      tag: 'fab',
                       child: QuickActionView(
                           iconData: Icons.book,
                           text: getString(context).task,

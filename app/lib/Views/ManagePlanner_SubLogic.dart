@@ -89,23 +89,24 @@ class _OrderableExampleState extends State<OrderableExample> {
   // Reordering works by having ReorderableList widget in hierarchy
   // containing ReorderableItems widgets
   //
-
+  @override
   Widget build(BuildContext context) {
     return ReorderableList(
-        onReorder: this._reorderCallback,
-        child: UpListView(
-          items: _items,
-          builder: (BuildContext c, item) {
-            int index = _items.indexOf(item);
-            return Item(
-              data: _items[index],
-              // first and last attributes affect border drawn during dragging
-              first: index == 0,
-              last: index == _items.length - 1,
-              child: builder(context, _items[index].planner, null),
-            );
-          },
-        ));
+      onReorder: _reorderCallback,
+      child: UpListView(
+        items: _items,
+        builder: (BuildContext c, item) {
+          int index = _items.indexOf(item);
+          return Item(
+            data: _items[index],
+            // first and last attributes affect border drawn during dragging
+            first: index == 0,
+            last: index == _items.length - 1,
+            child: builder(context, _items[index].planner, null),
+          );
+        },
+      ),
+    );
   }
 }
 

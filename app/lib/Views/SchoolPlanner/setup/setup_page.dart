@@ -29,14 +29,14 @@ class SetupView extends StatelessWidget {
         title: Column(
           children: <Widget>[
             Text(
-              bothlang(context, de: "Einrichtung", en: "Setup"),
+              bothlang(context, de: 'Einrichtung', en: 'Setup'),
               style: TextStyle(
                 fontSize: 18.0,
                 fontWeight: FontWeight.w500,
               ),
             ),
             Text(
-              plannerdata.name ?? "-",
+              plannerdata.name ?? '-',
               style: TextStyle(
                 fontSize: 12.5,
                 fontWeight: FontWeight.w300,
@@ -64,21 +64,21 @@ class SetupView extends StatelessWidget {
         pages: [
           PageViewModel(
             title: bothlang(context,
-                de: "Dein digitaler Schulplaner",
-                en: "Your digital school planner"),
+                de: 'Dein digitaler Schulplaner',
+                en: 'Your digital school planner'),
             bodytext: bothlang(context,
-                de: "Du kannst deinen Schulalltag mit deinen Mitschülern gemeinsam verwalten. So teilt ihr euch die Arbeit beim Eintragen von Hausaufgaben und Terminen. Greife von all deinen Geräten darauf zu.",
-                en: "You can manage your school life together with your classmates. You can share homework as well as events and more. Access to it from all your devices."),
+                de: 'Du kannst deinen Schulalltag mit deinen Mitschülern gemeinsam verwalten. So teilt ihr euch die Arbeit beim Eintragen von Hausaufgaben und Terminen. Greife von all deinen Geräten darauf zu.',
+                en: 'You can manage your school life together with your classmates. You can share homework as well as events and more. Access to it from all your devices.'),
             image: const Icon(
               Icons.public,
               size: 96.0,
             ),
           ),
           PageViewModel(
-            title: bothlang(context, de: "Schulklasse", en: "Schoolclass"),
+            title: bothlang(context, de: 'Schulklasse', en: 'School class'),
             bodytext: bothlang(context,
-                de: "Verbinde dich mit deinen Mitschülern und synchronisiere deine Fächer automatisch.",
-                en: "Connect with your class mates and sync your courses automatically."),
+                de: 'Verbinde dich mit deinen Mitschülern und synchronisiere deine Fächer automatisch.',
+                en: 'Connect with your classmates and sync your courses automatically.'),
             body: Card(
               child: ShortSchoolClassView(),
               shape: RoundedRectangleBorder(
@@ -92,7 +92,7 @@ class SetupView extends StatelessWidget {
             isDetailed: true,
           ),
           PageViewModel(
-            title: bothlang(context, de: "Fächer", en: "Courses"),
+            title: bothlang(context, de: 'Fächer', en: 'Courses'),
             body: Expanded(
                 child: Card(
               clipBehavior: Clip.antiAlias,
@@ -108,7 +108,7 @@ class SetupView extends StatelessWidget {
             isDetailed: true,
           ),
           PageViewModel(
-            title: bothlang(context, de: "Einstellungen", en: "Settings"),
+            title: bothlang(context, de: 'Einstellungen', en: 'Settings'),
             body: Expanded(
                 child: Card(
               child: ShortPlannerSettings(),
@@ -140,10 +140,10 @@ class SetupView extends StatelessWidget {
           ),
           PageViewModel(
             title: bothlang(context,
-                de: "Einrichtung abgeschlossen.", en: "Setup finished."),
+                de: 'Einrichtung abgeschlossen.', en: 'Setup finished.'),
             bodytext: bothlang(context,
-                de: "Beginne mit der Verwaltung deines Schulplaners.",
-                en: "Start managing your school planner."),
+                de: 'Beginne mit der Verwaltung deines Schulplaners.',
+                en: 'Start managing your school planner.'),
             image: const Icon(
               Icons.airplanemode_active,
               size: 96.0,
@@ -169,7 +169,7 @@ class SetupView extends StatelessWidget {
         },
         showSkipButton: true,
         next: Text(
-            bothlang(context, de: "Weiter", en: "Continue").toUpperCase(),
+            bothlang(context, de: 'Weiter', en: 'Continue').toUpperCase(),
             style: TextStyle(fontWeight: FontWeight.w700)),
       ),
     );

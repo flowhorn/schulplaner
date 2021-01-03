@@ -2,7 +2,6 @@ import 'package:app_functions/app_functions.dart';
 import 'package:bloc/bloc_base.dart';
 import 'package:bloc/bloc_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
 import 'package:schulplaner_models/schulplaner_models.dart';
 
 class SchulplanerFunctionsBloc extends BlocBase {
@@ -13,9 +12,9 @@ class SchulplanerFunctionsBloc extends BlocBase {
   void dispose() {}
 
   Future<AppFunctionsResult<bool>> joinGroup({
-    @required String myMemberId,
-    @required String groupId,
-    @required GroupType groupType,
+    required String myMemberId,
+    required String groupId,
+    required GroupType groupType,
   }) {
     return _appFunctionsBloc.callCloudFunction(
       functionName: 'JoinGroup',
@@ -29,9 +28,9 @@ class SchulplanerFunctionsBloc extends BlocBase {
   }
 
   Future<AppFunctionsResult<bool>> leaveGroup({
-    @required String myMemberId,
-    @required String groupId,
-    @required GroupType groupType,
+    required String myMemberId,
+    required String groupId,
+    required GroupType groupType,
   }) {
     return _appFunctionsBloc.callCloudFunction(
       functionName: 'LeaveGroup',
@@ -45,10 +44,10 @@ class SchulplanerFunctionsBloc extends BlocBase {
   }
 
   Future<AppFunctionsResult<bool>> removeMemberFromGroup({
-    @required String myMemberId,
-    @required String memberId,
-    @required String groupId,
-    @required GroupType groupType,
+    required String myMemberId,
+    required String memberId,
+    required String groupId,
+    required GroupType groupType,
   }) {
     return _appFunctionsBloc.callCloudFunction(
       functionName: 'RemoveMemberFromGroup',

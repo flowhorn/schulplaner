@@ -23,6 +23,9 @@ class LessonTime {
   }
 
   LessonTime copy() {
-    return LessonTime(start: this.start, end: this.end);
+    return LessonTime(
+      start: start,
+      end: end,
+    );
   }
 }

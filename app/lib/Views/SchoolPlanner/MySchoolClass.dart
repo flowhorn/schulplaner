@@ -32,11 +32,11 @@ void showSchoolClassMoreSheet(BuildContext context,
         return StreamBuilder<SchoolClass>(
             stream: plannerdatabase.schoolClassInfos.getItemStream(classid),
             builder: (context, snapshot) {
-              SchoolClass info = snapshot.data;
+              final info = snapshot.data;
               if (info == null) return loadedView();
               return Column(
                 children: <Widget>[
-                  getSheetText(context, info.getName() ?? "-"),
+                  getSheetText(context, info.getName() ?? '-'),
                   ListTile(
                     leading: Icon(Icons.edit),
                     title: Text(getString(context).edit),
@@ -77,7 +77,7 @@ void showSchoolClassMoreSheet(BuildContext context,
               );
             });
       },
-      routname: "schoolclass");
+      routname: 'schoolclass');
 }
 
 class NewSchoolClassView extends StatelessWidget {
@@ -152,7 +152,7 @@ class NewSchoolClassView extends StatelessWidget {
                             color: data.design?.primary ?? Colors.grey,
                           ),
                           title: Text(getString(context).design),
-                          subtitle: Text(data.design?.name ?? "-"),
+                          subtitle: Text(data.design?.name ?? '-'),
                           trailing: IconButton(
                               icon: Icon(Icons.autorenew),
                               onPressed: () {
@@ -286,7 +286,7 @@ class SchoolClassCoursesView extends StatelessWidget {
             child: Scaffold(
               appBar: MyAppHeader(
                   title:
-                      "${getString(context).courses} ${getString(context).in_} " +
+                      '${getString(context).courses} ${getString(context).in_} ' +
                           classInfo.getName()),
               body: SingleChildScrollView(
                 child: Column(
@@ -312,7 +312,7 @@ class SchoolClassCoursesView extends StatelessWidget {
                                     Opacity(
                                       opacity: isActivated ? 1.0 : 0.5,
                                       child: Hero(
-                                          tag: "courestag:" + courseInfo.id,
+                                          tag: 'courestag:' + courseInfo.id,
                                           child: ColoredCircleText(
                                               text: toShortNameLength(
                                                   context,
@@ -339,13 +339,13 @@ class SchoolClassCoursesView extends StatelessWidget {
                                 children: <Widget>[
                                   Text(
                                     getString(context).teacher +
-                                        ": " +
+                                        ': ' +
                                         courseInfo.getTeachersListed(),
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                   Text(getString(context).place +
-                                      ": " +
+                                      ': ' +
                                       courseInfo.getPlacesListed()),
                                 ],
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -410,16 +410,16 @@ class SchoolClassCoursesView extends StatelessWidget {
                                             ListTile(
                                               leading: Icon(Icons.delete_sweep),
                                               title: Text(bothlang(context,
-                                                  de: "Aus Klasse entfernen",
-                                                  en: "Remove from class")),
+                                                  de: 'Aus Klasse entfernen',
+                                                  en: 'Remove from class')),
                                               onTap: () {
                                                 showConfirmDialog(
                                                         context: context,
                                                         title: bothlang(context,
                                                             de:
-                                                                "Aus Klasse entfernen",
+                                                                'Aus Klasse entfernen',
                                                             en:
-                                                                "Remove from class"),
+                                                                'Remove from class'),
                                                         action:
                                                             getString(context)
                                                                 .remove,
@@ -450,7 +450,7 @@ class SchoolClassCoursesView extends StatelessWidget {
                                           ]);
                                         },
                                         title: courseInfo.getName(),
-                                        routname: "courseid");
+                                        routname: 'courseid');
                                   }),
                               onTap: () {
                                 pushWidget(
@@ -459,7 +459,7 @@ class SchoolClassCoursesView extends StatelessWidget {
                                       courseid: courseInfo.id,
                                       database: database,
                                     ),
-                                    routname: "course");
+                                    routname: 'course');
                               },
                               enabled: isActivated,
                             );
@@ -585,7 +585,7 @@ class SchoolClassSelectCourses extends StatelessWidget {
             child: Scaffold(
               appBar: MyAppHeader(
                   title: getString(context).addcoursein +
-                      " " +
+                      ' ' +
                       classInfo.getName()),
               body: ListView(
                 children: courses.map((courseInfo) {
@@ -602,13 +602,13 @@ class SchoolClassSelectCourses extends StatelessWidget {
                       children: <Widget>[
                         Text(
                           getString(context).teacher +
-                              ": " +
+                              ': ' +
                               courseInfo.getTeachersListed(),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
                         Text(getString(context).place +
-                            ": " +
+                            ': ' +
                             courseInfo.getPlacesListed()),
                       ],
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -701,8 +701,9 @@ class SchoolClassCourseTemplatesView extends StatelessWidget {
                                   );
                                   ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
-                                          content:
-                                              Text("${item.name} erstellt.")));
+                                          content: Text(bothlang(context,
+                                              de: '${item.name} erstellt',
+                                              en: '${item.name} created.'))));
                                 }
                               : null,
                           tooltip: getString(context).add,
