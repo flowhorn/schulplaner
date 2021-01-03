@@ -102,10 +102,7 @@ To get a local copy up and running follow these simple steps.
    ```sh
    git clone https://github.com/flowhorn/schulplaner.git
    ```
-2. Install packages
-   ```sh
-   flutter pub get
-   ```
+2. Read our [Wiki-entry on how to run the app](https://github.com/flowhorn/schulplaner/wiki/Run-the-App)
 
 
 
