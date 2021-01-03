@@ -84,12 +84,12 @@ class AppSettingsView extends StatelessWidget {
                   ListTile(
                     leading: Icon(Icons.language),
                     title: Text(getString(context).language +
-                        ": " +
+                        ': ' +
                         (getLanguage(
                               context,
                               getAppSettingsData(context).languagecode,
                             )?.name ??
-                            "-")),
+                            '-')),
                     onTap: () {
                       selectItem<SimpleItem>(
                           context: context,
@@ -102,7 +102,7 @@ class AppSettingsView extends StatelessWidget {
                                   ? Icon(item.iconData)
                                   : null,
                               title: Text(
-                                item.name ?? "-",
+                                item.name ?? '-',
                               ),
                               trailing: item.id == languageCode
                                   ? Icon(
