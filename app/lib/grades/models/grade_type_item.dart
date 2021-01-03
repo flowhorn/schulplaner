@@ -22,7 +22,7 @@ class GradeTypeItem {
 
   factory GradeTypeItem.Create(String id) {
     return GradeTypeItem._(
-        id: id, name: "", weight: 1.0, testsasoneexam: false, gradetypes: {});
+        id: id, name: '', weight: 1.0, testsasoneexam: false, gradetypes: {});
   }
 
   factory GradeTypeItem.FromData(dynamic data) {
@@ -84,10 +84,10 @@ class GradeTypeItem {
 
   String getGradeTypesListed(BuildContext context) {
     String text = getEnabledListedGradeTypes()
-        ?.map((data) => getGradeTypes(context)[data.index].name ?? "-")
-        ?.join(", ");
-    if (text == null || text == "") {
-      return "-";
+        ?.map((data) => getGradeTypes(context)[data.index].name ?? '-')
+        ?.join(', ');
+    if (text == null || text == '') {
+      return '-';
     } else {
       return text;
     }

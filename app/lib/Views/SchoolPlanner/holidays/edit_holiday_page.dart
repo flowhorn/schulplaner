@@ -25,7 +25,7 @@ class NewHolidayPage extends StatelessWidget {
         ? database.vacations.data[editvacationid].copyWith()
         : Holiday(
             id: ID(database.dataManager.generateVacationId()),
-            name: Name(""),
+            name: Name(''),
             start: null,
             end: null,
             isFromDatabase: false,
@@ -66,7 +66,7 @@ class NewHolidayPage extends StatelessWidget {
                       title: Text(getString(context).start),
                       subtitle: Text(data.start != null
                           ? data.start.parser.toYMMMMEEEEd
-                          : "-"),
+                          : '-'),
                       onTap: () {
                         selectDateString(context, data.start?.toDateString)
                             .then((newDateString) {
@@ -82,7 +82,7 @@ class NewHolidayPage extends StatelessWidget {
                       title: Text(getString(context).end),
                       subtitle: Text(data.end != null
                           ? data.end.parser.toYMMMMEEEEd
-                          : "-"),
+                          : '-'),
                       onTap: () {
                         selectDateString(context, data.end?.toDateString)
                             .then((newDateString) {

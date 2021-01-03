@@ -52,7 +52,7 @@ class Design {
   bool validate() {
     if (primary == null) return false;
     if (accent == null) return false;
-    if (name == null || name == "") return false;
+    if (name == null || name == '') return false;
     return true;
   }
 

@@ -157,7 +157,7 @@ class WeekView_LessonView extends StatelessWidget {
                   stepGranularity: 0.1,
                 ),
                 Text(
-                  item.place?.name ?? course.getPlaceFirst() ?? "-",
+                  item.place?.name ?? course.getPlaceFirst() ?? '-',
                   maxLines: 1,
                   style: TextStyle(
                       color: getTextColor(course.getDesign().primary),

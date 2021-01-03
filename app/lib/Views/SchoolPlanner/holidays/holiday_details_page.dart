@@ -28,16 +28,16 @@ Future<void> showVacationDetail(
                 ListTile(
                   leading: Icon(Icons.event),
                   title: Text(getString(context).from +
-                          " " +
+                          ' ' +
                           item.start.parser.toYMMMMEEEEd ??
-                      "-"),
+                      '-'),
                 ),
                 ListTile(
                   leading: Icon(Icons.event),
                   title: Text(getString(context).until +
-                          " " +
+                          ' ' +
                           item.end.parser.toYMMMMEEEEd ??
-                      "-"),
+                      '-'),
                 ),
                 ButtonBar(
                   children: <Widget>[
@@ -83,7 +83,7 @@ Future<void> showVacationDetail(
                                                   plannerdatabase.dataManager
                                                       .DeleteVacation(item);
                                                   popNavigatorBy(context,
-                                                      text: "vacationid");
+                                                      text: 'vacationid');
                                                 }
                                               });
                                             },
@@ -92,7 +92,7 @@ Future<void> showVacationDetail(
                                       );
                                     },
                                     title: getString(context).more,
-                                    routname: "vacationidmore");
+                                    routname: 'vacationidmore');
                               },
                         iconData: Icons.more_horiz),
                   ],
@@ -101,6 +101,6 @@ Future<void> showVacationDetail(
             );
           });
     },
-    routname: "vacationidview",
+    routname: 'vacationidview',
   );
 }

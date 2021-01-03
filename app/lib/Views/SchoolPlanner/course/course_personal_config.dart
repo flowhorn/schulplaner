@@ -62,7 +62,7 @@ class CoursePersonalPage extends StatelessWidget {
                     title: Text(
                       getString(context).mydesign,
                     ),
-                    subtitle: Text(courseInfo.personaldesign?.name ?? "-"),
+                    subtitle: Text(courseInfo.personaldesign?.name ?? '-'),
                     onTap: () {
                       selectDesign(context, courseInfo.personaldesign?.id)
                           .then((newdesign) {
@@ -153,7 +153,7 @@ class CoursePersonalPage extends StatelessWidget {
                     title: Text(
                       getString(context).myshortname,
                     ),
-                    subtitle: Text(courseInfo.personalshortname ?? "-"),
+                    subtitle: Text(courseInfo.personalshortname ?? '-'),
                     onTap: () {
                       getTextFromInput(
                               context: context,
@@ -161,7 +161,7 @@ class CoursePersonalPage extends StatelessWidget {
                               title: getString(context).shortname,
                               maxlength: 5)
                           .then((newtext) {
-                        if (newtext != null && newtext != "") {
+                        if (newtext != null && newtext != '') {
                           CoursePersonal newcoursepersonal =
                               database.courseinfo.secondarydata[courseInfo.id];
                           if (newcoursepersonal == null) {

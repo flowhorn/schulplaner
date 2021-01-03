@@ -11,7 +11,7 @@ class UrlImage extends StatelessWidget {
   final String url;
   @override
   Widget build(BuildContext context) {
-    if (url == null || url == "") {
+    if (url == null || url == '') {
       return StandardIcon(
         size: size,
       );

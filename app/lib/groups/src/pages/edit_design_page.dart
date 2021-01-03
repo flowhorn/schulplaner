@@ -95,7 +95,7 @@ class _Inner extends StatelessWidget {
           ),
           title: Text(getString(context).primary),
           subtitle: Text(design.primary == null
-              ? "-"
+              ? '-'
               : '#' + getHex(design.primary).toString()),
           onTap: () {
             selectColor(context, design.primary).then((newColor) {
@@ -112,7 +112,7 @@ class _Inner extends StatelessWidget {
           ),
           title: Text(getString(context).accent),
           subtitle: Text(design.accent == null
-              ? "-"
+              ? '-'
               : '#' + getHex(design.accent).toString()),
           onTap: () {
             selectColor(context, design.accent).then((newColor) {

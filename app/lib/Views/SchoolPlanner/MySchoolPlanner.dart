@@ -69,7 +69,7 @@ class MySchoolPlanner extends StatefulWidget {
           child: TimetableView(),
           key: Key("Test"),
         );
-        newdata.subChildName = "";
+        newdata.subChildName = '';
         newdata.actions = null;
         newdata.index = 4;
         navigationBloc.setMainPage(newdata);
@@ -80,7 +80,7 @@ class MySchoolPlanner extends StatefulWidget {
           child: MyTasksList(),
           key: Key("Test"),
         );
-        newdata.subChildName = "";
+        newdata.subChildName = '';
         newdata.actions = null;
         newdata.index = 4;
         navigationBloc.setMainPage(newdata);

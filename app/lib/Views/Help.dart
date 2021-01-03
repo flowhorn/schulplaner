@@ -30,18 +30,18 @@ class HelpView extends StatelessWidget {
               FormSpace(12.0),
               ListTile(
                 leading: Icon(CommunityMaterialIcons.discord),
-                title: Text("Discord-Server"),
+                title: Text('Discord-Server'),
                 trailing: RButton(
                     text: getString(context).openinbrowser,
                     onTap: () {
-                      launch("https://discord.gg/uZyK7Tf");
+                      launch('https://discord.gg/uZyK7Tf');
                     }),
               ),
             ],
           )),
-          FormSection(title: "FAQ", child: FAQ_ListView()),
+          FormSection(title: 'FAQ', child: FAQ_ListView()),
           FormHeader2(bothlang(context,
-              de: "Credits: Danke Elias🙏", en: "Credits: Thank you Elias🙏"))
+              de: 'Credits: Danke Elias🙏', en: 'Credits: Thank you Elias🙏'))
         ],
       ),
     );

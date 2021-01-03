@@ -116,7 +116,7 @@ class NewLessonView extends StatelessWidget {
                                         ? (data.start.toString() +
                                             ". " +
                                             getString(context).lesson)
-                                        : "-"),
+                                        : '-'),
                                     onTap: () {
                                       selectItem(
                                           context: context,
@@ -154,7 +154,7 @@ class NewLessonView extends StatelessWidget {
                                         ? (data.end.toString() +
                                             ". " +
                                             getString(context).lesson)
-                                        : "-"),
+                                        : '-'),
                                     trailing: IconButton(
                                         icon: Icon(Icons.expand_less),
                                         onPressed: () {
@@ -202,7 +202,7 @@ class NewLessonView extends StatelessWidget {
                                     ? (data.start.toString() +
                                         ". " +
                                         getString(context).lesson)
-                                    : "-"),
+                                    : '-'),
                                 trailing: IconButton(
                                     icon: Icon(Icons.expand_more),
                                     onPressed: () {
@@ -247,7 +247,7 @@ class NewLessonView extends StatelessWidget {
                                 title: Text(getString(context).weektype),
                                 subtitle: Text(data.weektype != null
                                     ? weektypes(context)[data.weektype].name
-                                    : "-"),
+                                    : '-'),
                                 onTap: () {
                                   selectItem<WeekType>(
                                       context: context,

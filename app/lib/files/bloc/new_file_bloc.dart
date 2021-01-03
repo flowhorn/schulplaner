@@ -76,8 +76,8 @@ class NewFileBloc extends BlocBase {
     _uploadStateSubject.add(1);
     final uploadTask = FirebaseStorage.instance
         .ref()
-        .child("files")
-        .child("personal")
+        .child('files')
+        .child('personal')
         .child(cloudFile.savedin.id)
         .child(cloudFile.fileid)
         .putFile(newFile);

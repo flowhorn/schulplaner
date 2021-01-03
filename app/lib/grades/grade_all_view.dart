@@ -40,7 +40,7 @@ class GradeAllView extends StatelessWidget {
                     ? getPrimaryColor(context)
                     : courseInfo.getDesign().primary,
                 text: courseInfo == null
-                    ? "???"
+                    ? '???'
                     : toShortNameLength(
                         context, courseInfo.getShortname_full()),
               ),
@@ -48,7 +48,7 @@ class GradeAllView extends StatelessWidget {
               subtitle: Column(
                 children: <Widget>[
                   Text(courseInfo == null
-                      ? "Fach nicht vorhanden"
+                      ? 'Fach nicht vorhanden'
                       : courseInfo.name),
                   Text(getDateText(grade.date)),
                 ],

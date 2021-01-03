@@ -240,7 +240,6 @@ class CourseStorageView extends StatelessWidget {
             body: Center(
               child: Text(bothlang(context,
                   de: 'Hier kommt bald was 😏', en: 'Coming soon 😏')),
-                  de: 'Hier kommt bald was 😏', en: 'Coming soon 😏')),
             ),
           );
         }));

@@ -95,7 +95,7 @@ Future<String> getTextFromInput(
     @required String title,
     TextInputType keyboardType,
     int maxlength}) async {
-  String inputtext = previousText ?? "";
+  String inputtext = previousText ?? '';
   return await showDialog<String>(
       context: context,
       builder: (BuildContext context) {
@@ -299,7 +299,7 @@ class MyAppHeader extends StatelessWidget implements PreferredSizeWidget {
       children: <Widget>[
         AppBar(
           centerTitle: true,
-          title: Text(title ?? "-"),
+          title: Text(title ?? '-'),
           elevation: 0.0,
         ),
         Divider(
@@ -325,7 +325,7 @@ Widget getEmptyView({String title, IconData icon}) {
         ),
         Padding(padding: const EdgeInsets.all(6.0)),
         Text(
-          title ?? "-",
+          title ?? '-',
           style: TextStyle(fontSize: 17.0),
         )
       ],
@@ -431,7 +431,7 @@ void showSheet(
                     Align(
                       alignment: Alignment.topCenter,
                       child: Text(
-                        title ?? "-",
+                        title ?? '-',
                         style: TextStyle(
                             fontSize: 19.0,
                             fontWeight: FontWeight.w400,
@@ -868,7 +868,7 @@ Future<T> showSheetBuilder<T>({
                     Align(
                       alignment: Alignment.topCenter,
                       child: Text(
-                        title ?? "-",
+                        title ?? '-',
                         style: TextStyle(
                             fontSize: 19.0,
                             fontWeight: FontWeight.w400,
@@ -909,7 +909,7 @@ Widget getSheetText(BuildContext context, String text) {
   return Align(
     alignment: Alignment.topCenter,
     child: Text(
-      text ?? "-",
+      text ?? '-',
       style: TextStyle(
           fontSize: 19.0, fontWeight: FontWeight.w400, color: Colors.grey[500]),
     ),
@@ -1099,7 +1099,7 @@ class ColoredCircleText extends StatelessWidget {
       child: Center(
         child: Material(
           child: Text(
-            text ?? "-",
+            text ?? '-',
             maxLines: 1,
             textAlign: TextAlign.center,
             style: TextStyle(
@@ -1251,7 +1251,7 @@ class QRCodeViewPublicCode extends StatelessWidget {
 
 String toShortNameLength(BuildContext context, String text) {
   int length = getConfigurationData(context).shortname_length ?? 2;
-  if (text == null) return "-";
+  if (text == null) return '-';
   if (length == 0) return text;
   return text.substring(0, text.length > length ? length : text.length);
 }

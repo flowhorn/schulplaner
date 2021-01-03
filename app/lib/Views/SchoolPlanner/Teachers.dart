@@ -27,10 +27,10 @@ class TeacherList extends StatelessWidget {
                   title: Text(teacher.name),
                   subtitle: Column(
                     children: <Widget>[
-                      Text("Email: " + (teacher.email ?? "-")),
+                      Text("Email: " + (teacher.email ?? '-')),
                       Text(bothlang(context,
-                          de: "Tel: " + (teacher.tel ?? "-"),
-                          en: "Phone: " + (teacher.tel ?? "-"))),
+                          de: "Tel: " + (teacher.tel ?? '-'),
+                          en: "Phone: " + (teacher.tel ?? '-'))),
                     ],
                     crossAxisAlignment: CrossAxisAlignment.start,
                   ),

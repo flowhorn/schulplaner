@@ -76,7 +76,7 @@ class _Inner extends StatelessWidget {
             subtitle: Text(notificationSettings.dailyNotificationTime != null
                 ? getTimeOfUTC(notificationSettings.dailyNotificationTime)
                     .format(context)
-                : "-"),
+                : '-'),
             enabled: notificationSettings.notifydaily,
             onTap: notificationSettings.notifydaily
                 ? () {
@@ -126,7 +126,7 @@ class _Inner extends StatelessWidget {
                 ? (notificationSettings.dailydaterange.toString() +
                     " " +
                     getString(context).days)
-                : "-"),
+                : '-'),
             enabled: notificationSettings.notifydaily,
             onTap: notificationSettings.notifydaily
                 ? () {
@@ -161,9 +161,9 @@ class _Inner extends StatelessWidget {
                   color: getAccentColor(context),
                   icon: Icon(Icons.devices),
                 ),
-                title: Text(device.devicename ?? "-"),
+                title: Text(device.devicename ?? '-'),
                 subtitle: Text(
-                  device.devicetoken.toString() ?? "-",
+                  device.devicetoken.toString() ?? '-',
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),

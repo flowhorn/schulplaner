@@ -21,7 +21,7 @@ class PlannerState extends StatelessWidget {
               builder: (context, snapshot) {
                 final planner = snapshot?.data?.getPlanner();
                 return Text(
-                  planner?.name ?? "-",
+                  planner?.name ?? '-',
                   textAlign: TextAlign.center,
                   maxLines: 1,
                 );

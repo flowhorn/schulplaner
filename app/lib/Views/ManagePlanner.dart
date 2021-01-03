@@ -124,8 +124,8 @@ class ManagePlannerView extends StatelessWidget {
                                                   leading:
                                                       Icon(Icons.content_copy),
                                                   title: Text(bothlang(context,
-                                                      de: "Kopie erstellen",
-                                                      en: "Create a copy")),
+                                                      de: 'Kopie erstellen',
+                                                      en: 'Create a copy')),
                                                   onTap: () {
                                                     Navigator.pop(context);
                                                     plannerLoaderBloc
@@ -158,7 +158,7 @@ class ManagePlannerView extends StatelessWidget {
                                                               //todo(th3ph4nt0m): get this in 1 single TextSpan and add English translation
                                                               TextSpan(
                                                                   text:
-                                                                      "Möchtest du den Planer "),
+                                                                      'Möchtest du den Planer '),
                                                               TextSpan(
                                                                   text: it.name,
                                                                   style: TextStyle(
@@ -167,7 +167,7 @@ class ManagePlannerView extends StatelessWidget {
                                                                               .bold)),
                                                               TextSpan(
                                                                   text:
-                                                                      " löschen?")
+                                                                      ' löschen?')
                                                             ])),
                                                         warning: true);
                                                   },
@@ -327,7 +327,7 @@ class ArchivedPlanner extends StatelessWidget {
                                                       //todo(th3ph4nt0m): Get this in 1 single TextSpan and add English translation
                                                       TextSpan(
                                                           text:
-                                                              "Möchtest du den Planer "),
+                                                              'Möchtest du den Planer '),
                                                       TextSpan(
                                                           text: planner.name,
                                                           style: TextStyle(
@@ -336,7 +336,7 @@ class ArchivedPlanner extends StatelessWidget {
                                                                       .bold)),
                                                       TextSpan(
                                                           text:
-                                                              " ${getString(context).delete}?")
+                                                              ' ${getString(context).delete}?')
                                                     ]),
                                                     textAlign: TextAlign.start,
                                                   ),
@@ -365,8 +365,8 @@ class ArchivedPlanner extends StatelessWidget {
           }
         },
         stream: getPlannerRef(plannerLoaderBloc.currentUserId)
-            .where("deleted", isEqualTo: false)
-            .where("archived", isEqualTo: true)
+            .where('deleted', isEqualTo: false)
+            .where('archived', isEqualTo: true)
             .snapshots(),
       ),
     );
@@ -409,7 +409,7 @@ class _NewPlannerViewState extends State<NewPlannerView> {
       planner = Planner(
           id: getPlannerRef(plannerLoaderBloc.currentUserId).doc().id,
           uid: plannerLoaderBloc.currentUserId.uid,
-          name: "");
+          name: '');
     }
   }
 
@@ -430,7 +430,7 @@ class _NewPlannerViewState extends State<NewPlannerView> {
                 valueChanged: (newtext) {
                   planner = planner.copyWith(name: newtext);
                 },
-                text: planner?.name ?? "",
+                text: planner?.name ?? '',
                 labeltext: getString(context).name,
                 iconData: Icons.short_text,
                 autofocus: true,

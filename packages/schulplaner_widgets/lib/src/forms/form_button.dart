@@ -14,7 +14,7 @@ class FormButton extends StatelessWidget {
       height: 48.0,
       width: double.infinity,
       child: Center(
-        child: RButton(text: text ?? "-", onTap: onTap, iconData: iconData),
+        child: RButton(text: text ?? '-', onTap: onTap, iconData: iconData),
       ),
     );
   }

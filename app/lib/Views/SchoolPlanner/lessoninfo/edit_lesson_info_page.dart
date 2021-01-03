@@ -75,12 +75,12 @@ class NewLessonInfoViewState extends State<NewLessonInfoView> {
       }
       ;
     }
-    prefilled_detail = lessoninfo.note ?? "";
+    prefilled_detail = lessoninfo.note ?? '';
   }
 
   LessonInfo lessoninfo;
 
-  String prefilled_detail = "";
+  String prefilled_detail = '';
 
   @override
   void initState() {
@@ -198,10 +198,10 @@ class NewLessonInfoViewState extends State<NewLessonInfoView> {
                   leading: Icon(Icons.category),
                   title: Text(
                     getString(context).type +
-                        ": " +
+                        ': ' +
                         (getLessonInfoTypes(context)[lessoninfo.type.index]
                                 .name ??
-                            "-"),
+                            '-'),
                   ),
                   trailing: Icon(
                       getLessonInfoTypes(context)[lessoninfo.type.index]
@@ -217,13 +217,13 @@ class NewLessonInfoViewState extends State<NewLessonInfoView> {
                 EditCustomField(
                   value: (lesson != null
                       ? (getWeekDays(context)[lesson.day].name +
-                          ", " +
+                          ', ' +
                           (lesson.isMultiLesson()
                               ? lesson.start.toString() +
-                                  ". - " +
+                                  '. - ' +
                                   lesson.end.toString() +
-                                  ". "
-                              : lesson.start.toString() + ". "))
+                                  '. '
+                              : lesson.start.toString() + '. '))
                       : null),
                   onClicked: (context) {
                     if (lessoninfo.courseid != null) {
@@ -239,8 +239,8 @@ class NewLessonInfoViewState extends State<NewLessonInfoView> {
                     } else {
                       showResultStateSheet(context: context).value = ResultItem(
                         text: bothlang(context,
-                            de: "Du musst vorher einen Kurs auswählen!",
-                            en: "You have to select a course!"),
+                            de: 'Du musst vorher einen Kurs auswählen!',
+                            en: 'You have to select a course!'),
                         iconData: Icons.warning,
                         loading: false,
                         color: Colors.orange,
@@ -255,7 +255,7 @@ class NewLessonInfoViewState extends State<NewLessonInfoView> {
                 ListTile(
                   leading: Icon(Icons.person),
                   title: Text(getString(context).teacher),
-                  subtitle: Text(lessoninfo.teacher?.name ?? "-"),
+                  subtitle: Text(lessoninfo.teacher?.name ?? '-'),
                   onTap: () {
                     selectTeacher(
                             context,
@@ -273,7 +273,7 @@ class NewLessonInfoViewState extends State<NewLessonInfoView> {
                 ListTile(
                   leading: Icon(Icons.place),
                   title: Text(getString(context).place),
-                  subtitle: Text(lessoninfo.place?.name ?? "-"),
+                  subtitle: Text(lessoninfo.place?.name ?? '-'),
                   onTap: () {
                     selectPlace(
                             context,
@@ -318,7 +318,7 @@ class NewLessonInfoViewState extends State<NewLessonInfoView> {
           category: PermissionAccessType.creator,
           courseid: lessoninfo.courseid);
     } else {
-      throw Exception("SOMETHING WENT WRONG???");
+      throw Exception('SOMETHING WENT WRONG???');
     }
   }
 }
@@ -337,13 +337,13 @@ Future<Lesson> showLessonPicker(
       builder: (context, item) {
         return ListTile(
             title: Text((getWeekDays(context)[item.day].name +
-                ", " +
+                ', ' +
                 (item.isMultiLesson()
                     ? item.start.toString() +
-                        ". - " +
+                        '. - ' +
                         item.end.toString() +
-                        ". "
-                    : item.start.toString() + ". "))),
+                        '. '
+                    : item.start.toString() + '. '))),
             onTap: () {
               Navigator.pop(context, item);
             },

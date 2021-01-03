@@ -87,7 +87,7 @@ class CourseAllGradeViewState extends State<CourseAllGradeView> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            item?.getName() ?? "-",
+            item?.getName() ?? '-',
           ),
           bottom: PreferredSize(
             child: Container(

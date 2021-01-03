@@ -26,13 +26,13 @@ Future<Country> selectCountry(BuildContext context, {Country selected}) {
 String countryToName(BuildContext context, Country country) {
   switch (country) {
     case Country.germany:
-      return bothlang(context, en: "Germany", de: "Deutschland");
+      return bothlang(context, en: 'Germany', de: 'Deutschland');
     case Country.austria:
-      return bothlang(context, en: "Austria", de: "Österreich");
+      return bothlang(context, en: 'Austria', de: 'Österreich');
     case Country.switzerland:
-      return bothlang(context, en: "Switzerland", de: "Schweiz");
+      return bothlang(context, en: 'Switzerland', de: 'Schweiz');
     case Country.netherlands:
-      return bothlang(context, en: "Netherlands", de: "Niederlanden");
+      return bothlang(context, en: 'Netherlands', de: 'Niederlanden');
   }
-  return bothlang(context, en: "All", de: "Alle");
+  return bothlang(context, en: 'All', de: 'Alle');
 }

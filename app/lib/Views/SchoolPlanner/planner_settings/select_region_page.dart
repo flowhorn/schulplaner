@@ -45,9 +45,9 @@ class SelectRegionPage extends StatelessWidget {
               builder: (context, filterValue, _) {
                 return Column(
                   children: <Widget>[
-                    FormHeader2(bothlang(context, en: "Filter", de: "Filter")),
+                    FormHeader2(bothlang(context, en: 'Filter', de: 'Filter')),
                     ListTile(
-                      title: Text(bothlang(context, en: "Country", de: "Land")),
+                      title: Text(bothlang(context, en: 'Country', de: 'Land')),
                       trailing:
                           Text(countryToName(context, filterValue.country)),
                       onTap: () {
@@ -63,7 +63,7 @@ class SelectRegionPage extends StatelessWidget {
                     ),
                     SwitchListTile.adaptive(
                       title: Text(bothlang(context,
-                          de: "Nur offizielle", en: "Officials only")),
+                          de: 'Nur offizielle', en: 'Officials only')),
                       value: filterValue.isOfficial,
                       onChanged: (newValue) {
                         setRegionsFilter(RegionsFilter(
@@ -87,7 +87,7 @@ class SelectRegionPage extends StatelessWidget {
                               Text(
                                 regions.length.toString() +
                                     bothlang(context,
-                                        en: " results", de: " Ergebnisse"),
+                                        en: ' results', de: ' Ergebnisse'),
                                 textAlign: TextAlign.center,
                               ),
                               for (final region in regions)
@@ -140,22 +140,22 @@ class RegionTile extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            bothlang(context, en: "Country", de: "Land") +
-                ": " +
+            bothlang(context, en: 'Country', de: 'Land') +
+                ': ' +
                 (region.country != null
                     ? countryToName(context, region.country)
-                    : "/"),
+                    : '/'),
           ),
           Text(getString(context).refreshed +
-              ": " +
+              ': ' +
               region.lastRefreshed.parser.toYMMMd),
           Row(
             children: <Widget>[
               if (region.isOfficial)
                 RegionTileTag(
-                    text: bothlang(context, de: "Offiziell", en: "Official"))
+                    text: bothlang(context, de: 'Offiziell', en: 'Official'))
               else
-                RegionTileTag(text: "Community"),
+                RegionTileTag(text: 'Community'),
             ],
           )
         ],

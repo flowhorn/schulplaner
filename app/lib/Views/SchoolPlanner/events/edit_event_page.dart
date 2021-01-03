@@ -105,7 +105,7 @@ class NewSchoolEventView extends StatelessWidget {
                               : Icon(Icons.warning),
                           subtitle: Text(data.type != null
                               ? eventtype_data(context)[data.type].name
-                              : "-"),
+                              : '-'),
                           onTap: () {
                             selectItem<EventTypeData>(
                                 context: context,
@@ -172,7 +172,7 @@ class NewSchoolEventView extends StatelessWidget {
                           leading: Icon(Icons.event),
                           title: Text(getString(context).date),
                           subtitle: Text(
-                              data.date != null ? getDateText(data.date) : "-"),
+                              data.date != null ? getDateText(data.date) : '-'),
                           onTap: () {
                             selectDateString(context, data.date)
                                 .then((newDateString) {
@@ -198,7 +198,7 @@ class NewSchoolEventView extends StatelessWidget {
                                 title: Text(getString(context).end),
                                 subtitle: Text(data.enddate != null
                                     ? getDateText(data.enddate)
-                                    : "-"),
+                                    : '-'),
                                 onTap: () {
                                   selectDateString(context, data.enddate)
                                       .then((newDateString) {
@@ -241,7 +241,7 @@ class NewSchoolEventView extends StatelessWidget {
                                 children: <Widget>[
                                   ListTile(
                                     title: Text(getString(context).starttime),
-                                    subtitle: Text(data.starttime ?? "-"),
+                                    subtitle: Text(data.starttime ?? '-'),
                                     onTap: () {
                                       showTimePicker(
                                               context: context,
@@ -258,7 +258,7 @@ class NewSchoolEventView extends StatelessWidget {
                                   ),
                                   ListTile(
                                     title: Text(getString(context).endtime),
-                                    subtitle: Text(data.endtime ?? "-"),
+                                    subtitle: Text(data.endtime ?? '-'),
                                     onTap: () {
                                       showTimePicker(
                                               context: context,

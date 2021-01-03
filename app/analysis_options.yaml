@@ -9,7 +9,6 @@ analyzer:
 
 linter:
   rules: 
-    prefer_single_quotes: false
     omit_local_variable_types: false
     prefer_collection_literals: false
     prefer_conditional_assignment: false

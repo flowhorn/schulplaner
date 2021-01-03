@@ -26,7 +26,7 @@ class RButton extends StatelessWidget {
           iconData,
           color: enabled ? null : disabledColor,
         ),
-        label: Text(text ?? "-"),
+        label: Text(text ?? '-'),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
             Radius.circular(16.0),
@@ -40,7 +40,7 @@ class RButton extends StatelessWidget {
     } else {
       return OutlineButton(
         onPressed: enabled == true ? onTap : null,
-        child: Text(text ?? "-"),
+        child: Text(text ?? '-'),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(16.0)),
           side: BorderSide(

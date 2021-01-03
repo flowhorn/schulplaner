@@ -46,7 +46,7 @@ class FormHeader2 extends StatelessWidget {
           right: 16.0,
         ),
         child: Text(
-          (title ?? "").toUpperCase(),
+          (title ?? '').toUpperCase(),
           style: TextStyle(
             fontWeight: FontWeight.w300,
             fontSize: 14.0,
