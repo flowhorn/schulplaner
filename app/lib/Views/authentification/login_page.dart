@@ -47,7 +47,7 @@ class LoginPage extends StatelessWidget {
                         fontWeight: FontWeight.w700,
                       ),
                     ),
-                    SizedBox(height: 6.0),
+                    SizedBox(height: 32.0),
                     LoginInnerPage(),
                     SizedBox(height: 32.0),
                   ],
@@ -139,52 +139,51 @@ class _FailedSignInState extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final signInBloc = BlocProvider.of<SignInBloc>(context);
-    return SizedBox(
-      height: 210.0,
-      child: InkWell(
-        child: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Icon(
-                Icons.error_outline,
-                color: Colors.red,
-                size: 48.0,
-              ),
-              SizedBox(height: 12.0),
-              Text(
-                bothlang(
-                  context,
-                  de: "Anmeldung fehlgeschlagen!",
-                  en: "Sign In failed!",
-                ),
-                style: TextStyle(
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.w300,
-                  color: Colors.red,
-                ),
-              ),
-              SizedBox(height: 4.0),
-              Text(
-                bothlang(
-                  context,
-                  de: "Tippen um nochmal zu versuchen",
-                  en: "Tap to retry",
-                ),
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.w300,
-                  color: Colors.red,
-                ),
-              ),
-            ],
-          ),
-        ),
-        onTap: () {
-          signInBloc.clear();
-        },
+    return
+        ElevatedButton(
+      child: InkWell(child: Column(
+          children: <Widget>[
+            Icon(
+              Icons.error_outline,
+              color: Colors.red,
+              size: 48.0,
+            ),
+            Text(bothlang(
+              context,
+              de: "Anmeldung fehlgeschlagen!",
+              en: "Sign In failed!",
+            ),
+            style: TextStyle(
+              color: Colors.black
+            ),),
+            Text(bothlang(
+              context,
+              de: "Tippen um nochmal zu versuchen",
+              en: "Tap to retry",
+            ),
+              style: TextStyle(
+                  color: Colors.black
+              ),),
+          ]
       ),
+      ),
+      style:
+      ElevatedButton.styleFrom(
+
+          side: BorderSide(color: Colors.black, width: 1),
+        padding: EdgeInsets.only(
+          left: 20,
+          right: 20,
+          top: 10,
+          bottom: 10
+      ),
+        onPrimary: Colors.grey,
+        primary: Colors.white,
+        onSurface: Colors.grey,
+      ),
+      onPressed: () {
+        signInBloc.clear();
+      },
     );
   }
 }
