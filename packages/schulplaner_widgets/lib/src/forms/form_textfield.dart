@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../theme/app_theme.dart';
 
@@ -44,7 +45,9 @@ class FormTextField extends StatelessWidget {
             obscureText: obscureText,
             maxLines: maxLines,
             maxLength: maxLength,
-            maxLengthEnforced: maxLengthEnforced,
+            maxLengthEnforcement: maxLengthEnforced == false
+                ? MaxLengthEnforcement.none
+                : MaxLengthEnforcement.enforced,
             autofocus: autofocus,
           )),
     );

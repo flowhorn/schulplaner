@@ -10,14 +10,14 @@ class CalValue {
   CalValue(this.enabled, this.color);
 
   CalValue.fromJson(dynamic json) {
-    enabled = json["e"];
-    color = fromHex(json["c"]);
+    enabled = json['e'];
+    color = fromHex(json['c']);
   }
 
   Map<String, dynamic> toJson() {
     return {
-      "e": enabled,
-      "c": getHex(color),
+      'e': enabled,
+      'c': getHex(color),
     };
   }
 
@@ -78,7 +78,7 @@ class CalendarSettings {
 
   Map<String, Object> toJson() {
     return {
-      "indicators": indicators?.map<String, dynamic>((key, value) {
+      'indicators': indicators?.map<String, dynamic>((key, value) {
         return MapEntry<String, dynamic>(key.index.toString(), value?.toJson());
       }),
     };

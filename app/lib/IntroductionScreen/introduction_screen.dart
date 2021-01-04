@@ -63,7 +63,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
   void initState() {
     super.initState();
     if (widget.pages.isEmpty) {
-      throw Exception("You provide at least one page on introduction screen !");
+      throw Exception('You provide at least one page on introduction screen !');
     }
     _currentPage = min(widget.initialPage, widget.pages.length - 1);
     _pageController = PageController(initialPage: _currentPage);

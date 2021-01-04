@@ -22,7 +22,7 @@ class UrlImage extends StatelessWidget {
         imageUrl: url,
         width: size,
         height: size,
-        errorWidget: (_, _2, _3) => Text("Error"),
+        errorWidget: (_, _2, _3) => Text('Error'),
       ),
     );
   }

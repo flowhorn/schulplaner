@@ -29,7 +29,7 @@ class SchoolClassSecuritySettings extends StatelessWidget {
             child: Scaffold(
               appBar: MyAppHeader(
                   title:
-                      "${getString(context).security} ${getString(context).in_} " +
+                      '${getString(context).security} ${getString(context).in_} ' +
                           schoolClass.getName()),
               body: getDefaultList([
                 _PublicClass(
@@ -56,7 +56,7 @@ class _PublicClass extends StatelessWidget {
     return SwitchListTile(
       value: schoolClass.settings.isPublic,
       title: Text(bothlang(context,
-          de: "Öffentliche Klasse", en: "Public school class")),
+          de: 'Öffentliche Klasse', en: 'Public school class')),
       onChanged: (newvalue) {
         ValueNotifier<bool> notifier =
             showPermissionStateSheet(context: context);
@@ -94,7 +94,7 @@ class _EnableChat extends StatelessWidget {
     return SwitchListTile(
       value: schoolClass.settings.isPublic,
       title:
-          Text(bothlang(context, de: "Chat aktiviert", en: "Chat activated")),
+          Text(bothlang(context, de: 'Chat aktiviert', en: 'Chat activated')),
       onChanged: (newvalue) {
         ValueNotifier<bool> notifier =
             showPermissionStateSheet(context: context);

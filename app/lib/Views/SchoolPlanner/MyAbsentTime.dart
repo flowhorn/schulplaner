@@ -18,6 +18,7 @@ import 'package:schulplaner_widgets/schulplaner_theme.dart';
 import 'attachments/edit_attachments_view.dart';
 import 'package:schulplaner_widgets/schulplaner_dialogs.dart';
 
+// ignore: must_be_immutable
 class NewAbsentTimeView extends StatelessWidget {
   final PlannerDatabase database;
   final bool editmode;
@@ -269,8 +270,10 @@ class MyAbsentListInner extends StatefulWidget {
 class MyAbsentListInnerState extends State<MyAbsentListInner>
     with AutomaticKeepAliveClientMixin {
   PlannerDatabase get plannerDatabase => widget.plannerDatabase;
+  
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return StreamBuilder<List<AbsentTime>>(
       stream: plannerDatabase.absentTime.stream,
       builder: (context, snapshot) {

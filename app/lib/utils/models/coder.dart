@@ -21,7 +21,7 @@ List<T> decodeList<T>(dynamic data, ObjectBuilder<T> builder) {
 T enumFromJson<T>(List<T> values, String json, {T orElse}) => json != null
     ? values.firstWhere(
         (it) =>
-            '$it'.split(".")[1].toString().toLowerCase() == json.toLowerCase(),
+            '$it'.split('.')[1].toString().toLowerCase() == json.toLowerCase(),
         orElse: () => orElse)
     : orElse;
 

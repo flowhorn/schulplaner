@@ -80,6 +80,7 @@ void showSchoolClassMoreSheet(BuildContext context,
       routname: 'schoolclass');
 }
 
+// ignore: must_be_immutable
 class NewSchoolClassView extends StatelessWidget {
   final PlannerDatabase database;
   final bool editmode;

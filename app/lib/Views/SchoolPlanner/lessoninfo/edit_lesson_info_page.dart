@@ -36,7 +36,7 @@ class NewLessonInfoView extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() => NewLessonInfoViewState(
-      this.database, courseid, lessonid, editmode, lessoninfoid, datestring);
+      database, courseid, lessonid, editmode, lessoninfoid, datestring,);
 }
 
 class NewLessonInfoViewState extends State<NewLessonInfoView> {

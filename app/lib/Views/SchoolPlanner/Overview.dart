@@ -159,7 +159,7 @@ class OverviewView extends StatelessWidget {
                     text: getString(context).timeline,
                     onTap: () {
                       NavigationBloc.of(context).openSubChild(
-                        "timeline",
+                        'timeline',
                         TimelineView(plannerDatabase),
                         getString(context).timeline,
                         navigationItem: NavigationItem.timeline,
@@ -170,7 +170,7 @@ class OverviewView extends StatelessWidget {
                     text: getString(context).calendar,
                     onTap: () {
                       NavigationBloc.of(context).openSubChild(
-                        "calendar",
+                        'calendar',
                         CalendarView(plannerDatabase),
                         getString(context).calendar,
                         navigationItem: NavigationItem.calendar,

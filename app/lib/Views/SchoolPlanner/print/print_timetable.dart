@@ -202,10 +202,10 @@ class WeekDayText extends StatelessWidget {
     return Container(
       child: Center(child: Text(text)),
       decoration: BoxDecoration(
-        border: BoxBorder(
-          bottom: true,
-          top: true,
-          color: PdfColors.grey600,
+        border: Border.symmetric(
+          vertical: BorderSide(
+            color: PdfColors.grey600,
+          ),
         ),
       ),
     );
@@ -287,8 +287,8 @@ class TimetablePDFFragment extends StatelessWidget {
                 );
               }).toList(),
             ),
-          )
-        ]..addAll(List.generate(daysOfWeek, (d) {
+          ),
+          ...List.generate(daysOfWeek, (d) {
             return Expanded(
               child: Stack(
                 children: [
@@ -301,11 +301,7 @@ class TimetablePDFFragment extends StatelessWidget {
                           child: Container(
                             height: lessonheight,
                             decoration: BoxDecoration(
-                              border: BoxBorder(
-                                top: true,
-                                bottom: true,
-                                left: true,
-                                right: true,
+                              border: Border.all(
                                 color: PdfColors.grey600,
                                 width: 1.0,
                               ),
@@ -329,7 +325,8 @@ class TimetablePDFFragment extends StatelessWidget {
                 ],
               ),
             );
-          })),
+          }),
+        ],
       ),
     );
   }

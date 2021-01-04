@@ -82,7 +82,7 @@ class _AppVersion extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       getString(context).version +
-          ": ${Config.versionName} (${Config.versionCode.toString()})",
+          ': ${Config.versionName} (${Config.versionCode.toString()})',
       textAlign: TextAlign.center,
       style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.w400),
     );

@@ -121,7 +121,7 @@ class DataCombinedPackage<T> {
   DataCombinedPackage({@required this.getKey}) {
     _list_streamcontroller = [];
     _list_streamcontroller_once = [];
-    data = Map();
+    data = {};
   }
 
   Map<String, T> data;
@@ -255,8 +255,8 @@ class DataCombinedPackageSpecial<T, T2> {
       @required this.dataCreator}) {
     _list_streamcontroller = [];
     _list_streamcontroller_once = [];
-    data = Map();
-    secondarydata = Map();
+    data = {};
+    secondarydata = {};
   }
 
   Map<String, T> data;

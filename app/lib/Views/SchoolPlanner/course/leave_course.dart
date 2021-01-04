@@ -16,7 +16,7 @@ Future<void> tryToLeaveCourse(BuildContext context, Course courseInfo) async {
         context, _leaveCourse(context, courseInfo.id));
     Navigator.popUntil(context, (Route predicate) {
       final routeName = predicate?.settings?.name;
-      return routeName?.startsWith("course") == false;
+      return routeName?.startsWith('course') == false;
     });
   }
 }

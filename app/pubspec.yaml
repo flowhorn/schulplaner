@@ -1,13 +1,12 @@
 name: schulplaner8
 description: A new Flutter project.
-
+publish_to: none
 version: 10.0.1+611
 
 environment:
   sdk: ">=2.9.0 <3.0.0"
 
 dependencies:
-
   schulplaner_addons:
     path: ../packages/schulplaner_addons
   schulplaner_widgets:
@@ -49,7 +48,7 @@ dependencies:
   firebase_crashlytics: 0.2.4
   firebase_dynamic_links: ^0.6.3
 
-  intl: 0.16.1
+  intl: ^0.17.0-nullsafety.2
   intl_translation: 0.17.10+1
   rxdart: ^0.24.1
   

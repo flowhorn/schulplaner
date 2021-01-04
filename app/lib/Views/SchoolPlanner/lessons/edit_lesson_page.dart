@@ -17,6 +17,7 @@ import 'package:schulplaner8/Views/SchoolPlanner/common/edit_page.dart';
 import 'package:schulplaner_widgets/schulplaner_theme.dart';
 import 'package:schulplaner_widgets/schulplaner_dialogs.dart';
 
+// ignore: must_be_immutable
 class NewLessonView extends StatelessWidget {
   final PlannerDatabase database;
   final bool editmode;
@@ -114,7 +115,7 @@ class NewLessonView extends StatelessWidget {
                                     title: Text(getString(context).start),
                                     subtitle: Text(data.start != null
                                         ? (data.start.toString() +
-                                            ". " +
+                                            '. ' +
                                             getString(context).lesson)
                                         : '-'),
                                     onTap: () {
@@ -129,7 +130,7 @@ class NewLessonView extends StatelessWidget {
                                           builder: (context, item) {
                                             return ListTile(
                                               title: Text(item.toString() +
-                                                  ". " +
+                                                  '. ' +
                                                   getString(context).lesson),
                                               onTap: () {
                                                 Navigator.pop(context);
@@ -152,7 +153,7 @@ class NewLessonView extends StatelessWidget {
                                     title: Text(getString(context).end),
                                     subtitle: Text(data.end != null
                                         ? (data.end.toString() +
-                                            ". " +
+                                            '. ' +
                                             getString(context).lesson)
                                         : '-'),
                                     trailing: IconButton(
@@ -175,7 +176,7 @@ class NewLessonView extends StatelessWidget {
                                           builder: (context, item) {
                                             return ListTile(
                                               title: Text(item.toString() +
-                                                  ". " +
+                                                  '. ' +
                                                   getString(context).lesson),
                                               onTap: () {
                                                 Navigator.pop(context);
@@ -200,7 +201,7 @@ class NewLessonView extends StatelessWidget {
                                 title: Text(getString(context).lesson),
                                 subtitle: Text(data.start != null
                                     ? (data.start.toString() +
-                                        ". " +
+                                        '. ' +
                                         getString(context).lesson)
                                     : '-'),
                                 trailing: IconButton(
@@ -221,7 +222,7 @@ class NewLessonView extends StatelessWidget {
                                       builder: (context, item) {
                                         return ListTile(
                                           title: Text(item.toString() +
-                                              ". " +
+                                              '. ' +
                                               getString(context).lesson),
                                           onTap: () {
                                             Navigator.pop(context);
@@ -511,7 +512,7 @@ class NewLessonView extends StatelessWidget {
           category: PermissionAccessType.creator,
           courseid: data.courseid);
     } else {
-      throw Exception("SOMETHING WENT WRONG???");
+      throw Exception('SOMETHING WENT WRONG???');
     }
   }
 }

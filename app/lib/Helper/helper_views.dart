@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:schulplaner8/Data/Objects.dart';
 import 'package:schulplaner_navigation/schulplaner_navigation.dart';
@@ -109,7 +110,9 @@ Future<String> getTextFromInput(
             decoration:
                 InputDecoration(labelText: title, border: OutlineInputBorder()),
             maxLength: maxlength,
-            maxLengthEnforced: maxlength == null ? false : true,
+            maxLengthEnforcement: maxlength == null
+                ? MaxLengthEnforcement.none
+                : MaxLengthEnforcement.enforced,
             keyboardType: keyboardType,
           ),
           actions: <Widget>[
@@ -738,7 +741,7 @@ ValueNotifier<bool> showLoadingStateSheetFull({
 }) {
   ValueNotifier<bool> sheetUpdate = ValueNotifier(null);
   showBetterModalBottomSheet(
-      routname: "loadingsheet",
+      routname: 'loadingsheet',
       context: context,
       builder: (BuildContext context) {
         return clearAppTheme(
@@ -748,7 +751,7 @@ ValueNotifier<bool> showLoadingStateSheetFull({
                 builder: (context, data, _) {
                   if (data == true) {
                     Future.delayed(Duration(seconds: 1), () {
-                      popNavigatorBy(context, text: "loadingsheet");
+                      popNavigatorBy(context, text: 'loadingsheet');
                     });
                   }
                   return Opacity(
@@ -942,7 +945,7 @@ void showConfirmationDialog(
                           child: ListTile(
                             leading: Icon(Icons.warning),
                             title: Text(warningtext ??
-                                "Du kannst dies nicht rückgäng machen!"),
+                                'Du kannst dies nicht rückgäng machen!'),
                           ),
                           color: Colors.redAccent,
                         )

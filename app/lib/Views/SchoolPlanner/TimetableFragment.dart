@@ -72,7 +72,7 @@ class Weekview_LeftPanel_Lesson extends StatelessWidget {
         child: Align(
           alignment: Alignment.center,
           child: Text(
-            period.toString() + ". ",
+            period.toString() + '. ',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontWeight: FontWeight.w300,
@@ -105,7 +105,7 @@ class Weekview_LeftPanel_LessonTime extends StatelessWidget {
         child: Align(
           alignment: Alignment.center,
           child: Text(
-            lessonTime.start + "\n-\n" + lessonTime.end,
+            lessonTime.start + '\n-\n' + lessonTime.end,
             textAlign: TextAlign.center,
             style: TextStyle(
               fontWeight: FontWeight.w300,

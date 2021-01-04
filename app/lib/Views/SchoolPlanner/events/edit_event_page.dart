@@ -18,6 +18,7 @@ import 'package:schulplaner8/Views/SchoolPlanner/attachments/edit_attachments_vi
 import 'package:schulplaner8/Views/SchoolPlanner/common/edit_page.dart';
 import 'package:schulplaner_widgets/schulplaner_theme.dart';
 
+// ignore: must_be_immutable
 class NewSchoolEventView extends StatelessWidget {
   final PlannerDatabase database;
   final bool editmode;
@@ -385,7 +386,7 @@ class NewSchoolEventView extends StatelessWidget {
               category: PermissionAccessType.creator,
               classid: data.classid);
         } else {
-          throw Exception("SOMETHING WENT WRONG???");
+          throw Exception('SOMETHING WENT WRONG???');
         }
       }
     }

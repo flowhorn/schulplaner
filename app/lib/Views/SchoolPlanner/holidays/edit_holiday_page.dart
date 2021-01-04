@@ -11,6 +11,7 @@ import 'package:schulplaner8/utils/models/id.dart';
 import 'package:schulplaner8/utils/models/name.dart';
 import 'package:schulplaner_widgets/schulplaner_dialogs.dart';
 
+// ignore: must_be_immutable
 class NewHolidayPage extends StatelessWidget {
   final PlannerDatabase database;
   bool changedValues = false;

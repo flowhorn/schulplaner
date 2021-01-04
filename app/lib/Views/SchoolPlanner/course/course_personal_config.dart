@@ -39,7 +39,7 @@ class CoursePersonalPage extends StatelessWidget {
                     onPressed: () {
                       final infoDialog = InfoDialog(
                         title: 'CourseId:',
-                        message: courseID ?? "???",
+                        message: courseID ?? '???',
                       );
                       // ignore: unawaited_futures
                       infoDialog.show(context);

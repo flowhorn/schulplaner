@@ -55,7 +55,7 @@ class CourseMemberSheet extends SchulplanerSheet {
                 : null,
           ),
           ListTile(
-            title: Text(bothlang(context, de: "Ersteller", en: "Creator")),
+            title: Text(bothlang(context, de: 'Ersteller', en: 'Creator')),
             trailing: memberitem.role == MemberRole.creator
                 ? Icon(
                     Icons.done,
@@ -110,7 +110,7 @@ class CourseMemberSheet extends SchulplanerSheet {
   Future<void> _tapRemoveMember(BuildContext context) async {
     final confirmResult = await ConfirmDialog(
       title:
-          "${userProfile?.name ?? getString(context).anonymoususer} ${getString(context).remove}",
+          '${userProfile?.name ?? getString(context).anonymoususer} ${getString(context).remove}',
       message: '',
     ).show<bool>(context);
     if (confirmResult == true) {
@@ -124,8 +124,8 @@ class CourseMemberSheet extends SchulplanerSheet {
         notifier.value = ResultItem(
           loading: true,
           text: bothlang(context,
-              de: "Authentifiziert, bitte waren...",
-              en: "Authenticated, please wait..."),
+              de: 'Authentifiziert, bitte waren...',
+              en: 'Authenticated, please wait...'),
         );
         final removeResult = await _removeMemberFromCourse(context);
 
@@ -137,7 +137,7 @@ class CourseMemberSheet extends SchulplanerSheet {
               color: Colors.green);
           await Future.delayed(Duration(milliseconds: 500)).then((value) {
             Navigator.pop(context);
-            popNavigatorBy(context, text: "memberid");
+            popNavigatorBy(context, text: 'memberid');
           });
         } else {
           notifier.value = ResultItem(
@@ -185,8 +185,8 @@ class CourseMemberSheet extends SchulplanerSheet {
         notifier.value = ResultItem(
           loading: true,
           text: bothlang(context,
-              de: "Authentifiziert, bitte waren...",
-              en: "Authenticated, please wait..."),
+              de: 'Authentifiziert, bitte waren...',
+              en: 'Authenticated, please wait...'),
         );
         changeMemberTypeUserCourse(
                 courseID: courseID, memberID: member.id, newRole: newRole)

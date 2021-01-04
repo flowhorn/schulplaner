@@ -133,7 +133,7 @@ class _ReorderableListState extends State<ReorderableList>
     _dragEnd(null);
   }
 
-  _dragEnd(DragEndDetails details) async {
+  Future<void> _dragEnd(DragEndDetails details) async {
     // ignore: unawaited_futures
     HapticFeedback.selectionClick();
     if (_scrolling) {
@@ -299,7 +299,7 @@ class _ReorderableListState extends State<ReorderableList>
 
   //
 
-  Map<Key, AnimationController> _itemTranslations = HashMap();
+  final Map<Key, AnimationController> _itemTranslations = HashMap();
 
   double itemTranslation(Key key) {
     if (!_itemTranslations.containsKey(key)) {
@@ -370,11 +370,11 @@ class ReorderableItem extends StatefulWidget {
   final ReorderableItemChildBuilder childBuilder;
 
   @override
-  createState() => _ReorderableItemState();
+  _ReorderableItemState createState() => _ReorderableItemState();
 }
 
 class _ReorderableItemState extends State<ReorderableItem> {
-  get key => widget.key;
+  Key get key => widget.key;
 
   @override
   Widget build(BuildContext context) {
@@ -455,9 +455,9 @@ class _DragProxyState extends State<_DragProxy> {
     });
   }
 
-  get offset => _offset;
+  double get offset => _offset;
 
-  get height => _size.height;
+  double get height => _size.height;
 
   double _shadowOpacity;
 

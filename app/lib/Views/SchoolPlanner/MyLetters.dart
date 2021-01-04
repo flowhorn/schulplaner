@@ -136,6 +136,7 @@ String getSavedInValue(SavedIn savedin, PlannerDatabase database) {
   throw Exception('Saved in value error!');
 }
 
+// ignore: must_be_immutable
 class NewLetterView extends StatelessWidget {
   final PlannerDatabase database;
   final bool editmode;

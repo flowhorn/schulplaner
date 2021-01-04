@@ -4,9 +4,9 @@ import 'package:date/time.dart';
 String getDeviceName() {
   //DeviceInfoPlugin plugin =DeviceInfoPlugin();
   if (PlatformCheck.isAndroid) {
-    return "Android Gerät";
+    return 'Android Gerät';
   } else if (PlatformCheck.isIOS) {
-    return "iOS Gerät";
+    return 'iOS Gerät';
   } else {
     return 'Unbekannter Gerätetyp';
   }

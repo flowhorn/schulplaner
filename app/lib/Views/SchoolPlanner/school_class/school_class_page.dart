@@ -62,7 +62,7 @@ class SchoolClassView extends StatelessWidget {
                           children: <Widget>[
                             ListTile(
                               leading: Hero(
-                                  tag: "classtag:" + info.id,
+                                  tag: 'classtag:' + info.id,
                                   child: ColoredCircleText(
                                     color: info.getDesign().primary,
                                     text: toShortNameLength(
@@ -160,15 +160,15 @@ class SchoolClassView extends StatelessWidget {
                                     ));
                               },
                               trailing: RButton(
-                                  text: "BETA",
+                                  text: 'BETA',
                                   onTap: null,
                                   disabledColor: Colors.orange),
                             ),
                             ListTile(
                               leading: Icon(Icons.settings_applications),
                               title: Text(bothlang(context,
-                                  de: "Geteilte Einstellungen",
-                                  en: "Shared settings")),
+                                  de: 'Geteilte Einstellungen',
+                                  en: 'Shared settings')),
                               onTap: () {
                                 pushWidget(
                                     context,

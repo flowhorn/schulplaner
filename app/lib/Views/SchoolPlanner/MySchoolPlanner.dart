@@ -60,25 +60,25 @@ class MySchoolPlanner extends StatefulWidget {
     @required this.navigationBloc,
     Key key,
   }) : super(key: key) {
-    print("SchoolPlannerHead Rebuilt!");
+    print('SchoolPlannerHead Rebuilt!');
     if (appLogicControllerBloc.startArgument != null) {
-      if (appLogicControllerBloc.startArgument == "starttimetable") {
+      if (appLogicControllerBloc.startArgument == 'starttimetable') {
         final newdata = navigationBloc.currentMainPageValue.copy();
         newdata.showSubChild = true;
         newdata.subChild = SlideUp(
           child: TimetableView(),
-          key: Key("Test"),
+          key: Key('Test'),
         );
         newdata.subChildName = '';
         newdata.actions = null;
         newdata.index = 4;
         navigationBloc.setMainPage(newdata);
-      } else if (appLogicControllerBloc.startArgument == "starttasks") {
+      } else if (appLogicControllerBloc.startArgument == 'starttasks') {
         final newdata = navigationBloc.currentMainPageValue.copy();
         newdata.showSubChild = true;
         newdata.subChild = SlideUp(
           child: MyTasksList(),
-          key: Key("Test"),
+          key: Key('Test'),
         );
         newdata.subChildName = '';
         newdata.actions = null;
@@ -107,7 +107,7 @@ class _MySchoolPlannerState extends State<MySchoolPlanner>
     @required this.plannerSettingsData,
     @required this.plannerDatabase,
   }) {
-    print("SchoolPlannerState Rebuilt!");
+    print('SchoolPlannerState Rebuilt!');
   }
 
   @override

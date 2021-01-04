@@ -9,6 +9,7 @@ import 'package:schulplaner8/Helper/helper_views.dart';
 import 'package:schulplaner8/Views/Help.dart';
 import 'package:schulplaner_widgets/schulplaner_theme.dart';
 
+// ignore: must_be_immutable
 class EmailView extends StatelessWidget {
   String _email;
   String _password;
@@ -157,6 +158,7 @@ class EmailView extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class RegisterEmailView extends StatelessWidget {
   String _email;
   String _password;

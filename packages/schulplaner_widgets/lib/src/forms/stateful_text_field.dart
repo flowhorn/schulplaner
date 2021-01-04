@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 /// Dieses Textfeld behält seinen State bei, auch wenn sich der Inhalt gerade ändert.
 class StatefulTextField extends StatefulWidget {
@@ -86,7 +87,9 @@ class _StatefulTextFieldState extends State<StatefulTextField> {
       decoration: widget.decoration,
       onChanged: widget.onChanged,
       maxLength: widget.maxLength,
-      maxLengthEnforced: widget.maxLengthEnforced,
+      maxLengthEnforcement: widget.maxLengthEnforced == false
+                ? MaxLengthEnforcement.none
+                : MaxLengthEnforcement.enforced,
       maxLines: widget.maxLines,
       autofillHints: widget.autofillHints,
       focusNode: widget.focusNode,

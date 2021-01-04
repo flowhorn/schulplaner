@@ -536,6 +536,7 @@ void _updateSettings(PlannerSettingsData newdata, PlannerDatabase database) {
   );
 }
 
+// ignore: must_be_immutable
 class LessonTimeSettings extends StatelessWidget {
   final PlannerDatabase database;
   bool changedValues = false;
@@ -784,6 +785,7 @@ class GradeProfileSettings extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class EditGradeProfileSettings extends StatelessWidget {
   final PlannerDatabase database;
   bool changedValues = false;
@@ -982,6 +984,7 @@ class EditGradeProfileSettings extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class EditGradeTypeItemSettings extends StatelessWidget {
   bool changedValues = false;
   GradeTypeItem gradetypeitem;

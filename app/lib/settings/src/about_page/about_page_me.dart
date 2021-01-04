@@ -6,7 +6,7 @@ import 'package:schulplaner_widgets/schulplaner_theme.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AboutPageMe extends StatelessWidget {
-  static const aboutMeString = BothLangString(de: "Über mich", en: "About me");
+  static const aboutMeString = BothLangString(de: 'Über mich', en: 'About me');
 
   static const aboutMeText1 = BothLangString(
     de: '''Hi, ich bin Felix, der Entwickler der Schulplaner App. Vor vier Jahren (2016) habe ich die erste Version der Schulplaner App veröffentlicht. Mit der App habe ich das Programmieren gelernt und gleichzeitig mit vielen Menschen zusammen etwas großartiges entwickelt.''',
@@ -58,11 +58,11 @@ class AboutPageMe extends StatelessWidget {
               color: Colors.pink,
             ),
             title: Text(
-              "Instagram (@felix.weuth)",
+              'Instagram (@felix.weuth)',
               style: TextStyle(color: Colors.pink),
             ),
             onTap: () {
-              launch("https://www.instagram.com/felix.weuth");
+              launch('https://www.instagram.com/felix.weuth');
             },
           ),
         ],

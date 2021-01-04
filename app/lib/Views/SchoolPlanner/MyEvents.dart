@@ -75,6 +75,7 @@ class MyEventsListInnerState extends State<MyEventsListInner>
     with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     final plannerDatabase =
         BlocProvider.of<PlannerDatabaseBloc>(context).plannerDatabase;
     return StreamBuilder<Map<String, SchoolEvent>>(
@@ -347,12 +348,12 @@ class MyEventsOnlyExams extends StatelessWidget {
 Stream<Map<String, SchoolEvent>> getArchiveStreamEvents(
     PlannerDatabase database) {
   StreamController<Map<String, SchoolEvent>> newcontroller = StreamController();
-  Map<String, List<SchoolEvent>> unmergeddata_tooold = Map();
-  Map<String, List<SchoolEvent>> unmergeddata_archived = Map();
+  Map<String, List<SchoolEvent>> unmergeddata_tooold = {};
+  Map<String, List<SchoolEvent>> unmergeddata_archived = {};
   List<StreamSubscription> subscriptions = [];
 
   void update() {
-    Map<String, SchoolEvent> compounddata = Map();
+    Map<String, SchoolEvent> compounddata = {};
     unmergeddata_archived.values.forEach((it) => compounddata
         .addAll(it.asMap().map((_, value) => MapEntry(value.eventid, value))));
     unmergeddata_tooold.values.forEach((it) => compounddata

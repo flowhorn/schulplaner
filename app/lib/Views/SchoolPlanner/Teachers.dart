@@ -27,10 +27,10 @@ class TeacherList extends StatelessWidget {
                   title: Text(teacher.name),
                   subtitle: Column(
                     children: <Widget>[
-                      Text("Email: " + (teacher.email ?? '-')),
+                      Text('Email: ' + (teacher.email ?? '-')),
                       Text(bothlang(context,
-                          de: "Tel: " + (teacher.tel ?? '-'),
-                          en: "Phone: " + (teacher.tel ?? '-'))),
+                          de: 'Tel: ' + (teacher.tel ?? '-'),
+                          en: 'Phone: ' + (teacher.tel ?? '-'))),
                     ],
                     crossAxisAlignment: CrossAxisAlignment.start,
                   ),
@@ -61,6 +61,7 @@ class TeacherList extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class NewTeacherView extends StatelessWidget {
   final PlannerDatabase database;
 
@@ -110,7 +111,7 @@ class NewTeacherView extends StatelessWidget {
                           changedValues = true;
                         },
                         iconData: Icons.phone,
-                        labeltext: "Tel",
+                        labeltext: 'Tel',
                         keyBoardType: TextInputType.phone),
                     FormSpace(16.0),
                     FormTextField(
@@ -120,7 +121,7 @@ class NewTeacherView extends StatelessWidget {
                         changedValues = true;
                       },
                       iconData: Icons.alternate_email,
-                      labeltext: "Email",
+                      labeltext: 'Email',
                       keyBoardType: TextInputType.emailAddress,
                     ),
                     FormSpace(16.0),

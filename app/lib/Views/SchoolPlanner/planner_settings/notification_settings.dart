@@ -106,8 +106,8 @@ class _Inner extends StatelessWidget {
                             iconData: Icons.warning,
                             color: Colors.orange,
                             text: bothlang(context,
-                                de: "Die Funktion befindet sich aktuell noch in der BETA. Alle Zeiten werden auf volle Stunden gerundet.",
-                                en: "This feature is still in the BETA. All times are rounded to full hours."));
+                                de: 'Die Funktion befindet sich aktuell noch in der BETA. Alle Zeiten werden auf volle Stunden gerundet.',
+                                en: 'This feature is still in the BETA. All times are rounded to full hours.'));
                       }
                     });
                   }
@@ -115,7 +115,7 @@ class _Inner extends StatelessWidget {
             trailing: Card(
               child: Padding(
                 padding: EdgeInsets.all(4.0),
-                child: Text("BETA"),
+                child: Text('BETA'),
               ),
               color: Colors.orange,
             ),
@@ -124,7 +124,7 @@ class _Inner extends StatelessWidget {
             title: Text(getString(context).rememberdaysbefore),
             subtitle: Text(notificationSettings.dailydaterange != null
                 ? (notificationSettings.dailydaterange.toString() +
-                    " " +
+                    ' ' +
                     getString(context).days)
                 : '-'),
             enabled: notificationSettings.notifydaily,
@@ -136,7 +136,7 @@ class _Inner extends StatelessWidget {
                         builder: (context, item) {
                           return ListTile(
                             title: Text(item.toString() +
-                                " " +
+                                ' ' +
                                 getString(context).days),
                             trailing: selectedView(
                                 item == notificationSettings.dailydaterange),
@@ -204,7 +204,7 @@ class _Devices extends StatelessWidget {
           if (notificationSettings.devices.containsKey(snapshot.data)) {
             return ListTile(
               title: Text(
-                getString(context).thisdeviceisactive + " :)",
+                getString(context).thisdeviceisactive + ' :)',
                 textAlign: TextAlign.center,
               ),
             );
