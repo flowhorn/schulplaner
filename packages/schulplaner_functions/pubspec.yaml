@@ -23,4 +23,12 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+
+dependency_overrides:
+  intl: ^0.17.0-nullsafety.2
+  intl_translation:
+    git:
+      url: https://github.com/Zazo032/intl_translation.git
+      ref: patch-1
+
 flutter:
