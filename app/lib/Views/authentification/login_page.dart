@@ -180,7 +180,7 @@ class _FailedSignInState extends StatelessWidget {
                 label: Text(
                   bothlang(
                     context,
-                    de: "Geh zurück",
+                    de: "Zurück",
                     en: "Go back",
                   ),
                   style:
