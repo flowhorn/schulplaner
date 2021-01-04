@@ -146,6 +146,15 @@ class _FailedSignInState extends StatelessWidget {
         color: Colors.red,
         size: 60.0,
       ),
+      Text(
+        bothlang(
+          context,
+          de: "Authentifizierungsfehler",
+          en: "Authentication error",
+        ),
+        style: TextStyle(
+            fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
+      ),
       SizedBox(height: 100.0),
       InkWell(
           customBorder: RoundedRectangleBorder(
@@ -171,8 +180,8 @@ class _FailedSignInState extends StatelessWidget {
                 label: Text(
                   bothlang(
                     context,
-                    de: "Anmeldung fehlgeschlagen",
-                    en: "Login failed",
+                    de: "Geh zurück",
+                    en: "Go back",
                   ),
                   style:
                       TextStyle(color: Colors.red, fontWeight: FontWeight.w800),
