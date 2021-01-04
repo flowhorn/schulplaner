@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Data/plannerdatabase.dart';
+import 'package:schulplaner8/grades/pages/edit_grade_page.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
 import 'package:schulplaner_widgets/schulplaner_common.dart';
 import 'package:schulplaner_widgets/schulplaner_forms.dart';
@@ -33,12 +34,12 @@ class NewSchoolReportViewState extends State<NewSchoolReportView> {
       schoolReport =
           SchoolReport(id: database.dataManager.schoolReportsRef.doc().id);
     }
-    prefilled_name = (schoolReport.name ?? "");
+    prefilled_name = (schoolReport.name ?? '');
   }
 
   SchoolReport schoolReport;
 
-  String prefilled_name = "";
+  String prefilled_name = '';
 
   @override
   void initState() {
@@ -113,7 +114,7 @@ class NewReportValueViewiewState extends State<NewReportValueView> {
   final PlannerDatabase database;
   SchoolReport report;
   String courseid;
-  String prefilled_grade = "";
+  String prefilled_grade = '';
   double prefilled_weight = 1.0;
   ValueNotifier<bool> showWeight = ValueNotifier(false);
 
@@ -124,7 +125,7 @@ class NewReportValueViewiewState extends State<NewReportValueView> {
       reportValue = report.getValue(courseid);
       if (reportValue == null) reportValue = ReportValue(weight: 1.0);
     }
-    prefilled_grade = reportValue.grade_key ?? "";
+    prefilled_grade = reportValue.grade_key ?? '';
     prefilled_weight = reportValue.weight ?? 1.0;
     if (getGradePackage(database.getSettings().gradepackageid).inputSupport) {
       if (reportValue.grade_key != null) {
@@ -175,7 +176,7 @@ class NewReportValueViewiewState extends State<NewReportValueView> {
                             .getCurrentGradePackage()
                             .id
                             .toString() +
-                        "-" +
+                        '-' +
                         mValue.toString();
                   } catch (exception) {
                     print(exception);
@@ -221,7 +222,7 @@ class NewReportValueViewiewState extends State<NewReportValueView> {
                             ? DataUtil_Grade()
                                 .getGradeValueOf(reportValue.grade_key)
                                 .getLongName()
-                            : "-"),
+                            : '-'),
                         dense: false,
                         enabled: true,
                         trailing: reportValue.grade_key != null
@@ -268,8 +269,4 @@ class NewReportValueViewiewState extends State<NewReportValueView> {
           ),
         ));
   }
-
-  void showGradeValuePicker(PlannerDatabase database, BuildContext context,
-      Null Function(GradeValue gradevalue) param2,
-      {String currentid}) {}
 }

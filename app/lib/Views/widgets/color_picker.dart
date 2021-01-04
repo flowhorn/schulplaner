@@ -21,7 +21,7 @@ class _ColorPicker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text(bothlang(context, de: "Farbe", en: "Color")),
+      title: Text(bothlang(context, de: 'Farbe', en: 'Color')),
       contentPadding: EdgeInsets.zero,
       content: MaterialColorPicker(
         selectedColor: selectedColor,

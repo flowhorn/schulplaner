@@ -87,21 +87,21 @@ class CourseAllGradeViewState extends State<CourseAllGradeView> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            item?.getName() ?? "-",
+            item?.getName() ?? '-',
           ),
           bottom: PreferredSize(
             child: Container(
               height: 50.0,
               child: ListTile(
-                title: Text(getString(context).average + ":"),
+                title: Text(getString(context).average + ':'),
                 trailing: Text(
-                  "Ø" +
+                  'Ø' +
                       (calculator.totalaverage != null
                           ? database
                               .getSettings()
                               .getCurrentAverageDisplay(context: context)
                               .input(calculator.totalaverage)
-                          : "/"),
+                          : '/'),
                   style: TextStyle(
                       color: getTextColor(item?.getDesign()?.primary),
                       fontWeight: FontWeight.bold,

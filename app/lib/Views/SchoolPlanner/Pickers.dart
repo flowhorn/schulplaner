@@ -102,7 +102,7 @@ Future<Place> selectPlace(BuildContext context, PlannerDatabase database,
       builder: (context, item) {
         bool isSelected = ((current ?? {})[item.placeid] != null) ?? false;
         return ListTile(
-          title: Text(item.name ?? "-"),
+          title: Text(item.name ?? '-'),
           trailing: selectedView(isSelected),
           onTap: isSelected
               ? null

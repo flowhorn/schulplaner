@@ -131,7 +131,7 @@ class ReportViewState extends State<ReportView> {
       appBar: AppBar(
         title: Text(getString(context).schoolreport),
         bottom: PreferredSize(
-          preferredSize: Size(null, 50.0),
+          preferredSize: Size(double.infinity, 50.0),
           child: Container(
             height: 50.0,
             child: ListTile(

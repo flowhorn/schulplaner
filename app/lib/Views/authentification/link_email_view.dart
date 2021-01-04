@@ -8,6 +8,7 @@ import 'package:schulplaner_translations/schulplaner_translations.dart';
 import 'package:schulplaner_widgets/schulplaner_forms.dart';
 import 'package:schulplaner_widgets/schulplaner_theme.dart';
 
+// ignore: must_be_immutable
 class LinkEmailView extends StatelessWidget {
   String _email;
   String _password;
@@ -51,7 +52,7 @@ class LinkEmailView extends StatelessWidget {
                                 _email = newemail;
                               },
                               iconData: Icons.email,
-                              labeltext: "Email",
+                              labeltext: 'Email',
                               keyBoardType: TextInputType.emailAddress,
                             ),
                             SizedBox(

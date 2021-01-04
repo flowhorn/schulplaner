@@ -80,6 +80,7 @@ void showSchoolClassMoreSheet(BuildContext context,
       routname: 'schoolclass');
 }
 
+// ignore: must_be_immutable
 class NewSchoolClassView extends StatelessWidget {
   final PlannerDatabase database;
   final bool editmode;
@@ -701,8 +702,9 @@ class SchoolClassCourseTemplatesView extends StatelessWidget {
                                   );
                                   ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
-                                          content:
-                                              Text('${item.name} erstellt.')));
+                                          content: Text(bothlang(context,
+                                              de: '${item.name} erstellt',
+                                              en: '${item.name} created.'))));
                                 }
                               : null,
                           tooltip: getString(context).add,

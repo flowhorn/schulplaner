@@ -68,9 +68,10 @@ class TimetablePDFWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           if (weekType == 1)
-            Text("A-Woche", style: TextStyle(color: PdfColors.black)),
+            Text('A-Woche', //todo(th3ph4nt0m): remove hard-coded week names
+                style: TextStyle(color: PdfColors.black)),
           if (weekType == 2)
-            Text("B-Woche", style: TextStyle(color: PdfColors.black)),
+            Text('B-Woche', style: TextStyle(color: PdfColors.black)),
           SizedBox(
             height: 40.0,
             child: Row(
@@ -116,15 +117,15 @@ class TimetablePDFWidget extends StatelessWidget {
 
 List<String> weekDays() {
   return [
-    "Null",
-    "Montag",
-    "Dienstag",
-    "Mittwoch",
-    "Donnerstag",
-    "Freitag",
-    "Samstag",
-    "Sonntag",
-  ];
+    'Null',
+    'Montag',
+    'Dienstag',
+    'Mittwoch',
+    'Donnerstag',
+    'Freitag',
+    'Samstag',
+    'Sonntag',
+  ]; //todo(th3ph4nt0m): remove hard-coded weekday names
 }
 
 List<TimeTableElement> buildElements(
@@ -199,13 +200,15 @@ class WeekDayText extends StatelessWidget {
   @override
   Widget build(Context context) {
     return Container(
-        child: Center(child: Text(text)),
-        decoration: BoxDecoration(
-            border: BoxBorder(
-          bottom: true,
-          top: true,
-          color: PdfColors.grey600,
-        ),),);
+      child: Center(child: Text(text)),
+      decoration: BoxDecoration(
+        border: Border.symmetric(
+          vertical: BorderSide(
+            color: PdfColors.grey600,
+          ),
+        ),
+      ),
+    );
   }
 }
 
@@ -216,13 +219,13 @@ class LessonPdfTile extends StatelessWidget {
   LessonPdfTile(this.lesson, this.course);
   @override
   Widget build(Context context) {
-    final place = lesson.place?.name ?? course.getPlaceFirst() ?? "";
+    final place = lesson.place?.name ?? course.getPlaceFirst() ?? '';
     return Container(
       color: PdfColor.fromInt(course.getDesign().primary.value),
       child: Stack(children: [
         Center(
             child: Text(
-          course.getName() ?? "/",
+          course.getName() ?? '/',
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 14.0,
@@ -284,8 +287,8 @@ class TimetablePDFFragment extends StatelessWidget {
                 );
               }).toList(),
             ),
-          )
-        ]..addAll(List.generate(daysOfWeek, (d) {
+          ),
+          ...List.generate(daysOfWeek, (d) {
             return Expanded(
               child: Stack(
                 children: [
@@ -298,11 +301,7 @@ class TimetablePDFFragment extends StatelessWidget {
                           child: Container(
                             height: lessonheight,
                             decoration: BoxDecoration(
-                              border: BoxBorder(
-                                top: true,
-                                bottom: true,
-                                left: true,
-                                right: true,
+                              border: Border.all(
                                 color: PdfColors.grey600,
                                 width: 1.0,
                               ),
@@ -326,7 +325,8 @@ class TimetablePDFFragment extends StatelessWidget {
                 ],
               ),
             );
-          })),
+          }),
+        ],
       ),
     );
   }

@@ -1,11 +1,11 @@
-import "package:intl/intl.dart";
+import 'package:intl/intl.dart';
 
 class Utils {
-  static final DateFormat _monthFormat = DateFormat("MMMM yyyy");
-  static final DateFormat _dayFormat = DateFormat("dd");
-  static final DateFormat _firstDayFormat = DateFormat("MMM dd");
-  static final DateFormat _fullDayFormat = DateFormat("EEE MMM dd, yyyy");
-  static final DateFormat _apiDayFormat = DateFormat("yyyy-MM-dd");
+  static final DateFormat _monthFormat = DateFormat('MMMM yyyy');
+  static final DateFormat _dayFormat = DateFormat('dd');
+  static final DateFormat _firstDayFormat = DateFormat('MMM dd');
+  static final DateFormat _fullDayFormat = DateFormat('EEE MMM dd, yyyy');
+  static final DateFormat _apiDayFormat = DateFormat('yyyy-MM-dd');
 
   static String formatMonth(DateTime d) => _monthFormat.format(d);
   static String formatDay(DateTime d) => _dayFormat.format(d);
@@ -14,13 +14,13 @@ class Utils {
   static String apiDayFormat(DateTime d) => _apiDayFormat.format(d);
 
   static const List<String> weekdays = [
-    "Mon",
-    "Tue",
-    "Wed",
-    "Thu",
-    "Fri",
-    "Sat",
-    "Sun",
+    'Mon',
+    'Tue',
+    'Wed',
+    'Thu',
+    'Fri',
+    'Sat',
+    'Sun',
   ];
 
   /// The list of days in a given month

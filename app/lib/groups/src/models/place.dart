@@ -19,7 +19,7 @@ class Place {
 
   bool validate() {
     if (placeid == null) return false;
-    if (name == null || name == "") return false;
+    if (name == null || name == '') return false;
     return true;
   }
 }

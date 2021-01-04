@@ -28,8 +28,8 @@ class PlaceList extends StatelessWidget {
                   subtitle: Column(
                     children: <Widget>[
                       Text(getString(context).address +
-                          ": " +
-                          (item.address ?? "-")),
+                          ': ' +
+                          (item.address ?? '-')),
                     ],
                     crossAxisAlignment: CrossAxisAlignment.start,
                   ),
@@ -60,6 +60,7 @@ class PlaceList extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class NewPlaceView extends StatelessWidget {
   final PlannerDatabase database;
 
@@ -161,7 +162,7 @@ class NewPlaceView extends StatelessWidget {
 Future<void> showPlaceDetail(
     {@required BuildContext context,
     @required PlannerDatabase plannerdatabase,
-    @required String placeid}) async{
+    @required String placeid}) async {
   await showDetailSheetBuilder(
       context: context,
       body: (BuildContext context) {
@@ -176,7 +177,7 @@ Future<void> showPlaceDetail(
                   FormSpace(12.0),
                   ListTile(
                     leading: Icon(Icons.map),
-                    title: Text(item.address ?? "-"),
+                    title: Text(item.address ?? '-'),
                   ),
                   ButtonBar(
                     children: <Widget>[
@@ -184,7 +185,7 @@ Future<void> showPlaceDetail(
                           text: getString(context).navigate,
                           onTap: () {
                             if (item.address != null) {
-                              launch("geo:0,0?:" + item.address);
+                              launch('geo:0,0?:' + item.address);
                             }
                           }),
                       RButton(
@@ -225,7 +226,7 @@ Future<void> showPlaceDetail(
                                               plannerdatabase.dataManager
                                                   .DeletePlace(item);
                                               popNavigatorBy(context,
-                                                  text: "placeid");
+                                                  text: 'placeid');
                                             }
                                           });
                                         },
@@ -234,7 +235,7 @@ Future<void> showPlaceDetail(
                                   );
                                 },
                                 title: getString(context).more,
-                                routname: "placeidmore");
+                                routname: 'placeidmore');
                           },
                           iconData: Icons.more_horiz),
                     ],
@@ -243,5 +244,5 @@ Future<void> showPlaceDetail(
               );
             });
       },
-      routname: "placeidview");
+      routname: 'placeidview');
 }

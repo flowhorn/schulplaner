@@ -140,7 +140,7 @@ class SchulplanerBlocs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      key: const ValueKey("SchulplanerBlocs"),
+      key: const ValueKey('SchulplanerBlocs'),
       child: child,
       blocProviders: [
         ...mainProviders,

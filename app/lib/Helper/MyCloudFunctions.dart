@@ -7,7 +7,7 @@ import 'package:schulplaner_models/schulplaner_models.dart';
 
 Future<Course> getCourseInformation(String courseid) {
   return FirebaseFirestore.instance
-      .collection("courses")
+      .collection('courses')
       .doc(courseid)
       .get()
       .then((snap) => Course.fromData(snap.data()));
@@ -30,7 +30,7 @@ Future<Course> getCourseInformation(String courseid) {
 
 Future<SchoolClass> getSchoolClassInformation(String classid) {
   return FirebaseFirestore.instance
-      .collection("schoolclasses")
+      .collection('schoolclasses')
       .doc(classid)
       .get()
       .then((snap) => SchoolClass.fromData(snap.data()));
@@ -63,7 +63,7 @@ Future<bool> changeMemberTypeUserCourse({
   @required MemberRole newRole,
 }) {
   return FirebaseFunctions.instance
-      .httpsCallable("CourseUpdateMemberRole")
+      .httpsCallable('CourseUpdateMemberRole')
       .call({
     'courseID': courseID,
     'memberID': memberID,
@@ -79,7 +79,7 @@ Future<bool> changeMemberTypeUserCourse({
 }
 
 Future<bool> addCourseToClass({String courseid, String classid}) {
-  return FirebaseFunctions.instance.httpsCallable("schoolClassAddCourse").call({
+  return FirebaseFunctions.instance.httpsCallable('schoolClassAddCourse').call({
     'courseid': courseid,
     'classid': classid,
   }).then<bool>((result) {
@@ -99,7 +99,7 @@ Future<bool> changeMemberTypeUserSchoolClass(
     {String classid, String memberid, MemberRole newRole}) {
   print(newRole.toString());
   return FirebaseFunctions.instance
-      .httpsCallable("ClassUpdateMemberRole")
+      .httpsCallable('ClassUpdateMemberRole')
       .call({
     'classID': classid,
     'memberID': memberid,
@@ -116,12 +116,12 @@ Future<bool> changeMemberTypeUserSchoolClass(
 
 Future<bool> removeCourseToClass({String courseid, String classid}) {
   return FirebaseFunctions.instance
-      .httpsCallable("schoolClassRemoveCourse")
+      .httpsCallable('schoolClassRemoveCourse')
       .call({
     'courseid': courseid,
     'classid': classid,
   }).then<bool>((result) {
-    print("REMOVE::");
+    print('REMOVE::');
     print(result.data);
     print(result.data.runtimeType);
     if (result.data is bool) {

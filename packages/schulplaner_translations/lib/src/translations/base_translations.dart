@@ -10,7 +10,7 @@ class BaseTranslations {
   }
 
   static TranslatableString get successfull {
-    return BothLangString(de: 'Erfolgreich', en: 'Successfull');
+    return BothLangString(de: 'Erfolgreich', en: 'Successful');
   }
 
   static TranslatableString get noInternetAccess {

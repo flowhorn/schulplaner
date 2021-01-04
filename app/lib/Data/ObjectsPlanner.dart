@@ -68,9 +68,9 @@ class Term{
 
   bool validate(){
     if(termid == null)return false;
-    if(name ==null || name == "")return false;
-    if(start ==null || start == "")return false;
-    if(end ==null || end == "")return false;
+    if(name ==null || name == '')return false;
+    if(start ==null || start == '')return false;
+    if(end ==null || end == '')return false;
     return true;
   }
 }

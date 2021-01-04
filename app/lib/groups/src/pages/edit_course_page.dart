@@ -114,7 +114,7 @@ class _Inner extends StatelessWidget {
             color: course.design?.primary ?? Colors.grey,
           ),
           title: Text(getString(context).design),
-          subtitle: Text(course.design?.name ?? "-"),
+          subtitle: Text(course.design?.name ?? '-'),
           trailing: IconButton(
               icon: Icon(Icons.autorenew),
               onPressed: () {
@@ -276,7 +276,7 @@ class _Connect extends StatelessWidget {
                 title: Text(schoolClassId == null
                     ? getString(context).addtoclass
                     : getString(context).addto +
-                        " ${bloc.database.schoolClassInfos.data[schoolClassId].getName()}"),
+                        ' ${bloc.database.schoolClassInfos.data[schoolClassId].getName()}'),
               ),
             ],
             mainAxisSize: MainAxisSize.min,

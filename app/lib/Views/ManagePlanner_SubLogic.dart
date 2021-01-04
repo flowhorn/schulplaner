@@ -70,12 +70,12 @@ class _OrderableExampleState extends State<OrderableExample> {
     final draggedItem = _items[draggingIndex];
     setState(() {
       debugPrint(
-          "Reordering " + item.toString() + " -> " + newPosition.toString());
+          'Reordering ' + item.toString() + ' -> ' + newPosition.toString());
       _items.removeAt(draggingIndex);
       _items.insert(newPositionIndex, draggedItem);
 
       List reverseditems = _items.reversed.toList();
-      Map<String, int> neworder = Map();
+      Map<String, int> neworder = {};
       for (ItemData i in reverseditems) {
         int index = reverseditems.indexOf(i);
         neworder[i.id] = index;

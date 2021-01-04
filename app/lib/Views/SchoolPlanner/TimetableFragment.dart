@@ -72,7 +72,7 @@ class Weekview_LeftPanel_Lesson extends StatelessWidget {
         child: Align(
           alignment: Alignment.center,
           child: Text(
-            period.toString() + ". ",
+            period.toString() + '. ',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontWeight: FontWeight.w300,
@@ -105,7 +105,7 @@ class Weekview_LeftPanel_LessonTime extends StatelessWidget {
         child: Align(
           alignment: Alignment.center,
           child: Text(
-            lessonTime.start + "\n-\n" + lessonTime.end,
+            lessonTime.start + '\n-\n' + lessonTime.end,
             textAlign: TextAlign.center,
             style: TextStyle(
               fontWeight: FontWeight.w300,
@@ -157,7 +157,7 @@ class WeekView_LessonView extends StatelessWidget {
                   stepGranularity: 0.1,
                 ),
                 Text(
-                  item.place?.name ?? course.getPlaceFirst() ?? "-",
+                  item.place?.name ?? course.getPlaceFirst() ?? '-',
                   maxLines: 1,
                   style: TextStyle(
                       color: getTextColor(course.getDesign().primary),

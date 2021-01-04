@@ -58,33 +58,33 @@ class HolidaySettings extends StatelessWidget {
               builder: (context, lastRefreshedValue, _) {
                 return ListTile(
                   title: Text(bothlang(context,
-                      en: "Holidaydatabase-Cache", de: "Feriendaten-Cache")),
+                      en: 'Vacationdatabase-cache', de: 'Feriendaten-Cache')),
                   subtitle: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
                         bothlang(context,
-                                en: "Last refreshed: ",
-                                de: "Zuletzt aktualisiert: ") +
+                                en: 'Last refresh: ',
+                                de: 'Letzte Aktualisierung: ') +
                             (lastRefreshedValue != null
                                 ? timeago.format(
                                     DateTime.fromMillisecondsSinceEpoch(
                                         lastRefreshedValue),
                                     locale: getString(context).languagecode)
-                                : "/"),
+                                : '/'),
                       ),
                       Text(
                         bothlang(context,
-                            en: "The cache automatically updates every 7 days",
-                            de: "Der Cache aktualisiert sich automatisch alle 7 Tage"),
+                            en: 'The cache automatically refreshes every 7 days',
+                            de: 'Der Cache aktualisiert sich automatisch alle 7 Tage'),
                         style: TextStyle(
                           fontStyle: FontStyle.italic,
                         ),
                       ),
                       Text(
                         bothlang(context,
-                            en: "Tap to refresh",
-                            de: "Tippen zum aktualisieren"),
+                            en: 'Tap to refresh',
+                            de: 'Tippen zum aktualisieren'),
                         style: TextStyle(
                           fontStyle: FontStyle.italic,
                         ),

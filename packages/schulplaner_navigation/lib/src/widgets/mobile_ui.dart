@@ -121,7 +121,7 @@ class _BottomNavBar extends StatelessWidget {
     final item = NavigationBloc.of(context).getNavigationActionItem(index);
     return BottomNavigationBarItem(
       icon: Icon(item?.iconData ?? Icons.navigation),
-      label: item?.name?.getText(context) ?? "-",
+      label: item?.name?.getText(context) ?? '-',
     );
   }
 }

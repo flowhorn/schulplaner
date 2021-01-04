@@ -35,15 +35,15 @@ class SchoolClassSharedSettingsView extends StatelessWidget {
             child: Scaffold(
               appBar: MyAppHeader(
                   title: bothlang(context,
-                      de: "Geteilte Einstellungen", en: "Shared Settings")),
+                      de: 'Geteilte Einstellungen', en: 'Shared Settings')),
               body: Column(
                 children: <Widget>[
                   if (sharedSettings == null)
                     ListTile(
                       title: Text(bothlang(
                         context,
-                        de: "Keine Einstellungen geteilt",
-                        en: "No shared settings",
+                        de: 'Keine Einstellungen geteilt',
+                        en: 'No shared settings',
                       )),
                     ),
                   if (sharedSettings != null)
@@ -57,19 +57,19 @@ class SchoolClassSharedSettingsView extends StatelessWidget {
 
                         return ListTile(
                           title: Text(bothlang(context,
-                                  en: "Last refreshed: ",
-                                  de: "Zuletzt aktualisiert: ") +
+                                  en: 'Last refreshed: ',
+                                  de: 'Zuletzt aktualisiert: ') +
                               (sharedSettings.lastRefreshed != null
                                   ? timeago.format(sharedSettings.lastRefreshed,
                                       locale: getString(context).languagecode)
-                                  : "/")),
+                                  : '/')),
                           trailing: RButton(
                             iconData: Icons.file_download,
                             enabled: enabled,
                             text: bothlang(
                               context,
-                              de: "Übernehemen",
-                              en: "Use",
+                              de: 'Übernehemen',
+                              en: 'Apply',
                             ),
                             onTap: !enabled
                                 ? null

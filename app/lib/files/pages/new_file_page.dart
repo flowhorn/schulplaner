@@ -118,7 +118,7 @@ class _FileCard extends StatelessWidget {
                     Expanded(
                         child: InkWell(
                       child: Tab(
-                        text: "Web-Link",
+                        text: 'Web-Link',
                         icon: Icon(Icons.link),
                       ),
                       onTap: isFileFormLocked
@@ -245,11 +245,11 @@ class _StandardFile extends StatelessWidget {
                     FormSpace(8.0),
                     Text(
                       (transferredbytes / totalbytes * 100).toStringAsFixed(1) +
-                          "% ${getString(context).of_} " +
+                          '% ${getString(context).of_} ' +
                           KiloByteSize(bytes: totalbytes)
                               .inKilobytes
                               .toString() +
-                          " Kilobytes",
+                          ' Kilobytes',
                     ),
                   ],
                 ),
@@ -279,7 +279,7 @@ class _WebLink extends StatelessWidget {
       child: StatefulTextField.standard(
         initialText: cloudFile.url ?? '',
         onChanged: bloc.changeUrl,
-        labelText: "Link",
+        labelText: 'Link',
       ),
     );
   }

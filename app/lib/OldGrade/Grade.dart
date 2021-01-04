@@ -319,7 +319,7 @@ class AverageCalculator {
   double totalaverage;
   AverageCalculator(PlannerSettingsData settingsData,
       {List<Grade> grades, List<Course> courses}) {
-    averageperCourse = Map();
+    averageperCourse = {};
     double total_count = 0.0;
     double total_value = 0.0;
     courses.forEach((Course c) {
@@ -350,7 +350,7 @@ class AverageCourse {
   double weight_schoolreport = 1.0;
   AverageCourse(PlannerSettingsData settingsData,
       {List<Grade> grades, String gradeprofileid}) {
-    averageperType = Map();
+    averageperType = {};
     double total_value = 0.0;
     double total_weight = 0.0;
     GradeProfile gradeProfile = settingsData.getGradeProfile(gradeprofileid);

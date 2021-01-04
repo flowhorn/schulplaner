@@ -17,6 +17,7 @@ import 'package:schulplaner_widgets/schulplaner_common.dart';
 import 'package:schulplaner_widgets/schulplaner_theme.dart';
 import 'package:schulplaner_widgets/schulplaner_dialogs.dart';
 
+// ignore: must_be_immutable
 class NewSchoolTaskView extends StatelessWidget {
   final PlannerDatabase database;
   final bool editmode;
@@ -308,7 +309,7 @@ class NewSchoolTaskView extends StatelessWidget {
               category: PermissionAccessType.creator,
               classid: data.classid);
         } else {
-          throw Exception("SOMETHING WENT WRONG???");
+          throw Exception('SOMETHING WENT WRONG???');
         }
       }
     }

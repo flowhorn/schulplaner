@@ -31,7 +31,7 @@ class MemberData {
   factory MemberData.create({@required String id, @required MemberRole role}) {
     return MemberData(
       id: id,
-      name: "",
+      name: '',
       role: role,
       pic: null,
       picThumb: null,
@@ -90,23 +90,23 @@ class MemberData {
   }
 
   String getUid() {
-    return id.split("::")[0];
+    return id.split('::')[0];
   }
 
   String getPlannerId() {
-    return id.split("::")[1];
+    return id.split('::')[1];
   }
 
   static String getUidFromKey(String key) {
-    if (key.startsWith("ADVANCED=")) {
-      return key.split("=")[1].split(":")[0];
+    if (key.startsWith('ADVANCED=')) {
+      return key.split('=')[1].split(':')[0];
     }
     return key;
   }
 
   static String getPlannerIDFromKey(String key) {
-    if (key.startsWith("ADVANCED=")) {
-      return key.split("=")[1].split(":")[1];
+    if (key.startsWith('ADVANCED=')) {
+      return key.split('=')[1].split(':')[1];
     }
     return key;
   }

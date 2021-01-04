@@ -12,7 +12,7 @@ import 'package:url_launcher/url_launcher.dart';
 Future<void> showTeacherDetail(
     {@required BuildContext context,
     @required PlannerDatabase plannerdatabase,
-    @required String teacherid}) async{
+    @required String teacherid}) async {
   await showDetailSheetBuilder(
       context: context,
       body: (BuildContext context) {
@@ -27,28 +27,28 @@ Future<void> showTeacherDetail(
                   FormSpace(12.0),
                   ListTile(
                     leading: Icon(Icons.phone),
-                    title: Text(item.tel ?? "-"),
+                    title: Text(item.tel ?? '-'),
                   ),
                   ListTile(
                     leading: Icon(Icons.alternate_email),
-                    title: Text(item.email ?? "-"),
+                    title: Text(item.email ?? '-'),
                   ),
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: ButtonBar(
                       children: <Widget>[
                         RButton(
-                            text: "Anrufen",
+                            text: 'Anrufen',
                             onTap: () {
                               if (item.tel != null) {
-                                launch("tel:" + item.tel);
+                                launch('tel:' + item.tel);
                               }
                             }),
                         RButton(
-                            text: "E-Mail Schreiben",
+                            text: 'E-Mail Schreiben',
                             onTap: () {
                               if (item.email != null) {
-                                launch("mailto:" + item.email);
+                                launch('mailto:' + item.email);
                               }
                             }),
                         RButton(
@@ -94,7 +94,7 @@ Future<void> showTeacherDetail(
                                                   return (predicate
                                                               ?.settings?.name
                                                               ?.startsWith(
-                                                                  "teacherid") ??
+                                                                  'teacherid') ??
                                                           false) ==
                                                       false;
                                                 });
@@ -106,7 +106,7 @@ Future<void> showTeacherDetail(
                                     );
                                   },
                                   title: getString(context).more,
-                                  routname: "teacheridmore");
+                                  routname: 'teacheridmore');
                             },
                             iconData: Icons.more_horiz),
                       ],
@@ -116,5 +116,5 @@ Future<void> showTeacherDetail(
               );
             });
       },
-      routname: "teacheridview");
+      routname: 'teacheridview');
 }

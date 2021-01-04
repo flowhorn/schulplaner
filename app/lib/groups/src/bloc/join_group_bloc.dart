@@ -24,7 +24,7 @@ class JoinGroupBloc extends BlocBase {
   Function(String) get changeEnteredCode => _enteredCodeSubject.add;
 
   Future<void> submitSearch(BuildContext context) async {
-    if (enteredCodeValue == null || enteredCodeValue == "") {
+    if (enteredCodeValue == null || enteredCodeValue == '') {
       return;
     }
     ValueNotifier<bool> sheet_notifier = ValueNotifier(null);

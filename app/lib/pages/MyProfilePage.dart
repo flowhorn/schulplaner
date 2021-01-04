@@ -15,6 +15,7 @@ import 'package:schulplaner8/models/additionaltypes.dart';
 import 'package:schulplaner8/models/member.dart';
 import 'package:schulplaner8/models/user.dart';
 
+// ignore: must_be_immutable
 class EditProfileView extends StatelessWidget {
   final UserDatabase userDatabase;
 
@@ -90,9 +91,9 @@ class EditProfileView extends StatelessWidget {
             FormSpace(16.0),
             Text(
               BothLangString(
-                de: 'Aktuell werden keine Avatare mehr unterstützt aufgrund eines ' +
+                de: 'Aktuell werden keine Avatare mehr unterstützt aufgrund eines '
                     'Bugs bei der AvatarAPI. Dies wird in einem künftigen Update gefixt.',
-                en: 'Currently Avatars are no longer supported, this will be fixed in' +
+                en: 'Currently Avatars are no longer supported, this will be fixed in'
                     ' a future update.',
               ).getText(context),
               textAlign: TextAlign.center,

@@ -10,21 +10,25 @@ class PlannerState extends StatelessWidget {
     final plannerLoaderBloc = BlocProvider.of<PlannerLoaderBloc>(context);
     return InkWell(
       child: Padding(
-        padding: EdgeInsets.all(6.0),
+        padding: EdgeInsets.all(8.0),
         child: Row(
           children: <Widget>[
             SizedBox(
-              width: 4.0,
+              width: 8.0,
             ),
             StreamBuilder<LoadAllPlannerStatus>(
               stream: plannerLoaderBloc.loadAllPlannerStatus,
               builder: (context, snapshot) {
                 final planner = snapshot?.data?.getPlanner();
-                return Text(planner?.name ?? "-");
+                return Text(
+                  planner?.name ?? '-',
+                  textAlign: TextAlign.center,
+                  maxLines: 1,
+                );
               },
             ),
             SizedBox(
-              width: 4.0,
+              width: 8.0,
             ),
             Icon(
               Icons.expand_more,
@@ -32,6 +36,8 @@ class PlannerState extends StatelessWidget {
             ),
           ],
           mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
         ),
       ),
       onTap: () {

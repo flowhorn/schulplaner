@@ -27,18 +27,19 @@ class RecommendedDate {
 
 Stream<Map<String, SchoolTask>> streamFinished(
     PlannerDatabase database, bool finished) {
-  return database.tasks.stream.map((data) {
-    return Map.fromIterable(
-      data.values.where((it) {
-        if (it.archived) {
-          return false;
-        }
-        return (it.isFinished(database.getMemberId()) == finished);
-      }),
-      key: (it) => it.taskid,
-      value: (it) => it,
-    );
-  });
+  return database.tasks.stream.map(
+    (data) {
+      return {
+        for (final it in data.values.where((it) {
+          if (it.archived) {
+            return false;
+          }
+          return (it.isFinished(database.getMemberId()) == finished);
+        }))
+          it.taskid: it,
+      };
+    },
+  );
 }
 
 class MyTasksList extends StatelessWidget {
@@ -97,6 +98,7 @@ class MyTaskListInnerState extends State<MyTaskListInner>
   PlannerDatabase get plannerDatabase => widget.plannerDatabase;
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return StreamBuilder<Map<String, SchoolTask>>(
       stream: streamFinished(widget.plannerDatabase, widget.finished),
       builder: (context, data) {
@@ -337,12 +339,12 @@ class MyTaskArchive extends StatelessWidget {
 
 Stream<Map<String, SchoolTask>> getArchiveStream(PlannerDatabase database) {
   StreamController<Map<String, SchoolTask>> newcontroller = StreamController();
-  Map<String, List<SchoolTask>> unmergeddata_tooold = Map();
-  Map<String, List<SchoolTask>> unmergeddata_archived = Map();
+  Map<String, List<SchoolTask>> unmergeddata_tooold = {};
+  Map<String, List<SchoolTask>> unmergeddata_archived = {};
   List<StreamSubscription> subscriptions = [];
 
   void update() {
-    Map<String, SchoolTask> compounddata = Map();
+    Map<String, SchoolTask> compounddata = {};
     unmergeddata_archived.values.forEach((it) => compounddata
         .addAll(it.asMap().map((_, value) => MapEntry(value.taskid, value))));
     unmergeddata_tooold.values.forEach((it) => compounddata

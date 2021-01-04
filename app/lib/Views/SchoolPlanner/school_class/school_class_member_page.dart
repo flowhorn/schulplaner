@@ -33,7 +33,7 @@ class SchoolClassMemberView extends StatelessWidget {
             child: Scaffold(
               appBar: MyAppHeader(
                   title:
-                      "${getString(context).members} ${getString(context).in_} " +
+                      '${getString(context).members} ${getString(context).in_} ' +
                           schoolClassInfo.getName()),
               body: ListView(
                 children: schoolClassInfo.membersData.values.map((memberData) {
@@ -52,7 +52,7 @@ class SchoolClassMemberView extends StatelessWidget {
                           showConfirmDialog(
                                   context: context,
                                   title: bothlang(context,
-                                      de: "Nutzer melden", en: "Report User"))
+                                      de: 'Nutzer melden', en: 'Report User'))
                               .then((result) {
                             if (result == true) {
                               FirebaseFirestore.instance
@@ -124,7 +124,7 @@ class CourseMemberTile extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.all(3.0),
                 child: Text(
-                  bothlang(context, de: "Ich", en: "Me"),
+                  bothlang(context, de: 'Ich', en: 'Me'),
                   style: TextStyle(color: Colors.white),
                 ),
               ),
@@ -156,7 +156,7 @@ Future<void> _showMemberSheet(
         return memberSheet.build(context);
       },
       title: userProfile?.name ?? getString(context).anonymoususer,
-      routname: "memberid");
+      routname: 'memberid');
 }
 
 class SchoolClassMemberRoleCard extends StatelessWidget {
@@ -180,7 +180,7 @@ class SchoolClassMemberRoleCard extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.all(3.0),
           child: Text(
-            bothlang(context, de: "Ersteller", en: "Creator"),
+            bothlang(context, de: 'Ersteller', en: 'Creator'),
             style: TextStyle(color: Colors.white),
           ),
         ),

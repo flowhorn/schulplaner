@@ -34,13 +34,13 @@ class GradeCoursesView extends StatelessWidget {
           },
           trailing: Text(
             calculator.averageperCourse[course.id]?.totalaverage != null
-                ? ("Ø" +
+                ? ('Ø' +
                     database
                         .getSettings()
                         .getCurrentAverageDisplay(context: context)
                         .input(calculator
                             .averageperCourse[course.id].totalaverage))
-                : "/",
+                : '/',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
           ),
         );

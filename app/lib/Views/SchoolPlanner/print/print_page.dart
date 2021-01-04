@@ -18,8 +18,8 @@ class PrintPage extends StatelessWidget {
         Card(
           child: ListTile(
             title: Text(bothlang(context,
-                en: "This is a beta product under development. It is not yet fully working or designed. Please keep this in mind.",
-                de: "Dies ist ein Beta-Produkt in der Entwicklung. Es ist noch nicht fertig designed und vollständig funktionsfähig. Bitte beachte dies!")),
+                en: 'This feature is currently still in BETA, so some troubles may still occur!',
+                de: 'Diese Funktion befindet sich zurzeit noch in der BETA, sodass noch einige Probleme auftreten können!')),
           ),
         ),
         ListTile(
@@ -53,7 +53,7 @@ class PrintPage extends StatelessWidget {
           if (value == 2) {
             return ListTile(
               leading: Icon(Icons.print),
-              title: Text(bothlang(context, en: "Print", de: "Drucken")),
+              title: Text(bothlang(context, en: 'Print', de: 'Drucken')),
               onTap: () {
                 Navigator.pop(context);
                 PrintTimetable(database).printTimetable();

@@ -252,11 +252,15 @@ class AppSettingsView extends StatelessWidget {
                                 action: getString(context).confirm,
                                 richtext: RichText(
                                     text: TextSpan(
-                                        text:
-                                            'Möchtest du dich in dieser App ausloggen?')),
+                                        text: bothlang(context,
+                                            de:
+                                                'Möchtest du dich wirklich ausloggen?',
+                                            en:
+                                                'Do you really want to log out?'))),
                                 warning: true,
-                                warningtext:
-                                    'Solltest du deinen Account nicht mit einer Anmeldemethode verknüpft haben, gehen alle Daten verloren!');
+                                warningtext: bothlang(context,
+                                    de: 'Wenn du keine Anmeldemethode eingerichtet hast, gehen alle Daten verloren!',
+                                    en: 'If you did not set up a login method, all data will get lost.'));
                           },
                         )),
                   ],

@@ -369,10 +369,10 @@ class TimeLineLessonItem extends StatelessWidget {
               alignment: Alignment.topCenter,
               child: Text((lesson.isMultiLesson()
                   ? lesson.start.toString() +
-                      ". - " +
+                      '. - ' +
                       lesson.end.toString() +
-                      ". "
-                  : lesson.start.toString() + ". ")),
+                      '. '
+                  : lesson.start.toString() + '. ')),
             ),
             Align(
               alignment: Alignment.center,

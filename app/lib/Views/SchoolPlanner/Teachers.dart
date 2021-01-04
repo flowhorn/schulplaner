@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Data/plannerdatabase.dart';
 import 'package:schulplaner8/Helper/Functions.dart';
+import 'package:schulplaner8/Helper/helper_data.dart';
 import 'package:schulplaner8/Helper/helper_views.dart';
 import 'package:schulplaner8/teachers/teacher_detail_sheet.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
@@ -26,8 +27,10 @@ class TeacherList extends StatelessWidget {
                   title: Text(teacher.name),
                   subtitle: Column(
                     children: <Widget>[
-                      Text("Email: " + (teacher.email ?? "-")),
-                      Text("Tel: " + (teacher.tel ?? "-")),
+                      Text('Email: ' + (teacher.email ?? '-')),
+                      Text(bothlang(context,
+                          de: 'Tel: ' + (teacher.tel ?? '-'),
+                          en: 'Phone: ' + (teacher.tel ?? '-'))),
                     ],
                     crossAxisAlignment: CrossAxisAlignment.start,
                   ),
@@ -58,6 +61,7 @@ class TeacherList extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class NewTeacherView extends StatelessWidget {
   final PlannerDatabase database;
 
@@ -107,7 +111,7 @@ class NewTeacherView extends StatelessWidget {
                           changedValues = true;
                         },
                         iconData: Icons.phone,
-                        labeltext: "Tel",
+                        labeltext: 'Tel',
                         keyBoardType: TextInputType.phone),
                     FormSpace(16.0),
                     FormTextField(
@@ -117,7 +121,7 @@ class NewTeacherView extends StatelessWidget {
                         changedValues = true;
                       },
                       iconData: Icons.alternate_email,
-                      labeltext: "Email",
+                      labeltext: 'Email',
                       keyBoardType: TextInputType.emailAddress,
                     ),
                     FormSpace(16.0),

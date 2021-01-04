@@ -44,7 +44,7 @@ class UpcomingView extends StatelessWidget {
                         ? Text(item.start.parser.toMMMEd)
                         : Text(
                             item.start.parser.toMMMEd +
-                                " - " +
+                                ' - ' +
                                 item.end.parser.toMMMEd,
                           ),
                     onTap: () {
@@ -67,7 +67,7 @@ class UpcomingView extends StatelessWidget {
                 }).toList(),
               )
             : ListTile(
-                title: Text(getString(context).noupcomingvacations + " :/"),
+                title: Text(getString(context).noupcomingvacations + ' :/'),
               ),
         FormDivider(),
         FormHeader2(getString(context).briefly),
@@ -81,7 +81,7 @@ class UpcomingView extends StatelessWidget {
                   text: getString(context).allevents,
                   onTap: () {
                     NavigationBloc.of(context).openSubChild(
-                      "allevents",
+                      'allevents',
                       MyEventsList(),
                       getString(context).allevents,
                       actions: (context) {
@@ -101,7 +101,7 @@ class UpcomingView extends StatelessWidget {
                   text: getString(context).tasks,
                   onTap: () {
                     NavigationBloc.of(context).openSubChild(
-                      "tasks",
+                      'tasks',
                       MyTasksList(),
                       getString(context).tasks,
                       actions: (context) {
@@ -125,7 +125,7 @@ class UpcomingView extends StatelessWidget {
                   text: getString(context).exams,
                   onTap: () {
                     NavigationBloc.of(context).openSubChild(
-                      "exams",
+                      'exams',
                       MyEventsOnlyExams(),
                       getString(context).exams,
                       navigationItem: NavigationItem.eventsExamsList,
@@ -183,7 +183,7 @@ class UpcomingTasksEventsView extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
                 subtitle:
-                    Text(getString(context).due + ": " + getDateText(item.due)),
+                    Text(getString(context).due + ': ' + getDateText(item.due)),
                 trailing: isFinished
                     ? IconButton(
                         icon: Icon(
@@ -262,7 +262,7 @@ class UpcomingTasksEventsView extends StatelessWidget {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
-                subtitle: Text("" + getDateText(item.date)),
+                subtitle: Text('' + getDateText(item.date)),
                 onTap: () {
                   showEventDetailSheet(
                     context,
@@ -273,7 +273,7 @@ class UpcomingTasksEventsView extends StatelessWidget {
               );
               return listTile;
             }
-            return Text("null");
+            return Text('null');
           }).toList(),
         );
       },
@@ -296,13 +296,13 @@ Stream<List<dynamic>> getTaskEventUpcomingStream(PlannerDatabase database) {
       String getdate(dynamic e) {
         if (e is SchoolTask) return e.due;
         if (e is SchoolEvent) return e.date;
-        return "-";
+        return '-';
       }
 
       String getTitle(dynamic e) {
         if (e is SchoolTask) return e.title;
         if (e is SchoolEvent) return e.title;
-        return "-";
+        return '-';
       }
 
       bool getFinished(dynamic e) {
@@ -358,13 +358,13 @@ List<dynamic> getTaskEventUpcomingStream_initialdata(PlannerDatabase database) {
     String getdate(dynamic e) {
       if (e is SchoolTask) return e.due;
       if (e is SchoolEvent) return e.date;
-      return "-";
+      return '-';
     }
 
     String getTitle(dynamic e) {
       if (e is SchoolTask) return e.title;
       if (e is SchoolEvent) return e.title;
-      return "-";
+      return '-';
     }
 
     bool getFinished(dynamic e) {
@@ -420,9 +420,9 @@ String getVacationText(Holiday item, BuildContext context) {
   if (vacationstart.isAfter(datetime)) {
     Duration duration = vacationstart.difference(datetime);
     return getString(context).in_ +
-        " " +
+        ' ' +
         duration.inDays.toString() +
-        " " +
+        ' ' +
         getString(context).indays;
   } else {
     if ((vacationstart.isBefore(datetime) ||
@@ -435,7 +435,7 @@ String getVacationText(Holiday item, BuildContext context) {
         ) {
       return getString(context).current;
     } else {
-      return "???";
+      return '???';
     }
   }
 }

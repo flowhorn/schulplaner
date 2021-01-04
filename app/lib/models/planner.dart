@@ -45,9 +45,9 @@ class Planner {
   }
 
   bool validate() {
-    if (name == null || name == "") return false;
-    if (id == null || id == "") return false;
-    if (uid == null || uid == "") return false;
+    if (name == null || name == '') return false;
+    if (id == null || id == '') return false;
+    if (uid == null || uid == '') return false;
     if (archived == null) return false;
     if (setup_done == null) return false;
     return true;

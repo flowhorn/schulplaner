@@ -95,7 +95,7 @@ class CourseView extends StatelessWidget {
                       children: <Widget>[
                         ListTile(
                           leading: Hero(
-                              tag: "courestag:" + courseInfo.id,
+                              tag: 'courestag:' + courseInfo.id,
                               child: ColoredCircleText(
                                 color: courseInfo.getDesign().primary,
                                 text: toShortNameLength(
@@ -107,7 +107,7 @@ class CourseView extends StatelessWidget {
                           children: courseInfo.teachers.values.map((it) {
                             return ListTile(
                               leading: Icon(Icons.person_outline),
-                              title: Text(it?.name ?? "-"),
+                              title: Text(it?.name ?? '-'),
                               onTap: () {
                                 showTeacherDetail(
                                     context: context,
@@ -121,7 +121,7 @@ class CourseView extends StatelessWidget {
                           children: courseInfo.places.values.map((it) {
                             return ListTile(
                               leading: Icon(Icons.place),
-                              title: Text(it.name ?? "-"),
+                              title: Text(it.name ?? '-'),
                               onTap: () {
                                 showPlaceDetail(
                                     context: context,
@@ -161,8 +161,8 @@ class CourseView extends StatelessWidget {
                           leading: Icon(Icons.person_outline),
                           title: Text(
                             bothlang(context,
-                                en: "Own configuration",
-                                de: "Eigene Einstellungen"),
+                                en: 'Custom configuration',
+                                de: 'Eigene Einstellungen'),
                           ),
                           onTap: () {
                             pushWidget(

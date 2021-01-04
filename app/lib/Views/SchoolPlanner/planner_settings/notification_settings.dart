@@ -67,7 +67,7 @@ class _Inner extends StatelessWidget {
             value: notificationSettings.notifydaily,
             onChanged: (newvalue) {
               notificationSettings.notifydaily = newvalue;
-               _updateNotificationSettings(context, notificationSettings);
+              _updateNotificationSettings(context, notificationSettings);
             },
             title: Text(getString(context).dailynotifications),
           ),
@@ -76,7 +76,7 @@ class _Inner extends StatelessWidget {
             subtitle: Text(notificationSettings.dailyNotificationTime != null
                 ? getTimeOfUTC(notificationSettings.dailyNotificationTime)
                     .format(context)
-                : "-"),
+                : '-'),
             enabled: notificationSettings.notifydaily,
             onTap: notificationSettings.notifydaily
                 ? () {
@@ -105,8 +105,9 @@ class _Inner extends StatelessWidget {
                             loading: false,
                             iconData: Icons.warning,
                             color: Colors.orange,
-                            text:
-                                "Die Funktion befindet sich aktuell noch in der BETA. Alle Zeiten werden auf volle Stunden gerundet.");
+                            text: bothlang(context,
+                                de: 'Die Funktion befindet sich aktuell noch in der BETA. Alle Zeiten werden auf volle Stunden gerundet.',
+                                en: 'This feature is still in the BETA. All times are rounded to full hours.'));
                       }
                     });
                   }
@@ -114,7 +115,7 @@ class _Inner extends StatelessWidget {
             trailing: Card(
               child: Padding(
                 padding: EdgeInsets.all(4.0),
-                child: Text("BETA"),
+                child: Text('BETA'),
               ),
               color: Colors.orange,
             ),
@@ -123,9 +124,9 @@ class _Inner extends StatelessWidget {
             title: Text(getString(context).rememberdaysbefore),
             subtitle: Text(notificationSettings.dailydaterange != null
                 ? (notificationSettings.dailydaterange.toString() +
-                    " " +
+                    ' ' +
                     getString(context).days)
-                : "-"),
+                : '-'),
             enabled: notificationSettings.notifydaily,
             onTap: notificationSettings.notifydaily
                 ? () {
@@ -135,7 +136,7 @@ class _Inner extends StatelessWidget {
                         builder: (context, item) {
                           return ListTile(
                             title: Text(item.toString() +
-                                " " +
+                                ' ' +
                                 getString(context).days),
                             trailing: selectedView(
                                 item == notificationSettings.dailydaterange),
@@ -160,9 +161,9 @@ class _Inner extends StatelessWidget {
                   color: getAccentColor(context),
                   icon: Icon(Icons.devices),
                 ),
-                title: Text(device.devicename ?? "-"),
+                title: Text(device.devicename ?? '-'),
                 subtitle: Text(
-                  device.devicetoken.toString() ?? "-",
+                  device.devicetoken.toString() ?? '-',
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -203,7 +204,7 @@ class _Devices extends StatelessWidget {
           if (notificationSettings.devices.containsKey(snapshot.data)) {
             return ListTile(
               title: Text(
-                getString(context).thisdeviceisactive + " :)",
+                getString(context).thisdeviceisactive + ' :)',
                 textAlign: TextAlign.center,
               ),
             );
@@ -226,7 +227,9 @@ class _Devices extends StatelessWidget {
           return CircularProgressIndicator();
         }
       },
-      future: PlatformCheck.isMobile ? FirebaseMessaging().getToken() : Future.value(null),
+      future: PlatformCheck.isMobile
+          ? FirebaseMessaging().getToken()
+          : Future.value(null),
     );
   }
 }

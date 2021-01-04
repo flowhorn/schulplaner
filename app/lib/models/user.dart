@@ -17,7 +17,7 @@ class UserProfile {
   factory UserProfile.create({@required String uid}) {
     return UserProfile._(
       uid: uid,
-      name: "",
+      name: '',
       pic: null,
       picThumb: null,
       avatar: null,
@@ -77,8 +77,8 @@ class UserProfile {
   }
 
   bool validate() {
-    if (name == null || name == "") return false;
-    if (uid == null || uid == "") return false;
+    if (name == null || name == '') return false;
+    if (uid == null || uid == '') return false;
     return true;
   }
 

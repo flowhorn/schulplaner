@@ -30,7 +30,7 @@ class CourseList extends StatelessWidget {
               emptyViewBuilder: (context) {
                 return getEmptyView(
                   title: bothlang(context,
-                      de: "Noch keine Fächer...", en: "No courses..."),
+                      de: 'Noch keine Fächer...', en: 'No courses...'),
                   icon: Icons.hourglass_empty,
                 );
               },
@@ -61,7 +61,7 @@ class _CourseTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final plannerDatabase =
         BlocProvider.of<PlannerDatabaseBloc>(context).plannerDatabase;
-    if (courseInfo == null) {
+    if (courseInfo == null || courseInfo.id == null) {
       return SizedBox(
         height: 52.0,
         child: Center(
@@ -73,7 +73,7 @@ class _CourseTile extends StatelessWidget {
       leading: Padding(
         padding: EdgeInsets.only(top: 8, bottom: 8),
         child: Hero(
-            tag: "courestag:" + courseInfo.id,
+            tag: 'courestag:' + courseInfo.id,
             child: ColoredCircleText(
                 text:
                     toShortNameLength(context, courseInfo.getShortname_full()),
@@ -84,11 +84,11 @@ class _CourseTile extends StatelessWidget {
       subtitle: Column(
         children: <Widget>[
           Text(
-            getString(context).teacher + ": " + courseInfo.getTeachersListed(),
+            getString(context).teacher + ': ' + courseInfo.getTeachersListed(),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
-          Text(getString(context).place + ": " + courseInfo.getPlacesListed()),
+          Text(getString(context).place + ': ' + courseInfo.getPlacesListed()),
         ],
         crossAxisAlignment: CrossAxisAlignment.start,
       ),
@@ -109,7 +109,7 @@ class _CourseTile extends StatelessWidget {
             courseid: courseInfo.id,
             database: plannerDatabase,
           ),
-          routname: "course",
+          routname: 'course',
         );
       },
     );

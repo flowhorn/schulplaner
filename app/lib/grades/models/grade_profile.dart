@@ -20,7 +20,7 @@ class GradeProfile {
   factory GradeProfile.Create(String id) {
     return GradeProfile._(
         profileid: id,
-        name: "",
+        name: '',
         averagebytype: false,
         weight_totalaverage: 1.0,
         types: {});

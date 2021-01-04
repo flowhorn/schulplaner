@@ -35,15 +35,15 @@ class SchoolClassPublicCodeView extends StatelessWidget {
                 ListTile(
                   title: Text(
                     info.publiccode != null
-                        ? ("#" + info.publiccode)
-                        : ("#??????"),
+                        ? ('#' + info.publiccode)
+                        : ('#??????'),
                     style: TextStyle(fontSize: 22.0),
                   ),
                 ),
                 ListTile(
                   leading: Icon(Icons.link),
                   title: Text(
-                    info.joinLink ?? "???",
+                    info.joinLink ?? '???',
                     style: TextStyle(
                       fontSize: 18.0,
                       color: Colors.lightBlue,

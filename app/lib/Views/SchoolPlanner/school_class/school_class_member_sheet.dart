@@ -57,7 +57,7 @@ class SchoolClassMemberSheet extends SchulplanerSheet {
                   : null,
             ),
             ListTile(
-              title: Text(bothlang(context, de: "Ersteller", en: "Creator")),
+              title: Text(bothlang(context, de: 'Ersteller', en: 'Creator')),
               trailing: memberitem.role == MemberRole.creator
                   ? Icon(
                       Icons.done,
@@ -113,7 +113,7 @@ class SchoolClassMemberSheet extends SchulplanerSheet {
   Future<void> _tapRemoveMember(BuildContext context) async {
     final confirmResult = await ConfirmDialog(
       title:
-          "${userProfile?.name ?? getString(context).anonymoususer} ${getString(context).remove}",
+          '${userProfile?.name ?? getString(context).anonymoususer} ${getString(context).remove}',
       message: '',
     ).show<bool>(context);
     if (confirmResult == true) {
@@ -126,7 +126,7 @@ class SchoolClassMemberSheet extends SchulplanerSheet {
       if (hasPermission == true) {
         notifier.value = ResultItem(
           loading: true,
-          text: "Authentifiziert. Bitte warten...",
+          text: 'Authentifiziert. Bitte warten...',
         );
         final removeResult = await _removeMemberFromSchoolClass(context);
         if (removeResult == true) {
@@ -137,7 +137,7 @@ class SchoolClassMemberSheet extends SchulplanerSheet {
               color: Colors.green);
           await Future.delayed(Duration(milliseconds: 500)).then((value) {
             Navigator.pop(context);
-            popNavigatorBy(context, text: "memberid");
+            popNavigatorBy(context, text: 'memberid');
           });
         } else {
           notifier.value = ResultItem(
@@ -179,7 +179,7 @@ class SchoolClassMemberSheet extends SchulplanerSheet {
         .then((result) {
       if (result == true) {
         notifier.value =
-            ResultItem(loading: true, text: "Authentifiziert. Bitte warten...");
+            ResultItem(loading: true, text: 'Authentifiziert. Bitte warten...');
         changeMemberTypeUserSchoolClass(
                 classid: schoolClassID, memberid: member.id, newRole: newRole)
             .then((newresult) {

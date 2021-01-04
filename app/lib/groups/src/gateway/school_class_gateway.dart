@@ -9,19 +9,19 @@ class SchoolClassGateway {
   SchoolClassGateway(this._firestore, this.memberId);
 
   DocumentReference courseDocumentReference(String courseId) =>
-      _firestore.collection("courses").doc(courseId);
+      _firestore.collection('courses').doc(courseId);
 
   DocumentReference get userRootReference =>
-      _firestore.collection("users").doc(memberId.userId.uid);
+      _firestore.collection('users').doc(memberId.userId.uid);
 
   DocumentReference get plannerRootReference =>
-      userRootReference.collection("planner").doc(memberId.plannerId);
+      userRootReference.collection('planner').doc(memberId.plannerId);
 
   DocumentReference get plannerConnectionsReference =>
-      plannerRootReference.collection("data").doc("connections");
+      plannerRootReference.collection('data').doc('connections');
 
   DocumentReference schoolClassInfoReference(String classid) =>
-      _firestore.collection("schoolclasses").doc(classid);
+      _firestore.collection('schoolclasses').doc(classid);
 
   void CreateSchoolClassAsCreator(SchoolClass classInfo) {
     schoolClassInfoReference(classInfo.id).set(

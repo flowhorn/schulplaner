@@ -78,7 +78,7 @@ class HolidayTile extends StatelessWidget {
                 Text(
                   (holiday.start != null
                       ? holiday.start.parser.toYMMMMEEEEd
-                      : "-"),
+                      : '-'),
                 ),
               ],
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -87,17 +87,17 @@ class HolidayTile extends StatelessWidget {
               children: <Widget>[
                 Text(
                   getString(context).start +
-                      ": " +
+                      ': ' +
                       (holiday.start != null
                           ? holiday.start.parser.toYMMMMEEEEd
-                          : "-"),
+                          : '-'),
                 ),
                 Text(
                   getString(context).end +
-                      ": " +
+                      ': ' +
                       (holiday.end != null
                           ? holiday.end.parser.toYMMMMEEEEd
-                          : "-"),
+                          : '-'),
                 ),
               ],
               crossAxisAlignment: CrossAxisAlignment.start,

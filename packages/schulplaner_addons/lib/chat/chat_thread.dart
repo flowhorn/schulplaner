@@ -18,7 +18,7 @@ class ChatThread extends StatelessWidget {
     final bloc = BlocProvider.of<ChatPageBloc>(context);
     return Scaffold(
       appBar: ChatAppBar(
-        title: chatRoom.name ?? "",
+        title: chatRoom.name ?? '',
       ),
       body: Column(children: [
         Expanded(
@@ -120,7 +120,7 @@ class ChatInput extends StatelessWidget {
   final bool Function(String text) onSendMessage;
   final void Function() onPressedAdd;
   final TextEditingController textEditingController =
-      TextEditingController(text: "");
+      TextEditingController(text: '');
   ChatInput(
       {Key key,
       @required this.onSendMessage,

@@ -81,10 +81,10 @@ class PlannerConnectionsState {
 
   PlannerConnectionsState(this.connections, this.addToDB, this.removeToDB,
       this.addClassToDB, this.removeClassToDB) {
-    activecourselistener = Map();
-    activeclasslistener = Map();
-    indirectconnections = Map();
-    mapofclasslisteners = Map();
+    activecourselistener = {};
+    activeclasslistener = {};
+    indirectconnections = {};
+    mapofclasslisteners = {};
     connections.stream.listen((newdata) {
       if (newdata != null) {
         directconnections = newdata.mycourses;
@@ -268,7 +268,7 @@ class PlannerDatabase {
   GradeSpanPackage gradespanpackage;
   HolidayGateway holidayGateway;
 
-  Map<String, Map<String, Lesson>> oldlessondata = Map();
+  Map<String, Map<String, Lesson>> oldlessondata = {};
 
   Map<String, List<StreamSubscription>> _courselistener;
   Map<String, List<StreamSubscription>> _classlistener;
@@ -307,8 +307,8 @@ class PlannerDatabase {
     @required this.plannerid,
     @required AppSettingsBloc appSettingsBloc,
   }) {
-    _courselistener = Map();
-    _classlistener = Map();
+    _courselistener = {};
+    _classlistener = {};
     root = FirebaseFirestore.instance;
     dataManager = DataManager(plannerid: plannerid, uid: uid);
     _rootplanner =

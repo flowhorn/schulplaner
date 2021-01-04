@@ -6,8 +6,8 @@ homepage:
 publish_to: none
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
-  flutter: ">=1.17.0 <2.0.0"
+  sdk: ">=2.11.0 <3.0.0"
+  flutter: ">=1.25.0 <2.0.0"
 
 dependencies:
   app_functions:
@@ -22,5 +22,13 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+
+dependency_overrides:
+  intl: ^0.17.0-nullsafety.2
+  intl_translation:
+    git:
+      url: https://github.com/Zazo032/intl_translation.git
+      ref: patch-1
 
 flutter:

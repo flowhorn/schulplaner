@@ -41,7 +41,7 @@ class DynamicLinksBloc extends BlocBase {
         },
         onError: (e) async {
           print(
-              "DynamicLink Error - Details: ${e.details}, Code: ${e.code}, Message: ${e.message}");
+              'DynamicLink Error - Details: ${e.details}, Code: ${e.code}, Message: ${e.message}');
         },
       );
     } catch (e) {

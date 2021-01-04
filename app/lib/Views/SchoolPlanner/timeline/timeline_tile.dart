@@ -158,7 +158,7 @@ class _TimelineTileSectionTitle extends StatelessWidget {
     final dateTime = parseDate(date);
     return Tile(
       leading: Hero(
-          tag: "timelineitem" + date,
+          tag: 'timelineitem' + date,
           child: ColoredCircleText(
             text: getWeekDays(context)[dateTime.weekday].name.substring(0, 2),
             radius: 16.0,
@@ -402,7 +402,7 @@ class HolidayTile_Timeline extends StatelessWidget {
         leading: Icon(Icons.wb_sunny),
         title: Text(holiday.name.text),
         subtitle: Text(
-            holiday.start.parser.toMMMEd + " - " + holiday.end.parser.toMMMEd),
+            holiday.start.parser.toMMMEd + ' - ' + holiday.end.parser.toMMMEd),
       ),
       decoration: ShapeDecoration(
         shape: RoundedRectangleBorder(

@@ -4,7 +4,7 @@ import 'package:schulplaner8/Helper/helper_data.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
 
 String parseDateString(DateTime time) {
-  return DateFormat("yyyy-MM-dd").format(time);
+  return DateFormat('yyyy-MM-dd').format(time);
 }
 
 DateTime parseDate(String datestring) {
@@ -30,17 +30,17 @@ String getDateTextDetailed(
   if (difference.inHours < 1) {
     int minutesago = difference.inMinutes;
     return bothlang(context,
-        de: "Vor $minutesago Minuten", en: "$minutesago minutes ago");
+        de: 'Vor $minutesago Minuten', en: '$minutesago minutes ago');
   }
   if (difference.inHours == 1) {
     int hoursago = difference.inHours;
     return bothlang(context,
-        de: "Vor $hoursago Stunde", en: "$hoursago hour ago");
+        de: 'Vor $hoursago Stunde', en: '$hoursago hour ago');
   }
   if (difference.inHours <= 8) {
     int hoursago = difference.inHours;
     return bothlang(context,
-        de: "Vor $hoursago Stunden", en: "$hoursago hours ago");
+        de: 'Vor $hoursago Stunden', en: '$hoursago hours ago');
   }
   if (isSameDay(parseDateString(datetime), getDateToday())) {
     return getString(context).today;

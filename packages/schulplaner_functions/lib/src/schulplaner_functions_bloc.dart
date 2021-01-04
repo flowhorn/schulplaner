@@ -2,7 +2,6 @@ import 'package:app_functions/app_functions.dart';
 import 'package:bloc/bloc_base.dart';
 import 'package:bloc/bloc_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
 import 'package:schulplaner_models/schulplaner_models.dart';
 
 class SchulplanerFunctionsBloc extends BlocBase {

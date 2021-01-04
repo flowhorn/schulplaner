@@ -17,6 +17,7 @@ import 'package:schulplaner8/Views/SchoolPlanner/common/edit_page.dart';
 import 'package:schulplaner_widgets/schulplaner_theme.dart';
 import 'package:schulplaner_widgets/schulplaner_dialogs.dart';
 
+// ignore: must_be_immutable
 class NewLessonView extends StatelessWidget {
   final PlannerDatabase database;
   final bool editmode;
@@ -114,9 +115,9 @@ class NewLessonView extends StatelessWidget {
                                     title: Text(getString(context).start),
                                     subtitle: Text(data.start != null
                                         ? (data.start.toString() +
-                                            ". " +
+                                            '. ' +
                                             getString(context).lesson)
-                                        : "-"),
+                                        : '-'),
                                     onTap: () {
                                       selectItem(
                                           context: context,
@@ -129,7 +130,7 @@ class NewLessonView extends StatelessWidget {
                                           builder: (context, item) {
                                             return ListTile(
                                               title: Text(item.toString() +
-                                                  ". " +
+                                                  '. ' +
                                                   getString(context).lesson),
                                               onTap: () {
                                                 Navigator.pop(context);
@@ -151,8 +152,10 @@ class NewLessonView extends StatelessWidget {
                                     leading: Icon(Icons.hourglass_full),
                                     title: Text(getString(context).end),
                                     subtitle: Text(data.end != null
-                                        ? (data.end.toString() + ". Stunde")
-                                        : "-"),
+                                        ? (data.end.toString() +
+                                            '. ' +
+                                            getString(context).lesson)
+                                        : '-'),
                                     trailing: IconButton(
                                         icon: Icon(Icons.expand_less),
                                         onPressed: () {
@@ -173,7 +176,7 @@ class NewLessonView extends StatelessWidget {
                                           builder: (context, item) {
                                             return ListTile(
                                               title: Text(item.toString() +
-                                                  ". " +
+                                                  '. ' +
                                                   getString(context).lesson),
                                               onTap: () {
                                                 Navigator.pop(context);
@@ -198,9 +201,9 @@ class NewLessonView extends StatelessWidget {
                                 title: Text(getString(context).lesson),
                                 subtitle: Text(data.start != null
                                     ? (data.start.toString() +
-                                        ". " +
+                                        '. ' +
                                         getString(context).lesson)
-                                    : "-"),
+                                    : '-'),
                                 trailing: IconButton(
                                     icon: Icon(Icons.expand_more),
                                     onPressed: () {
@@ -219,7 +222,7 @@ class NewLessonView extends StatelessWidget {
                                       builder: (context, item) {
                                         return ListTile(
                                           title: Text(item.toString() +
-                                              ". " +
+                                              '. ' +
                                               getString(context).lesson),
                                           onTap: () {
                                             Navigator.pop(context);
@@ -245,7 +248,7 @@ class NewLessonView extends StatelessWidget {
                                 title: Text(getString(context).weektype),
                                 subtitle: Text(data.weektype != null
                                     ? weektypes(context)[data.weektype].name
-                                    : "-"),
+                                    : '-'),
                                 onTap: () {
                                   selectItem<WeekType>(
                                       context: context,
@@ -509,7 +512,7 @@ class NewLessonView extends StatelessWidget {
           category: PermissionAccessType.creator,
           courseid: data.courseid);
     } else {
-      throw Exception("SOMETHING WENT WRONG???");
+      throw Exception('SOMETHING WENT WRONG???');
     }
   }
 }

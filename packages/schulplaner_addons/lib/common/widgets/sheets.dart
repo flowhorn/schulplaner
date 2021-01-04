@@ -37,7 +37,7 @@ Future<T> showSheet<T>(
                   Align(
                     alignment: Alignment.topCenter,
                     child: Text(
-                      title ?? "-",
+                      title ?? '-',
                       style: TextStyle(
                           fontSize: 19.0,
                           fontWeight: FontWeight.w400,
