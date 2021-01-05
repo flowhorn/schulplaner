@@ -6,6 +6,10 @@ yarn-debug.log*
 yarn-error.log*
 firebase-debug.log*
 
+.last_build_id
+flutter_service_worker.js
+main.dart.js
+
 # Firebase cache
 .firebase/
 

@@ -11,7 +11,8 @@ DerivedData/
 build/
 GeneratedPluginRegistrant.h
 GeneratedPluginRegistrant.m
-
+Flutter.podspec
+flutter_export_environment.sh
 .generated/
 
 *.pbxuser
