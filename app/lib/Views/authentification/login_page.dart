@@ -28,7 +28,7 @@ class LoginPage extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Column(
                   children: <Widget>[
-                    SizedBox(height: 12.0),
+                    SizedBox(height: 24.0),
                     CircleAvatar(
                       child: Icon(
                         Icons.lock,
@@ -47,7 +47,7 @@ class LoginPage extends StatelessWidget {
                         fontWeight: FontWeight.w700,
                       ),
                     ),
-                    SizedBox(height: 6.0),
+                    SizedBox(height: 32.0),
                     LoginInnerPage(),
                     SizedBox(height: 32.0),
                   ],
@@ -139,53 +139,55 @@ class _FailedSignInState extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final signInBloc = BlocProvider.of<SignInBloc>(context);
-    return SizedBox(
-      height: 210.0,
-      child: InkWell(
-        child: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Icon(
-                Icons.error_outline,
-                color: Colors.red,
-                size: 48.0,
-              ),
-              SizedBox(height: 12.0),
-              Text(
-                bothlang(
-                  context,
-                  de: 'Anmeldung fehlgeschlagen!',
-                  en: 'Sign In failed!',
-                ),
-                style: TextStyle(
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.w300,
-                  color: Colors.red,
-                ),
-              ),
-              SizedBox(height: 4.0),
-              Text(
-                bothlang(
-                  context,
-                  de: 'Tippe, um es nochmal zu versuchen',
-                  en: 'Tap to retry',
-                ),
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.w300,
-                  color: Colors.red,
-                ),
-              ),
-            ],
-          ),
-        ),
-        onTap: () {
-          signInBloc.clear();
-        },
+    return Column(children: <Widget>[
+      SizedBox(height: 60.00),
+      Icon(
+        Icons.error_outline,
+        color: Colors.red,
+        size: 60.0,
       ),
-    );
+      Text(
+        bothlang(
+          context,
+          de: "Authentifizierungsfehler",
+          en: "Authentication error",
+        ),
+        style: TextStyle(
+            fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
+      ),
+      SizedBox(height: 100.0),
+      InkWell(
+          customBorder: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(5),
+              side: BorderSide(color: Colors.red)),
+          onTap: () {
+            signInBloc.clear();
+          },
+          child: Container(
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.red,
+                  width: 2,
+                ),
+                borderRadius: BorderRadius.circular(5),
+              ),
+              child: FlatButton.icon(
+                highlightColor: Colors.white,
+                icon: Icon(
+                  Icons.arrow_left_outlined,
+                  color: Colors.red,
+                ),
+                label: Text(
+                  bothlang(
+                    context,
+                    de: "Zurück",
+                    en: "Go back",
+                  ),
+                  style:
+                      TextStyle(color: Colors.red, fontWeight: FontWeight.w800),
+                ),
+              ))),
+    ]);
   }
 }
 
