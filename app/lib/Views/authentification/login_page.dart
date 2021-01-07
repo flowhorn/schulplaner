@@ -149,44 +149,50 @@ class _FailedSignInState extends StatelessWidget {
       Text(
         bothlang(
           context,
-          de: "Authentifizierungsfehler",
-          en: "Authentication error",
+          de: 'Authentifizierungsfehler',
+          en: 'Authentication error',
         ),
         style: TextStyle(
             fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
       ),
       SizedBox(height: 100.0),
       InkWell(
-          customBorder: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(5),
-              side: BorderSide(color: Colors.red)),
-          onTap: () {
-            signInBloc.clear();
-          },
-          child: Container(
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.red,
-                  width: 2,
-                ),
-                borderRadius: BorderRadius.circular(5),
+        customBorder: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(5),
+          side: BorderSide(color: Colors.red),
+        ),
+        onTap: () {
+          signInBloc.clear();
+        },
+        child: Container(
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: Colors.red,
+              width: 2,
+            ),
+            borderRadius: BorderRadius.circular(5),
+          ),
+          child: FlatButton.icon(
+            highlightColor: Colors.white,
+            icon: Icon(
+              Icons.arrow_left_outlined,
+              color: Colors.red,
+            ),
+            label: Text(
+              bothlang(
+                context,
+                de: 'Zurück',
+                en: 'Go back',
               ),
-              child: FlatButton.icon(
-                highlightColor: Colors.white,
-                icon: Icon(
-                  Icons.arrow_left_outlined,
-                  color: Colors.red,
-                ),
-                label: Text(
-                  bothlang(
-                    context,
-                    de: "Zurück",
-                    en: "Go back",
-                  ),
-                  style:
-                      TextStyle(color: Colors.red, fontWeight: FontWeight.w800),
-                ),
-              ))),
+              style: TextStyle(color: Colors.red, fontWeight: FontWeight.w800),
+            ),
+            onPressed: () {
+              final signInBloc = BlocProvider.of<SignInBloc>(context);
+              signInBloc.clear();
+            },
+          ),
+        ),
+      ),
     ]);
   }
 }
