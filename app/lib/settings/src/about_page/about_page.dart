@@ -21,7 +21,6 @@ class AboutPage extends StatelessWidget {
           children: [
             AboutPageHeader(),
             _AboutApp(),
-            _AppStore(),
             _ContactUs(),
             _SocialMedia(),
             _Financing(),
@@ -51,59 +50,21 @@ class _AboutApp extends StatelessWidget {
               en: 'The Schoolplanner-App is a digital Schoolplanner.\nIt simplifies the organisation of your daily schoollife.\nYou can use it with all your devices and together with your classmates. Then only one has to enter tasks and lessons.',
             ).getText(context),
           )),
-        ],
-      ),
-    );
-  }
-}
-
-class _AppStore extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return FormSection(
-      title: BothLangString(
-        de: 'Gefällt dir Schulplaner?',
-        en: 'Do you like Schoolplanner?',
-      ).getText(context),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          FormSectionText(
-            text: DefaultTextSpan(
-              context,
-              BothLangString(
-                de: 'Wir würden uns sehr über eine Bewertung freuen.\nTeile die App gerne an all deine Mitschüler/Innen. Zusammen gelingt die Organisation noch viel besser☺',
-                en: 'We would be happy about an review.\nShare the app with all your friends. Together the organisation of the school life is much simpler.',
-              ).getText(context),
-            ),
+          SizedBox(
+            height: 10,
           ),
           ListTile(
-            leading: Icon(Icons.star),
-            title: Text(
-              getString(context).rate_us,
-            ),
+            leading: Icon(FontAwesomeIcons.star),
+            title: Text(getString(context).rate_us),
             onTap: () {
-              LaunchReview.launch();
+              if (Platform.isAndroid || Platform.isIOS) {
+                LaunchReview.launch();
+              } else {
+                launch(
+                    'https://schulplaner.web.app/'); //todo(flowhorn) set link to download section
+              }
             },
-          ),
-          ListTile(
-            leading: Icon(Icons.play_arrow),
-            title: Text(
-              'Google Play Store',
-            ),
-            onTap: () {
-              Share.share(
-                  'https://play.google.com/store/apps/details?id=com.xla.school');
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.apps),
-            title: Text('Apple App Store'),
-            onTap: () {
-              Share.share(
-                  'https://itunes.apple.com/de/app/schulplanerpro/id1425606459?mt=8');
-            },
-          ),
+          )
         ],
       ),
     );
