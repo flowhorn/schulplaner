@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'src/website_scaffold.dart';
+import 'package:schulplaner_website/src/routes.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,9 +12,13 @@ class MyApp extends StatelessWidget {
       title: 'Schulplaner',
       theme: ThemeData(
         primarySwatch: Colors.teal,
+        brightness: Brightness.dark,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: WebsiteScaffold(),
+      home: homepageWebsite,
+      routes: {
+        homepageWebsiteRoute: (context) => homepageWebsite,
+      },
       debugShowCheckedModeBanner: false,
     );
   }
