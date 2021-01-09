@@ -2039,7 +2039,7 @@ class MyAppLocalizations {
 
   String get contact_us {
     return Intl.message(
-      'Contact us',
+      'Contact Us',
       name: 'contact_us',
     );
   }
