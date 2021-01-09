@@ -27,5 +27,11 @@
             ],
             "program": "app/lib/main.dart"
         },
+        {
+            "name": "Run Website",
+            "request": "launch",
+            "type": "dart",
+            "program": "schulplaner_website/lib/main.dart"
+        },
     ]
 }
