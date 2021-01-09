@@ -4,7 +4,6 @@ import 'package:launch_review/launch_review.dart';
 import 'package:schulplaner8/Helper/LogAnalytics.dart';
 import 'package:schulplaner8/Helper/helper_views.dart';
 import 'package:schulplaner8/settings/src/about_page/about_page_header.dart';
-import 'package:schulplaner8/settings/src/about_page/about_page_me.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
 import 'package:schulplaner_widgets/schulplaner_forms.dart';
 import 'package:share/share.dart';
@@ -21,7 +20,6 @@ class AboutPage extends StatelessWidget {
         child: Column(
           children: [
             AboutPageHeader(),
-            AboutPageMe(),
             _AboutApp(),
             _AppStore(),
             _ContactUs(),
