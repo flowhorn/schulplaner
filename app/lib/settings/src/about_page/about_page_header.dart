@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:schulplaner8/Config.dart';
 import 'package:schulplaner8/Views/SchoolPlanner/Overview.dart';
 import 'package:schulplaner8/Views/settings/pages/settings_changelog_page.dart';
@@ -6,6 +7,7 @@ import 'package:schulplaner_navigation/schulplaner_navigation.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
 import 'package:schulplaner_widgets/schulplaner_forms.dart';
 import 'package:schulplaner_widgets/schulplaner_theme.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AboutPageHeader extends StatelessWidget {
   @override
@@ -96,27 +98,47 @@ class _Actions extends StatelessWidget {
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            SizedBox(width: 8),
+            SizedBox(
+              width: 12,
+            ),
             QuickActionView(
-              iconData: Icons.track_changes,
+              iconData: Icons.format_list_bulleted,
               text: getString(context).changelog,
-              color: Colors.blueGrey,
+              color: Colors.blueAccent,
               onTap: () {
                 final navigationBloc = NavigationBloc.of(context);
                 navigationBloc.openSubPage(
                     builder: (context) => ChangelogView());
               },
             ),
+            SizedBox(
+              width:
+                  7, /* To have the same spacing as on the right. Probably belongs to the text-length */
+            ),
             QuickActionView(
-              iconData: Icons.texture,
+              iconData: Icons.layers_sharp,
               text: getString(context).licenses,
-              color: Colors.greenAccent,
+              color: Colors.blueAccent,
               onTap: () {
                 showLicensePage(context: context);
               },
             ),
-            SizedBox(width: 8),
+            SizedBox(
+              width: 12,
+            ),
+            QuickActionView(
+              iconData: FontAwesomeIcons.github,
+              text: getString(context).github,
+              color: Colors.blueAccent,
+              onTap: () {
+                launch('https://github.com/flowhorn/schulplaner');
+              },
+            ),
+            SizedBox(
+              width: 12,
+            ),
           ],
         ),
       ),

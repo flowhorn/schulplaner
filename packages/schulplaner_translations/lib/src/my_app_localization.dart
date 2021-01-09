@@ -2057,6 +2057,13 @@ class MyAppLocalizations {
       name: 'licenses',
     );
   }
+
+  String get github {
+    return Intl.message(
+      'GitHub',
+      name: 'github',
+    );
+  }
   //END ABOUT
 
   //ADVANTAGES
