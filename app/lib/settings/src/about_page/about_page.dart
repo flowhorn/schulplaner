@@ -1,12 +1,15 @@
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:launch_review/launch_review.dart';
 import 'package:schulplaner8/Helper/LogAnalytics.dart';
+import 'package:schulplaner8/Helper/helper_data.dart';
 import 'package:schulplaner8/Helper/helper_views.dart';
 import 'package:schulplaner8/settings/src/about_page/about_page_header.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
 import 'package:schulplaner_widgets/schulplaner_forms.dart';
 import 'package:share/share.dart';
+import 'package:universal_io/prefer_universal/io.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AboutPage extends StatelessWidget {
@@ -41,6 +44,7 @@ class _AboutApp extends StatelessWidget {
         en: 'About the Schoolplanner-App',
       ).getText(context),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           FormSectionText(
               text: DefaultTextSpan(
@@ -117,6 +121,16 @@ class _ContactUs extends StatelessWidget {
               launch('https://discord.gg/uZyK7Tf');
             },
           ),
+          ListTile(
+            leading: Icon(FontAwesomeIcons.bug),
+            title: Text(bothlang(context,
+                de: 'Erstelle ein Issue (GitHub)',
+                en: 'Create an issue (GitHub)')),
+            onTap: () {
+              launch(
+                  'https://github.com/flowhorn/schulplaner/issues/new/choose');
+            },
+          )
         ],
       ),
     );
