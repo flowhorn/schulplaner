@@ -105,5 +105,5 @@ Future<void> _openDownloadPage(BuildContext context) async {
 }
 
 Future<void> _openOpenSourcePage(BuildContext context) async {
-  await Navigator.pushReplacementNamed(context, downloadWebsiteRoute);
+  await Navigator.pushReplacementNamed(context, opensourceWebsiteRoute);
 }
