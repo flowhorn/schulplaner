@@ -11,14 +11,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Schulplaner',
       theme: ThemeData(
-        primarySwatch: Colors.teal,
-        brightness: Brightness.dark,
+        primaryColor: Colors.white,
+        accentColor: Colors.teal,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: homepageWebsite,
-      routes: {
-        homepageWebsiteRoute: (context) => homepageWebsite,
-      },
+      initialRoute: homepageWebsiteRoute,
+      routes: navigationRoutes,
       debugShowCheckedModeBanner: false,
     );
   }

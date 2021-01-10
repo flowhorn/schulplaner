@@ -4,4 +4,6 @@ enum NavigationItem {
   privacy,
   about,
   donate,
+  download,
+  opensource,
 }

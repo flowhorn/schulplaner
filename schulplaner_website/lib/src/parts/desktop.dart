@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'navigation_drawer.dart';
+
 class DesktopScaffold extends StatelessWidget {
   final Widget body;
 
@@ -9,6 +11,7 @@ class DesktopScaffold extends StatelessWidget {
     return Scaffold(
       appBar: _DesktopAppBar(),
       body: body,
+      endDrawer: NavigationDrawer(),
     );
   }
 }
@@ -18,6 +21,7 @@ class _DesktopAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       title: Text('Schulplaner'),
+      elevation: 0,
     );
   }
 
