@@ -26,6 +26,7 @@ class AboutPage extends StatelessWidget {
             _AboutApp(),
             _ContactUs(),
             _SocialMedia(),
+            _Team(),
             _Financing(),
             FormSpace(16.0),
           ],
@@ -97,7 +98,7 @@ class _ContactUs extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.email),
             title: Text(
-              getString(context).contact_us,
+              getString(context).contact_founder,
             ),
             subtitle: Text('danielfelixplay@gmail.com'),
             onTap: () {
@@ -149,8 +150,8 @@ class _SocialMedia extends StatelessWidget {
               text: DefaultTextSpan(
             context,
             BothLangString(
-              de: 'Möchtest du mehr über die Entwicklung der App, neue Features und uns erfahren? ',
-              en: 'Du you want to know more about the development of the app, features and us?',
+              de: 'Möchtest du mehr über die Entwicklung der App und kommende Updates erfahren?',
+              en: 'Du you want to know more about the development of the app and learn about upcoming releases?',
             ).getText(context),
           )),
           ListTile(
@@ -178,6 +179,62 @@ class _SocialMedia extends StatelessWidget {
             onTap: () {
               launch('https://twitter.com/SchulplanerApp');
             },
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _Team extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return FormSection(
+      title: BothLangString(
+              de: 'Das Team (Klicke für mehr 😉)',
+              en: 'The team (Click for more 😉)')
+          .getText(context),
+      child: Column(
+        children: <Widget>[
+          Column(
+            children: [
+              ListTile(
+                leading: Icon(
+                  FontAwesomeIcons.lightbulb,
+                  size: 35,
+                ),
+                title: Text('Felix Weuthen aka. flowhorn'),
+                subtitle: Text('Founder & Developer'),
+                onTap: () {
+                  launch('https://www.instagram.com/felix.weuth/');
+                },
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              ListTile(
+                leading: Icon(
+                  FontAwesomeIcons.headset,
+                  size: 35,
+                ),
+                title: Text('Elias aka. Friendly'),
+                subtitle: Text('Support'),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              ListTile(
+                leading: Icon(
+                  CommunityMaterialIcons.code_tags,
+                  size: 35,
+                ),
+                title: Text('Henrik Steffens aka. Th3Ph4nt0m'),
+                subtitle: Text('UI/UX Development'),
+                onTap: () {
+                  launch('https://www.th3ph4nt0m.de/');
+                },
+              ),
+            ],
           ),
         ],
       ),

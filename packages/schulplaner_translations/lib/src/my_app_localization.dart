@@ -2044,6 +2044,13 @@ class MyAppLocalizations {
     );
   }
 
+  String get contact_founder {
+    return Intl.message(
+      'Contact the app founder',
+      name: 'contact_founder',
+    );
+  }
+
   String get rate_us {
     return Intl.message(
       'Rate us',
