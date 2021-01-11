@@ -24,7 +24,7 @@ class ResponsiveSides extends StatelessWidget {
               Flexible(child: first),
               Flexible(child: second),
             ],
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.center,
           );
         } else {

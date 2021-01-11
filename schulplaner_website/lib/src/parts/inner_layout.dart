@@ -30,7 +30,6 @@ class InnerLayout extends StatelessWidget {
               padding: EdgeInsets.all(16),
               child: content,
             ),
-            SizedBox(height: 800),
             Footer(),
           ],
           crossAxisAlignment: CrossAxisAlignment.start,
