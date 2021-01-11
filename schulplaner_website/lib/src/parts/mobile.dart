@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:schulplaner_website/src/widgets/website_title.dart';
 
 import 'navigation_drawer.dart';
 
@@ -20,11 +21,11 @@ class _MobileAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text('Schulplaner'),
+      title: WebsiteTitle(),
       elevation: 0,
     );
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(72);
+  Size get preferredSize => Size.fromHeight(64);
 }
