@@ -21,6 +21,7 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function>{
         "about": MessageLookupByLibrary.simpleMessage("Über"),
+        "about_contributors": MessageLookupByLibrary.simpleMessage("Mitwirkende"),
         "absentlessons": MessageLookupByLibrary.simpleMessage("Fehlstunden"),
         "absenttime": MessageLookupByLibrary.simpleMessage("Fehlzeit"),
         "absenttimes": MessageLookupByLibrary.simpleMessage("Fehlzeiten"),

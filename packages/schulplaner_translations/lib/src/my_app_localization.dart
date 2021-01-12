@@ -6,16 +6,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 import '../l10n/messages_all.dart';
 
-class CupertinoEnDefaultLocalizationsDelegate
-    extends LocalizationsDelegate<CupertinoLocalizations> {
+class CupertinoEnDefaultLocalizationsDelegate extends LocalizationsDelegate<CupertinoLocalizations> {
   const CupertinoEnDefaultLocalizationsDelegate();
 
   @override
   bool isSupported(Locale locale) => true;
 
   @override
-  Future<CupertinoLocalizations> load(Locale locale) =>
-      DefaultCupertinoLocalizations.load(Locale('en'));
+  Future<CupertinoLocalizations> load(Locale locale) => DefaultCupertinoLocalizations.load(Locale('en'));
 
   @override
   bool shouldReload(CupertinoEnDefaultLocalizationsDelegate old) => false;
@@ -24,16 +22,14 @@ class CupertinoEnDefaultLocalizationsDelegate
   String toString() => 'DefaultCupertinoLocalizations.delegate(en_US)';
 }
 
-class MyAppLocalizationsDelegate
-    extends LocalizationsDelegate<MyAppLocalizations> {
+class MyAppLocalizationsDelegate extends LocalizationsDelegate<MyAppLocalizations> {
   const MyAppLocalizationsDelegate();
 
   @override
   bool isSupported(Locale locale) => ['en', 'de'].contains(locale.languageCode);
 
   @override
-  Future<MyAppLocalizations> load(Locale locale) =>
-      MyAppLocalizations.load(locale);
+  Future<MyAppLocalizations> load(Locale locale) => MyAppLocalizations.load(locale);
 
   @override
   bool shouldReload(MyAppLocalizationsDelegate old) => false;
@@ -1493,8 +1489,7 @@ class MyAppLocalizations {
       );
 
   static Future<MyAppLocalizations> load(Locale locale) {
-    final String name =
-        locale.countryCode.isEmpty ? locale.languageCode : locale.toString();
+    final String name = locale.countryCode.isEmpty ? locale.languageCode : locale.toString();
     final String localeName = Intl.canonicalizedLocale(name);
     return initializeMessages(localeName).then((_) {
       Intl.defaultLocale = localeName;
@@ -2034,6 +2029,13 @@ class MyAppLocalizations {
     return Intl.message(
       'About',
       name: 'about',
+    );
+  }
+
+  String get about_contributors {
+    return Intl.message(
+      'Contributors',
+      name: 'about_contributors',
     );
   }
 

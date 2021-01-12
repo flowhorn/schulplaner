@@ -5,10 +5,12 @@ import 'package:launch_review/launch_review.dart';
 import 'package:schulplaner8/Helper/LogAnalytics.dart';
 import 'package:schulplaner8/Helper/helper_data.dart';
 import 'package:schulplaner8/Helper/helper_views.dart';
+import 'package:schulplaner8/settings/src/about_page/about_page_contributors.dart';
 import 'package:schulplaner8/settings/src/about_page/about_page_header.dart';
+import 'package:schulplaner_navigation/schulplaner_navigation.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
 import 'package:schulplaner_widgets/schulplaner_forms.dart';
-import 'package:share/share.dart';
+import 'package:schulplaner_widgets/schulplaner_theme.dart';
 import 'package:universal_io/prefer_universal/io.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -65,8 +67,7 @@ class _AboutApp extends StatelessWidget {
               if (Platform.isAndroid || Platform.isIOS) {
                 LaunchReview.launch();
               } else {
-                launch(
-                    'https://schulplaner.web.app/'); //todo(flowhorn) set link to download section
+                launch('https://schulplaner.web.app/'); //todo(flowhorn) set link to download section
               }
             },
           )
@@ -80,10 +81,7 @@ class _ContactUs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FormSection(
-      title: BothLangString(
-              de: 'Du möchtest uns gerne kontaktieren?',
-              en: 'Do you want to contact us?')
-          .getText(context),
+      title: BothLangString(de: 'Du möchtest uns gerne kontaktieren?', en: 'Do you want to contact us?').getText(context),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -103,8 +101,7 @@ class _ContactUs extends StatelessWidget {
             subtitle: Text('danielfelixplay@gmail.com'),
             onTap: () {
               Future<void> _launchURL() async {
-                dynamic url =
-                    'mailto:danielfelixplay@gmail.com?subject=${getString(context).apptitle}';
+                dynamic url = 'mailto:danielfelixplay@gmail.com?subject=${getString(context).apptitle}';
                 if (await canLaunch(url)) {
                   await launch(url);
                 } else {
@@ -124,12 +121,9 @@ class _ContactUs extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(FontAwesomeIcons.bug),
-            title: Text(bothlang(context,
-                de: 'Erstelle ein Issue (GitHub)',
-                en: 'Create an issue (GitHub)')),
+            title: Text(bothlang(context, de: 'Erstelle ein Issue (GitHub)', en: 'Create an issue (GitHub)')),
             onTap: () {
-              launch(
-                  'https://github.com/flowhorn/schulplaner/issues/new/choose');
+              launch('https://github.com/flowhorn/schulplaner/issues/new/choose');
             },
           )
         ],
@@ -190,10 +184,7 @@ class _Team extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FormSection(
-      title: BothLangString(
-              de: 'Das Team (Klicke für mehr 😉)',
-              en: 'The team (Click for more 😉)')
-          .getText(context),
+      title: BothLangString(de: 'Das Team (Klicke für mehr 😉)', en: 'The team (Click for more 😉)').getText(context),
       child: Column(
         children: <Widget>[
           Column(
@@ -234,6 +225,23 @@ class _Team extends StatelessWidget {
                   launch('https://www.th3ph4nt0m.de/');
                 },
               ),
+              SizedBox(
+                height: 5,
+              ),
+              Card(
+                  child: ListTile(
+                    leading: Icon(
+                      FontAwesomeIcons.arrowRight,
+                      size: 30,
+                    ),
+                    title: Text(bothlang(context, de: 'Alle Mitwirkenden', en: 'All contributors')),
+                    subtitle: Text(bothlang(context, de: 'Schaue dir eine Liste aller Mitwirkenden an!', en: 'View a list of all contributors!')),
+                    onTap: () {
+                      final navigationBloc = NavigationBloc.of(context);
+                      navigationBloc.openSubPage(builder: (context) => AboutContributors());
+                    },
+                  ),
+                  shape: StadiumBorder(side: BorderSide(color: getAccentColor(context), width: 1.5))),
             ],
           ),
         ],
