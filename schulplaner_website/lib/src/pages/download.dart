@@ -17,7 +17,7 @@ class DownloadPage extends StatelessWidget {
     return InnerLayout(
       content: Column(
         children: [
-          SizedBox(height: 32),
+          SizedBox(height: 128),
           ResponsiveSides(
             first: Center(
               child: CircleAvatar(

@@ -17,6 +17,7 @@ dependencies:
   url_launcher: 5.7.10
   flutter_svg: ^0.19.2+1
   community_material_icon: ^5.4.55
+  native_pdf_renderer: ^2.4.0
 
 
 dev_dependencies:
@@ -28,3 +29,4 @@ flutter:
   assets:
     - assets/badges/
     - assets/screenshots/
+    - assets/privacy_policy_schulplaner.pdf
