@@ -24,6 +24,9 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+dependency_overrides:
+  extended_image: 1.5.0-dev
+
 flutter:
   uses-material-design: true
   assets:

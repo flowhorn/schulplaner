@@ -84,6 +84,8 @@ class _SocialMediaButtons extends StatelessWidget {
         _Instagram(),
         SizedBox(width: 8),
         _Twitter(),
+        SizedBox(width: 8),
+        _Discord(),
       ],
     );
   }
@@ -111,6 +113,20 @@ class _Twitter extends StatelessWidget {
       onPressed: () {
         openUrl(
             urlString: 'https://twitter.com/schulplanerapp',
+            openInNewWindow: true);
+      },
+    );
+  }
+}
+
+class _Discord extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      icon: Icon(CommunityMaterialIcons.discord),
+      onPressed: () {
+        openUrl(
+            urlString: 'https://discord.com/invite/uZyK7Tf',
             openInNewWindow: true);
       },
     );

@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.white,
         accentColor: Colors.teal,
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        pageTransitionsTheme: PageTransitionsTheme(),
       ),
       initialRoute: homepageWebsiteRoute,
       routes: navigationRoutes,

@@ -24,6 +24,7 @@ class _DesktopAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      key: Key('_DesktopAppBar'),
       title: WebsiteTitle(),
       elevation: 0,
       actions: const [

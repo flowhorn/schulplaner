@@ -1,5 +1,6 @@
 import 'package:design_utils/design_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:schulplaner_website/src/logic/website_utils.dart';
 import 'package:schulplaner_website/src/parts/inner_layout.dart';
 
 class OpenSourcePage extends StatelessWidget {
@@ -8,7 +9,7 @@ class OpenSourcePage extends StatelessWidget {
     return InnerLayout(
       content: Column(
         children: [
-          SizedBox(height: 32),
+          SizedBox(height: 128),
           ResponsiveSides(
             first: Center(
               child: CircleAvatar(
@@ -24,7 +25,7 @@ class OpenSourcePage extends StatelessWidget {
             second: Column(
               children: [
                 Text(
-                  'Open Source. Community!',
+                  'Open Source! Community!',
                   style: TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.w600,
@@ -48,6 +49,7 @@ class OpenSourcePage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
             ),
           ),
+          SizedBox(height: 128),
         ],
       ),
     );
@@ -73,7 +75,11 @@ class _OpenGithub extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
-      onPressed: () {},
+      onPressed: () {
+        openUrl(
+            urlString: 'https://github.com/flowhorn/schulplaner',
+            openInNewWindow: true);
+      },
       child: Text('Github (Source Code)'),
       color: Colors.green,
     );
@@ -84,7 +90,11 @@ class _OpenDiscord extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
-      onPressed: () {},
+      onPressed: () {
+        openUrl(
+            urlString: 'https://discord.com/invite/uZyK7Tf',
+            openInNewWindow: true);
+      },
       child: Text('Discord (Community)'),
       color: Colors.orange,
     );

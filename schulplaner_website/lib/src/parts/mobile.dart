@@ -21,6 +21,7 @@ class _MobileAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      key: Key('_MobileAppBar'),
       title: WebsiteTitle(),
       elevation: 0,
     );
