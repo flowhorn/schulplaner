@@ -5,6 +5,7 @@ import 'package:schulplaner8/Helper/helper_data.dart';
 import 'package:schulplaner8/Helper/helper_views.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
 import 'package:schulplaner_widgets/schulplaner_forms.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AboutContributors extends StatelessWidget {
   @override
@@ -96,6 +97,12 @@ class _ContributorListTile extends StatelessWidget {
     return ListTile(
       leading: Icon(FontAwesomeIcons.github),
       title: Text(contributor.name),
+      trailing: Text(
+        BothLangString(de: 'Beiträge: ' + contributor.contributions.toString(), en: 'Contributions: ' + contributor.contributions.toString()).getText(context),
+      ),
+      onTap: () {
+        launch(contributor.url);
+      },
     );
   }
 }
