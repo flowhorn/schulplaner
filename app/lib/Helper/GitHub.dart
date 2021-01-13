@@ -12,7 +12,7 @@ class GitHub {
     try {
       final response = await http.get(url);
 
-      var responseData = json.decode(response.body);
+      final responseData = json.decode(response.body);
 
       /// List to store the contributors in.
       List<Contributor> contributors = [];

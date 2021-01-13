@@ -49,39 +49,45 @@ class _Contributors extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 70, //todo multiply with length
-      child: _myListView(context),
+      height: MediaQuery.of(context).size.height.roundToDouble(),
+      child: _ContributorsList(),
     );
   }
 }
 
-Widget _myListView(BuildContext context) {
-  Future<List<Contributor>> list = GitHub().getContributors();
+class _ContributorsList extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<List<Contributor>>(
+      future: GitHub().getContributors(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) return CircularProgressIndicator();
 
-  List<Contributor> contrs = [];
+        final contributors = snapshot.data;
+        //Because the value ca
+        if (contributors == null) return CircularProgressIndicator();
 
-//todo get List entries via FutureBuilder
-
-  if (contrs.isEmpty) {
-    Contributor contributor = Contributor(
-      name: 'Loading failure',
-      url: '',
-      contributions: 0,
+        return ListView.builder(
+          itemCount: contributors.length,
+          itemBuilder: (context, index) {
+            final _contributor = contributors[index];
+            return _ContributorListTile(contributor: _contributor);
+          },
+        );
+      },
     );
-    contrs.add(contributor);
   }
+}
 
-  return ListView.builder(
-    itemCount: contrs.length,
-    itemBuilder: (context, index) {
-      return Card(
-        //                           <-- Card widget
-        child: ListTile(
-          leading: Icon(FontAwesomeIcons.hands),
-          title: Text(contrs[index].name),
-          trailing: Text('Contributions: ' + contrs[index].contributions.toString()),
-        ),
-      );
-    },
-  );
+class _ContributorListTile extends StatelessWidget {
+  final Contributor contributor;
+  const _ContributorListTile({this.contributor});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      leading: Icon(FontAwesomeIcons.github),
+      title: Text(contributor.name),
+    );
+  }
 }
