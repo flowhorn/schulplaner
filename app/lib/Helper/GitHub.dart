@@ -15,9 +15,9 @@ class GitHub {
       final responseData = json.decode(response.body);
 
       /// List to store the contributors in.
-      List<Contributor> contributors = [];
-      for (var singleContr in responseData) {
-        Contributor contributor = Contributor(
+      final List<Contributor> contributors = [];
+      for (final singleContr in responseData) {
+        final Contributor contributor = Contributor(
           name: singleContr['login'],
           url: singleContr['html_url'],
           contributions: singleContr['contributions'],
