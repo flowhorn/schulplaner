@@ -62,11 +62,18 @@ class _ContributorsList extends StatelessWidget {
     return FutureBuilder<List<Contributor>>(
       future: GitHub().getContributors(),
       builder: (context, snapshot) {
-        if (!snapshot.hasData) return CircularProgressIndicator();
-
         final contributors = snapshot.data;
-        //Because the value ca
-        if (contributors == null) return CircularProgressIndicator();
+
+        //Because the value can be null
+        if (contributors == null || !snapshot.hasData) {
+          return FormSectionText(
+              text: DefaultTextSpan(
+                  context,
+                  BothLangString(
+                          de: 'Die Liste wird geladen. Falls es zu lange dauert, hast du vielleicht dein Datenvolumen für diesen Monat schon aufgebraucht. 😕',
+                          en: 'The list is loading. If it takes too long, you may have already used up your data volume for this month. 😕')
+                      .getText(context)));
+        }
 
         return ListView.builder(
           itemCount: contributors.length,
