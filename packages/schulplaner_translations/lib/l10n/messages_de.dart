@@ -21,7 +21,6 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function>{
         "about": MessageLookupByLibrary.simpleMessage("Über"),
-        "about_contributors": MessageLookupByLibrary.simpleMessage("Mitwirkende"),
         "absentlessons": MessageLookupByLibrary.simpleMessage("Fehlstunden"),
         "absenttime": MessageLookupByLibrary.simpleMessage("Fehlzeit"),
         "absenttimes": MessageLookupByLibrary.simpleMessage("Fehlzeiten"),
@@ -88,7 +87,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "connected": MessageLookupByLibrary.simpleMessage("Verbunden"),
         "connectedclasses": MessageLookupByLibrary.simpleMessage("Verbundene Klassen"),
         "contact_data_protection_commissioner": MessageLookupByLibrary.simpleMessage("Datenschutzbeauftragten kontaktieren"),
-        "contact_founder": MessageLookupByLibrary.simpleMessage("Kontaktiere den App Gründer"),
         "contact_us": MessageLookupByLibrary.simpleMessage("Kontaktiere uns"),
         "content": MessageLookupByLibrary.simpleMessage("Inhalt"),
         "course": MessageLookupByLibrary.simpleMessage("Fach"),
@@ -391,6 +389,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "wholetimespan": MessageLookupByLibrary.simpleMessage("Gesamter Zeitraum"),
         "widgets": MessageLookupByLibrary.simpleMessage("Widgets"),
         "yesterday": MessageLookupByLibrary.simpleMessage("Gestern"),
-        "zerolesson": MessageLookupByLibrary.simpleMessage("0.Stunde"),
+        "zerolesson": MessageLookupByLibrary.simpleMessage("0.Stunde")
       };
 }

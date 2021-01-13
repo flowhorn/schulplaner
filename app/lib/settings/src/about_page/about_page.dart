@@ -95,9 +95,7 @@ class _ContactUs extends StatelessWidget {
           )),
           ListTile(
             leading: Icon(Icons.email),
-            title: Text(
-              getString(context).contact_founder,
-            ),
+            title: Text(bothlang(context, de: 'Kontaktiere den App-Gründer', en: 'Contact the app founder')),
             subtitle: Text('danielfelixplay@gmail.com'),
             onTap: () {
               Future<void> _launchURL() async {

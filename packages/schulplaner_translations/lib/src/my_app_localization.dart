@@ -2032,24 +2032,10 @@ class MyAppLocalizations {
     );
   }
 
-  String get about_contributors {
-    return Intl.message(
-      'Contributors',
-      name: 'about_contributors',
-    );
-  }
-
   String get contact_us {
     return Intl.message(
-      'Contact Us',
+      'Contact us',
       name: 'contact_us',
-    );
-  }
-
-  String get contact_founder {
-    return Intl.message(
-      'Contact the app founder',
-      name: 'contact_founder',
     );
   }
 
@@ -2064,13 +2050,6 @@ class MyAppLocalizations {
     return Intl.message(
       'Licenses',
       name: 'licenses',
-    );
-  }
-
-  String get github {
-    return Intl.message(
-      'GitHub',
-      name: 'github',
     );
   }
   //END ABOUT

@@ -83,8 +83,7 @@ class _AppVersion extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      getString(context).version +
-          ': ${Config.versionName} (${Config.versionCode.toString()})',
+      getString(context).version + ': ${Config.versionName} (${Config.versionCode.toString()})',
       textAlign: TextAlign.center,
       style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.w400),
     );
@@ -109,13 +108,11 @@ class _Actions extends StatelessWidget {
               color: Colors.blueAccent,
               onTap: () {
                 final navigationBloc = NavigationBloc.of(context);
-                navigationBloc.openSubPage(
-                    builder: (context) => ChangelogView());
+                navigationBloc.openSubPage(builder: (context) => ChangelogView());
               },
             ),
             SizedBox(
-              width:
-                  7, /* To have the same spacing as on the right. Probably belongs to the text-length */
+              width: 7, /* To have the same spacing as on the right. Probably belongs to the text-length */
             ),
             QuickActionView(
               iconData: Icons.layers_sharp,
@@ -130,7 +127,7 @@ class _Actions extends StatelessWidget {
             ),
             QuickActionView(
               iconData: FontAwesomeIcons.github,
-              text: getString(context).github,
+              text: 'GitHub',
               color: Colors.blueAccent,
               onTap: () {
                 launch('https://github.com/flowhorn/schulplaner');

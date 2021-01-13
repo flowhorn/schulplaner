@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:schulplaner8/Helper/GitHub.dart';
+import 'package:schulplaner8/Helper/helper_data.dart';
 import 'package:schulplaner8/Helper/helper_views.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
 import 'package:schulplaner_widgets/schulplaner_forms.dart';
@@ -10,7 +11,7 @@ class AboutContributors extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MyAppHeader(
-        title: getString(context).about_contributors,
+        title: bothlang(context, de: 'Mitwirkende', en: 'Contributors'),
       ),
       body: SingleChildScrollView(
         child: Column(
