@@ -9,6 +9,8 @@ import 'package:schulplaner_widgets/schulplaner_forms.dart';
 import 'package:schulplaner_widgets/schulplaner_theme.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+int contributorCount = 1;
+
 class AboutContributors extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -52,8 +54,9 @@ class _AboutContributors extends StatelessWidget {
 class _Contributors extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return FormSection(
+    return Container(
       child: _ContributorsList(),
+      height: contributorCount.toDouble() * 70,
     );
   }
 }
@@ -74,6 +77,8 @@ class _ContributorsList extends StatelessWidget {
             valueColor: AlwaysStoppedAnimation<Color>(ColorUtils.of(context).getAccentColor()),
           ));
         }
+
+        contributorCount = contributors.length;
 
         return ListView.builder(
           itemCount: contributors.length,
