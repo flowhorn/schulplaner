@@ -3,8 +3,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:schulplaner8/Helper/GitHub.dart';
 import 'package:schulplaner8/Helper/helper_data.dart';
 import 'package:schulplaner8/Helper/helper_views.dart';
+import 'package:schulplaner_addons/schulplaner_utils.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
 import 'package:schulplaner_widgets/schulplaner_forms.dart';
+import 'package:schulplaner_widgets/schulplaner_theme.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AboutContributors extends StatelessWidget {
@@ -50,8 +52,7 @@ class _AboutContributors extends StatelessWidget {
 class _Contributors extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height.roundToDouble(),
+    return FormSection(
       child: _ContributorsList(),
     );
   }
@@ -67,13 +68,11 @@ class _ContributorsList extends StatelessWidget {
 
         //Because the value can be null
         if (contributors == null || !snapshot.hasData) {
-          return FormSectionText(
-              text: DefaultTextSpan(
-                  context,
-                  BothLangString(
-                          de: 'Die Liste wird geladen. Falls es zu lange dauert, hast du vielleicht dein Datenvolumen für diesen Monat schon aufgebraucht. 😕',
-                          en: 'The list is loading. If it takes too long, you may have already used up your data volume for this month. 😕')
-                      .getText(context)));
+          return Center(
+              child: CircularProgressIndicator(
+            strokeWidth: 5,
+            valueColor: AlwaysStoppedAnimation<Color>(ColorUtils.of(context).getAccentColor()),
+          ));
         }
 
         return ListView.builder(
