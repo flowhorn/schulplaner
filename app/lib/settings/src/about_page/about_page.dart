@@ -11,6 +11,7 @@ import 'package:schulplaner_navigation/schulplaner_navigation.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
 import 'package:schulplaner_widgets/schulplaner_forms.dart';
 import 'package:schulplaner_widgets/schulplaner_theme.dart';
+import 'package:universal_commons/platform_check.dart';
 import 'package:universal_io/prefer_universal/io.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -64,7 +65,7 @@ class _AboutApp extends StatelessWidget {
             leading: Icon(FontAwesomeIcons.star),
             title: Text(getString(context).rate_us),
             onTap: () {
-              if (Platform.isAndroid || Platform.isIOS) {
+              if (PlatformCheck.isAndroid || PlatformCheck.isIOS) {
                 LaunchReview.launch();
               } else {
                 launch('https://schulplaner.web.app/'); //todo(flowhorn) set link to download section
@@ -81,7 +82,10 @@ class _ContactUs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FormSection(
-      title: BothLangString(de: 'Du möchtest uns gerne kontaktieren?', en: 'Do you want to contact us?').getText(context),
+      title: BothLangString(
+        de: 'Du möchtest uns gerne kontaktieren?',
+        en: 'Do you want to contact us?',
+      ).getText(context),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -95,11 +99,15 @@ class _ContactUs extends StatelessWidget {
           )),
           ListTile(
             leading: Icon(Icons.email),
-            title: Text(bothlang(context, de: 'Kontaktiere den App-Gründer', en: 'Contact the app founder')),
+            title: Text(bothlang(
+              context,
+              de: 'Kontaktiere den App-Gründer',
+              en: 'Contact the app founder',
+            )),
             subtitle: Text('danielfelixplay@gmail.com'),
             onTap: () {
               Future<void> _launchURL() async {
-                dynamic url = 'mailto:danielfelixplay@gmail.com?subject=${getString(context).apptitle}';
+                final dynamic url = 'mailto:danielfelixplay@gmail.com?subject=${getString(context).apptitle}';
                 if (await canLaunch(url)) {
                   await launch(url);
                 } else {
@@ -119,7 +127,11 @@ class _ContactUs extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(FontAwesomeIcons.bug),
-            title: Text(bothlang(context, de: 'Erstelle ein Issue (GitHub)', en: 'Create an issue (GitHub)')),
+            title: Text(bothlang(
+              context,
+              de: 'Erstelle ein Issue (GitHub)',
+              en: 'Create an issue (GitHub)',
+            )),
             onTap: () {
               launch('https://github.com/flowhorn/schulplaner/issues/new/choose');
             },

@@ -99,9 +99,7 @@ class _Actions extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            SizedBox(
-              width: 12,
-            ),
+            SizedBox(width: 12),
             QuickActionView(
               iconData: Icons.format_list_bulleted,
               text: getString(context).changelog,

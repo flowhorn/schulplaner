@@ -5,7 +5,7 @@ class GitHub {
   /// baseurl of the GitHub REST API for this repository
   String baseUrl = 'https://api.github.com/repos/flowhorn/schulplaner';
 
-  /// Get a list of all current GitHub contributors.
+  /// Returns a list of contributors at GitHub || null
   Future<List<Contributor>> getContributors() async {
     String url = baseUrl + '/contributors';
 
@@ -36,7 +36,7 @@ class Contributor {
   final String name, url;
   final int contributions;
 
-  Contributor({
+  const Contributor({
     this.name,
     this.url,
     this.contributions,
