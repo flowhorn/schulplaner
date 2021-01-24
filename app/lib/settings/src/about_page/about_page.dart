@@ -107,7 +107,7 @@ class _ContactUs extends StatelessWidget {
             subtitle: Text('danielfelixplay@gmail.com'),
             onTap: () {
               Future<void> _launchURL() async {
-                final dynamic url = 'mailto:danielfelixplay@gmail.com?subject=${getString(context).apptitle}';
+                final url = 'mailto:danielfelixplay@gmail.com?subject=${getString(context).apptitle}';
                 if (await canLaunch(url)) {
                   await launch(url);
                 } else {
