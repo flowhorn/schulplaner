@@ -8,8 +8,6 @@ import 'package:schulplaner_translations/schulplaner_translations.dart';
 import 'package:schulplaner_widgets/schulplaner_forms.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-int contributorCount = 1;
-
 class AboutContributors extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -58,7 +56,6 @@ class _Contributors extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: _ContributorsList(),
-      height: contributorCount.toDouble() * 70,
     );
   }
 }
@@ -80,14 +77,13 @@ class _ContributorsList extends StatelessWidget {
           ));
         }
 
-        contributorCount = contributors.length;
-
-        return ListView.builder(
-          itemCount: contributors.length,
-          itemBuilder: (context, index) {
-            final _contributor = contributors[index];
-            return _ContributorListTile(contributor: _contributor);
-          },
+        return Column(
+          children: [
+            for (final contributor in contributors)
+              _ContributorListTile(
+                contributor: contributor,
+              )
+          ],
         );
       },
     );
