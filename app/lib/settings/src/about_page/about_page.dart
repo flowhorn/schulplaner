@@ -1,13 +1,18 @@
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:launch_review/launch_review.dart';
 import 'package:schulplaner8/Helper/LogAnalytics.dart';
+import 'package:schulplaner8/Helper/helper_data.dart';
 import 'package:schulplaner8/Helper/helper_views.dart';
+import 'package:schulplaner8/settings/src/about_page/about_page_contributors.dart';
 import 'package:schulplaner8/settings/src/about_page/about_page_header.dart';
-import 'package:schulplaner8/settings/src/about_page/about_page_me.dart';
+import 'package:schulplaner_navigation/schulplaner_navigation.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
 import 'package:schulplaner_widgets/schulplaner_forms.dart';
-import 'package:share/share.dart';
+import 'package:schulplaner_widgets/schulplaner_theme.dart';
+import 'package:universal_commons/platform_check.dart';
+import 'package:universal_io/prefer_universal/io.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AboutPage extends StatelessWidget {
@@ -21,11 +26,10 @@ class AboutPage extends StatelessWidget {
         child: Column(
           children: [
             AboutPageHeader(),
-            AboutPageMe(),
             _AboutApp(),
-            _AppStore(),
             _ContactUs(),
             _SocialMedia(),
+            _Team(),
             _Financing(),
             FormSpace(16.0),
           ],
@@ -44,6 +48,7 @@ class _AboutApp extends StatelessWidget {
         en: 'About the Schoolplanner-App',
       ).getText(context),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           FormSectionText(
               text: DefaultTextSpan(
@@ -53,59 +58,20 @@ class _AboutApp extends StatelessWidget {
               en: 'The Schoolplanner-App is a digital Schoolplanner.\nIt simplifies the organisation of your daily schoollife.\nYou can use it with all your devices and together with your classmates. Then only one has to enter tasks and lessons.',
             ).getText(context),
           )),
-        ],
-      ),
-    );
-  }
-}
-
-class _AppStore extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return FormSection(
-      title: BothLangString(
-        de: 'Gefällt dir Schulplaner?',
-        en: 'Do you like Schoolplanner?',
-      ).getText(context),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          FormSectionText(
-            text: DefaultTextSpan(
-              context,
-              BothLangString(
-                de: 'Wir würden uns sehr über eine Bewertung freuen.\nTeile die App gerne an all deine Mitschüler/Innen. Zusammen gelingt die Organisation noch viel besser☺',
-                en: 'We would be happy about an review.\nShare the app with all your friends. Together the organisation of the school life is much simpler.',
-              ).getText(context),
-            ),
+          SizedBox(
+            height: 10,
           ),
           ListTile(
-            leading: Icon(Icons.star),
-            title: Text(
-              getString(context).rate_us,
-            ),
+            leading: Icon(FontAwesomeIcons.star),
+            title: Text(getString(context).rate_us),
             onTap: () {
-              LaunchReview.launch();
+              if (PlatformCheck.isAndroid || PlatformCheck.isIOS) {
+                LaunchReview.launch();
+              } else {
+                launch('https://schulplaner.web.app/'); //todo(flowhorn) set link to download section
+              }
             },
-          ),
-          ListTile(
-            leading: Icon(Icons.play_arrow),
-            title: Text(
-              'Google Play Store',
-            ),
-            onTap: () {
-              Share.share(
-                  'https://play.google.com/store/apps/details?id=com.xla.school');
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.apps),
-            title: Text('Apple App Store'),
-            onTap: () {
-              Share.share(
-                  'https://itunes.apple.com/de/app/schulplanerpro/id1425606459?mt=8');
-            },
-          ),
+          )
         ],
       ),
     );
@@ -117,9 +83,9 @@ class _ContactUs extends StatelessWidget {
   Widget build(BuildContext context) {
     return FormSection(
       title: BothLangString(
-              de: 'Du möchtest uns gerne kontaktieren?',
-              en: 'Do you want to contact us?')
-          .getText(context),
+        de: 'Du möchtest uns gerne kontaktieren?',
+        en: 'Do you want to contact us?',
+      ).getText(context),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -133,14 +99,15 @@ class _ContactUs extends StatelessWidget {
           )),
           ListTile(
             leading: Icon(Icons.email),
-            title: Text(
-              getString(context).contact_us,
-            ),
+            title: Text(bothlang(
+              context,
+              de: 'Kontaktiere den App-Gründer',
+              en: 'Contact the app founder',
+            )),
             subtitle: Text('danielfelixplay@gmail.com'),
             onTap: () {
               Future<void> _launchURL() async {
-                dynamic url =
-                    'mailto:danielfelixplay@gmail.com?subject=${getString(context).apptitle}';
+                final url = 'mailto:danielfelixplay@gmail.com?subject=${getString(context).apptitle}';
                 if (await canLaunch(url)) {
                   await launch(url);
                 } else {
@@ -158,6 +125,17 @@ class _ContactUs extends StatelessWidget {
               launch('https://discord.gg/uZyK7Tf');
             },
           ),
+          ListTile(
+            leading: Icon(FontAwesomeIcons.bug),
+            title: Text(bothlang(
+              context,
+              de: 'Erstelle ein Issue (GitHub)',
+              en: 'Create an issue (GitHub)',
+            )),
+            onTap: () {
+              launch('https://github.com/flowhorn/schulplaner/issues/new/choose');
+            },
+          )
         ],
       ),
     );
@@ -176,8 +154,8 @@ class _SocialMedia extends StatelessWidget {
               text: DefaultTextSpan(
             context,
             BothLangString(
-              de: 'Möchtest du mehr über die Entwicklung der App, neue Features und uns erfahren? ',
-              en: 'Du you want to know more about the development of the app, features and us?',
+              de: 'Möchtest du mehr über die Entwicklung der App und kommende Updates erfahren?',
+              en: 'Du you want to know more about the development of the app and learn about upcoming releases?',
             ).getText(context),
           )),
           ListTile(
@@ -205,6 +183,76 @@ class _SocialMedia extends StatelessWidget {
             onTap: () {
               launch('https://twitter.com/SchulplanerApp');
             },
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _Team extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return FormSection(
+      title: BothLangString(de: 'Das Team (Klicke für mehr 😉)', en: 'The team (Click for more 😉)').getText(context),
+      child: Column(
+        children: <Widget>[
+          Column(
+            children: [
+              ListTile(
+                leading: Icon(
+                  FontAwesomeIcons.lightbulb,
+                  size: 35,
+                ),
+                title: Text('Felix Weuthen aka. flowhorn'),
+                subtitle: Text('Founder & Developer'),
+                onTap: () {
+                  launch('https://www.instagram.com/felix.weuth/');
+                },
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              ListTile(
+                leading: Icon(
+                  FontAwesomeIcons.headset,
+                  size: 35,
+                ),
+                title: Text('Elias aka. Friendly'),
+                subtitle: Text('Support'),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              ListTile(
+                leading: Icon(
+                  CommunityMaterialIcons.code_tags,
+                  size: 35,
+                ),
+                title: Text('Henrik Steffens aka. Th3Ph4nt0m'),
+                subtitle: Text('UI/UX Development'),
+                onTap: () {
+                  launch('https://www.th3ph4nt0m.de/');
+                },
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Card(
+                  child: ListTile(
+                    leading: Icon(
+                      FontAwesomeIcons.arrowRight,
+                      size: 30,
+                    ),
+                    title: Text(bothlang(context, de: 'Alle Mitwirkenden', en: 'All contributors')),
+                    subtitle: Text(bothlang(context, de: 'Schaue dir eine Liste aller Mitwirkenden an!', en: 'View a list of all contributors!')),
+                    onTap: () {
+                      final navigationBloc = NavigationBloc.of(context);
+                      navigationBloc.openSubPage(builder: (context) => AboutContributors());
+                    },
+                  ),
+                  shape: StadiumBorder(side: BorderSide(color: getAccentColor(context), width: 1.5))),
+            ],
           ),
         ],
       ),
