@@ -34,7 +34,7 @@ export class CourseData {
     }
 
     sizeOfConnectedClasses() {
-        var totals = 0;
+        let totals = 0;
         if (this.class1 != null) totals++;
         if (this.class2 != null) totals++;
         if (this.class3 != null) totals++;
