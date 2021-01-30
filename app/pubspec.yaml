@@ -53,6 +53,7 @@ dependencies:
   rxdart: ^0.24.1
   
   community_material_icon: 5.8.55
+  font_awesome_flutter: ^8.8.1
   color: 2.1.1
   flutter_material_color_picker: 1.0.5
   diff_match_patch: 0.3.0

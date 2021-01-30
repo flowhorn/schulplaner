@@ -141,6 +141,7 @@ class DefaultTextSpan extends TextSpan {
       : super(
           text: text,
           style: TextStyle(
+            fontSize: 15,
             fontWeight: FontWeight.w300,
             color: getClearTextColor(context),
           ),
