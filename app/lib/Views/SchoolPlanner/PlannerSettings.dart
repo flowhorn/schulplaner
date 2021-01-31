@@ -365,7 +365,7 @@ Widget getSubSettingsGrades(BuildContext context, PlannerDatabase database) {
 }
 
 Widget getSubSettingsNotifications(BuildContext context) {
-  FirebaseMessaging().requestNotificationPermissions();
+  FirebaseMessaging.instance.requestPermission();
   return NotificationSettingsSubPage();
 }
 

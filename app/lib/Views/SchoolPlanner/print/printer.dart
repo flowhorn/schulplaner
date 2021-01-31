@@ -4,7 +4,8 @@ import 'package:printing/printing.dart';
 
 class Printer {
   Future<void> sharePDF(Document pdf) async {
-    await Printing.sharePdf(bytes: pdf.save(), filename: 'timetable.pdf');
+    final bytes = await pdf.save();
+    await Printing.sharePdf(bytes: bytes, filename: 'timetable.pdf');
   }
 
   Future<void> printPDF(Document pdf) async {

@@ -12,7 +12,6 @@ import 'package:schulplaner_translations/schulplaner_translations.dart';
 import 'package:schulplaner_widgets/schulplaner_forms.dart';
 import 'package:schulplaner_widgets/schulplaner_theme.dart';
 import 'package:universal_commons/platform_check.dart';
-import 'package:universal_io/prefer_universal/io.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AboutPage extends StatelessWidget {
@@ -68,7 +67,8 @@ class _AboutApp extends StatelessWidget {
               if (PlatformCheck.isAndroid || PlatformCheck.isIOS) {
                 LaunchReview.launch();
               } else {
-                launch('https://schulplaner.web.app/'); //todo(flowhorn) set link to download section
+                launch(
+                    'https://schulplaner.web.app/'); //todo(flowhorn) set link to download section
               }
             },
           )
@@ -107,7 +107,8 @@ class _ContactUs extends StatelessWidget {
             subtitle: Text('danielfelixplay@gmail.com'),
             onTap: () {
               Future<void> _launchURL() async {
-                final url = 'mailto:danielfelixplay@gmail.com?subject=${getString(context).apptitle}';
+                final url =
+                    'mailto:danielfelixplay@gmail.com?subject=${getString(context).apptitle}';
                 if (await canLaunch(url)) {
                   await launch(url);
                 } else {
@@ -133,7 +134,8 @@ class _ContactUs extends StatelessWidget {
               en: 'Create an issue (GitHub)',
             )),
             onTap: () {
-              launch('https://github.com/flowhorn/schulplaner/issues/new/choose');
+              launch(
+                  'https://github.com/flowhorn/schulplaner/issues/new/choose');
             },
           )
         ],
@@ -194,7 +196,10 @@ class _Team extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FormSection(
-      title: BothLangString(de: 'Das Team (Klicke für mehr 😉)', en: 'The team (Click for more 😉)').getText(context),
+      title: BothLangString(
+              de: 'Das Team (Klicke für mehr 😉)',
+              en: 'The team (Click for more 😉)')
+          .getText(context),
       child: Column(
         children: <Widget>[
           Column(
@@ -244,14 +249,20 @@ class _Team extends StatelessWidget {
                       FontAwesomeIcons.arrowRight,
                       size: 30,
                     ),
-                    title: Text(bothlang(context, de: 'Alle Mitwirkenden', en: 'All contributors')),
-                    subtitle: Text(bothlang(context, de: 'Schaue dir eine Liste aller Mitwirkenden an!', en: 'View a list of all contributors!')),
+                    title: Text(bothlang(context,
+                        de: 'Alle Mitwirkenden', en: 'All contributors')),
+                    subtitle: Text(bothlang(context,
+                        de: 'Schaue dir eine Liste aller Mitwirkenden an!',
+                        en: 'View a list of all contributors!')),
                     onTap: () {
                       final navigationBloc = NavigationBloc.of(context);
-                      navigationBloc.openSubPage(builder: (context) => AboutContributors());
+                      navigationBloc.openSubPage(
+                          builder: (context) => AboutContributors());
                     },
                   ),
-                  shape: StadiumBorder(side: BorderSide(color: getAccentColor(context), width: 1.5))),
+                  shape: StadiumBorder(
+                      side: BorderSide(
+                          color: getAccentColor(context), width: 1.5))),
             ],
           ),
         ],

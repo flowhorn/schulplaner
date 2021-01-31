@@ -1,5 +1,6 @@
 import 'package:date/time.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:firebase_messaging/firebase_messaging.dart'
+    as firebase_messaging;
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Helper/EasyWidget.dart';
 import 'package:schulplaner8/Helper/helper_data.dart';
@@ -228,7 +229,7 @@ class _Devices extends StatelessWidget {
         }
       },
       future: PlatformCheck.isMobile
-          ? FirebaseMessaging().getToken()
+          ? firebase_messaging.FirebaseMessaging.instance.getToken()
           : Future.value(null),
     );
   }

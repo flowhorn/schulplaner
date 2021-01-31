@@ -35,22 +35,22 @@ dependencies:
     sdk: flutter
 
   shared_preferences: 0.5.12+4
-  cupertino_icons: 1.0.1+1
+  cupertino_icons: 1.0.2
 
   #GOOGLE
-  cloud_firestore: 0.14.4
-  firebase_auth: 0.18.4+1
-  firebase_messaging: 7.0.3
-  firebase_storage: 5.2.0
-  firebase_analytics: 6.3.0
-  firebase_database: 4.4.0
-  firebase_performance: 0.4.3
-  firebase_crashlytics: 0.2.4
-  firebase_dynamic_links: ^0.6.3
+  cloud_firestore: 0.16.0
+  firebase_auth: 0.20.0+1
+  firebase_messaging: 8.0.0-dev.14
+  firebase_storage: 7.0.0
+  firebase_analytics: 7.0.1
+  firebase_database: 6.0.0
+  firebase_performance: 0.5.0+1
+  firebase_crashlytics: 0.4.0+1
+  firebase_dynamic_links: ^0.7.0+1
 
   intl: ^0.17.0-nullsafety.2
   intl_translation: 0.17.10+1
-  rxdart: ^0.24.1
+  rxdart: ^0.25.0
   
   community_material_icon: 5.8.55
   font_awesome_flutter: ^8.8.1
@@ -66,9 +66,9 @@ dependencies:
   launch_review: 2.0.0
   flutter_image_compress: 0.7.0
   photo_view: 0.10.3
-  path_provider: 1.6.24
-  cached_network_image: 2.4.1
-  flutter_cache_manager: 2.0.0
+  path_provider: 1.6.27
+  cached_network_image: 2.5.0
+  flutter_cache_manager: 2.1.1
   after_layout: 1.0.7+2
   auto_size_text: 2.1.0
   avataaar_image: 1.0.8
@@ -78,8 +78,8 @@ dependencies:
   timeago: ^2.0.28
   fl_chart: ^0.11.1
   percent_indicator: ^2.1.8
-  printing: ^3.7.1
-  pdf: ^1.12.0
+  printing: ^4.0.0
+  pdf: ^2.0.0
   universal_io: ^1.0.2
   
 dev_dependencies:
@@ -92,31 +92,6 @@ dependency_overrides:
     git:
       url: https://github.com/Zazo032/intl_translation.git
       ref: patch-1
-  firebase_auth:
-    git: 
-      url: https://github.com/FirebaseExtended/flutterfire.git
-      ref: "@russell/constants-app-initialise"
-      path: packages/firebase_auth/firebase_auth
-  firebase_auth_platform_interface:
-    git: 
-      url: https://github.com/FirebaseExtended/flutterfire.git
-      ref: "@russell/constants-app-initialise"
-      path: packages/firebase_auth/firebase_auth_platform_interface
-  firebase_auth_web:
-    git: 
-      url: https://github.com/FirebaseExtended/flutterfire.git
-      ref: "@russell/constants-app-initialise"
-      path: packages/firebase_auth/firebase_auth_web
-  firebase_core_platform_interface:
-    git: 
-      url: https://github.com/FirebaseExtended/flutterfire.git
-      ref: "@russell/constants-app-initialise"
-      path: packages/firebase_core/firebase_core_platform_interface
-  firebase_core_web:
-    git: 
-      url: https://github.com/FirebaseExtended/flutterfire.git
-      ref: "@russell/constants-app-initialise"
-      path: packages/firebase_core/firebase_core_web
 
 flutter:
   uses-material-design: true

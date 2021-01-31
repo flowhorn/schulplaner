@@ -434,7 +434,7 @@
 				CODE_SIGN_ENTITLEMENTS = Runner/DebugProfile.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 610;
+				CURRENT_PROJECT_VERSION = 616;
 				DEVELOPMENT_TEAM = 42W59UZ2C3;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -445,7 +445,8 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 9.2.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MARKETING_VERSION = 10.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.xla.schoolplanner;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -568,7 +569,7 @@
 				CODE_SIGN_ENTITLEMENTS = Runner/DebugProfile.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 610;
+				CURRENT_PROJECT_VERSION = 616;
 				DEVELOPMENT_TEAM = 42W59UZ2C3;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -579,7 +580,8 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 9.2.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MARKETING_VERSION = 10.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.xla.schoolplanner;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -596,7 +598,7 @@
 				CODE_SIGN_ENTITLEMENTS = Runner/Release.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 610;
+				CURRENT_PROJECT_VERSION = 616;
 				DEVELOPMENT_TEAM = 42W59UZ2C3;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -607,7 +609,8 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 9.2.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MARKETING_VERSION = 10.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.xla.schoolplanner;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
