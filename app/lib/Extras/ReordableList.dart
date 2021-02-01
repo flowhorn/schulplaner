@@ -91,15 +91,15 @@ class _ReorderableListState extends State<ReorderableList>
     if (!_scrolling && _scrollController != null && _dragging != null) {
       final position = _scrollController.position;
       double newOffset;
-      int duration = 14; // in ms
-      double step = 1.0;
-      double overdragMax = 20.0;
-      double overdragCoef = 10.0;
+      final duration = 14; // in ms
+      final step = 1.0;
+      final overdragMax = 20.0;
+      final overdragCoef = 10.0;
 
-      MediaQueryData d = MediaQuery.of(context);
+      final d = MediaQuery.of(context);
 
-      double top = d?.padding?.top ?? 0.0;
-      double bottom = context.size.height - (d?.padding?.bottom ?? 0.0);
+      final top = d?.padding?.top ?? 0.0;
+      final bottom = context.size.height - (d?.padding?.bottom ?? 0.0);
 
       if (_dragProxy.offset < top &&
           position.pixels > position.minScrollExtent) {
@@ -202,14 +202,14 @@ class _ReorderableListState extends State<ReorderableList>
     final draggingHeight = draggingState.context.size.height;
 
     _ReorderableItemState closest;
-    double closestDistance = 0.0;
+    var closestDistance = 0.0;
 
     // These callbacks will be invoked on successful reorder, they will ensure that
     // reordered items appear on their old position and animate to one
-    List<Function> onReorderApproved = [];
+    final onReorderApproved = <Function>[];
 
     if (_dragProxy.offset < draggingTop) {
-      for (_ReorderableItemState item in _items.values) {
+      for (final item in _items.values) {
         if (item.key == _dragging) continue;
         final itemTop = _itemOffset(item);
         if (itemTop > draggingTop) continue;
@@ -228,9 +228,9 @@ class _ReorderableListState extends State<ReorderableList>
         }
       }
     } else {
-      double draggingBottom = _dragProxy.offset + draggingHeight;
+      final draggingBottom = _dragProxy.offset + draggingHeight;
 
-      for (_ReorderableItemState item in _items.values) {
+      for (final item in _items.values) {
         if (item.key == _dragging) continue;
         final itemTop = _itemOffset(item);
         if (itemTop < draggingTop) continue;
@@ -310,7 +310,7 @@ class _ReorderableListState extends State<ReorderableList>
   }
 
   void _adjustItemTranslation(Key key, double delta, double max) {
-    double current = 0.0;
+    var current = 0.0;
     final currentController = _itemTranslations[key];
     if (currentController != null) {
       current = currentController.value;
@@ -382,7 +382,7 @@ class _ReorderableItemState extends State<ReorderableItem> {
     _listState = _ReorderableListState.of(context);
 
     _listState.registerItem(this);
-    bool dragging = _listState.dragging == key;
+    final dragging = _listState.dragging == key;
     return Listener(
         onPointerDown: _routePointer,
         child: Transform(
@@ -401,7 +401,7 @@ class _ReorderableItemState extends State<ReorderableItem> {
   void _routePointer(PointerEvent event) {
     RenderBox ro = context.findRenderObject();
     final query = MediaQuery.of(context);
-    Offset point = ro.globalToLocal(event.position);
+    final point = ro.globalToLocal(event.position);
     if (point.dx < 60 - (query?.padding?.left ?? 0.0) &&
         point.dy < 60 - (query?.padding?.top ?? 0.0)) {
       _listState.startDragging(key, event);
@@ -478,7 +478,7 @@ class _DragProxyState extends State<_DragProxy> {
     final state = _ReorderableListState.of(context);
     state._dragProxy = this;
 
-    final double decorationHeight = 10.0;
+    final decorationHeight = 10.0;
 
     return _widget != null && _size != null && _offset != null
         ? Positioned.fromRect(

@@ -73,12 +73,13 @@ class _PdfPrivacyPolicy extends StatelessWidget {
               child: FutureBuilder<PrivacyPolicyData>(
                 future: getPrivacyPolicyData(),
                 builder: (context, snapshot) {
-                  if (!snapshot.hasData)
+                  if (!snapshot.hasData) {
                     return SizedBox(
                       height: 48,
                       width: 48,
                       child: Center(child: CircularProgressIndicator()),
                     );
+                  }
                   final privacyPolicyData = snapshot.data;
                   return Column(
                     children: [

@@ -229,7 +229,7 @@ class _Course extends StatelessWidget {
                       if (snapshot.data == null) {
                         return CircularProgressIndicator();
                       }
-                      bool isAlreadyInCourse =
+                      final isAlreadyInCourse =
                           snapshot.data.containsKey(courseInfo.id);
 
                       return isAlreadyInCourse
@@ -281,7 +281,7 @@ class _Course extends StatelessWidget {
       ));
       return;
     }
-    ValueNotifier<bool> sheet_notifier = ValueNotifier(null);
+    final sheet_notifier = ValueNotifier<bool>(null);
     showLoadingStateSheet(context: context, sheetUpdate: sheet_notifier);
     final schulPlanerFunctions = SchulplanerFunctionsBloc.of(context);
     final joinGroupResult = await schulPlanerFunctions.joinGroup(
@@ -321,7 +321,7 @@ class _SchoolClass extends StatelessWidget {
                       if (snapshot.data == null) {
                         return CircularProgressIndicator();
                       }
-                      bool isAlreadyInClass =
+                      final isAlreadyInClass =
                           snapshot.data?.containsKey(info.id) ?? false;
 
                       return isAlreadyInClass
@@ -381,7 +381,7 @@ class _SchoolClass extends StatelessWidget {
       return;
     }
 
-    ValueNotifier<bool> sheet_notifier = ValueNotifier(null);
+    final sheet_notifier = ValueNotifier<bool>(null);
     showLoadingStateSheet(context: context, sheetUpdate: sheet_notifier);
     final schulPlanerFunctions = SchulplanerFunctionsBloc.of(context);
     final joinGroupResult = await schulPlanerFunctions.joinGroup(

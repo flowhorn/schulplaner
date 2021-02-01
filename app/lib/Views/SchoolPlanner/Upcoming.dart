@@ -282,14 +282,14 @@ class UpcomingTasksEventsView extends StatelessWidget {
 }
 
 Stream<List<dynamic>> getTaskEventUpcomingStream(PlannerDatabase database) {
-  StreamController<List<dynamic>> controller = StreamController();
-  List<StreamSubscription> subs = [];
+  final controller = StreamController<List<dynamic>>();
+  final subs = <StreamSubscription>[];
 
   Iterable<SchoolTask> tasks;
   Iterable<SchoolEvent> events;
 
   void update() {
-    List<dynamic> newlist = [];
+    final newlist = <dynamic>[];
     if (tasks != null) newlist.addAll(tasks);
     if (events != null) newlist.addAll(events);
     newlist.sort((e1, e2) {
@@ -311,9 +311,9 @@ Stream<List<dynamic>> getTaskEventUpcomingStream(PlannerDatabase database) {
         return false;
       }
 
-      int compareDue = getdate(e1).compareTo(getdate(e2));
+      final compareDue = getdate(e1).compareTo(getdate(e2));
       if (compareDue != 0) return compareDue;
-      int compareFinished =
+      final compareFinished =
           getFinished(e1).toString().compareTo(getFinished(e2).toString());
       if (compareFinished != 0) return compareFinished;
       return getTitle(e1).compareTo(getTitle(e2));
@@ -342,16 +342,16 @@ Stream<List<dynamic>> getTaskEventUpcomingStream(PlannerDatabase database) {
 }
 
 List<dynamic> getTaskEventUpcomingStream_initialdata(PlannerDatabase database) {
-  Iterable<SchoolTask> tasks = database.tasks.data.values.where((taskitem) {
+  final tasks = database.tasks.data.values.where((taskitem) {
     if (taskitem.archived == true) return false;
     return isInNextXDays(taskitem.due, 5);
   });
-  Iterable<SchoolEvent> events = database.events.data.values.where((evenitem) {
+  final events = database.events.data.values.where((evenitem) {
     if (evenitem.archived == true) return false;
     return isInNextXDays(evenitem.date, 5);
   });
 
-  List<dynamic> newlist = [];
+  final newlist = <dynamic>[];
   if (tasks != null) newlist.addAll(tasks);
   if (events != null) newlist.addAll(events);
   newlist.sort((e1, e2) {

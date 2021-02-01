@@ -128,7 +128,7 @@ class _SocialMediaCard extends StatelessWidget {
         RButton(
             text: getString(context).hide,
             onTap: () {
-              AppStats stats = _getAppStats(context).copy();
+              final stats = _getAppStats(context).copy();
               stats.hidecard_socialmedia = true;
               _updateAppStats(context, stats);
             })
@@ -174,7 +174,7 @@ class _DonationCard extends StatelessWidget {
           RButton(
               text: getString(context).hide,
               onTap: () {
-                AppStats stats = _getAppStats(context).copy();
+                final stats = _getAppStats(context).copy();
                 stats.hidecard_supportapp = true;
                 _updateAppStats(context, stats);
                 LogAnalytics.SupportAppHide();
@@ -206,7 +206,7 @@ class _RateCard extends StatelessWidget {
         RButton(
           text: getString(context).hide,
           onTap: () {
-            AppStats stats = _getAppStats(context).copy();
+            final stats = _getAppStats(context).copy();
             stats.hidecard_rateapp = true;
             _updateAppStats(context, stats);
           },

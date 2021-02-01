@@ -218,8 +218,7 @@ class Course {
   }
 
   String getTeachersListed() {
-    String text =
-        teachers?.values?.map((data) => data?.name ?? '-')?.join(', ');
+    final text = teachers?.values?.map((data) => data?.name ?? '-')?.join(', ');
     if (text == null || text == '') {
       return '-';
     } else {
@@ -228,7 +227,7 @@ class Course {
   }
 
   String getPlacesListed() {
-    String text = places?.values?.map((data) => data?.name ?? '-')?.join(', ');
+    final text = places?.values?.map((data) => data?.name ?? '-')?.join(', ');
     if (text == null || text == '') {
       return '-';
     } else {
@@ -237,7 +236,7 @@ class Course {
   }
 
   String getTeacherFirst() {
-    List<TeacherLink> list = getTeacherLinks();
+    final list = getTeacherLinks();
     if (list.isNotEmpty) {
       return list[0]?.name ?? '-';
     } else {
@@ -255,7 +254,7 @@ class Course {
   }
 
   String getPlaceFirst() {
-    List<PlaceLink> list = getPlaceLinks();
+    final list = getPlaceLinks();
     if (list.isNotEmpty) {
       return list[0]?.name;
     } else {
@@ -264,7 +263,7 @@ class Course {
   }
 
   PlaceLink getPlaceFirstItem() {
-    List<PlaceLink> list = getPlaceLinks();
+    final list = getPlaceLinks();
     if (list.isNotEmpty) {
       return list[0];
     } else {

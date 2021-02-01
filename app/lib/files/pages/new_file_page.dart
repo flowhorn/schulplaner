@@ -221,8 +221,8 @@ class _StandardFile extends StatelessWidget {
               } else if (snapshot.hasError == true) {
                 return Icon(Icons.error_outline);
               }
-              int transferredbytes = snapshot.data.bytesTransferred;
-              int totalbytes = snapshot.data.totalBytes;
+              final transferredbytes = snapshot.data.bytesTransferred;
+              final totalbytes = snapshot.data.totalBytes;
               final isFinished = transferredbytes == totalbytes;
               return Padding(
                 padding: EdgeInsets.all(16.0),

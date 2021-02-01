@@ -76,7 +76,7 @@ dependencies:
   image: 2.1.19
   dots_indicator: ^1.2.0
   timeago: ^2.0.28
-  fl_chart: ^0.11.1
+  fl_chart: ^0.12.2
   percent_indicator: ^2.1.8
   printing: ^4.0.0
   pdf: ^2.0.0

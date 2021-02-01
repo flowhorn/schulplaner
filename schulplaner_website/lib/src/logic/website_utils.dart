@@ -7,7 +7,7 @@ Future<void> openUrl({String urlString, bool openInNewWindow = true}) async {
 }
 
 void downloadFile(String url, String name) {
-  html.AnchorElement anchorElement = new html.AnchorElement(href: url);
+  final anchorElement = html.AnchorElement(href: url);
   anchorElement.download = name;
   anchorElement.click();
 }

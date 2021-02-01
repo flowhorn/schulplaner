@@ -94,7 +94,7 @@ class GradeDevelopmentView extends StatelessWidget {
                           bottomTitles: SideTitles(
                             showTitles: true,
                             reservedSize: 22,
-                            textStyle: TextStyle(
+                            getTextStyles: (value) => TextStyle(
                                 color: const Color(0xff68737d),
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16),
@@ -105,7 +105,7 @@ class GradeDevelopmentView extends StatelessWidget {
                           ),
                           leftTitles: SideTitles(
                             showTitles: true,
-                            textStyle: TextStyle(
+                            getTextStyles: (value) => TextStyle(
                               color: const Color(0xff67727d),
                               fontWeight: FontWeight.bold,
                               fontSize: 15,

@@ -77,8 +77,8 @@ class SchoolEvent {
       try {
         if (data['olddata']['att'] != null) {
           Map<dynamic, dynamic> rawdata = data['olddata']['att'];
-          final attachments =
-              rawdata.map<String, CloudFile>((key, value) => MapEntry<String, CloudFile>(
+          final attachments = rawdata.map<String, CloudFile>(
+              (key, value) => MapEntry<String, CloudFile>(
                   key,
                   CloudFile(
                     fileid: key,
@@ -90,8 +90,8 @@ class SchoolEvent {
         }
         if (data['olddata']['attachments'] != null) {
           Map<dynamic, dynamic> rawdata = data['olddata']['attachments'];
-          Map<String, CloudFile> attachments =
-              rawdata.map((key, value) => MapEntry<String, CloudFile>(
+          final attachments = rawdata.map<String, CloudFile>(
+              (key, value) => MapEntry<String, CloudFile>(
                   key,
                   CloudFile(
                     fileid: key,
@@ -169,9 +169,9 @@ class SchoolEvent {
   }
 
   List<String> getDateKeys() {
-    DateTime start = parseDate(date);
-    DateTime end = parseDate(enddate ?? date);
-    List<String> items = [];
+    var start = parseDate(date);
+    final end = parseDate(enddate ?? date);
+    final items = <String>[];
     if (end.isBefore(start)) return [date];
     if (start.difference(end).abs() > Duration(days: 7)) return [date];
     while (!start.isAfter(end)) {

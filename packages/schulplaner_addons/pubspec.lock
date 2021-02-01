@@ -203,7 +203,7 @@ packages:
       name: file_picker
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.5+1"
+    version: "2.1.6"
   firebase_core:
     dependency: transitive
     description:
@@ -505,7 +505,7 @@ packages:
       name: rxdart
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.24.1"
+    version: "0.25.0"
   schulplaner_translations:
     dependency: "direct main"
     description:

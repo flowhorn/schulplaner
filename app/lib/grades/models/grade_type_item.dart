@@ -83,7 +83,7 @@ class GradeTypeItem {
   }
 
   String getGradeTypesListed(BuildContext context) {
-    String text = getEnabledListedGradeTypes()
+    final text = getEnabledListedGradeTypes()
         ?.map((data) => getGradeTypes(context)[data.index].name ?? '-')
         ?.join(', ');
     if (text == null || text == '') {

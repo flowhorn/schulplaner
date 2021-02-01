@@ -52,11 +52,11 @@ class ItemList extends StatelessWidget {
           if (!snapshot.hasData) {
             return CircularProgressIndicator();
           } else {
-            List<Item> items = snapshot.data;
+            final items = snapshot.data;
             return ListView.builder(
                 itemCount: items.length,
                 itemBuilder: (context, index) {
-                  Item item = items[index];
+                  final item = items[index];
                   return ListTile(
                     title: Text(item.name ?? '-'),
                   );
@@ -88,7 +88,7 @@ class DetailItemView extends StatelessWidget {
           if (!snapshot.hasData) {
             return CircularProgressIndicator();
           } else {
-            Item item = snapshot.data;
+            final item = snapshot.data;
             return Text(item.name ?? '-');
           }
         });

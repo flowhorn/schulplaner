@@ -1190,7 +1190,7 @@ class DataManager {
   }
 
   void SetArchivedSchoolTask(SchoolTask schoolTask, bool archived) {
-    Map<String, dynamic> archivedmap = {'archived': archived};
+    final archivedmap = <String, dynamic>{'archived': archived};
     if (schoolTask.private) {
       getTaskRefPrivate().doc(schoolTask.taskid).set(
             archivedmap,
@@ -1239,7 +1239,7 @@ class DataManager {
   }
 
   void SetArchivedSchoolEvent(SchoolEvent schoolEvent, bool archived) {
-    Map<String, dynamic> archivedmap = {'archived': archived};
+    final archivedmap = <String, dynamic>{'archived': archived};
     if (schoolEvent.private) {
       getEventRefPrivate().doc(schoolEvent.eventid).set(
             archivedmap,

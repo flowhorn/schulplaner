@@ -67,7 +67,7 @@ class DynamicLinksBloc extends BlocBase {
   // geöffnet war) der Dynamic Link erneut vom Dynamic Links Plugin
   // getriggert wurde...
   bool _hasLinkBeenProcessed(PendingDynamicLinkData link) {
-    bool containsMapValue = false;
+    var containsMapValue = false;
     incomingLinks.values.forEach((_link) {
       if (_link.link == link.link) containsMapValue = true;
     });

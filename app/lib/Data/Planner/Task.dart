@@ -84,8 +84,8 @@ class SchoolTask {
         }
         if (data['olddata']['attachments'] != null) {
           Map<dynamic, dynamic> rawdata = data['olddata']['attachments'];
-          Map<String, CloudFile> attachments =
-              rawdata.map((key, value) => MapEntry<String, CloudFile>(
+          final attachments = rawdata.map<String, CloudFile>(
+              (key, value) => MapEntry<String, CloudFile>(
                   key,
                   CloudFile(
                     fileid: key,

@@ -27,7 +27,7 @@ class JoinGroupBloc extends BlocBase {
     if (enteredCodeValue == null || enteredCodeValue == '') {
       return;
     }
-    ValueNotifier<bool> sheet_notifier = ValueNotifier(null);
+    final sheet_notifier = ValueNotifier<bool>(null);
     showLoadingStateSheet(context: context, sheetUpdate: sheet_notifier);
     sheet_notifier.value = await _searchPublicCode();
   }

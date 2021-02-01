@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Data/plannerdatabase.dart';
 import 'package:schulplaner8/OldGrade/Grade.dart';
-import 'package:schulplaner8/OldGrade/GradePackage.dart';
 import 'package:schulplaner_widgets/schulplaner_forms.dart';
 
 import 'grade_development_view.dart';
@@ -14,9 +13,9 @@ class GradeInfoView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    GradePackage gradePackage =
+    final gradePackage =
         database.getSettings().getCurrentGradePackage(context: context);
-    final List<Grade> grades = list.reversed.toList();
+    final grades = list.reversed.toList();
     return SingleChildScrollView(
       child: Column(
         children: <Widget>[

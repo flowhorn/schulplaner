@@ -22,7 +22,7 @@ class CourseList extends StatelessWidget {
         initialData: plannerDatabase.courseinfo.data,
         builder: (context, data) {
           if (data != null) {
-            List<Course> courselist = (data.data ?? {}).values.toList()
+            final courselist = (data.data ?? {}).values.toList()
               ..sort(
                   (item1, item2) => item1.getName().compareTo(item2.getName()));
             return UpListView(
