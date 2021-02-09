@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:schulplaner_website/src/models/navigation_item.dart';
-import 'package:schulplaner_website/src/pages/opensource.dart';
 import 'package:schulplaner_website/src/website_scaffold.dart';
 
-import 'pages/about.dart';
-import 'pages/donate.dart';
-import 'pages/download.dart';
-import 'pages/homepage.dart';
-import 'pages/impressum.dart';
-import 'pages/privacy.dart';
+import 'pages/about/about.dart';
+import 'pages/donate/donate.dart';
+import 'pages/download/download.dart';
+import 'pages/homepage/homepage.dart';
+import 'pages/impressum/impressum.dart';
+import 'pages/opensource/opensource.dart';
+import 'pages/privacy/privacy.dart';
 
 final Map<String, WidgetBuilder> navigationRoutes = {
   homepageWebsiteRoute: (context) => homepageWebsite,

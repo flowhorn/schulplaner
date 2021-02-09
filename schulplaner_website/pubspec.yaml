@@ -18,6 +18,9 @@ dependencies:
   flutter_svg: ^0.19.2+1
   community_material_icon: ^5.4.55
   native_pdf_renderer: ^2.4.0
+  carousel_slider: ^3.0.0
+  persist_theme: ^1.7.0
+  provider: ^4.0.2
 
 
 dev_dependencies:

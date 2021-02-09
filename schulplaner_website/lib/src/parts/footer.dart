@@ -1,6 +1,7 @@
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:design_utils/design_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:persist_theme/ui/theme_widgets.dart';
 import 'package:schulplaner_website/src/logic/website_utils.dart';
 import 'package:schulplaner_website/src/models/navigation_item.dart';
 import 'package:schulplaner_website/src/routes.dart';
@@ -45,6 +46,10 @@ class Footer extends StatelessWidget {
             ),
             second: Column(
               children: [
+                SizedBox(
+                  width: 200,
+                  child: DarkModeSwitch(),
+                ),
                 FlatButton(
                   child: Text('-> Datenschutzerklärung'),
                   onPressed: () {

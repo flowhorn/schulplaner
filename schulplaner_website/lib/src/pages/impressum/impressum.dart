@@ -35,7 +35,8 @@ class ImpressumPage extends StatelessWidget {
                 Text(
                   'Felix Weuthen\n'
                   'Klosterstraße 50, 41747 Viersen\n'
-                  'Email: danielfelixplay@gmail.com',
+                  'Email: danielfelixplay@gmail.com\n \n'
+                  'Angaben gemäß § 5 TMG',
                   style: TextStyle(
                     fontSize: 17,
                     fontWeight: FontWeight.w400,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:schulplaner_website/src/parts/layout_title.dart';
 
 import 'footer.dart';
 
@@ -16,15 +17,8 @@ class InnerLayout extends StatelessWidget {
         child: Column(
           children: [
             if (title != null)
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  title,
-                  style: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
+              LayoutTitle(
+                text: title,
               ),
             Padding(
               padding: EdgeInsets.all(16),

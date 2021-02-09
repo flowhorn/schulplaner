@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:persist_theme/ui/theme_widgets.dart';
 import 'package:schulplaner_website/src/blocs/website_bloc.dart';
 import 'package:schulplaner_website/src/models/navigation_item.dart';
 import 'package:schulplaner_website/src/routes.dart';
@@ -10,6 +11,7 @@ class NavigationDrawer extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
+            SizedBox(height: 16),
             _HomepageTile(),
             _DownloadTile(),
             _DonateTile(),
@@ -17,6 +19,10 @@ class NavigationDrawer extends StatelessWidget {
             _OpenSourceTile(),
             _ImpressumTile(),
             _AboutTile(),
+            SizedBox(height: 16),
+            Divider(),
+            SizedBox(height: 16),
+            DarkModeSwitch(),
           ],
         ),
       ),

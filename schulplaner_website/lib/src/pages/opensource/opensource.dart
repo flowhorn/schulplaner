@@ -80,7 +80,10 @@ class _OpenGithub extends StatelessWidget {
             urlString: 'https://github.com/flowhorn/schulplaner',
             openInNewWindow: true);
       },
-      child: Text('Github (Source Code)'),
+      child: Padding(
+        padding: const EdgeInsets.all(8),
+        child: Text('Github (Source Code)'),
+      ),
       color: Colors.green,
     );
   }
@@ -95,7 +98,10 @@ class _OpenDiscord extends StatelessWidget {
             urlString: 'https://discord.com/invite/uZyK7Tf',
             openInNewWindow: true);
       },
-      child: Text('Discord (Community)'),
+      child: Padding(
+        padding: const EdgeInsets.all(8),
+        child: Text('Discord (Community)'),
+      ),
       color: Colors.orange,
     );
   }
