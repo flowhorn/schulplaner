@@ -68,7 +68,7 @@ class ItemList extends StatelessWidget {
 
 class DetailItemView extends StatelessWidget {
   final String itemid;
-  DetailItemView({@required this.itemid});
+  DetailItemView({required this.itemid});
 
   @override
   Widget build(BuildContext context) {

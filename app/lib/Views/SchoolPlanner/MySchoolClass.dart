@@ -25,7 +25,7 @@ import 'package:schulplaner8/models/school_class.dart';
 import 'package:schulplaner_widgets/schulplaner_dialogs.dart';
 
 void showSchoolClassMoreSheet(BuildContext context,
-    {@required String classid, @required PlannerDatabase plannerdatabase}) {
+    {required String classid, required PlannerDatabase plannerdatabase}) {
   showDetailSheetBuilder(
       context: context,
       body: (context) {
@@ -95,7 +95,7 @@ class NewSchoolClassView extends StatelessWidget {
   ValueNotifier<bool> showSeveralForm = ValueNotifier(false);
 
   NewSchoolClassView(
-      {@required this.database, this.editmode = false, this.editmode_classid}) {
+      {required this.database, this.editmode = false, this.editmode_classid}) {
     if (editmode) {
       data = database.schoolClassInfos.data[editmode_classid].copyWith();
     } else {
@@ -258,7 +258,7 @@ class NewSchoolClassView extends StatelessWidget {
 class SchoolClassCoursesView extends StatelessWidget {
   final String classid;
   final PlannerDatabase database;
-  SchoolClassCoursesView({@required this.classid, @required this.database});
+  SchoolClassCoursesView({required this.classid, required this.database});
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<
@@ -570,7 +570,7 @@ class SchoolClassCoursesView extends StatelessWidget {
 class SchoolClassSelectCourses extends StatelessWidget {
   final String classid;
   final PlannerDatabase database;
-  SchoolClassSelectCourses({@required this.classid, @required this.database});
+  SchoolClassSelectCourses({required this.classid, required this.database});
 
   @override
   Widget build(BuildContext context) {
@@ -651,7 +651,7 @@ class SchoolClassCourseTemplatesView extends StatelessWidget {
   final PlannerDatabase database;
 
   SchoolClassCourseTemplatesView(
-      {@required this.database, @required this.classid});
+      {required this.database, required this.classid});
 
   @override
   Widget build(BuildContext context) {

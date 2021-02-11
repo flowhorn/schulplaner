@@ -12,7 +12,7 @@ class HolidayList extends StatelessWidget {
   final PlannerDatabase plannerDatabase;
 
   HolidayList({
-    @required this.plannerDatabase,
+    required this.plannerDatabase,
   });
   @override
   Widget build(BuildContext context) {

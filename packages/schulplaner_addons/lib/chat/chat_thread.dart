@@ -123,8 +123,8 @@ class ChatInput extends StatelessWidget {
       TextEditingController(text: '');
   ChatInput(
       {Key key,
-      @required this.onSendMessage,
-      @required this.onPressedAdd,
+      required this.onSendMessage,
+      required this.onPressedAdd,
       this.accentColor: Colors.blueGrey})
       : super(key: key);
 

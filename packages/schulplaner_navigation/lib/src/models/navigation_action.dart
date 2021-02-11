@@ -10,10 +10,10 @@ class NavigationActionItem {
   final Widget Function(BuildContext context) builder;
 
   const NavigationActionItem({
-    @required this.id,
-    @required this.iconData,
-    @required this.name,
-    @required this.builder,
-    @required this.navigationItem,
+    required this.id,
+    required this.iconData,
+    required this.name,
+    required this.builder,
+    required this.navigationItem,
   });
 }

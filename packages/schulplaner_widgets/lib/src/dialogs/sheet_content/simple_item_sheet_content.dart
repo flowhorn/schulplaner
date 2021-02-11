@@ -8,9 +8,9 @@ class SimpleItemSheetContent extends SheetContent {
   final TranslatableString text;
 
   const SimpleItemSheetContent({
-    @required this.iconData,
-    @required this.color,
-    @required this.text,
+    required this.iconData,
+    required this.color,
+    required this.text,
   });
 
   @override

@@ -20,10 +20,10 @@ class QuickActionView extends StatelessWidget {
   final Color color;
   final VoidCallback onTap;
   QuickActionView(
-      {@required this.iconData,
-      @required this.text,
-      @required this.color,
-      @required this.onTap});
+      {required this.iconData,
+      required this.text,
+      required this.color,
+      required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -68,10 +68,10 @@ class ActionView extends StatelessWidget {
   final Color color;
   final VoidCallback onTap;
   ActionView(
-      {@required this.iconData,
-      @required this.text,
-      @required this.color,
-      @required this.onTap});
+      {required this.iconData,
+      required this.text,
+      required this.color,
+      required this.onTap});
 
   @override
   Widget build(BuildContext context) {

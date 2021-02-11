@@ -10,9 +10,9 @@ class AppFunctionsBloc extends BlocBase {
   const AppFunctionsBloc();
 
   Future<AppFunctionsResult<T>> callCloudFunction<T>({
-    @required String functionName,
-    @required AppFunctionsRegion region,
-    @required Map<String, dynamic> parameters,
+    required String functionName,
+    required AppFunctionsRegion region,
+    required Map<String, dynamic> parameters,
   }) async {
     try {
       final cloudFunctions =

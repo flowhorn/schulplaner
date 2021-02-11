@@ -7,7 +7,7 @@ class UserDatabaseBloc extends BlocBase {
   final _currentUserIdSubject = BehaviorSubject<UserId>();
   UserId get currentUserId => _currentUserIdSubject.value;
 
-  UserDatabase userDatabase;
+  UserDatabase? userDatabase;
 
   void setAuthentification(UserId userId) {
     // Prevent unnesseccary reloads by checking currentUserId

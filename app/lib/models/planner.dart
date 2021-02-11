@@ -6,9 +6,9 @@ class Planner {
   final bool archived, setup_done;
 
   Planner({
-    @required this.id,
-    @required this.uid,
-    @required this.name,
+    required this.id,
+    required this.uid,
+    required this.name,
     this.archived = false,
     this.setup_done = false,
   });

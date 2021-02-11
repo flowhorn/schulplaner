@@ -54,10 +54,10 @@ class MySchoolPlanner extends StatefulWidget {
   final AppLogicControllerBloc appLogicControllerBloc;
   final NavigationBloc navigationBloc;
   MySchoolPlanner({
-    @required this.plannerSettingsData,
-    @required this.plannerDatabase,
-    @required this.appLogicControllerBloc,
-    @required this.navigationBloc,
+    required this.plannerSettingsData,
+    required this.plannerDatabase,
+    required this.appLogicControllerBloc,
+    required this.navigationBloc,
     Key key,
   }) : super(key: key) {
     print('SchoolPlannerHead Rebuilt!');
@@ -104,8 +104,8 @@ class _MySchoolPlannerState extends State<MySchoolPlanner>
 
   StreamSubscription _streamSubscription;
   _MySchoolPlannerState({
-    @required this.plannerSettingsData,
-    @required this.plannerDatabase,
+    required this.plannerSettingsData,
+    required this.plannerDatabase,
   }) {
     print('SchoolPlannerState Rebuilt!');
   }
@@ -155,7 +155,7 @@ class _MySchoolPlannerState extends State<MySchoolPlanner>
           stream: plannerLoaderBloc.loadAllPlannerStatus,
           initialData: plannerLoaderBloc.loadAllPlannerStatusValue,
           builder: (context, snapshot) {
-            LoadAllPlannerStatus status = snapshot.data;
+            final status = snapshot.data;
             if (status.getPlanner().setup_done == false) {
               return SetupView(status);
             } else {

@@ -15,7 +15,7 @@ class AuthentificationBloc extends BlocBase {
           LoadingAuthentificationStatus());
 
   AuthentificationBloc({
-    @required FirebaseAuth firebaseAuth,
+    required FirebaseAuth firebaseAuth,
   }) : _firebaseAuth = firebaseAuth {
     _initializeFirebaseAuthStream();
   }

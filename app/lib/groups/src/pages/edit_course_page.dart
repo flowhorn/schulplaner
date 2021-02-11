@@ -10,8 +10,8 @@ import 'package:schulplaner_widgets/schulplaner_forms.dart';
 import 'package:schulplaner_widgets/schulplaner_theme.dart';
 
 Future<void> openEditCoursePage({
-  @required BuildContext context,
-  @required EditCourseBloc editCourseBloc,
+  required BuildContext context,
+  required EditCourseBloc editCourseBloc,
 }) async {
   await pushWidget(
     context,
@@ -79,7 +79,7 @@ class _Inner extends StatelessWidget {
 
   const _Inner({
     Key key,
-    @required this.course,
+    required this.course,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {

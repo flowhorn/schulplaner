@@ -15,12 +15,12 @@ class Region {
   final bool isOfficial;
 
   const Region({
-    @required this.id,
-    @required this.name,
-    @required this.country,
-    @required this.lastRefreshed,
-    @required this.years,
-    @required this.isOfficial,
+    required this.id,
+    required this.name,
+    required this.country,
+    required this.lastRefreshed,
+    required this.years,
+    required this.isOfficial,
   });
 }
 

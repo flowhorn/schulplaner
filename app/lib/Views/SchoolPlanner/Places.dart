@@ -11,7 +11,7 @@ import 'package:schulplaner_widgets/schulplaner_dialogs.dart';
 
 class PlaceList extends StatelessWidget {
   final PlannerDatabase plannerDatabase;
-  PlaceList({@required this.plannerDatabase});
+  PlaceList({required this.plannerDatabase});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,7 +71,7 @@ class NewPlaceView extends StatelessWidget {
   Place data;
   ValueNotifier<Place> notifier;
   NewPlaceView(
-      {@required this.database, this.editMode = false, this.editplaceid}) {
+      {required this.database, this.editMode = false, this.editplaceid}) {
     data = editMode
         ? database.places.getItem(editplaceid)
         : Place(placeid: database.dataManager.generatePlaceId());
@@ -160,9 +160,9 @@ class NewPlaceView extends StatelessWidget {
 }
 
 Future<void> showPlaceDetail(
-    {@required BuildContext context,
-    @required PlannerDatabase plannerdatabase,
-    @required String placeid}) async {
+    {required BuildContext context,
+    required PlannerDatabase plannerdatabase,
+    required String placeid}) async {
   await showDetailSheetBuilder(
       context: context,
       body: (BuildContext context) {

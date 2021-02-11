@@ -199,7 +199,7 @@ class RegionsFilter {
   final Country country;
   final bool isOfficial;
 
-  const RegionsFilter({@required this.country, @required this.isOfficial});
+  const RegionsFilter({required this.country, required this.isOfficial});
 }
 
 void _updateSettings(PlannerSettingsData newdata, PlannerDatabase database) {

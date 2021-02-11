@@ -5,10 +5,10 @@ class CloudPhoto {
   final String fullUrl, compUrl, thumbUrl;
 
   const CloudPhoto({
-    @required this.id,
-    @required this.fullUrl,
-    @required this.compUrl,
-    @required this.thumbUrl,
+    required this.id,
+    required this.fullUrl,
+    required this.compUrl,
+    required this.thumbUrl,
   });
 }
 

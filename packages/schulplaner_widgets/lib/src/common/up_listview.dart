@@ -8,8 +8,8 @@ class UpListView<T> extends StatelessWidget {
 
   const UpListView(
       {Key key,
-      @required this.items,
-      @required this.builder,
+      required this.items,
+      required this.builder,
       this.emptyViewBuilder})
       : super(key: key);
   @override

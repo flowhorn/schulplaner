@@ -7,9 +7,9 @@ class CourseTemplate {
   Design design;
   int category;
   CourseTemplate(
-      {@required this.name,
-      @required this.shortname,
-      @required this.design,
+      {required this.name,
+      required this.shortname,
+      required this.design,
       this.category = 0});
 }
 

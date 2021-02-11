@@ -164,10 +164,10 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
 
   const _AppBar({
     Key key,
-    @required this.averageCalculator,
-    @required this.gradeSpan,
-    @required this.database,
-    @required this.tabs,
+    required this.averageCalculator,
+    required this.gradeSpan,
+    required this.database,
+    required this.tabs,
   }) : super(key: key);
 
   @override

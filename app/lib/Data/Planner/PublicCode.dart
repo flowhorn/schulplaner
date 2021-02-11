@@ -57,7 +57,7 @@ Future<PublicCode> getPublicCodeValue(String publiccode) {
 }
 
 Future<PublicCode> generatePublicCode(
-    {@required String id, @required int codetype}) {
+    {required String id, required int codetype}) {
   return FirebaseFunctions.instance.httpsCallable('generatePublicCode').call({
     'codetype': codetype,
     'id': id,
@@ -69,7 +69,7 @@ Future<PublicCode> generatePublicCode(
   });
 }
 
-Future<bool> removePublicCode({@required String id, @required int codetype}) {
+Future<bool> removePublicCode({required String id, required int codetype}) {
   return FirebaseFunctions.instance.httpsCallable('removePublicCode').call({
     'codetype': codetype,
     'id': id,

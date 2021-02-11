@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
 
 class FormContainer extends StatelessWidget {
-  const FormContainer({@required this.child, this.padding});
+  const FormContainer({required this.child, this.padding});
   final Widget child;
   final EdgeInsets padding;
 

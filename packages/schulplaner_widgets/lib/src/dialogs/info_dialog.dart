@@ -9,8 +9,8 @@ class InfoDialog extends SchulplanerDialog {
   final String message;
 
   const InfoDialog({
-    @required this.title,
-    @required this.message,
+    required this.title,
+    required this.message,
   });
   @override
   Widget build(BuildContext context) {

@@ -7,8 +7,8 @@ class InformationCard extends StatelessWidget {
 
   const InformationCard({
     Key key,
-    @required this.title,
-    @required this.description,
+    required this.title,
+    required this.description,
     this.actions,
   }) : super(key: key);
   @override

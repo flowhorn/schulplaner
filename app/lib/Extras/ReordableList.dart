@@ -363,7 +363,7 @@ typedef Widget ReorderableItemChildBuilder(BuildContext context, bool dragging);
 
 class ReorderableItem extends StatefulWidget {
   ReorderableItem(
-      {@required Key key, @required this.childBuilder, this.decorationBuilder})
+      {required Key key, required this.childBuilder, this.decorationBuilder})
       : super(key: key);
 
   final ReorderableItemDecorationBuilder decorationBuilder;

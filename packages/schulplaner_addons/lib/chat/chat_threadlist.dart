@@ -44,11 +44,11 @@ class ChatThreadList extends StatelessWidget {
 
   factory ChatThreadList.build({
     Key key,
-    @required List<Message> messages,
-    @required
-        Widget Function(BuildContext context, _ChatThreadMessage threadMessage)
-            messageBuilder,
-    @required VoidCallback loadMore,
+    required List<Message> messages,
+    required Widget Function(
+            BuildContext context, _ChatThreadMessage threadMessage)
+        messageBuilder,
+    required VoidCallback loadMore,
     ScrollController scrollController,
   }) {
     return ChatThreadList._(

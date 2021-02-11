@@ -9,11 +9,11 @@ class LoadAllPlannerStatus {
   final bool _loadedData;
 
   const LoadAllPlannerStatus({
-    String activePlanner,
-    Map<String, Planner> plannerlist,
-    Map<String, int> plannerorder,
-    bool loadedData,
-  })  : _activePlanner = activePlanner,
+    required String activePlanner,
+    required Map<String, Planner> plannerlist,
+    required Map<String, int> plannerorder,
+    required bool loadedData,
+  })   : _activePlanner = activePlanner,
         plannermap = plannerlist,
         _loadedData = loadedData,
         plannerordermap = plannerorder;
@@ -26,7 +26,7 @@ class LoadAllPlannerStatus {
       });
   }
 
-  Planner getPlanner() {
+  Planner? getPlanner() {
     if (plannermap.isNotEmpty) {
       if (plannermap.containsKey(_activePlanner)) {
         return plannermap[_activePlanner];

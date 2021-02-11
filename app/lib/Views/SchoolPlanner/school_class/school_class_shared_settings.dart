@@ -15,7 +15,7 @@ class SchoolClassSharedSettingsView extends StatelessWidget {
   final String schoolClassID;
   final PlannerDatabase database;
   SchoolClassSharedSettingsView(
-      {@required this.schoolClassID, @required this.database}) {
+      {required this.schoolClassID, required this.database}) {
     timeago.setLocaleMessages('de', timeago.DeMessages());
   }
   @override

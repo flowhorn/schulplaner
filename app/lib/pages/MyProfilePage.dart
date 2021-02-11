@@ -23,7 +23,7 @@ class EditProfileView extends StatelessWidget {
   UserProfile data;
   final ValueNotifier<UserProfile> notifier = ValueNotifier(null);
 
-  EditProfileView({@required this.userDatabase}) {
+  EditProfileView({required this.userDatabase}) {
     data = userDatabase.userprofile.data ??
         UserProfile.create(uid: userDatabase.uid);
     notifier.value = data;
@@ -246,7 +246,7 @@ class MemberImageView extends StatelessWidget {
   final MemberData memberData;
 
   const MemberImageView(
-      {@required this.thumbnailMode, @required this.memberData});
+      {required this.thumbnailMode, required this.memberData});
 
   @override
   Widget build(BuildContext context) {

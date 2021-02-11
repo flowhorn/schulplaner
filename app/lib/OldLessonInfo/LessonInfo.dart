@@ -127,7 +127,7 @@ class DataUtil_LessonInfo {
 
 class LessonInfosList extends StatelessWidget {
   final PlannerDatabase plannerDatabase;
-  LessonInfosList({@required this.plannerDatabase});
+  LessonInfosList({required this.plannerDatabase});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

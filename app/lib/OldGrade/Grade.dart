@@ -216,7 +216,7 @@ class AppWidgetSettings {
   final bool darkmode;
 
   const AppWidgetSettings({
-    @required this.darkmode,
+    required this.darkmode,
   });
 
   factory AppWidgetSettings.fromData(dynamic data) {
@@ -245,11 +245,11 @@ class GradeSpan {
   final bool activated;
 
   const GradeSpan({
-    @required this.id,
-    @required this.start,
-    @required this.end,
-    @required this.name,
-    @required this.activated,
+    required this.id,
+    required this.start,
+    required this.end,
+    required this.name,
+    required this.activated,
   });
 
   factory GradeSpan.fromData(Map<String, dynamic> data) {

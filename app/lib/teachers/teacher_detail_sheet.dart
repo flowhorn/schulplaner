@@ -10,9 +10,9 @@ import 'package:schulplaner_widgets/schulplaner_forms.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 Future<void> showTeacherDetail(
-    {@required BuildContext context,
-    @required PlannerDatabase plannerdatabase,
-    @required String teacherid}) async {
+    {required BuildContext context,
+    required PlannerDatabase plannerdatabase,
+    required String teacherid}) async {
   await showDetailSheetBuilder(
       context: context,
       body: (BuildContext context) {

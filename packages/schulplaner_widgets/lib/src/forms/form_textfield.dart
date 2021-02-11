@@ -5,10 +5,10 @@ import '../theme/app_theme.dart';
 
 class FormTextField extends StatelessWidget {
   const FormTextField(
-      {@required this.text,
+      {required this.text,
       this.labeltext,
       this.iconData,
-      @required this.valueChanged,
+      required this.valueChanged,
       this.keyBoardType,
       this.obscureText = false,
       this.maxLength,

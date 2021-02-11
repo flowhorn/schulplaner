@@ -79,7 +79,8 @@ class PlannerLoaderBloc extends BlocBase {
       _plannerOrderSubject,
       _activePlannerSubject,
       _hasLoadedDataSubject,
-      (plannerMap, plannerOrder, activePlanner, hasLoaded) {
+      (Map<String, Planner> plannerMap, Map<String, int> plannerOrder,
+          String activePlanner, bool hasLoaded) {
         return LoadAllPlannerStatus(
           activePlanner: activePlanner,
           plannerlist: plannerMap,
@@ -191,46 +192,5 @@ class PlannerLoaderBloc extends BlocBase {
       subscription.cancel();
     }
     _streamSubscriptions.clear();
-  }
-}
-
-class LoadAllPlanner {
-  final String uid;
-
-  bool loadedData = false;
-  String activePlanner;
-  Map<String, int> plannerorder;
-  Map<String, Planner> plannermap;
-  List<StreamController<LoadAllPlannerStatus>> _list_streamcontroller;
-
-  LoadAllPlannerStatus status;
-
-  LoadAllPlanner({this.uid}) {
-    _list_streamcontroller = [];
-    status =
-        LoadAllPlannerStatus(activePlanner: activePlanner, plannerlist: {});
-    plannermap = {};
-    plannerorder = {};
-  }
-
-  Stream<LoadAllPlannerStatus> get stream {
-    final newcontroller = StreamController<LoadAllPlannerStatus>();
-    _list_streamcontroller.add(newcontroller);
-    newcontroller.add(status);
-    newcontroller.onCancel = () {
-      _list_streamcontroller.remove(newcontroller);
-    };
-    return newcontroller.stream;
-  }
-
-  void destroy() {}
-
-  void update() {
-    status = LoadAllPlannerStatus(
-        activePlanner: activePlanner,
-        plannerlist: plannermap,
-        loadedData: loadedData,
-        plannerorder: plannerorder);
-    _list_streamcontroller.forEach((it) => it.add(status));
   }
 }

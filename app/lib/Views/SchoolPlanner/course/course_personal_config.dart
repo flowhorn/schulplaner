@@ -15,7 +15,7 @@ import 'package:schulplaner_widgets/schulplaner_dialogs.dart';
 class CoursePersonalPage extends StatelessWidget {
   final String courseID;
   final PlannerDatabase database;
-  CoursePersonalPage({@required this.courseID, @required this.database});
+  CoursePersonalPage({required this.courseID, required this.database});
 
   @override
   Widget build(BuildContext context) {

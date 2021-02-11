@@ -8,7 +8,7 @@ class GoogleAuthProviderTile extends StatelessWidget {
 
   const GoogleAuthProviderTile({
     Key key,
-    @required this.authProviderType,
+    required this.authProviderType,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {

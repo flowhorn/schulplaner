@@ -32,7 +32,7 @@ class NewLessonView extends StatelessWidget {
   Lesson data;
   ValueNotifier<Lesson> notifier;
   NewLessonView({
-    @required this.database,
+    required this.database,
     this.editmode = false,
     this.editmode_lessonid,
   }) {

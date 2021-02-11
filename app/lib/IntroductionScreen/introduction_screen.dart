@@ -30,9 +30,9 @@ class IntroductionScreen extends StatefulWidget {
 
   const IntroductionScreen({
     Key key,
-    @required this.pages,
-    @required this.onDone,
-    @required this.done,
+    required this.pages,
+    required this.onDone,
+    required this.done,
     this.next,
     this.skip,
     this.showSkipButton = false,

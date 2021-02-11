@@ -12,7 +12,7 @@ class UserImageView extends StatelessWidget {
 
   const UserImageView(
       {this.thumbnailMode = false,
-      @required this.userProfile,
+      required this.userProfile,
       this.size = 48.0});
 
   @override

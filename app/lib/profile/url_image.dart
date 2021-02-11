@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 class UrlImage extends StatelessWidget {
   UrlImage({
     Key key,
-    @required this.size,
-    @required this.url,
+    required this.size,
+    required this.url,
   }) : super(key: key);
   final double size;
   final String url;
@@ -29,7 +29,7 @@ class UrlImage extends StatelessWidget {
 }
 
 class StandardIcon extends StatelessWidget {
-  const StandardIcon({Key key, @required this.size}) : super(key: key);
+  const StandardIcon({Key key, required this.size}) : super(key: key);
   final double size;
 
   @override

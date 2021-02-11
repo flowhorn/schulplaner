@@ -23,7 +23,7 @@ import 'package:schulplaner_widgets/schulplaner_dialogs.dart';
 import 'attachments/edit_attachments_view.dart';
 
 void showSchoolLetterMoreSheet(BuildContext context,
-    {@required Letter initialData, @required PlannerDatabase database}) {
+    {required Letter initialData, required PlannerDatabase database}) {
   showDetailSheetBuilder(
       context: context,
       body: (context) {
@@ -157,7 +157,7 @@ class NewLetterView extends StatelessWidget {
     changedValues = true;
   }
 
-  NewLetterView.Create({@required this.database, SavedIn savein})
+  NewLetterView.Create({required this.database, SavedIn savein})
       : editmode = false {
     data = Letter.Create(
             id: database.dataManager.generateCourseId(),
@@ -168,7 +168,7 @@ class NewLetterView extends StatelessWidget {
     notifier.value = data;
   }
 
-  NewLetterView.Edit({@required this.database, Letter letter})
+  NewLetterView.Edit({required this.database, Letter letter})
       : editmode = true {
     data = letter.copyWith();
     notifier.value = data;
@@ -361,7 +361,7 @@ class NewLetterView extends StatelessWidget {
 class LetterCard extends StatelessWidget {
   final Letter letter;
   final PlannerDatabase database;
-  LetterCard({@required this.letter, @required this.database});
+  LetterCard({required this.letter, required this.database});
 
   @override
   Widget build(BuildContext context) {
@@ -489,7 +489,7 @@ class LetterCard extends StatelessWidget {
 class LetterDetailedView extends StatelessWidget {
   final Letter initialdata;
   final PlannerDatabase database;
-  LetterDetailedView({@required this.initialdata, @required this.database});
+  LetterDetailedView({required this.initialdata, required this.database});
 
   @override
   Widget build(BuildContext context) {
@@ -764,7 +764,7 @@ Map<String, MemberData> getMemberInitial(
 class LetterResponsesView extends StatelessWidget {
   final Letter initialdata;
   final PlannerDatabase database;
-  LetterResponsesView({@required this.initialdata, @required this.database});
+  LetterResponsesView({required this.initialdata, required this.database});
 
   @override
   Widget build(BuildContext context) {

@@ -25,7 +25,7 @@ class LoadingAuthentificationStatus extends AuthentificationStatus {
 }
 
 class AuthentifiedAuthentificationStatus extends AuthentificationStatus {
-  const AuthentifiedAuthentificationStatus({@required this.authUser});
+  const AuthentifiedAuthentificationStatus({required this.authUser});
   final AuthUser authUser;
 
   @override

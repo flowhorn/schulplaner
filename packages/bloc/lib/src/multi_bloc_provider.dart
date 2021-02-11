@@ -22,8 +22,8 @@ class MultiBlocProvider extends StatelessWidget {
 
   const MultiBlocProvider({
     Key key,
-    @required this.blocProviders,
-    @required this.child,
+    required this.blocProviders,
+    required this.child,
   }) : super(key: key);
 
   @override

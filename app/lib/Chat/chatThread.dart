@@ -21,9 +21,9 @@ class ChatThread extends StatefulWidget {
 
   ChatThread(
       {Key key,
-      @required this.groupid,
-      @required this.database,
-      @required this.uid})
+      required this.groupid,
+      required this.database,
+      required this.uid})
       : super(key: key);
 
   @override
@@ -31,7 +31,7 @@ class ChatThread extends StatefulWidget {
 }
 
 class ChatThreadState extends State<ChatThread> {
-  ChatThreadState({Key key, @required this.groupid, @required this.uid});
+  ChatThreadState({Key? key, required this.groupid, required this.uid});
 
   String uid;
   String groupid;

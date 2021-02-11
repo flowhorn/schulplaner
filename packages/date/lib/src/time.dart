@@ -5,7 +5,7 @@ import 'package:meta/meta.dart';
 class Time {
   final String _time;
 
-  factory Time({@required int hour, int minute = 0}) {
+  factory Time({required int hour, int minute = 0}) {
     final numberFormat = NumberFormat("00");
     return Time._(
         "${numberFormat.format(hour)}:${numberFormat.format(minute)}");

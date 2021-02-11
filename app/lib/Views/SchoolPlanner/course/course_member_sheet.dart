@@ -21,10 +21,10 @@ class CourseMemberSheet extends SchulplanerSheet {
   final UserProfile userProfile;
   final PlannerDatabase database;
   CourseMemberSheet({
-    @required this.courseId,
-    @required this.database,
-    @required this.memberData,
-    @required this.userProfile,
+    required this.courseId,
+    required this.database,
+    required this.memberData,
+    required this.userProfile,
   });
   @override
   Widget build(BuildContext context) {

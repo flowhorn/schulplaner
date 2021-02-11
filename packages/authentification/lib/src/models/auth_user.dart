@@ -5,8 +5,8 @@ import 'package:meta/meta.dart';
 
 class AuthUser {
   const AuthUser({
-    @required this.userId,
-    @required this.authProviders,
+    required this.userId,
+    required this.authProviders,
   });
   final UserId userId;
   final List<AuthProviderType> authProviders;

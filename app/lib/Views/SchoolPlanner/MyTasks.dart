@@ -404,7 +404,7 @@ Stream<Map<String, SchoolTask>> getArchiveStream(PlannerDatabase database) {
 }
 
 void showTaskDetailSheet(BuildContext context,
-    {@required String taskid, @required PlannerDatabase plannerdatabase}) {
+    {required String taskid, required PlannerDatabase plannerdatabase}) {
   showDetailSheetBuilder(
       context: context,
       body: (context) {
@@ -676,7 +676,7 @@ void showTaskDetailSheet(BuildContext context,
 }
 
 void showTaskDetailSheetCritical(BuildContext context,
-    {@required SchoolTask task, @required PlannerDatabase plannerdatabase}) {
+    {required SchoolTask task, required PlannerDatabase plannerdatabase}) {
   showDetailSheetBuilder(
       context: context,
       body: (context) {

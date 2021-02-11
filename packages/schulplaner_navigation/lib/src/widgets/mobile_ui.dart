@@ -11,7 +11,7 @@ class MobileUI extends StatelessWidget {
   final WidgetBuilder plannerStateBuilder;
   const MobileUI({
     Key key,
-    @required this.plannerStateBuilder,
+    required this.plannerStateBuilder,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -41,8 +41,8 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
   final WidgetBuilder plannerStateBuilder;
   const _AppBar({
     Key key,
-    @required this.navigationState,
-    @required this.plannerStateBuilder,
+    required this.navigationState,
+    required this.plannerStateBuilder,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -85,7 +85,7 @@ class _BottomNavBar extends StatelessWidget {
   final NavigationState navigationState;
   const _BottomNavBar({
     Key key,
-    @required this.navigationState,
+    required this.navigationState,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {

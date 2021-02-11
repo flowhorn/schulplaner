@@ -10,8 +10,8 @@ class TabletUI extends StatelessWidget {
   final Widget libraryTabletWidget;
   const TabletUI({
     Key key,
-    @required this.plannerStateBuilder,
-    @required this.libraryTabletWidget,
+    required this.plannerStateBuilder,
+    required this.libraryTabletWidget,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {

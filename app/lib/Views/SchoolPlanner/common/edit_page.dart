@@ -13,10 +13,10 @@ class EditCourseField extends StatelessWidget {
 
   const EditCourseField({
     Key key,
-    @required this.database,
-    @required this.courseID,
-    @required this.editmode,
-    @required this.onChanged,
+    required this.database,
+    required this.courseID,
+    required this.editmode,
+    required this.onChanged,
   }) : super(key: key);
 
   @override

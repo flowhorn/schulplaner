@@ -8,7 +8,7 @@ class FormHideable extends StatefulWidget {
   final ValueNotifier<bool> notifier;
 
   const FormHideable(
-      {@required this.title, @required this.notifier, @required this.builder});
+      {required this.title, required this.notifier, required this.builder});
 
   @override
   State<StatefulWidget> createState() => _FormHideableState();
@@ -50,10 +50,10 @@ class FormStreamHideable extends StatefulWidget {
 
   const FormStreamHideable({
     Key key,
-    @required this.shouldShow,
-    @required this.title,
-    @required this.builder,
-    @required this.switchState,
+    required this.shouldShow,
+    required this.title,
+    required this.builder,
+    required this.switchState,
   }) : super(key: key);
   @override
   _FormStreamHideableState createState() => _FormStreamHideableState();
@@ -94,7 +94,7 @@ class _FormStreamHideableState extends State<FormStreamHideable>
 class FormSection extends StatelessWidget {
   final String title;
   final Widget child;
-  const FormSection({this.title, @required this.child});
+  const FormSection({this.title, required this.child});
 
   @override
   Widget build(BuildContext context) {
@@ -123,7 +123,7 @@ class FormSection extends StatelessWidget {
 class FormSectionText extends StatelessWidget {
   final TextSpan text;
 
-  const FormSectionText({@required this.text});
+  const FormSectionText({required this.text});
   @override
   Widget build(BuildContext context) {
     return Padding(

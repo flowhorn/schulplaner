@@ -6,8 +6,8 @@ import 'url_image.dart';
 class AvatarImage extends StatelessWidget {
   const AvatarImage({
     Key key,
-    @required this.avatarData,
-    @required this.size,
+    required this.avatarData,
+    required this.size,
   }) : super(key: key);
   final String avatarData;
   final double size;

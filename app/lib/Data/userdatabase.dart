@@ -10,7 +10,7 @@ class UserDatabase {
 
   DataDocumentPackage<UserProfile> userprofile;
   DataDocumentPackage<User> user;
-  UserDatabase({@required this.uid}) {
+  UserDatabase({required this.uid}) {
     _root = FirebaseFirestore.instance.collection('users').doc(uid);
     userprofile = DataDocumentPackage(
         reference: _root.collection('data').doc('info'),
@@ -36,13 +36,13 @@ class User {
   final String referralLink;
 
   User({
-    @required this.id,
-    @required this.name,
-    @required this.referralScore,
-    @required this.referralLink,
+    required this.id,
+    required this.name,
+    required this.referralScore,
+    required this.referralLink,
   });
 
-  factory User.fromData({@required String id, @required dynamic data}) {
+  factory User.fromData({required String id, required dynamic data}) {
     if (data != null) {
       return User(
         id: id,

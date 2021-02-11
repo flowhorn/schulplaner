@@ -29,7 +29,7 @@ class _ScreenshotImage extends StatelessWidget {
 
   const _ScreenshotImage({
     Key key,
-    @required this.assetPath,
+    required this.assetPath,
   }) : super(key: key);
 
   @override

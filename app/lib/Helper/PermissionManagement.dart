@@ -13,9 +13,9 @@ import 'package:schulplaner_models/schulplaner_models.dart';
 export 'package:schulplaner8/models/coursepermission.dart';
 
 Future<bool> requestPermissionCourse(
-    {@required PlannerDatabase database,
-    @required PermissionAccessType category,
-    @required String courseid}) {
+    {required PlannerDatabase database,
+    required PermissionAccessType category,
+    required String courseid}) {
   if (!areThereAdmins(database.courseinfo.data[courseid].membersData) &&
       !areClassesConnected(
           database.courseinfo.data[courseid].connectedclasses)) {
@@ -84,9 +84,9 @@ bool areClassesConnected(Map<String, bool> connectedclasses) {
 }
 
 Future<bool> requestPermissionClass(
-    {@required PlannerDatabase database,
-    @required PermissionAccessType category,
-    @required String classid}) {
+    {required PlannerDatabase database,
+    required PermissionAccessType category,
+    required String classid}) {
   if (!areThereAdmins(database.schoolClassInfos.data[classid].membersData)) {
     database.dataManager.schoolClassRoot(classid).set(
       {
@@ -113,10 +113,10 @@ Future<bool> requestPermissionClass(
 }
 
 Future<bool> requestSimplePermission(
-    {@required BuildContext context,
-    @required PlannerDatabase database,
-    @required PermissionAccessType category,
-    @required String id,
+    {required BuildContext context,
+    required PlannerDatabase database,
+    required PermissionAccessType category,
+    required String id,
     int type = 0,
     String routname}) async {
   switch (type) {
@@ -157,10 +157,10 @@ Future<bool> requestSimplePermission(
 }
 
 Future<bool> requestSavedInSimplePermission(
-    {@required BuildContext context,
-    @required PlannerDatabase database,
-    @required PermissionAccessType category,
-    @required SavedIn savedin,
+    {required BuildContext context,
+    required PlannerDatabase database,
+    required PermissionAccessType category,
+    required SavedIn savedin,
     String routname}) async {
   switch (savedin.type) {
     case SavedInType.COURSE:

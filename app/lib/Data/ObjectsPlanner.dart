@@ -6,7 +6,7 @@ class CoursePersonal {
   Design design;
 
   CoursePersonal(
-      {@required this.courseid,
+      {required this.courseid,
       this.design,
       this.shortname,
       this.gradeprofileid});

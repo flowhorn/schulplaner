@@ -13,12 +13,12 @@ class LetterResponse {
   final Timestamp lastchanged;
 
   const LetterResponse._(
-      {@required this.id,
-      @required this.type,
-      @required this.message,
-      @required this.lastchanged});
+      {required this.id,
+      required this.type,
+      required this.message,
+      required this.lastchanged});
 
-  factory LetterResponse.Create({@required String id}) {
+  factory LetterResponse.Create({required String id}) {
     return LetterResponse._(
       id: id,
       type: ResponseType.NONE,
@@ -80,21 +80,21 @@ class Letter {
   final Map<String, LetterResponse> responses;
 
   const Letter._(
-      {@required this.id,
-      @required this.title,
-      @required this.savedin,
-      @required this.content,
-      @required this.authorid,
-      @required this.published,
-      @required this.lastchanged,
-      @required this.archived,
-      @required this.deleted,
-      @required this.sendpush,
-      @required this.allowreply,
-      @required this.files,
-      @required this.responses});
+      {required this.id,
+      required this.title,
+      required this.savedin,
+      required this.content,
+      required this.authorid,
+      required this.published,
+      required this.lastchanged,
+      required this.archived,
+      required this.deleted,
+      required this.sendpush,
+      required this.allowreply,
+      required this.files,
+      required this.responses});
 
-  factory Letter.Create({@required String id, @required String authorid}) {
+  factory Letter.Create({required String id, required String authorid}) {
     return Letter._(
       id: id,
       title: '',

@@ -133,7 +133,7 @@ ConfigurationData getConfigurationData(BuildContext context) {
 }
 
 String bothlang(BuildContext context,
-    {@required String de, @required String en}) {
+    {required String de, required String en}) {
   if (getString(context).languagecode == 'de') {
     return de;
   } else {

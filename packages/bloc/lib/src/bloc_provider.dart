@@ -5,7 +5,7 @@ class BlocProvider<T extends BlocBase> extends StatefulWidget {
   const BlocProvider({
     Key key,
     this.child,
-    @required this.bloc,
+    required this.bloc,
   }) : super(key: key);
 
   final T bloc;

@@ -13,22 +13,22 @@ class AnonymousAuthProviderType extends AuthProviderType {
 class EmailAuthProviderType extends AuthProviderType {
   final String email;
   EmailAuthProviderType({
-    @required String firebaseProviderId,
-    @required this.email,
+    required String firebaseProviderId,
+    required this.email,
   }) : super(firebaseProviderId);
 }
 
 class GoogleAuthProviderType extends AuthProviderType {
   final String email;
   GoogleAuthProviderType({
-    @required String firebaseProviderId,
-    @required this.email,
+    required String firebaseProviderId,
+    required this.email,
   }) : super(firebaseProviderId);
 }
 
 class AppleAuthProviderType extends AuthProviderType {
   AppleAuthProviderType({
-    @required String firebaseProviderId,
+    required String firebaseProviderId,
   }) : super(firebaseProviderId);
 }
 

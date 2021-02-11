@@ -9,8 +9,8 @@ class Design {
 
   Design({
     this.id,
-    @required this.name,
-    @required this.primary,
+    required this.name,
+    required this.primary,
     this.accent,
   });
 

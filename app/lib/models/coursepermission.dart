@@ -9,8 +9,7 @@ enum PermissionAccessType {
 }
 
 bool requestPermission(
-    {@required MemberRole role,
-    @required PermissionAccessType permissiontype}) {
+    {required MemberRole role, required PermissionAccessType permissiontype}) {
   if (role == null) return false;
   switch (permissiontype) {
     case PermissionAccessType.membermanagement:

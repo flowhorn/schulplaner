@@ -303,9 +303,9 @@ class PlannerDatabase {
       );
 
   PlannerDatabase({
-    @required this.uid,
-    @required this.plannerid,
-    @required AppSettingsBloc appSettingsBloc,
+    required this.uid,
+    required this.plannerid,
+    required AppSettingsBloc appSettingsBloc,
   }) {
     _courselistener = {};
     _classlistener = {};
@@ -671,7 +671,7 @@ class DataManager {
   DocumentReference get notificationSettings =>
       instance.collection('notifications').doc(getMemberId());
 
-  DataManager({@required this.plannerid, @required this.uid});
+  DataManager({required this.plannerid, required this.uid});
 
   String generateCourseId() => instance.collection('courses').doc().id;
   String generateFileId() => filesPersonalRef.doc().id;

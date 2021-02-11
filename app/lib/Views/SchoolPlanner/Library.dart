@@ -698,7 +698,7 @@ Widget getDrawerFunctionTile(
   String name,
   IconData iconData,
   VoidCallback onTap,
-  @required NavigationItem navigationItem,
+  required NavigationItem navigationItem,
 }) {
   return DrawerTile(
     icon: iconData,
@@ -709,7 +709,7 @@ Widget getDrawerFunctionTile(
 }
 
 Widget getFunctionScaffhold(BuildContext context,
-    {@required String name, @required Widget child}) {
+    {required String name, required Widget child}) {
   return Scaffold(
     appBar: MyAppHeader(title: name),
     body: child,

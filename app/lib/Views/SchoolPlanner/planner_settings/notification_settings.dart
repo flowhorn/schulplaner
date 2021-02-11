@@ -48,8 +48,7 @@ void _updateNotificationSettings(
 class _Inner extends StatelessWidget {
   final NotificationSettings notificationSettings;
 
-  const _Inner({Key key, @required this.notificationSettings})
-      : super(key: key);
+  const _Inner({Key key, required this.notificationSettings}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -194,7 +193,7 @@ class _Inner extends StatelessWidget {
 class _Devices extends StatelessWidget {
   final NotificationSettings notificationSettings;
 
-  const _Devices({Key key, @required this.notificationSettings})
+  const _Devices({Key key, required this.notificationSettings})
       : super(key: key);
 
   @override

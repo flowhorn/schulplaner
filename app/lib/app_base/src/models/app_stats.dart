@@ -18,15 +18,18 @@ class AppStats {
     this.hidecard_supportapp = false,
   });
 
-  AppStats.fromString(String data) {
+  factory AppStats.fromString(String data) {
     Map<String, dynamic> map = jsonDecode(data);
-    openedhomepage = map['openedhomepage'] ?? 0;
-    openedapp = map['openedapp'] ?? 0;
-    addedtask = map['addedtask'] ?? 0;
-    hidecard_rateapp = map['hidecard_rateapp'] ?? false;
-    hidecard_shareapp = map['hidecard_shareapp'] ?? false;
-    hidecard_socialmedia = map['hidecard_socialmedia'] ?? false;
-    hidecard_supportapp = map['hidecard_supportapp'] ?? false;
+
+    return AppStats(
+      openedhomepage: map['openedhomepage'] ?? 0,
+      openedapp: map['openedapp'] ?? 0,
+      addedtask: map['addedtask'] ?? 0,
+      hidecard_rateapp: map['hidecard_rateapp'] ?? false,
+      hidecard_shareapp: map['hidecard_shareapp'] ?? false,
+      hidecard_socialmedia: map['hidecard_socialmedia'] ?? false,
+      hidecard_supportapp: map['hidecard_supportapp'] ?? false,
+    );
   }
 
   String toJsonString() {

@@ -22,10 +22,10 @@ class SchoolClassMemberSheet extends SchulplanerSheet {
   final PlannerDatabase database;
 
   const SchoolClassMemberSheet({
-    @required this.schoolClassId,
-    @required this.database,
-    @required this.memberData,
-    @required this.userProfile,
+    required this.schoolClassId,
+    required this.database,
+    required this.memberData,
+    required this.userProfile,
   });
   @override
   Widget build(BuildContext context) {

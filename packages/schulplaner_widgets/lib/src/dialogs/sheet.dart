@@ -14,7 +14,7 @@ abstract class SchulplanerSheet {
 
   Future<void> showWithAutoPop(
     BuildContext context, {
-    @required Future<bool> future,
+    required Future<bool> future,
     Duration delay,
   }) async {
     final sheetPop = show(context);

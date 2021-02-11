@@ -10,7 +10,7 @@ class DynamicLinkData {
   final bool hasBeenHandled;
 
   DynamicLinkData(
-      {@required this.id, @required this.link, this.hasBeenHandled = false});
+      {required this.id, required this.link, this.hasBeenHandled = false});
 
   DynamicLinkData copyWith({bool hasBeenHandled}) {
     return DynamicLinkData(

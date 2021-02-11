@@ -13,11 +13,11 @@ class GradeTypeItem {
   final bool testsasoneexam;
 
   GradeTypeItem._({
-    @required this.id,
-    @required this.name,
-    @required this.weight,
-    @required this.gradetypes,
-    @required this.testsasoneexam,
+    required this.id,
+    required this.name,
+    required this.weight,
+    required this.gradetypes,
+    required this.testsasoneexam,
   });
 
   factory GradeTypeItem.Create(String id) {

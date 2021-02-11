@@ -9,7 +9,7 @@ import 'package:universal_commons/platform_check.dart';
 
 class SignInBloc extends BlocBase {
   SignInBloc({
-    @required FirebaseAuth firebaseAuth,
+    required FirebaseAuth firebaseAuth,
   }) : _firebaseAuth = firebaseAuth;
 
   final FirebaseAuth _firebaseAuth;

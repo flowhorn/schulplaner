@@ -224,10 +224,10 @@ class _TipsCard extends StatelessWidget {
 
   const _TipsCard({
     Key key,
-    @required this.iconData,
-    @required this.title,
-    @required this.content,
-    @required this.bottom,
+    required this.iconData,
+    required this.title,
+    required this.content,
+    required this.bottom,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {

@@ -156,7 +156,7 @@ class CourseAllGradeViewState extends State<CourseAllGradeView> {
 class _Fab extends StatelessWidget {
   final String courseId;
 
-  const _Fab({Key key, @required this.courseId}) : super(key: key);
+  const _Fab({Key key, required this.courseId}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final database = PlannerDatabaseBloc.getDatabase(context);

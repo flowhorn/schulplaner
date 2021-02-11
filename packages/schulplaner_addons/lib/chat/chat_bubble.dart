@@ -44,7 +44,7 @@ class _ChatBubbleLeft extends StatelessWidget {
       this.message,
       this.name,
       this.isSingleChat,
-      @required this.color})
+      required this.color})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -92,8 +92,7 @@ class _ChatBubbleRight extends StatelessWidget {
   final Message message;
   final Color color;
 
-  const _ChatBubbleRight(
-      {Key key, @required this.message, @required this.color})
+  const _ChatBubbleRight({Key key, required this.message, required this.color})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -135,8 +134,7 @@ class _BubbleTimeView extends StatelessWidget {
   final TimeOfDay timeOfDay;
   final Color color;
 
-  const _BubbleTimeView(
-      {Key key, @required this.timeOfDay, @required this.color})
+  const _BubbleTimeView({Key key, required this.timeOfDay, required this.color})
       : super(key: key);
 
   @override
@@ -248,7 +246,7 @@ class MessageInner extends StatelessWidget {
   final Message message;
   final Color color;
 
-  const MessageInner({Key key, @required this.message, @required this.color})
+  const MessageInner({Key key, required this.message, required this.color})
       : super(key: key);
   @override
   Widget build(BuildContext context) {

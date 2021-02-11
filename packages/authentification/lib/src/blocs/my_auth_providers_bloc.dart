@@ -15,8 +15,8 @@ class MyAuthProvidersBloc extends BlocBase {
       BehaviorSubject<SignInState>.seeded(SignInState.none);
 
   MyAuthProvidersBloc(
-      {@required FirebaseAuth firebaseAuth,
-      @required AuthentificationBloc authentificationBloc})
+      {required FirebaseAuth firebaseAuth,
+      required AuthentificationBloc authentificationBloc})
       : _firebaseAuth = firebaseAuth {
     authentificationBloc.authentificationStatus.listen((authStatus) {
       if (authStatus is AuthentifiedAuthentificationStatus) {

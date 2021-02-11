@@ -10,7 +10,7 @@ class DrawerTile extends StatelessWidget {
   final VoidCallback onTap;
   final NavigationItem navigationItem;
   const DrawerTile(
-      {this.icon, this.name, this.onTap, @required this.navigationItem});
+      {this.icon, this.name, this.onTap, required this.navigationItem});
   @override
   Widget build(BuildContext context) {
     final navigationBloc = NavigationBloc.of(context);
@@ -59,9 +59,9 @@ class _Selected extends StatelessWidget {
 
   const _Selected({
     Key key,
-    @required this.iconData,
-    @required this.title,
-    @required this.isCollapsed,
+    required this.iconData,
+    required this.title,
+    required this.isCollapsed,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -111,10 +111,10 @@ class _Unselected extends StatelessWidget {
 
   const _Unselected({
     Key key,
-    @required this.iconData,
-    @required this.title,
-    @required this.onTap,
-    @required this.isCollapsed,
+    required this.iconData,
+    required this.title,
+    required this.onTap,
+    required this.isCollapsed,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {

@@ -22,15 +22,15 @@ class AppLogicControllerBloc extends BlocBase {
   final UserDatabaseBloc userDatabaseBloc;
   final DynamicLinksBloc dynamicLinksBloc;
 
-  String startArgument;
+  String? startArgument;
 
   AppLogicControllerBloc({
-    @required this.authentificationBloc,
-    @required this.appSettingsBloc,
-    @required this.plannerDatabaseBloc,
-    @required this.plannerLoaderBloc,
-    @required this.userDatabaseBloc,
-    @required this.dynamicLinksBloc,
+    required this.authentificationBloc,
+    required this.appSettingsBloc,
+    required this.plannerDatabaseBloc,
+    required this.plannerLoaderBloc,
+    required this.userDatabaseBloc,
+    required this.dynamicLinksBloc,
   }) {
     authentificationBloc.authentificationStatus.listen(_updateAuthentification);
     if (PlatformCheck.isAndroid) {

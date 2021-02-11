@@ -19,7 +19,7 @@ typedef Widget DataDocumentWidgetBuilder<T>(BuildContext context, T data);
 class DataCollectionWidget<T> extends StatelessWidget {
   final DataCollectionPackage<T> package;
   final DataCollectionWidgetBuilder<T> builder;
-  DataCollectionWidget({@required this.package, @required this.builder});
+  DataCollectionWidget({required this.package, required this.builder});
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<List<T>>(
@@ -45,7 +45,7 @@ class DataItemWidget<T> extends StatelessWidget {
   final DataDocumentWidgetBuilder<T> builder;
   final String id;
   DataItemWidget(
-      {@required this.package, @required this.builder, @required this.id});
+      {required this.package, required this.builder, required this.id});
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<T>(
@@ -67,7 +67,7 @@ class DataDocumentWidget<T> extends StatelessWidget {
   final DataDocumentWidgetBuilder<T> builder;
   final bool allowNull;
   DataDocumentWidget(
-      {@required this.package, @required this.builder, this.allowNull = false});
+      {required this.package, required this.builder, this.allowNull = false});
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<T>(
@@ -91,9 +91,9 @@ class DataDocumentWidget<T> extends StatelessWidget {
 }
 
 Future<String> getTextFromInput(
-    {@required BuildContext context,
-    @required String previousText,
-    @required String title,
+    {required BuildContext context,
+    required String previousText,
+    required String title,
     TextInputType keyboardType,
     int maxlength}) async {
   String inputtext = previousText ?? '';
@@ -136,9 +136,9 @@ Future<String> getTextFromInput(
 }
 
 Widget getHeadedCardView(
-    {@required IconData iconData,
-    @required String title,
-    @required List<Widget> content,
+    {required IconData iconData,
+    required String title,
+    required List<Widget> content,
     Widget bottom}) {
   List<Widget> widgetlist = [
     Padding(
@@ -174,9 +174,9 @@ Widget getHeadedCardView(
 }
 
 Widget getHeadedCardViewSingle(
-    {@required IconData iconData,
-    @required String title,
-    @required Widget content,
+    {required IconData iconData,
+    required String title,
+    required Widget content,
     Widget bottom}) {
   List<Widget> widgetlist = [
     Padding(
@@ -295,7 +295,7 @@ class LabeledIconButtonSmall extends StatelessWidget {
 
 class MyAppHeader extends StatelessWidget implements PreferredSizeWidget {
   final String title;
-  MyAppHeader({@required this.title});
+  MyAppHeader({required this.title});
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -337,7 +337,7 @@ Widget getEmptyView({String title, IconData icon}) {
   );
 }
 
-Theme clearAppTheme({@required BuildContext context, @required Widget child}) {
+Theme clearAppTheme({required BuildContext context, required Widget child}) {
   ThemeData parentTheme = Theme.of(context);
   return Theme(
       data: ThemeData(
@@ -350,7 +350,7 @@ Theme clearAppTheme({@required BuildContext context, @required Widget child}) {
       child: child);
 }
 
-ThemeData clearAppThemeData({@required BuildContext context}) {
+ThemeData clearAppThemeData({required BuildContext context}) {
   ThemeData parentTheme = Theme.of(context);
   return ThemeData(
     primaryColor: parentTheme.brightness == Brightness.light
@@ -388,16 +388,16 @@ Widget selectedView(bool selected) {
       : null;
 }
 
-void popNavigatorBy(BuildContext context, {@required String text}) {
+void popNavigatorBy(BuildContext context, {required String text}) {
   Navigator.popUntil(context, (Route predicate) {
     return (predicate?.settings?.name?.contains(text) ?? false) == false;
   });
 }
 
 void showSheet(
-    {@required BuildContext context,
-    @required Widget child,
-    @required String title,
+    {required BuildContext context,
+    required Widget child,
+    required String title,
     List<Widget> actions}) {
   showModalBottomSheet(
       context: context,
@@ -468,7 +468,7 @@ void showSheet(
       });
 }
 
-ValueNotifier<bool> showPermissionStateSheet({@required BuildContext context}) {
+ValueNotifier<bool> showPermissionStateSheet({required BuildContext context}) {
   ValueNotifier<bool> mNotifier = ValueNotifier(null);
   showModalBottomSheet(
       context: context,
@@ -555,7 +555,7 @@ ValueNotifier<bool> showPermissionStateSheet({@required BuildContext context}) {
 }
 
 ValueNotifier<ResultItem> showResultStateSheet(
-    {@required BuildContext context, double fontSize = 19.0}) {
+    {required BuildContext context, double fontSize = 19.0}) {
   ValueNotifier<ResultItem> mNotifier =
       ValueNotifier(ResultItem(loading: true));
   showModalBottomSheet(
@@ -653,7 +653,7 @@ class ResultItem {
 }
 
 void showLoadingStateSheet(
-    {@required BuildContext context, ValueNotifier<bool> sheetUpdate}) {
+    {required BuildContext context, ValueNotifier<bool> sheetUpdate}) {
   showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
@@ -737,7 +737,7 @@ void showLoadingStateSheet(
 }
 
 ValueNotifier<bool> showLoadingStateSheetFull({
-  @required BuildContext context,
+  required BuildContext context,
 }) {
   ValueNotifier<bool> sheetUpdate = ValueNotifier(null);
   showBetterModalBottomSheet(
@@ -830,8 +830,8 @@ ValueNotifier<bool> showLoadingStateSheetFull({
 }
 
 Future<T> showSheetBuilder<T>({
-  @required BuildContext context,
-  @required WidgetBuilder child,
+  required BuildContext context,
+  required WidgetBuilder child,
   String title,
   WidgetListBuilder actions,
   String routname,
@@ -920,12 +920,12 @@ Widget getSheetText(BuildContext context, String text) {
 }
 
 void showConfirmationDialog(
-    {@required BuildContext context,
-    @required String title,
-    @required VoidCallback onConfirm,
-    @required String action,
+    {required BuildContext context,
+    required String title,
+    required VoidCallback onConfirm,
+    required String action,
     bool warning,
-    @required RichText richtext,
+    required RichText richtext,
     String warningtext}) {
   showDialog(
       context: context,
@@ -983,8 +983,8 @@ void showConfirmationDialog(
 }
 
 Future<bool> showConfirmDialog(
-    {@required BuildContext context,
-    @required String title,
+    {required BuildContext context,
+    required String title,
     String action,
     RichText richtext,
     String warningtext}) {
@@ -1023,8 +1023,8 @@ Future<bool> showConfirmDialog(
 }
 
 Future<void> showDetailSheetBuilder(
-    {@required BuildContext context,
-    @required WidgetBuilder body,
+    {required BuildContext context,
+    required WidgetBuilder body,
     String routname}) {
   return showBetterModalBottomSheet(
     context: context,
@@ -1203,7 +1203,7 @@ Stream<ThreeObjects<T1, T2, T3>> getThreeMergedStream<T1, T2, T3>(
 class QRCodeViewPublicCode extends StatelessWidget {
   final String publiccode;
 
-  QRCodeViewPublicCode({@required this.publiccode});
+  QRCodeViewPublicCode({required this.publiccode});
   @override
   Widget build(BuildContext context) {
     return publiccode == null

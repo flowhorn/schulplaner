@@ -9,9 +9,9 @@ class SharedSettings {
   final PlannerSettingsData settingsData;
 
   const SharedSettings._({
-    @required this.lastRefreshed,
-    @required this.authorID,
-    @required this.settingsData,
+    required this.lastRefreshed,
+    required this.authorID,
+    required this.settingsData,
   });
 
   factory SharedSettings.Create(

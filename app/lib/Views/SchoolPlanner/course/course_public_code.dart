@@ -11,7 +11,7 @@ import 'package:schulplaner_widgets/schulplaner_common.dart';
 class CoursePublicCodeView extends StatelessWidget {
   final String courseid;
   final PlannerDatabase database;
-  CoursePublicCodeView({@required this.courseid, @required this.database});
+  CoursePublicCodeView({required this.courseid, required this.database});
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<Course>(

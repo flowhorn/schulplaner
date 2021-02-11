@@ -414,8 +414,8 @@ Stream<Map<String, SchoolEvent>> getArchiveStreamEvents(
 
 void showEventDetailSheet(
   BuildContext context, {
-  @required SchoolEvent eventdata,
-  @required PlannerDatabase plannerdatabase,
+  required SchoolEvent eventdata,
+  required PlannerDatabase plannerdatabase,
 }) {
   showDetailSheetBuilder(
       context: context,

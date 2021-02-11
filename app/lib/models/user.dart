@@ -6,15 +6,15 @@ class UserProfile {
   final String uid, name, pic, picThumb, avatar;
   final ProfileDisplayMode displayMode;
   UserProfile._({
-    @required this.name,
-    @required this.pic,
-    @required this.picThumb,
-    @required this.uid,
-    @required this.avatar,
-    @required this.displayMode,
+    required this.name,
+    required this.pic,
+    required this.picThumb,
+    required this.uid,
+    required this.avatar,
+    required this.displayMode,
   });
 
-  factory UserProfile.create({@required String uid}) {
+  factory UserProfile.create({required String uid}) {
     return UserProfile._(
       uid: uid,
       name: '',

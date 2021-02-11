@@ -31,7 +31,7 @@ class NewSchoolTaskView extends StatelessWidget {
   ValueNotifier<bool> showmore = ValueNotifier(false);
 
   NewSchoolTaskView(
-      {@required this.database, this.editmode = false, this.editmode_taskid}) {
+      {required this.database, this.editmode = false, this.editmode_taskid}) {
     if (editmode) {
       data = database.tasks.data[editmode_taskid].copy();
     } else {
@@ -50,7 +50,7 @@ class NewSchoolTaskView extends StatelessWidget {
     notifier = ValueNotifier(data);
   }
 
-  NewSchoolTaskView.fromCriticalEdit({@required this.database, SchoolTask task})
+  NewSchoolTaskView.fromCriticalEdit({required this.database, SchoolTask task})
       : editmode = true,
         editmode_taskid = null {
     data = task.copy();
@@ -58,7 +58,7 @@ class NewSchoolTaskView extends StatelessWidget {
   }
 
   NewSchoolTaskView.CreateWithData(
-      {@required this.database, String due, String courseid})
+      {required this.database, String due, String courseid})
       : editmode = false,
         editmode_taskid = null {
     data = SchoolTask(due: due, courseid: courseid);

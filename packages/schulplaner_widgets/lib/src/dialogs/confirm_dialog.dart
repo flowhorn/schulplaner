@@ -9,8 +9,8 @@ class ConfirmDialog extends SchulplanerDialog {
   final String message;
 
   const ConfirmDialog({
-    @required this.title,
-    @required this.message,
+    required this.title,
+    required this.message,
   });
   @override
   Widget build(BuildContext context) {

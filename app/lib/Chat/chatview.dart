@@ -15,7 +15,12 @@ class Chat extends StatelessWidget {
   final PlannerDatabase database;
   final Design design;
 
-  const Chat(this.database, this.design, {this.groupid, this.uid});
+  const Chat(
+    this.database,
+    this.design, {
+    required this.groupid,
+    required this.uid,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -25,11 +30,12 @@ class Chat extends StatelessWidget {
           appBar: MyAppHeader(
             title: getString(context).chat,
           ),
-          body: StreamBuilder(
+          body: StreamBuilder<SchoolClass?>(
               initialData: database.getClassInfo(groupid),
               stream: database.schoolClassInfos.getItemStream(groupid),
               builder: (context, snapshot) {
-                SchoolClass data = snapshot.data;
+                final data = snapshot.data;
+                if (data == null) return CircularProgressIndicator();
                 if (data.enablechat) {
                   return ChatThread(
                     database: database,

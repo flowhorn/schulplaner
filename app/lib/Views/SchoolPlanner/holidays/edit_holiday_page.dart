@@ -21,7 +21,7 @@ class NewHolidayPage extends StatelessWidget {
   Holiday data;
   ValueNotifier<Holiday> notifier;
   NewHolidayPage(
-      {@required this.database, this.editMode = false, this.editvacationid}) {
+      {required this.database, this.editMode = false, this.editvacationid}) {
     data = editMode
         ? database.vacations.data[editvacationid].copyWith()
         : Holiday(

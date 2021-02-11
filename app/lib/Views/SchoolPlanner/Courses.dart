@@ -76,7 +76,7 @@ void showNewCourseSheet(BuildContext context, PlannerDatabase database) {
 }
 
 void showCourseMoreSheet(BuildContext context,
-    {@required String courseid, @required PlannerDatabase plannerdatabase}) {
+    {required String courseid, required PlannerDatabase plannerdatabase}) {
   showDetailSheetBuilder(
       context: context,
       body: (context) {
@@ -179,7 +179,7 @@ void showCourseMoreSheet(BuildContext context,
 class QuickCreateCourseView extends StatelessWidget {
   final PlannerDatabase database;
   final String courseid;
-  QuickCreateCourseView({@required this.database, @required this.courseid});
+  QuickCreateCourseView({required this.database, required this.courseid});
 
   @override
   Widget build(BuildContext context) {
@@ -255,7 +255,7 @@ class QuickCreateCourseView extends StatelessWidget {
 class CourseSecurityView extends StatelessWidget {
   final String courseid;
   final PlannerDatabase database;
-  CourseSecurityView({@required this.courseid, @required this.database});
+  CourseSecurityView({required this.courseid, required this.database});
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<Course>(
@@ -317,7 +317,7 @@ class CourseTemplatesView extends StatelessWidget {
   final List<dynamic> templates = getTemplateList_DE();
   final PlannerDatabase database;
 
-  CourseTemplatesView({@required this.database});
+  CourseTemplatesView({required this.database});
 
   @override
   Widget build(BuildContext context) {
@@ -426,8 +426,7 @@ class CourseTemplatesView extends StatelessWidget {
 class CourseConnectedClassesView extends StatelessWidget {
   final String courseid;
   final PlannerDatabase database;
-  CourseConnectedClassesView(
-      {@required this.courseid, @required this.database});
+  CourseConnectedClassesView({required this.courseid, required this.database});
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<Course>(

@@ -5,6 +5,7 @@ analyzer:
     errors:
       invalid_use_of_protected_member: ignore
       invalid_use_of_visible_for_testing_member: ignore
+      import_of_legacy_library_into_null_safe: ignore
 
 linter:
   rules: 
@@ -12,6 +13,7 @@ linter:
     prefer_conditional_assignment: false
     prefer_generic_function_type_aliases: false
     prefer_if_null_operators: false
+    unnescessary_null_comparison: false
 
 #   exclude:
 #     - path/to/excluded/files/**

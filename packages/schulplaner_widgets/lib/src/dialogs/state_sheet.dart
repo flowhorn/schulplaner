@@ -7,7 +7,7 @@ class StateSheet extends SchulplanerSheet {
   final Stream<SheetContent> stream;
 
   const StateSheet({
-    @required this.stream,
+    required this.stream,
   });
   @override
   Widget build(BuildContext context) {

@@ -15,10 +15,10 @@ class EditAttachementsView extends StatelessWidget {
   final Map<String, CloudFile> attachments;
   final ValueSetter<CloudFile> onAdded, onRemoved;
   EditAttachementsView(
-      {@required this.database,
-      @required this.attachments,
-      @required this.onAdded,
-      @required this.onRemoved});
+      {required this.database,
+      required this.attachments,
+      required this.onAdded,
+      required this.onRemoved});
   @override
   Widget build(BuildContext context) {
     return Column(

@@ -45,8 +45,8 @@ class BottomSheet extends StatefulWidget {
   const BottomSheet(
       {Key key,
       this.animationController,
-      @required this.onClosing,
-      @required this.builder})
+      required this.onClosing,
+      required this.builder})
       : assert(onClosing != null),
         assert(builder != null),
         super(key: key);
@@ -264,8 +264,8 @@ class _ModalBottomSheetRoute<T> extends PopupRoute<T> {
 ///    non-modal bottom sheets.
 ///  * <https://material.google.com/components/bottom-sheets.html#bottom-sheets-modal-bottom-sheets>
 Future<T> showBetterModalBottomSheet<T>({
-  @required BuildContext context,
-  @required WidgetBuilder builder,
+  required BuildContext context,
+  required WidgetBuilder builder,
   String routname,
 }) {
   assert(context != null);
@@ -316,8 +316,8 @@ Future<T> showBetterModalBottomSheet<T>({
 ///  * [Scaffold.of], for information about how to obtain the [BuildContext].
 ///  * <https://material.google.com/components/bottom-sheets.html#bottom-sheets-persistent-bottom-sheets>
 PersistentBottomSheetController<T> showBottomSheet<T>({
-  @required BuildContext context,
-  @required WidgetBuilder builder,
+  required BuildContext context,
+  required WidgetBuilder builder,
 }) {
   assert(context != null);
   assert(builder != null);

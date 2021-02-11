@@ -6,8 +6,8 @@ class MemberId {
   final String plannerId;
 
   const MemberId({
-    @required this.userId,
-    @required this.plannerId,
+    required this.userId,
+    required this.plannerId,
   });
 
   String toDataString() {

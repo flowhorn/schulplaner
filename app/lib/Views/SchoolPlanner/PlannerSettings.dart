@@ -466,9 +466,9 @@ class SubSettingsPlanner extends StatelessWidget {
   final PlannerDatabase plannerDatabase;
 
   const SubSettingsPlanner({
-    @required this.title,
-    @required this.plannerDatabase,
-    @required this.builder,
+    required this.title,
+    required this.plannerDatabase,
+    required this.builder,
   });
 
   @override
@@ -502,8 +502,8 @@ class SubSettingsPlannerFloating extends StatelessWidget {
   final PlannerDatabase plannerDatabase;
 
   const SubSettingsPlannerFloating({
-    @required this.plannerDatabase,
-    @required this.builder,
+    required this.plannerDatabase,
+    required this.builder,
   });
 
   @override

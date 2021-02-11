@@ -5,9 +5,9 @@ import 'package:schulplaner_widgets/schulplaner_theme.dart';
 class RButton extends StatelessWidget {
   const RButton({
     Key key,
-    @required this.text,
+    required this.text,
     this.iconData,
-    @required this.onTap,
+    required this.onTap,
     this.enabled = true,
     this.disabledColor,
   }) : super(key: key);

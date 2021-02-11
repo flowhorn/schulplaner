@@ -15,8 +15,7 @@ import 'package:schulplaner8/models/user.dart';
 class SchoolClassMemberView extends StatelessWidget {
   final String schoolClassID;
   final PlannerDatabase database;
-  SchoolClassMemberView(
-      {@required this.schoolClassID, @required this.database});
+  SchoolClassMemberView({required this.schoolClassID, required this.database});
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<SchoolClass>(
@@ -139,11 +138,11 @@ class CourseMemberTile extends StatelessWidget {
 }
 
 Future<void> _showMemberSheet(
-    {@required BuildContext context,
-    @required String schoolClassId,
-    @required PlannerDatabase database,
-    @required UserProfile userProfile,
-    @required MemberData memberData}) {
+    {required BuildContext context,
+    required String schoolClassId,
+    required PlannerDatabase database,
+    required UserProfile userProfile,
+    required MemberData memberData}) {
   final memberSheet = SchoolClassMemberSheet(
     schoolClassId: schoolClassId,
     database: database,

@@ -32,9 +32,9 @@ class EditCourseBloc extends BlocBase {
   final _hasChangedValuesSubject = BehaviorSubject<bool>.seeded(false);
 
   EditCourseBloc.withEditState({
-    @required Course course,
-    @required this.database,
-    @required this.courseGateway,
+    required Course course,
+    required this.database,
+    required this.courseGateway,
   }) {
     _currentCourseSubject.add(course);
     _editModeSubject.add(true);
@@ -44,8 +44,8 @@ class EditCourseBloc extends BlocBase {
   EditCourseBloc.withCreateState({
     CourseTemplate template,
     String schoolClassId,
-    @required this.database,
-    @required this.courseGateway,
+    required this.database,
+    required this.courseGateway,
   }) {
     final courseId = database.dataManager.generateCourseId();
     final course = template != null
@@ -141,7 +141,7 @@ class EditCourseBloc extends BlocBase {
   }
 
   Future<bool> submit({
-    @required BuildContext context,
+    required BuildContext context,
   }) async {
     final course = _currentCourseSubject.value;
     final schoolClassId = _addToSchoolClassSubject.value;

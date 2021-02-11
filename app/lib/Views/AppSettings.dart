@@ -303,7 +303,7 @@ class AppConfigurationView extends StatelessWidget {
   final AppSettingsBloc appSettingsBloc;
   final UserDatabase userDatabase;
   AppConfigurationView(
-      {@required this.appSettingsBloc, @required this.userDatabase});
+      {required this.appSettingsBloc, required this.userDatabase});
 
   @override
   Widget build(BuildContext context) {

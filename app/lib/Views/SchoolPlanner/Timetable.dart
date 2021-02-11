@@ -264,9 +264,9 @@ String getLessonPeriodString(
 }
 
 void showLessonDetailSheet(BuildContext context,
-    {@required String lessonid,
+    {required String lessonid,
     String datestring,
-    @required PlannerDatabase plannerdatabase}) {
+    required PlannerDatabase plannerdatabase}) {
   showDetailSheetBuilder(
       context: context,
       body: (context) {

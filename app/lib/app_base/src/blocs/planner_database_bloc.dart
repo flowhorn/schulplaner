@@ -16,9 +16,9 @@ class PlannerDatabaseBloc extends BlocBase {
   final _currentPlannerIdSubject = BehaviorSubject<String>();
   String get currentPlannerId => _currentPlannerIdSubject.value;
 
-  PlannerDatabase plannerDatabase;
+  PlannerDatabase? plannerDatabase;
 
-  void setPlanner(UserId userId, String plannerId) {
+  void setPlanner(UserId? userId, String? plannerId) {
     // Prevent unnesseccary reloads by checking currentUserId
     if (userId == null || plannerId == null) return;
     if (userId != currentUserId || plannerId != currentPlannerId) {
@@ -40,7 +40,7 @@ class PlannerDatabaseBloc extends BlocBase {
   }
 
   static PlannerDatabase getDatabase(BuildContext context) {
-    return BlocProvider.of<PlannerDatabaseBloc>(context).plannerDatabase;
+    return BlocProvider.of<PlannerDatabaseBloc>(context).plannerDatabase!;
   }
 
   @override

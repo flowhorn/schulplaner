@@ -23,8 +23,8 @@ class SchoolClassView extends StatelessWidget {
   final PlannerDatabase database;
 
   const SchoolClassView({
-    @required this.classid,
-    @required this.database,
+    required this.classid,
+    required this.database,
   });
 
   @override

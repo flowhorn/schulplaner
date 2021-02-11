@@ -58,9 +58,9 @@ Future<SchoolClass> getSchoolClassInformation(String classid) {
 }
 
 Future<bool> changeMemberTypeUserCourse({
-  @required String courseID,
-  @required String memberID,
-  @required MemberRole newRole,
+  required String courseID,
+  required String memberID,
+  required MemberRole newRole,
 }) {
   return FirebaseFunctions.instance
       .httpsCallable('CourseUpdateMemberRole')

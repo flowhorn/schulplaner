@@ -11,7 +11,7 @@ class SchulplanerDrawer extends StatelessWidget {
 
   const SchulplanerDrawer({
     Key key,
-    @required this.libraryTabletWidget,
+    required this.libraryTabletWidget,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {

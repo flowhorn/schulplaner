@@ -38,9 +38,9 @@ class AppSettingsStateHead extends StatefulWidget {
 
   const AppSettingsStateHead({
     Key key,
-    @required this.dynamicLinksLogic,
-    @required this.authentificationBloc,
-    @required this.appSettingsBloc,
+    required this.dynamicLinksLogic,
+    required this.authentificationBloc,
+    required this.appSettingsBloc,
   }) : super(key: key);
 
   @override

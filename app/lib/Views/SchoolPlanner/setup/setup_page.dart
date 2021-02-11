@@ -36,7 +36,7 @@ class SetupView extends StatelessWidget {
               ),
             ),
             Text(
-              plannerdata.name ?? '-',
+              plannerdata?.name ?? '-',
               style: TextStyle(
                 fontSize: 12.5,
                 fontWeight: FontWeight.w300,
