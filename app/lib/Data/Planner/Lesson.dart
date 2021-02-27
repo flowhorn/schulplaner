@@ -1,3 +1,5 @@
+//@dart=2.11
+
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/groups/src/models/course.dart';
 import 'package:schulplaner8/groups/src/models/place_link.dart';
@@ -47,7 +49,7 @@ class Lesson {
       this.overridentime,
       this.newimplementation = true});
 
-  factory Lesson.fromData({required String id, required dynamic data}) {
+  factory Lesson.fromData({@required String id, @required dynamic data}) {
     if (data == null) return null;
     return Lesson(
       courseid: data['courseid'],
@@ -170,13 +172,13 @@ class Lesson {
 class WeekType {
   int type;
   String name;
-  WeekType({required this.type, required this.name});
+  WeekType({@required this.type, @required this.name});
 }
 
 class Weekday {
   int day;
   String name;
-  Weekday({required this.day, required this.name});
+  Weekday({@required this.day, @required this.name});
 }
 
 Map<int, String> weektypesamount_meaning(BuildContext context) {

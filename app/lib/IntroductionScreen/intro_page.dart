@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:flutter/material.dart';
 
 class IntroPage extends StatelessWidget {
@@ -5,7 +6,7 @@ class IntroPage extends StatelessWidget {
   final Widget image;
   final Widget content;
 
-  const IntroPage({Key key, this.image, required this.content, this.bgColor})
+  const IntroPage({Key key, this.image, @required this.content, this.bgColor})
       : super(key: key);
 
   @override
@@ -27,7 +28,7 @@ class IntroPageDetailed extends StatelessWidget {
   final Color bgColor;
   final Widget content;
 
-  const IntroPageDetailed({Key key, required this.content, this.bgColor})
+  const IntroPageDetailed({Key key, @required this.content, this.bgColor})
       : super(key: key);
 
   @override

@@ -50,19 +50,19 @@ class Footer extends StatelessWidget {
                   width: 200,
                   child: DarkModeSwitch(),
                 ),
-                FlatButton(
+                TextButton(
                   child: Text('-> Datenschutzerklärung'),
                   onPressed: () {
                     openNavigationPage(context, NavigationItem.privacy);
                   },
                 ),
-                FlatButton(
+                TextButton(
                   child: Text('-> Impressum'),
                   onPressed: () {
                     openNavigationPage(context, NavigationItem.impressum);
                   },
                 ),
-                FlatButton(
+                TextButton(
                   child: Text('-> Über'),
                   onPressed: () {
                     openNavigationPage(context, NavigationItem.about);

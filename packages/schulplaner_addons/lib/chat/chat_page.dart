@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:schulplaner_addons/chat/chat_room.dart';
 import 'package:schulplaner_addons/chat/chat_thread.dart';
 import 'package:schulplaner_addons/chat/message.dart';

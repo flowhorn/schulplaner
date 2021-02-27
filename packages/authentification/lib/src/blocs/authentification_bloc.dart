@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'dart:async';
 
 import 'package:authentification/src/models/auth_user.dart';
@@ -15,7 +16,7 @@ class AuthentificationBloc extends BlocBase {
           LoadingAuthentificationStatus());
 
   AuthentificationBloc({
-    required FirebaseAuth firebaseAuth,
+    @required FirebaseAuth firebaseAuth,
   }) : _firebaseAuth = firebaseAuth {
     _initializeFirebaseAuthStream();
   }

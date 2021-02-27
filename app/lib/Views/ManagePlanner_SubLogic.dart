@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Extras/ReordableList.dart' as reordable_list;
 import 'package:schulplaner8/app_base/src/blocs/planner_loader_bloc.dart';

@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:authentification/src/logic/apple_sign_in_logic.dart';
 import 'package:authentification/src/logic/google_sign_in_logic.dart';
 import 'package:authentification/src/models/sign_in_state.dart';
@@ -9,7 +10,7 @@ import 'package:universal_commons/platform_check.dart';
 
 class SignInBloc extends BlocBase {
   SignInBloc({
-    required FirebaseAuth firebaseAuth,
+    @required FirebaseAuth firebaseAuth,
   }) : _firebaseAuth = firebaseAuth;
 
   final FirebaseAuth _firebaseAuth;

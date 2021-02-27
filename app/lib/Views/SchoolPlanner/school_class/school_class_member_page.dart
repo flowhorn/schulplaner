@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Views/SchoolPlanner/school_class/school_class_member_sheet.dart';
@@ -15,7 +16,8 @@ import 'package:schulplaner8/models/user.dart';
 class SchoolClassMemberView extends StatelessWidget {
   final String schoolClassID;
   final PlannerDatabase database;
-  SchoolClassMemberView({required this.schoolClassID, required this.database});
+  SchoolClassMemberView(
+      {@required this.schoolClassID, @required this.database});
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<SchoolClass>(
@@ -138,11 +140,11 @@ class CourseMemberTile extends StatelessWidget {
 }
 
 Future<void> _showMemberSheet(
-    {required BuildContext context,
-    required String schoolClassId,
-    required PlannerDatabase database,
-    required UserProfile userProfile,
-    required MemberData memberData}) {
+    {@required BuildContext context,
+    @required String schoolClassId,
+    @required PlannerDatabase database,
+    @required UserProfile userProfile,
+    @required MemberData memberData}) {
   final memberSheet = SchoolClassMemberSheet(
     schoolClassId: schoolClassId,
     database: database,

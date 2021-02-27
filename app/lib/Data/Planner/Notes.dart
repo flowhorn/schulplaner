@@ -1,3 +1,5 @@
+//@dart = 2.11
+
 import 'package:schulplaner8/Data/Planner/File.dart';
 
 class NoteData {
@@ -34,8 +36,8 @@ class NoteData {
       try {
         if (data['olddata']['att'] != null) {
           Map<dynamic, dynamic> rawdata = data['olddata']['att'];
-          final attachments =
-              rawdata.map<String, CloudFile>((key, value) => MapEntry<String, CloudFile>(
+          final attachments = rawdata.map<String, CloudFile>(
+              (key, value) => MapEntry<String, CloudFile>(
                   key,
                   CloudFile(
                     fileid: key,
@@ -47,8 +49,8 @@ class NoteData {
         }
         if (data['olddata']['attachments'] != null) {
           Map<dynamic, dynamic> rawdata = data['olddata']['attachments'];
-          final attachments =
-              rawdata.map<String, CloudFile>((key, value) => MapEntry<String, CloudFile>(
+          final attachments = rawdata.map<String, CloudFile>(
+              (key, value) => MapEntry<String, CloudFile>(
                   key,
                   CloudFile(
                     fileid: key,

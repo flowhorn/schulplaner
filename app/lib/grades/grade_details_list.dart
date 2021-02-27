@@ -1,3 +1,4 @@
+// @dart=2.11
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -164,10 +165,10 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
 
   const _AppBar({
     Key key,
-    required this.averageCalculator,
-    required this.gradeSpan,
-    required this.database,
-    required this.tabs,
+    @required this.averageCalculator,
+    @required this.gradeSpan,
+    @required this.database,
+    @required this.tabs,
   }) : super(key: key);
 
   @override

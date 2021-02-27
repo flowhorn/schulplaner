@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -81,9 +82,9 @@ class PlannerSettingsData {
       }
 
       try {
-        if (gradeprofiles['default'].types['1'] != null &&
-            gradeprofiles['default'].types['1'].id == '0') {
-          Map<String, GradeTypeItem> datamap = gradeprofiles['default'].types;
+        if (gradeprofiles['default']?.types['1'] != null &&
+            gradeprofiles['default']?.types['1']?.id == '0') {
+          Map<String, GradeTypeItem> datamap = gradeprofiles['default']?.types;
           datamap['1'] = datamap['1'].copyWith(id: '1');
           gradeprofiles['default'] =
               gradeprofiles['default'].copyWith(types: datamap);

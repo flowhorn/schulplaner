@@ -10,7 +10,7 @@ class SchulplanerDrawer extends StatelessWidget {
   final Widget libraryTabletWidget;
 
   const SchulplanerDrawer({
-    Key key,
+    Key? key,
     required this.libraryTabletWidget,
   }) : super(key: key);
   @override
@@ -22,7 +22,7 @@ class SchulplanerDrawer extends StatelessWidget {
       builder: (context, snapshot) {
         final isCollapsed = snapshot.data;
         final child = Container(
-          width: isCollapsed ? 80 : 290,
+          width: isCollapsed! ? 80 : 290,
           child: Drawer(
             elevation: 0,
             child: Material(
@@ -66,7 +66,10 @@ class SchulplanerDrawer extends StatelessWidget {
 class _DrawerContent extends StatelessWidget {
   final Widget libraryTabletWidget;
 
-  const _DrawerContent({Key key, this.libraryTabletWidget}) : super(key: key);
+  const _DrawerContent({
+    Key? key,
+    required this.libraryTabletWidget,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(

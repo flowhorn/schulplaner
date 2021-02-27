@@ -1,7 +1,6 @@
 import 'package:authentification/authentification_blocs.dart';
 import 'package:authentification/authentification_models.dart';
 import 'package:bloc/bloc_base.dart';
-import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:schulplaner8/Helper/NativeConnection.dart';
 import 'package:schulplaner8/app_base/src/blocs/app_settings_bloc.dart';
@@ -61,7 +60,7 @@ class AppLogicControllerBloc extends BlocBase {
     }
   }
 
-  void _updatePlanner(UserId userId, Planner planner) {
+  void _updatePlanner(UserId userId, Planner? planner) {
     plannerDatabaseBloc.setPlanner(userId, planner?.id);
   }
 

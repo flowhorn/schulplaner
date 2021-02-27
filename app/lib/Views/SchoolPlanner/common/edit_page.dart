@@ -12,7 +12,7 @@ class EditCourseField extends StatelessWidget {
   final void Function(BuildContext context, Course course) onChanged;
 
   const EditCourseField({
-    Key key,
+    Key? key,
     required this.database,
     required this.courseID,
     required this.editmode,

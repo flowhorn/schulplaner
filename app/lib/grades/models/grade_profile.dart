@@ -1,3 +1,4 @@
+//@dart = 2.11
 import 'package:schulplaner8/utils/models/coder.dart';
 import 'package:meta/meta.dart';
 
@@ -10,11 +11,11 @@ class GradeProfile {
   final Map<String, GradeTypeItem> types;
 
   GradeProfile._({
-    required this.profileid,
-    required this.name,
-    required this.averagebytype,
-    required this.weight_totalaverage,
-    required this.types,
+    @required this.profileid,
+    @required this.name,
+    @required this.averagebytype,
+    @required this.weight_totalaverage,
+    @required this.types,
   });
 
   factory GradeProfile.Create(String id) {

@@ -1,3 +1,4 @@
+//@dart=2.11
 class LessonTime {
   String start, end;
   LessonTime({this.start, this.end});

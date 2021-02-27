@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'dart:async';
 
 import 'package:community_material_icon/community_material_icon.dart';

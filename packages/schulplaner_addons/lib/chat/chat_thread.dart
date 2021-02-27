@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:schulplaner_addons/chat/chat_attachment.dart';
 import 'package:schulplaner_addons/chat/chat_bubble.dart';
 import 'package:schulplaner_addons/chat/chat_page.dart';
@@ -123,8 +124,8 @@ class ChatInput extends StatelessWidget {
       TextEditingController(text: '');
   ChatInput(
       {Key key,
-      required this.onSendMessage,
-      required this.onPressedAdd,
+      @required this.onSendMessage,
+      @required this.onPressedAdd,
       this.accentColor: Colors.blueGrey})
       : super(key: key);
 

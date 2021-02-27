@@ -45,10 +45,10 @@ class BigElement extends StatelessWidget {
   final VoidCallback onTap;
 
   const BigElement({
-    Key key,
-    this.iconData,
-    this.title,
-    this.onTap,
+    Key? key,
+    required this.iconData,
+    required this.title,
+    required this.onTap,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {

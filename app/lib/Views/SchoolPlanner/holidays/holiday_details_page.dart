@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Data/plannerdatabase.dart';
 import 'package:schulplaner8/Helper/Functions.dart';
@@ -10,9 +11,9 @@ import 'package:schulplaner8/holiday_database/models/holiday.dart';
 import 'package:schulplaner8/utils/models/id.dart';
 
 Future<void> showVacationDetail(
-    {required BuildContext context,
-    required PlannerDatabase plannerdatabase,
-    required ID holidayID}) async {
+    {@required BuildContext context,
+    @required PlannerDatabase plannerdatabase,
+    @required ID holidayID}) async {
   await showDetailSheetBuilder(
     context: context,
     body: (BuildContext context) {

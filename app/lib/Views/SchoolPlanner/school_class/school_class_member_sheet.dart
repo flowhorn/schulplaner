@@ -29,7 +29,7 @@ class SchoolClassMemberSheet extends SchulplanerSheet {
   });
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<MemberData>(
+    return StreamBuilder<MemberData?>(
       stream: database.schoolClassInfos
           .getItemStream(schoolClassId)
           .map((settings) => settings?.membersData[memberData.id]),

@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/groups/src/models/place_link.dart';
 import 'package:schulplaner8/groups/src/models/teacher_link.dart';
@@ -36,7 +37,13 @@ class NewLessonInfoView extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() => NewLessonInfoViewState(
-      database, courseid, lessonid, editmode, lessoninfoid, datestring,);
+        database,
+        courseid,
+        lessonid,
+        editmode,
+        lessoninfoid,
+        datestring,
+      );
 }
 
 class NewLessonInfoViewState extends State<NewLessonInfoView> {

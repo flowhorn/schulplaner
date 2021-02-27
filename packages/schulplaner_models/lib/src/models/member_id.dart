@@ -1,5 +1,4 @@
 import 'package:authentification/authentification_models.dart';
-import 'package:meta/meta.dart';
 
 class MemberId {
   final UserId userId;

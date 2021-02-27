@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:bloc/bloc_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:flutter/material.dart';
@@ -303,7 +304,7 @@ class AppConfigurationView extends StatelessWidget {
   final AppSettingsBloc appSettingsBloc;
   final UserDatabase userDatabase;
   AppConfigurationView(
-      {required this.appSettingsBloc, required this.userDatabase});
+      {@required this.appSettingsBloc, @required this.userDatabase});
 
   @override
   Widget build(BuildContext context) {

@@ -1,3 +1,4 @@
+//@dart = 2.11
 import 'package:meta/meta.dart';
 import 'package:schulplaner_widgets/schulplaner_theme.dart';
 
@@ -6,7 +7,7 @@ class CoursePersonal {
   Design design;
 
   CoursePersonal(
-      {required this.courseid,
+      {@required this.courseid,
       this.design,
       this.shortname,
       this.gradeprofileid});

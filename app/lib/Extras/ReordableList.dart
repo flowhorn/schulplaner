@@ -1,3 +1,4 @@
+//@dart = 2.11
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/gestures.dart';
@@ -363,7 +364,7 @@ typedef Widget ReorderableItemChildBuilder(BuildContext context, bool dragging);
 
 class ReorderableItem extends StatefulWidget {
   ReorderableItem(
-      {required Key key, required this.childBuilder, this.decorationBuilder})
+      {Key key, @required this.childBuilder, this.decorationBuilder})
       : super(key: key);
 
   final ReorderableItemDecorationBuilder decorationBuilder;

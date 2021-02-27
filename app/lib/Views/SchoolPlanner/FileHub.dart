@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Data/Planner/File.dart';
 import 'package:schulplaner8/Data/plannerdatabase.dart';
@@ -14,7 +15,7 @@ import 'package:share/share.dart';
 
 class FileHub extends StatelessWidget {
   final PlannerDatabase database;
-  FileHub({required this.database});
+  FileHub({@required this.database});
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +97,7 @@ class FileHub extends StatelessWidget {
 
 class PersonalStorageView extends StatelessWidget {
   final PlannerDatabase database;
-  PersonalStorageView({required this.database});
+  PersonalStorageView({@required this.database});
 
   @override
   Widget build(BuildContext context) {
@@ -190,7 +191,7 @@ class PersonalStorageView extends StatelessWidget {
 class CourseStorageView extends StatelessWidget {
   final PlannerDatabase database;
   final Course courseInfo;
-  CourseStorageView({required this.database, required this.courseInfo});
+  CourseStorageView({@required this.database, @required this.courseInfo});
 
   @override
   Widget build(BuildContext context) {
@@ -247,7 +248,7 @@ class CourseStorageView extends StatelessWidget {
 }
 
 void showFilePersonalMoreSheet(BuildContext context,
-    {required String fileid, required PlannerDatabase database}) {
+    {@required String fileid, @required PlannerDatabase database}) {
   showDetailSheetBuilder(
       context: context,
       body: (context) {

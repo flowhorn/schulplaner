@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:bloc/bloc_base.dart';
 import 'package:bloc/bloc_provider.dart';
 import 'package:flutter/material.dart';
@@ -19,8 +20,8 @@ class NavigationBloc extends BlocBase {
   );
 
   NavigationBloc({
-    required this.router,
-    required this.getNavigationActionItem,
+    @required this.router,
+    @required this.getNavigationActionItem,
   });
 
   Stream<NavigationState> get currentMainPage => _currentPageSubject;
@@ -34,7 +35,7 @@ class NavigationBloc extends BlocBase {
     Widget subChild,
     String title, {
     WidgetListBuilder actions,
-    required NavigationItem navigationItem,
+    @required NavigationItem navigationItem,
   }) {
     final newData = _currentPageSubject.value.copy();
     newData.showSubChild = true;

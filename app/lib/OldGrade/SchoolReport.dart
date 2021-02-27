@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -231,7 +232,7 @@ class ReportViewState extends State<ReportView> {
 
 class SchoolReportList extends StatelessWidget {
   final PlannerDatabase plannerDatabase;
-  SchoolReportList({required this.plannerDatabase});
+  SchoolReportList({@required this.plannerDatabase});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -284,7 +285,7 @@ class SchoolReportList extends StatelessWidget {
 }
 
 void showSchoolReportMoreSheet(BuildContext context,
-    {required String reportid, required PlannerDatabase plannerdatabase}) {
+    {@required String reportid, @required PlannerDatabase plannerdatabase}) {
   showDetailSheetBuilder(
       context: context,
       body: (context) {

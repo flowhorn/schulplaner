@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:app_functions/app_functions.dart';
 import 'package:authentification/authentification_blocs.dart';
 import 'package:bloc/bloc_provider.dart';
@@ -21,10 +22,10 @@ import 'app_base/src/blocs/planner_loader_bloc.dart';
 
 class SchulplanerBlocs extends StatelessWidget {
   const SchulplanerBlocs._({
-    Key? key,
-    required this.child,
-    required this.authProviders,
-    required this.mainProviders,
+    Key key,
+    @required this.child,
+    @required this.authProviders,
+    @required this.mainProviders,
   }) : super(key: key);
 
   final Widget child;
@@ -32,9 +33,9 @@ class SchulplanerBlocs extends StatelessWidget {
   final List<BlocProvider> mainProviders;
 
   factory SchulplanerBlocs.create({
-    required Widget child,
-    required FirebaseAuth firebaseAuth,
-    required DynamicLinksBloc dynamicLinksBloc,
+    @required Widget child,
+    @required FirebaseAuth firebaseAuth,
+    @required DynamicLinksBloc dynamicLinksBloc,
   }) {
     final authentificationBloc =
         AuthentificationBloc(firebaseAuth: firebaseAuth);

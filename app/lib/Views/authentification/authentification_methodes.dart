@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:authentification/authentification_blocs.dart';
 import 'package:authentification/authentification_models.dart';
 import 'package:bloc/bloc_provider.dart';

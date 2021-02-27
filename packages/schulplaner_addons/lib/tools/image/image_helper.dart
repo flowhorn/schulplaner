@@ -22,7 +22,7 @@ class ImageCompresser {
 }
 
 class ImageHelper {
-  static Future<File> resizeImage(File file, {int width, int height}) async {
+  static Future<File> resizeImage(File file, {int? width, int? height}) async {
     Image image = decodeImage(file.readAsBytesSync());
     Image thumbnail = copyResize(image, width: width, height: height);
     String path =
@@ -36,9 +36,9 @@ class ImageHelper {
     ]);
   }
 
-  static Future<File> pickImageCamera({
-    double maxWidth,
-    double maxHeight,
+  static Future<File?> pickImageCamera({
+    double? maxWidth,
+    double? maxHeight,
   }) async {
     final image = await ImagePicker().getImage(
       source: ImageSource.camera,
@@ -51,9 +51,9 @@ class ImageHelper {
       return null;
   }
 
-  static Future<File> pickImageGallery({
-    double maxWidth,
-    double maxHeight,
+  static Future<File?> pickImageGallery({
+    double? maxWidth,
+    double? maxHeight,
   }) async {
     final image = await ImagePicker().getImage(
       source: ImageSource.gallery,

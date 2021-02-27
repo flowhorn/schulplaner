@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:meta/meta.dart';
 import 'package:schulplaner8/models/helper_functions.dart';
 
@@ -9,9 +10,9 @@ class SharedSettings {
   final PlannerSettingsData settingsData;
 
   const SharedSettings._({
-    required this.lastRefreshed,
-    required this.authorID,
-    required this.settingsData,
+    @required this.lastRefreshed,
+    @required this.authorID,
+    @required this.settingsData,
   });
 
   factory SharedSettings.Create(

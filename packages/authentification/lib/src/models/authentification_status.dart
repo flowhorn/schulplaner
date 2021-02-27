@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:authentification/authentification_models.dart';
 import 'package:meta/meta.dart';
 import 'auth_user.dart';
@@ -25,7 +26,7 @@ class LoadingAuthentificationStatus extends AuthentificationStatus {
 }
 
 class AuthentifiedAuthentificationStatus extends AuthentificationStatus {
-  const AuthentifiedAuthentificationStatus({required this.authUser});
+  const AuthentifiedAuthentificationStatus({@required this.authUser});
   final AuthUser authUser;
 
   @override

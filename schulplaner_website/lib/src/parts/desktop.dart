@@ -9,7 +9,10 @@ import 'navigation_drawer.dart';
 class DesktopScaffold extends StatelessWidget {
   final Widget body;
 
-  const DesktopScaffold({Key key, this.body}) : super(key: key);
+  const DesktopScaffold({
+    Key? key,
+    required this.body,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -106,9 +109,9 @@ class _AppBarAction extends StatelessWidget {
   final String title;
 
   const _AppBarAction({
-    Key key,
-    this.navigationItem,
-    this.title,
+    Key? key,
+    required this.navigationItem,
+    required this.title,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -122,7 +125,7 @@ class _AppBarAction extends StatelessWidget {
             fontSize: 16,
             color: currentNavigationItem == navigationItem
                 ? Theme.of(context).accentColor
-                : Theme.of(context).primaryTextTheme.bodyText1.color,
+                : Theme.of(context).primaryTextTheme.bodyText1?.color,
           ),
         ),
       ),

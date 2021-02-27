@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -88,8 +89,8 @@ class _StatefulTextFieldState extends State<StatefulTextField> {
       onChanged: widget.onChanged,
       maxLength: widget.maxLength,
       maxLengthEnforcement: widget.maxLengthEnforced == false
-                ? MaxLengthEnforcement.none
-                : MaxLengthEnforcement.enforced,
+          ? MaxLengthEnforcement.none
+          : MaxLengthEnforcement.enforced,
       maxLines: widget.maxLines,
       autofillHints: widget.autofillHints,
       focusNode: widget.focusNode,

@@ -1,7 +1,6 @@
 import 'package:bloc/bloc_base.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/services.dart';
-import 'package:meta/meta.dart';
 import 'app_functions_region.dart';
 import 'app_functions_exception.dart';
 import 'app_functions_result.dart';

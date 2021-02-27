@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:flutter/material.dart';
 
 abstract class SchulplanerSheet {
@@ -14,7 +15,7 @@ abstract class SchulplanerSheet {
 
   Future<void> showWithAutoPop(
     BuildContext context, {
-    required Future<bool> future,
+    @required Future<bool> future,
     Duration delay,
   }) async {
     final sheetPop = show(context);

@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Data/plannerdatabase.dart';
@@ -199,7 +200,7 @@ class RegionsFilter {
   final Country country;
   final bool isOfficial;
 
-  const RegionsFilter({required this.country, required this.isOfficial});
+  const RegionsFilter({@required this.country, @required this.isOfficial});
 }
 
 void _updateSettings(PlannerSettingsData newdata, PlannerDatabase database) {

@@ -1,5 +1,4 @@
-library introduction_screen;
-
+//@dart=2.11
 import 'dart:async';
 import 'dart:math';
 
@@ -30,9 +29,9 @@ class IntroductionScreen extends StatefulWidget {
 
   const IntroductionScreen({
     Key key,
-    required this.pages,
-    required this.onDone,
-    required this.done,
+    @required this.pages,
+    @required this.onDone,
+    @required this.done,
     this.next,
     this.skip,
     this.showSkipButton = false,

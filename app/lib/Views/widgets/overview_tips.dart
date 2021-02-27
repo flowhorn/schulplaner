@@ -20,6 +20,7 @@ class OverviewTips extends StatelessWidget {
         initialData: appStatsBloc.currentAppStats,
         builder: (context, snapshot) {
           final appStats = snapshot.data;
+          if (appStats == null) return Container();
           return Column(
             children: <Widget>[
               if (showRateCard(appStats)) _RateCard(),
@@ -223,7 +224,7 @@ class _TipsCard extends StatelessWidget {
   final List<Widget> bottom;
 
   const _TipsCard({
-    Key key,
+    Key? key,
     required this.iconData,
     required this.title,
     required this.content,

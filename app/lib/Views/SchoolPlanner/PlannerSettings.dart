@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:bloc/bloc_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:schulplaner8/Views/SchoolPlanner/planner_settings/notification_settings.dart';
@@ -42,8 +43,7 @@ class PlannerSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final plannerDatabase =
-        BlocProvider.of<PlannerDatabaseBloc>(context).plannerDatabase;
+    final plannerDatabase = PlannerDatabaseBloc.getDatabase(context);
     return Column(
       children: <Widget>[
         ListTile(
@@ -152,7 +152,7 @@ Widget getSubSettingsLessons(BuildContext context, PlannerDatabase database) {
                 ' ' +
                 getString(context).lessonsperday),
             onTap: () {
-              selectItem(
+              selectItem<int>(
                   context: context,
                   items: buildIntList(24, start: 1),
                   builder: (context, item) {
@@ -201,7 +201,7 @@ Widget getSubSettingsLessons(BuildContext context, PlannerDatabase database) {
                       ' ${getString(context).weektypes}' +
                       ' (${weektypesamount_meaning(context)[settings.weektypes_amount]})'),
                   onTap: () {
-                    selectItem(
+                    selectItem<int>(
                         context: context,
                         items: [2, 3, 4],
                         builder: (context, item) {
@@ -302,7 +302,7 @@ Widget getSubSettingsGrades(BuildContext context, PlannerDatabase database) {
             subtitle:
                 Text(settings.getCurrentAverageDisplay(context: context).name),
             onTap: () {
-              List list = settings
+              final list = settings
                   .getCurrentGradePackage(context: context)
                   .averagedisplays;
               selectItem<AverageDisplay>(
@@ -466,9 +466,9 @@ class SubSettingsPlanner extends StatelessWidget {
   final PlannerDatabase plannerDatabase;
 
   const SubSettingsPlanner({
-    required this.title,
-    required this.plannerDatabase,
-    required this.builder,
+    @required this.title,
+    @required this.plannerDatabase,
+    @required this.builder,
   });
 
   @override
@@ -502,8 +502,8 @@ class SubSettingsPlannerFloating extends StatelessWidget {
   final PlannerDatabase plannerDatabase;
 
   const SubSettingsPlannerFloating({
-    required this.plannerDatabase,
-    required this.builder,
+    @required this.plannerDatabase,
+    @required this.builder,
   });
 
   @override
@@ -542,8 +542,8 @@ class LessonTimeSettings extends StatelessWidget {
   bool changedValues = false;
   Map<int, LessonTime> lessontimes;
   ValueNotifier<Map<int, LessonTime>> notifier;
-  LessonTimeSettings({this.database}) {
-    lessontimes = Map.from(database.settings.data.lessontimes ?? {});
+  LessonTimeSettings({@required this.database}) {
+    lessontimes = Map.from(database.settings.data?.lessontimes ?? {});
     notifier = ValueNotifier(lessontimes);
   }
 
@@ -560,8 +560,7 @@ class LessonTimeSettings extends StatelessWidget {
                     children: buildIntList(24,
                             start: database.settings.data.zero_lesson ? 0 : 1)
                         .map((value) {
-                  LessonTime time = data[value];
-                  if (time == null) time = LessonTime();
+                  LessonTime time = data[value] ?? LessonTime();
                   return Padding(
                     padding: EdgeInsets.only(
                         left: 8.0, right: 8.0, top: 5.0, bottom: 0.0),
@@ -690,7 +689,7 @@ class LessonTimeSettings extends StatelessWidget {
 
 class GradeProfileSettings extends StatelessWidget {
   final PlannerDatabase database;
-  GradeProfileSettings({this.database});
+  GradeProfileSettings({@required this.database});
 
   @override
   Widget build(BuildContext context) {

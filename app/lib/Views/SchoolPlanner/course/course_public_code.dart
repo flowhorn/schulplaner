@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Data/Planner/PublicCode.dart';
 import 'package:schulplaner8/Data/plannerdatabase.dart';
@@ -11,7 +12,7 @@ import 'package:schulplaner_widgets/schulplaner_common.dart';
 class CoursePublicCodeView extends StatelessWidget {
   final String courseid;
   final PlannerDatabase database;
-  CoursePublicCodeView({required this.courseid, required this.database});
+  CoursePublicCodeView({@required this.courseid, @required this.database});
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<Course>(

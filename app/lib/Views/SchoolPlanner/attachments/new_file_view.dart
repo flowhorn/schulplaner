@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Data/Planner/File.dart';
 import 'package:schulplaner8/Data/plannerdatabase.dart';
@@ -7,7 +8,7 @@ import 'package:schulplaner8/Helper/helper_views.dart';
 class SelectFileView extends StatelessWidget {
   final PlannerDatabase database;
 
-  SelectFileView({required this.database});
+  SelectFileView({@required this.database});
 
   @override
   Widget build(BuildContext context) {

@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:schulplaner_addons/chat/message.dart';
 import 'package:schulplaner_addons/utils/date_utils.dart' as dateUtils;
 import 'package:flutter/material.dart';
@@ -44,11 +45,11 @@ class ChatThreadList extends StatelessWidget {
 
   factory ChatThreadList.build({
     Key key,
-    required List<Message> messages,
-    required Widget Function(
-            BuildContext context, _ChatThreadMessage threadMessage)
-        messageBuilder,
-    required VoidCallback loadMore,
+    @required List<Message> messages,
+    @required
+        Widget Function(BuildContext context, _ChatThreadMessage threadMessage)
+            messageBuilder,
+    @required VoidCallback loadMore,
     ScrollController scrollController,
   }) {
     return ChatThreadList._(

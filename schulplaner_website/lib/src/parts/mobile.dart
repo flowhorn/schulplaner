@@ -6,7 +6,7 @@ import 'navigation_drawer.dart';
 class MobileScaffold extends StatelessWidget {
   final Widget body;
 
-  const MobileScaffold({Key key, this.body}) : super(key: key);
+  const MobileScaffold({Key? key, required this.body}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(

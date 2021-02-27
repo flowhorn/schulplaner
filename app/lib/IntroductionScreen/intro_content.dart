@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Helper/helper_views.dart';
 
@@ -11,7 +12,7 @@ class IntroContent extends StatelessWidget {
 
   const IntroContent(
       {Key key,
-      required this.title,
+      @required this.title,
       this.bodytext,
       this.body,
       this.footer,

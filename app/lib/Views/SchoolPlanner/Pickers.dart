@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/groups/src/pages/edit_design_page.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';

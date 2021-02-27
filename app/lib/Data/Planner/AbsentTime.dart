@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:schulplaner8/Data/Planner/File.dart';
 
 class AbsentTime {

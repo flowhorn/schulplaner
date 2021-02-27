@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:schulplaner8/Data/ObjectsPlanner.dart';
 import 'package:schulplaner8/groups/src/models/group_version.dart';
 import 'package:schulplaner8/models/planner_settings.dart';
@@ -29,22 +30,22 @@ class SchoolClass {
   final GroupVersion groupVersion;
 
   const SchoolClass._({
-    required this.id,
-    required this.name,
-    required this.design,
-    required this.shortname,
-    required this.courses,
-    required this.publiccode,
-    required this.joinLink,
-    required this.description,
-    required this.membersList,
-    required this.membersData,
-    required this.userRoles,
-    required this.creatorRequiresAdmin,
-    required this.enablechat,
-    required this.settings,
-    required this.sharedSettings,
-    required this.groupVersion,
+    @required this.id,
+    @required this.name,
+    @required this.design,
+    @required this.shortname,
+    @required this.courses,
+    @required this.publiccode,
+    @required this.joinLink,
+    @required this.description,
+    @required this.membersList,
+    @required this.membersData,
+    @required this.userRoles,
+    @required this.creatorRequiresAdmin,
+    @required this.enablechat,
+    @required this.settings,
+    @required this.sharedSettings,
+    @required this.groupVersion,
   });
 
   factory SchoolClass.Create(

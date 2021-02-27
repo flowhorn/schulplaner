@@ -5,7 +5,6 @@ import 'package:authentification/src/models/auth_provider.dart';
 import 'package:bloc/bloc_base.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:rxdart/subjects.dart';
-import 'package:meta/meta.dart';
 
 class MyAuthProvidersBloc extends BlocBase {
   final FirebaseAuth _firebaseAuth;

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class IntroButton extends StatelessWidget {
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final Widget child;
 
-  const IntroButton({Key key, this.onPressed, required this.child})
+  const IntroButton({Key? key, this.onPressed, required this.child})
       : super(key: key);
 
   @override

@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 class InformationCard extends StatelessWidget {
   final String title;
   final String description;
-  final Widget actions;
+  final Widget? actions;
 
   const InformationCard({
-    Key key,
+    Key? key,
     required this.title,
     required this.description,
     this.actions,
@@ -37,7 +37,7 @@ class InformationCard extends StatelessWidget {
             ),
             SizedBox(height: 6),
             if (actions != null) ...[
-              actions,
+              actions!,
               SizedBox(height: 6),
             ],
           ],

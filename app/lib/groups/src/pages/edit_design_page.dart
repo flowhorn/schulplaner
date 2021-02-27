@@ -1,3 +1,4 @@
+// @dart=2.11
 import 'package:bloc/bloc_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Helper/Functions.dart';
@@ -10,7 +11,7 @@ import 'package:schulplaner_widgets/schulplaner_theme.dart';
 import 'package:schulplaner_widgets/schulplaner_dialogs.dart';
 
 Future<Design> createNewDesignFromEditDesignPage(
-    {required BuildContext context}) async {
+    {@required BuildContext context}) async {
   return pushWidget<Design>(
     context,
     BlocProvider(

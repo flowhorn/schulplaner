@@ -1,3 +1,4 @@
+//@dart = 2.11
 import 'package:schulplaner8/Data/plannerdatabase.dart';
 
 class TwoObjects<T, T2> {

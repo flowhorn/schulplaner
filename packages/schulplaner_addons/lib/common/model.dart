@@ -1,3 +1,4 @@
+//@dart=2.11
 Map<String, T> decodeMap<T>(
     dynamic data, T Function(String key, dynamic data) builder) {
   Map<dynamic, dynamic> originaldata = data?.cast<dynamic, dynamic>();

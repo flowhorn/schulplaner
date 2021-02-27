@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:bloc/bloc_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -380,7 +381,7 @@ class NewPlannerView extends StatefulWidget {
   final Planner previousplanner;
   final bool activateplanner;
   NewPlannerView(
-      {required this.plannerLoaderBloc,
+      {@required this.plannerLoaderBloc,
       this.plannerid,
       this.editmode = false,
       this.previousplanner,
@@ -398,7 +399,7 @@ class _NewPlannerViewState extends State<NewPlannerView> {
   final bool editmode;
   final String plannerid;
   _NewPlannerViewState(
-      {required this.plannerLoaderBloc,
+      {@required this.plannerLoaderBloc,
       this.plannerid,
       this.editmode = false,
       Planner previousplanner}) {

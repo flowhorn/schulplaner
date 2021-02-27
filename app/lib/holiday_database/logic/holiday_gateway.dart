@@ -1,3 +1,4 @@
+// @dart=2.11
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -99,7 +100,7 @@ class HolidayCacheManager {
   final ValueNotifier<int> lastRefreshedNotifier = ValueNotifier(null);
 
   Future<Tuple2<List<Holiday>, bool>> loadCache(
-      {required String regionID}) async {
+      {@required String regionID}) async {
     final sharedPrefInstance = await SharedPreferences.getInstance();
     final value = sharedPrefInstance.getString(_key + regionID);
     if (value != null) {
@@ -119,7 +120,7 @@ class HolidayCacheManager {
   }
 
   Future<bool> putIntoCache(
-      {required String regionID, required List<Holiday> data}) async {
+      {@required String regionID, @required List<Holiday> data}) async {
     final sharedPrefInstance = await SharedPreferences.getInstance();
     final lastRefreshed = DateTime.now().millisecondsSinceEpoch;
     lastRefreshedNotifier.value = lastRefreshed;

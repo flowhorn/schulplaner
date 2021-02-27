@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'dart:async';
 import 'package:bloc/bloc_provider.dart';
 import 'package:flutter/material.dart';
@@ -54,10 +55,10 @@ class MySchoolPlanner extends StatefulWidget {
   final AppLogicControllerBloc appLogicControllerBloc;
   final NavigationBloc navigationBloc;
   MySchoolPlanner({
-    required this.plannerSettingsData,
-    required this.plannerDatabase,
-    required this.appLogicControllerBloc,
-    required this.navigationBloc,
+    @required this.plannerSettingsData,
+    @required this.plannerDatabase,
+    @required this.appLogicControllerBloc,
+    @required this.navigationBloc,
     Key key,
   }) : super(key: key) {
     print('SchoolPlannerHead Rebuilt!');
@@ -104,8 +105,8 @@ class _MySchoolPlannerState extends State<MySchoolPlanner>
 
   StreamSubscription _streamSubscription;
   _MySchoolPlannerState({
-    required this.plannerSettingsData,
-    required this.plannerDatabase,
+    @required this.plannerSettingsData,
+    @required this.plannerDatabase,
   }) {
     print('SchoolPlannerState Rebuilt!');
   }

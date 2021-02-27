@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:schulplaner_addons/chat/chat_member.dart';
 import 'package:schulplaner_addons/common/model.dart';
 

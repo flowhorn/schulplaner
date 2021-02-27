@@ -6,10 +6,10 @@ class ResponsiveSides extends StatelessWidget {
   final Widget first, second;
 
   const ResponsiveSides({
-    Key key,
+    Key? key,
     this.breakPoint = 700,
-    this.first,
-    this.second,
+    required this.first,
+    required this.second,
   }) : super(key: key);
 
   @override

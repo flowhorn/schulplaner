@@ -20,7 +20,7 @@ class ChatThread extends StatefulWidget {
   final PlannerDatabase database;
 
   ChatThread(
-      {Key key,
+      {Key? key,
       required this.groupid,
       required this.database,
       required this.uid})
@@ -33,10 +33,10 @@ class ChatThread extends StatefulWidget {
 class ChatThreadState extends State<ChatThread> {
   ChatThreadState({Key? key, required this.groupid, required this.uid});
 
-  String uid;
-  String groupid;
+  final String uid;
+  final String groupid;
 
-  List<Message> listMessage;
+  List<Message> listMessage = [];
 
   bool isLoading = false;
 
@@ -165,7 +165,7 @@ class ChatThreadState extends State<ChatThread> {
     return Future.value(false);
   }
 
-  String getFromNameDatabase(String uid) {
+  String? getFromNameDatabase(String uid) {
     if (nameDatabase.containsKey(uid)) {
       return nameDatabase[uid];
     } else {
@@ -228,7 +228,7 @@ class ChatThreadState extends State<ChatThread> {
                               valueColor: AlwaysStoppedAnimation<Color>(
                                   ColorUtils.of(context).getAccentColor())));
                     } else {
-                      listMessage = snapshot.data;
+                      listMessage = (snapshot.data ?? []);
                       return ChatThreadList.build(
                         messages: listMessage
                             .map((message) => message2.Message(
@@ -292,7 +292,7 @@ class ChatThreadState extends State<ChatThread> {
 class ChatLoading extends StatelessWidget {
   final bool isLoading;
 
-  const ChatLoading({Key key, this.isLoading}) : super(key: key);
+  const ChatLoading({Key? key, required this.isLoading}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Positioned(

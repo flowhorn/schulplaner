@@ -1,3 +1,4 @@
+//@dart=2.11
 typedef ObjectMapBuilder<T> = T Function(String key, dynamic value);
 typedef ObjectBuilder<T> = T Function(dynamic value);
 

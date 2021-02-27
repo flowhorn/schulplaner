@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:schulplaner8/Helper/DateAPI.dart';
 import 'package:schulplaner8/Helper/EasyWidget.dart';
 import 'package:schulplaner8/Helper/PermissionManagement.dart';
@@ -32,7 +33,7 @@ class NewSchoolEventView extends StatelessWidget {
   ValueNotifier<bool> showenddate = ValueNotifier(false);
 
   NewSchoolEventView.Create(
-      {required this.database, int type = 0, String date, String courseid})
+      {@required this.database, int type = 0, String date, String courseid})
       : editmode = false {
     data = SchoolEvent(type: type, date: date, courseid: courseid);
     notifier = ValueNotifier(data);
@@ -46,8 +47,8 @@ class NewSchoolEventView extends StatelessWidget {
   }
 
   NewSchoolEventView.Edit({
-    required this.database,
-    required SchoolEvent eventData,
+    @required this.database,
+    @required SchoolEvent eventData,
   }) : editmode = true {
     data = eventData.copy();
     notifier = ValueNotifier(data);

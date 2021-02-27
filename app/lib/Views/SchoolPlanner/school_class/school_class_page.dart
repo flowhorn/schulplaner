@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Chat/chatview.dart';
 import 'package:schulplaner8/Views/SchoolPlanner/school_class/school_class_security_settings.dart';
@@ -23,8 +24,8 @@ class SchoolClassView extends StatelessWidget {
   final PlannerDatabase database;
 
   const SchoolClassView({
-    required this.classid,
-    required this.database,
+    @required this.classid,
+    @required this.database,
   });
 
   @override

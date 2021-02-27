@@ -1,3 +1,4 @@
+// @dart=2.11
 import 'package:bloc/bloc_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Data/Planner/PublicCode.dart';
@@ -16,7 +17,7 @@ import 'package:schulplaner_widgets/schulplaner_common.dart';
 import 'package:schulplaner_widgets/schulplaner_forms.dart';
 
 Future<void> openGroupJoinPage({
-  required BuildContext context,
+  @required BuildContext context,
   String initialCode,
 }) async {
   return openGroupJoinPageByNavigationBloc(
@@ -26,7 +27,7 @@ Future<void> openGroupJoinPage({
 }
 
 Future<void> openGroupJoinPageByNavigationBloc({
-  required NavigationBloc navigationBloc,
+  @required NavigationBloc navigationBloc,
   String initialCode,
 }) async {
   final joinGroupBloc = JoinGroupBloc(initialCode: initialCode);
@@ -170,7 +171,8 @@ class _Result extends StatelessWidget {
 class _CodeValueBuilder extends StatelessWidget {
   final PublicCode codeValue;
 
-  const _CodeValueBuilder({Key key, required this.codeValue}) : super(key: key);
+  const _CodeValueBuilder({Key key, @required this.codeValue})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Builder(builder: (context) {

@@ -1,3 +1,4 @@
+// @dart=2.11
 import 'package:schulplaner_navigation/schulplaner_navigation.dart';
 
 import 'helper_views.dart';
@@ -6,9 +7,9 @@ import 'package:flutter/material.dart';
 typedef Widget DataWidgetBuilder<T>(BuildContext context, T data);
 
 Future<T> selectItem<T>({
-  required BuildContext context,
-  required List<T> items,
-  required DataWidgetBuilder<T> builder,
+  @required BuildContext context,
+  @required List<T> items,
+  @required DataWidgetBuilder<T> builder,
   WidgetListBuilder actions,
 }) {
   return showSheetBuilder<T>(
@@ -25,9 +26,9 @@ Future<T> selectItem<T>({
 }
 
 Future<void> selectItemAsync<T>({
-  required BuildContext context,
-  required Stream<List<T>> itemstream,
-  required DataWidgetBuilder<T> builder,
+  @required BuildContext context,
+  @required Stream<List<T>> itemstream,
+  @required DataWidgetBuilder<T> builder,
   WidgetListBuilder actions,
 }) {
   return showSheetBuilder(

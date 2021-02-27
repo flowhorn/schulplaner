@@ -77,7 +77,6 @@ Future<void> openNavigationPage(
     case NavigationItem.opensource:
       return _openOpenSourcePage(context);
   }
-  return Future.value();
 }
 
 Future<void> _openHomepage(BuildContext context) async {

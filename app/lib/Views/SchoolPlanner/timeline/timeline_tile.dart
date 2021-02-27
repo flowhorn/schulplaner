@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Data/Planner/Lesson.dart';
 import 'package:schulplaner8/Data/Planner/SchoolEvent.dart';
@@ -32,12 +33,12 @@ class TimelineTile extends StatelessWidget {
 
   TimelineTile(
     this.database, {
-    required this.weektype,
-    required this.date,
-    required this.tasks,
-    required this.events,
-    required this.lessons,
-    required this.lessonInfos,
+    @required this.weektype,
+    @required this.date,
+    @required this.tasks,
+    @required this.events,
+    @required this.lessons,
+    @required this.lessonInfos,
   });
 
   @override
@@ -148,9 +149,9 @@ class _TimelineTileSectionTitle extends StatelessWidget {
 
   const _TimelineTileSectionTitle({
     Key key,
-    required this.database,
-    required this.date,
-    required this.weektype,
+    @required this.database,
+    @required this.date,
+    @required this.weektype,
   }) : super(key: key);
 
   @override
@@ -182,10 +183,10 @@ class _TimelineTileSectionLessons extends StatelessWidget {
 
   const _TimelineTileSectionLessons({
     Key key,
-    required this.database,
-    required this.date,
-    required this.lessons,
-    required this.lessonInfos,
+    @required this.database,
+    @required this.date,
+    @required this.lessons,
+    @required this.lessonInfos,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -246,9 +247,9 @@ class _TimelineTileSectionTasks extends StatelessWidget {
 
   const _TimelineTileSectionTasks({
     Key key,
-    required this.database,
-    required this.date,
-    required this.tasks,
+    @required this.database,
+    @required this.date,
+    @required this.tasks,
   }) : super(key: key);
 
   @override
@@ -394,7 +395,10 @@ class _TimelineTileSectionEvents extends StatelessWidget {
 class HolidayTile_Timeline extends StatelessWidget {
   final Holiday holiday;
 
-  const HolidayTile_Timeline({Key key, this.holiday}) : super(key: key);
+  const HolidayTile_Timeline({
+    Key key,
+    this.holiday,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(

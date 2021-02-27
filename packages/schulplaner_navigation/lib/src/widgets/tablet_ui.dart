@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:flutter/material.dart';
 import 'package:schulplaner_navigation/schulplaner_navigation.dart';
 import 'package:schulplaner_navigation/src/logic/navigation_router.dart';
@@ -10,8 +11,8 @@ class TabletUI extends StatelessWidget {
   final Widget libraryTabletWidget;
   const TabletUI({
     Key key,
-    required this.plannerStateBuilder,
-    required this.libraryTabletWidget,
+    @required this.plannerStateBuilder,
+    @required this.libraryTabletWidget,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {

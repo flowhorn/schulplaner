@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:bloc/bloc_provider.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/material.dart';
@@ -377,7 +378,7 @@ class LibraryView extends StatelessWidget {
                       iconData: Icons.print, onTap: () {
                     navigationBloc.openSubChild(
                       'print',
-                      PrintPage(database: plannerDatabase),
+                      PrintPage(),
                       bothlang(context, en: 'Print', de: 'Drucken'),
                       navigationItem: NavigationItem.files,
                     );
@@ -661,7 +662,7 @@ class LibraryTabletView extends StatelessWidget {
                 onTap: () {
                   navigationBloc.openSubChild(
                     'print',
-                    PrintPage(database: plannerDatabase),
+                    PrintPage(),
                     getString(context).files,
                     navigationItem: NavigationItem.print,
                   );
@@ -698,7 +699,7 @@ Widget getDrawerFunctionTile(
   String name,
   IconData iconData,
   VoidCallback onTap,
-  required NavigationItem navigationItem,
+  @required NavigationItem navigationItem,
 }) {
   return DrawerTile(
     icon: iconData,
@@ -709,7 +710,7 @@ Widget getDrawerFunctionTile(
 }
 
 Widget getFunctionScaffhold(BuildContext context,
-    {required String name, required Widget child}) {
+    {@required String name, @required Widget child}) {
   return Scaffold(
     appBar: MyAppHeader(title: name),
     body: child,

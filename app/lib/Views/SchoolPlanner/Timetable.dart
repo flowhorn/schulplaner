@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:bloc/bloc_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Data/Planner/Lesson.dart';
@@ -264,9 +265,9 @@ String getLessonPeriodString(
 }
 
 void showLessonDetailSheet(BuildContext context,
-    {required String lessonid,
+    {@required String lessonid,
     String datestring,
-    required PlannerDatabase plannerdatabase}) {
+    @required PlannerDatabase plannerdatabase}) {
   showDetailSheetBuilder(
       context: context,
       body: (context) {

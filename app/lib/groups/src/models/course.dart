@@ -1,3 +1,4 @@
+// @dart=2.11
 import 'package:meta/meta.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:schulplaner8/Data/ObjectsPlanner.dart';
@@ -35,30 +36,30 @@ class Course {
   final GroupVersion groupVersion;
 
   const Course._({
-    required this.id,
-    required this.name,
-    required this.title,
-    required this.description,
-    required this.shortname,
-    required this.publiccode,
-    required this.joinLink,
-    required this.createdOn,
-    required this.membersList,
-    required this.membersData,
-    required this.userRoles,
-    required this.settings,
-    required this.lessons,
-    required this.personalshortname,
-    required this.personalgradeprofile,
-    required this.design,
-    required this.personaldesign,
-    required this.connectedclasses,
-    required this.teachers,
-    required this.places,
-    required this.groupVersion,
+    @required this.id,
+    @required this.name,
+    @required this.title,
+    @required this.description,
+    @required this.shortname,
+    @required this.publiccode,
+    @required this.joinLink,
+    @required this.createdOn,
+    @required this.membersList,
+    @required this.membersData,
+    @required this.userRoles,
+    @required this.settings,
+    @required this.lessons,
+    @required this.personalshortname,
+    @required this.personalgradeprofile,
+    @required this.design,
+    @required this.personaldesign,
+    @required this.connectedclasses,
+    @required this.teachers,
+    @required this.places,
+    @required this.groupVersion,
   });
 
-  factory Course.create({required String id}) {
+  factory Course.create({@required String id}) {
     return Course._(
       id: id,
       name: '',

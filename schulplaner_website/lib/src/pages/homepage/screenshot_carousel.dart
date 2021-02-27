@@ -28,7 +28,7 @@ class _ScreenshotImage extends StatelessWidget {
   final String assetPath;
 
   const _ScreenshotImage({
-    Key key,
+    Key? key,
     required this.assetPath,
   }) : super(key: key);
 

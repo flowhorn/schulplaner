@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:flutter/material.dart';
 
 /// Eine ListView mit einer Endzone am Ende von 72dp, zusätzlich einem emptyViewBuilder
@@ -8,8 +9,8 @@ class UpListView<T> extends StatelessWidget {
 
   const UpListView(
       {Key key,
-      required this.items,
-      required this.builder,
+      @required this.items,
+      @required this.builder,
       this.emptyViewBuilder})
       : super(key: key);
   @override

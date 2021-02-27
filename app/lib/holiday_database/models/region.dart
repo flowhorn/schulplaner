@@ -1,7 +1,6 @@
 import 'package:schulplaner8/holiday_database/models/country.dart';
 import 'package:schulplaner8/utils/models/id.dart';
 import 'package:schulplaner8/utils/models/name.dart';
-import 'package:meta/meta.dart';
 import 'package:schulplaner8/utils/models/errors.dart';
 import 'package:date/date.dart';
 import 'package:schulplaner8/utils/models/coder.dart';

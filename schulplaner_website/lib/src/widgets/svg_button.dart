@@ -7,9 +7,9 @@ class SvgButton extends StatelessWidget {
   final double height;
 
   const SvgButton({
-    Key key,
-    this.assetPath,
-    this.onTap,
+    Key? key,
+    required this.assetPath,
+    required this.onTap,
     this.height = 64.0,
   }) : super(key: key);
 

@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Data/plannerdatabase.dart';
 import 'package:schulplaner8/Helper/Functions.dart';
@@ -11,7 +12,7 @@ import 'package:schulplaner_widgets/schulplaner_dialogs.dart';
 
 class TeacherList extends StatelessWidget {
   final PlannerDatabase plannerDatabase;
-  TeacherList({required this.plannerDatabase});
+  TeacherList({@required this.plannerDatabase});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,7 +73,7 @@ class NewTeacherView extends StatelessWidget {
   Teacher data;
   ValueNotifier<Teacher> notifier;
   NewTeacherView(
-      {required this.database, this.editMode = false, this.editteacherid}) {
+      {@required this.database, this.editMode = false, this.editteacherid}) {
     data = editMode
         ? database.teachers.getItem(editteacherid)
         : Teacher(teacherid: database.dataManager.generateTeacherId());

@@ -4,10 +4,14 @@ import 'package:schulplaner_website/src/parts/layout_title.dart';
 import 'footer.dart';
 
 class InnerLayout extends StatelessWidget {
-  final String title;
+  final String? title;
   final Widget content;
 
-  const InnerLayout({Key key, this.title, this.content}) : super(key: key);
+  const InnerLayout({
+    Key? key,
+    this.title,
+    required this.content,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scrollbar(
@@ -18,7 +22,7 @@ class InnerLayout extends StatelessWidget {
           children: [
             if (title != null)
               LayoutTitle(
-                text: title,
+                text: title!,
               ),
             Padding(
               padding: EdgeInsets.all(16),

@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:schulplaner_widgets/schulplaner_theme.dart';
@@ -5,7 +6,7 @@ import 'package:schulplaner_widgets/schulplaner_theme.dart';
 class AppHeaderAdvanced extends StatelessWidget implements PreferredSizeWidget {
   final Widget title, leading;
   final List<Widget> actions;
-  AppHeaderAdvanced({required this.title, this.leading, this.actions});
+  AppHeaderAdvanced({@required this.title, this.leading, this.actions});
   @override
   Widget build(BuildContext context) {
     return Column(

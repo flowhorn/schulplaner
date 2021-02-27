@@ -1,4 +1,3 @@
-import 'package:meta/meta.dart';
 import 'package:schulplaner_models/schulplaner_models.dart';
 
 enum PermissionAccessType {

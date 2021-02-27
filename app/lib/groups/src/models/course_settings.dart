@@ -40,10 +40,10 @@ class CourseSettings {
   }
 
   CourseSettings copyWith({
-    bool isPublic,
+    bool? isPublic,
     onlyVerifiedMembers,
-    DateTime lastChanged,
-    MemberRole defaultRole,
+    DateTime? lastChanged,
+    MemberRole? defaultRole,
   }) {
     return CourseSettings._(
       isPublic: isPublic ?? this.isPublic,

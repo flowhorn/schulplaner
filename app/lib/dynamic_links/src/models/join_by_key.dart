@@ -1,5 +1,3 @@
-import 'package:meta/meta.dart';
-
 const joinByKey = 'joinbykey';
 
 class DynamicLinkJoinByKey {

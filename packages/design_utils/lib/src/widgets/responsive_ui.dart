@@ -7,8 +7,11 @@ class ResponsiveUI extends StatelessWidget {
   final WidgetBuilder desktopBuilder;
   final WidgetBuilder mobileBuilder;
 
-  const ResponsiveUI({Key key, this.desktopBuilder, this.mobileBuilder})
-      : super(key: key);
+  const ResponsiveUI({
+    Key? key,
+    required this.desktopBuilder,
+    required this.mobileBuilder,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final dimensions = Dimensions.of(context);

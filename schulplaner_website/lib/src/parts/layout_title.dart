@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class LayoutTitle extends StatelessWidget {
   final String text;
 
-  const LayoutTitle({Key key, this.text}) : super(key: key);
+  const LayoutTitle({Key? key, required this.text}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Padding(

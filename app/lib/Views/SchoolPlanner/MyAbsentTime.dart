@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -26,14 +27,14 @@ class NewAbsentTimeView extends StatelessWidget {
 
   AbsentTime data;
   ValueNotifier<AbsentTime> notifier;
-  NewAbsentTimeView.Create({required this.database, String date})
+  NewAbsentTimeView.Create({@required this.database, String date})
       : editmode = false {
     data =
         AbsentTime(id: database.dataManager.absentTimeRef.doc().id, date: date);
     notifier = ValueNotifier(data);
   }
 
-  NewAbsentTimeView.Edit({required this.database, AbsentTime absenttimedata})
+  NewAbsentTimeView.Edit({@required this.database, AbsentTime absenttimedata})
       : editmode = true {
     data = absenttimedata.copy();
     notifier = ValueNotifier(data);
@@ -238,7 +239,7 @@ class NewAbsentTimeView extends StatelessWidget {
 class MyAbsentList extends StatelessWidget {
   final PlannerDatabase plannerDatabase;
 
-  MyAbsentList({required this.plannerDatabase});
+  MyAbsentList({@required this.plannerDatabase});
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -333,8 +334,8 @@ class MyAbsentListInnerState extends State<MyAbsentListInner>
 
 void showAbsentTimeDetailSheetCritical(
   BuildContext context, {
-  required AbsentTime absentTimeData,
-  required PlannerDatabase plannerdatabase,
+  @required AbsentTime absentTimeData,
+  @required PlannerDatabase plannerdatabase,
 }) {
   showDetailSheetBuilder(
       context: context,

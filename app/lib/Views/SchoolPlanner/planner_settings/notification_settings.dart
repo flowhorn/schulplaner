@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:date/time.dart';
 import 'package:firebase_messaging/firebase_messaging.dart'
     as firebase_messaging;
@@ -48,7 +49,8 @@ void _updateNotificationSettings(
 class _Inner extends StatelessWidget {
   final NotificationSettings notificationSettings;
 
-  const _Inner({Key key, required this.notificationSettings}) : super(key: key);
+  const _Inner({Key key, @required this.notificationSettings})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -193,7 +195,7 @@ class _Inner extends StatelessWidget {
 class _Devices extends StatelessWidget {
   final NotificationSettings notificationSettings;
 
-  const _Devices({Key key, required this.notificationSettings})
+  const _Devices({Key key, @required this.notificationSettings})
       : super(key: key);
 
   @override

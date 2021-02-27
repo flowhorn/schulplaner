@@ -13,7 +13,7 @@ class ColorUtils {
     if (background == null ? true : isDarkColor(background)) {
       return Colors.white;
     } else
-      return Colors.grey[850];
+      return Colors.grey[850]!;
   }
 
   Color getDefaultTextColor() {
@@ -38,7 +38,7 @@ class ColorUtils {
       if (isNotReallyDarkColor(color)) {
         return color;
       } else
-        return Colors.grey[850];
+        return Colors.grey[850]!;
     } else {
       if (isReallyDarkColor(color)) {
         return Colors.white;
@@ -49,7 +49,7 @@ class ColorUtils {
 
   Color getDividerColor() {
     if (theme.brightness == Brightness.light) {
-      return Colors.grey[850];
+      return Colors.grey[850]!;
     } else {
       return Colors.white;
     }

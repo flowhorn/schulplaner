@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Data/plannerdatabase.dart';
 import 'package:schulplaner8/Helper/Functions.dart';
@@ -12,7 +13,7 @@ class HolidayList extends StatelessWidget {
   final PlannerDatabase plannerDatabase;
 
   HolidayList({
-    required this.plannerDatabase,
+    @required this.plannerDatabase,
   });
   @override
   Widget build(BuildContext context) {

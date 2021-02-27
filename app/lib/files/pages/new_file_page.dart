@@ -1,3 +1,4 @@
+//@dart = 2.11
 import 'package:bloc/bloc_provider.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -87,7 +88,7 @@ class _FileCard extends StatelessWidget {
 
   const _FileCard({
     Key key,
-    required this.cloudFile,
+    @required this.cloudFile,
   }) : super(key: key);
 
   @override
@@ -186,7 +187,7 @@ class _FileCard extends StatelessWidget {
 class _StandardFile extends StatelessWidget {
   final int fileUploadState;
 
-  const _StandardFile({Key key, required this.fileUploadState})
+  const _StandardFile({Key key, @required this.fileUploadState})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -265,7 +266,7 @@ class _StandardFile extends StatelessWidget {
 class _WebLink extends StatelessWidget {
   final CloudFile cloudFile;
 
-  const _WebLink({Key key, required this.cloudFile}) : super(key: key);
+  const _WebLink({Key key, @required this.cloudFile}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final bloc = BlocProvider.of<NewFileBloc>(context);

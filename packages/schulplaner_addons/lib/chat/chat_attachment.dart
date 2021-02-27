@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:schulplaner_addons/common/widgets/sheets.dart';
 import 'package:schulplaner_addons/common/widgets/widgets.dart';
 import 'package:schulplaner_addons/tools/image/file_helper.dart';

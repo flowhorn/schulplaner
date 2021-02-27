@@ -113,10 +113,10 @@ class _DrawerListTile extends StatelessWidget {
   final IconData iconData;
 
   const _DrawerListTile({
-    Key key,
-    this.navigationItem,
-    this.title,
-    this.iconData,
+    Key? key,
+    required this.navigationItem,
+    required this.title,
+    required this.iconData,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {

@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:schulplaner8/Data/ConfigurationData.dart';
 import 'package:schulplaner8/OldRest/Calendar.dart';
 

@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:schulplaner_addons/common/model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 

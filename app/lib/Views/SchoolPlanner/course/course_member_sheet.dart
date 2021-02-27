@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:bloc/bloc_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -21,10 +22,10 @@ class CourseMemberSheet extends SchulplanerSheet {
   final UserProfile userProfile;
   final PlannerDatabase database;
   CourseMemberSheet({
-    required this.courseId,
-    required this.database,
-    required this.memberData,
-    required this.userProfile,
+    @required this.courseId,
+    @required this.database,
+    @required this.memberData,
+    @required this.userProfile,
   });
   @override
   Widget build(BuildContext context) {

@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Helper/EasyWidget.dart';
@@ -11,7 +12,7 @@ import 'package:schulplaner_widgets/schulplaner_theme.dart';
 
 class SchoolClassSecuritySettings extends StatelessWidget {
   final String classId;
-  SchoolClassSecuritySettings({required this.classId});
+  SchoolClassSecuritySettings({@required this.classId});
   @override
   Widget build(BuildContext context) {
     final database = PlannerDatabaseBloc.getDatabase(context);
@@ -49,7 +50,7 @@ class SchoolClassSecuritySettings extends StatelessWidget {
 class _PublicClass extends StatelessWidget {
   final SchoolClass schoolClass;
 
-  const _PublicClass({Key key, required this.schoolClass}) : super(key: key);
+  const _PublicClass({Key key, @required this.schoolClass}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final database = PlannerDatabaseBloc.getDatabase(context);
@@ -87,7 +88,7 @@ class _PublicClass extends StatelessWidget {
 class _EnableChat extends StatelessWidget {
   final SchoolClass schoolClass;
 
-  const _EnableChat({Key key, required this.schoolClass}) : super(key: key);
+  const _EnableChat({Key key, @required this.schoolClass}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final database = PlannerDatabaseBloc.getDatabase(context);

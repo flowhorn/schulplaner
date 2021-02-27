@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:bloc/bloc_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,7 @@ import 'course_member_sheet.dart';
 
 class CourseMemberView extends StatelessWidget {
   final String courseID;
-  CourseMemberView({required this.courseID});
+  CourseMemberView({@required this.courseID});
   @override
   Widget build(BuildContext context) {
     final database =
@@ -60,8 +61,8 @@ class _MemberItem extends StatelessWidget {
 
   const _MemberItem({
     Key key,
-    required this.memberData,
-    required this.courseId,
+    @required this.memberData,
+    @required this.courseId,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -163,11 +164,11 @@ class CourseMemberTile extends StatelessWidget {
 }
 
 Future<void> _showMemberSheet(
-    {required BuildContext context,
-    required String courseId,
-    required PlannerDatabase database,
-    required UserProfile userProfile,
-    required MemberData memberData}) {
+    {@required BuildContext context,
+    @required String courseId,
+    @required PlannerDatabase database,
+    @required UserProfile userProfile,
+    @required MemberData memberData}) {
   final memberSheet = CourseMemberSheet(
     courseId: courseId,
     database: database,

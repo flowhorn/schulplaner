@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -5,7 +6,7 @@ class RoundButton extends StatelessWidget {
   final String label;
   final void Function() onTap;
 
-  const RoundButton({Key key, required this.label, required this.onTap})
+  const RoundButton({Key key, @required this.label, @required this.onTap})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -23,10 +24,10 @@ class RoundButton extends StatelessWidget {
 class SheetIconButton extends StatelessWidget {
   const SheetIconButton(
       {Key key,
-      required this.title,
-      required this.iconData,
-      required this.onTap,
-      required this.tooltip,
+      @required this.title,
+      @required this.iconData,
+      @required this.onTap,
+      @required this.tooltip,
       this.radius: 75.0})
       : super(key: key);
 

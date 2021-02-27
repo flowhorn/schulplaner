@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/groups/src/models/place_link.dart';
 import 'package:schulplaner8/groups/src/models/teacher_link.dart';
@@ -32,7 +33,7 @@ class NewLessonView extends StatelessWidget {
   Lesson data;
   ValueNotifier<Lesson> notifier;
   NewLessonView({
-    required this.database,
+    @required this.database,
     this.editmode = false,
     this.editmode_lessonid,
   }) {

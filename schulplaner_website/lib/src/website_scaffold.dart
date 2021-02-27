@@ -11,7 +11,8 @@ class WebsiteScaffold extends StatelessWidget {
   final NavigationItem navigationItem;
   final Widget body;
 
-  const WebsiteScaffold({Key key, this.navigationItem, this.body})
+  const WebsiteScaffold(
+      {Key? key, required this.navigationItem, required this.body})
       : super(key: key);
   @override
   Widget build(BuildContext context) {

@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 
 class FileHelper {
-  Future<File> pickFile() async {
+  Future<File?> pickFile() async {
     final filePickerResult = await FilePicker.platform.pickFiles(
       allowMultiple: false,
       withData: true,

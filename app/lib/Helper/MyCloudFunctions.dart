@@ -1,5 +1,4 @@
 import 'package:cloud_functions/cloud_functions.dart';
-import 'package:meta/meta.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:schulplaner8/groups/src/models/course.dart';
 import 'package:schulplaner8/models/school_class.dart';
@@ -78,7 +77,8 @@ Future<bool> changeMemberTypeUserCourse({
   });
 }
 
-Future<bool> addCourseToClass({String courseid, String classid}) {
+Future<bool> addCourseToClass(
+    {required String courseid, required String classid}) {
   return FirebaseFunctions.instance.httpsCallable('schoolClassAddCourse').call({
     'courseid': courseid,
     'classid': classid,
@@ -95,8 +95,11 @@ Future<bool> addCourseToClass({String courseid, String classid}) {
   });
 }
 
-Future<bool> changeMemberTypeUserSchoolClass(
-    {String classid, String memberid, MemberRole newRole}) {
+Future<bool> changeMemberTypeUserSchoolClass({
+  required String classid,
+  required String memberid,
+  required MemberRole newRole,
+}) {
   print(newRole.toString());
   return FirebaseFunctions.instance
       .httpsCallable('ClassUpdateMemberRole')
@@ -114,7 +117,10 @@ Future<bool> changeMemberTypeUserSchoolClass(
   });
 }
 
-Future<bool> removeCourseToClass({String courseid, String classid}) {
+Future<bool> removeCourseToClass({
+  required String courseid,
+  required String classid,
+}) {
   return FirebaseFunctions.instance
       .httpsCallable('schoolClassRemoveCourse')
       .call({

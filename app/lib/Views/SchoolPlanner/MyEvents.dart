@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'dart:async';
 
 import 'package:bloc/bloc_provider.dart';
@@ -414,8 +415,8 @@ Stream<Map<String, SchoolEvent>> getArchiveStreamEvents(
 
 void showEventDetailSheet(
   BuildContext context, {
-  required SchoolEvent eventdata,
-  required PlannerDatabase plannerdatabase,
+  @required SchoolEvent eventdata,
+  @required PlannerDatabase plannerdatabase,
 }) {
   showDetailSheetBuilder(
       context: context,

@@ -1,3 +1,4 @@
+//@dart = 2.11
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -68,29 +69,32 @@ class ItemList extends StatelessWidget {
 
 class DetailItemView extends StatelessWidget {
   final String itemid;
-  DetailItemView({required this.itemid});
+  DetailItemView({
+    @required this.itemid,
+  });
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<Item>(
-        stream: FirebaseFirestore.instance
-            .collection('tasks')
-            .doc(itemid)
-            .snapshots()
-            .map((snap) {
-          if (snap.exists) {
-            return Item.fromData(snap.data);
-          } else {
-            return null;
-          }
-        }),
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return CircularProgressIndicator();
-          } else {
-            final item = snapshot.data;
-            return Text(item.name ?? '-');
-          }
-        });
+      stream: FirebaseFirestore.instance
+          .collection('tasks')
+          .doc(itemid)
+          .snapshots()
+          .map((snap) {
+        if (snap.exists) {
+          return Item.fromData(snap.data);
+        } else {
+          return null;
+        }
+      }),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return CircularProgressIndicator();
+        } else {
+          final item = snapshot.data;
+          return Text(item.name ?? '-');
+        }
+      },
+    );
   }
 }

@@ -1,3 +1,4 @@
+//@dart=2.11
 // Copyright 2015 The Chromium Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -45,8 +46,8 @@ class BottomSheet extends StatefulWidget {
   const BottomSheet(
       {Key key,
       this.animationController,
-      required this.onClosing,
-      required this.builder})
+      @required this.onClosing,
+      @required this.builder})
       : assert(onClosing != null),
         assert(builder != null),
         super(key: key);
@@ -264,8 +265,8 @@ class _ModalBottomSheetRoute<T> extends PopupRoute<T> {
 ///    non-modal bottom sheets.
 ///  * <https://material.google.com/components/bottom-sheets.html#bottom-sheets-modal-bottom-sheets>
 Future<T> showBetterModalBottomSheet<T>({
-  required BuildContext context,
-  required WidgetBuilder builder,
+  @required BuildContext context,
+  @required WidgetBuilder builder,
   String routname,
 }) {
   assert(context != null);
@@ -288,7 +289,7 @@ Future<T> showBetterModalBottomSheet<T>({
 ///
 /// A persistent bottom sheet shows information that supplements the primary
 /// content of the app. A persistent bottom sheet remains visible even when the
-/// user interacts with other parts of the app. A [Scaffold] is required in the
+/// user interacts with other parts of the app. A [Scaffold] is @required in the
 /// given `context`; its [ScaffoldState.showBottomSheet] method is used to
 /// actually show the bottom sheet.
 ///
@@ -316,8 +317,8 @@ Future<T> showBetterModalBottomSheet<T>({
 ///  * [Scaffold.of], for information about how to obtain the [BuildContext].
 ///  * <https://material.google.com/components/bottom-sheets.html#bottom-sheets-persistent-bottom-sheets>
 PersistentBottomSheetController<T> showBottomSheet<T>({
-  required BuildContext context,
-  required WidgetBuilder builder,
+  @required BuildContext context,
+  @required WidgetBuilder builder,
 }) {
   assert(context != null);
   assert(builder != null);

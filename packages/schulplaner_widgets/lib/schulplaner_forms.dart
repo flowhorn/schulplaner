@@ -1,3 +1,4 @@
+//@dart=2.11
 library schulplaner_forms;
 
 export 'src/forms/helper_forms.dart';

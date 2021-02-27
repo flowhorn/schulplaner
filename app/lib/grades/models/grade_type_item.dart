@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/OldGrade/Grade.dart';
-import 'package:meta/meta.dart';
 import 'package:schulplaner8/models/helper_functions.dart';
 import 'package:schulplaner8/utils/models/coder.dart';
 
@@ -94,11 +93,11 @@ class GradeTypeItem {
   }
 
   GradeTypeItem copyWith({
-    String id,
-    String name,
-    double weight,
-    Map<GradeType, bool> gradetypes,
-    bool testsasoneexam,
+    String? id,
+    String? name,
+    double? weight,
+    Map<GradeType, bool>? gradetypes,
+    bool? testsasoneexam,
   }) {
     return GradeTypeItem._(
         id: id ?? this.id,

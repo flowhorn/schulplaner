@@ -1,3 +1,4 @@
+//@dart = 2.11
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:meta/meta.dart';
 import 'package:cloud_functions/cloud_functions.dart';
@@ -57,7 +58,7 @@ Future<PublicCode> getPublicCodeValue(String publiccode) {
 }
 
 Future<PublicCode> generatePublicCode(
-    {required String id, required int codetype}) {
+    {@required String id, @required int codetype}) {
   return FirebaseFunctions.instance.httpsCallable('generatePublicCode').call({
     'codetype': codetype,
     'id': id,
@@ -69,7 +70,7 @@ Future<PublicCode> generatePublicCode(
   });
 }
 
-Future<bool> removePublicCode({required String id, required int codetype}) {
+Future<bool> removePublicCode({@required String id, @required int codetype}) {
   return FirebaseFunctions.instance.httpsCallable('removePublicCode').call({
     'codetype': codetype,
     'id': id,

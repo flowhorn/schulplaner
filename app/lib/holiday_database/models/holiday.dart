@@ -1,3 +1,4 @@
+// @dart=2.11
 import 'package:schulplaner8/holiday_database/models/holiday_type.dart';
 import 'package:date/date.dart';
 import 'package:meta/meta.dart';
@@ -13,12 +14,12 @@ class Holiday {
   final bool isFromDatabase;
 
   const Holiday({
-    required this.id,
-    required this.start,
-    required this.end,
-    required this.name,
-    required this.type,
-    required this.isFromDatabase,
+    @required this.id,
+    @required this.start,
+    @required this.end,
+    @required this.name,
+    @required this.type,
+    @required this.isFromDatabase,
   });
 
   Holiday copyWith({

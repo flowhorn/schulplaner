@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:schulplaner_addons/common/widgets/pickers.dart';
 import 'package:schulplaner_addons/common/widgets/widgets.dart';
 import 'package:schulplaner_addons/tools/image/cloud_photo.dart';
@@ -14,10 +15,10 @@ class EditPage<T> extends StatefulWidget {
   final ValueWidgetBuilder<T> builder;
   final bool Function(T data) onFinished;
   EditPage({
-    required this.data,
-    required this.editPageType,
-    required this.onFinished,
-    required this.builder,
+    @required this.data,
+    @required this.editPageType,
+    @required this.onFinished,
+    @required this.builder,
   });
   @override
   State<StatefulWidget> createState() => _EditPageState<T>();
@@ -74,8 +75,8 @@ class EditTextField extends StatelessWidget {
   final int maxLines, maxLength;
 
   EditTextField(
-      {required this.initialValue,
-      required this.onChanged,
+      {@required this.initialValue,
+      @required this.onChanged,
       this.iconData,
       this.label,
       this.hint,
@@ -114,8 +115,8 @@ class EditDateField extends StatelessWidget {
   final ValueNotifier<bool> isSelected = ValueNotifier(false);
 
   EditDateField({
-    required this.date,
-    required this.onChanged,
+    @required this.date,
+    @required this.onChanged,
     this.label,
   });
 
@@ -173,8 +174,8 @@ class EditTimeField extends StatelessWidget {
   final ValueNotifier<bool> isSelected = ValueNotifier(false);
 
   EditTimeField({
-    required this.timeOfDay,
-    required this.onChanged,
+    @required this.timeOfDay,
+    @required this.onChanged,
     this.onRemoved,
     this.label,
   });
@@ -239,8 +240,8 @@ class EditCustomField extends StatelessWidget {
   final ValueNotifier<bool> isSelected = ValueNotifier(false);
 
   EditCustomField({
-    required this.value,
-    required this.onClicked,
+    @required this.value,
+    @required this.onClicked,
     this.iconData,
     this.label,
     this.onRemoved,
@@ -300,9 +301,9 @@ class EditPhotoField extends StatelessWidget {
   final void Function() onClickedRemove;
   final void Function(LocalFile file) onAddedFile;
   EditPhotoField(
-      {required this.cloudPhoto,
-      required this.onClickedRemove,
-      required this.onAddedFile});
+      {@required this.cloudPhoto,
+      @required this.onClickedRemove,
+      @required this.onAddedFile});
 
   @override
   Widget build(BuildContext context) {

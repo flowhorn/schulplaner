@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Data/ObjectsPlanner.dart';
 import 'package:schulplaner8/grades/models/grade_profile.dart';
@@ -15,7 +16,7 @@ import 'package:schulplaner_widgets/schulplaner_dialogs.dart';
 class CoursePersonalPage extends StatelessWidget {
   final String courseID;
   final PlannerDatabase database;
-  CoursePersonalPage({required this.courseID, required this.database});
+  CoursePersonalPage({@required this.courseID, @required this.database});
 
   @override
   Widget build(BuildContext context) {

@@ -6,9 +6,9 @@ class AssetButton extends StatelessWidget {
   final double height;
 
   const AssetButton({
-    Key key,
-    this.assetPath,
-    this.onTap,
+    Key? key,
+    required this.assetPath,
+    required this.onTap,
     this.height = 64.0,
   }) : super(key: key);
 

@@ -10,7 +10,7 @@ class EditDesignBloc extends BlocBase {
 
   EditDesignBloc() {
     _designSubject.add(Design(
-      primary: null,
+      primary: Colors.green,
       name: '',
     ));
     _editModeSubject.add(false);
