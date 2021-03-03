@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-typedef T ObjectBuilder<T>(String id, Map<String, dynamic> data);
+typedef T ObjectBuilder<T>(String id, Map<String, dynamic>? data);
 typedef bool ItemFilter<T>(T item);
 typedef String GetKey<T>(T item);
 typedef T DataCreator<T, T2>(T item, T2 secondary);
@@ -22,7 +22,7 @@ ChangeType fromDocumentChange(DocumentChangeType type) {
 class DataDocumentPackage<T> {
   DocumentReference reference;
   final bool directlyLoad, lockedOnStart, loadNullData;
-  final ObjectBuilder<T> objectBuilder;
+  final ObjectBuilder<T?> objectBuilder;
   bool _isinitiated = false;
   bool _islocked = false;
   bool _loadedData = false;
@@ -81,7 +81,7 @@ class DataDocumentPackage<T> {
         _list_streamcontroller_once.clear();
       } else {
         if (loadNullData) {
-          data = objectBuilder(event.id, event.data()!);
+          data = objectBuilder(event.id, event.data());
         } else {
           data = null;
         }

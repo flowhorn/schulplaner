@@ -201,25 +201,25 @@ class AppSettingsView extends StatelessWidget {
                 return Column(
                   children: <Widget>[
                     DataDocumentWidget<UserProfile>(
-                        allowNull: true,
-                        package: userDatabaseBloc.userDatabase.userprofile,
-                        builder: (context, data) {
-                          return ListTile(
-                            leading: UserImageView(
-                              userProfile: data,
-                              size: 36.0,
-                            ),
-                            title: Text(
-                                data?.name ?? getString(context).anonymoususer),
-                            trailing: RButton(
-                              onTap: () {
-                                pushWidget(context, MyProfile());
-                              },
-                              text:
-                                  getString(context).gotoprofile.toUpperCase(),
-                            ),
-                          );
-                        }),
+                      allowNull: true,
+                      package: userDatabaseBloc.userDatabase.userprofile,
+                      builder: (context, data) {
+                        return ListTile(
+                          leading: UserImageView(
+                            userProfile: data,
+                            size: 36.0,
+                          ),
+                          title: Text(
+                              data?.name ?? getString(context).anonymoususer),
+                          trailing: RButton(
+                            onTap: () {
+                              pushWidget(context, MyProfile());
+                            },
+                            text: getString(context).gotoprofile.toUpperCase(),
+                          ),
+                        );
+                      },
+                    ),
                     ListTile(
                       leading: Icon(Icons.lock),
                       title: Text(getString(context).signinmethodes),

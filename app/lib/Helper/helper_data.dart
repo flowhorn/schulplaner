@@ -1,4 +1,3 @@
-// @dart=2.11
 import 'package:bloc/bloc_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -23,13 +22,13 @@ String parseDatetime(DateTime date) {
   return DateFormat.yMMMMEEEEd('de').format(date);
 }
 
-Map<String, dynamic> decodeMapNullable(dynamic data) {
-  Map<dynamic, dynamic> premapdata = data?.cast<String, dynamic>();
+Map<String, dynamic> decodeMapNullable(dynamic? data) {
+  Map<dynamic, dynamic>? premapdata = data?.cast<String, dynamic>();
   return (premapdata ?? {}).map<String, dynamic>(
       (dynamic key, dynamic value) => MapEntry<String, dynamic>(key, value));
 }
 
-Map<String, T1> buildDataMapNullable<T1>(
+Map<String, T1?> buildDataMapNullable<T1>(
     dynamic data, DynamicObjectBuilder<T1> builder) {
   return decodeMapNullable(data).map((key, value) =>
       value != null ? MapEntry(key, builder(value)) : MapEntry(key, null));
@@ -125,8 +124,7 @@ Time getUTCTimeOfLocal(Time time) {
 }
 
 AppSettingsData getAppSettings(BuildContext context) {
-  return BlocProvider.of<AppSettingsBloc>(context)?.currentValue ??
-      AppSettingsData.fromString(null);
+  return BlocProvider.of<AppSettingsBloc>(context).currentValue;
 }
 
 ConfigurationData getConfigurationData(BuildContext context) {
@@ -134,7 +132,7 @@ ConfigurationData getConfigurationData(BuildContext context) {
 }
 
 String bothlang(BuildContext context,
-    {@required String de, @required String en}) {
+    {required String de, required String en}) {
   if (getString(context).languagecode == 'de') {
     return de;
   } else {

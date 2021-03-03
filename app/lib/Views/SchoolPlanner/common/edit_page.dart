@@ -7,7 +7,7 @@ import 'package:schulplaner_translations/schulplaner_translations.dart';
 
 class EditCourseField extends StatelessWidget {
   final PlannerDatabase database;
-  final String courseID;
+  final String? courseID;
   final bool editmode;
   final void Function(BuildContext context, Course course) onChanged;
 
@@ -21,7 +21,8 @@ class EditCourseField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Course course = courseID != null ? database.getCourseInfo(courseID) : null;
+    final Course? course =
+        courseID != null ? database.getCourseInfo(courseID) : null;
     if (course != null) {
       return ListTile(
         leading: ColoredCircleText(
@@ -31,7 +32,7 @@ class EditCourseField extends StatelessWidget {
         title: Text(course.getName()),
         enabled: !editmode,
         onTap: () {
-          selectCourse(context, database, courseID).then((newCourse) {
+          selectCourse(context, database, courseID).then((Course? newCourse) {
             if (newCourse != null) {
               onChanged(context, newCourse);
             }
@@ -44,7 +45,7 @@ class EditCourseField extends StatelessWidget {
         title: Text(getString(context).course),
         enabled: !editmode,
         onTap: () {
-          selectCourse(context, database, courseID).then((newCourse) {
+          selectCourse(context, database, courseID).then((Course? newCourse) {
             if (newCourse != null) {
               onChanged(context, newCourse);
             }

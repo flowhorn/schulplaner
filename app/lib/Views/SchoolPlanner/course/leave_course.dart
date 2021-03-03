@@ -15,7 +15,7 @@ Future<void> tryToLeaveCourse(BuildContext context, Course courseInfo) async {
     await showAppFunctionStateSheet(
         context, _leaveCourse(context, courseInfo.id));
     Navigator.popUntil(context, (Route predicate) {
-      final routeName = predicate?.settings?.name;
+      final routeName = predicate.settings.name;
       return routeName?.startsWith('course') == false;
     });
   }

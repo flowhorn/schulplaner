@@ -38,7 +38,7 @@ class AppLogicControllerBloc extends BlocBase {
       });
     }
     CombineLatestStream.combine2<AuthentificationStatus, LoadAllPlannerStatus,
-        Tuple2<UserId, Planner?>>(
+        Tuple2<UserId?, Planner?>>(
       authentificationBloc.authentificationStatus,
       plannerLoaderBloc.loadAllPlannerStatus,
       (authentificationStatus, loadAllPlannerStatus) {
@@ -60,7 +60,7 @@ class AppLogicControllerBloc extends BlocBase {
     }
   }
 
-  void _updatePlanner(UserId userId, Planner? planner) {
+  void _updatePlanner(UserId? userId, Planner? planner) {
     plannerDatabaseBloc.setPlanner(userId, planner?.id);
   }
 

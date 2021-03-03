@@ -113,7 +113,7 @@ class SchoolClassMemberSheet extends SchulplanerSheet {
   Future<void> _tapRemoveMember(BuildContext context) async {
     final confirmResult = await ConfirmDialog(
       title:
-          '${userProfile?.name ?? getString(context).anonymoususer} ${getString(context).remove}',
+          '${userProfile.name ?? getString(context).anonymoususer} ${getString(context).remove}',
       message: '',
     ).show<bool>(context);
     if (confirmResult == true) {
