@@ -8,10 +8,10 @@ class GitHub {
 
   /// Returns a list of contributors at GitHub || null
   Future<List<Contributor>> getContributors() async {
-    String url = baseUrl + '/contributors';
+    final url = baseUrl + '/contributors';
 
     try {
-      final response = await http.get(url);
+      final response = await http.get(Uri.parse(url));
 
       final responseData = json.decode(response.body);
 

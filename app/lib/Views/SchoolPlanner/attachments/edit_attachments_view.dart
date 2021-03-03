@@ -24,8 +24,7 @@ class EditAttachementsView extends StatelessWidget {
     return Column(
       children: <Widget>[
         FormHeader(getString(context).attachments),
-        ...((attachments?.values?.where((it) => it != null) ?? [])
-            .map<Widget>((it) {
+        ...(attachments.values.map<Widget>((it) {
           return ListTile(
             leading: ColoredCircleIcon(
               icon: Icon(Icons.attach_file),

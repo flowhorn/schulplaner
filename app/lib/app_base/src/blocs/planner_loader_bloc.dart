@@ -1,3 +1,5 @@
+// @dart=2.11
+
 import 'dart:async';
 
 import 'package:authentification/authentification_models.dart';

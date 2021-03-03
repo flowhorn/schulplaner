@@ -60,9 +60,9 @@ class ConfigurationData {
       'general_daysinhome': general_daysinhome,
       'navigationactions': navigationactions
           .map((key, value) => MapEntry(key.toString(), value)),
-      'cs': calendarSettings?.toJson(),
-      'timetable': timetablesettings?.toJson(),
-      'timeline': timelineSettings?.toJson(),
+      'cs': calendarSettings.toJson(),
+      'timetable': timetablesettings.toJson(),
+      'timeline': timelineSettings.toJson(),
     };
   }
 

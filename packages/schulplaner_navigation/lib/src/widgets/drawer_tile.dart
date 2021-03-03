@@ -25,7 +25,7 @@ class DrawerTile extends StatelessWidget {
       builder: (context, snapshot) {
         final isCollapsed = snapshot.data;
         return StreamBuilder<NavigationState>(
-          key: ValueKey(this.navigationItem),
+          key: ValueKey(navigationItem),
           stream: navigationBloc.currentMainPage,
           initialData: navigationBloc.currentMainPageValue,
           builder: (context, snapshot) {
@@ -45,7 +45,7 @@ class DrawerTile extends StatelessWidget {
                     title: name,
                   );
             return AnimatedSwitcher(
-              key: ValueKey(this.navigationItem),
+              key: ValueKey(navigationItem),
               child: child,
               duration: Duration(milliseconds: 250),
             );

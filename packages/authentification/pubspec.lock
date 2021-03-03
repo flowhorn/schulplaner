@@ -84,21 +84,21 @@ packages:
       name: cloud_functions
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.9.0"
+    version: "1.0.0"
   cloud_functions_platform_interface:
     dependency: transitive
     description:
       name: cloud_functions_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.0.1"
+    version: "5.0.0"
   cloud_functions_web:
     dependency: transitive
     description:
       name: cloud_functions_web
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.1.3"
+    version: "4.0.0"
   collection:
     dependency: transitive
     description:
@@ -161,70 +161,76 @@ packages:
       name: firebase
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "7.3.0"
+    version: "9.0.0"
   firebase_auth:
     dependency: "direct main"
     description:
       name: firebase_auth
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.20.0+1"
+    version: "1.0.0"
   firebase_auth_oauth:
     dependency: "direct main"
     description:
-      name: firebase_auth_oauth
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.2.4"
+      path: firebase_auth_oauth
+      ref: non-existant-deps
+      resolved-ref: "41c80ac1ec0f058720b377a3a2ea6f01f15aa710"
+      url: "https://github.com/treeder/firebase_auth_oauth.git"
+    source: git
+    version: "1.0.0"
   firebase_auth_oauth_platform_interface:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      name: firebase_auth_oauth_platform_interface
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.2.2"
+      path: firebase_auth_oauth_platform_interface
+      ref: non-existant-deps
+      resolved-ref: "41c80ac1ec0f058720b377a3a2ea6f01f15aa710"
+      url: "https://github.com/treeder/firebase_auth_oauth.git"
+    source: git
+    version: "1.0.0"
   firebase_auth_oauth_web:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      name: firebase_auth_oauth_web
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.2.2"
+      path: firebase_auth_oauth_web
+      ref: non-existant-deps
+      resolved-ref: "41c80ac1ec0f058720b377a3a2ea6f01f15aa710"
+      url: "https://github.com/treeder/firebase_auth_oauth.git"
+    source: git
+    version: "1.0.0"
   firebase_auth_platform_interface:
     dependency: transitive
     description:
       name: firebase_auth_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.1"
+    version: "4.0.0"
   firebase_auth_web:
     dependency: transitive
     description:
       name: firebase_auth_web
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.3.2+6"
+    version: "1.0.0"
   firebase_core:
     dependency: transitive
     description:
       name: firebase_core
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.7.0"
+    version: "1.0.0"
   firebase_core_platform_interface:
     dependency: transitive
     description:
       name: firebase_core_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.1"
+    version: "4.0.0"
   firebase_core_web:
     dependency: transitive
     description:
       name: firebase_core_web
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.1+3"
+    version: "1.0.0"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -253,21 +259,21 @@ packages:
       name: google_sign_in
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.5.9"
+    version: "5.0.0"
   google_sign_in_platform_interface:
     dependency: transitive
     description:
       name: google_sign_in_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.1.2"
+    version: "2.0.0"
   google_sign_in_web:
     dependency: transitive
     description:
       name: google_sign_in_web
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.9.2"
+    version: "0.10.0"
   html:
     dependency: transitive
     description:
@@ -281,14 +287,14 @@ packages:
       name: http
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.12.2"
+    version: "0.13.0"
   http_parser:
     dependency: transitive
     description:
       name: http_parser
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.1.4"
+    version: "4.0.0"
   intl:
     dependency: "direct overridden"
     description:
@@ -360,7 +366,7 @@ packages:
       name: pedantic
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.9.0"
+    version: "1.10.0"
   petitparser:
     dependency: transitive
     description:
@@ -374,7 +380,7 @@ packages:
       name: plugin_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.2"
+    version: "2.0.0"
   pub_semver:
     dependency: transitive
     description:
@@ -388,14 +394,14 @@ packages:
       name: quiver
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.3"
+    version: "3.0.0"
   rxdart:
     dependency: "direct main"
     description:
       name: rxdart
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.25.0"
+    version: "0.26.0"
   schulplaner_translations:
     dependency: "direct main"
     description:
@@ -428,7 +434,7 @@ packages:
       name: source_span
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.8.0"
+    version: "1.8.1"
   stack_trace:
     dependency: transitive
     description:

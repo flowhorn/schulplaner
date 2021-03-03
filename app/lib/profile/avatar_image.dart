@@ -1,4 +1,3 @@
-//import 'package:avataaar_image/avataaar_image.dart';
 import 'package:flutter/material.dart';
 
 import 'url_image.dart';

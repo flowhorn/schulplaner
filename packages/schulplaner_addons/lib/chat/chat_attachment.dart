@@ -28,8 +28,8 @@ Future<ChatAttachment> selectChatAttachment(BuildContext context,
         ),
         children: <Widget>[
           SheetIconButton(
-            title: "Kamera",
-            tooltip: "Kamera öffnen",
+            title: 'Kamera',
+            tooltip: 'Kamera öffnen',
             iconData: Icons.camera,
             onTap: () async {
               final file = await ImageHelper.pickImageCamera();
@@ -45,8 +45,8 @@ Future<ChatAttachment> selectChatAttachment(BuildContext context,
             radius: 50.0,
           ),
           SheetIconButton(
-            title: "Galerie",
-            tooltip: "Galerie öffnen",
+            title: 'Galerie',
+            tooltip: 'Galerie öffnen',
             iconData: Icons.image,
             onTap: () async {
               final file = await ImageHelper.pickImageGallery();
@@ -62,8 +62,8 @@ Future<ChatAttachment> selectChatAttachment(BuildContext context,
             radius: 50.0,
           ),
           SheetIconButton(
-            title: "Dokument",
-            tooltip: "Dokument öffnen",
+            title: 'Dokument',
+            tooltip: 'Dokument öffnen',
             iconData: Icons.insert_drive_file,
             onTap: () {
               FileHelper().pickFile().then((file) {
@@ -81,15 +81,15 @@ Future<ChatAttachment> selectChatAttachment(BuildContext context,
           ),
           if (showPresets)
             SheetIconButton(
-              title: "Vorlage",
-              tooltip: "Vorlagen öffnen",
+              title: 'Vorlage',
+              tooltip: 'Vorlagen öffnen',
               iconData: Icons.mail,
               onTap: () {
                 Navigator.pop(
                     context,
                     ChatAttachment(
                       type: ChatAttachmentType.text,
-                      text: "Testvorlage Hallo [MAX]",
+                      text: 'Testvorlage Hallo [MAX]',
                     ));
               },
               radius: 50.0,

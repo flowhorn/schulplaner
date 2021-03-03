@@ -34,23 +34,23 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
-  shared_preferences: 0.5.12+4
+  shared_preferences: 2.0.3
   cupertino_icons: 1.0.2
 
   #GOOGLE
-  cloud_firestore: 0.16.0
-  firebase_auth: 0.20.0+1
-  firebase_messaging: 8.0.0-dev.14
-  firebase_storage: 7.0.0
-  firebase_analytics: 7.0.1
-  firebase_database: 6.0.0
-  firebase_performance: 0.5.0+1
-  firebase_crashlytics: 0.4.0+1
-  firebase_dynamic_links: ^0.7.0+1
+  cloud_firestore: 1.0.0
+  firebase_auth: 1.0.0
+  firebase_messaging: 9.0.0
+  firebase_storage: 8.0.0
+  firebase_analytics: 7.1.0
+  firebase_database: 6.1.0
+  firebase_performance: 0.6.0
+  firebase_crashlytics: 1.0.0
+  firebase_dynamic_links: ^0.8.0
 
   intl: ^0.17.0-nullsafety.2
   intl_translation: 0.17.10+1
-  rxdart: ^0.25.0
+  rxdart: ^0.26.0
   
   community_material_icon: 5.8.55
   font_awesome_flutter: ^8.8.1
@@ -58,29 +58,28 @@ dependencies:
   flutter_material_color_picker: 1.0.5
   diff_match_patch: 0.3.0
   qr_flutter: 3.2.0
-  device_info: 1.0.0
-  url_launcher: 5.7.10
-  decimal: 0.3.5
-  share: 0.6.5+4
-  tuple: 1.0.3
+  device_info: 2.0.0
+  url_launcher: 6.0.2
+  decimal: 1.0.0
+  share: 2.0.0
+  tuple: 2.0.0-nullsafety.0
   launch_review: 2.0.0
   flutter_image_compress: 0.7.0
   photo_view: 0.10.3
-  path_provider: 1.6.27
-  cached_network_image: 2.5.0
-  flutter_cache_manager: 2.1.1
+  path_provider: 2.0.1
+  cached_network_image: 3.0.0-nullsafety
+  flutter_cache_manager: 3.0.0-nullsafety.1
   after_layout: 1.0.7+2
   auto_size_text: 2.1.0
-  avataaar_image: 1.0.8
   filesize: 1.0.4
-  image: 2.1.19
+  image: 3.0.1
   dots_indicator: ^1.2.0
-  timeago: ^2.0.28
-  fl_chart: ^0.12.2
-  percent_indicator: ^2.1.8
-  printing: ^4.0.0
-  pdf: ^2.0.0
-  universal_io: ^1.0.2
+  timeago: ^3.0.1
+  fl_chart: ^0.20.0-nullsafety1
+  percent_indicator: ^2.1.9+1
+  printing: ^5.0.0
+  pdf: ^3.0.0
+  universal_io: ^2.0.0-nullsafety.2
   
 dev_dependencies:
   flutter_test:
@@ -92,6 +91,28 @@ dependency_overrides:
     git:
       url: https://github.com/Zazo032/intl_translation.git
       ref: patch-1
+  qr: ^2.0.0
+  plugin_platform_interface: ^2.0.0
+  firebase_auth_oauth:
+    git: 
+      url: https://github.com/treeder/firebase_auth_oauth.git
+      ref: non-existant-deps
+      path: firebase_auth_oauth
+  firebase_auth_oauth_web:
+    git: 
+      url: https://github.com/treeder/firebase_auth_oauth.git
+      ref: non-existant-deps
+      path: firebase_auth_oauth_web
+  firebase_auth_oauth_platform_interface:
+    git: 
+      url: https://github.com/treeder/firebase_auth_oauth.git
+      ref: non-existant-deps
+      path: firebase_auth_oauth_platform_interface
+  firebase: ^9.0.0
+  petitparser: ^4.0.2
+  xml: ^5.0.2
+  crypto: ^3.0.0-nullsafety
+
 
 flutter:
   uses-material-design: true

@@ -14,7 +14,7 @@ class ChatPageBloc extends BlocBase {
 
   Stream<ChatRoom> streamChatRoom() {
     return FirebaseFirestore.instance
-        .collection("chatRooms")
+        .collection('chatRooms')
         .doc(chatRoomID)
         .snapshots()
         .map((snapshot) {
@@ -28,9 +28,9 @@ class ChatPageBloc extends BlocBase {
 
   Stream<List<Message>> streamMessages() {
     return FirebaseFirestore.instance
-        .collection("chatRooms")
+        .collection('chatRooms')
         .doc(chatRoomID)
-        .collection("messages")
+        .collection('messages')
         .orderBy('createdOn', descending: false)
         .snapshots()
         .map((querySnapshot) {

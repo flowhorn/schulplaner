@@ -10,11 +10,11 @@ class PlannerDatabaseBloc extends BlocBase {
   PlannerDatabaseBloc(this.appSettingsBloc);
   final AppSettingsBloc appSettingsBloc;
 
-  final _currentUserIdSubject = BehaviorSubject<UserId>();
-  UserId get currentUserId => _currentUserIdSubject.value;
+  final _currentUserIdSubject = BehaviorSubject<UserId?>();
+  UserId? get currentUserId => _currentUserIdSubject.value;
 
   final _currentPlannerIdSubject = BehaviorSubject<String>();
-  String get currentPlannerId => _currentPlannerIdSubject.value;
+  String? get currentPlannerId => _currentPlannerIdSubject.value;
 
   PlannerDatabase? plannerDatabase;
 

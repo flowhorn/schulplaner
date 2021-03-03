@@ -8,8 +8,8 @@ class FileHelper {
       allowMultiple: false,
       withData: true,
     );
-    if (filePickerResult.files.isNotEmpty) {
-      return File(filePickerResult.files.first.path);
+    if (filePickerResult?.files.isNotEmpty ?? false) {
+      return File(filePickerResult!.files.first.path!);
     } else {
       return null;
     }

@@ -26,13 +26,13 @@ class AppSettingsBloc extends BlocBase {
     }
   }
 
-  AppSettingsData get currentValue => _appSettingsDataSubject.value;
+  AppSettingsData get currentValue =>
+      _appSettingsDataSubject.valueWrapper!.value;
 
   Stream<AppSettingsData> get appSettingsData => _appSettingsDataSubject;
 
   void setAppConfiguration(ConfigurationData newdata) {
-    final newAppdata =
-        currentValue.copyWith(configurationData: newdata);
+    final newAppdata = currentValue.copyWith(configurationData: newdata);
     setAppSettings(newAppdata);
   }
 

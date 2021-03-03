@@ -7,6 +7,9 @@ analyzer:
       invalid_use_of_visible_for_testing_member: ignore
       import_of_legacy_library_into_null_safe: ignore
 
+      
+      
+
 linter:
   rules: 
     omit_local_variable_types: false

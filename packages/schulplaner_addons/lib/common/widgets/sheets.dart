@@ -7,7 +7,7 @@ Future<T?> showSheet<T>(
   return showModalBottomSheet<T>(
     context: context,
     builder: (BuildContext context) {
-      return new Opacity(
+      return Opacity(
         opacity: 1.0,
         child: Material(
           color: Colors.white,
@@ -36,7 +36,7 @@ Future<T?> showSheet<T>(
                 Align(
                   alignment: Alignment.topCenter,
                   child: Text(
-                    title ?? '-',
+                    title,
                     style: TextStyle(
                         fontSize: 19.0,
                         fontWeight: FontWeight.w400,

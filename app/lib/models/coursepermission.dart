@@ -29,5 +29,4 @@ bool requestPermission(
             .contains(role);
       }
   }
-  return false;
 }

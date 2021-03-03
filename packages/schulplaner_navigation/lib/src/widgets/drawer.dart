@@ -34,7 +34,7 @@ class SchulplanerDrawer extends StatelessWidget {
                   children: <Widget>[
                     AppBar(
                       title: Text(
-                        isCollapsed ? '' : "Schulplaner",
+                        isCollapsed ? '' : 'Schulplaner',
                         style: TextStyle(color: getPrimaryColor(context)),
                       ),
                       backgroundColor: getDrawerBackgroundColor(context),
@@ -106,8 +106,8 @@ class _DrawerContent extends StatelessWidget {
     final navigationBloc = NavigationBloc.of(context);
     final item = navigationBloc.getNavigationActionItem(index);
     return DrawerTile(
-      icon: item?.iconData ?? Icons.navigation,
-      name: item?.name?.getText(context) ?? '-',
+      icon: item.iconData,
+      name: item.name.getText(context),
       onTap: () {
         navigationBloc.setMainPageWithIndex(context, index);
       },

@@ -21,6 +21,5 @@ extension GroupTypeConverter on GroupType {
       case GroupType.schoolClass:
         return _schoolClassString;
     }
-    throw UnimplementedError();
   }
 }

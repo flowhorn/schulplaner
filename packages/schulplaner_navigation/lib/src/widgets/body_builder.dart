@@ -15,7 +15,7 @@ class BodyBuilder extends StatelessWidget {
           if (navigationState.showSubChild) {
             return navigationState.subChild ??
                 Container(
-                  child: Text("Not found!"),
+                  child: Text('Not found!'),
                 );
           } else {
             if (navigationState.child != null) {

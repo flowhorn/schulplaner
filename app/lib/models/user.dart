@@ -4,7 +4,8 @@ import 'package:schulplaner8/models/additionaltypes.dart';
 
 @immutable
 class UserProfile {
-  final String uid, name, pic, picThumb, avatar;
+  final String uid, pic, picThumb, avatar;
+  final String name;
   final ProfileDisplayMode displayMode;
   UserProfile._({
     @required this.name,
@@ -22,7 +23,7 @@ class UserProfile {
       pic: null,
       picThumb: null,
       avatar: null,
-      displayMode: ProfileDisplayMode.avatar,
+      displayMode: ProfileDisplayMode.none,
     );
   }
 

@@ -23,8 +23,8 @@ class ImageCompresser {
 
 class ImageHelper {
   static Future<File> resizeImage(File file, {int? width, int? height}) async {
-    Image image = decodeImage(file.readAsBytesSync());
-    Image thumbnail = copyResize(image, width: width, height: height);
+    final image = decodeImage(file.readAsBytesSync());
+    final thumbnail = copyResize(image!, width: width, height: height);
     String path =
         (await getTemporaryDirectory()).path + file.uri.pathSegments.last;
     return File(path)..writeAsBytesSync(encodePng(thumbnail));
@@ -45,10 +45,11 @@ class ImageHelper {
       maxHeight: maxHeight,
       maxWidth: maxWidth,
     );
-    if (image != null)
+    if (image != null) {
       return File(image.path);
-    else
+    } else {
       return null;
+    }
   }
 
   static Future<File?> pickImageGallery({
@@ -60,9 +61,10 @@ class ImageHelper {
       maxHeight: maxHeight,
       maxWidth: maxWidth,
     );
-    if (image != null)
+    if (image != null) {
       return File(image.path);
-    else
+    } else {
       return null;
+    }
   }
 }

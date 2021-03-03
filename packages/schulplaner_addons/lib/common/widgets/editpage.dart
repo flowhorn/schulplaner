@@ -2,7 +2,7 @@
 import 'package:schulplaner_addons/common/widgets/pickers.dart';
 import 'package:schulplaner_addons/common/widgets/widgets.dart';
 import 'package:schulplaner_addons/tools/image/cloud_photo.dart';
-import 'package:schulplaner_addons/utils/date_utils.dart' as dateUtils;
+import 'package:schulplaner_addons/utils/date_utils.dart' as date_utils;
 import 'package:schulplaner_addons/utils/file_utils.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +29,7 @@ class _EditPageState<T> extends State<EditPage<T>> {
 
   @override
   void initState() {
-    scrollController = new ScrollController();
+    scrollController = ScrollController();
     super.initState();
   }
 
@@ -47,8 +47,8 @@ class _EditPageState<T> extends State<EditPage<T>> {
           return Scaffold(
             appBar: AppBar(
               title: Text(widget.editPageType == EditPageType.create
-                  ? "Erstellen"
-                  : "Bearbeiten"),
+                  ? 'Erstellen'
+                  : 'Bearbeiten'),
               centerTitle: true,
             ),
             body: SingleChildScrollView(
@@ -61,7 +61,7 @@ class _EditPageState<T> extends State<EditPage<T>> {
                   if (result == true) Navigator.pop(context);
                 },
                 icon: Icon(Icons.done),
-                label: Text("Fertig")),
+                label: Text('Fertig')),
           );
         });
   }
@@ -147,7 +147,7 @@ class EditDateField extends StatelessWidget {
                   height: 18.0,
                   child: date == null
                       ? Container()
-                      : Text(dateUtils.DateUtils.getDateText(date),
+                      : Text(date_utils.DateUtils.getDateText(date),
                           style: TextStyle(fontSize: 16.0)),
                 ),
               ),
@@ -336,7 +336,7 @@ class EditPhotoField extends StatelessWidget {
                 child: Padding(
                   padding: EdgeInsets.only(left: 16.0, top: 16.0),
                   child: Text(
-                    "Profilfoto",
+                    'Profilfoto',
                     style: TextStyle(fontSize: 19.0),
                   ),
                 ),
@@ -344,7 +344,7 @@ class EditPhotoField extends StatelessWidget {
               ButtonBar(
                 children: <Widget>[
                   RoundButton(
-                    label: "Neues Bild",
+                    label: 'Neues Bild',
                     onTap: () {
                       selectImage(context, resize: true).then((localFile) {
                         if (localFile != null) {
@@ -355,7 +355,7 @@ class EditPhotoField extends StatelessWidget {
                   ),
                   if (cloudPhoto != null)
                     RoundButton(
-                      label: "Entfernen",
+                      label: 'Entfernen',
                       onTap: () {
                         onClickedRemove();
                       },

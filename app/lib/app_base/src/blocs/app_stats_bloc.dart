@@ -1,3 +1,4 @@
+// @dart=2.11
 import 'package:bloc/bloc_base.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:schulplaner8/app_base/src/models/app_stats.dart';

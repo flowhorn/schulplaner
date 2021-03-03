@@ -1,5 +1,4 @@
 //@dart=2.11
-import 'package:avataaar_image/avataaar_image.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Data/userdatabase.dart';
@@ -77,29 +76,10 @@ class EditProfileView extends StatelessWidget {
                           data.copyWith(displayMode: ProfileDisplayMode.pic));
                     },
                   ),
-                  RadioListTile<ProfileDisplayMode>(
-                    title: Text('Avatar'),
-                    groupValue: data.displayMode,
-                    value: ProfileDisplayMode.avatar,
-                    onChanged: (newvalue) {
-                      update(data.copyWith(
-                          displayMode: ProfileDisplayMode.avatar));
-                    },
-                  ),
                 ],
               ),
             ),
             FormSpace(16.0),
-            Text(
-              BothLangString(
-                de: 'Aktuell werden keine Avatare mehr unterstützt aufgrund eines '
-                    'Bugs bei der AvatarAPI. Dies wird in einem künftigen Update gefixt.',
-                en: 'Currently Avatars are no longer supported, this will be fixed in'
-                    ' a future update.',
-              ).getText(context),
-              textAlign: TextAlign.center,
-            ),
-            FormSpace(8.0),
             Center(
               child: UserImageView(userProfile: data, size: 148.0),
             ),
@@ -145,26 +125,6 @@ class EditProfileView extends StatelessWidget {
                               onTap: () {
                                 update(data.copyWithNoPic());
                               })
-                        ],
-                        alignment: MainAxisAlignment.center,
-                      );
-                    }
-                  case ProfileDisplayMode.avatar:
-                    {
-                      return ButtonBar(
-                        children: <Widget>[
-                          RButton(
-                            text: bothlang(
-                              context,
-                              de: 'Zufällig',
-                              en: 'Random',
-                            ),
-                            onTap: () {
-                              update(data.copyWith(
-                                  avatar: Avataaar.random().toJson()));
-                            },
-                            iconData: Icons.shuffle,
-                          ),
                         ],
                         alignment: MainAxisAlignment.center,
                       );
@@ -273,17 +233,6 @@ class MemberImageView extends StatelessWidget {
                     ),
                     //radius: 43.0,
                   ),
-          );
-        }
-      case ProfileDisplayMode.avatar:
-        {
-          return AvataaarImage(
-            avatar: memberData.avatar == null
-                ? Avataaar()
-                : Avataaar.fromJson(memberData.avatar),
-            errorImage: Icon(Icons.person),
-            placeholder: CircularProgressIndicator(),
-            //width: 128.0,
           );
         }
       case ProfileDisplayMode.none:

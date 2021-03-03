@@ -73,7 +73,7 @@ class UpdateData {
           accent: appSettingsData.accent,
         ).toWidgetJson()
           ..addAll({
-            'darkmode': appSettingsData.appwidgetsettings?.darkmode ?? false,
+            'darkmode': appSettingsData.appwidgetsettings.darkmode ?? false,
             'autodark': false,
           }),
         maxlesson: database.getSettings().maxlessons,

@@ -71,7 +71,7 @@ class DataDocumentPackage<T> {
     _listener = reference.snapshots().listen((event) {
       if (_loadedData == false) _loadedData = true;
       if (event.exists) {
-        data = objectBuilder(event.id, event.data());
+        data = objectBuilder(event.id, event.data()!);
         for (StreamController<T?> controller in _list_streamcontroller) {
           controller.add(data);
         }
@@ -81,7 +81,7 @@ class DataDocumentPackage<T> {
         _list_streamcontroller_once.clear();
       } else {
         if (loadNullData) {
-          data = objectBuilder(event.id, event.data());
+          data = objectBuilder(event.id, event.data()!);
         } else {
           data = null;
         }
@@ -131,8 +131,8 @@ class DataCombinedPackage<T> {
       _list_streamcontroller.remove(newcontroller);
     };
     return newcontroller.stream.map((data) {
-      Iterable<T>? iterable = data?.values?.where(filter);
-      if (iterable != null && iterable.isNotEmpty) {
+      Iterable<T>? iterable = data.values.where(filter);
+      if (iterable.isNotEmpty) {
         return iterable.first;
       } else {
         return null;
@@ -259,7 +259,7 @@ class DataCombinedPackageSpecial<T, T2> {
       _list_streamcontroller.remove(newcontroller);
     };
     return newcontroller.stream
-        .map((streamData) => streamData?.values?.firstWhere(filter));
+        .map((streamData) => streamData.values.firstWhere(filter));
   }
 
   Stream<Map<String, T>> get stream {
@@ -404,7 +404,7 @@ class DataCollectionPackage<T> {
   final bool directlyLoad, lockedOnStart;
   final ObjectBuilder<T> objectBuilder;
   final GetKey<T> getKey;
-  final Sorter<T> sorter;
+  final Sorter<T>? sorter;
   bool _isinitiated = false;
   bool _islocked = false;
   bool _loadedData = false;
@@ -418,7 +418,7 @@ class DataCollectionPackage<T> {
     required this.getKey,
     this.directlyLoad = false,
     this.lockedOnStart = false,
-    required this.sorter,
+    this.sorter,
   }) {
     if (lockedOnStart) _islocked = true;
     if (directlyLoad) {
@@ -499,7 +499,7 @@ class DataCollectionPackage<T> {
           querySnapshot.docs.where((docSnapshot) => docSnapshot.exists);
       final dataObjects = documents
           .map((docSnapshot) =>
-              objectBuilder(docSnapshot.id, docSnapshot.data()))
+              objectBuilder(docSnapshot.id, docSnapshot.data()!))
           .toList();
       dataObjects.removeWhere((it) => it == null);
       if (sorter != null) dataObjects.sort(sorter);

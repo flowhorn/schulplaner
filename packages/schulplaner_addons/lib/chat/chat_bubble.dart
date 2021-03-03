@@ -57,7 +57,7 @@ class _ChatBubbleLeft extends StatelessWidget {
               InkWell(
                 child: Container(
                   child: Text(
-                    name ?? "???",
+                    name ?? '???',
                     style: TextStyle(
                       color: Colors.blueGrey,
                       fontSize: 13.5,
@@ -270,7 +270,7 @@ class MessageInner extends StatelessWidget {
             onTap: () {
               Navigator.push(
                   context,
-                  new MaterialPageRoute(
+                  MaterialPageRoute(
                       builder: (context) => FullImageView(
                             imageUrl: message.content,
                           )));
@@ -281,7 +281,7 @@ class MessageInner extends StatelessWidget {
             leading: CircleAvatar(
               child: Icon(Icons.insert_drive_file),
             ),
-            title: Text(message.content ?? "???"),
+            title: Text(message.content ?? '???'),
             onTap: () {
               launch(message.content);
             },

@@ -9,7 +9,7 @@ class AnonymousAuthProviderType extends AuthProviderType {
 }
 
 class EmailAuthProviderType extends AuthProviderType {
-  final String email;
+  final String? email;
   EmailAuthProviderType({
     required String firebaseProviderId,
     required this.email,
@@ -17,7 +17,7 @@ class EmailAuthProviderType extends AuthProviderType {
 }
 
 class GoogleAuthProviderType extends AuthProviderType {
-  final String email;
+  final String? email;
   GoogleAuthProviderType({
     required String firebaseProviderId,
     required this.email,

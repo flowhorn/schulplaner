@@ -34,5 +34,4 @@ String countryToName(BuildContext context, Country country) {
     case Country.netherlands:
       return bothlang(context, en: 'Netherlands', de: 'Niederlanden');
   }
-  return bothlang(context, en: 'All', de: 'Alle');
 }

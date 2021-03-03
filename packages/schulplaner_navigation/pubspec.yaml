@@ -16,8 +16,8 @@ dependencies:
     path: ../schulplaner_widgets
   schulplaner_translations:
     path: ../schulplaner_translations
-  rxdart: ^0.25.0
-  shared_preferences: 0.5.12+4
+  rxdart: ^0.26.0
+  shared_preferences: 2.0.3
   flutter:
     sdk: flutter
 

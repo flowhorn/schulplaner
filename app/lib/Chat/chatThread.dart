@@ -61,7 +61,7 @@ class ChatThreadState extends State<ChatThread> {
   }
 
   Future getAttachment() async {
-    final attachment = await selectChatAttachment(context);
+    final ChatAttachment? attachment = await selectChatAttachment(context);
     if (attachment != null) {
       switch (attachment.type) {
         case ChatAttachmentType.image:
@@ -176,7 +176,7 @@ class ChatThreadState extends State<ChatThread> {
           .get()
           .then((it) {
         if (it.exists) {
-          String name = it.get('name');
+          final String? name = it.get('name');
           setState(() {
             nameDatabase[uid] = name ?? it.id;
           });
