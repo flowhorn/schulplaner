@@ -13,10 +13,12 @@ class DonatePage extends StatelessWidget {
           ResponsiveSides(
             first: Center(
               child: CircleAvatar(
-                child: Icon(
-                  Icons.favorite_outline,
-                  size: 72,
-                  color: Colors.white,
+                child: Center(
+                  child: Icon(
+                    Icons.favorite_outline,
+                    size: 72,
+                    color: Colors.white,
+                  ),
                 ),
                 backgroundColor: Colors.teal,
                 radius: 72,

@@ -9,10 +9,14 @@ class IntroButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FlatButton(
+    return TextButton(
       onPressed: onPressed,
       child: child,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+      style: ButtonStyle(
+        shape: MaterialStateProperty.all(
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+        ),
+      ),
     );
   }
 }

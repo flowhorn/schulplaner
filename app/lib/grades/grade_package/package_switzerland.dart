@@ -17,7 +17,7 @@ class GradePackageSwitzerland extends GradePackage {
         id: '6-1', value: 1.0, gradepackage: 6, name: '1', name2: 'Schlecht'),
   ];
 
-  GradePackageSwitzerland(BuildContext context)
+  GradePackageSwitzerland(BuildContext? context)
       : super(
             id: 6,
             name: context != null ? 'Schweiz (6-1)' : '',

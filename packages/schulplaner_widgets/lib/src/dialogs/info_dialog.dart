@@ -34,7 +34,7 @@ class InfoDialog extends SchulplanerDialog {
         title: Text(message),
       ),
       actions: <Widget>[
-        FlatButton(
+        TextButton(
           onPressed: () {
             Navigator.pop(context);
           },

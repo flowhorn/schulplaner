@@ -18,6 +18,7 @@ class MobileScaffold extends StatelessWidget {
 }
 
 class _MobileAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const _MobileAppBar();
   @override
   Widget build(BuildContext context) {
     return AppBar(

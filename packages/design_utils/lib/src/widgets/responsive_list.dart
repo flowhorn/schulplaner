@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 
-/// 2 Widgets next to each other (horizontal), but if the space is smaller than the breakpoint they will be adjusted vertically
-class ResponsiveSides extends StatelessWidget {
+/// Widgets next to each other (horizontal), but if the space is smaller than the breakpoint they will be adjusted vertically
+class ResponsiveList extends StatelessWidget {
   final double breakPoint;
-  final Widget first, second;
+  final List<Widget> children;
 
-  const ResponsiveSides({
+  const ResponsiveList({
     Key? key,
     this.breakPoint = 700,
-    required this.first,
-    required this.second,
+    required this.children,
   }) : super(key: key);
 
   @override
@@ -20,13 +19,11 @@ class ResponsiveSides extends StatelessWidget {
         final isWideEnough = maxWidth >= breakPoint;
         if (isWideEnough) {
           return _RowAlignment(
-            first: first,
-            second: second,
+            children: children,
           );
         } else {
           return _ColumnAlignment(
-            first: first,
-            second: second,
+            children: children,
           );
         }
       },
@@ -35,17 +32,16 @@ class ResponsiveSides extends StatelessWidget {
 }
 
 class _RowAlignment extends StatelessWidget {
-  final Widget first, second;
+  final List<Widget> children;
 
-  const _RowAlignment({Key? key, required this.first, required this.second})
-      : super(key: key);
+  const _RowAlignment({
+    Key? key,
+    required this.children,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Row(
-      children: [
-        Flexible(child: first),
-        Flexible(child: second),
-      ],
+      children: children,
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       crossAxisAlignment: CrossAxisAlignment.center,
     );
@@ -53,18 +49,16 @@ class _RowAlignment extends StatelessWidget {
 }
 
 class _ColumnAlignment extends StatelessWidget {
-  final Widget first, second;
+  final List<Widget> children;
 
-  const _ColumnAlignment({Key? key, required this.first, required this.second})
-      : super(key: key);
+  const _ColumnAlignment({
+    Key? key,
+    required this.children,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [
-        first,
-        SizedBox(height: 16),
-        second,
-      ],
+      children: children,
       crossAxisAlignment: CrossAxisAlignment.center,
     );
   }

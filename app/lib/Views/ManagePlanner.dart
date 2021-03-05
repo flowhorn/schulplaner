@@ -47,12 +47,15 @@ class ManagePlannerView extends StatelessWidget {
                           backgroundColor: getAccentColor(context),
                         ),
                         title: Text(getString(context).archivedplanners),
-                        trailing: FlatButton(
+                        trailing: TextButton(
                           onPressed: () {
                             pushWidget(context, ArchivedPlanner());
                           },
                           child: Text(getString(context).view.toUpperCase()),
-                          textColor: getAccentColor(context),
+                          style: ButtonStyle(
+                            foregroundColor: MaterialStateProperty.all(
+                                getAccentColor(context)),
+                          ),
                         ),
                       ),
                     ),
@@ -91,7 +94,7 @@ class ManagePlannerView extends StatelessWidget {
                               ),
                               Row(
                                 children: <Widget>[
-                                  FlatButton.icon(
+                                  TextButton.icon(
                                       onPressed: () {
                                         pushWidget(
                                             context,
@@ -104,7 +107,7 @@ class ManagePlannerView extends StatelessWidget {
                                       },
                                       icon: Icon(Icons.edit),
                                       label: Text(getString(context).edit)),
-                                  FlatButton.icon(
+                                  TextButton.icon(
                                       onPressed: () {
                                         showSheet(
                                             context: context,
@@ -197,7 +200,7 @@ class ManagePlannerView extends StatelessWidget {
           return ListView(
               children: [
                 Padding(padding: EdgeInsets.all(4.0), child: Card(child: ListTile(leading: CircleAvatar(child: Icon(Icons.archive),backgroundColor: getAccentColor(context),),title: Text("Archiv"),
-                  trailing: FlatButton(onPressed: (){}, child: Text("Ansehen".toUpperCase()), textColor: getAccentColor(context),),
+                  trailing: TextButton(onPressed: (){}, child: Text("Ansehen".toUpperCase()), textColor: getAccentColor(context),),
                   subtitle: Text("3 archivierte Planer"),
                 ),),),
               ]..addAll((loadAllPlannerStatus.getAllPlanner().isNotEmpty
@@ -210,11 +213,11 @@ class ManagePlannerView extends StatelessWidget {
                     trailing: it.id == loadAllPlannerStatus.getPlanner().id ? Icon(Icons.done, color: Colors.green,) :null,
                   ),
                   Row(children: <Widget>[
-                    FlatButton.icon(onPressed: it.id == loadAllPlannerStatus.getPlanner().id ?null : (){
+                    TextButton.icon(onPressed: it.id == loadAllPlannerStatus.getPlanner().id ?null : (){
                       loadAllPlanner.setActivePlanner(it.id);
                     }, icon: Icon(Icons.done), label: Text("Auswählen"),),
-                    FlatButton.icon(onPressed: (){}, icon: Icon(Icons.edit), label: Text("Bearbeiten")),
-                    FlatButton.icon(onPressed: (){
+                    TextButton.icon(onPressed: (){}, icon: Icon(Icons.edit), label: Text("Bearbeiten")),
+                    TextButton.icon(onPressed: (){
                       showSheet(context: context, child: Column(children: <Widget>[
                         ListTile(leading: Icon(Icons.archive),title: Text("Archivieren"),onTap: (){},),
                         ListTile(leading: Icon(Icons.delete_forever),title: Text("Löschen"),onTap: (){},),
@@ -280,7 +283,7 @@ class ArchivedPlanner extends StatelessWidget {
                         ),
                         Row(
                           children: <Widget>[
-                            FlatButton.icon(
+                            TextButton.icon(
                                 onPressed: () {
                                   pushWidget(
                                       context,
@@ -291,7 +294,7 @@ class ArchivedPlanner extends StatelessWidget {
                                 },
                                 icon: Icon(Icons.edit),
                                 label: Text(getString(context).edit)),
-                            FlatButton.icon(
+                            TextButton.icon(
                                 onPressed: () {
                                   showSheet(
                                       context: context,

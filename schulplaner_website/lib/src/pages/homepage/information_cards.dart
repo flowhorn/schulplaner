@@ -5,11 +5,12 @@ import 'package:schulplaner_website/src/routes.dart';
 import 'package:schulplaner_website/src/widgets/information_card.dart';
 
 class InformationCards extends StatelessWidget {
+  const InformationCards();
   @override
   Widget build(BuildContext context) {
     return ResponsiveSides(
       first: Column(
-        children: [
+        children: const [
           InformationCard(
             title: 'Intelligent',
             description:
@@ -33,12 +34,14 @@ class InformationCards extends StatelessWidget {
             title: 'Sicher',
             description:
                 'Wir verwenden neueste und beste Technologien für die App. So ist die gesamte App verschlüsselt über TLS-Kommunikation. Die Daten werden zudem zusätzlich verschlüsselt. So musst du dir um die Sicherheit keine Sorgen mehr machen.',
-            actions: FlatButton(
+            actions: TextButton(
               child: Text('-> Erfahre mehr über den Datenschutz'),
               onPressed: () {
                 openNavigationPage(context, NavigationItem.privacy);
               },
-              textColor: Colors.teal,
+              style: ButtonStyle(
+                foregroundColor: MaterialStateProperty.all(Colors.teal),
+              ),
             ),
           ),
         ],

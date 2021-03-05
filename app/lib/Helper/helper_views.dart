@@ -116,19 +116,27 @@ Future<String?> getTextFromInput(
           keyboardType: keyboardType,
         ),
         actions: <Widget>[
-          FlatButton(
+          TextButton(
             child: Text(getString(context).cancel),
             onPressed: () {
               Navigator.of(context).pop();
             },
-            textColor: getTextPrimary(context),
+            style: ButtonStyle(
+              foregroundColor: MaterialStateProperty.all(
+                getTextPrimary(context),
+              ),
+            ),
           ),
-          FlatButton(
+          TextButton(
             child: Text(getString(context).set),
             onPressed: () {
               Navigator.of(context).pop(inputtext);
             },
-            textColor: getTextPrimary(context),
+            style: ButtonStyle(
+              foregroundColor: MaterialStateProperty.all(
+                getTextPrimary(context),
+              ),
+            ),
           )
         ],
       );
@@ -976,23 +984,32 @@ void showConfirmationDialog(
                 mainAxisSize: MainAxisSize.min,
               ),
               actions: <Widget>[
-                FlatButton(
+                TextButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
                   child: Text(getString(context).cancel.toUpperCase()),
-                  textColor: getTextColor(getBackgroundColor(context)),
+                  style: ButtonStyle(
+                    foregroundColor: MaterialStateProperty.all(
+                      getTextColor(getBackgroundColor(context)),
+                    ),
+                  ),
                 ),
-                FlatButton(
+                TextButton(
                   onPressed: () {
                     Navigator.pop(context);
                     onConfirm();
                   },
                   child: Text(action.toUpperCase()),
-                  color: Colors.redAccent,
-                  textColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(8.0))),
+                  style: ButtonStyle(
+                    foregroundColor: MaterialStateProperty.all(Colors.white),
+                    backgroundColor:
+                        MaterialStateProperty.all(Colors.redAccent),
+                    shape: MaterialStateProperty.all(
+                      RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(8.0))),
+                    ),
+                  ),
                 ),
               ],
             ));
@@ -1017,12 +1034,16 @@ Future<bool?> showConfirmDialog(
             mainAxisSize: MainAxisSize.min,
           ),
           actions: <Widget>[
-            FlatButton(
+            TextButton(
               onPressed: () {
                 Navigator.pop(context, false);
               },
               child: Text(getString(context).cancel.toUpperCase()),
-              textColor: getClearTextColor(context),
+              style: ButtonStyle(
+                foregroundColor: MaterialStateProperty.all(
+                  getClearTextColor(context),
+                ),
+              ),
             ),
             FlatButton(
               onPressed: () {
@@ -1259,7 +1280,7 @@ class QRCodeViewPublicCode extends StatelessWidget {
                       contentPadding:
                           EdgeInsets.only(left: 24.0, right: 24.0, top: 24.0),
                       actions: <Widget>[
-                        FlatButton(
+                        TextButton(
                             onPressed: () => Navigator.pop(context),
                             child: Text(getString(context).cancel))
                       ],

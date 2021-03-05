@@ -3,15 +3,19 @@ import 'package:flutter/material.dart';
 
 /// Zeigt einzelne Screenshots der App auf der Homepage
 class ScreenshotCarousel extends StatelessWidget {
+  const ScreenshotCarousel();
   @override
   Widget build(BuildContext context) {
     return CarouselSlider(
-      items: [
+      items: const [
         _ScreenshotImage(
           assetPath: 'assets/screenshots/screenshot_mobile1.png',
         ),
         _ScreenshotImage(
-          assetPath: 'assets/screenshots/screenshot_mobile1.png',
+          assetPath: 'assets/screenshots/screenshot_mobile2.png',
+        ),
+        _ScreenshotImage(
+          assetPath: 'assets/screenshots/screenshot_mobile3.png',
         ),
       ],
       options: CarouselOptions(

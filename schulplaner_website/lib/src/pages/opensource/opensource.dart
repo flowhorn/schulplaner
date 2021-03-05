@@ -4,51 +4,14 @@ import 'package:schulplaner_website/src/logic/website_utils.dart';
 import 'package:schulplaner_website/src/parts/inner_layout.dart';
 
 class OpenSourcePage extends StatelessWidget {
+  const OpenSourcePage();
   @override
   Widget build(BuildContext context) {
     return InnerLayout(
       content: Column(
-        children: [
+        children: const [
           SizedBox(height: 128),
-          ResponsiveSides(
-            first: Center(
-              child: CircleAvatar(
-                child: Icon(
-                  Icons.code_outlined,
-                  size: 72,
-                  color: Colors.white,
-                ),
-                backgroundColor: Colors.teal,
-                radius: 72,
-              ),
-            ),
-            second: Column(
-              children: [
-                Text(
-                  'Open Source! Community!',
-                  style: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.w600,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                SizedBox(height: 8),
-                Text(
-                  'Der gesamte Source Code von Schulplaner ist Open Source.\n'
-                  'Alles ist einsehbar. Und ihr könnt euch an diesem Projekt beteiligen und mitmachen!\n'
-                  'Für Fragen, Anregungen, Kontakt und mehr kannst du die Community auf Discord erreichen.',
-                  style: TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight.w400,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                SizedBox(height: 16),
-                _RedirectButtons(),
-              ],
-              crossAxisAlignment: CrossAxisAlignment.center,
-            ),
-          ),
+          _FirstSection(),
           SizedBox(height: 128),
         ],
       ),
@@ -56,17 +19,64 @@ class OpenSourcePage extends StatelessWidget {
   }
 }
 
-class _RedirectButtons extends StatelessWidget {
+class _FirstSection extends StatelessWidget {
+  const _FirstSection();
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return ResponsiveSides(
+      first: Center(
+        child: CircleAvatar(
+          child: Icon(
+            Icons.code_outlined,
+            size: 72,
+            color: Colors.white,
+          ),
+          backgroundColor: Colors.teal,
+          radius: 72,
+        ),
+      ),
+      second: Column(
+        children: const [
+          Text(
+            'Open Source! Community!',
+            style: TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.w600,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: 8),
+          Text(
+            'Der gesamte Source Code von Schulplaner ist Open Source.\n'
+            'Alles ist einsehbar. Und ihr könnt euch an diesem Projekt beteiligen und mitmachen!\n'
+            'Für Fragen, Anregungen, Kontakt und mehr kannst du die Community auf Discord erreichen.',
+            style: TextStyle(
+              fontSize: 17,
+              fontWeight: FontWeight.w400,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: 16),
+          _RedirectButtons(),
+        ],
+        crossAxisAlignment: CrossAxisAlignment.center,
+      ),
+    );
+  }
+}
+
+class _RedirectButtons extends StatelessWidget {
+  const _RedirectButtons();
+  @override
+  Widget build(BuildContext context) {
+    return ResponsiveList(
+      breakPoint: 350,
       children: [
         _OpenGithub(),
-        SizedBox(width: 12),
+        SizedBox(width: 12, height: 12),
         _OpenDiscord(),
-        SizedBox(width: 12),
+        SizedBox(width: 12, height: 12),
       ],
-      mainAxisAlignment: MainAxisAlignment.center,
     );
   }
 }

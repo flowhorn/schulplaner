@@ -1,3 +1,4 @@
+import 'package:design_utils/design_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:schulplaner_website/src/logic/website_utils.dart';
 import 'package:schulplaner_website/src/widgets/assets_button.dart';
@@ -10,22 +11,30 @@ final kAppstoreURL =
 final kWebAppURL = 'https://schulplaner-beta.web.app';
 
 class DownloadButtons extends StatelessWidget {
+  const DownloadButtons();
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
+    return ResponsiveList(
+      breakPoint: 430,
+      children: const [
         _DownloadAndroid(),
-        SizedBox(width: 8),
+        SizedBox(
+          width: 8,
+          height: 8,
+        ),
         _DownloadiOS(),
-        SizedBox(width: 8),
+        SizedBox(
+          width: 8,
+          height: 10,
+        ),
         _OpenWebApp(),
       ],
-      mainAxisAlignment: MainAxisAlignment.center,
     );
   }
 }
 
 class _DownloadAndroid extends StatelessWidget {
+  const _DownloadAndroid();
   @override
   Widget build(BuildContext context) {
     return AssetButton(
@@ -42,6 +51,7 @@ class _DownloadAndroid extends StatelessWidget {
 }
 
 class _DownloadiOS extends StatelessWidget {
+  const _DownloadiOS();
   @override
   Widget build(BuildContext context) {
     return SvgButton(
@@ -58,6 +68,7 @@ class _DownloadiOS extends StatelessWidget {
 }
 
 class _OpenWebApp extends StatelessWidget {
+  const _OpenWebApp();
   @override
   Widget build(BuildContext context) {
     return AssetButton(

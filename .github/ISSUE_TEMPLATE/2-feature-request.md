@@ -5,7 +5,7 @@ labels: 'bug'
 ---
 
 
-[download]: https://schulplaner.firebaseapp.com/
+[download]: https://schulplaner.web.app/
 
 ## General Troubleshooting
 

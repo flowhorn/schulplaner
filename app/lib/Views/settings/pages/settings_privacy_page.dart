@@ -129,12 +129,12 @@ class PrivacyView extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.all(4.0),
-                      child: FlatButton(
+                      child: TextButton(
                         onPressed: () {
                           void _launchURL(BuildContext context) async {
                             try {
                               await launch(
-                                'https://schulplaner.firebaseapp.com/privacy',
+                                'https://schulplaner.web.app/privacy',
                                 forceWebView: true,
                               );
                             } catch (e) {

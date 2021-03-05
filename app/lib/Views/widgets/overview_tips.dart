@@ -165,7 +165,7 @@ class _DonationCard extends StatelessWidget {
                     color: Colors.red,
                   )),
               onTap: () {
-                launch('https://schulplaner.firebaseapp.com/support');
+                launch('https://schulplaner.web.app/support');
                 LogAnalytics.SupportAppClickMainScreen();
               },
             ),
@@ -221,14 +221,14 @@ class _TipsCard extends StatelessWidget {
   final IconData iconData;
   final String title;
   final Widget content;
-  final List<Widget> bottom;
+  final List<Widget>? bottom;
 
   const _TipsCard({
     Key? key,
     required this.iconData,
     required this.title,
     required this.content,
-    required this.bottom,
+    this.bottom,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -267,7 +267,7 @@ class _TipsCard extends StatelessWidget {
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
-                    children: bottom,
+                    children: bottom!,
                     mainAxisAlignment: MainAxisAlignment.start),
               ),
             FormSpace(4.0),

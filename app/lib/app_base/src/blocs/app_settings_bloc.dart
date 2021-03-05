@@ -20,9 +20,7 @@ class AppSettingsBloc extends BlocBase {
     final sharedPrefData = instance.getString('appsettings');
     if (sharedPrefData != null) {
       final newData = AppSettingsData.fromString(sharedPrefData);
-      if (newData != null) {
-        _appSettingsDataSubject.add(newData);
-      }
+      _appSettingsDataSubject.add(newData);
     }
   }
 
@@ -40,7 +38,7 @@ class AppSettingsBloc extends BlocBase {
     _appSettingsDataSubject.add(newData);
 
     SharedPreferences.getInstance().then((instance) {
-      final newdatastring = newData.toJsonString();
+      final String? newdatastring = newData.toJsonString();
       if (newdatastring != null) {
         instance.setString('appsettings', newdatastring);
       }

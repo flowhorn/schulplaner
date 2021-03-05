@@ -589,7 +589,7 @@ class LessonTimeSettings extends StatelessWidget {
                           ),
                           Row(
                             children: <Widget>[
-                              FlatButton.icon(
+                              TextButton.icon(
                                 onPressed: () {
                                   showTimePicker(
                                           context: context,
@@ -619,7 +619,7 @@ class LessonTimeSettings extends StatelessWidget {
                                   softWrap: true,
                                 ),
                               ),
-                              FlatButton.icon(
+                              TextButton.icon(
                                   onPressed: () {
                                     showTimePicker(
                                             context: context,

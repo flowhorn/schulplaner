@@ -116,7 +116,7 @@ class LinkEmailView extends StatelessWidget {
                                                 .pleasecheckdata),
                                           ),
                                           actions: <Widget>[
-                                            FlatButton(
+                                            TextButton(
                                                 onPressed: () {
                                                   Navigator.pop(context);
                                                 },

@@ -17,10 +17,10 @@ dependencies:
   url_launcher: 6.0.2
   flutter_svg: ^0.21.0-nullsafety.0
   community_material_icon: ^5.9.55
-  native_pdf_renderer: ^3.0.0
   carousel_slider: ^3.0.0
   persist_theme: ^1.7.0
   provider: ^4.0.2
+  #url_strategy: 0.2.0
 
 
 dev_dependencies:

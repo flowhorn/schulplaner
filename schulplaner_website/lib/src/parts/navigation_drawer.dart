@@ -5,12 +5,13 @@ import 'package:schulplaner_website/src/models/navigation_item.dart';
 import 'package:schulplaner_website/src/routes.dart';
 
 class NavigationDrawer extends StatelessWidget {
+  const NavigationDrawer();
   @override
   Widget build(BuildContext context) {
     return Drawer(
       child: SingleChildScrollView(
         child: Column(
-          children: [
+          children: const [
             SizedBox(height: 16),
             _HomepageTile(),
             _DownloadTile(),
@@ -31,6 +32,7 @@ class NavigationDrawer extends StatelessWidget {
 }
 
 class _HomepageTile extends StatelessWidget {
+  const _HomepageTile();
   @override
   Widget build(BuildContext context) {
     return _DrawerListTile(
@@ -42,6 +44,7 @@ class _HomepageTile extends StatelessWidget {
 }
 
 class _AboutTile extends StatelessWidget {
+  const _AboutTile();
   @override
   Widget build(BuildContext context) {
     return _DrawerListTile(
@@ -53,6 +56,7 @@ class _AboutTile extends StatelessWidget {
 }
 
 class _PrivacyTile extends StatelessWidget {
+  const _PrivacyTile();
   @override
   Widget build(BuildContext context) {
     return _DrawerListTile(
@@ -64,6 +68,7 @@ class _PrivacyTile extends StatelessWidget {
 }
 
 class _DownloadTile extends StatelessWidget {
+  const _DownloadTile();
   @override
   Widget build(BuildContext context) {
     return _DrawerListTile(
@@ -75,6 +80,7 @@ class _DownloadTile extends StatelessWidget {
 }
 
 class _DonateTile extends StatelessWidget {
+  const _DonateTile();
   @override
   Widget build(BuildContext context) {
     return _DrawerListTile(
@@ -86,6 +92,7 @@ class _DonateTile extends StatelessWidget {
 }
 
 class _ImpressumTile extends StatelessWidget {
+  const _ImpressumTile();
   @override
   Widget build(BuildContext context) {
     return _DrawerListTile(
@@ -97,6 +104,7 @@ class _ImpressumTile extends StatelessWidget {
 }
 
 class _OpenSourceTile extends StatelessWidget {
+  const _OpenSourceTile();
   @override
   Widget build(BuildContext context) {
     return _DrawerListTile(

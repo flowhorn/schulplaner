@@ -24,6 +24,7 @@ class DesktopScaffold extends StatelessWidget {
 }
 
 class _DesktopAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const _DesktopAppBar();
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -116,28 +117,50 @@ class _AppBarAction extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final currentNavigationItem = WebsiteBloc.of(context).navigationItem;
-    return OutlineButton(
+    return OutlinedButton(
       child: Padding(
         padding: const EdgeInsets.all(4.0),
-        child: Text(
-          title,
-          style: TextStyle(
-            fontSize: 16,
-            color: currentNavigationItem == navigationItem
-                ? Theme.of(context).accentColor
-                : Theme.of(context).primaryTextTheme.bodyText1?.color,
-          ),
+        child: _AppBarActionText(
+          title: title,
+          isCurrentPage: currentNavigationItem == navigationItem,
         ),
       ),
       onPressed: () {
         openNavigationPage(context, navigationItem);
       },
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(16.0)),
-        side: BorderSide(
-          color: currentNavigationItem == navigationItem
+      style: ButtonStyle(
+        shape: MaterialStateProperty.all(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(16.0)),
+            side: BorderSide(
+              color: currentNavigationItem == navigationItem
+                  ? Theme.of(context).accentColor
+                  : Colors.black,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _AppBarActionText extends StatelessWidget {
+  final String title;
+  final bool isCurrentPage;
+  const _AppBarActionText({
+    required this.title,
+    required this.isCurrentPage,
+  });
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Text(
+        title,
+        style: TextStyle(
+          fontSize: 16,
+          color: isCurrentPage
               ? Theme.of(context).accentColor
-              : Colors.black,
+              : Theme.of(context).primaryTextTheme.bodyText1?.color,
         ),
       ),
     );

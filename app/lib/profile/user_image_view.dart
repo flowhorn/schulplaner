@@ -17,10 +17,11 @@ class UserImageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (userProfile == null)
+    if (userProfile == null) {
       return Container(
         width: 0.0,
       );
+    }
     switch (userProfile!.displayMode) {
       case ProfileDisplayMode.pic:
         {

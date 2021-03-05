@@ -7,47 +7,55 @@ class AboutPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return InnerLayout(
       content: Column(
-        children: [
+        children: const [
           SizedBox(height: 128),
-          ResponsiveSides(
-            first: Center(
-              child: CircleAvatar(
-                child: Icon(
-                  Icons.info_outline,
-                  size: 72,
-                  color: Colors.white,
-                ),
-                backgroundColor: Colors.teal,
-                radius: 72,
-              ),
-            ),
-            second: Column(
-              children: [
-                Text(
-                  'Über:',
-                  style: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.w600,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                SizedBox(height: 12),
-                Text(
-                  'Die Schulplaner App\n'
-                  'Hier wird einiges an Text stehen :)\n',
-                  style: TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight.w400,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                SizedBox(height: 32),
-              ],
-              crossAxisAlignment: CrossAxisAlignment.center,
-            ),
-          ),
+          _FirstSection(),
           SizedBox(height: 128),
         ],
+      ),
+    );
+  }
+}
+
+class _FirstSection extends StatelessWidget {
+  const _FirstSection();
+  @override
+  Widget build(BuildContext context) {
+    return ResponsiveSides(
+      first: Center(
+        child: CircleAvatar(
+          child: Icon(
+            Icons.info_outline,
+            size: 72,
+            color: Colors.white,
+          ),
+          backgroundColor: Colors.teal,
+          radius: 72,
+        ),
+      ),
+      second: Column(
+        children: [
+          Text(
+            'Über:',
+            style: TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.w600,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: 12),
+          Text(
+            'Die Schulplaner App\n'
+            'Hier wird einiges an Text stehen :)\n',
+            style: TextStyle(
+              fontSize: 17,
+              fontWeight: FontWeight.w400,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: 32),
+        ],
+        crossAxisAlignment: CrossAxisAlignment.center,
       ),
     );
   }

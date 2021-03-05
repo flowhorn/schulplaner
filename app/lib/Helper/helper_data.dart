@@ -42,7 +42,7 @@ Timestamp buildTimestamp(dynamic data) {
   }
 }
 
-TimeOfDay parseTimeOfDay(String timestring) {
+TimeOfDay parseTimeOfDay(String? timestring) {
   if (timestring == null) return TimeOfDay.now();
   return TimeOfDay(
       hour: int.parse(timestring.split(':')[0]),
@@ -58,7 +58,7 @@ String parseTimeString(TimeOfDay time) {
 
 String parseDateToday() => parseDatetime(DateTime.now());
 
-String useOr(String s1, String s2) {
+String useOr(String? s1, String s2) {
   if (s1 == null || s1 == '') {
     return s2;
   } else {
@@ -85,14 +85,14 @@ List<int> buildIntList(int length, {int start = 0}) {
   return newlist;
 }
 
-TimeOfDay getTimeOfDay(String time) {
+TimeOfDay getTimeOfDay(String? time) {
   return TimeOfDay(
     hour: time != null ? int.parse(time.split(':')[0]) : 12,
     minute: time != null ? int.parse(time.split(':')[1]) : 0,
   );
 }
 
-TimeOfDay getTimeOfUTC(Time time) {
+TimeOfDay getTimeOfUTC(Time? time) {
   DateTime utcTime = DateTime.utc(
     2018,
     1,
@@ -107,7 +107,7 @@ TimeOfDay getTimeOfUTC(Time time) {
   );
 }
 
-Time getUTCTimeOfLocal(Time time) {
+Time getUTCTimeOfLocal(Time? time) {
   final localTime = DateTime(
     2018,
     1,

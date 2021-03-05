@@ -40,13 +40,13 @@ class ConfirmDialog extends SchulplanerDialog {
         title: Text(message),
       ),
       actions: <Widget>[
-        FlatButton(
+        TextButton(
           onPressed: () {
             Navigator.pop(context, false);
           },
           child: Text(getString(context).cancel),
         ),
-        FlatButton(
+        TextButton(
           onPressed: () {
             Navigator.pop(context, true);
           },

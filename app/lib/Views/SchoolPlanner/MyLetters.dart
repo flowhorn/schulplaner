@@ -448,7 +448,7 @@ class LetterCard extends StatelessWidget {
                   EdgeInsets.only(top: 4.0, bottom: 4.0, left: 4.0, right: 4.0),
               child: Row(
                 children: <Widget>[
-                  FlatButton(
+                  TextButton(
                     onPressed: () {
                       pushWidget(
                           context,
@@ -456,12 +456,15 @@ class LetterCard extends StatelessWidget {
                               initialdata: letter, database: database));
                     },
                     child: Text(getString(context).details.toUpperCase()),
-                    textColor:
-                        getEventualTextColor(context, getPrimaryColor(context)),
+                    style: ButtonStyle(
+                      foregroundColor: MaterialStateProperty.all(
+                          getEventualTextColor(
+                              context, getPrimaryColor(context))),
+                    ),
                   ),
                   letter.isRead(database)
                       ? nowidget()
-                      : FlatButton.icon(
+                      : TextButton.icon(
                           onPressed: () {
                             database.dataManager.SetResponseLetter(
                                 letter,
@@ -472,8 +475,11 @@ class LetterCard extends StatelessWidget {
                           icon: Icon(Icons.check),
                           label:
                               Text(getString(context).markasread.toUpperCase()),
-                          textColor: getEventualTextColor(
-                              context, getPrimaryColor(context)),
+                          style: ButtonStyle(
+                            foregroundColor: MaterialStateProperty.all(
+                                getEventualTextColor(
+                                    context, getPrimaryColor(context))),
+                          ),
                         ),
                 ],
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -612,7 +618,7 @@ class LetterDetailedView extends StatelessWidget {
                             children: <Widget>[
                               letter.isRead(database)
                                   ? nowidget()
-                                  : FlatButton.icon(
+                                  : TextButton.icon(
                                       onPressed: () {
                                         database.dataManager.SetResponseLetter(
                                             letter,
@@ -625,8 +631,12 @@ class LetterDetailedView extends StatelessWidget {
                                       label: Text(getString(context)
                                           .markasread
                                           .toUpperCase()),
-                                      textColor: getEventualTextColor(
-                                          context, getPrimaryColor(context)),
+                                      style: ButtonStyle(
+                                        foregroundColor:
+                                            MaterialStateProperty.all(
+                                                getEventualTextColor(context,
+                                                    getPrimaryColor(context))),
+                                      ),
                                     ),
                             ],
                             mainAxisAlignment: MainAxisAlignment.end,
@@ -842,7 +852,7 @@ class LetterResponsesView extends StatelessWidget {
                             children: <Widget>[
                               letter.isRead(database)
                                   ? nowidget()
-                                  : FlatButton.icon(
+                                  : TextButton.icon(
                                       onPressed: () {
                                         database.dataManager.SetResponseLetter(
                                             letter,
@@ -855,8 +865,12 @@ class LetterResponsesView extends StatelessWidget {
                                       label: Text(getString(context)
                                           .markasread
                                           .toUpperCase()),
-                                      textColor: getEventualTextColor(
-                                          context, getPrimaryColor(context)),
+                                      style: ButtonStyle(
+                                        foregroundColor:
+                                            MaterialStateProperty.all(
+                                                getEventualTextColor(context,
+                                                    getPrimaryColor(context))),
+                                      ),
                                     ),
                             ],
                             mainAxisAlignment: MainAxisAlignment.end,

@@ -230,7 +230,7 @@ class AppSettingsView extends StatelessWidget {
                     SizedBox(
                         height: 52.0,
                         width: double.infinity,
-                        child: FlatButton.icon(
+                        child: TextButton.icon(
                           icon: Icon(Icons.exit_to_app),
                           label: Text(
                             getString(context).logout,

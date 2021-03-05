@@ -6,7 +6,7 @@ import 'package:schulplaner_website/src/models/navigation_item.dart';
 class WebsiteBloc extends BlocBase {
   final NavigationItem navigationItem;
 
-  WebsiteBloc(this.navigationItem);
+  const WebsiteBloc(this.navigationItem);
 
   @override
   void dispose() {}

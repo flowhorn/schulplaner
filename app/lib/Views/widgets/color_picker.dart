@@ -37,7 +37,7 @@ class _ColorPicker extends StatelessWidget {
         onlyShadeSelection: true,
       ),
       actions: <Widget>[
-        FlatButton(
+        TextButton(
             onPressed: () {
               Navigator.pop(context, color.value);
             },
