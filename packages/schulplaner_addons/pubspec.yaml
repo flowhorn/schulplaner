@@ -35,7 +35,7 @@ dependencies:
   cloud_firestore: 1.0.0
   #MORE
   url_launcher: 6.0.2
-  universal_io: ^2.0.0-nullsafety.2
+  universal_io: ^2.0.0
 
 dev_dependencies:
   flutter_test:

@@ -25,7 +25,7 @@ dependencies:
   sign_in_with_apple: ^2.5.4
   firebase_auth_oauth: 0.2.4
   rxdart: ^0.26.0
-  community_material_icon: 5.8.55
+  community_material_icon: 5.9.55
 
 dev_dependencies:
   flutter_test:

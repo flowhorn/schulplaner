@@ -129,7 +129,7 @@ Future<PrivacyPolicyData> getPrivacyPolicyData() async {
   final pageImage2 =
       await page2.render(width: page2.width * 3, height: page2.height * 3);
   return PrivacyPolicyData(
-    pageImage1,
-    pageImage2,
+    pageImage1!,
+    pageImage2!,
   );
 }
