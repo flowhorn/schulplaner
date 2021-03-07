@@ -30,10 +30,13 @@ class ImageHelper {
     return File(path)..writeAsBytesSync(encodePng(thumbnail));
   }
 
-  static Future<File> cropImage(File file) {
-    return ImageCropper.cropImage(sourcePath: file.path, aspectRatioPresets: [
-      CropAspectRatioPreset.square,
-    ]);
+  static Future<File?> cropImage(File file) {
+    return ImageCropper.cropImage(
+      sourcePath: file.path,
+      aspectRatioPresets: [
+        CropAspectRatioPreset.square,
+      ],
+    );
   }
 
   static Future<File?> pickImageCamera({

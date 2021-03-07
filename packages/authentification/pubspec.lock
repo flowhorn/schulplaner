@@ -172,29 +172,23 @@ packages:
   firebase_auth_oauth:
     dependency: "direct main"
     description:
-      path: firebase_auth_oauth
-      ref: non-existant-deps
-      resolved-ref: "41c80ac1ec0f058720b377a3a2ea6f01f15aa710"
-      url: "https://github.com/treeder/firebase_auth_oauth.git"
-    source: git
-    version: "1.0.0"
+      name: firebase_auth_oauth
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.1"
   firebase_auth_oauth_platform_interface:
-    dependency: "direct overridden"
+    dependency: transitive
     description:
-      path: firebase_auth_oauth_platform_interface
-      ref: non-existant-deps
-      resolved-ref: "41c80ac1ec0f058720b377a3a2ea6f01f15aa710"
-      url: "https://github.com/treeder/firebase_auth_oauth.git"
-    source: git
+      name: firebase_auth_oauth_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
     version: "1.0.0"
   firebase_auth_oauth_web:
-    dependency: "direct overridden"
+    dependency: transitive
     description:
-      path: firebase_auth_oauth_web
-      ref: non-existant-deps
-      resolved-ref: "41c80ac1ec0f058720b377a3a2ea6f01f15aa710"
-      url: "https://github.com/treeder/firebase_auth_oauth.git"
-    source: git
+      name: firebase_auth_oauth_web
+      url: "https://pub.dartlang.org"
+    source: hosted
     version: "1.0.0"
   firebase_auth_platform_interface:
     dependency: transitive
@@ -301,7 +295,7 @@ packages:
       name: intl
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.17.0-nullsafety.2"
+    version: "0.17.0"
   intl_translation:
     dependency: "direct overridden"
     description:
@@ -507,4 +501,4 @@ packages:
     version: "2.2.1"
 sdks:
   dart: ">=2.12.0 <3.0.0"
-  flutter: ">=2.0.0"
+  flutter: ">2.0.0"
