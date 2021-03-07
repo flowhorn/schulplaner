@@ -1,3 +1,4 @@
+//@dart = 2.11
 import 'package:meta/meta.dart';
 import 'package:schulplaner_widgets/schulplaner_theme.dart';
 

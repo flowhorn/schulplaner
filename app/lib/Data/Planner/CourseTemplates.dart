@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
 import 'package:schulplaner_widgets/schulplaner_theme.dart';
 
 class CourseTemplate {
@@ -7,16 +6,19 @@ class CourseTemplate {
   Design design;
   int category;
   CourseTemplate(
-      {@required this.name,
-      @required this.shortname,
-      @required this.design,
+      {required this.name,
+      required this.shortname,
+      required this.design,
       this.category = 0});
 }
 
 class TemplateCategory {
   int category;
   String name;
-  TemplateCategory({this.category, this.name});
+  TemplateCategory({
+    required this.category,
+    required this.name,
+  });
 }
 
 List<dynamic> getTemplateList_DE() {
@@ -92,7 +94,7 @@ List<dynamic> getTemplateList_DE() {
         shortname: 'Phy',
         design: Design(
           name: 'Tiefes Rot',
-          primary: Colors.red[800],
+          primary: Colors.red[800]!,
         ),
         category: 1),
     TemplateCategory(category: 2, name: 'Nebenfächer'),
@@ -101,7 +103,7 @@ List<dynamic> getTemplateList_DE() {
         shortname: 'Spo',
         design: Design(
           name: 'Tiefes Rot',
-          primary: Colors.red[800],
+          primary: Colors.red[800]!,
         ),
         category: 2),
     CourseTemplate(
@@ -150,7 +152,7 @@ List<dynamic> getTemplateList_DE() {
         shortname: 'Geo',
         design: Design(
           name: 'Leichtes Grün',
-          primary: Colors.lightGreen[300],
+          primary: Colors.lightGreen[300]!,
         ),
         category: 3),
     CourseTemplate(
@@ -158,7 +160,7 @@ List<dynamic> getTemplateList_DE() {
         shortname: 'Sowi',
         design: Design(
           name: 'Tiefes Rot',
-          primary: Colors.red[800],
+          primary: Colors.red[800]!,
         ),
         category: 3),
     CourseTemplate(

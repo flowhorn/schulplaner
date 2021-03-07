@@ -1,3 +1,4 @@
+// @dart=2.11
 import 'package:schulplaner_navigation/schulplaner_navigation.dart';
 
 import 'helper_views.dart';

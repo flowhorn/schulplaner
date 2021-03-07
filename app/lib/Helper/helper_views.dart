@@ -19,10 +19,10 @@ typedef Widget DataDocumentWidgetBuilder<T>(BuildContext context, T data);
 class DataCollectionWidget<T> extends StatelessWidget {
   final DataCollectionPackage<T> package;
   final DataCollectionWidgetBuilder<T> builder;
-  DataCollectionWidget({@required this.package, @required this.builder});
+  DataCollectionWidget({required this.package, required this.builder});
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<List<T>>(
+    return StreamBuilder<List<T>?>(
       builder: (BuildContext context, asyncSnapshot) {
         if (asyncSnapshot.data == null) {
           return SizedBox(
@@ -31,7 +31,7 @@ class DataCollectionWidget<T> extends StatelessWidget {
             child: CircularProgressIndicator(),
           );
         } else {
-          return builder(context, asyncSnapshot.data);
+          return builder(context, asyncSnapshot.data ?? []);
         }
       },
       initialData: package.data,
@@ -45,15 +45,15 @@ class DataItemWidget<T> extends StatelessWidget {
   final DataDocumentWidgetBuilder<T> builder;
   final String id;
   DataItemWidget(
-      {@required this.package, @required this.builder, @required this.id});
+      {required this.package, required this.builder, required this.id});
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<T>(
+    return StreamBuilder<T?>(
       builder: (BuildContext context, asyncSnapshot) {
         if (asyncSnapshot.data == null) {
           return CircularProgressIndicator();
         } else {
-          return builder(context, asyncSnapshot.data);
+          return builder(context, asyncSnapshot.data!);
         }
       },
       initialData: package.getItem(id),
@@ -64,13 +64,13 @@ class DataItemWidget<T> extends StatelessWidget {
 
 class DataDocumentWidget<T> extends StatelessWidget {
   final DataDocumentPackage<T> package;
-  final DataDocumentWidgetBuilder<T> builder;
+  final DataDocumentWidgetBuilder<T?> builder;
   final bool allowNull;
   DataDocumentWidget(
-      {@required this.package, @required this.builder, this.allowNull = false});
+      {required this.package, required this.builder, this.allowNull = false});
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<T>(
+    return StreamBuilder<T?>(
       builder: (BuildContext context, asyncSnapshot) {
         if (allowNull) {
           return builder(context, asyncSnapshot.data);
@@ -90,56 +90,66 @@ class DataDocumentWidget<T> extends StatelessWidget {
   }
 }
 
-Future<String> getTextFromInput(
-    {@required BuildContext context,
-    @required String previousText,
-    @required String title,
-    TextInputType keyboardType,
-    int maxlength}) async {
+Future<String?> getTextFromInput(
+    {required BuildContext context,
+    required String? previousText,
+    required String title,
+    TextInputType keyboardType = TextInputType.text,
+    int? maxlength}) async {
   String inputtext = previousText ?? '';
   return await showDialog<String>(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(getString(context).enter),
-          content: TextField(
-            onChanged: (String s) {
-              inputtext = s;
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text(getString(context).enter),
+        content: TextField(
+          onChanged: (String s) {
+            inputtext = s;
+          },
+          controller: TextEditingController(text: inputtext),
+          decoration:
+              InputDecoration(labelText: title, border: OutlineInputBorder()),
+          maxLength: maxlength,
+          maxLengthEnforcement: maxlength == null
+              ? MaxLengthEnforcement.none
+              : MaxLengthEnforcement.enforced,
+          keyboardType: keyboardType,
+        ),
+        actions: <Widget>[
+          TextButton(
+            child: Text(getString(context).cancel),
+            onPressed: () {
+              Navigator.of(context).pop();
             },
-            controller: TextEditingController(text: inputtext),
-            decoration:
-                InputDecoration(labelText: title, border: OutlineInputBorder()),
-            maxLength: maxlength,
-            maxLengthEnforcement: maxlength == null
-                ? MaxLengthEnforcement.none
-                : MaxLengthEnforcement.enforced,
-            keyboardType: keyboardType,
-          ),
-          actions: <Widget>[
-            FlatButton(
-              child: Text(getString(context).cancel),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              textColor: getTextPrimary(context),
+            style: ButtonStyle(
+              foregroundColor: MaterialStateProperty.all(
+                getTextPrimary(context),
+              ),
             ),
-            FlatButton(
-              child: Text(getString(context).set),
-              onPressed: () {
-                Navigator.of(context).pop(inputtext);
-              },
-              textColor: getTextPrimary(context),
-            )
-          ],
-        );
-      });
+          ),
+          TextButton(
+            child: Text(getString(context).set),
+            onPressed: () {
+              Navigator.of(context).pop(inputtext);
+            },
+            style: ButtonStyle(
+              foregroundColor: MaterialStateProperty.all(
+                getTextPrimary(context),
+              ),
+            ),
+          )
+        ],
+      );
+    },
+  );
 }
 
-Widget getHeadedCardView(
-    {@required IconData iconData,
-    @required String title,
-    @required List<Widget> content,
-    Widget bottom}) {
+Widget getHeadedCardView({
+  required IconData iconData,
+  required String title,
+  required List<Widget> content,
+  Widget? bottom,
+}) {
   List<Widget> widgetlist = [
     Padding(
         padding: const EdgeInsets.only(
@@ -173,32 +183,35 @@ Widget getHeadedCardView(
   );
 }
 
-Widget getHeadedCardViewSingle(
-    {@required IconData iconData,
-    @required String title,
-    @required Widget content,
-    Widget bottom}) {
+Widget getHeadedCardViewSingle({
+  required IconData iconData,
+  required String title,
+  required Widget content,
+  Widget? bottom,
+}) {
   List<Widget> widgetlist = [
     Padding(
-        padding: const EdgeInsets.only(
-            left: 16.0, top: 12.0, bottom: 12.0, right: 16.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Icon(
-              iconData,
-              size: 18.0,
-              color: Colors.grey,
+      padding: const EdgeInsets.only(
+          left: 16.0, top: 12.0, bottom: 12.0, right: 16.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Icon(
+            iconData,
+            size: 18.0,
+            color: Colors.grey,
+          ),
+          Container(
+            padding: const EdgeInsets.only(left: 8.0),
+            child: Text(
+              title,
+              style: TextStyle(color: Colors.grey),
             ),
-            Container(
-                padding: const EdgeInsets.only(left: 8.0),
-                child: Text(
-                  title,
-                  style: TextStyle(color: Colors.grey),
-                )),
-          ],
-        )),
+          ),
+        ],
+      ),
+    ),
   ];
   widgetlist.add(content);
   if (bottom != null) widgetlist.add(bottom);
@@ -216,39 +229,44 @@ class LabeledIconButton extends StatelessWidget {
   final IconData iconData;
   final bool selected;
   final VoidCallback onTap;
-  LabeledIconButton(
-      {this.name, this.iconData, this.onTap, this.selected = false});
+  LabeledIconButton({
+    required this.name,
+    required this.iconData,
+    required this.onTap,
+    this.selected = false,
+  });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-        onTap: selected ? null : onTap,
-        child: Container(
-          margin: const EdgeInsets.only(
-              left: 12.0, right: 12.0, top: 4.0, bottom: 4.0),
-          height: 72.0,
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                iconData,
-                size: 32.0,
-                color: selected ? Colors.red : Colors.grey,
+      onTap: selected ? null : onTap,
+      child: Container(
+        margin: const EdgeInsets.only(
+            left: 12.0, right: 12.0, top: 4.0, bottom: 4.0),
+        height: 72.0,
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              iconData,
+              size: 32.0,
+              color: selected ? Colors.red : Colors.grey,
+            ),
+            Container(
+              margin: const EdgeInsets.only(top: 4.0),
+              child: Text(
+                name,
+                style: TextStyle(
+                    fontSize: 15.0,
+                    fontWeight: selected ? FontWeight.w600 : FontWeight.w400,
+                    color: selected ? Colors.red : Colors.grey),
               ),
-              Container(
-                margin: const EdgeInsets.only(top: 4.0),
-                child: Text(
-                  name,
-                  style: TextStyle(
-                      fontSize: 15.0,
-                      fontWeight: selected ? FontWeight.w600 : FontWeight.w400,
-                      color: selected ? Colors.red : Colors.grey),
-                ),
-              ),
-            ],
-          ),
-        ));
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
 
@@ -257,8 +275,12 @@ class LabeledIconButtonSmall extends StatelessWidget {
   final IconData iconData;
   final bool selected;
   final VoidCallback onTap;
-  LabeledIconButtonSmall(
-      {this.name, this.iconData, this.onTap, this.selected = false});
+  LabeledIconButtonSmall({
+    required this.name,
+    required this.iconData,
+    required this.onTap,
+    this.selected = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -294,8 +316,8 @@ class LabeledIconButtonSmall extends StatelessWidget {
 }
 
 class MyAppHeader extends StatelessWidget implements PreferredSizeWidget {
-  final String title;
-  MyAppHeader({@required this.title});
+  final String? title;
+  MyAppHeader({required this.title});
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -318,7 +340,7 @@ class MyAppHeader extends StatelessWidget implements PreferredSizeWidget {
   Size get preferredSize => Size.fromHeight(57.0);
 }
 
-Widget getEmptyView({String title, IconData icon}) {
+Widget getEmptyView({String? title, IconData? icon}) {
   return Center(
     child: Column(
       children: <Widget>[
@@ -337,7 +359,7 @@ Widget getEmptyView({String title, IconData icon}) {
   );
 }
 
-Theme clearAppTheme({@required BuildContext context, @required Widget child}) {
+Theme clearAppTheme({required BuildContext context, required Widget child}) {
   ThemeData parentTheme = Theme.of(context);
   return Theme(
       data: ThemeData(
@@ -350,7 +372,7 @@ Theme clearAppTheme({@required BuildContext context, @required Widget child}) {
       child: child);
 }
 
-ThemeData clearAppThemeData({@required BuildContext context}) {
+ThemeData clearAppThemeData({required BuildContext context}) {
   ThemeData parentTheme = Theme.of(context);
   return ThemeData(
     primaryColor: parentTheme.brightness == Brightness.light
@@ -379,7 +401,7 @@ Brightness autoBrightness() {
   }
 }
 
-Widget selectedView(bool selected) {
+Widget? selectedView(bool selected) {
   return selected
       ? Icon(
           Icons.done,
@@ -388,17 +410,17 @@ Widget selectedView(bool selected) {
       : null;
 }
 
-void popNavigatorBy(BuildContext context, {@required String text}) {
+void popNavigatorBy(BuildContext context, {required String text}) {
   Navigator.popUntil(context, (Route predicate) {
-    return (predicate?.settings?.name?.contains(text) ?? false) == false;
+    return (predicate.settings.name?.contains(text) ?? false) == false;
   });
 }
 
 void showSheet(
-    {@required BuildContext context,
-    @required Widget child,
-    @required String title,
-    List<Widget> actions}) {
+    {required BuildContext context,
+    required Widget child,
+    required String? title,
+    List<Widget>? actions}) {
   showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
@@ -468,14 +490,14 @@ void showSheet(
       });
 }
 
-ValueNotifier<bool> showPermissionStateSheet({@required BuildContext context}) {
-  ValueNotifier<bool> mNotifier = ValueNotifier(null);
+ValueNotifier<bool?> showPermissionStateSheet({required BuildContext context}) {
+  ValueNotifier<bool?> mNotifier = ValueNotifier(null);
   showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
         return clearAppTheme(
             context: context,
-            child: ValueListenableBuilder<bool>(
+            child: ValueListenableBuilder<bool?>(
                 valueListenable: mNotifier,
                 builder: (context, data, _) {
                   return Opacity(
@@ -555,7 +577,7 @@ ValueNotifier<bool> showPermissionStateSheet({@required BuildContext context}) {
 }
 
 ValueNotifier<ResultItem> showResultStateSheet(
-    {@required BuildContext context, double fontSize = 19.0}) {
+    {required BuildContext context, double fontSize = 19.0}) {
   ValueNotifier<ResultItem> mNotifier =
       ValueNotifier(ResultItem(loading: true));
   showModalBottomSheet(
@@ -641,19 +663,22 @@ ValueNotifier<ResultItem> showResultStateSheet(
 }
 
 class ResultItem {
-  String text;
-  bool loading;
-  IconData iconData;
+  String? text;
+  bool? loading;
+  IconData? iconData;
   Color color;
-  ResultItem(
-      {this.text,
-      this.loading = true,
-      this.iconData,
-      this.color = Colors.blueGrey});
+  ResultItem({
+    this.text,
+    this.loading = true,
+    this.iconData,
+    this.color = Colors.blueGrey,
+  });
 }
 
-void showLoadingStateSheet(
-    {@required BuildContext context, ValueNotifier<bool> sheetUpdate}) {
+void showLoadingStateSheet({
+  required BuildContext context,
+  required ValueNotifier<bool> sheetUpdate,
+}) {
   showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
@@ -736,17 +761,17 @@ void showLoadingStateSheet(
       });
 }
 
-ValueNotifier<bool> showLoadingStateSheetFull({
-  @required BuildContext context,
+ValueNotifier<bool?> showLoadingStateSheetFull({
+  required BuildContext context,
 }) {
-  ValueNotifier<bool> sheetUpdate = ValueNotifier(null);
+  ValueNotifier<bool?> sheetUpdate = ValueNotifier(null);
   showBetterModalBottomSheet(
       routname: 'loadingsheet',
       context: context,
       builder: (BuildContext context) {
         return clearAppTheme(
             context: context,
-            child: ValueListenableBuilder<bool>(
+            child: ValueListenableBuilder<bool?>(
                 valueListenable: sheetUpdate,
                 builder: (context, data, _) {
                   if (data == true) {
@@ -830,11 +855,11 @@ ValueNotifier<bool> showLoadingStateSheetFull({
 }
 
 Future<T> showSheetBuilder<T>({
-  @required BuildContext context,
-  @required WidgetBuilder child,
-  String title,
-  WidgetListBuilder actions,
-  String routname,
+  required BuildContext context,
+  required WidgetBuilder child,
+  String? title,
+  WidgetListBuilder? actions,
+  String? routname,
 }) {
   return showBetterModalBottomSheet<T>(
     context: context,
@@ -871,7 +896,7 @@ Future<T> showSheetBuilder<T>({
                     Align(
                       alignment: Alignment.topCenter,
                       child: Text(
-                        title ?? '-',
+                        title,
                         style: TextStyle(
                             fontSize: 19.0,
                             fontWeight: FontWeight.w400,
@@ -908,7 +933,7 @@ Future<T> showSheetBuilder<T>({
   );
 }
 
-Widget getSheetText(BuildContext context, String text) {
+Widget getSheetText(BuildContext context, String? text) {
   return Align(
     alignment: Alignment.topCenter,
     child: Text(
@@ -920,13 +945,13 @@ Widget getSheetText(BuildContext context, String text) {
 }
 
 void showConfirmationDialog(
-    {@required BuildContext context,
-    @required String title,
-    @required VoidCallback onConfirm,
-    @required String action,
-    bool warning,
-    @required RichText richtext,
-    String warningtext}) {
+    {required BuildContext context,
+    required String title,
+    required VoidCallback onConfirm,
+    required String action,
+    bool? warning,
+    required RichText richtext,
+    String? warningtext}) {
   showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -959,35 +984,44 @@ void showConfirmationDialog(
                 mainAxisSize: MainAxisSize.min,
               ),
               actions: <Widget>[
-                FlatButton(
+                TextButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
                   child: Text(getString(context).cancel.toUpperCase()),
-                  textColor: getTextColor(getBackgroundColor(context)),
+                  style: ButtonStyle(
+                    foregroundColor: MaterialStateProperty.all(
+                      getTextColor(getBackgroundColor(context)),
+                    ),
+                  ),
                 ),
-                FlatButton(
+                TextButton(
                   onPressed: () {
                     Navigator.pop(context);
                     onConfirm();
                   },
                   child: Text(action.toUpperCase()),
-                  color: Colors.redAccent,
-                  textColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(8.0))),
+                  style: ButtonStyle(
+                    foregroundColor: MaterialStateProperty.all(Colors.white),
+                    backgroundColor:
+                        MaterialStateProperty.all(Colors.redAccent),
+                    shape: MaterialStateProperty.all(
+                      RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(8.0))),
+                    ),
+                  ),
                 ),
               ],
             ));
       });
 }
 
-Future<bool> showConfirmDialog(
-    {@required BuildContext context,
-    @required String title,
-    String action,
-    RichText richtext,
-    String warningtext}) {
+Future<bool?> showConfirmDialog(
+    {required BuildContext context,
+    required String title,
+    String? action,
+    RichText? richtext,
+    String? warningtext}) {
   return showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -1000,12 +1034,16 @@ Future<bool> showConfirmDialog(
             mainAxisSize: MainAxisSize.min,
           ),
           actions: <Widget>[
-            FlatButton(
+            TextButton(
               onPressed: () {
                 Navigator.pop(context, false);
               },
               child: Text(getString(context).cancel.toUpperCase()),
-              textColor: getClearTextColor(context),
+              style: ButtonStyle(
+                foregroundColor: MaterialStateProperty.all(
+                  getClearTextColor(context),
+                ),
+              ),
             ),
             FlatButton(
               onPressed: () {
@@ -1023,9 +1061,9 @@ Future<bool> showConfirmDialog(
 }
 
 Future<void> showDetailSheetBuilder(
-    {@required BuildContext context,
-    @required WidgetBuilder body,
-    String routname}) {
+    {required BuildContext context,
+    required WidgetBuilder body,
+    String? routname}) {
   return showBetterModalBottomSheet(
     context: context,
     builder: (BuildContext sheetcontext) {
@@ -1089,8 +1127,8 @@ class LoadAppView extends StatelessWidget {
 }
 
 class ColoredCircleText extends StatelessWidget {
-  final Color color;
-  final String text;
+  final Color? color;
+  final String? text;
   final double radius, textsize;
   const ColoredCircleText(
       {this.color, this.text, this.radius = 22.0, this.textsize = 17.0});
@@ -1128,8 +1166,8 @@ class ColoredCircleText extends StatelessWidget {
 }
 
 class ColoredCircleIcon extends StatelessWidget {
-  final Color color;
-  final Icon icon;
+  final Color? color;
+  final Icon? icon;
   final double radius;
   const ColoredCircleIcon({this.color, this.icon, this.radius = 22.0});
 
@@ -1154,11 +1192,11 @@ class ColoredCircleIcon extends StatelessWidget {
   }
 }
 
-Stream<TwoObjects<T1, T2>> getMergedStream<T1, T2>(
+Stream<TwoObjects<T1?, T2?>> getMergedStream<T1, T2>(
     Stream<T1> stream1, Stream<T2> stream2) {
-  StreamController<TwoObjects<T1, T2>> newcontroller = StreamController();
-  T1 data1;
-  T2 data2;
+  StreamController<TwoObjects<T1?, T2?>> newcontroller = StreamController();
+  T1? data1;
+  T2? data2;
   var listenstream1 = stream1.listen((data) {
     data1 = data;
     newcontroller.add(TwoObjects(item: data1, item2: data2));
@@ -1174,12 +1212,13 @@ Stream<TwoObjects<T1, T2>> getMergedStream<T1, T2>(
   return newcontroller.stream;
 }
 
-Stream<ThreeObjects<T1, T2, T3>> getThreeMergedStream<T1, T2, T3>(
+Stream<ThreeObjects<T1?, T2?, T3?>> getThreeMergedStream<T1, T2, T3>(
     Stream<T1> stream1, Stream<T2> stream2, Stream<T3> stream3) {
-  StreamController<ThreeObjects<T1, T2, T3>> newcontroller = StreamController();
-  T1 data1;
-  T2 data2;
-  T3 data3;
+  StreamController<ThreeObjects<T1?, T2?, T3?>> newcontroller =
+      StreamController();
+  T1? data1;
+  T2? data2;
+  T3? data3;
   var listenstream1 = stream1.listen((data) {
     data1 = data;
     newcontroller.add(ThreeObjects(item: data1, item2: data2, item3: data3));
@@ -1203,7 +1242,7 @@ Stream<ThreeObjects<T1, T2, T3>> getThreeMergedStream<T1, T2, T3>(
 class QRCodeViewPublicCode extends StatelessWidget {
   final String publiccode;
 
-  QRCodeViewPublicCode({@required this.publiccode});
+  QRCodeViewPublicCode({required this.publiccode});
   @override
   Widget build(BuildContext context) {
     return publiccode == null
@@ -1241,7 +1280,7 @@ class QRCodeViewPublicCode extends StatelessWidget {
                       contentPadding:
                           EdgeInsets.only(left: 24.0, right: 24.0, top: 24.0),
                       actions: <Widget>[
-                        FlatButton(
+                        TextButton(
                             onPressed: () => Navigator.pop(context),
                             child: Text(getString(context).cancel))
                       ],
@@ -1253,7 +1292,7 @@ class QRCodeViewPublicCode extends StatelessWidget {
 }
 
 String toShortNameLength(BuildContext context, String text) {
-  int length = getConfigurationData(context).shortname_length ?? 2;
+  int length = getConfigurationData(context).shortname_length;
   if (text == null) return '-';
   if (length == 0) return text;
   return text.substring(0, text.length > length ? length : text.length);

@@ -1,3 +1,4 @@
+// @dart=2.11
 import 'package:bloc/bloc_base.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/subjects.dart';
@@ -12,13 +13,14 @@ class EditApperanceBloc extends BlocBase {
   }
 
   Future<void> submit() async {
-    final newValue = _appSettingsDataSubject.value;
+    final newValue = _appSettingsDataSubject.valueWrapper.value;
     appSettingsBloc.setAppSettings(newValue);
   }
 
   Stream<AppSettingsData> get appSettingsData => _appSettingsDataSubject;
 
-  AppSettingsData get currentValue => _appSettingsDataSubject.value;
+  AppSettingsData get currentValue =>
+      _appSettingsDataSubject.valueWrapper.value;
 
   void setPrimary(Color primary) {
     _appSettingsDataSubject.add(currentValue.copyWith(primary: primary));

@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:meta/meta.dart';
 import 'package:flutter/material.dart';
 import 'package:decimal/decimal.dart';

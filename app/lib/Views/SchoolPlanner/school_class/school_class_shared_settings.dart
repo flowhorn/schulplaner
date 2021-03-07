@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/models/planner_settings.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
@@ -14,8 +15,10 @@ import 'package:schulplaner_widgets/schulplaner_common.dart';
 class SchoolClassSharedSettingsView extends StatelessWidget {
   final String schoolClassID;
   final PlannerDatabase database;
-  SchoolClassSharedSettingsView(
-      {@required this.schoolClassID, @required this.database}) {
+  SchoolClassSharedSettingsView({
+    @required this.schoolClassID,
+    @required this.database,
+  }) {
     timeago.setLocaleMessages('de', timeago.DeMessages());
   }
   @override

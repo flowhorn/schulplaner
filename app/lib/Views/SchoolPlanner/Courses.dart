@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:diff_match_patch/diff_match_patch.dart';
@@ -20,7 +21,6 @@ import 'package:schulplaner8/Helper/helper_data.dart';
 import 'package:schulplaner_widgets/schulplaner_forms.dart';
 import 'package:schulplaner8/Helper/helper_views.dart';
 import 'package:schulplaner8/OldGrade/GradeDetail.dart';
-import 'package:schulplaner8/Views/SchoolPlanner/Overview.dart';
 import 'package:schulplaner8/Helper/PermissionManagement.dart';
 import 'package:schulplaner8/Views/SchoolPlanner/course/course_public_code.dart';
 import 'package:schulplaner8/Views/SchoolPlanner/events/edit_event_page.dart';
@@ -30,6 +30,7 @@ import 'package:schulplaner8/groups/src/models/course.dart';
 import 'package:schulplaner8/models/school_class.dart';
 import 'package:schulplaner_widgets/schulplaner_common.dart';
 import 'course/leave_course.dart';
+import 'overview/quick_action_view.dart';
 
 void showNewCourseSheet(BuildContext context, PlannerDatabase database) {
   showSheetBuilder(
@@ -187,66 +188,67 @@ class QuickCreateCourseView extends StatelessWidget {
       children: <Widget>[
         FormSpace(8.0),
         FormSection(
-            title: getString(context).create_quickly,
-            child: Padding(
-              padding:
-                  EdgeInsets.only(left: 8.0, right: 8.0, top: 4.0, bottom: 4.0),
-              child: SingleChildScrollView(
-                child: Row(
-                  children: <Widget>[
-                    QuickActionView(
-                        iconData: Icons.book,
-                        text: getString(context).task,
-                        color: Colors.greenAccent,
-                        onTap: () {
-                          pushWidget(
-                              context,
-                              NewSchoolTaskView.CreateWithData(
-                                database: database,
-                                courseid: courseid,
-                              ));
-                        }),
-                    QuickActionView(
-                        iconData: Icons.event_note,
-                        text: getString(context).event,
-                        color: Colors.blueGrey,
-                        onTap: () {
-                          pushWidget(
-                              context,
-                              NewSchoolEventView.Create(
-                                database: database,
-                                courseid: courseid,
-                              ));
-                        }),
-                    QuickActionView(
-                        iconData: CommunityMaterialIcons.trophy_outline,
-                        text: getString(context).grade,
-                        color: Colors.indigoAccent,
-                        onTap: () {
-                          pushWidget(
-                              context,
-                              NewGradeView(
-                                database,
-                                courseid: courseid,
-                              ));
-                        }),
-                    QuickActionView(
-                        iconData: Icons.info_outline,
-                        text: getString(context).info,
-                        color: Colors.purpleAccent,
-                        onTap: () {
-                          pushWidget(
-                              context,
-                              NewLessonInfoView(
-                                database,
-                                courseid: courseid,
-                              ));
-                        }),
-                  ],
-                ),
-                scrollDirection: Axis.horizontal,
+          title: getString(context).create_quickly,
+          child: Padding(
+            padding:
+                EdgeInsets.only(left: 8.0, right: 8.0, top: 4.0, bottom: 4.0),
+            child: SingleChildScrollView(
+              child: Row(
+                children: <Widget>[
+                  QuickActionView(
+                      iconData: Icons.book,
+                      text: getString(context).task,
+                      color: Colors.greenAccent,
+                      onTap: () {
+                        pushWidget(
+                            context,
+                            NewSchoolTaskView.CreateWithData(
+                              database: database,
+                              courseid: courseid,
+                            ));
+                      }),
+                  QuickActionView(
+                      iconData: Icons.event_note,
+                      text: getString(context).event,
+                      color: Colors.blueGrey,
+                      onTap: () {
+                        pushWidget(
+                            context,
+                            NewSchoolEventView.Create(
+                              database: database,
+                              courseid: courseid,
+                            ));
+                      }),
+                  QuickActionView(
+                      iconData: CommunityMaterialIcons.trophy_outline,
+                      text: getString(context).grade,
+                      color: Colors.indigoAccent,
+                      onTap: () {
+                        pushWidget(
+                            context,
+                            NewGradeView(
+                              database,
+                              courseid: courseid,
+                            ));
+                      }),
+                  QuickActionView(
+                      iconData: Icons.info_outline,
+                      text: getString(context).info,
+                      color: Colors.purpleAccent,
+                      onTap: () {
+                        pushWidget(
+                            context,
+                            NewLessonInfoView(
+                              database,
+                              courseid: courseid,
+                            ));
+                      }),
+                ],
               ),
-            ))
+              scrollDirection: Axis.horizontal,
+            ),
+          ),
+        )
       ],
     );
   }

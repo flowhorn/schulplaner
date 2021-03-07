@@ -10,6 +10,6 @@ class DateUtils {
   }
 
   static String getDateText(String dateString) {
-    return DateFormat.yMMMd("de").format(parseDateTime(dateString));
+    return DateFormat.yMMMd('de').format(parseDateTime(dateString));
   }
 }

@@ -12,22 +12,22 @@ class AppSettingsData {
   final Color primary, accent;
   final String languagecode;
   final ConfigurationData configurationData;
-  final GradeSpan gradespan;
+  final GradeSpan? gradespan;
   final AppWidgetSettings appwidgetsettings;
 
   const AppSettingsData._({
-    @required this.darkmode,
-    @required this.autodark,
-    @required this.coloredAppBar,
-    @required this.primary,
-    @required this.accent,
-    @required this.languagecode,
-    @required this.configurationData,
-    @required this.gradespan,
-    @required this.appwidgetsettings,
+    required this.darkmode,
+    required this.autodark,
+    required this.coloredAppBar,
+    required this.primary,
+    required this.accent,
+    required this.languagecode,
+    required this.configurationData,
+    required this.gradespan,
+    required this.appwidgetsettings,
   });
 
-  factory AppSettingsData.fromString(String data) {
+  factory AppSettingsData.fromString(String? data) {
     Map<String, dynamic> map = data == null ? {} : jsonDecode(data);
     return AppSettingsData._(
         darkmode: map['darkmode'] ?? false,
@@ -54,22 +54,22 @@ class AppSettingsData {
       'languagecode': languagecode,
       'primary': getHex(primary),
       'accent': getHex(accent),
-      'config': configurationData?.toJson(),
+      'config': configurationData.toJson(),
       'gradespan': gradespan?.toJson(),
       'appwidgetsettings': appwidgetsettings.toJson(),
     });
   }
 
   AppSettingsData copyWith({
-    bool darkmode,
-    bool autodark,
-    bool coloredAppBar,
-    Color primary,
-    Color accent,
-    String languagecode,
-    ConfigurationData configurationData,
-    GradeSpan gradespan,
-    AppWidgetSettings appwidgetsettings,
+    bool? darkmode,
+    bool? autodark,
+    bool? coloredAppBar,
+    Color? primary,
+    Color? accent,
+    String? languagecode,
+    ConfigurationData? configurationData,
+    GradeSpan? gradespan,
+    AppWidgetSettings? appwidgetsettings,
   }) {
     return AppSettingsData._(
       darkmode: darkmode ?? this.darkmode,

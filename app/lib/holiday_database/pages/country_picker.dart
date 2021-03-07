@@ -3,7 +3,7 @@ import 'package:schulplaner8/Helper/EasyWidget.dart';
 import 'package:schulplaner8/Helper/helper_data.dart';
 import 'package:schulplaner8/holiday_database/models/country.dart';
 
-Future<Country> selectCountry(BuildContext context, {Country selected}) {
+Future<Country> selectCountry(BuildContext context, {Country? selected}) {
   return selectItem(
       context: context,
       items: Country.values.toList(),
@@ -34,5 +34,4 @@ String countryToName(BuildContext context, Country country) {
     case Country.netherlands:
       return bothlang(context, en: 'Netherlands', de: 'Niederlanden');
   }
-  return bothlang(context, en: 'All', de: 'Alle');
 }

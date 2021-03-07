@@ -3,13 +3,13 @@ import 'bloc_base.dart';
 
 class BlocProvider<T extends BlocBase> extends StatefulWidget {
   const BlocProvider({
-    Key key,
+    Key? key,
     this.child,
-    @required this.bloc,
+    required this.bloc,
   }) : super(key: key);
 
   final T bloc;
-  final Widget child;
+  final Widget? child;
 
   @override
   _BlocProviderState<T> createState() => _BlocProviderState<T>();
@@ -23,7 +23,7 @@ class BlocProvider<T extends BlocBase> extends StatefulWidget {
 If this is not true this propably means that BlocProvider.of<$T>(context)
 was called while no BlocProvider with Type of $T was created in an 
 ancestor widget.""");
-    return provider.bloc;
+    return provider!.bloc;
   }
 
   static Type _typeOf<T>() => T;
@@ -46,6 +46,6 @@ class _BlocProviderState<T> extends State<BlocProvider<BlocBase>> {
 
   @override
   Widget build(BuildContext context) {
-    return widget.child;
+    return widget.child ?? Container();
   }
 }

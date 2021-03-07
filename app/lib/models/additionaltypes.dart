@@ -7,7 +7,7 @@ WeekDay weekDayEnumFromString(String data) =>
 
 String weekDayEnumToString(WeekDay weekDay) => weekDay.toString().split('.')[1];
 
-enum ProfileDisplayMode { pic, avatar, none }
+enum ProfileDisplayMode { pic, none }
 
 ProfileDisplayMode profileDisplayModeEnumFromString(String data) =>
     enumFromString(ProfileDisplayMode.values, data);

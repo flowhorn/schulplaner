@@ -1,5 +1,6 @@
+//@dart=2.11
 import 'package:schulplaner_addons/chat/message.dart';
-import 'package:schulplaner_addons/utils/date_utils.dart' as dateUtils;
+import 'package:schulplaner_addons/utils/date_utils.dart' as date_utils;
 import 'package:flutter/material.dart';
 
 abstract class _ChatThreadElement {
@@ -24,7 +25,7 @@ class _ChatThreadDate implements _ChatThreadElement {
 
   @override
   int get position =>
-      dateUtils.DateUtils.parseDateTime(date).millisecondsSinceEpoch;
+      date_utils.DateUtils.parseDateTime(date).millisecondsSinceEpoch;
 }
 
 class ChatThreadList extends StatelessWidget {
@@ -114,11 +115,11 @@ List<_ChatThreadElement> _buildThreadList(List<Message> messages) {
   List<_ChatThreadElement> elements = [];
   for (final message in messages) {
     String date =
-        dateUtils.DateUtils.parseDateString(message.createdOn.toDate());
+        date_utils.DateUtils.parseDateString(message.createdOn.toDate());
     if (!dates.containsKey(date)) {
       dates[date] = true;
       elements
-          .add(_ChatThreadDate(date, dateUtils.DateUtils.getDateText(date)));
+          .add(_ChatThreadDate(date, date_utils.DateUtils.getDateText(date)));
     }
     elements.add(_ChatThreadMessage(message));
   }

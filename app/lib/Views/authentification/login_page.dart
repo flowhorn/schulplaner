@@ -199,7 +199,7 @@ class _FailedSignInState extends StatelessWidget {
 
 class _SignInMethodes extends StatelessWidget {
   const _SignInMethodes({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -274,7 +274,7 @@ class _LoadingSignInState extends StatelessWidget {
 
 class LoginHelpLinks extends StatelessWidget {
   const LoginHelpLinks({
-    Key key,
+    Key? key,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -310,7 +310,7 @@ class LoginHelpLinks extends StatelessWidget {
 
 class _HelpActions extends StatelessWidget {
   const _HelpActions({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override

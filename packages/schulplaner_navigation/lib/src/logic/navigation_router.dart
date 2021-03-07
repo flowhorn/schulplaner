@@ -12,11 +12,11 @@ class NavigationRouter {
   final WidgetBuilder libraryBuilder;
 
   NavigationRouter({
-    @required this.openAppSettings,
-    @required this.openMyProfilePage,
-    @required this.openPlannersSheet,
-    @required this.overviewBuilder,
-    @required this.libraryBuilder,
+    required this.openAppSettings,
+    required this.openMyProfilePage,
+    required this.openPlannersSheet,
+    required this.overviewBuilder,
+    required this.libraryBuilder,
   });
 
   static NavigationRouter of(BuildContext context) {

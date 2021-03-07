@@ -1,13 +1,10 @@
 name: schulplaner_functions
-description: A new Flutter package project.
 version: 0.0.1
-author:
-homepage:
 publish_to: none
 
 environment:
-  sdk: ">=2.11.0 <3.0.0"
-  flutter: ">=1.25.0 <2.0.0"
+  sdk: ">=2.12.0 <3.0.0"
+  flutter: ">2.0.0"
 
 dependencies:
   app_functions:
@@ -25,7 +22,10 @@ dev_dependencies:
 
 
 dependency_overrides:
-  intl: ^0.17.0-nullsafety.2
+  intl: ^0.17.0
+  petitparser: ^4.0.2
+  xml: ^5.0.2
+  crypto: ^3.0.0
   intl_translation:
     git:
       url: https://github.com/Zazo032/intl_translation.git

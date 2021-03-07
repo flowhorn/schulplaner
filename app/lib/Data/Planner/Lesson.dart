@@ -1,3 +1,5 @@
+//@dart=2.11
+
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/groups/src/models/course.dart';
 import 'package:schulplaner8/groups/src/models/place_link.dart';

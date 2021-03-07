@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:bloc/bloc_provider.dart';
 import 'package:flutter/material.dart';
 
@@ -36,7 +37,7 @@ class SetupView extends StatelessWidget {
               ),
             ),
             Text(
-              plannerdata.name ?? '-',
+              plannerdata?.name ?? '-',
               style: TextStyle(
                 fontSize: 12.5,
                 fontWeight: FontWeight.w300,

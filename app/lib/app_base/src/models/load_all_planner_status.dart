@@ -1,3 +1,4 @@
+// @dart=2.11
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/models/planner.dart';
@@ -9,10 +10,10 @@ class LoadAllPlannerStatus {
   final bool _loadedData;
 
   const LoadAllPlannerStatus({
-    String activePlanner,
-    Map<String, Planner> plannerlist,
-    Map<String, int> plannerorder,
-    bool loadedData,
+    @required String activePlanner,
+    @required Map<String, Planner> plannerlist,
+    @required Map<String, int> plannerorder,
+    @required bool loadedData,
   })  : _activePlanner = activePlanner,
         plannermap = plannerlist,
         _loadedData = loadedData,

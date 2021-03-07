@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Data/ObjectsPlanner.dart';
 import 'package:schulplaner8/grades/models/grade_profile.dart';

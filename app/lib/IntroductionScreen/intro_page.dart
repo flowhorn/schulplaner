@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:flutter/material.dart';
 
 class IntroPage extends StatelessWidget {
@@ -35,7 +36,7 @@ class IntroPageDetailed extends StatelessWidget {
     return Container(
       color: bgColor,
       padding: const EdgeInsets.all(16.0),
-      child:  content,
+      child: content,
     );
   }
 }

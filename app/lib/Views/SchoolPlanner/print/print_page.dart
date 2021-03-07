@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:schulplaner8/Data/plannerdatabase.dart';
 import 'package:schulplaner8/Helper/EasyWidget.dart';
 import 'package:schulplaner8/Helper/helper_data.dart';
 import 'package:schulplaner8/Helper/helper_views.dart';
 import 'package:schulplaner8/Views/SchoolPlanner/print/print_timetable.dart';
+import 'package:schulplaner8/app_base/src/blocs/planner_database_bloc.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
 
 class PrintPage extends StatelessWidget {
-  final PlannerDatabase database;
-
-  const PrintPage({Key key, this.database}) : super(key: key);
+  const PrintPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +44,8 @@ class PrintPage extends StatelessWidget {
               title: Text(getString(context).share),
               onTap: () {
                 Navigator.pop(context);
-                PrintTimetable(database).shareTimetable();
+                PrintTimetable(PlannerDatabaseBloc.getDatabase(context))
+                    .shareTimetable();
               },
             );
           }
@@ -56,7 +55,8 @@ class PrintPage extends StatelessWidget {
               title: Text(bothlang(context, en: 'Print', de: 'Drucken')),
               onTap: () {
                 Navigator.pop(context);
-                PrintTimetable(database).printTimetable();
+                PrintTimetable(PlannerDatabaseBloc.getDatabase(context))
+                    .printTimetable();
               },
             );
           }

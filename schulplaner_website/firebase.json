@@ -1,0 +1,53 @@
+{
+  "hosting": {
+    "target": "landing-app",
+    "public": "build/web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "redirects": [
+      {
+        "regex": "/download*",
+        "destination": "https://schulplaner.web.app/#/download",
+        "type": 302
+      },
+      {
+        "regex": "/privacy*",
+        "destination": "https://schulplaner.web.app/#/privacy",
+        "type": 302
+      },
+      {
+        "regex": "/datenschutz*",
+        "destination": "https://schulplaner.web.app/#/privacy",
+        "type": 302
+      },
+      {
+        "regex": "/support*",
+        "destination": "https://schulplaner.web.app/#/donate",
+        "type": 302
+      },
+      {
+        "regex": "/donate*",
+        "destination": "https://schulplaner.web.app/#/donate",
+        "type": 302
+      },
+      {
+        "regex": "/about*",
+        "destination": "https://schulplaner.web.app/#/about",
+        "type": 302
+      },
+      {
+        "regex": "/impressum*",
+        "destination": "https://schulplaner.web.app/#/impressum",
+        "type": 302
+      },
+      {
+        "regex": "/opensource*",
+        "destination": "https://schulplaner.web.app/#/opensource",
+        "type": 302
+      }
+    ]
+  }
+}

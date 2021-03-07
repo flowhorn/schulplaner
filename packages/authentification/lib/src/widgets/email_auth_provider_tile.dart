@@ -9,8 +9,8 @@ class EmailAuthProviderTile extends StatelessWidget {
   final EmailAuthProviderType authProviderType;
 
   const EmailAuthProviderTile({
-    Key key,
-    @required this.authProviderType,
+    Key? key,
+    required this.authProviderType,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {

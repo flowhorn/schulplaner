@@ -1,3 +1,4 @@
+//@dart=2.11
 library authentification_widgets;
 
 export 'src/widgets/authentification_login_tile.dart';

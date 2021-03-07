@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:bloc/bloc_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:flutter/material.dart';
@@ -200,25 +201,25 @@ class AppSettingsView extends StatelessWidget {
                 return Column(
                   children: <Widget>[
                     DataDocumentWidget<UserProfile>(
-                        allowNull: true,
-                        package: userDatabaseBloc.userDatabase.userprofile,
-                        builder: (context, data) {
-                          return ListTile(
-                            leading: UserImageView(
-                              userProfile: data,
-                              size: 36.0,
-                            ),
-                            title: Text(
-                                data?.name ?? getString(context).anonymoususer),
-                            trailing: RButton(
-                              onTap: () {
-                                pushWidget(context, MyProfile());
-                              },
-                              text:
-                                  getString(context).gotoprofile.toUpperCase(),
-                            ),
-                          );
-                        }),
+                      allowNull: true,
+                      package: userDatabaseBloc.userDatabase.userprofile,
+                      builder: (context, data) {
+                        return ListTile(
+                          leading: UserImageView(
+                            userProfile: data,
+                            size: 36.0,
+                          ),
+                          title: Text(
+                              data?.name ?? getString(context).anonymoususer),
+                          trailing: RButton(
+                            onTap: () {
+                              pushWidget(context, MyProfile());
+                            },
+                            text: getString(context).gotoprofile.toUpperCase(),
+                          ),
+                        );
+                      },
+                    ),
                     ListTile(
                       leading: Icon(Icons.lock),
                       title: Text(getString(context).signinmethodes),
@@ -229,7 +230,7 @@ class AppSettingsView extends StatelessWidget {
                     SizedBox(
                         height: 52.0,
                         width: double.infinity,
-                        child: FlatButton.icon(
+                        child: TextButton.icon(
                           icon: Icon(Icons.exit_to_app),
                           label: Text(
                             getString(context).logout,

@@ -1,7 +1,10 @@
 import 'dart:convert';
 
+import 'package:schulplaner_addons/common/model.dart';
+
 class AppStats {
   int openedhomepage, openedapp, addedtask;
+  Map<String, bool> hideForMonth;
 
   bool hidecard_rateapp,
       hidecard_shareapp,
@@ -16,17 +19,21 @@ class AppStats {
     this.hidecard_rateapp = false,
     this.hidecard_shareapp = false,
     this.hidecard_supportapp = false,
+    this.hideForMonth = const {},
   });
 
-  AppStats.fromString(String data) {
+  factory AppStats.fromString(String data) {
     Map<String, dynamic> map = jsonDecode(data);
-    openedhomepage = map['openedhomepage'] ?? 0;
-    openedapp = map['openedapp'] ?? 0;
-    addedtask = map['addedtask'] ?? 0;
-    hidecard_rateapp = map['hidecard_rateapp'] ?? false;
-    hidecard_shareapp = map['hidecard_shareapp'] ?? false;
-    hidecard_socialmedia = map['hidecard_socialmedia'] ?? false;
-    hidecard_supportapp = map['hidecard_supportapp'] ?? false;
+    return AppStats(
+      openedhomepage: map['openedhomepage'] ?? 0,
+      openedapp: map['openedapp'] ?? 0,
+      addedtask: map['addedtask'] ?? 0,
+      hidecard_rateapp: map['hidecard_rateapp'] ?? false,
+      hidecard_shareapp: map['hidecard_shareapp'] ?? false,
+      hidecard_socialmedia: map['hidecard_socialmedia'] ?? false,
+      hidecard_supportapp: map['hidecard_supportapp'] ?? false,
+      hideForMonth: decodeMap<bool>(map['hidecard_donation'], (key, it) => it),
+    );
   }
 
   String toJsonString() {
@@ -38,7 +45,19 @@ class AppStats {
       'hidecard_shareapp': hidecard_shareapp,
       'hidecard_socialmedia': hidecard_socialmedia,
       'hidecard_supportapp': hidecard_supportapp,
+      'hidecard_donation': hideForMonth,
     });
+  }
+
+  bool shouldHideDonationThisMonth() {
+    final currentMonth = DateTime.now().toIso8601String().substring(0, 7);
+    print(openedhomepage);
+    return hideForMonth[currentMonth] == true || openedhomepage < 15;
+  }
+
+  void setHideThisMonth() {
+    final currentMonth = DateTime.now().toIso8601String().substring(0, 7);
+    hideForMonth[currentMonth] = true;
   }
 
   AppStats copy() {

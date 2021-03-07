@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:flutter/material.dart';
 import 'package:schulplaner_navigation/schulplaner_navigation.dart';
 
@@ -14,7 +15,7 @@ class BodyBuilder extends StatelessWidget {
           if (navigationState.showSubChild) {
             return navigationState.subChild ??
                 Container(
-                  child: Text("Not found!"),
+                  child: Text('Not found!'),
                 );
           } else {
             if (navigationState.child != null) {

@@ -1,3 +1,5 @@
+// @dart=2.11
+
 import 'package:authentification/authentification_models.dart';
 import 'package:bloc/bloc_base.dart';
 import 'package:rxdart/rxdart.dart';

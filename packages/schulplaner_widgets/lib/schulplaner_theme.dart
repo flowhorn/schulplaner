@@ -1,3 +1,4 @@
+//@dart=2.11
 library schulplaner_theme;
 
 export 'src/theme/app_theme.dart';

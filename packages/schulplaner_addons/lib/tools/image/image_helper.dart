@@ -22,47 +22,52 @@ class ImageCompresser {
 }
 
 class ImageHelper {
-  static Future<File> resizeImage(File file, {int width, int height}) async {
-    Image image = decodeImage(file.readAsBytesSync());
-    Image thumbnail = copyResize(image, width: width, height: height);
+  static Future<File> resizeImage(File file, {int? width, int? height}) async {
+    final image = decodeImage(file.readAsBytesSync());
+    final thumbnail = copyResize(image!, width: width, height: height);
     String path =
         (await getTemporaryDirectory()).path + file.uri.pathSegments.last;
     return File(path)..writeAsBytesSync(encodePng(thumbnail));
   }
 
-  static Future<File> cropImage(File file) {
-    return ImageCropper.cropImage(sourcePath: file.path, aspectRatioPresets: [
-      CropAspectRatioPreset.square,
-    ]);
+  static Future<File?> cropImage(File file) {
+    return ImageCropper.cropImage(
+      sourcePath: file.path,
+      aspectRatioPresets: [
+        CropAspectRatioPreset.square,
+      ],
+    );
   }
 
-  static Future<File> pickImageCamera({
-    double maxWidth,
-    double maxHeight,
+  static Future<File?> pickImageCamera({
+    double? maxWidth,
+    double? maxHeight,
   }) async {
     final image = await ImagePicker().getImage(
       source: ImageSource.camera,
       maxHeight: maxHeight,
       maxWidth: maxWidth,
     );
-    if (image != null)
+    if (image != null) {
       return File(image.path);
-    else
+    } else {
       return null;
+    }
   }
 
-  static Future<File> pickImageGallery({
-    double maxWidth,
-    double maxHeight,
+  static Future<File?> pickImageGallery({
+    double? maxWidth,
+    double? maxHeight,
   }) async {
     final image = await ImagePicker().getImage(
       source: ImageSource.gallery,
       maxHeight: maxHeight,
       maxWidth: maxWidth,
     );
-    if (image != null)
+    if (image != null) {
       return File(image.path);
-    else
+    } else {
       return null;
+    }
   }
 }

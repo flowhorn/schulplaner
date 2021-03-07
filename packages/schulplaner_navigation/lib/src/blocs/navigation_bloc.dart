@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:bloc/bloc_base.dart';
 import 'package:bloc/bloc_provider.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +42,7 @@ class NavigationBloc extends BlocBase {
     newData.subChildTag = tag;
     newData.subChild = SlideUp(
       child: subChild,
-      key: Key("Test"),
+      key: Key('Test'),
     );
     newData.subChildName = title;
     newData.actions = actions;
@@ -72,12 +73,13 @@ class NavigationBloc extends BlocBase {
     newdata.subChildTag = null;
     newdata.subChildNavigationItem = null;
     newdata.actions = null;
-    if (index == 0)
+    if (index == 0) {
       newdata.navigationItem = NavigationItem.home;
-    else if (index == 4)
+    } else if (index == 4) {
       newdata.navigationItem = NavigationItem.library;
-    else
+    } else {
       newdata.navigationItem = getNavigationActionItem(index).navigationItem;
+    }
     switch (index) {
       case 0:
         newdata.child = router.overviewBuilder(context);

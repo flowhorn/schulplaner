@@ -1,3 +1,4 @@
+//@dart = 2.11
 import 'dart:async';
 import 'dart:math';
 
@@ -14,15 +15,11 @@ class DynamicLinksBloc extends BlocBase {
       BehaviorSubject<Map<String, DynamicLinkData>>();
 
   Map<String, DynamicLinkData> incomingLinks = {};
-  String referredby;
 
   DynamicLinksBloc(this.dynamicLinks) {
     stream().listen((incomingLinkMap) {
       for (final incomingLink in incomingLinkMap.values) {
         print('Incoming Link: ${incomingLink.link.queryParameters}');
-        if (_isIncomingLinkRefferalLink(incomingLink)) {
-          referredby = incomingLink.getReferralData().referredby;
-        }
       }
     });
   }
@@ -48,9 +45,6 @@ class DynamicLinksBloc extends BlocBase {
       // print(e);
     }
   }
-
-  bool _isIncomingLinkRefferalLink(DynamicLinkData incomingLink) =>
-      incomingLink.getType() == DynamicLinksType.personalReferral;
 
   void addDynamicLinkDataFromFirebase(PendingDynamicLinkData incominLinkData) {
     if (incominLinkData != null && !_hasLinkBeenProcessed(incominLinkData)) {
@@ -91,7 +85,6 @@ class DynamicLinksBloc extends BlocBase {
 }
 
 enum DynamicLinksType {
-  personalReferral,
   joinByKey,
   unknown,
 }

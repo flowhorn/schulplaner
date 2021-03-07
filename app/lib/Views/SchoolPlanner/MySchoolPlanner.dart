@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'dart:async';
 import 'package:bloc/bloc_provider.dart';
 import 'package:flutter/material.dart';
@@ -155,7 +156,7 @@ class _MySchoolPlannerState extends State<MySchoolPlanner>
           stream: plannerLoaderBloc.loadAllPlannerStatus,
           initialData: plannerLoaderBloc.loadAllPlannerStatusValue,
           builder: (context, snapshot) {
-            LoadAllPlannerStatus status = snapshot.data;
+            final status = snapshot.data;
             if (status.getPlanner().setup_done == false) {
               return SetupView(status);
             } else {

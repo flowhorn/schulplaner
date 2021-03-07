@@ -1,17 +1,25 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Message {
-  String id, uid;
-  Timestamp timestamp;
-  dynamic type, content;
-  Message({this.id, this.uid, this.timestamp, this.type, this.content});
+  final String id, uid;
+  final Timestamp timestamp;
+  final dynamic type, content;
+  const Message({
+    required this.id,
+    required this.uid,
+    required this.timestamp,
+    required this.type,
+    required this.content,
+  });
 
-  Message.fromData(dynamic data) {
-    id = data['id'];
-    uid = data['uid'];
-    type = data['type'];
-    content = data['content'];
-    timestamp = Timestamp.fromMillisecondsSinceEpoch((data['timestamp']));
+  factory Message.fromData(dynamic data) {
+    return Message(
+      id: data['id'],
+      uid: data['uid'],
+      type: data['type'],
+      content: data['content'],
+      timestamp: Timestamp.fromMillisecondsSinceEpoch((data['timestamp'])),
+    );
   }
 
   Map<String, dynamic> toJson() {

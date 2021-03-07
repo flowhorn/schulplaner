@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:schulplaner8/Data/Planner/File.dart';
 import 'package:schulplaner8/Data/plannerdatabase.dart';
 import 'package:schulplaner8/Helper/helper_data.dart';
@@ -8,17 +7,18 @@ import 'package:schulplaner8/utils/models/coder.dart';
 enum ResponseType { NONE, DELIVERED, READ, REPLY }
 
 class LetterResponse {
-  final String id, message;
+  final String id;
+  final String? message;
   final ResponseType type;
   final Timestamp lastchanged;
 
   const LetterResponse._(
-      {@required this.id,
-      @required this.type,
-      @required this.message,
-      @required this.lastchanged});
+      {required this.id,
+      required this.type,
+      required this.message,
+      required this.lastchanged});
 
-  factory LetterResponse.Create({@required String id}) {
+  factory LetterResponse.Create({required String id}) {
     return LetterResponse._(
       id: id,
       type: ResponseType.NONE,
@@ -51,8 +51,12 @@ class LetterResponse {
     return true;
   }
 
-  LetterResponse copyWith(
-      {String id, String message, ResponseType type, Timestamp lastchanged}) {
+  LetterResponse copyWith({
+    String? id,
+    String? message,
+    ResponseType? type,
+    Timestamp? lastchanged,
+  }) {
     return LetterResponse._(
       id: id ?? this.id,
       type: type ?? this.type,
@@ -73,28 +77,28 @@ class LetterResponse {
 class Letter {
   final String id, title, content;
   final String authorid;
-  final SavedIn savedin;
+  final SavedIn? savedin;
   final Timestamp published, lastchanged;
   final bool archived, deleted, sendpush, allowreply;
   final Map<String, CloudFile> files;
   final Map<String, LetterResponse> responses;
 
   const Letter._(
-      {@required this.id,
-      @required this.title,
-      @required this.savedin,
-      @required this.content,
-      @required this.authorid,
-      @required this.published,
-      @required this.lastchanged,
-      @required this.archived,
-      @required this.deleted,
-      @required this.sendpush,
-      @required this.allowreply,
-      @required this.files,
-      @required this.responses});
+      {required this.id,
+      required this.title,
+      required this.savedin,
+      required this.content,
+      required this.authorid,
+      required this.published,
+      required this.lastchanged,
+      required this.archived,
+      required this.deleted,
+      required this.sendpush,
+      required this.allowreply,
+      required this.files,
+      required this.responses});
 
-  factory Letter.Create({@required String id, @required String authorid}) {
+  factory Letter.Create({required String id, required String authorid}) {
     return Letter._(
       id: id,
       title: '',
@@ -132,19 +136,19 @@ class Letter {
   }
 
   Letter copyWith({
-    String id,
+    String? id,
     title,
     content,
-    String authorid,
-    SavedIn savedin,
-    Timestamp published,
+    String? authorid,
+    SavedIn? savedin,
+    Timestamp? published,
     lastchanged,
-    bool archived,
+    bool? archived,
     deleted,
     sendpush,
     allowreply,
-    Map<String, CloudFile> files,
-    Map<String, LetterResponse> responses,
+    Map<String, CloudFile>? files,
+    Map<String, LetterResponse>? responses,
   }) {
     return Letter._(
       id: id ?? this.id,
@@ -164,7 +168,7 @@ class Letter {
   }
 
   Letter copyWithNull({
-    SavedIn savedin,
+    SavedIn? savedin,
   }) {
     return Letter._(
       id: id,
@@ -195,7 +199,7 @@ class Letter {
       'id': id,
       'title': title,
       'content': content,
-      'savedin': savedin.toJson(),
+      'savedin': savedin?.toJson(),
       'published': published,
       'lastchanged': lastchanged,
       'archived': archived,
@@ -218,7 +222,7 @@ class Letter {
     }
   }
 
-  LetterResponse getMyResponse(PlannerDatabase database) {
+  LetterResponse? getMyResponse(PlannerDatabase database) {
     var response = responses[database.getMemberId()];
     return response;
   }

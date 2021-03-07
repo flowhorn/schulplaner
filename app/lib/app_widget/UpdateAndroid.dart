@@ -5,7 +5,6 @@ import 'package:schulplaner8/Data/Planner/Lesson.dart';
 import 'package:schulplaner8/Data/plannerdatabase.dart';
 import 'package:schulplaner8/groups/src/models/course.dart';
 import 'package:schulplaner8/groups/src/models/teacher.dart';
-import 'package:meta/meta.dart';
 
 class WidgetSettings {
   Map<String, dynamic> appdesign;
@@ -15,13 +14,14 @@ class WidgetSettings {
       zero_lesson;
   int maxlesson;
 
-  WidgetSettings(
-      {this.appdesign,
-      this.multiple_weektypes,
-      this.timetable_useshortname,
-      this.schedule_showlessontime,
-      this.maxlesson,
-      this.zero_lesson});
+  WidgetSettings({
+    required this.appdesign,
+    required this.multiple_weektypes,
+    required this.timetable_useshortname,
+    required this.schedule_showlessontime,
+    required this.maxlesson,
+    required this.zero_lesson,
+  });
 
   Map<String, dynamic> toJson() {
     return {
@@ -44,44 +44,47 @@ class UpdateData {
   String memberid;
   final AppSettingsBloc appSettingsBloc;
   UpdateData({
-    this.courselist,
-    this.lessonlist,
-    this.settings,
-    this.periodmap,
-    this.teacherslist,
-    this.memberid,
-    @required this.appSettingsBloc,
+    required this.courselist,
+    required this.lessonlist,
+    required this.settings,
+    required this.periodmap,
+    required this.teacherslist,
+    required this.memberid,
+    required this.appSettingsBloc,
   });
 
-  UpdateData.collectData({
-    @required PlannerDatabase database,
-    @required this.appSettingsBloc,
+  factory UpdateData.collectData({
+    required PlannerDatabase database,
+    required AppSettingsBloc appSettingsBloc,
   }) {
-    courselist = database.courseinfo.data.values.toList();
-    lessonlist = database.getLessons().values.toList();
     final appSettingsData = appSettingsBloc.currentValue;
-    settings = WidgetSettings(
-      appdesign: Design(
-        id: 'widgetdesign',
-        name: 'WidgetDesign',
-        primary: appSettingsData.primary,
-        accent: appSettingsData.accent,
-      ).toWidgetJson()
-        ..addAll({
-          'darkmode': appSettingsData?.appwidgetsettings?.darkmode ?? false,
-          'autodark': false,
-        }),
-      maxlesson: database.getSettings().maxlessons,
-      schedule_showlessontime: database.getSettings().timetable_timemode,
-      timetable_useshortname:
-          appSettingsData.configurationData.timetablesettings.useshortname,
-      multiple_weektypes: database.getSettings().multiple_weektypes,
-      zero_lesson: database.getSettings().zero_lesson,
-    );
 
-    periodmap = database.getSettings().lessontimes;
-    teacherslist = database.teachers.data;
-    memberid = database.getMemberId();
+    return UpdateData(
+      courselist: database.courseinfo.data.values.toList(),
+      lessonlist: database.getLessons().values.toList(),
+      periodmap: database.getSettings().lessontimes,
+      teacherslist: database.teachers.data ?? [],
+      memberid: database.getMemberId(),
+      settings: WidgetSettings(
+        appdesign: Design(
+          id: 'widgetdesign',
+          name: 'WidgetDesign',
+          primary: appSettingsData.primary,
+          accent: appSettingsData.accent,
+        ).toWidgetJson()
+          ..addAll({
+            'darkmode': appSettingsData.appwidgetsettings.darkmode ?? false,
+            'autodark': false,
+          }),
+        maxlesson: database.getSettings().maxlessons,
+        schedule_showlessontime: database.getSettings().timetable_timemode,
+        timetable_useshortname:
+            appSettingsData.configurationData.timetablesettings.useshortname,
+        multiple_weektypes: database.getSettings().multiple_weektypes,
+        zero_lesson: database.getSettings().zero_lesson,
+      ),
+      appSettingsBloc: appSettingsBloc,
+    );
   }
 
   Map<String, Object> toJson() {
@@ -93,7 +96,7 @@ class UpdateData {
       return l.toPrimitiveJson(
           courselist[courselist.indexWhere((c) => c.id == l.courseid)]);
     }).toList();
-    List<Map<String, Object>> _internalperiodlist =
+    List<Map<String, dynamic>> _internalperiodlist =
         periodmap.entries.map((MapEntry<int, LessonTime> entry) {
       return entry.value.toWidgetJson(entry.key);
     }).toList();

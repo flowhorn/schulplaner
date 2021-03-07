@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'dart:async';
 import 'package:bloc/bloc_provider.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';

@@ -1,3 +1,4 @@
+// @dart=2.11
 import 'package:schulplaner8/holiday_database/models/holiday_type.dart';
 import 'package:date/date.dart';
 import 'package:meta/meta.dart';

@@ -1,3 +1,4 @@
+//@dart = 2.11
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:meta/meta.dart';
 import 'package:cloud_functions/cloud_functions.dart';

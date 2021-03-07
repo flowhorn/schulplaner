@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:schulplaner8/Data/Planner/Lesson.dart';
 import 'package:schulplaner8/Data/plannerdatabase.dart';
 import 'package:schulplaner8/Helper/DateAPI.dart';

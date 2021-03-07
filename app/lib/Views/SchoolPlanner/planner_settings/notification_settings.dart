@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:date/time.dart';
 import 'package:firebase_messaging/firebase_messaging.dart'
     as firebase_messaging;

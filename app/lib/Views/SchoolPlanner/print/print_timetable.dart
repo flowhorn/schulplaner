@@ -58,7 +58,11 @@ class TimetablePDFWidget extends StatelessWidget {
   final Map<String, Lesson> lessons;
   final PlannerDatabase database;
 
-  TimetablePDFWidget({this.weekType, this.lessons, this.database});
+  TimetablePDFWidget({
+    required this.weekType,
+    required this.lessons,
+    required this.database,
+  });
 
   @override
   Widget build(Context context) {
@@ -148,7 +152,7 @@ List<TimeTableElement> buildElements(
 
 List<TimeTablePeriodElement> buildPeriodElements(PlannerDatabase database) {
   List<TimeTablePeriodElement> mylist = [];
-  PlannerSettingsData settingsData = database.settings.data;
+  PlannerSettingsData settingsData = database.settings.data!;
 
   buildIntList(settingsData.maxlessons, start: 1).forEach((period) {
     mylist.add(TimeTablePeriodElement(
@@ -181,7 +185,7 @@ List<Widget> buildLessons(
           return true;
         }
         return false;
-      }, orElse: () => null);
+      });
       if (lesson != null) {
         widgets.add(
             LessonPdfTile(lesson, database.getCourseInfo(lesson.courseid)));
@@ -257,13 +261,14 @@ class TimetablePDFFragment extends StatelessWidget {
   List<TimeTableElement> events;
   List<TimeTablePeriodElement> periods;
   double lessonheight;
-  TimetablePDFFragment(
-      {this.starttime_calendar,
-      this.endtime_calendar,
-      this.events,
-      this.periods,
-      this.daysOfWeek,
-      this.lessonheight});
+  TimetablePDFFragment({
+    required this.starttime_calendar,
+    required this.endtime_calendar,
+    required this.events,
+    required this.periods,
+    required this.daysOfWeek,
+    required this.lessonheight,
+  });
 
   @override
   Widget build(Context context) {

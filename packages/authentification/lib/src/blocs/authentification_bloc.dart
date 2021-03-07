@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'dart:async';
 
 import 'package:authentification/src/models/auth_user.dart';
@@ -41,7 +42,7 @@ class AuthentificationBloc extends BlocBase {
       _authentificationStatusSubject;
 
   AuthentificationStatus get authentificationStatusValue =>
-      _authentificationStatusSubject.value;
+      _authentificationStatusSubject.valueWrapper.value;
 
   UserId get userId => _firebaseAuth.currentUser != null
       ? UserId(_firebaseAuth.currentUser.uid)

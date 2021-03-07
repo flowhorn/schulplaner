@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 
 class SlideUp extends StatefulWidget {
   final Widget child;
-  SlideUp({@required this.child, Key key}) : super(key: key);
+  SlideUp({required this.child, Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _SlideUpState();
 }
 
 class _SlideUpState extends State<SlideUp> with SingleTickerProviderStateMixin {
-  AnimationController controller;
+  late AnimationController controller;
 
   @override
   void initState() {

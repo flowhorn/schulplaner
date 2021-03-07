@@ -5,7 +5,6 @@ import 'package:authentification/src/models/auth_provider.dart';
 import 'package:bloc/bloc_base.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:rxdart/subjects.dart';
-import 'package:meta/meta.dart';
 
 class MyAuthProvidersBloc extends BlocBase {
   final FirebaseAuth _firebaseAuth;
@@ -15,8 +14,8 @@ class MyAuthProvidersBloc extends BlocBase {
       BehaviorSubject<SignInState>.seeded(SignInState.none);
 
   MyAuthProvidersBloc(
-      {@required FirebaseAuth firebaseAuth,
-      @required AuthentificationBloc authentificationBloc})
+      {required FirebaseAuth firebaseAuth,
+      required AuthentificationBloc authentificationBloc})
       : _firebaseAuth = firebaseAuth {
     authentificationBloc.authentificationStatus.listen((authStatus) {
       if (authStatus is AuthentifiedAuthentificationStatus) {

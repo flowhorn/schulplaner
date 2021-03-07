@@ -19,7 +19,7 @@ class PlannerState extends StatelessWidget {
             StreamBuilder<LoadAllPlannerStatus>(
               stream: plannerLoaderBloc.loadAllPlannerStatus,
               builder: (context, snapshot) {
-                final planner = snapshot?.data?.getPlanner();
+                final planner = snapshot.data?.getPlanner();
                 return Text(
                   planner?.name ?? '-',
                   textAlign: TextAlign.center,

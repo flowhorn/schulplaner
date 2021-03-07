@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -270,7 +271,7 @@ class MyAbsentListInner extends StatefulWidget {
 class MyAbsentListInnerState extends State<MyAbsentListInner>
     with AutomaticKeepAliveClientMixin {
   PlannerDatabase get plannerDatabase => widget.plannerDatabase;
-  
+
   @override
   Widget build(BuildContext context) {
     super.build(context);

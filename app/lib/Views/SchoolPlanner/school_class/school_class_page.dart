@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Chat/chatview.dart';
 import 'package:schulplaner8/Views/SchoolPlanner/school_class/school_class_security_settings.dart';

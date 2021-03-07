@@ -22,14 +22,14 @@ class SchoolClassMemberSheet extends SchulplanerSheet {
   final PlannerDatabase database;
 
   const SchoolClassMemberSheet({
-    @required this.schoolClassId,
-    @required this.database,
-    @required this.memberData,
-    @required this.userProfile,
+    required this.schoolClassId,
+    required this.database,
+    required this.memberData,
+    required this.userProfile,
   });
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<MemberData>(
+    return StreamBuilder<MemberData?>(
       stream: database.schoolClassInfos
           .getItemStream(schoolClassId)
           .map((settings) => settings?.membersData[memberData.id]),
@@ -113,7 +113,7 @@ class SchoolClassMemberSheet extends SchulplanerSheet {
   Future<void> _tapRemoveMember(BuildContext context) async {
     final confirmResult = await ConfirmDialog(
       title:
-          '${userProfile?.name ?? getString(context).anonymoususer} ${getString(context).remove}',
+          '${userProfile.name ?? getString(context).anonymoususer} ${getString(context).remove}',
       message: '',
     ).show<bool>(context);
     if (confirmResult == true) {

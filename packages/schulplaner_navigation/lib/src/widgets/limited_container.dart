@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class LimitedContainer extends StatelessWidget {
   final Widget child;
 
-  const LimitedContainer({Key key, this.child}) : super(key: key);
+  const LimitedContainer({Key? key, required this.child}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Center(

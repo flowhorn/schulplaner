@@ -22,7 +22,7 @@
     <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://schulplaner.firebaseapp.com/">Download</a>
+    <a href="https://schulplaner.web.app/">Download</a>
     ·
     <a href="https://github.com/flowhorn/schulplaner/issues">Report Bug</a>
     ·

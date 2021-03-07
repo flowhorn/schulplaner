@@ -1,3 +1,4 @@
+//@dart=2.11
 // Copyright 2015 The Chromium Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -288,7 +289,7 @@ Future<T> showBetterModalBottomSheet<T>({
 ///
 /// A persistent bottom sheet shows information that supplements the primary
 /// content of the app. A persistent bottom sheet remains visible even when the
-/// user interacts with other parts of the app. A [Scaffold] is required in the
+/// user interacts with other parts of the app. A [Scaffold] is @required in the
 /// given `context`; its [ScaffoldState.showBottomSheet] method is used to
 /// actually show the bottom sheet.
 ///

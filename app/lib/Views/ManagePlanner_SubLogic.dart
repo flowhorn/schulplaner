@@ -1,5 +1,6 @@
+//@dart=2.11
 import 'package:flutter/material.dart';
-import 'package:schulplaner8/Extras/ReordableList.dart';
+import 'package:schulplaner8/Extras/ReordableList.dart' as reordable_list;
 import 'package:schulplaner8/app_base/src/blocs/planner_loader_bloc.dart';
 import 'package:schulplaner8/app_base/src/models/load_all_planner_status.dart';
 import 'package:schulplaner8/models/planner.dart';
@@ -91,7 +92,7 @@ class _OrderableExampleState extends State<OrderableExample> {
   //
   @override
   Widget build(BuildContext context) {
-    return ReorderableList(
+    return reordable_list.ReorderableList(
       onReorder: _reorderCallback,
       child: UpListView(
         items: _items,
@@ -137,7 +138,7 @@ class Item extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ReorderableItem(
+    return reordable_list.ReorderableItem(
         key: data.key, //
         childBuilder: _buildChild,
         decorationBuilder: _buildDecoration);

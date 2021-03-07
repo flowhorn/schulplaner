@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/OldGrade/Grade.dart';
-import 'package:meta/meta.dart';
 import 'package:schulplaner8/models/helper_functions.dart';
 import 'package:schulplaner8/utils/models/coder.dart';
 
@@ -13,11 +12,11 @@ class GradeTypeItem {
   final bool testsasoneexam;
 
   GradeTypeItem._({
-    @required this.id,
-    @required this.name,
-    @required this.weight,
-    @required this.gradetypes,
-    @required this.testsasoneexam,
+    required this.id,
+    required this.name,
+    required this.weight,
+    required this.gradetypes,
+    required this.testsasoneexam,
   });
 
   factory GradeTypeItem.Create(String id) {
@@ -84,9 +83,9 @@ class GradeTypeItem {
 
   String getGradeTypesListed(BuildContext context) {
     final text = getEnabledListedGradeTypes()
-        ?.map((data) => getGradeTypes(context)[data.index].name ?? '-')
-        ?.join(', ');
-    if (text == null || text == '') {
+        .map((data) => getGradeTypes(context)[data.index].name ?? '-')
+        .join(', ');
+    if (text == '') {
       return '-';
     } else {
       return text;
@@ -94,11 +93,11 @@ class GradeTypeItem {
   }
 
   GradeTypeItem copyWith({
-    String id,
-    String name,
-    double weight,
-    Map<GradeType, bool> gradetypes,
-    bool testsasoneexam,
+    String? id,
+    String? name,
+    double? weight,
+    Map<GradeType, bool>? gradetypes,
+    bool? testsasoneexam,
   }) {
     return GradeTypeItem._(
         id: id ?? this.id,

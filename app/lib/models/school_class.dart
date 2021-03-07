@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:schulplaner8/Data/ObjectsPlanner.dart';
 import 'package:schulplaner8/groups/src/models/group_version.dart';
 import 'package:schulplaner8/models/planner_settings.dart';

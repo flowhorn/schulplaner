@@ -1,5 +1,6 @@
 import 'package:bloc/bloc_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:schulplaner8/Data/userdatabase.dart';
 import 'package:schulplaner8/Helper/helper_views.dart';
 import 'package:schulplaner8/app_base/src/blocs/user_database_bloc.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
@@ -12,7 +13,7 @@ class PrivacyView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final userDatabase =
+    final UserDatabase? userDatabase =
         BlocProvider.of<UserDatabaseBloc>(context).userDatabase;
     return Scaffold(
       backgroundColor: getBackgroundColor(context),
@@ -35,7 +36,7 @@ class PrivacyView extends StatelessWidget {
                         onTap: () {
                           void _launchURL() async {
                             dynamic url =
-                                'mailto:danielfelixplay@gmail.com?subject=${getString(context).remove_data}&body= UID: ${userDatabase?.uid}';
+                                'mailto:danielfelixplay@gmail.com?subject=${getString(context).remove_data}&body= UID: ${userDatabase.uid}';
                             if (await canLaunch(url)) {
                               await launch(url);
                             } else {
@@ -52,7 +53,7 @@ class PrivacyView extends StatelessWidget {
                         onTap: () {
                           void _launchURL() async {
                             dynamic url =
-                                'mailto:danielfelixplay@gmail.com?subject=${getString(context).retrieve_data}&body= UID: ${userDatabase?.uid}';
+                                'mailto:danielfelixplay@gmail.com?subject=${getString(context).retrieve_data}&body= UID: ${userDatabase.uid}';
                             if (await canLaunch(url)) {
                               await launch(url);
                             } else {
@@ -128,12 +129,12 @@ class PrivacyView extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.all(4.0),
-                      child: FlatButton(
+                      child: TextButton(
                         onPressed: () {
                           void _launchURL(BuildContext context) async {
                             try {
                               await launch(
-                                'https://schulplaner.firebaseapp.com/privacy',
+                                'https://schulplaner.web.app/privacy',
                                 forceWebView: true,
                               );
                             } catch (e) {

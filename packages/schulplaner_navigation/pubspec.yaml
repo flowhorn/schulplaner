@@ -6,8 +6,8 @@ homepage:
 publish_to: none
 
 environment:
-  sdk: ">=2.11.0 <3.0.0"
-  flutter: ">=1.25.0 <2.0.0"
+  sdk: ">=2.12.0 <3.0.0"
+  flutter: ">2.0.0"
 
 dependencies:
   bloc:
@@ -16,8 +16,8 @@ dependencies:
     path: ../schulplaner_widgets
   schulplaner_translations:
     path: ../schulplaner_translations
-  rxdart: ^0.25.0
-  shared_preferences: 0.5.12+4
+  rxdart: ^0.26.0
+  shared_preferences: 2.0.3
   flutter:
     sdk: flutter
 

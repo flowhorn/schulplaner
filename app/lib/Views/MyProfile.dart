@@ -16,7 +16,7 @@ class MyProfile extends StatelessWidget {
     return clearAppTheme(
         context: context,
         child: DataDocumentWidget<UserProfile>(
-          package: userDatabaseBloc.userDatabase.userprofile,
+          package: userDatabaseBloc.userDatabase!.userprofile,
           allowNull: true,
           builder: (context, data) {
             return Scaffold(

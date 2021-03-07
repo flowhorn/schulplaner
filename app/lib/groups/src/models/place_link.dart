@@ -1,3 +1,4 @@
+// @dart=2.11
 import 'package:meta/meta.dart';
 import 'package:schulplaner8/groups/src/models/place.dart';
 

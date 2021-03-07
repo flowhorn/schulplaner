@@ -1,3 +1,4 @@
+// @dart=2.11
 import 'package:bloc/bloc_base.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/subjects.dart';
@@ -18,7 +19,7 @@ class JoinGroupBloc extends BlocBase {
   }
 
   Stream<String> get enteredCode => _enteredCodeSubject;
-  String get enteredCodeValue => _enteredCodeSubject.value;
+  String get enteredCodeValue => _enteredCodeSubject.valueWrapper.value;
   Stream<PublicCode> get publicCodeResult => _publicCodeResultSubject;
 
   Function(String) get changeEnteredCode => _enteredCodeSubject.add;

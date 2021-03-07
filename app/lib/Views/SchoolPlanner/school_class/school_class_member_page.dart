@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Views/SchoolPlanner/school_class/school_class_member_sheet.dart';

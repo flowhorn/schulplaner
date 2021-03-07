@@ -1,5 +1,5 @@
+//@dart=2.11
 import 'package:flutter/widgets.dart';
-
 import 'navigation_item.dart';
 
 class NavigationState {

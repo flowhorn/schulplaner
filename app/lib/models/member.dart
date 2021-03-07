@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:schulplaner8/models/additionaltypes.dart';
 import 'package:meta/meta.dart';

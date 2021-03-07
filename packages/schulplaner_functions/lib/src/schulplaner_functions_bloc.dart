@@ -12,9 +12,9 @@ class SchulplanerFunctionsBloc extends BlocBase {
   void dispose() {}
 
   Future<AppFunctionsResult<bool>> joinGroup({
-    @required String myMemberId,
-    @required String groupId,
-    @required GroupType groupType,
+    required String myMemberId,
+    required String groupId,
+    required GroupType groupType,
   }) {
     return _appFunctionsBloc.callCloudFunction(
       functionName: 'JoinGroup',
@@ -28,9 +28,9 @@ class SchulplanerFunctionsBloc extends BlocBase {
   }
 
   Future<AppFunctionsResult<bool>> leaveGroup({
-    @required String myMemberId,
-    @required String groupId,
-    @required GroupType groupType,
+    required String myMemberId,
+    required String groupId,
+    required GroupType groupType,
   }) {
     return _appFunctionsBloc.callCloudFunction(
       functionName: 'LeaveGroup',
@@ -44,10 +44,10 @@ class SchulplanerFunctionsBloc extends BlocBase {
   }
 
   Future<AppFunctionsResult<bool>> removeMemberFromGroup({
-    @required String myMemberId,
-    @required String memberId,
-    @required String groupId,
-    @required GroupType groupType,
+    required String myMemberId,
+    required String memberId,
+    required String groupId,
+    required GroupType groupType,
   }) {
     return _appFunctionsBloc.callCloudFunction(
       functionName: 'RemoveMemberFromGroup',

@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:authentification/authentification_blocs.dart';
 import 'package:authentification/authentification_models.dart';
 import 'package:bloc/bloc_provider.dart';
@@ -43,7 +44,7 @@ class AuthenticationMethodes extends StatelessWidget {
                             de: 'Du hast noch keine Anmeldemethode hinzugefügt. Füge besser jetzt eine hinzu!',
                             en: "You haven't added any Sign-In methode. Do it know!")),
                         /*
-                            trailing: true ? null: FlatButton(
+                            trailing: true ? null: TextButton(
                               onPressed: () {
                                 //pushWidget(context, LoginAdvantagesView());
                               },
@@ -83,13 +84,16 @@ class AuthenticationMethodes extends StatelessWidget {
                           ),
                           SizedBox(
                             height: 52.0,
-                            child: FlatButton(
+                            child: TextButton(
                               onPressed: () {
                                 pushWidget(context, LinkEmailView());
                               },
                               child:
                                   Text(getString(context).linkit.toUpperCase()),
-                              textColor: getAccentColor(context),
+                              style: ButtonStyle(
+                                foregroundColor: MaterialStateProperty.all(
+                                    getAccentColor(context)),
+                              ),
                             ),
                           ),
                         ],
@@ -116,13 +120,16 @@ class AuthenticationMethodes extends StatelessWidget {
                           ),
                           SizedBox(
                             height: 52.0,
-                            child: FlatButton(
+                            child: TextButton(
                               onPressed: () {
                                 linkAuthentificationGoogle(context);
                               },
                               child:
                                   Text(getString(context).linkit.toUpperCase()),
-                              textColor: getAccentColor(context),
+                              style: ButtonStyle(
+                                foregroundColor: MaterialStateProperty.all(
+                                    getAccentColor(context)),
+                              ),
                             ),
                           ),
                         ],

@@ -3,25 +3,27 @@ import 'package:schulplaner8/models/additionaltypes.dart';
 
 @immutable
 class UserProfile {
-  final String uid, name, pic, picThumb, avatar;
+  final String uid;
+  final String? name;
+  final String? pic, picThumb, avatar;
   final ProfileDisplayMode displayMode;
   UserProfile._({
-    @required this.name,
-    @required this.pic,
-    @required this.picThumb,
-    @required this.uid,
-    @required this.avatar,
-    @required this.displayMode,
+    required this.name,
+    required this.pic,
+    required this.picThumb,
+    required this.uid,
+    required this.avatar,
+    required this.displayMode,
   });
 
-  factory UserProfile.create({@required String uid}) {
+  factory UserProfile.create({required String uid}) {
     return UserProfile._(
       uid: uid,
       name: '',
       pic: null,
       picThumb: null,
       avatar: null,
-      displayMode: ProfileDisplayMode.avatar,
+      displayMode: ProfileDisplayMode.none,
     );
   }
 
@@ -48,12 +50,12 @@ class UserProfile {
   }
 
   UserProfile copyWith({
-    String uid,
-    String name,
-    String pic,
-    String picThumb,
-    String avatar,
-    ProfileDisplayMode displayMode,
+    String? uid,
+    String? name,
+    String? pic,
+    String? picThumb,
+    String? avatar,
+    ProfileDisplayMode? displayMode,
   }) {
     return UserProfile._(
       uid: uid ?? this.uid,
@@ -67,18 +69,18 @@ class UserProfile {
 
   UserProfile copyWithNoPic() {
     return UserProfile._(
-      uid: uid ?? uid,
-      name: name ?? name,
+      uid: uid,
+      name: name,
       pic: null,
       picThumb: null,
-      avatar: avatar ?? avatar,
-      displayMode: displayMode ?? displayMode,
+      avatar: avatar,
+      displayMode: displayMode,
     );
   }
 
   bool validate() {
     if (name == null || name == '') return false;
-    if (uid == null || uid == '') return false;
+    if (uid == '') return false;
     return true;
   }
 

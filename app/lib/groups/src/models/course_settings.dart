@@ -9,10 +9,10 @@ class CourseSettings {
   final MemberRole defaultRole;
 
   const CourseSettings._(
-      {@required this.isPublic,
-      @required this.lastChanged,
-      @required this.onlyVerifiedMembers,
-      @required this.defaultRole});
+      {required this.isPublic,
+      required this.lastChanged,
+      required this.onlyVerifiedMembers,
+      required this.defaultRole});
 
   static final CourseSettings standard = CourseSettings._(
       isPublic: true,
@@ -40,10 +40,10 @@ class CourseSettings {
   }
 
   CourseSettings copyWith({
-    bool isPublic,
+    bool? isPublic,
     onlyVerifiedMembers,
-    DateTime lastChanged,
-    MemberRole defaultRole,
+    DateTime? lastChanged,
+    MemberRole? defaultRole,
   }) {
     return CourseSettings._(
       isPublic: isPublic ?? this.isPublic,

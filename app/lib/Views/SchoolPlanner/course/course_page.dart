@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Views/SchoolPlanner/course/leave_course.dart';
 import 'package:schulplaner8/groups/src/bloc/edit_course_bloc.dart';

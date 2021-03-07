@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'dart:async';
 
 import 'package:community_material_icon/community_material_icon.dart';
@@ -208,7 +209,8 @@ class TimelineViewState extends State<TimelineView> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    return Scrollbar(
+      child: ListView.builder(
       itemBuilder: (BuildContext context, int index) {
         String datestring = getDateString(index);
         int weekday = parseDate(datestring).weekday;
@@ -237,6 +239,7 @@ class TimelineViewState extends State<TimelineView> {
             }).toList());
       },
       cacheExtent: 100.0,
+    ),
     );
   }
 }

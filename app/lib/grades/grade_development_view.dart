@@ -14,7 +14,8 @@ class GradeDevelopmentView extends StatelessWidget {
     Color(0xff02d39a),
   ];
 
-  const GradeDevelopmentView({Key key, this.grades, this.gradePackage})
+  const GradeDevelopmentView(
+      {Key? key, required this.grades, required this.gradePackage})
       : super(key: key);
   @override
   Widget build(BuildContext context) {

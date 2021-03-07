@@ -1,3 +1,4 @@
+//@dart=2.11
 library schulplaner_common;
 
 export 'src/common/r_button.dart';

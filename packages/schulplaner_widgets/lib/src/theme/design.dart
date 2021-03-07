@@ -4,13 +4,15 @@ import 'package:flutter/material.dart';
 import 'color_design.dart';
 
 class Design {
-  final Color primary, accent;
-  final String name, id;
+  final Color primary;
+  final Color? accent;
+  final String? id;
+  final String name;
 
   Design({
     this.id,
-    @required this.name,
-    @required this.primary,
+    required this.name,
+    required this.primary,
     this.accent,
   });
 
@@ -35,7 +37,7 @@ class Design {
   Map<String, dynamic> toJson() {
     return {
       'primary': getHex(primary),
-      'accent': accent != null ? getHex(accent) : null,
+      'accent': accent != null ? getHex(accent!) : null,
       'name': name,
     };
   }
@@ -44,7 +46,7 @@ class Design {
     return {
       'id': id,
       'primary': getHex(primary),
-      'accent': accent != null ? getHex(accent) : null,
+      'accent': accent != null ? getHex(accent!) : null,
       'name': name,
     };
   }
@@ -57,9 +59,9 @@ class Design {
   }
 
   Design copyWith({
-    String name,
-    Color primary,
-    Color accent,
+    String? name,
+    Color? primary,
+    Color? accent,
   }) {
     return Design(
       id: id,
@@ -131,13 +133,13 @@ List<Design> designPresets(BuildContext context) {
     Design(
       id: "011",
       name: "Deep Orange",
-      primary: Colors.deepOrange[800],
+      primary: Colors.deepOrange[800]!,
       accent: Colors.deepOrange[800],
     ),
     Design(
       id: "012",
       name: "Light Blue",
-      primary: Colors.lightBlue[300],
+      primary: Colors.lightBlue[300]!,
       accent: Colors.lightBlue[300],
     ),
     Design(

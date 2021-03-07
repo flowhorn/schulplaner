@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:schulplaner8/Helper/GitHub.dart';
@@ -31,7 +32,10 @@ class _AboutContributors extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FormSection(
-        title: BothLangString(de: 'Mitwirkende am Schulplaner', en: 'Schoolplanner\'s collaborators').getText(context),
+        title: BothLangString(
+                de: 'Mitwirkende am Schulplaner',
+                en: 'Schoolplanner\'s collaborators')
+            .getText(context),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -73,7 +77,8 @@ class _ContributorsList extends StatelessWidget {
           return Center(
               child: CircularProgressIndicator(
             strokeWidth: 5,
-            valueColor: AlwaysStoppedAnimation<Color>(ColorUtils.of(context).getAccentColor()),
+            valueColor: AlwaysStoppedAnimation<Color>(
+                ColorUtils.of(context).getAccentColor()),
           ));
         }
 

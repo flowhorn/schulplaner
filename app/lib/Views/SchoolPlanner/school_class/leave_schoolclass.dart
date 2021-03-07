@@ -16,7 +16,7 @@ Future<void> tryToLeaveSchoolClass(
     await showAppFunctionStateSheet(
         context, _leaveSchoolClass(context, schoolClass.id));
     Navigator.popUntil(context, (Route predicate) {
-      final routeName = predicate?.settings?.name;
+      final routeName = predicate.settings.name;
       return routeName?.startsWith('schoolclass') == false;
     });
   }

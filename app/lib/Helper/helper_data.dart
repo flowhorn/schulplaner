@@ -22,13 +22,13 @@ String parseDatetime(DateTime date) {
   return DateFormat.yMMMMEEEEd('de').format(date);
 }
 
-Map<String, dynamic> decodeMapNullable(dynamic data) {
-  Map<dynamic, dynamic> premapdata = data?.cast<String, dynamic>();
+Map<String, dynamic> decodeMapNullable(dynamic? data) {
+  Map<dynamic, dynamic>? premapdata = data?.cast<String, dynamic>();
   return (premapdata ?? {}).map<String, dynamic>(
       (dynamic key, dynamic value) => MapEntry<String, dynamic>(key, value));
 }
 
-Map<String, T1> buildDataMapNullable<T1>(
+Map<String, T1?> buildDataMapNullable<T1>(
     dynamic data, DynamicObjectBuilder<T1> builder) {
   return decodeMapNullable(data).map((key, value) =>
       value != null ? MapEntry(key, builder(value)) : MapEntry(key, null));
@@ -42,7 +42,7 @@ Timestamp buildTimestamp(dynamic data) {
   }
 }
 
-TimeOfDay parseTimeOfDay(String timestring) {
+TimeOfDay parseTimeOfDay(String? timestring) {
   if (timestring == null) return TimeOfDay.now();
   return TimeOfDay(
       hour: int.parse(timestring.split(':')[0]),
@@ -58,7 +58,7 @@ String parseTimeString(TimeOfDay time) {
 
 String parseDateToday() => parseDatetime(DateTime.now());
 
-String useOr(String s1, String s2) {
+String useOr(String? s1, String s2) {
   if (s1 == null || s1 == '') {
     return s2;
   } else {
@@ -85,14 +85,14 @@ List<int> buildIntList(int length, {int start = 0}) {
   return newlist;
 }
 
-TimeOfDay getTimeOfDay(String time) {
+TimeOfDay getTimeOfDay(String? time) {
   return TimeOfDay(
     hour: time != null ? int.parse(time.split(':')[0]) : 12,
     minute: time != null ? int.parse(time.split(':')[1]) : 0,
   );
 }
 
-TimeOfDay getTimeOfUTC(Time time) {
+TimeOfDay getTimeOfUTC(Time? time) {
   DateTime utcTime = DateTime.utc(
     2018,
     1,
@@ -107,7 +107,7 @@ TimeOfDay getTimeOfUTC(Time time) {
   );
 }
 
-Time getUTCTimeOfLocal(Time time) {
+Time getUTCTimeOfLocal(Time? time) {
   final localTime = DateTime(
     2018,
     1,
@@ -124,8 +124,7 @@ Time getUTCTimeOfLocal(Time time) {
 }
 
 AppSettingsData getAppSettings(BuildContext context) {
-  return BlocProvider.of<AppSettingsBloc>(context)?.currentValue ??
-      AppSettingsData.fromString(null);
+  return BlocProvider.of<AppSettingsBloc>(context).currentValue;
 }
 
 ConfigurationData getConfigurationData(BuildContext context) {
@@ -133,7 +132,7 @@ ConfigurationData getConfigurationData(BuildContext context) {
 }
 
 String bothlang(BuildContext context,
-    {@required String de, @required String en}) {
+    {required String de, required String en}) {
   if (getString(context).languagecode == 'de') {
     return de;
   } else {

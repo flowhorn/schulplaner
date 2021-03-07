@@ -10,16 +10,16 @@ class EditDesignBloc extends BlocBase {
 
   EditDesignBloc() {
     _designSubject.add(Design(
-      primary: null,
+      primary: Colors.green,
       name: '',
     ));
     _editModeSubject.add(false);
   }
 
   Stream<Design> get design => _designSubject;
-  Design get currentDesign => _designSubject.value;
-  bool get hasChangedValues => _hasChangedValuesSubject.value;
-  bool get isEditMode => _editModeSubject.value;
+  Design get currentDesign => _designSubject.valueWrapper!.value;
+  bool get hasChangedValues => _hasChangedValuesSubject.valueWrapper!.value;
+  bool get isEditMode => _editModeSubject.valueWrapper!.value;
 
   void changeName(String name) {
     _designSubject.add(currentDesign.copyWith(name: name));

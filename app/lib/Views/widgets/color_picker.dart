@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:flutter/material.dart';
 import 'package:flutter_material_color_picker/flutter_material_color_picker.dart';
 import 'package:schulplaner8/Helper/helper_data.dart';
@@ -36,7 +37,7 @@ class _ColorPicker extends StatelessWidget {
         onlyShadeSelection: true,
       ),
       actions: <Widget>[
-        FlatButton(
+        TextButton(
             onPressed: () {
               Navigator.pop(context, color.value);
             },

@@ -1,7 +1,6 @@
 import 'package:authentification/authentification_blocs.dart';
 import 'package:authentification/authentification_models.dart';
 import 'package:bloc/bloc_base.dart';
-import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:schulplaner8/Helper/NativeConnection.dart';
 import 'package:schulplaner8/app_base/src/blocs/app_settings_bloc.dart';
@@ -22,15 +21,15 @@ class AppLogicControllerBloc extends BlocBase {
   final UserDatabaseBloc userDatabaseBloc;
   final DynamicLinksBloc dynamicLinksBloc;
 
-  String startArgument;
+  String? startArgument;
 
   AppLogicControllerBloc({
-    @required this.authentificationBloc,
-    @required this.appSettingsBloc,
-    @required this.plannerDatabaseBloc,
-    @required this.plannerLoaderBloc,
-    @required this.userDatabaseBloc,
-    @required this.dynamicLinksBloc,
+    required this.authentificationBloc,
+    required this.appSettingsBloc,
+    required this.plannerDatabaseBloc,
+    required this.plannerLoaderBloc,
+    required this.userDatabaseBloc,
+    required this.dynamicLinksBloc,
   }) {
     authentificationBloc.authentificationStatus.listen(_updateAuthentification);
     if (PlatformCheck.isAndroid) {
@@ -39,7 +38,7 @@ class AppLogicControllerBloc extends BlocBase {
       });
     }
     CombineLatestStream.combine2<AuthentificationStatus, LoadAllPlannerStatus,
-        Tuple2<UserId, Planner>>(
+        Tuple2<UserId?, Planner?>>(
       authentificationBloc.authentificationStatus,
       plannerLoaderBloc.loadAllPlannerStatus,
       (authentificationStatus, loadAllPlannerStatus) {
@@ -61,7 +60,7 @@ class AppLogicControllerBloc extends BlocBase {
     }
   }
 
-  void _updatePlanner(UserId userId, Planner planner) {
+  void _updatePlanner(UserId? userId, Planner? planner) {
     plannerDatabaseBloc.setPlanner(userId, planner?.id);
   }
 

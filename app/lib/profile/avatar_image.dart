@@ -1,13 +1,12 @@
-//import 'package:avataaar_image/avataaar_image.dart';
 import 'package:flutter/material.dart';
 
 import 'url_image.dart';
 
 class AvatarImage extends StatelessWidget {
   const AvatarImage({
-    Key key,
-    @required this.avatarData,
-    @required this.size,
+    Key? key,
+    required this.avatarData,
+    required this.size,
   }) : super(key: key);
   final String avatarData;
   final double size;

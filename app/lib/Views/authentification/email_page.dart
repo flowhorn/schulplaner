@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -144,7 +145,7 @@ class EmailView extends StatelessWidget {
                 title: Text(getString(context).pleasecheckdata),
               ),
               actions: <Widget>[
-                FlatButton(
+                TextButton(
                     onPressed: () {
                       Navigator.pop(context);
                     },
@@ -293,7 +294,7 @@ class RegisterEmailView extends StatelessWidget {
                     en: 'Please check your data!')),
               ),
               actions: <Widget>[
-                FlatButton(
+                TextButton(
                     onPressed: () {
                       Navigator.pop(context);
                     },

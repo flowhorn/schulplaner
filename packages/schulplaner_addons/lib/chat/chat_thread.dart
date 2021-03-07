@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:schulplaner_addons/chat/chat_attachment.dart';
 import 'package:schulplaner_addons/chat/chat_bubble.dart';
 import 'package:schulplaner_addons/chat/chat_page.dart';

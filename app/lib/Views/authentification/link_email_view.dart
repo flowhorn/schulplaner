@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -115,7 +116,7 @@ class LinkEmailView extends StatelessWidget {
                                                 .pleasecheckdata),
                                           ),
                                           actions: <Widget>[
-                                            FlatButton(
+                                            TextButton(
                                                 onPressed: () {
                                                   Navigator.pop(context);
                                                 },

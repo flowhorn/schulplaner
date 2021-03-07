@@ -9,8 +9,8 @@ class ConfirmDialog extends SchulplanerDialog {
   final String message;
 
   const ConfirmDialog({
-    @required this.title,
-    @required this.message,
+    required this.title,
+    required this.message,
   });
   @override
   Widget build(BuildContext context) {
@@ -40,13 +40,13 @@ class ConfirmDialog extends SchulplanerDialog {
         title: Text(message),
       ),
       actions: <Widget>[
-        FlatButton(
+        TextButton(
           onPressed: () {
             Navigator.pop(context, false);
           },
           child: Text(getString(context).cancel),
         ),
-        FlatButton(
+        TextButton(
           onPressed: () {
             Navigator.pop(context, true);
           },

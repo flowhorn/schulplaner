@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:schulplaner8/Helper/DateAPI.dart';
 import 'package:schulplaner8/Helper/EasyWidget.dart';
 import 'package:schulplaner8/Helper/PermissionManagement.dart';

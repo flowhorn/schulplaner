@@ -9,8 +9,12 @@ class DrawerTile extends StatelessWidget {
   final String name;
   final VoidCallback onTap;
   final NavigationItem navigationItem;
-  const DrawerTile(
-      {this.icon, this.name, this.onTap, @required this.navigationItem});
+  const DrawerTile({
+    required this.icon,
+    required this.name,
+    required this.onTap,
+    required this.navigationItem,
+  });
   @override
   Widget build(BuildContext context) {
     final navigationBloc = NavigationBloc.of(context);
@@ -21,27 +25,27 @@ class DrawerTile extends StatelessWidget {
       builder: (context, snapshot) {
         final isCollapsed = snapshot.data;
         return StreamBuilder<NavigationState>(
-          key: ValueKey(this.navigationItem),
+          key: ValueKey(navigationItem),
           stream: navigationBloc.currentMainPage,
           initialData: navigationBloc.currentMainPageValue,
           builder: (context, snapshot) {
             final navigationState = snapshot.data;
-            final isSelected = navigationState.isSelected(navigationItem);
+            final isSelected = navigationState!.isSelected(navigationItem);
 
             final child = isSelected
                 ? _Selected(
                     title: name,
                     iconData: icon,
-                    isCollapsed: isCollapsed,
+                    isCollapsed: isCollapsed!,
                   )
                 : _Unselected(
-                    isCollapsed: isCollapsed,
+                    isCollapsed: isCollapsed!,
                     iconData: icon,
                     onTap: onTap,
                     title: name,
                   );
             return AnimatedSwitcher(
-              key: ValueKey(this.navigationItem),
+              key: ValueKey(navigationItem),
               child: child,
               duration: Duration(milliseconds: 250),
             );
@@ -58,10 +62,10 @@ class _Selected extends StatelessWidget {
   final bool isCollapsed;
 
   const _Selected({
-    Key key,
-    @required this.iconData,
-    @required this.title,
-    @required this.isCollapsed,
+    Key? key,
+    required this.iconData,
+    required this.title,
+    required this.isCollapsed,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -110,11 +114,11 @@ class _Unselected extends StatelessWidget {
   final bool isCollapsed;
 
   const _Unselected({
-    Key key,
-    @required this.iconData,
-    @required this.title,
-    @required this.onTap,
-    @required this.isCollapsed,
+    Key? key,
+    required this.iconData,
+    required this.title,
+    required this.onTap,
+    required this.isCollapsed,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {

@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:authentification/src/blocs/sign_in_bloc.dart';
 import 'package:bloc/bloc_provider.dart';
 import 'package:flutter/material.dart';

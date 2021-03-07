@@ -1,3 +1,4 @@
+//@dart=2.11
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Data/Planner/Lesson.dart';
 import 'package:schulplaner8/Data/Planner/SchoolEvent.dart';
@@ -394,7 +395,10 @@ class _TimelineTileSectionEvents extends StatelessWidget {
 class HolidayTile_Timeline extends StatelessWidget {
   final Holiday holiday;
 
-  const HolidayTile_Timeline({Key key, this.holiday}) : super(key: key);
+  const HolidayTile_Timeline({
+    Key key,
+    this.holiday,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
