@@ -19,12 +19,12 @@ class DownloadButtons extends StatelessWidget {
       children: const [
         _DownloadAndroid(),
         SizedBox(
-          width: 8,
+          width: 4,
           height: 8,
         ),
         _DownloadiOS(),
         SizedBox(
-          width: 8,
+          width: 4,
           height: 10,
         ),
         _OpenWebApp(),
@@ -37,15 +37,19 @@ class _DownloadAndroid extends StatelessWidget {
   const _DownloadAndroid();
   @override
   Widget build(BuildContext context) {
-    return AssetButton(
-      onTap: () {
-        openUrl(
-          urlString: kPlayStoreURL,
-          openInNewWindow: true,
-        );
-      },
-      assetPath: 'assets/badges/google-play-badge.png',
-      height: 58.0,
+    return SizedBox(
+      height: 60.0,
+      width: 125.0,
+      child: AssetButton(
+        onTap: () {
+          openUrl(
+            urlString: kPlayStoreURL,
+            openInNewWindow: true,
+          );
+        },
+        assetPath: 'assets/badges/google-play-badge.png',
+        height: 60.0,
+      ),
     );
   }
 }
@@ -54,15 +58,20 @@ class _DownloadiOS extends StatelessWidget {
   const _DownloadiOS();
   @override
   Widget build(BuildContext context) {
-    return SvgButton(
-      onTap: () {
-        openUrl(
-          urlString: kAppstoreURL,
-          openInNewWindow: true,
-        );
-      },
-      assetPath: 'assets/badges/Download_on_the_App_Store_Badge_DE_RGB_wht.svg',
-      height: 40.0,
+    return SizedBox(
+      height: 48.0,
+      width: 125.0,
+      child: SvgButton(
+        onTap: () {
+          openUrl(
+            urlString: kAppstoreURL,
+            openInNewWindow: true,
+          );
+        },
+        assetPath:
+            'assets/badges/Download_on_the_App_Store_Badge_DE_RGB_wht.svg',
+        height: 48.0,
+      ),
     );
   }
 }
@@ -71,15 +80,19 @@ class _OpenWebApp extends StatelessWidget {
   const _OpenWebApp();
   @override
   Widget build(BuildContext context) {
-    return AssetButton(
-      onTap: () {
-        openUrl(
-          urlString: kWebAppURL,
-          openInNewWindow: true,
-        );
-      },
-      assetPath: 'assets/badges/open-web-app.png',
-      height: 40.0,
+    return SizedBox(
+      height: 48.0,
+      width: 125.0,
+      child: AssetButton(
+        onTap: () {
+          openUrl(
+            urlString: kWebAppURL,
+            openInNewWindow: true,
+          );
+        },
+        assetPath: 'assets/badges/open-web-app.png',
+        height: 48.0,
+      ),
     );
   }
 }

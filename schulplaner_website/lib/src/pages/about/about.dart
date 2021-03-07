@@ -6,6 +6,7 @@ class AboutPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InnerLayout(
+      key: ValueKey('AboutPageContent'),
       content: Column(
         children: const [
           SizedBox(height: 128),

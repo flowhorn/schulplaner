@@ -22,7 +22,7 @@ dependencies:
     path: ../universal_commons
   firebase_auth: 1.0.0
   google_sign_in: 5.0.0
-  sign_in_with_apple: ^2.5.4
+  sign_in_with_apple: ^3.0.0
   firebase_auth_oauth: 0.2.4
   rxdart: ^0.26.0
   community_material_icon: 5.9.55

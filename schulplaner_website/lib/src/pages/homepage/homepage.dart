@@ -12,6 +12,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InnerLayout(
+      key: ValueKey('HomePageContent'),
       content: Column(
         children: const [
           SizedBox(height: 128),

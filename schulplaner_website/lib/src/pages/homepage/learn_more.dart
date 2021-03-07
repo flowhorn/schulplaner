@@ -8,31 +8,43 @@ class LearnMoreSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [
+      children: const [
         LayoutTitle(
           text: 'Erfahre mehr...',
         ),
         SizedBox(height: 16),
-        Column(
-          children: [
-            _LearnMoreElement(
-              iconData: Icons.favorite_outline,
-              title: 'wie du Schulplaner unterstützen kannst',
-              onTap: () {
-                openNavigationPage(context, NavigationItem.donate);
-              },
-            ),
-            _LearnMoreElement(
-              iconData: Icons.code_outlined,
-              title: 'dass Schulplaner Open-Source ist',
-              onTap: () {
-                openNavigationPage(context, NavigationItem.opensource);
-              },
-            ),
-          ],
-        ),
+        _LearnMoreDonate(),
+        _LearnMoreOpenSource(),
       ],
       crossAxisAlignment: CrossAxisAlignment.start,
+    );
+  }
+}
+
+class _LearnMoreDonate extends StatelessWidget {
+  const _LearnMoreDonate();
+  @override
+  Widget build(BuildContext context) {
+    return _LearnMoreElement(
+      iconData: Icons.favorite_outline,
+      title: 'wie du Schulplaner unterstützen kannst',
+      onTap: () {
+        openNavigationPage(context, NavigationItem.donate);
+      },
+    );
+  }
+}
+
+class _LearnMoreOpenSource extends StatelessWidget {
+  const _LearnMoreOpenSource();
+  @override
+  Widget build(BuildContext context) {
+    return _LearnMoreElement(
+      iconData: Icons.code_outlined,
+      title: 'dass Schulplaner Open-Source ist',
+      onTap: () {
+        openNavigationPage(context, NavigationItem.opensource);
+      },
     );
   }
 }

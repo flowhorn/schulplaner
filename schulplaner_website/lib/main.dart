@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:persist_theme/persist_theme.dart';
 import 'package:provider/provider.dart';
 import 'package:schulplaner_website/src/routes.dart';
+
+import 'src/widgets/web_transition.dart';
 //import 'package:url_strategy/url_strategy.dart';
 
 void main() {
@@ -26,7 +28,7 @@ class MyApp extends StatelessWidget {
               accentColor: Colors.teal,
               brightness: model.darkMode ? Brightness.dark : Brightness.light,
               visualDensity: VisualDensity.adaptivePlatformDensity,
-              pageTransitionsTheme: PageTransitionsTheme(),
+              pageTransitionsTheme: NoTransitionsOnWeb(),
             ),
             initialRoute: homepageWebsiteRoute,
             routes: navigationRoutes,

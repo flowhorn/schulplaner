@@ -1,5 +1,7 @@
 // @dart=2.11
 import 'package:bloc/bloc_base.dart';
+import 'package:bloc/bloc_provider.dart';
+import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:schulplaner8/app_base/src/models/app_stats.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -34,7 +36,7 @@ class AppStatsBloc extends BlocBase {
 
   void incrementOpenHomePage() {
     final currentStatsData = _appStatsSubject.value;
-    currentStatsData.openedapp++;
+    currentStatsData.openedhomepage++;
 
     SharedPreferences.getInstance().then((pref) {
       pref.setString('appstats', currentStatsData.toJsonString());
@@ -53,5 +55,16 @@ class AppStatsBloc extends BlocBase {
   @override
   void dispose() {
     _appStatsSubject.close();
+  }
+
+  void hideDonationCardForThisMonth() {
+    final currentStatsData = _appStatsSubject.value.copy();
+    currentStatsData.setHideThisMonth();
+
+    updateAppStats(currentStatsData);
+  }
+
+  static AppStatsBloc of(BuildContext context) {
+    return BlocProvider.of<AppStatsBloc>(context);
   }
 }

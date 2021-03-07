@@ -7,8 +7,9 @@ class DonatePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InnerLayout(
+      key: ValueKey('DonatePageContent'),
       content: Column(
-        children: [
+        children: const [
           SizedBox(height: 128),
           ResponsiveSides(
             first: Center(
@@ -24,33 +25,7 @@ class DonatePage extends StatelessWidget {
                 radius: 72,
               ),
             ),
-            second: Column(
-              children: [
-                Text(
-                  'Spenden',
-                  style: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.w600,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                SizedBox(height: 12),
-                Text(
-                  'Die Schulplaner App ist komplett kostenlos und werbefrei!\n'
-                  'Für die hilfreichen Online-Features der App entstehen jedoch jeden Monat Serverkosten.\n'
-                  'Du kannst mitunterstützen, damit die App am Leben bleibt!',
-                  style: TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight.w400,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                SizedBox(height: 12),
-                _PaypalMeButton(),
-                SizedBox(height: 32),
-              ],
-              crossAxisAlignment: CrossAxisAlignment.center,
-            ),
+            second: _DonateText(),
           ),
           SizedBox(height: 128),
         ],
@@ -59,15 +34,54 @@ class DonatePage extends StatelessWidget {
   }
 }
 
+class _DonateText extends StatelessWidget {
+  const _DonateText();
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: const [
+        Text(
+          'Spenden',
+          style: TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.w600,
+          ),
+          textAlign: TextAlign.center,
+        ),
+        SizedBox(height: 12),
+        Text(
+          'Die Schulplaner App ist komplett kostenlos und werbefrei!\n'
+          'Für die hilfreichen Online-Features der App entstehen jedoch jeden Monat Serverkosten.\n'
+          'Du kannst mitunterstützen, damit die App am Leben bleibt!',
+          style: TextStyle(
+            fontSize: 17,
+            fontWeight: FontWeight.w400,
+          ),
+          textAlign: TextAlign.center,
+        ),
+        SizedBox(height: 16),
+        _PaypalMeButton(),
+        SizedBox(height: 32),
+      ],
+      crossAxisAlignment: CrossAxisAlignment.center,
+    );
+  }
+}
+
 class _PaypalMeButton extends StatelessWidget {
+  const _PaypalMeButton();
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
-      child: Text('Zu Paypal weiterleiten'),
+      child: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Text('Zu Paypal weiterleiten'),
+      ),
       onPressed: () {
         openUrl(
-            urlString: 'https://www.paypal.com/paypalme/felixweuthen',
-            openInNewWindow: true);
+          urlString: 'https://www.paypal.com/paypalme/felixweuthen',
+          openInNewWindow: true,
+        );
       },
       color: Colors.lightBlue,
     );

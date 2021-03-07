@@ -8,6 +8,7 @@ class DownloadPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InnerLayout(
+      key: ValueKey('DownloadPageContent'),
       content: Column(
         children: const [
           SizedBox(height: 128),
@@ -100,10 +101,7 @@ class _SecondSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
       ),
       second: Center(
-        child: Image.asset(
-          'assets/screenshots/screenshot_mobile1.png',
-          width: 180.0,
-        ),
+        child: _Mobile1Screenshot(),
       ),
     );
   }
@@ -114,11 +112,8 @@ class _ThirdSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ResponsiveSides(
-      first: Center(
-        child: Image.asset(
-          'assets/screenshots/screenshot_desktop1.png',
-          height: 240.0,
-        ),
+      first: const Center(
+        child: _Desktop1Screenshot(),
       ),
       second: Column(
         children: const [
@@ -145,6 +140,35 @@ class _ThirdSection extends StatelessWidget {
           SizedBox(height: 32),
         ],
         crossAxisAlignment: CrossAxisAlignment.center,
+      ),
+    );
+  }
+}
+
+class _Mobile1Screenshot extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 400,
+      width: 200,
+      child: Image.asset(
+        'assets/screenshots/screenshot_mobile1.png',
+        width: 200,
+      ),
+    );
+  }
+}
+
+class _Desktop1Screenshot extends StatelessWidget {
+  const _Desktop1Screenshot();
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 250,
+      width: 400,
+      child: Image.asset(
+        'assets/screenshots/screenshot_desktop1.png',
+        height: 250.0,
       ),
     );
   }

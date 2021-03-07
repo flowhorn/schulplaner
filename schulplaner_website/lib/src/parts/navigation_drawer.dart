@@ -8,25 +8,33 @@ class NavigationDrawer extends StatelessWidget {
   const NavigationDrawer();
   @override
   Widget build(BuildContext context) {
-    return Drawer(
+    return const Drawer(
       child: SingleChildScrollView(
-        child: Column(
-          children: const [
-            SizedBox(height: 16),
-            _HomepageTile(),
-            _DownloadTile(),
-            _DonateTile(),
-            _PrivacyTile(),
-            _OpenSourceTile(),
-            _ImpressumTile(),
-            _AboutTile(),
-            SizedBox(height: 16),
-            Divider(),
-            SizedBox(height: 16),
-            DarkModeSwitch(),
-          ],
-        ),
+        child: _DrawerList(),
       ),
+    );
+  }
+}
+
+class _DrawerList extends StatelessWidget {
+  const _DrawerList();
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: const [
+        SizedBox(height: 16),
+        _HomepageTile(),
+        _DownloadTile(),
+        _DonateTile(),
+        _PrivacyTile(),
+        _OpenSourceTile(),
+        _ImpressumTile(),
+        _AboutTile(),
+        SizedBox(height: 16),
+        Divider(),
+        SizedBox(height: 16),
+        DarkModeSwitch(),
+      ],
     );
   }
 }
@@ -35,7 +43,7 @@ class _HomepageTile extends StatelessWidget {
   const _HomepageTile();
   @override
   Widget build(BuildContext context) {
-    return _DrawerListTile(
+    return const _DrawerListTile(
       title: 'Übersicht',
       navigationItem: NavigationItem.homepage,
       iconData: Icons.home_outlined,
@@ -47,7 +55,7 @@ class _AboutTile extends StatelessWidget {
   const _AboutTile();
   @override
   Widget build(BuildContext context) {
-    return _DrawerListTile(
+    return const _DrawerListTile(
       title: 'Über',
       navigationItem: NavigationItem.about,
       iconData: Icons.info_outline,
@@ -59,7 +67,7 @@ class _PrivacyTile extends StatelessWidget {
   const _PrivacyTile();
   @override
   Widget build(BuildContext context) {
-    return _DrawerListTile(
+    return const _DrawerListTile(
       title: 'Datenschutz',
       navigationItem: NavigationItem.privacy,
       iconData: Icons.privacy_tip_outlined,
@@ -71,7 +79,7 @@ class _DownloadTile extends StatelessWidget {
   const _DownloadTile();
   @override
   Widget build(BuildContext context) {
-    return _DrawerListTile(
+    return const _DrawerListTile(
       title: 'Download',
       navigationItem: NavigationItem.download,
       iconData: Icons.download_outlined,
@@ -83,7 +91,7 @@ class _DonateTile extends StatelessWidget {
   const _DonateTile();
   @override
   Widget build(BuildContext context) {
-    return _DrawerListTile(
+    return const _DrawerListTile(
       title: 'Spenden',
       navigationItem: NavigationItem.donate,
       iconData: Icons.favorite_outline,
@@ -95,7 +103,7 @@ class _ImpressumTile extends StatelessWidget {
   const _ImpressumTile();
   @override
   Widget build(BuildContext context) {
-    return _DrawerListTile(
+    return const _DrawerListTile(
       title: 'Impressum',
       navigationItem: NavigationItem.impressum,
       iconData: Icons.contact_mail_outlined,
@@ -107,7 +115,7 @@ class _OpenSourceTile extends StatelessWidget {
   const _OpenSourceTile();
   @override
   Widget build(BuildContext context) {
-    return _DrawerListTile(
+    return const _DrawerListTile(
       title: 'Open Source',
       navigationItem: NavigationItem.opensource,
       iconData: Icons.code_outlined,

@@ -24,7 +24,7 @@ class InformationCards extends StatelessWidget {
         ],
       ),
       second: Column(
-        children: [
+        children: const [
           InformationCard(
             title: 'Übersichtlich',
             description:
@@ -34,17 +34,25 @@ class InformationCards extends StatelessWidget {
             title: 'Sicher',
             description:
                 'Wir verwenden neueste und beste Technologien für die App. So ist die gesamte App verschlüsselt über TLS-Kommunikation. Die Daten werden zudem zusätzlich verschlüsselt. So musst du dir um die Sicherheit keine Sorgen mehr machen.',
-            actions: TextButton(
-              child: Text('-> Erfahre mehr über den Datenschutz'),
-              onPressed: () {
-                openNavigationPage(context, NavigationItem.privacy);
-              },
-              style: ButtonStyle(
-                foregroundColor: MaterialStateProperty.all(Colors.teal),
-              ),
-            ),
+            actions: _LearnMoreAboutPrivacyButton(),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _LearnMoreAboutPrivacyButton extends StatelessWidget {
+  const _LearnMoreAboutPrivacyButton();
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      child: Text('-> Erfahre mehr über den Datenschutz'),
+      onPressed: () {
+        openNavigationPage(context, NavigationItem.privacy);
+      },
+      style: ButtonStyle(
+        foregroundColor: MaterialStateProperty.all(Colors.teal),
       ),
     );
   }

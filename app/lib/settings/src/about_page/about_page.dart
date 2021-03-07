@@ -5,6 +5,7 @@ import 'package:launch_review/launch_review.dart';
 import 'package:schulplaner8/Helper/LogAnalytics.dart';
 import 'package:schulplaner8/Helper/helper_data.dart';
 import 'package:schulplaner8/Helper/helper_views.dart';
+import 'package:schulplaner8/donation/donation_page.dart';
 import 'package:schulplaner8/settings/src/about_page/about_page_contributors.dart';
 import 'package:schulplaner8/settings/src/about_page/about_page_header.dart';
 import 'package:schulplaner_navigation/schulplaner_navigation.dart';
@@ -67,8 +68,7 @@ class _AboutApp extends StatelessWidget {
               if (PlatformCheck.isAndroid || PlatformCheck.isIOS) {
                 LaunchReview.launch();
               } else {
-                launch(
-                    'https://schulplaner.web.app/'); //todo(flowhorn) set link to download section
+                launch('https://schulplaner.web.app/download');
               }
             },
           )
@@ -302,8 +302,7 @@ class _Financing extends StatelessWidget {
                 style: TextStyle(color: Colors.red),
               ),
               onTap: () {
-                launch('https://schulplaner.web.app/support');
-                LogAnalytics.SupportAppClickAbout();
+                openDonationPage(context: context);
               },
             ),
           ],

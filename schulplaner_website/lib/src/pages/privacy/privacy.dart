@@ -8,8 +8,9 @@ class PrivacyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InnerLayout(
+      key: ValueKey('PrivacyPageContent'),
       content: Column(
-        children: [
+        children: const [
           SizedBox(height: 128),
           ResponsiveSides(
             first: Center(
@@ -23,31 +24,7 @@ class PrivacyPage extends StatelessWidget {
                 radius: 72,
               ),
             ),
-            second: Column(
-              children: [
-                Text(
-                  'Datenschutz!',
-                  style: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.w600,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                SizedBox(height: 12),
-                Text(
-                  'Schulplaner ist kein kommerzielles Produkt.\n'
-                  'Alle erhobenen Daten dienen ausschließlich der Funktionalität von Schulplaner\n'
-                  '-> Erfahre mehr darüber.',
-                  style: TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight.w400,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                SizedBox(height: 32),
-              ],
-              crossAxisAlignment: CrossAxisAlignment.center,
-            ),
+            second: _FirstSectionText(),
           ),
           SizedBox(height: 128),
           _PdfPrivacyPolicy(),
@@ -55,6 +32,38 @@ class PrivacyPage extends StatelessWidget {
         ],
         crossAxisAlignment: CrossAxisAlignment.start,
       ),
+    );
+  }
+}
+
+class _FirstSectionText extends StatelessWidget {
+  const _FirstSectionText();
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: const [
+        Text(
+          'Datenschutz!',
+          style: TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.w600,
+          ),
+          textAlign: TextAlign.center,
+        ),
+        SizedBox(height: 12),
+        Text(
+          'Schulplaner ist kein kommerzielles Produkt.\n'
+          'Alle erhobenen Daten dienen ausschließlich der Funktionalität von Schulplaner\n'
+          '-> Erfahre mehr darüber.',
+          style: TextStyle(
+            fontSize: 17,
+            fontWeight: FontWeight.w400,
+          ),
+          textAlign: TextAlign.center,
+        ),
+        SizedBox(height: 32),
+      ],
+      crossAxisAlignment: CrossAxisAlignment.center,
     );
   }
 }
@@ -70,7 +79,7 @@ class _PdfPrivacyPolicy extends StatelessWidget {
           child: LayoutBuilder(builder: (context, constraints) {
             final maxWidth = constraints.maxWidth;
             final containerWidthFactor =
-                (maxWidth > 400 ? 0.7 : 0.98) * maxWidth;
+                (maxWidth > 600 ? 0.7 : 0.98) * maxWidth;
             return Container(
               width: containerWidthFactor,
               child: Column(
@@ -110,7 +119,7 @@ class _PolicyContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [
+      children: const [
         SizedBox(height: 32),
         _PolicyText(
           title: _Title('Datenschutzerklärung Schulplaner'),
@@ -172,7 +181,8 @@ class _PolicyContent extends StatelessWidget {
               '- Recht auf Löschung und Einschränkung der Verarbeitung von Daten (nach Art. 17 DSGVO)\n'
               '- Recht auf Vergessenwerden (nach Art. 17 DSGVO)\n'
               '- Recht auf Datenübertragbarkeit (nach Art. 20 DSGVO)\n'
-              '- Recht auf Beschwerde bei Aufsichtsbehörden (nach Art. 77 DSGVO). - Recht auf Widerruf von Einwilligungen (nach Art. 7 Abs. 3 DSGVO).',
+              '- Recht auf Beschwerde bei Aufsichtsbehörden (nach Art. 77 DSGVO)\n'
+              ' - Recht auf Widerruf von Einwilligungen (nach Art. 7 Abs. 3 DSGVO)',
             )
           ],
         ),
@@ -188,7 +198,8 @@ class _PolicyContent extends StatelessWidget {
           title: _Title('Kontakt'),
           texts: [
             _ContentText(
-              'Bei Fragen wenden Sie sich bitte an unseren Datenschutzbeauftragten.\n Felix Weuthen'
+              'Bei Fragen wenden Sie sich bitte an unseren Datenschutzbeauftragten.\n'
+              'Felix Weuthen\n'
               'Klosterstraße 50\n'
               '41747 Viersen\n'
               'Email: danielfelixplay@gmail.com',

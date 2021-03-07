@@ -8,6 +8,7 @@ class OpenSourcePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InnerLayout(
+      key: ValueKey('OpenSourceContent'),
       content: Column(
         children: const [
           SizedBox(height: 128),
@@ -71,7 +72,7 @@ class _RedirectButtons extends StatelessWidget {
   Widget build(BuildContext context) {
     return ResponsiveList(
       breakPoint: 350,
-      children: [
+      children: const [
         _OpenGithub(),
         SizedBox(width: 12, height: 12),
         _OpenDiscord(),
@@ -82,6 +83,7 @@ class _RedirectButtons extends StatelessWidget {
 }
 
 class _OpenGithub extends StatelessWidget {
+  const _OpenGithub();
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
@@ -100,6 +102,7 @@ class _OpenGithub extends StatelessWidget {
 }
 
 class _OpenDiscord extends StatelessWidget {
+  const _OpenDiscord();
   @override
   Widget build(BuildContext context) {
     return MaterialButton(

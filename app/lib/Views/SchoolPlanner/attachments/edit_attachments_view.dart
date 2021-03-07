@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:schulplaner8/Data/Planner/File.dart';
 import 'package:schulplaner8/Data/plannerdatabase.dart';
 import 'package:schulplaner8/Helper/Functions.dart';
+import 'package:schulplaner8/Views/SchoolPlanner/overview/action_view.dart';
 import 'package:schulplaner8/files/pages/new_file_page.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
 import 'package:schulplaner_widgets/schulplaner_forms.dart';
@@ -12,7 +13,7 @@ import 'new_file_view.dart';
 
 class EditAttachementsView extends StatelessWidget {
   final PlannerDatabase database;
-  final Map<String, CloudFile> attachments;
+  final Map<String, CloudFile>? attachments;
   final ValueSetter<CloudFile> onAdded, onRemoved;
   EditAttachementsView(
       {required this.database,
@@ -24,25 +25,25 @@ class EditAttachementsView extends StatelessWidget {
     return Column(
       children: <Widget>[
         FormHeader(getString(context).attachments),
-        ...(attachments.values.map<Widget>((it) {
-          return ListTile(
-            leading: ColoredCircleIcon(
-              icon: Icon(Icons.attach_file),
+        if (attachments != null)
+          for (final it in attachments!.values)
+            ListTile(
+              leading: ColoredCircleIcon(
+                icon: Icon(Icons.attach_file),
+              ),
+              title: Text(it.name),
+              subtitle: it.url == null
+                  ? null
+                  : Text(
+                      it.url,
+                      style: TextStyle(color: Colors.blue),
+                    ),
+              trailing: IconButton(
+                  icon: Icon(Icons.cancel),
+                  onPressed: () {
+                    onRemoved(it);
+                  }),
             ),
-            title: Text(it.name),
-            subtitle: it.url == null
-                ? null
-                : Text(
-                    it.url,
-                    style: TextStyle(color: Colors.blue),
-                  ),
-            trailing: IconButton(
-                icon: Icon(Icons.cancel),
-                onPressed: () {
-                  onRemoved(it);
-                }),
-          );
-        }).toList()),
         FormButton(
           getString(context).newattachment,
           () {

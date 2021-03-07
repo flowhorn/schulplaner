@@ -4,6 +4,7 @@ import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Helper/Functions.dart';
 import 'package:schulplaner8/Views/SchoolPlanner/Overview.dart';
+import 'package:schulplaner8/Views/SchoolPlanner/overview/quick_action_view.dart';
 import 'package:schulplaner8/app_base/src/blocs/planner_database_bloc.dart';
 import 'package:schulplaner8/grades/pages/edit_grade_page.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
@@ -54,27 +55,29 @@ class QuickCreateView extends StatelessWidget {
                             ));
                       }),
                   QuickActionView(
-                      iconData: CommunityMaterialIcons.trophy_outline,
-                      text: getString(context).grade,
-                      color: Colors.indigoAccent,
-                      onTap: () {
-                        pushWidget(
-                            context,
-                            NewGradeView(
-                              database,
-                            ));
-                      }),
+                    iconData: CommunityMaterialIcons.trophy_outline,
+                    text: getString(context).grade,
+                    color: Colors.indigoAccent,
+                    onTap: () {
+                      pushWidget(
+                          context,
+                          NewGradeView(
+                            database,
+                          ));
+                    },
+                  ),
                   QuickActionView(
-                      iconData: Icons.info_outline,
-                      text: getString(context).info,
-                      color: Colors.purpleAccent,
-                      onTap: () {
-                        pushWidget(
-                            context,
-                            NewLessonInfoView(
-                              database,
-                            ));
-                      }),
+                    iconData: Icons.info_outline,
+                    text: getString(context).info,
+                    color: Colors.purpleAccent,
+                    onTap: () {
+                      pushWidget(
+                          context,
+                          NewLessonInfoView(
+                            database,
+                          ));
+                    },
+                  ),
                   QuickActionView(
                       iconData: Icons.not_interested,
                       text: getString(context).absenttime,

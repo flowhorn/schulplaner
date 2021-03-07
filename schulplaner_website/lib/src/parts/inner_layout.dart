@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:schulplaner_website/src/parts/layout_title.dart';
 import 'footer/footer.dart';
 
 class InnerLayout extends StatelessWidget {

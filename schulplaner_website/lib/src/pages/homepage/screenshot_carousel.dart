@@ -6,23 +6,27 @@ class ScreenshotCarousel extends StatelessWidget {
   const ScreenshotCarousel();
   @override
   Widget build(BuildContext context) {
-    return CarouselSlider(
-      items: const [
-        _ScreenshotImage(
-          assetPath: 'assets/screenshots/screenshot_mobile1.png',
+    return SizedBox(
+      height: 400,
+      width: 800,
+      child: CarouselSlider(
+        items: const [
+          _ScreenshotImage(
+            assetPath: 'assets/screenshots/screenshot_mobile1.png',
+          ),
+          _ScreenshotImage(
+            assetPath: 'assets/screenshots/screenshot_mobile2.png',
+          ),
+          _ScreenshotImage(
+            assetPath: 'assets/screenshots/screenshot_mobile3.png',
+          ),
+        ],
+        options: CarouselOptions(
+          autoPlay: true,
+          enlargeCenterPage: true,
+          aspectRatio: 1.6,
+          viewportFraction: 0.3,
         ),
-        _ScreenshotImage(
-          assetPath: 'assets/screenshots/screenshot_mobile2.png',
-        ),
-        _ScreenshotImage(
-          assetPath: 'assets/screenshots/screenshot_mobile3.png',
-        ),
-      ],
-      options: CarouselOptions(
-        autoPlay: true,
-        enlargeCenterPage: true,
-        aspectRatio: 1.6,
-        viewportFraction: 0.3,
       ),
     );
   }
@@ -38,7 +42,9 @@ class _ScreenshotImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
+      width: 180,
+      height: 415,
       child: Center(
         child: Image(
           image: AssetImage(assetPath),
