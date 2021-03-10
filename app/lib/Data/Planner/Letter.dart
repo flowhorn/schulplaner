@@ -80,7 +80,7 @@ class Letter {
   final SavedIn? savedin;
   final Timestamp published, lastchanged;
   final bool archived, deleted, sendpush, allowreply;
-  final Map<String, CloudFile> files;
+  final Map<String, CloudFile?> files;
   final Map<String, LetterResponse> responses;
 
   const Letter._(
@@ -130,7 +130,9 @@ class Letter {
         allowreply: data['allowreply'],
         savedin: SavedIn.fromData(data['savedin']),
         files: decodeMap<CloudFile>(
-            data['files'], (key, value) => CloudFile.fromData(value)),
+          data['files'],
+          (key, value) => CloudFile.fromData(value),
+        ),
         responses: decodeMap<LetterResponse>(
             data['responses'], (key, value) => LetterResponse.FromData(value)));
   }
@@ -147,7 +149,7 @@ class Letter {
     deleted,
     sendpush,
     allowreply,
-    Map<String, CloudFile>? files,
+    Map<String, CloudFile?>? files,
     Map<String, LetterResponse>? responses,
   }) {
     return Letter._(
@@ -206,7 +208,7 @@ class Letter {
       'deleted': deleted,
       'sendpush': sendpush,
       'allowreply': allowreply,
-      'files': files.map((key, value) => MapEntry(key, value.toJson())),
+      'files': files.map((key, value) => MapEntry(key, value?.toJson())),
       'responses': responses.map((key, value) => MapEntry(key, value.toJson())),
     };
   }

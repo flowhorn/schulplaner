@@ -79,14 +79,16 @@ class SchoolEvent {
         if (data['olddata']['att'] != null) {
           Map<dynamic, dynamic> rawdata = data['olddata']['att'];
           final attachments = rawdata.map<String, CloudFile>(
-              (key, value) => MapEntry<String, CloudFile>(
-                  key,
-                  CloudFile(
-                    fileid: key,
-                    name: value['n'] ?? key,
-                    fileform: FileForm.OLDTTYPE,
-                    savedin: SavedIn(type: SavedInType.PERSONAL, id: null),
-                  )));
+            (key, value) => MapEntry<String, CloudFile>(
+              key,
+              CloudFile(
+                fileid: key,
+                name: value['n'] ?? key,
+                fileform: FileForm.OLDTTYPE,
+                savedin: SavedIn(type: SavedInType.PERSONAL, id: null),
+              ),
+            ),
+          );
           files.addAll(attachments);
         }
         if (data['olddata']['attachments'] != null) {

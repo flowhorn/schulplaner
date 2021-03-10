@@ -20,7 +20,7 @@ dependencies:
     path: ../schulplaner_translations
   universal_commons:
     path: ../universal_commons
-  firebase_auth: 1.0.0
+  firebase_auth: 1.0.1
   google_sign_in: 5.0.0
   sign_in_with_apple: ^3.0.0
   firebase_auth_oauth: 1.0.1

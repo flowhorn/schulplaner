@@ -1,9 +1,11 @@
 import 'package:bloc/bloc_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Data/userdatabase.dart';
+import 'package:schulplaner8/Helper/Functions.dart';
 import 'package:schulplaner8/Helper/helper_views.dart';
 import 'package:schulplaner8/app_base/src/blocs/user_database_bloc.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
+import 'package:schulplaner_website/schulplaner_website_pages.dart';
 import 'package:schulplaner_widgets/schulplaner_forms.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:schulplaner_widgets/schulplaner_theme.dart';
@@ -68,18 +70,7 @@ class PrivacyView extends StatelessWidget {
                         leading: Icon(Icons.security),
                         title: Text(getString(context).privacy_policy),
                         onTap: () {
-                          void _launchURL(BuildContext context) async {
-                            try {
-                              await launch(
-                                  'https://schulplaner.firebaseapp.com/privacy',
-                                  forceWebView: true);
-                            } catch (e) {
-                              // An exception is thrown if browser app is not installed on Android device.
-                              debugPrint(e.toString());
-                            }
-                          }
-
-                          _launchURL(context);
+                          openPrivacyPolicyPage(context);
                         },
                       ),
                       ListTile(
@@ -131,19 +122,7 @@ class PrivacyView extends StatelessWidget {
                       padding: const EdgeInsets.all(4.0),
                       child: TextButton(
                         onPressed: () {
-                          void _launchURL(BuildContext context) async {
-                            try {
-                              await launch(
-                                'https://schulplaner.web.app/privacy',
-                                forceWebView: true,
-                              );
-                            } catch (e) {
-                              // An exception is thrown if browser app is not installed on Android device.
-                              debugPrint(e.toString());
-                            }
-                          }
-
-                          _launchURL(context);
+                          openPrivacyPolicyPage(context);
                         },
                         child: Text(getString(context).privacy_policy),
                       ),
@@ -158,4 +137,18 @@ class PrivacyView extends StatelessWidget {
       ),
     );
   }
+}
+
+Future<void> openPrivacyPolicyPage(BuildContext context) {
+  return pushWidget(
+    context,
+    Scaffold(
+      appBar: AppBar(
+        title: Text(getString(context).privacy_policy),
+      ),
+      body: SingleChildScrollView(
+        child:  PrivacyPageContent(),
+      ),
+    ),
+  );
 }

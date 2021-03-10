@@ -27,6 +27,9 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+dependency_overrides:
+  shared_preferences: ^2.0.3
+
 
 flutter:
   uses-material-design: true

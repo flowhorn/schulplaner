@@ -10,7 +10,7 @@ environment:
   flutter: ">2.0.0"
 
 dependencies:
-  color: 2.1.1
+  color: 3.0.0
   schulplaner_translations:
     path: ../schulplaner_translations
   app_functions:

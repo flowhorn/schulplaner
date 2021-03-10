@@ -140,10 +140,10 @@ void OpenCloudFile(BuildContext context, CloudFile cloudfile) {
           if (fileExtension == 'jpg' || fileExtension == 'png') {
             showImage(context, cloudfile.url, cloudfile.name);
           } else {
-            launch('https:' + cloudfile.url);
+            launchUrlWithOrWithoutHttps(cloudfile.url);
           }
         } catch (e) {
-          launch('https:' + cloudfile.url);
+          launchUrlWithOrWithoutHttps(cloudfile.url);
         }
         break;
       }
@@ -155,10 +155,18 @@ void OpenCloudFile(BuildContext context, CloudFile cloudfile) {
             .child(cloudfile.fileid)
             .getDownloadURL()
             .then((url) {
-          if (url != null) launch('https:' + url);
+          if (url != null) launchUrlWithOrWithoutHttps(url);
         });
         break;
       }
+  }
+}
+
+void launchUrlWithOrWithoutHttps(String url) {
+  if (url.startsWith('https://')) {
+    launch(url);
+  } else {
+    launch('https://$url');
   }
 }
 

@@ -50,7 +50,7 @@ class SelectRegionPage extends StatelessWidget {
                     ListTile(
                       title: Text(bothlang(context, en: 'Country', de: 'Land')),
                       trailing:
-                          Text(countryToName(context, filterValue.country)),
+                          Text(filterValue.country != null ? countryToName(context, filterValue.country) : '???'),
                       onTap: () {
                         selectCountry(context, selected: filterValue.country)
                             .then((selectedCountry) {

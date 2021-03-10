@@ -1,6 +1,6 @@
 import 'package:design_utils/design_utils.dart';
 import 'package:flutter/material.dart';
-import 'package:schulplaner_website/src/logic/website_utils.dart';
+import 'package:schulplaner_website/src/logic/download_file/download_file.dart';
 import 'package:schulplaner_website/src/parts/inner_layout.dart';
 
 class PrivacyPage extends StatelessWidget {
@@ -9,7 +9,16 @@ class PrivacyPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return InnerLayout(
       key: ValueKey('PrivacyPageContent'),
-      content: Column(
+      content: PrivacyPageContent(),
+    );
+  }
+}
+
+class PrivacyPageContent extends StatelessWidget {
+  const PrivacyPageContent();
+  @override
+  Widget build(BuildContext context) {
+    return Column(
         children: const [
           SizedBox(height: 128),
           ResponsiveSides(
@@ -31,10 +40,11 @@ class PrivacyPage extends StatelessWidget {
           SizedBox(height: 128),
         ],
         crossAxisAlignment: CrossAxisAlignment.start,
-      ),
     );
   }
 }
+
+
 
 class _FirstSectionText extends StatelessWidget {
   const _FirstSectionText();
@@ -84,7 +94,7 @@ class _PdfPrivacyPolicy extends StatelessWidget {
               width: containerWidthFactor,
               child: Column(
                 children: const [
-                  _DownloadPrivacyPolicyTile(),
+                  //_DownloadPrivacyPolicyTile(),
                   _PolicyContent(),
                 ],
               ),

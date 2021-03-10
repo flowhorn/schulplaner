@@ -51,8 +51,7 @@ class AppStats {
 
   bool shouldHideDonationThisMonth() {
     final currentMonth = DateTime.now().toIso8601String().substring(0, 7);
-    print(openedhomepage);
-    return hideForMonth[currentMonth] == true || openedhomepage < 15;
+    return hideForMonth[currentMonth] == true || openedhomepage < 150;
   }
 
   void setHideThisMonth() {

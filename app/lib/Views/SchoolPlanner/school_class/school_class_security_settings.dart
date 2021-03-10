@@ -93,7 +93,7 @@ class _EnableChat extends StatelessWidget {
   Widget build(BuildContext context) {
     final database = PlannerDatabaseBloc.getDatabase(context);
     return SwitchListTile(
-      value: schoolClass.settings.isPublic,
+      value: schoolClass.enablechat,
       title:
           Text(bothlang(context, de: 'Chat aktiviert', en: 'Chat activated')),
       onChanged: (newvalue) {

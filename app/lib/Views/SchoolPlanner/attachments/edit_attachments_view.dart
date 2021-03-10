@@ -13,7 +13,7 @@ import 'new_file_view.dart';
 
 class EditAttachementsView extends StatelessWidget {
   final PlannerDatabase database;
-  final Map<String, CloudFile>? attachments;
+  final Map<String, CloudFile?>? attachments;
   final ValueSetter<CloudFile> onAdded, onRemoved;
   EditAttachementsView(
       {required this.database,
@@ -26,12 +26,13 @@ class EditAttachementsView extends StatelessWidget {
       children: <Widget>[
         FormHeader(getString(context).attachments),
         if (attachments != null)
-          for (final it in attachments!.values)
+          for (final it
+              in attachments!.values.where((element) => element != null))
             ListTile(
               leading: ColoredCircleIcon(
                 icon: Icon(Icons.attach_file),
               ),
-              title: Text(it.name),
+              title: Text(it!.name),
               subtitle: it.url == null
                   ? null
                   : Text(

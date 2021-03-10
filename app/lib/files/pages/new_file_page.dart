@@ -32,7 +32,9 @@ class _NewFilePage extends StatelessWidget {
     return WillPopScope(
       child: Scaffold(
         appBar: MyAppHeader(title: getString(context).newfile),
-        body: _Inner(),
+        body: SingleChildScrollView(
+          child: _Inner(),
+        ),
         floatingActionButton: _Fab(),
       ),
       onWillPop: () async {

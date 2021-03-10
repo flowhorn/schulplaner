@@ -1,8 +1,6 @@
 name: schulplaner_models
 description: A new Flutter package project.
 version: 0.0.1
-author:
-homepage:
 publish_to: none
 
 environment:
