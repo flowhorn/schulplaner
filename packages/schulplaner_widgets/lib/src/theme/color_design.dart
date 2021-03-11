@@ -1,4 +1,3 @@
-//@dart=2.11
 import 'package:color/color.dart' as colorlib;
 import 'package:flutter/material.dart';
 
@@ -7,8 +6,9 @@ String getHex(Color c) {
   return rgbcolor.toHexColor().toString();
 }
 
-Color fromHex(String hex) {
+Color fromHex(String? hex) {
   if (hex == null) return Colors.blue;
   colorlib.RgbColor primaryRgb = colorlib.HexColor(hex).toRgbColor();
-  return Color.fromARGB(255, primaryRgb.r, primaryRgb.g, primaryRgb.b);
+  return Color.fromARGB(
+      255, primaryRgb.r.toInt(), primaryRgb.g.toInt(), primaryRgb.b.toInt());
 }

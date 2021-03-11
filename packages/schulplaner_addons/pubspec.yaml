@@ -43,14 +43,15 @@ dev_dependencies:
 
 dependency_overrides:
   intl: ^0.17.0
-  plugin_platform_interface: ^2.0.0
-  petitparser: ^4.0.2
-  xml: ^5.0.2
-  crypto: ^3.0.0
   intl_translation:
     git:
       url: https://github.com/Zazo032/intl_translation.git
       ref: patch-1
+  plugin_platform_interface: ^2.0.0
+  petitparser: ^4.0.2
+  xml: ^5.0.2
+  crypto: ^3.0.0
+  
 
 
 flutter:

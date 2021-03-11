@@ -7,7 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 
 class ImageCompresser {
-  static Future<File> compressImage(File image,
+  static Future<File?> compressImage(File image,
       {int compressionRate = 95}) async {
     String temporaryPath =
         (await getTemporaryDirectory()).path + image.uri.pathSegments.last;
