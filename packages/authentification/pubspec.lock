@@ -112,7 +112,7 @@ packages:
       name: color
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.1"
+    version: "3.0.0"
   community_material_icon:
     dependency: "direct main"
     description:
@@ -168,7 +168,7 @@ packages:
       name: firebase_auth
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.0"
+    version: "1.0.1"
   firebase_auth_oauth:
     dependency: "direct main"
     description:
@@ -203,7 +203,7 @@ packages:
       name: firebase_auth_web
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.0"
+    version: "1.0.1"
   firebase_core:
     dependency: transitive
     description:

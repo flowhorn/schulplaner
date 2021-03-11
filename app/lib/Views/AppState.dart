@@ -17,7 +17,6 @@ import 'package:schulplaner8/app_base/src/models/app_settings_data.dart';
 import 'package:schulplaner8/dynamic_links/src/bloc/dynamic_link_bloc.dart';
 import 'package:schulplaner_navigation/schulplaner_navigation.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
-import 'package:after_layout/after_layout.dart';
 import 'package:schulplaner_widgets/schulplaner_theme.dart';
 import 'package:authentification/authentification_blocs.dart';
 import 'package:universal_commons/platform_check.dart';
@@ -148,8 +147,7 @@ class SelectPlannerView extends StatefulWidget {
   State<StatefulWidget> createState() => SelectPlannerViewState();
 }
 
-class SelectPlannerViewState extends State<SelectPlannerView>
-    with AfterLayoutMixin<SelectPlannerView> {
+class SelectPlannerViewState extends State<SelectPlannerView> {
   @override
   Widget build(BuildContext context) {
     final plannerLoaderBloc = BlocProvider.of<PlannerLoaderBloc>(context);
@@ -301,7 +299,4 @@ class SelectPlannerViewState extends State<SelectPlannerView>
       ),
     );
   }
-
-  @override
-  void afterFirstLayout(BuildContext context) {}
 }
