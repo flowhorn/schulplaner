@@ -1,4 +1,3 @@
-//@dart=2.11
 library schulplaner_translations;
 
 export 'src/my_app_localization.dart';

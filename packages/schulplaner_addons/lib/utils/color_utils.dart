@@ -9,7 +9,7 @@ class ColorUtils {
     return ColorUtils._(Theme.of(context));
   }
 
-  static Color getTextColor(Color background) {
+  static Color getTextColor(Color? background) {
     if (background == null ? true : isDarkColor(background)) {
       return Colors.white;
     } else {

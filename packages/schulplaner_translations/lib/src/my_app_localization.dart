@@ -1,4 +1,3 @@
-//@dart=2.11
 // ignore_for_file: non_constant_identifier_names
 
 import 'dart:async';
@@ -1494,8 +1493,9 @@ class MyAppLocalizations {
       );
 
   static Future<MyAppLocalizations> load(Locale locale) {
-    final String name =
-        locale.countryCode?.isEmpty ? locale.languageCode : locale.toString();
+    final String name = (locale.countryCode?.isEmpty ?? true)
+        ? locale.languageCode
+        : locale.toString();
     final String localeName = Intl.canonicalizedLocale(name);
     return initializeMessages(localeName).then((_) {
       Intl.defaultLocale = localeName;
@@ -1503,7 +1503,7 @@ class MyAppLocalizations {
     });
   }
 
-  static MyAppLocalizations of(BuildContext context) {
+  static MyAppLocalizations? of(BuildContext context) {
     return Localizations.of<MyAppLocalizations>(context, MyAppLocalizations);
   }
 

@@ -1,4 +1,3 @@
-//@dart = 2.11
 import 'package:bloc/bloc_provider.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +13,7 @@ import 'package:schulplaner_widgets/schulplaner_forms.dart';
 import 'package:schulplaner_widgets/schulplaner_theme.dart';
 import 'package:schulplaner_navigation/schulplaner_navigation.dart';
 
-Future<CloudFile> openNewFilePage(BuildContext context) {
+Future<CloudFile?> openNewFilePage(BuildContext context) {
   final navigationBloc = NavigationBloc.of(context);
   final database = PlannerDatabaseBloc.getDatabase(context);
   return navigationBloc.openSubPage<CloudFile>(
@@ -72,7 +71,7 @@ class _Inner extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 8.0, right: 8.0),
             child: StatefulTextField.standard(
-              initialText: cloudFile.name ?? '',
+              initialText: cloudFile?.name ?? '',
               onChanged: bloc.changeName,
               labelText: getString(context).name,
             ),
@@ -86,11 +85,11 @@ class _Inner extends StatelessWidget {
 }
 
 class _FileCard extends StatelessWidget {
-  final CloudFile cloudFile;
+  final CloudFile? cloudFile;
 
   const _FileCard({
-    Key key,
-    @required this.cloudFile,
+    Key? key,
+    required this.cloudFile,
   }) : super(key: key);
 
   @override
@@ -100,7 +99,7 @@ class _FileCard extends StatelessWidget {
         stream: bloc.isFileFormLocked,
         initialData: bloc.isFileFormLockedValue,
         builder: (context, snapshot) {
-          final isFileFormLocked = snapshot.data;
+          final isFileFormLocked = snapshot.data ?? true;
           return FormSection(
             child: Column(
               children: <Widget>[
@@ -140,7 +139,7 @@ class _FileCard extends StatelessWidget {
                       width: double.infinity,
                     ),
                     Positioned(
-                      left: cloudFile.fileform == FileForm.STANDARD
+                      left: cloudFile?.fileform == FileForm.STANDARD
                           ? 0
                           : MediaQuery.of(context).size.width / 2,
                       child: Container(
@@ -151,34 +150,35 @@ class _FileCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                Builder(
-                  builder: (context) {
-                    switch (cloudFile.fileform) {
-                      case FileForm.STANDARD:
-                        {
-                          return StreamBuilder<int>(
-                            stream: bloc.uploadState,
-                            builder: (context, snapshot) {
-                              final fileUploadState = snapshot.data;
-                              return _StandardFile(
-                                fileUploadState: fileUploadState,
-                              );
-                            },
-                          );
-                        }
-                      case FileForm.WEBLINK:
-                        {
-                          return _WebLink(
-                            cloudFile: cloudFile,
-                          );
-                        }
-                      case FileForm.OLDTTYPE:
-                        return Container();
-                      default:
-                        return Container();
-                    }
-                  },
-                ),
+                if (cloudFile != null)
+                  Builder(
+                    builder: (context) {
+                      switch (cloudFile?.fileform) {
+                        case FileForm.STANDARD:
+                          {
+                            return StreamBuilder<int>(
+                              stream: bloc.uploadState,
+                              builder: (context, snapshot) {
+                                final fileUploadState = snapshot.data;
+                                return _StandardFile(
+                                  fileUploadState: fileUploadState ?? 0,
+                                );
+                              },
+                            );
+                          }
+                        case FileForm.WEBLINK:
+                          {
+                            return _WebLink(
+                              cloudFile: cloudFile!,
+                            );
+                          }
+                        case FileForm.OLDTTYPE:
+                          return Container();
+                        default:
+                          return Container();
+                      }
+                    },
+                  ),
               ],
             ),
           );
@@ -189,8 +189,10 @@ class _FileCard extends StatelessWidget {
 class _StandardFile extends StatelessWidget {
   final int fileUploadState;
 
-  const _StandardFile({Key key, @required this.fileUploadState})
-      : super(key: key);
+  const _StandardFile({
+    Key? key,
+    required this.fileUploadState,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final bloc = BlocProvider.of<NewFileBloc>(context);
@@ -224,8 +226,8 @@ class _StandardFile extends StatelessWidget {
               } else if (snapshot.hasError == true) {
                 return Icon(Icons.error_outline);
               }
-              final transferredbytes = snapshot.data.bytesTransferred;
-              final totalbytes = snapshot.data.totalBytes;
+              final transferredbytes = snapshot.data!.bytesTransferred;
+              final totalbytes = snapshot.data!.totalBytes;
               final isFinished = transferredbytes == totalbytes;
               return Padding(
                 padding: EdgeInsets.all(16.0),
@@ -268,7 +270,7 @@ class _StandardFile extends StatelessWidget {
 class _WebLink extends StatelessWidget {
   final CloudFile cloudFile;
 
-  const _WebLink({Key key, @required this.cloudFile}) : super(key: key);
+  const _WebLink({Key? key, required this.cloudFile}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final bloc = BlocProvider.of<NewFileBloc>(context);

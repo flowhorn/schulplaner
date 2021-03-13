@@ -66,7 +66,7 @@ Future<PublicCode> generatePublicCode(
     final newcode = PublicCode.fromData(result.data.cast<String, dynamic>());
     return newcode;
   }).catchError((error) {
-    return Future.error(error);
+    throw Future.error(error);
   });
 }
 
@@ -81,6 +81,6 @@ Future<bool> removePublicCode({@required String id, @required int codetype}) {
       return true;
     }
   }).catchError((error) {
-    return Future.error(error);
+    throw Future.error(error);
   });
 }

@@ -2,7 +2,7 @@ import 'package:schulplaner_addons/common/model.dart';
 
 enum MemberRole { owner, admin, creator, standard, none }
 
-MemberRole memberRoleFromMemberType(int membertype) {
+MemberRole memberRoleFromMemberType(int? membertype) {
   if (membertype == null) {
     return MemberRole.standard;
   } else if (membertype == 0) {
@@ -14,7 +14,7 @@ MemberRole memberRoleFromMemberType(int membertype) {
 }
 
 MemberRole memberRoleEnumFromString(String data) =>
-    enumFromString(MemberRole.values, data);
+    enumFromString(MemberRole.values, data)!;
 
 String memberRoleEnumToString(MemberRole memberRole) =>
     memberRole.toString().split('.')[1];

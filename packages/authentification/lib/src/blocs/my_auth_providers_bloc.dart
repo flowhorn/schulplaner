@@ -39,7 +39,7 @@ class MyAuthProvidersBloc extends BlocBase {
         final googleAuthCredentials =
             await GoogleSignInLogic().getAuthCredentials();
         if (googleAuthCredentials != null) {
-          final userCredentials =
+          final UserCredential? userCredentials =
               await firebaseUser.linkWithCredential(googleAuthCredentials);
           if (userCredentials != null) {
             _linkingStateSubject.add(SignInState.successfull);

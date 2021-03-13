@@ -133,7 +133,7 @@ List<String> weekDays() {
 }
 
 List<TimeTableElement> buildElements(
-    Map<String, Lesson> datamap, int weektype, PlannerDatabase database) {
+    Map<String, Lesson>? datamap, int weektype, PlannerDatabase database) {
   if (datamap == null) return [];
   List<TimeTableElement> mylist = [];
 
@@ -180,7 +180,7 @@ List<Widget> buildLessons(
   for (int period in buildIntList(8, start: 1)) {
     widgets.add(WeekDayText(period.toString()));
     for (int day in buildIntList(5, start: 1)) {
-      final lesson = lessons.firstWhere((lesson) {
+      final Lesson? lesson = lessons.firstWhere((lesson) {
         if (lesson.day == day) {
           return true;
         }

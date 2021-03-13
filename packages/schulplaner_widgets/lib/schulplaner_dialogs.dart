@@ -1,4 +1,3 @@
-//@dart=2.11
 library schulplaner_dialogs;
 
 export 'src/dialogs/info_dialog.dart';

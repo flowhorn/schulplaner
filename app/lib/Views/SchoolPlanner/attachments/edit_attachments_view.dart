@@ -7,7 +7,6 @@ import 'package:schulplaner8/files/pages/new_file_page.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
 import 'package:schulplaner_widgets/schulplaner_forms.dart';
 import 'package:schulplaner8/Helper/helper_views.dart';
-import 'package:schulplaner8/Views/SchoolPlanner/Overview.dart';
 
 import 'new_file_view.dart';
 

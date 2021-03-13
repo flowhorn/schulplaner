@@ -10,13 +10,18 @@ class RoundButton extends StatelessWidget {
       : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return OutlineButton(
+    return OutlinedButton(
       child: Text(label),
       onPressed: onTap,
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-        Radius.circular(8.0),
-      )),
+      style: ButtonStyle(
+        shape: MaterialStateProperty.all(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(8.0),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

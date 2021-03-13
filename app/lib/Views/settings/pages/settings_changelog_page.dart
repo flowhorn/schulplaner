@@ -1,4 +1,3 @@
-//@dart=2.11
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Helper/helper_data.dart';
 import 'package:schulplaner8/Helper/helper_views.dart';
@@ -7,14 +6,15 @@ import 'package:schulplaner_widgets/schulplaner_theme.dart';
 
 class ChangelogItem {
   int versioncode;
-  String versionname, releasedate;
+  String versionname;
+  String? releasedate;
   List<String> changes_de, changes_en;
   ChangelogItem({
-    this.versioncode,
-    this.versionname,
+    required this.versioncode,
+    required this.versionname,
     this.releasedate,
-    this.changes_de,
-    this.changes_en,
+    required this.changes_de,
+    required this.changes_en,
   });
 }
 
@@ -296,7 +296,7 @@ class ChangelogView extends StatelessWidget {
                     ListTile(
                       leading: Icon(Icons.today),
                       title: Text(item.releasedate != null
-                          ? getDateStringSmall(item.releasedate)
+                          ? getDateStringSmall(item.releasedate!)
                           : '-'),
                     ),
                   ],

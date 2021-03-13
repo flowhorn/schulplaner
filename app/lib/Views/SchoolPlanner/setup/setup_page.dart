@@ -149,7 +149,7 @@ class SetupView extends StatelessWidget {
               Icons.airplanemode_active,
               size: 96.0,
             ),
-            footer: RaisedButton(
+            footer: ElevatedButton(
               onPressed: () {
                 plannerLoaderBloc
                     .editPlanner(plannerdata.copyWith(setup_done: true));
