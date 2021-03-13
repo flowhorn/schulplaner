@@ -47,6 +47,11 @@
         "regex": "/opensource*",
         "destination": "https://schulplaner.web.app/#/opensource",
         "type": 302
+      },
+      {
+        "regex": "/web*",
+        "destination": "https://schulplaner-beta.web.app",
+        "type": 302
       }
     ]
   }

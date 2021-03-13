@@ -19,32 +19,30 @@ class PrivacyPageContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-        children: const [
-          SizedBox(height: 128),
-          ResponsiveSides(
-            first: Center(
-              child: CircleAvatar(
-                child: Icon(
-                  Icons.privacy_tip_outlined,
-                  size: 72,
-                  color: Colors.white,
-                ),
-                backgroundColor: Colors.teal,
-                radius: 72,
+      children: const [
+        SizedBox(height: 128),
+        ResponsiveSides(
+          first: Center(
+            child: CircleAvatar(
+              child: Icon(
+                Icons.privacy_tip_outlined,
+                size: 72,
+                color: Colors.white,
               ),
+              backgroundColor: Colors.teal,
+              radius: 72,
             ),
-            second: _FirstSectionText(),
           ),
-          SizedBox(height: 128),
-          _PdfPrivacyPolicy(),
-          SizedBox(height: 128),
-        ],
-        crossAxisAlignment: CrossAxisAlignment.start,
+          second: _FirstSectionText(),
+        ),
+        SizedBox(height: 128),
+        _PdfPrivacyPolicy(),
+        SizedBox(height: 128),
+      ],
+      crossAxisAlignment: CrossAxisAlignment.start,
     );
   }
 }
-
-
 
 class _FirstSectionText extends StatelessWidget {
   const _FirstSectionText();
@@ -106,6 +104,7 @@ class _PdfPrivacyPolicy extends StatelessWidget {
   }
 }
 
+// ignore: unused_element
 class _DownloadPrivacyPolicyTile extends StatelessWidget {
   const _DownloadPrivacyPolicyTile();
   @override
@@ -140,6 +139,7 @@ class _PolicyContent extends StatelessWidget {
             ),
           ],
         ),
+        _Paragraph(),
         _PolicyText(
           title: _Title('Was wird gespeichert?'),
           texts: [
@@ -161,6 +161,7 @@ class _PolicyContent extends StatelessWidget {
             ),
           ],
         ),
+        _Paragraph(),
         _PolicyText(
           title: _Title(
               'Informationen über Speicherung und Verarbeitung der Daten'),
@@ -171,6 +172,7 @@ class _PolicyContent extends StatelessWidget {
             ),
           ],
         ),
+        _Paragraph(),
         _PolicyText(
           title: _Title('Login und Analytics'),
           texts: [
@@ -181,6 +183,7 @@ class _PolicyContent extends StatelessWidget {
             )
           ],
         ),
+        _Paragraph(),
         _PolicyText(
           title: _Title('Generelle Hinweise'),
           texts: [
@@ -196,6 +199,7 @@ class _PolicyContent extends StatelessWidget {
             )
           ],
         ),
+        _Paragraph(),
         _PolicyText(
           title: _Title('Weiteres'),
           texts: [
@@ -204,6 +208,7 @@ class _PolicyContent extends StatelessWidget {
             )
           ],
         ),
+        _Paragraph(),
         _PolicyText(
           title: _Title('Kontakt'),
           texts: [

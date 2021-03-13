@@ -1,4 +1,3 @@
-//@dart=2.11
 library authentification_blocs;
 
 export 'src/blocs/authentification_bloc.dart';

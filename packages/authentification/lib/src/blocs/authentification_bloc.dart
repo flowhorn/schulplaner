@@ -1,4 +1,3 @@
-//@dart=2.11
 import 'dart:async';
 
 import 'package:authentification/src/models/auth_user.dart';
@@ -6,7 +5,6 @@ import 'package:authentification/src/models/authentification_status.dart';
 import 'package:authentification/src/models/user_id.dart';
 import 'package:bloc/bloc_base.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:meta/meta.dart';
 import 'package:rxdart/subjects.dart';
 
 class AuthentificationBloc extends BlocBase {
@@ -16,7 +14,7 @@ class AuthentificationBloc extends BlocBase {
           LoadingAuthentificationStatus());
 
   AuthentificationBloc({
-    @required FirebaseAuth firebaseAuth,
+    required FirebaseAuth firebaseAuth,
   }) : _firebaseAuth = firebaseAuth {
     _initializeFirebaseAuthStream();
   }
@@ -42,10 +40,10 @@ class AuthentificationBloc extends BlocBase {
       _authentificationStatusSubject;
 
   AuthentificationStatus get authentificationStatusValue =>
-      _authentificationStatusSubject.valueWrapper.value;
+      _authentificationStatusSubject.valueWrapper!.value;
 
-  UserId get userId => _firebaseAuth.currentUser != null
-      ? UserId(_firebaseAuth.currentUser.uid)
+  UserId? get userId => _firebaseAuth.currentUser != null
+      ? UserId(_firebaseAuth.currentUser!.uid)
       : null;
 
   Future<void> logOut() async {

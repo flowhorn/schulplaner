@@ -35,11 +35,11 @@ class ChatThread extends StatelessWidget {
                 ) {
                   String name =
                       chatRoom.members[threadMessage.message.uID]?.name ??
-                          "???";
+                          '???';
                   return ChatBubble(
                     message: threadMessage.message,
                     name: name,
-                    isMe: threadMessage.message.uID == "max",
+                    isMe: threadMessage.message.uID == 'max',
                     isSingleChat: false,
                   );
                 },
@@ -122,12 +122,12 @@ class ChatInput extends StatelessWidget {
   final void Function() onPressedAdd;
   final TextEditingController textEditingController =
       TextEditingController(text: '');
-  ChatInput(
-      {Key key,
-      @required this.onSendMessage,
-      @required this.onPressedAdd,
-      this.accentColor: Colors.blueGrey})
-      : super(key: key);
+  ChatInput({
+    Key key,
+    @required this.onSendMessage,
+    @required this.onPressedAdd,
+    this.accentColor = Colors.blueGrey,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -161,7 +161,7 @@ class ChatInput extends StatelessWidget {
                         borderSide: BorderSide(
                           color: ColorUtils.of(context).getDefaultTextColor(),
                         )),
-                    hintText: "Sende eine Nachricht...",
+                    hintText: 'Sende eine Nachricht...',
                     contentPadding: EdgeInsets.only(
                       left: 16.0,
                       right: 16.0,

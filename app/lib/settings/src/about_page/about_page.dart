@@ -2,7 +2,6 @@ import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:launch_review/launch_review.dart';
-import 'package:schulplaner8/Helper/LogAnalytics.dart';
 import 'package:schulplaner8/Helper/helper_data.dart';
 import 'package:schulplaner8/Helper/helper_views.dart';
 import 'package:schulplaner8/donation/donation_page.dart';

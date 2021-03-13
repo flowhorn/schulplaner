@@ -19,7 +19,7 @@ class BothLangString implements TranslatableString {
   const BothLangString({required this.de, required this.en});
 
   String getText(BuildContext context) {
-    if (getString(context).languagecode == "de") {
+    if (getString(context).languagecode == 'de') {
       return de;
     } else {
       return en;

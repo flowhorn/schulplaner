@@ -677,14 +677,14 @@ class ResultItem {
 
 void showLoadingStateSheet({
   required BuildContext context,
-  required ValueNotifier<bool> sheetUpdate,
+  required ValueNotifier<bool?> sheetUpdate,
 }) {
   showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
         return clearAppTheme(
             context: context,
-            child: ValueListenableBuilder<bool>(
+            child: ValueListenableBuilder<bool?>(
                 valueListenable: sheetUpdate,
                 builder: (context, data, _) {
                   return Opacity(
@@ -1240,7 +1240,7 @@ Stream<ThreeObjects<T1?, T2?, T3?>> getThreeMergedStream<T1, T2, T3>(
 }
 
 class QRCodeViewPublicCode extends StatelessWidget {
-  final String publiccode;
+  final String? publiccode;
 
   QRCodeViewPublicCode({required this.publiccode});
   @override
@@ -1291,7 +1291,7 @@ class QRCodeViewPublicCode extends StatelessWidget {
   }
 }
 
-String toShortNameLength(BuildContext context, String text) {
+String toShortNameLength(BuildContext context, String? text) {
   int length = getConfigurationData(context).shortname_length;
   if (text == null) return '-';
   if (length == 0) return text;

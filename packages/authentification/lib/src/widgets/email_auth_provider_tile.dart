@@ -46,7 +46,8 @@ class EmailAuthProviderTile extends StatelessWidget {
                 if (value == 0) {
                   final signInBloc = BlocProvider.of<SignInBloc>(context);
                   await signInBloc.sendPasswordResetRequest(
-                      email: authProviderType.email);
+                    email: authProviderType.email!,
+                  );
                   final infoDialog = InfoDialog(
                     title: getString(context).resetpassword,
                     message: BothLangString(

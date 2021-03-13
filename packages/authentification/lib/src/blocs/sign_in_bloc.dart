@@ -1,16 +1,14 @@
-//@dart=2.11
 import 'package:authentification/src/logic/apple_sign_in_logic.dart';
 import 'package:authentification/src/logic/google_sign_in_logic.dart';
 import 'package:authentification/src/models/sign_in_state.dart';
 import 'package:bloc/bloc_base.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:meta/meta.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:universal_commons/platform_check.dart';
 
 class SignInBloc extends BlocBase {
   SignInBloc({
-    @required FirebaseAuth firebaseAuth,
+    required FirebaseAuth firebaseAuth,
   }) : _firebaseAuth = firebaseAuth;
 
   final FirebaseAuth _firebaseAuth;
@@ -31,8 +29,9 @@ class SignInBloc extends BlocBase {
     _signInSubject.add(SignInState.loading);
     try {
       final credentials = await GoogleSignInLogic().getAuthCredentials();
-      final userCredentials =
-          await _firebaseAuth.signInWithCredential(credentials);
+      final userCredentials = credentials != null
+          ? await _firebaseAuth.signInWithCredential(credentials)
+          : null;
       if (userCredentials != null) {
         _signInSubject.add(SignInState.successfull);
       } else {
@@ -48,8 +47,9 @@ class SignInBloc extends BlocBase {
     try {
       if (PlatformCheck.isAppleOS) {
         final credentials = await AppleSignInLogic().getAuthCredentials();
-        final userCredentials =
-            await _firebaseAuth.signInWithCredential(credentials);
+        final userCredentials = credentials != null
+            ? await _firebaseAuth.signInWithCredential(credentials)
+            : null;
         if (userCredentials != null) {
           _signInSubject.add(SignInState.successfull);
         } else {
@@ -71,7 +71,8 @@ class SignInBloc extends BlocBase {
   Future<void> tryAnonymouslySignIn() async {
     _signInSubject.add(SignInState.loading);
     try {
-      final userCredentials = await _firebaseAuth.signInAnonymously();
+      final UserCredential? userCredentials =
+          await _firebaseAuth.signInAnonymously();
       if (userCredentials != null) {
         _signInSubject.add(SignInState.successfull);
       } else {
@@ -83,7 +84,9 @@ class SignInBloc extends BlocBase {
     }
   }
 
-  Future<void> sendPasswordResetRequest({String email}) async {
+  Future<void> sendPasswordResetRequest({
+    required String email,
+  }) async {
     await _firebaseAuth.sendPasswordResetEmail(email: email);
   }
 

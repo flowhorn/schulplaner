@@ -1,10 +1,13 @@
-//@dart=2.11
 import 'package:flutter/material.dart';
 
 class AuthentificationLoginTile extends StatelessWidget {
-  const AuthentificationLoginTile(
-      {Key key, this.iconData, this.color, this.title, this.onTap})
-      : super(key: key);
+  const AuthentificationLoginTile({
+    Key? key,
+    required this.iconData,
+    required this.color,
+    required this.title,
+    required this.onTap,
+  }) : super(key: key);
   final IconData iconData;
   final Color color;
   final String title;

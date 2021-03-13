@@ -1,4 +1,3 @@
-//@dart=2.11
 library authentification_models;
 
 export 'src/models/auth_user.dart';

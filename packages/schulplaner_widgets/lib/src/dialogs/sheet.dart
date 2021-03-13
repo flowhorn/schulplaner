@@ -1,4 +1,3 @@
-//@dart=2.11
 import 'package:flutter/material.dart';
 
 abstract class SchulplanerSheet {
@@ -6,7 +5,7 @@ abstract class SchulplanerSheet {
 
   Widget build(BuildContext context);
 
-  Future<T> show<T>(BuildContext context) async {
+  Future<T?> show<T>(BuildContext context) async {
     return showModalBottomSheet<T>(
       context: context,
       builder: (context) => build(context),
@@ -15,8 +14,8 @@ abstract class SchulplanerSheet {
 
   Future<void> showWithAutoPop(
     BuildContext context, {
-    @required Future<bool> future,
-    Duration delay,
+    required Future<bool> future,
+    required Duration delay,
   }) async {
     final sheetPop = show(context);
     bool hasSheetPopped = false;
