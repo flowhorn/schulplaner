@@ -1,8 +1,6 @@
-// @dart=2.11
 import 'package:bloc/bloc_base.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/subjects.dart';
-import 'package:meta/meta.dart';
 import 'package:schulplaner8/Data/Planner/CourseTemplates.dart';
 import 'package:schulplaner8/Data/plannerdatabase.dart';
 import 'package:schulplaner8/Helper/MyCloudFunctions.dart';
@@ -28,14 +26,14 @@ class EditCourseBloc extends BlocBase {
   final _editModeSubject = BehaviorSubject<bool>();
 
   final _currentCourseSubject = BehaviorSubject<Course>();
-  final _addToSchoolClassSubject = BehaviorSubject<String>.seeded(null);
+  final _addToSchoolClassSubject = BehaviorSubject<String?>.seeded(null);
   final _addToPrivateCoursesSubject = BehaviorSubject<bool>();
   final _hasChangedValuesSubject = BehaviorSubject<bool>.seeded(false);
 
   EditCourseBloc.withEditState({
-    @required Course course,
-    @required this.database,
-    @required this.courseGateway,
+    required Course course,
+    required this.database,
+    required this.courseGateway,
   }) {
     _currentCourseSubject.add(course);
     _editModeSubject.add(true);
@@ -43,10 +41,10 @@ class EditCourseBloc extends BlocBase {
   }
 
   EditCourseBloc.withCreateState({
-    CourseTemplate template,
-    String schoolClassId,
-    @required this.database,
-    @required this.courseGateway,
+    CourseTemplate? template,
+    String? schoolClassId,
+    required this.database,
+    required this.courseGateway,
   }) {
     final courseId = database.dataManager.generateCourseId();
     final course = template != null
@@ -55,7 +53,7 @@ class EditCourseBloc extends BlocBase {
             template: template,
           )
         : Course.create(id: courseId).copyWith(
-            design: getRandomDesign(null),
+            design: getRandomDesign(),
           );
     _currentCourseSubject.add(course);
     if (schoolClassId != null) {
@@ -71,15 +69,15 @@ class EditCourseBloc extends BlocBase {
   Stream<bool> get showSeveralForm => _showSeveralFormSubject;
 
   Stream<Course> get currentCourse => _currentCourseSubject;
-  Course get _currentCourseValue => _currentCourseSubject.valueWrapper.value;
-  bool get isEditMode => _editModeSubject.valueWrapper.value;
-  bool get hasChangedValues => _hasChangedValuesSubject.valueWrapper.value;
+  Course get _currentCourseValue => _currentCourseSubject.valueWrapper!.value;
+  bool get isEditMode => _editModeSubject.valueWrapper!.value;
+  bool get hasChangedValues => _hasChangedValuesSubject.valueWrapper!.value;
 
   bool get addToPrivateCourses =>
-      _addToPrivateCoursesSubject.valueWrapper.value;
+      _addToPrivateCoursesSubject.valueWrapper!.value;
   bool get addToSchoolClass =>
-      _addToSchoolClassSubject.valueWrapper.value != null;
-  Stream<String> get schoolClassId => _addToSchoolClassSubject;
+      _addToSchoolClassSubject.valueWrapper!.value != null;
+  Stream<String?> get schoolClassId => _addToSchoolClassSubject;
 
   void _updateCourse(Course newCourse) {
     _hasChangedValuesSubject.add(true);
@@ -144,11 +142,11 @@ class EditCourseBloc extends BlocBase {
   }
 
   Future<bool> submit({
-    @required BuildContext context,
+    required BuildContext context,
   }) async {
-    final course = _currentCourseSubject.valueWrapper.value;
-    final schoolClassId = _addToSchoolClassSubject.valueWrapper.value;
-    if (course?.validate() == true) {
+    final course = _currentCourseSubject.valueWrapper!.value;
+    final schoolClassId = _addToSchoolClassSubject.valueWrapper!.value;
+    if (course.validate() == true) {
       if (isEditMode) {
         await requestSimplePermission(
                 context: context,

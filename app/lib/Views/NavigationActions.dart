@@ -41,7 +41,7 @@ final Map<int, NavigationActionItem> allNavigationActions = {
     iconData: Icons.timeline,
     name: TranslationString((context) => getString(context).timeline),
     builder: (context) => TimelineView(
-      BlocProvider.of<PlannerDatabaseBloc>(context).plannerDatabase,
+      BlocProvider.of<PlannerDatabaseBloc>(context).plannerDatabase!,
     ),
     navigationItem: NavigationItem.timeline,
   ),

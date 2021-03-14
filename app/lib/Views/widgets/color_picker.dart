@@ -1,11 +1,10 @@
-//@dart=2.11
 import 'package:flutter/material.dart';
 import 'package:flutter_material_color_picker/flutter_material_color_picker.dart';
 import 'package:schulplaner8/Helper/helper_data.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
 
-Future<Color> selectColor(BuildContext context, Color selectedColor) {
-  return showDialog(
+Future<Color?> selectColor(BuildContext context, Color? selectedColor) {
+  return showDialog<Color>(
     context: context,
     builder: (context) => _ColorPicker(
       selectedColor: selectedColor,
@@ -14,9 +13,9 @@ Future<Color> selectColor(BuildContext context, Color selectedColor) {
 }
 
 class _ColorPicker extends StatelessWidget {
-  final Color selectedColor;
-  final ValueNotifier<Color> color;
-  _ColorPicker({Key key, this.selectedColor})
+  final Color? selectedColor;
+  final ValueNotifier<Color?> color;
+  _ColorPicker({Key? key, required this.selectedColor})
       : color = ValueNotifier(selectedColor),
         super(key: key);
   @override

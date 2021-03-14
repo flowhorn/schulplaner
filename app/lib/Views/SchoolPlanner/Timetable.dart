@@ -1,4 +1,3 @@
-//@dart=2.11
 import 'package:bloc/bloc_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Data/Planner/Lesson.dart';
@@ -28,27 +27,29 @@ ThemeData getLessonTheme(
     BuildContext context, Lesson lesson, PlannerDatabase database) {
   if (lesson.courseid != null) {
     return newAppThemeDesign(
-        context, database.courseinfo.data[lesson.courseid].design);
+        context, database.courseinfo.data[lesson.courseid]?.design);
   } else {
     return clearAppThemeData(context: context);
   }
 }
 
 class TimetableView extends StatelessWidget {
-  final Color backgroundcolor;
-  TimetableView({this.backgroundcolor});
+  final Color? backgroundcolor;
+  const TimetableView({
+    this.backgroundcolor,
+  });
   @override
   Widget build(BuildContext context) {
     final plannerDatabase =
-        BlocProvider.of<PlannerDatabaseBloc>(context).plannerDatabase;
+        BlocProvider.of<PlannerDatabaseBloc>(context).plannerDatabase!;
     return StreamBuilder<Map<String, Lesson>>(
       stream: plannerDatabase.getLessonsStream(),
       initialData: plannerDatabase.getLessons(),
       builder: (context, snapshot) {
         return DefaultTabController(
-            length: plannerDatabase.settings.data.getAmountWeekTypes(),
+            length: plannerDatabase.settings!.data!.getAmountWeekTypes(),
             child: Scaffold(
-              appBar: plannerDatabase.settings.data.multiple_weektypes
+              appBar: plannerDatabase.settings!.data!.multiple_weektypes
                   ? PreferredSize(
                       child: TabBar(
                         tabs: getListOfWeekTypes(
@@ -73,7 +74,7 @@ class TimetableView extends StatelessWidget {
                     ),
               body: TabBarView(
                   children: getTimetableFragments(
-                      plannerDatabase, context, snapshot.data)),
+                      plannerDatabase, context, snapshot.data!)),
               backgroundColor: backgroundcolor,
               floatingActionButton: FloatingActionButton(
                 onPressed: () {
@@ -93,7 +94,7 @@ class TimetableView extends StatelessWidget {
   List<Widget> getTimetableFragments(PlannerDatabase plannerDatabase,
       BuildContext context, Map<String, Lesson> datamap) {
     List<Widget> mlist = [];
-    PlannerSettingsData settingsData = plannerDatabase.settings.data;
+    PlannerSettingsData settingsData = plannerDatabase.settings!.data!;
 
     TimetableFragment buildFragment(int weektype) {
       if (settingsData.timetable_timemode) {
@@ -105,10 +106,10 @@ class TimetableView extends StatelessWidget {
           daysOfWeek: settingsData.getAmountDaysOfWeek(),
           events: buildElements(plannerDatabase, datamap, weektype, true),
           starttime_calendar: getPositionForTimeString(settingsData
-                  ?.lessontimes[(settingsData.zero_lesson ? 0 : 1)]?.start ??
+                  .lessontimes[(settingsData.zero_lesson ? 0 : 1)]?.start ??
               '7:00'),
           endtime_calendar: getPositionForTimeString(
-              settingsData?.lessontimes[settingsData.maxlessons]?.end ??
+              settingsData.lessontimes[settingsData.maxlessons]?.end ??
                   '18:30'),
           timemode: true,
           periods: buildPeriodElements(plannerDatabase, true),
@@ -157,7 +158,7 @@ class TimetableView extends StatelessWidget {
     if (datamap == null) return [];
     List<TimeTableElement> mylist = [];
     Map<int, LessonTime> lessontimes =
-        plannerDatabase.settings.data.lessontimes;
+        plannerDatabase.settings!.data!.lessontimes;
     datamap.values.forEach((l) {
       if (l.correctWeektype(weektype)) {
         mylist.add(TimeTableElement(
@@ -174,7 +175,7 @@ class TimetableView extends StatelessWidget {
   List<TimeTablePeriodElement> buildPeriodElements(
       PlannerDatabase plannerDatabase, bool timemode) {
     List<TimeTablePeriodElement> mylist = [];
-    PlannerSettingsData settingsData = plannerDatabase.settings.data;
+    PlannerSettingsData settingsData = plannerDatabase.settings!.data!;
     Map<int, LessonTime> lessontimes = settingsData.lessontimes;
     if (timemode) {
       lessontimes.values.forEach((l) {
@@ -212,10 +213,10 @@ class TimetableView extends StatelessWidget {
     }
   }
 
-  double getPositionForTimeString(String timestring) {
-    var splitted = (timestring ?? '0:00').split(':');
+  double getPositionForTimeString(String? timestring) {
+    final List<String>? splitted = (timestring ?? '0:00').split(':');
     double inhours_start =
-        int.parse(splitted[0] ?? 0) + (int.parse(splitted[1]) / 60) ?? 0;
+        int.parse(splitted?[0] ?? '0') + (int.parse(splitted?[1] ?? '0') / 60);
     return inhours_start;
   }
 
@@ -236,7 +237,7 @@ class TimetableView extends StatelessWidget {
 }
 
 String getLessonTitle(BuildContext context, Lesson lesson) {
-  String day = getWeekDays(context)[lesson.day].name;
+  final String day = getWeekDays(context)[lesson.day]?.name ?? '?';
   String periodtext = lesson.isMultiLesson()
       ? (lesson.start.toString() +
           '. -' +
@@ -247,7 +248,7 @@ String getLessonTitle(BuildContext context, Lesson lesson) {
           bothlang(context, en: '. lesson', de: '. Stunde'));
   String weektypetext = lesson.weektype != 0
       ? (' (' +
-          (weektypes(context)[lesson.weektype].name.substring(0, 1)) +
+          (weektypes(context)[lesson.weektype]!.name.substring(0, 1)) +
           ')')
       : '';
   return day + ', ' + periodtext + weektypetext;
@@ -258,37 +259,37 @@ String getLessonPeriodString(
   if (lesson.overridentime != null) {
     return lesson.overridentime.start + ':' + lesson.overridentime.end;
   }
-  Map<int, LessonTime> lessontimes = database.settings.data.lessontimes;
-  String start_first = lessontimes[lesson.start]?.start;
-  String end_last = lessontimes[lesson.end]?.end;
+  Map<int, LessonTime>? lessontimes = database.settings!.data!.lessontimes;
+  String? start_first = lessontimes[lesson.start]?.start;
+  String? end_last = lessontimes[lesson.end]?.end;
   return (start_first ?? '?') + '-' + (end_last ?? '?');
 }
 
 void showLessonDetailSheet(BuildContext context,
-    {@required String lessonid,
-    String datestring,
-    @required PlannerDatabase plannerdatabase}) {
+    {required String lessonid,
+    String? datestring,
+    required PlannerDatabase plannerdatabase}) {
   showDetailSheetBuilder(
       context: context,
       body: (context) {
         return StreamBuilder<Lesson>(
             stream: plannerdatabase.getLessonStream(lessonid),
             builder: (context, snapshot) {
-              Lesson lesson = snapshot.data;
+              Lesson? lesson = snapshot.data;
               if (lesson == null) return loadedView();
-              Course courseInfo =
+              final Course? courseInfo =
                   plannerdatabase.getCourseInfo(lesson.courseid);
               return Expanded(
                   child: Column(
                 children: <Widget>[
-                  getSheetText(context, getLessonTitle(context, lesson) ?? '-'),
+                  getSheetText(context, getLessonTitle(context, lesson)),
                   getExpandList([
                     datestring == null
                         ? nowidget()
                         : Card(
-                            child: StreamBuilder(
+                            child: StreamBuilder<Map<String, LessonInfo>>(
                               builder: (context, snapshot) {
-                                Map<String, LessonInfo> datamap =
+                                final Map<String, LessonInfo> datamap =
                                     snapshot.data ?? {};
                                 List<LessonInfo> infolist =
                                     datamap.values.where((it) {
@@ -381,7 +382,7 @@ void showLessonDetailSheet(BuildContext context,
                           ),
                     ListTile(
                       leading: Icon(Icons.widgets),
-                      title: Text(courseInfo.getName()),
+                      title: Text(courseInfo?.getName() ?? '-'),
                     ),
                     ListTile(
                       leading: Icon(Icons.hourglass_empty),
@@ -391,11 +392,11 @@ void showLessonDetailSheet(BuildContext context,
                     ListTile(
                       leading: Icon(Icons.person_outline),
                       title: Text(lesson.teacher?.name ??
-                          courseInfo.getTeacherFirst() ??
+                          courseInfo?.getTeacherFirst() ??
                           '-'),
                       onTap: () {
-                        String teacherid = lesson.teacher?.teacherid ??
-                            courseInfo.getTeacherFirstItem()?.teacherid;
+                        String? teacherid = lesson.teacher?.teacherid ??
+                            courseInfo?.getTeacherFirstItem()?.teacherid;
                         if (teacherid != null) {
                           showTeacherDetail(
                               context: context,
@@ -407,11 +408,11 @@ void showLessonDetailSheet(BuildContext context,
                     ListTile(
                       leading: Icon(Icons.place),
                       title: Text(lesson.place?.name ??
-                          courseInfo.getPlaceFirst() ??
+                          courseInfo?.getPlaceFirst() ??
                           '-'),
                       onTap: () {
-                        String placeid = lesson.place?.placeid ??
-                            courseInfo.getPlaceFirstItem()?.placeid;
+                        String? placeid = lesson.place?.placeid ??
+                            courseInfo?.getPlaceFirstItem()?.placeid;
                         if (placeid != null) {
                           showPlaceDetail(
                               context: context,
@@ -458,7 +459,7 @@ void showLessonDetailSheet(BuildContext context,
                                             context: context,
                                             title: getString(context).delete,
                                           ).then((delete) {
-                                            if (delete) {
+                                            if (delete == true) {
                                               requestSimplePermission(
                                                       context: context,
                                                       database: plannerdatabase,

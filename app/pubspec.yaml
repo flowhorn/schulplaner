@@ -78,7 +78,7 @@ dependencies:
   timeago: ^3.0.2
   fl_chart: ^0.20.1
   percent_indicator: ^3.3.0-nullsafety.1
-  printing: ^5.0.2
+  printing: ^5.0.3
   pdf: ^3.0.1
   universal_io: ^2.0.0
   

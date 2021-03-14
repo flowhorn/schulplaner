@@ -1,4 +1,3 @@
-// @dart=2.11
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
@@ -7,7 +6,7 @@ class GitHub {
   String baseUrl = 'https://api.github.com/repos/flowhorn/schulplaner';
 
   /// Returns a list of contributors at GitHub || null
-  Future<List<Contributor>> getContributors() async {
+  Future<List<Contributor>?> getContributors() async {
     final url = baseUrl + '/contributors';
 
     try {
@@ -38,8 +37,8 @@ class Contributor {
   final int contributions;
 
   const Contributor({
-    this.name,
-    this.url,
-    this.contributions,
+    required this.name,
+    required this.url,
+    required this.contributions,
   });
 }

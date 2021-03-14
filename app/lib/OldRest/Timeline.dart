@@ -1,4 +1,3 @@
-//@dart=2.11
 import 'dart:async';
 
 import 'package:community_material_icon/community_material_icon.dart';
@@ -49,16 +48,15 @@ class ShortTimelineViewState extends State<ShortTimelineView> {
     return parseDateString(DateTime.now().add(Duration(days: position)));
   }
 
-  Map<String, Lesson> lessons;
-  Map<String, LessonInfo> lessoninfos;
-  List<Holiday> vacations;
-  Map<String, SchoolEvent> schoolevents;
-  Map<String, SchoolTask> schooltasks;
+  Map<String, Lesson>? lessons;
+  Map<String, LessonInfo>? lessoninfos;
+  List<Holiday>? vacations;
+  Map<String, SchoolEvent>? schoolevents;
+  Map<String, SchoolTask>? schooltasks;
 
-  List<StreamSubscription> subs;
+  final List<StreamSubscription> subs = [];
 
   ShortTimelineViewState(this.database) {
-    subs = [];
     lessons = database.getLessons();
     schooltasks = database.tasks.data;
     schoolevents = database.events.data;
@@ -158,18 +156,17 @@ class TimelineViewState extends State<TimelineView> {
     return parseDateString(DateTime.now().add(Duration(days: position)));
   }
 
-  Map<String, Lesson> lessons;
-  Map<String, LessonInfo> lessoninfos;
-  List<Holiday> vacations;
-  Map<String, SchoolEvent> schoolevents;
-  Map<String, SchoolTask> schooltasks;
+  Map<String, Lesson>? lessons;
+  Map<String, LessonInfo>? lessoninfos;
+  List<Holiday>? vacations;
+  Map<String, SchoolEvent>? schoolevents;
+  Map<String, SchoolTask>? schooltasks;
 
-  List<StreamSubscription> subs;
+  final List<StreamSubscription> subs = [];
 
   TimelineViewState(
     this.database,
   ) {
-    subs = [];
     lessons = database.getLessons();
     schooltasks = database.tasks.data;
     schoolevents = database.events.data;
@@ -211,35 +208,35 @@ class TimelineViewState extends State<TimelineView> {
   Widget build(BuildContext context) {
     return Scrollbar(
       child: ListView.builder(
-      itemBuilder: (BuildContext context, int index) {
-        String datestring = getDateString(index);
-        int weekday = parseDate(datestring).weekday;
-        int weektype = getWeektypeofDate(datestring, database);
-        return TimelineTile(database,
-            weektype: weektype,
-            date: datestring,
-            tasks: (schooltasks ?? {}).values.where((item) {
-              if (item.archived == true) return false;
-              return item.due == datestring;
-            }).toList(),
-            events: (schoolevents ?? {}).values.where((item) {
-              if (item.archived == true) return false;
-              return item.getDateKeys().contains(datestring);
-            }).toList(),
-            lessonInfos: (lessoninfos ?? {}).values.where((item) {
-              return item.date == datestring;
-            }).toList(),
-            lessons: (lessons ?? {}).values.where((lesson) {
-              if (lesson.day != weekday) return false;
-              if (lesson.correctWeektype(weektype)) {
-                return true;
-              } else {
-                return false;
-              }
-            }).toList());
-      },
-      cacheExtent: 100.0,
-    ),
+        itemBuilder: (BuildContext context, int index) {
+          String datestring = getDateString(index);
+          int weekday = parseDate(datestring).weekday;
+          int weektype = getWeektypeofDate(datestring, database);
+          return TimelineTile(database,
+              weektype: weektype,
+              date: datestring,
+              tasks: (schooltasks ?? {}).values.where((item) {
+                if (item.archived == true) return false;
+                return item.due == datestring;
+              }).toList(),
+              events: (schoolevents ?? {}).values.where((item) {
+                if (item.archived == true) return false;
+                return item.getDateKeys().contains(datestring);
+              }).toList(),
+              lessonInfos: (lessoninfos ?? {}).values.where((item) {
+                return item.date == datestring;
+              }).toList(),
+              lessons: (lessons ?? {}).values.where((lesson) {
+                if (lesson.day != weekday) return false;
+                if (lesson.correctWeektype(weektype)) {
+                  return true;
+                } else {
+                  return false;
+                }
+              }).toList());
+        },
+        cacheExtent: 100.0,
+      ),
     );
   }
 }
@@ -321,10 +318,10 @@ void showPickerCreateAtDate(
 }
 
 Widget simpleTile({
-  IconData iconData,
-  String text,
-  Color color,
-  VoidCallback onTap,
+  required IconData iconData,
+  required String text,
+  required Color color,
+  VoidCallback? onTap,
 }) {
   return ListTile(
     leading: Icon(
@@ -336,9 +333,9 @@ Widget simpleTile({
   );
 }
 
-T getFirst<T>(Iterable<T> iterable) {
+T? getFirst<T>(Iterable<T>? iterable) {
   if ((iterable?.length ?? 0) > 0) {
-    return iterable.first;
+    return iterable!.first;
   } else {
     return null;
   }
@@ -348,7 +345,7 @@ class TimeLineLessonItem extends StatelessWidget {
   final Lesson lesson;
   final Course course;
   final PlannerDatabase database;
-  final LessonInfo lessoninfo;
+  final LessonInfo? lessoninfo;
   final String datestring;
 
   const TimeLineLessonItem(
@@ -392,7 +389,7 @@ class TimeLineLessonItem extends StatelessWidget {
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(6.0)),
             color: lessoninfo != null
-                ? getLessonInfoColor(lessoninfo.type)
+                ? getLessonInfoColor(lessoninfo!.type)
                 : null),
       ),
       onTap: () {
@@ -403,11 +400,12 @@ class TimeLineLessonItem extends StatelessWidget {
       },
       onLongPress: () {
         pushWidget(
-            context,
-            NewSchoolTaskView.CreateWithData(
-              database: database,
-              courseid: lesson.courseid,
-            ));
+          context,
+          NewSchoolTaskView.CreateWithData(
+            database: database,
+            courseid: lesson.courseid,
+          ),
+        );
       },
     );
   }

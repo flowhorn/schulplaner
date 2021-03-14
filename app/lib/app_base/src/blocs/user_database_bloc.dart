@@ -1,15 +1,13 @@
-// @dart=2.11
-
 import 'package:authentification/authentification_models.dart';
 import 'package:bloc/bloc_base.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:schulplaner8/Data/userdatabase.dart';
 
 class UserDatabaseBloc extends BlocBase {
-  final _currentUserIdSubject = BehaviorSubject<UserId>();
-  UserId get currentUserId => _currentUserIdSubject.value;
+  final _currentUserIdSubject = BehaviorSubject<UserId?>();
+  UserId? get currentUserId => _currentUserIdSubject.value;
 
-  UserDatabase userDatabase;
+  UserDatabase? userDatabase;
 
   void setAuthentification(UserId userId) {
     // Prevent unnesseccary reloads by checking currentUserId

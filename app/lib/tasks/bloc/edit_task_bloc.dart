@@ -1,4 +1,3 @@
-// @dart=2.11
 import 'package:bloc/bloc_base.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:schulplaner8/Data/Planner/Task.dart';
@@ -19,9 +18,9 @@ class EditTaskBloc extends BlocBase {
 
   Stream<SchoolTask> get currenSchoolTask => _currentTaskSubject;
   SchoolTask get _currenSchoolTaskValue =>
-      _currentTaskSubject.valueWrapper.value;
-  bool get isEditMode => _editModeSubject.valueWrapper.value;
-  bool get hasChangedValues => _hasChangedValuesSubject.valueWrapper.value;
+      _currentTaskSubject.valueWrapper!.value;
+  bool get isEditMode => _editModeSubject.valueWrapper!.value;
+  bool get hasChangedValues => _hasChangedValuesSubject.valueWrapper!.value;
 
   void _updateTask(SchoolTask newTask) {
     _hasChangedValuesSubject.add(true);

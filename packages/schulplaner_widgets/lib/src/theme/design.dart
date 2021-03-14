@@ -72,7 +72,7 @@ class Design {
   }
 }
 
-List<Design> designPresets(BuildContext context) {
+List<Design> designPresets() {
   return [
     Design(
         id: "000",
@@ -158,9 +158,9 @@ List<Design> designPresets(BuildContext context) {
   ];
 }
 
-Design getRandomDesign(BuildContext context) {
+Design getRandomDesign() {
   final _random = Random();
-  final list = designPresets(context);
+  final list = designPresets();
   return list[_random.nextInt(list.length)];
 }
 

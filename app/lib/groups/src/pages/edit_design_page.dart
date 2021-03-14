@@ -1,4 +1,3 @@
-// @dart=2.11
 import 'package:bloc/bloc_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Helper/Functions.dart';
@@ -10,8 +9,8 @@ import 'package:schulplaner_widgets/schulplaner_forms.dart';
 import 'package:schulplaner_widgets/schulplaner_theme.dart';
 import 'package:schulplaner_widgets/schulplaner_dialogs.dart';
 
-Future<Design> createNewDesignFromEditDesignPage(
-    {@required BuildContext context}) async {
+Future<Design?> createNewDesignFromEditDesignPage(
+    {required BuildContext context}) async {
   return pushWidget<Design>(
     context,
     BlocProvider(
@@ -32,7 +31,7 @@ class EditDesignPage extends StatelessWidget {
               if (!snapshot.hasData || snapshot.data == null) {
                 return CircularProgressIndicator();
               }
-              final design = snapshot.data;
+              final design = snapshot.data!;
               return Theme(
                 data: newAppThemeDesign(context, design),
                 child: Scaffold(
@@ -72,7 +71,7 @@ class EditDesignPage extends StatelessWidget {
 class _Inner extends StatelessWidget {
   final Design design;
 
-  const _Inner({Key key, this.design}) : super(key: key);
+  const _Inner({Key? key, required this.design}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final bloc = BlocProvider.of<EditDesignBloc>(context);
@@ -114,7 +113,7 @@ class _Inner extends StatelessWidget {
           title: Text(getString(context).accent),
           subtitle: Text(design.accent == null
               ? '-'
-              : '#' + getHex(design.accent).toString()),
+              : '#' + getHex(design.accent!).toString()),
           onTap: () {
             selectColor(context, design.accent).then((newColor) {
               if (newColor != null) {

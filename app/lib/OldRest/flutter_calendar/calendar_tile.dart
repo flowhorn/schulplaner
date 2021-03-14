@@ -1,4 +1,3 @@
-//@dart=2.11
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Helper/DateAPI.dart';
 import 'package:schulplaner_widgets/schulplaner_theme.dart';
@@ -19,15 +18,15 @@ class CalendarTile extends StatelessWidget {
 
   CalendarTile(
     this.background, {
-    this.onDateSelected,
-    this.date,
-    this.child,
-    this.dateStyles,
-    this.dayOfWeek,
-    this.dayOfWeekStyles,
+    required this.onDateSelected,
+    required this.date,
+    required this.child,
+    required this.dateStyles,
+    required this.dayOfWeek,
+    required this.dayOfWeekStyles,
     this.isDayOfWeek = false,
     this.isSelected = false,
-    this.indicators,
+    required this.indicators,
   });
 
   Widget renderDateOrDayOfWeek(BuildContext context) {

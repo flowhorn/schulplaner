@@ -1,15 +1,18 @@
-//@dart = 2.11
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:meta/meta.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 //CODETYPE 0 = COURSE, 1 = CLASS
 
 class PublicCode {
-  String publiccode;
-  int codetype;
-  String referedid;
-  String link;
-  PublicCode({this.publiccode, this.codetype, this.referedid, this.link});
+  late String publiccode;
+  late int codetype;
+  String? referedid;
+  String? link;
+  PublicCode(
+      {required this.publiccode,
+      required this.codetype,
+      this.referedid,
+      this.link});
 
   PublicCode.fromData(Map<String, dynamic> data) {
     publiccode = data['publiccode'];
@@ -27,15 +30,15 @@ class PublicCode {
   }
 }
 
-Future<PublicCode> getPublicCodeValue(String publiccode) {
-  if (publiccode == null || publiccode == '') return null;
+Future<PublicCode?> getPublicCodeValue(String? publiccode) {
+  if (publiccode == null || publiccode == '') return Future.value(null);
   return FirebaseFirestore.instance
       .collection('publiccodes')
       .doc(publiccode)
       .get()
       .then((snap) {
     if (snap.exists) {
-      return PublicCode.fromData(snap.data());
+      return PublicCode.fromData(snap.data()!);
     } else {
       return null;
     }
@@ -57,8 +60,8 @@ Future<PublicCode> getPublicCodeValue(String publiccode) {
   */
 }
 
-Future<PublicCode> generatePublicCode(
-    {@required String id, @required int codetype}) {
+Future<PublicCode?> generatePublicCode(
+    {required String id, required int codetype}) {
   return FirebaseFunctions.instance.httpsCallable('generatePublicCode').call({
     'codetype': codetype,
     'id': id,
@@ -70,7 +73,7 @@ Future<PublicCode> generatePublicCode(
   });
 }
 
-Future<bool> removePublicCode({@required String id, @required int codetype}) {
+Future<bool> removePublicCode({required String id, required int codetype}) {
   return FirebaseFunctions.instance.httpsCallable('removePublicCode').call({
     'codetype': codetype,
     'id': id,

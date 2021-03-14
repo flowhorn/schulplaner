@@ -22,7 +22,7 @@ Future<Design> selectDesign(BuildContext context, String currentkey) async {
   Design selected;
   return await selectItem<Design>(
       context: context,
-      items: designPresets(context),
+      items: designPresets(),
       builder: (context, design) => ListTile(
             leading: Icon(
               Icons.color_lens,

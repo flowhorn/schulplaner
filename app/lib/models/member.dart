@@ -51,7 +51,7 @@ class MemberData {
       picThumb: data['picThumb'],
       avatar: data['avatar'],
       displayMode:
-          profileDisplayModeEnumFromString(data['displayMode'] ?? 'avatar'),
+          profileDisplayModeEnumFromString(data['displayMode'] ?? 'none'),
       joinedOn: ((data['joinedOn'] ?? Timestamp.now()) as Timestamp).toDate(),
     );
   }

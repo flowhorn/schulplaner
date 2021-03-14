@@ -119,7 +119,7 @@ class _Inner extends StatelessWidget {
           trailing: IconButton(
               icon: Icon(Icons.autorenew),
               onPressed: () {
-                bloc.changeDesign(getRandomDesign(context));
+                bloc.changeDesign(getRandomDesign());
               }),
           onTap: () {
             selectDesign(context, course.design?.id).then((newDesign) {

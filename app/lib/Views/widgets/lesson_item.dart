@@ -1,4 +1,3 @@
-//@dart=2.11
 import 'package:flutter/material.dart';
 import 'package:schulplaner_addons/utils/color_utils.dart';
 import 'package:schulplaner8/Helper/helper_views.dart';
@@ -7,21 +6,21 @@ import 'package:schulplaner_widgets/schulplaner_theme.dart';
 
 class LessonItemTimeline extends StatelessWidget {
   final int start, end;
-  final Color color;
-  final String courseName;
+  final Color? color;
+  final String? courseName;
   final VoidCallback onTap, onLongPress;
-  final LessonInfoType lessonInfoType;
+  final LessonInfoType? lessonInfoType;
 
-  const LessonItemTimeline(
-      {Key key,
-      this.start,
-      this.end,
-      this.color,
-      this.courseName,
-      this.onTap,
-      this.lessonInfoType,
-      this.onLongPress})
-      : super(key: key);
+  const LessonItemTimeline({
+    Key? key,
+    required this.start,
+    required this.end,
+    required this.color,
+    required this.courseName,
+    required this.onTap,
+    required this.lessonInfoType,
+    required this.onLongPress,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +33,7 @@ class LessonItemTimeline extends StatelessWidget {
             ? BoxDecoration(
                 border: Border.all(
                   color: ColorUtils.of(context)
-                      .getClearBorderColor(context, color),
+                      .getClearBorderColor(context, color ?? Colors.black),
                   width: 2.0,
                 ),
                 borderRadius: BorderRadius.circular(32.0))
@@ -80,8 +79,8 @@ class LessonItemTimeline extends StatelessWidget {
                         color: color,
                         border: Border.all(
                           width: 2.0,
-                          color: ColorUtils.of(context)
-                              .getClearBorderColor(context, color),
+                          color: ColorUtils.of(context).getClearBorderColor(
+                              context, color ?? Colors.black),
                         ),
                       ),
                       child: Center(

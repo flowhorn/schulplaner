@@ -104,7 +104,7 @@ class NewSchoolClassView extends StatelessWidget {
         database.dataManager.generateSchoolClassId(),
         database.getSettings(),
         database.getMemberId(),
-      ).copyWith(design: getRandomDesign(null));
+      ).copyWith(design: getRandomDesign());
     }
     notifier = ValueNotifier(data);
   }
@@ -159,8 +159,8 @@ class NewSchoolClassView extends StatelessWidget {
                               icon: Icon(Icons.autorenew),
                               onPressed: () {
                                 changedValues = true;
-                                SchoolClass newdata = data.copyWith(
-                                    design: getRandomDesign(context));
+                                SchoolClass newdata =
+                                    data.copyWith(design: getRandomDesign());
                                 data = newdata;
                                 notifier.value = newdata;
                               }),

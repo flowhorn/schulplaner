@@ -9,8 +9,11 @@ String weekDayEnumToString(WeekDay weekDay) => weekDay.toString().split('.')[1];
 
 enum ProfileDisplayMode { pic, none }
 
-ProfileDisplayMode profileDisplayModeEnumFromString(String data) =>
-    enumFromString(ProfileDisplayMode.values, data)!;
+ProfileDisplayMode profileDisplayModeEnumFromString(String data) {
+  return enumFromString<ProfileDisplayMode>(ProfileDisplayMode.values, data,
+          orElse: ProfileDisplayMode.none) ??
+      ProfileDisplayMode.none;
+}
 
 String profileDisplayModeEnumToString(ProfileDisplayMode memberRole) =>
     memberRole.toString().split('.')[1];

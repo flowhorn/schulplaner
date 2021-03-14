@@ -1,4 +1,3 @@
-// @dart=2.11
 import 'package:bloc/bloc_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Helper/Functions.dart';
@@ -16,32 +15,28 @@ class CourseList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final plannerDatabase =
-        BlocProvider.of<PlannerDatabaseBloc>(context).plannerDatabase;
+        BlocProvider.of<PlannerDatabaseBloc>(context).plannerDatabase!;
     return Scaffold(
       body: StreamBuilder<Map<String, Course>>(
         stream: plannerDatabase.courseinfo.stream,
         initialData: plannerDatabase.courseinfo.data,
-        builder: (context, data) {
-          if (data != null) {
-            final courselist = (data.data ?? {}).values.toList()
-              ..sort(
-                  (item1, item2) => item1.getName().compareTo(item2.getName()));
-            return UpListView(
-              items: courselist,
-              emptyViewBuilder: (context) {
-                return getEmptyView(
-                  title: bothlang(context,
-                      de: 'Noch keine Fächer...', en: 'No courses...'),
-                  icon: Icons.hourglass_empty,
-                );
-              },
-              builder: (context, courseInfo) {
-                return _CourseTile(courseInfo: courseInfo);
-              },
-            );
-          } else {
-            return CircularProgressIndicator();
-          }
+        builder: (context, snapshot) {
+          final courselist = (snapshot.data ?? {}).values.toList()
+            ..sort(
+                (item1, item2) => item1.getName().compareTo(item2.getName()));
+          return UpListView<Course>(
+            items: courselist,
+            emptyViewBuilder: (context) {
+              return getEmptyView(
+                title: bothlang(context,
+                    de: 'Noch keine Fächer...', en: 'No courses...'),
+                icon: Icons.hourglass_empty,
+              );
+            },
+            builder: (context, courseInfo) {
+              return _CourseTile(courseInfo: courseInfo);
+            },
+          );
         },
       ),
       floatingActionButton: FloatingActionButton(
@@ -55,18 +50,18 @@ class CourseList extends StatelessWidget {
 }
 
 class _CourseTile extends StatelessWidget {
-  final Course courseInfo;
+  final Course? courseInfo;
 
-  const _CourseTile({Key key, this.courseInfo}) : super(key: key);
+  const _CourseTile({Key? key, this.courseInfo}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final plannerDatabase =
         BlocProvider.of<PlannerDatabaseBloc>(context).plannerDatabase;
-    if (courseInfo == null || courseInfo.id == null) {
+    if (courseInfo == null || courseInfo?.id == null) {
       return SizedBox(
         height: 52.0,
-        child: Center(
-          child: CircularProgressIndicator(),
+        child: ListTile(
+          title: Text('Leeres KursObjekt geladen!'),
         ),
       );
     }
@@ -74,22 +69,22 @@ class _CourseTile extends StatelessWidget {
       leading: Padding(
         padding: EdgeInsets.only(top: 8, bottom: 8),
         child: Hero(
-            tag: 'courestag:' + courseInfo.id,
+            tag: 'courestag:' + courseInfo!.id,
             child: ColoredCircleText(
                 text:
-                    toShortNameLength(context, courseInfo.getShortname_full()),
-                color: courseInfo.getDesign().primary,
+                    toShortNameLength(context, courseInfo!.getShortname_full()),
+                color: courseInfo!.getDesign().primary,
                 radius: 22.0)),
       ),
-      title: Text(courseInfo.name),
+      title: Text(courseInfo!.name),
       subtitle: Column(
         children: <Widget>[
           Text(
-            getString(context).teacher + ': ' + courseInfo.getTeachersListed(),
+            getString(context).teacher + ': ' + courseInfo!.getTeachersListed(),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
-          Text(getString(context).place + ': ' + courseInfo.getPlacesListed()),
+          Text(getString(context).place + ': ' + courseInfo!.getPlacesListed()),
         ],
         crossAxisAlignment: CrossAxisAlignment.start,
       ),
@@ -99,7 +94,7 @@ class _CourseTile extends StatelessWidget {
           onPressed: () {
             showCourseMoreSheet(
               context,
-              courseid: courseInfo.id,
+              courseid: courseInfo!.id,
               plannerdatabase: plannerDatabase,
             );
           }),
@@ -107,7 +102,7 @@ class _CourseTile extends StatelessWidget {
         pushWidget(
           context,
           CourseView(
-            courseid: courseInfo.id,
+            courseid: courseInfo!.id,
             database: plannerDatabase,
           ),
           routname: 'course',

@@ -1,4 +1,3 @@
-//@dart=2.11
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Data/Planner/Lesson.dart';
 import 'package:schulplaner8/Data/Planner/SchoolEvent.dart';
@@ -33,12 +32,12 @@ class TimelineTile extends StatelessWidget {
 
   TimelineTile(
     this.database, {
-    @required this.weektype,
-    @required this.date,
-    @required this.tasks,
-    @required this.events,
-    @required this.lessons,
-    @required this.lessonInfos,
+    required this.weektype,
+    required this.date,
+    required this.tasks,
+    required this.events,
+    required this.lessons,
+    required this.lessonInfos,
   });
 
   @override
@@ -148,10 +147,10 @@ class _TimelineTileSectionTitle extends StatelessWidget {
   final int weektype;
 
   const _TimelineTileSectionTitle({
-    Key key,
-    @required this.database,
-    @required this.date,
-    @required this.weektype,
+    Key? key,
+    required this.database,
+    required this.date,
+    required this.weektype,
   }) : super(key: key);
 
   @override
@@ -161,7 +160,7 @@ class _TimelineTileSectionTitle extends StatelessWidget {
       leading: Hero(
           tag: 'timelineitem' + date,
           child: ColoredCircleText(
-            text: getWeekDays(context)[dateTime.weekday].name.substring(0, 2),
+            text: getWeekDays(context)[dateTime.weekday]?.name.substring(0, 2),
             radius: 16.0,
           )),
       title: Text(getDateNoWeekDayText(date)),
@@ -170,7 +169,9 @@ class _TimelineTileSectionTitle extends StatelessWidget {
           onPressed: () {
             showPickerCreateAtDate(context, database, date);
           }),
-      subtitle: weektype == 0 ? null : Text(weektypes(context)[weektype].name),
+      subtitle: weektype == 0
+          ? null
+          : Text(weektypes(context)[weektype]?.name ?? '-'),
     );
   }
 }
@@ -182,11 +183,11 @@ class _TimelineTileSectionLessons extends StatelessWidget {
   final List<LessonInfo> lessonInfos;
 
   const _TimelineTileSectionLessons({
-    Key key,
-    @required this.database,
-    @required this.date,
-    @required this.lessons,
-    @required this.lessonInfos,
+    Key? key,
+    required this.database,
+    required this.date,
+    required this.lessons,
+    required this.lessonInfos,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -202,13 +203,14 @@ class _TimelineTileSectionLessons extends StatelessWidget {
                   }))
                 .map(
               (it) {
-                Course courseInfo = database.getCourseInfo(it.courseid);
-                LessonInfo lessonInfo = getFirst(lessonInfos.where((lit) {
+                final Course? courseInfo = database.getCourseInfo(it.courseid);
+                final LessonInfo? lessonInfo =
+                    getFirst(lessonInfos.where((lit) {
                   return lit.lessonid == it.lessonid;
                 }));
                 return LessonItemTimeline(
-                  color: courseInfo.getDesign().primary,
-                  courseName: courseInfo.getShortname_full(),
+                  color: courseInfo?.getDesign().primary,
+                  courseName: courseInfo?.getShortname_full(),
                   start: it.start,
                   end: it.end,
                   lessonInfoType: lessonInfo == null ? null : lessonInfo.type,
@@ -246,10 +248,10 @@ class _TimelineTileSectionTasks extends StatelessWidget {
   final List<SchoolTask> tasks;
 
   const _TimelineTileSectionTasks({
-    Key key,
-    @required this.database,
-    @required this.date,
-    @required this.tasks,
+    Key? key,
+    required this.database,
+    required this.date,
+    required this.tasks,
   }) : super(key: key);
 
   @override
@@ -260,7 +262,7 @@ class _TimelineTileSectionTasks extends StatelessWidget {
         Column(
           children: tasks.map((item) {
             bool isFinished = item.isFinished(database.getMemberId());
-            Course courseInfo = item.courseid != null
+            final Course? courseInfo = item.courseid != null
                 ? database.getCourseInfo(item.courseid)
                 : null;
             final listTile = ListTile(
@@ -344,10 +346,10 @@ class _TimelineTileSectionEvents extends StatelessWidget {
   final List<SchoolEvent> events;
 
   const _TimelineTileSectionEvents({
-    Key key,
-    this.database,
-    this.date,
-    this.events,
+    Key? key,
+    required this.database,
+    required this.date,
+    required this.events,
   }) : super(key: key);
 
   @override
@@ -357,7 +359,7 @@ class _TimelineTileSectionEvents extends StatelessWidget {
         FormHeader(getString(context).events),
         Column(
           children: events.map((item) {
-            Course courseInfo = item.courseid != null
+            final Course? courseInfo = item.courseid != null
                 ? database.getCourseInfo(item.courseid)
                 : null;
             ListTile listTile = ListTile(
@@ -396,8 +398,8 @@ class HolidayTile_Timeline extends StatelessWidget {
   final Holiday holiday;
 
   const HolidayTile_Timeline({
-    Key key,
-    this.holiday,
+    Key? key,
+    required this.holiday,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -421,10 +423,10 @@ class HolidayTile_Timeline extends StatelessWidget {
 }
 
 class Tile extends StatelessWidget {
-  final Widget leading, title, subtitle, trailing;
+  final Widget? leading, title, subtitle, trailing;
 
   const Tile({
-    Key key,
+    Key? key,
     this.leading,
     this.title,
     this.subtitle,
@@ -448,13 +450,13 @@ class Tile extends StatelessWidget {
               children: <Widget>[
                 if (title != null)
                   DefaultTextStyle(
-                    child: title,
-                    style: Theme.of(context).textTheme.subtitle1,
+                    child: title!,
+                    style: Theme.of(context).textTheme.subtitle1!,
                   ),
                 if (subtitle != null)
                   DefaultTextStyle(
-                    child: subtitle,
-                    style: Theme.of(context).textTheme.bodyText2,
+                    child: subtitle!,
+                    style: Theme.of(context).textTheme.bodyText2!,
                   ),
               ],
               crossAxisAlignment: CrossAxisAlignment.start,
