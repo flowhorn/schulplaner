@@ -1,4 +1,3 @@
-//@dart=2.11
 import 'package:schulplaner_addons/common/widgets/sheets.dart';
 import 'package:schulplaner_addons/common/widgets/widgets.dart';
 import 'package:schulplaner_addons/tools/image/file_helper.dart';
@@ -10,14 +9,17 @@ enum ChatAttachmentType { image, document, text }
 
 class ChatAttachment {
   final ChatAttachmentType type;
-  final LocalFile file;
-  final String text;
+  final LocalFile? file;
+  final String? text;
 
-  ChatAttachment({this.type, this.file, this.text});
+  ChatAttachment({
+    required this.type,
+    required this.file,
+    this.text,
+  });
 }
 
-Future<ChatAttachment> selectChatAttachment(BuildContext context,
-    {bool showPresets = false}) {
+Future<ChatAttachment?> selectChatAttachment(BuildContext context) {
   return showSheet(
       title: null,
       context: context,
@@ -35,11 +37,12 @@ Future<ChatAttachment> selectChatAttachment(BuildContext context,
               final file = await ImageHelper.pickImageCamera();
               if (file != null) {
                 Navigator.pop(
-                    context,
-                    ChatAttachment(
-                      type: ChatAttachmentType.image,
-                      file: LocalFile(file),
-                    ));
+                  context,
+                  ChatAttachment(
+                    type: ChatAttachmentType.image,
+                    file: LocalFile(file),
+                  ),
+                );
               }
             },
             radius: 50.0,
@@ -79,21 +82,6 @@ Future<ChatAttachment> selectChatAttachment(BuildContext context,
             },
             radius: 50.0,
           ),
-          if (showPresets)
-            SheetIconButton(
-              title: 'Vorlage',
-              tooltip: 'Vorlagen öffnen',
-              iconData: Icons.mail,
-              onTap: () {
-                Navigator.pop(
-                    context,
-                    ChatAttachment(
-                      type: ChatAttachmentType.text,
-                      text: 'Testvorlage Hallo [MAX]',
-                    ));
-              },
-              radius: 50.0,
-            ),
         ],
       ));
 }

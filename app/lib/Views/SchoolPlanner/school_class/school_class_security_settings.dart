@@ -1,4 +1,3 @@
-//@dart=2.11
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Helper/EasyWidget.dart';
@@ -12,11 +11,11 @@ import 'package:schulplaner_widgets/schulplaner_theme.dart';
 
 class SchoolClassSecuritySettings extends StatelessWidget {
   final String classId;
-  SchoolClassSecuritySettings({@required this.classId});
+  SchoolClassSecuritySettings({required this.classId});
   @override
   Widget build(BuildContext context) {
     final database = PlannerDatabaseBloc.getDatabase(context);
-    return StreamBuilder<SchoolClass>(
+    return StreamBuilder<SchoolClass?>(
       builder: (context, snapshot) {
         final schoolClass = snapshot.data;
         if (schoolClass == null) {
@@ -24,7 +23,7 @@ class SchoolClassSecuritySettings extends StatelessWidget {
             child: CircularProgressIndicator(),
           );
         }
-        final design = schoolClass?.getDesign();
+        final design = schoolClass.getDesign();
         return Theme(
             data: newAppThemeDesign(context, design),
             child: Scaffold(
@@ -50,7 +49,7 @@ class SchoolClassSecuritySettings extends StatelessWidget {
 class _PublicClass extends StatelessWidget {
   final SchoolClass schoolClass;
 
-  const _PublicClass({Key key, @required this.schoolClass}) : super(key: key);
+  const _PublicClass({Key? key, required this.schoolClass}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final database = PlannerDatabaseBloc.getDatabase(context);
@@ -59,7 +58,7 @@ class _PublicClass extends StatelessWidget {
       title: Text(bothlang(context,
           de: 'Öffentliche Klasse', en: 'Public school class')),
       onChanged: (newvalue) {
-        ValueNotifier<bool> notifier =
+        ValueNotifier<bool?> notifier =
             showPermissionStateSheet(context: context);
         requestPermissionClass(
                 database: database,
@@ -88,7 +87,7 @@ class _PublicClass extends StatelessWidget {
 class _EnableChat extends StatelessWidget {
   final SchoolClass schoolClass;
 
-  const _EnableChat({Key key, @required this.schoolClass}) : super(key: key);
+  const _EnableChat({Key? key, required this.schoolClass}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final database = PlannerDatabaseBloc.getDatabase(context);
@@ -97,7 +96,7 @@ class _EnableChat extends StatelessWidget {
       title:
           Text(bothlang(context, de: 'Chat aktiviert', en: 'Chat activated')),
       onChanged: (newvalue) {
-        ValueNotifier<bool> notifier =
+        ValueNotifier<bool?> notifier =
             showPermissionStateSheet(context: context);
         requestPermissionClass(
                 database: database,

@@ -52,143 +52,163 @@ class _Inner extends StatelessWidget {
   const _Inner({Key key, @required this.notificationSettings})
       : super(key: key);
 
+  Future<bool> getWebInitFuture() async {
+    if (PlatformCheck.isWeb) {
+      final messaging = firebase_messaging.FirebaseMessaging.instance;
+      await messaging.getToken(
+        vapidKey:
+            'BE1bPoqMt335BxnwYC3F6JtaYU7zZdew4wRSLKWrbSVyaGcJ5VAtKDl-9FScF-ru657ZnGDJrNqtKRb-8eZs1G8',
+      );
+    }
+    return true;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          SwitchListTile(
-            value: notificationSettings.notifycreatetasks,
-            onChanged: (newvalue) {
-              notificationSettings.notifycreatetasks = newvalue;
-              _updateNotificationSettings(context, notificationSettings);
-            },
-            title: Text(getString(context).createnotifications),
-          ),
-          SwitchListTile(
-            value: notificationSettings.notifydaily,
-            onChanged: (newvalue) {
-              notificationSettings.notifydaily = newvalue;
-              _updateNotificationSettings(context, notificationSettings);
-            },
-            title: Text(getString(context).dailynotifications),
-          ),
-          ListTile(
-            title: Text(getString(context).timetoremember),
-            subtitle: Text(notificationSettings.dailyNotificationTime != null
-                ? getTimeOfUTC(notificationSettings.dailyNotificationTime)
-                    .format(context)
-                : '-'),
-            enabled: notificationSettings.notifydaily,
-            onTap: notificationSettings.notifydaily
-                ? () {
-                    showTimePicker(
-                            context: context,
-                            initialTime: notificationSettings
-                                        .dailyNotificationTime !=
-                                    null
-                                ? getTimeOfUTC(
-                                    notificationSettings.dailyNotificationTime)
-                                : TimeOfDay(hour: 16, minute: 0))
-                        .then((TimeOfDay newTime) {
-                      if (newTime != null) {
-                        Time localTime = Time.fromTimeOfDay(newTime);
-                        Time utcTime = getUTCTimeOfLocal(localTime);
-                        // Da nur volle Stunden erlaubt sind.
-                        notificationSettings.dailyNotificationTime =
-                            utcTime.copyWithAddedMinutes(-utcTime.minute);
-                        _updateNotificationSettings(
-                            context, notificationSettings);
-
-                        // SHOW USER THAT SELECTED TIME IS CHANGED TO FULLTIME
-                        var resultsheet = showResultStateSheet(
-                            context: context, fontSize: 15.5);
-                        resultsheet.value = ResultItem(
-                            loading: false,
-                            iconData: Icons.warning,
-                            color: Colors.orange,
-                            text: bothlang(context,
-                                de: 'Die Funktion befindet sich aktuell noch in der BETA. Alle Zeiten werden auf volle Stunden gerundet.',
-                                en: 'This feature is still in the BETA. All times are rounded to full hours.'));
-                      }
-                    });
-                  }
-                : null,
-            trailing: Card(
-              child: Padding(
-                padding: EdgeInsets.all(4.0),
-                child: Text('BETA'),
-              ),
-              color: Colors.orange,
-            ),
-          ),
-          ListTile(
-            title: Text(getString(context).rememberdaysbefore),
-            subtitle: Text(notificationSettings.dailydaterange != null
-                ? (notificationSettings.dailydaterange.toString() +
-                    ' ' +
-                    getString(context).days)
-                : '-'),
-            enabled: notificationSettings.notifydaily,
-            onTap: notificationSettings.notifydaily
-                ? () {
-                    selectItem(
-                        context: context,
-                        items: buildIntList(7, start: 1),
-                        builder: (context, item) {
-                          return ListTile(
-                            title: Text(item.toString() +
-                                ' ' +
-                                getString(context).days),
-                            trailing: selectedView(
-                                item == notificationSettings.dailydaterange),
-                            onTap: () {
-                              notificationSettings.dailydaterange = item;
+    return FutureBuilder<bool>(
+        future: getWebInitFuture(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return CircularProgressIndicator();
+          }
+          return SingleChildScrollView(
+            child: Column(
+              children: [
+                SwitchListTile(
+                  value: notificationSettings.notifycreatetasks,
+                  onChanged: (newvalue) {
+                    notificationSettings.notifycreatetasks = newvalue;
+                    _updateNotificationSettings(context, notificationSettings);
+                  },
+                  title: Text(getString(context).createnotifications),
+                ),
+                SwitchListTile(
+                  value: notificationSettings.notifydaily,
+                  onChanged: (newvalue) {
+                    notificationSettings.notifydaily = newvalue;
+                    _updateNotificationSettings(context, notificationSettings);
+                  },
+                  title: Text(getString(context).dailynotifications),
+                ),
+                ListTile(
+                  title: Text(getString(context).timetoremember),
+                  subtitle: Text(notificationSettings.dailyNotificationTime !=
+                          null
+                      ? getTimeOfUTC(notificationSettings.dailyNotificationTime)
+                          .format(context)
+                      : '-'),
+                  enabled: notificationSettings.notifydaily,
+                  onTap: notificationSettings.notifydaily
+                      ? () {
+                          showTimePicker(
+                                  context: context,
+                                  initialTime: notificationSettings
+                                              .dailyNotificationTime !=
+                                          null
+                                      ? getTimeOfUTC(notificationSettings
+                                          .dailyNotificationTime)
+                                      : TimeOfDay(hour: 16, minute: 0))
+                              .then((TimeOfDay newTime) {
+                            if (newTime != null) {
+                              Time localTime = Time.fromTimeOfDay(newTime);
+                              Time utcTime = getUTCTimeOfLocal(localTime);
+                              // Da nur volle Stunden erlaubt sind.
+                              notificationSettings.dailyNotificationTime =
+                                  utcTime.copyWithAddedMinutes(-utcTime.minute);
                               _updateNotificationSettings(
                                   context, notificationSettings);
-                              Navigator.pop(context);
-                            },
-                          );
-                        });
-                  }
-                : null,
-          ),
-          FormDivider(),
-          FormHeader(getString(context).devices),
-          Column(
-            children: notificationSettings.devices.values.map((device) {
-              if (device == null) return nowidget();
-              return ListTile(
-                leading: ColoredCircleIcon(
-                  color: getAccentColor(context),
-                  icon: Icon(Icons.devices),
+
+                              // SHOW USER THAT SELECTED TIME IS CHANGED TO FULLTIME
+                              var resultsheet = showResultStateSheet(
+                                  context: context, fontSize: 15.5);
+                              resultsheet.value = ResultItem(
+                                  loading: false,
+                                  iconData: Icons.warning,
+                                  color: Colors.orange,
+                                  text: bothlang(context,
+                                      de: 'Die Funktion befindet sich aktuell noch in der BETA. Alle Zeiten werden auf volle Stunden gerundet.',
+                                      en: 'This feature is still in the BETA. All times are rounded to full hours.'));
+                            }
+                          });
+                        }
+                      : null,
+                  trailing: Card(
+                    child: Padding(
+                      padding: EdgeInsets.all(4.0),
+                      child: Text('BETA'),
+                    ),
+                    color: Colors.orange,
+                  ),
                 ),
-                title: Text(device.devicename ?? '-'),
-                subtitle: Text(
-                  device.devicetoken.toString() ?? '-',
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
+                ListTile(
+                  title: Text(getString(context).rememberdaysbefore),
+                  subtitle: Text(notificationSettings.dailydaterange != null
+                      ? (notificationSettings.dailydaterange.toString() +
+                          ' ' +
+                          getString(context).days)
+                      : '-'),
+                  enabled: notificationSettings.notifydaily,
+                  onTap: notificationSettings.notifydaily
+                      ? () {
+                          selectItem(
+                              context: context,
+                              items: buildIntList(7, start: 1),
+                              builder: (context, item) {
+                                return ListTile(
+                                  title: Text(item.toString() +
+                                      ' ' +
+                                      getString(context).days),
+                                  trailing: selectedView(item ==
+                                      notificationSettings.dailydaterange),
+                                  onTap: () {
+                                    notificationSettings.dailydaterange = item;
+                                    _updateNotificationSettings(
+                                        context, notificationSettings);
+                                    Navigator.pop(context);
+                                  },
+                                );
+                              });
+                        }
+                      : null,
                 ),
-                trailing: IconButton(
-                    icon: Icon(Icons.cancel),
-                    onPressed: () {
-                      notificationSettings.devices[device.devicetoken] = null;
-                      _updateNotificationSettings(
-                          context, notificationSettings);
-                    }),
-              );
-            }).toList(),
-          ),
-          FormSpace(12.0),
-          _Devices(
-            notificationSettings: notificationSettings,
-          ),
-          FormDivider(),
-          FormSpace(64.0),
-        ],
-        mainAxisSize: MainAxisSize.min,
-      ),
-    );
+                FormDivider(),
+                FormHeader(getString(context).devices),
+                Column(
+                  children: notificationSettings.devices.values.map((device) {
+                    if (device == null) return nowidget();
+                    return ListTile(
+                      leading: ColoredCircleIcon(
+                        color: getAccentColor(context),
+                        icon: Icon(Icons.devices),
+                      ),
+                      title: Text(device.devicename ?? '-'),
+                      subtitle: Text(
+                        device.devicetoken.toString() ?? '-',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      trailing: IconButton(
+                          icon: Icon(Icons.cancel),
+                          onPressed: () {
+                            notificationSettings.devices[device.devicetoken] =
+                                null;
+                            _updateNotificationSettings(
+                                context, notificationSettings);
+                          }),
+                    );
+                  }).toList(),
+                ),
+                FormSpace(12.0),
+                _Devices(
+                  notificationSettings: notificationSettings,
+                ),
+                FormDivider(),
+                FormSpace(64.0),
+              ],
+              mainAxisSize: MainAxisSize.min,
+            ),
+          );
+        });
   }
 }
 

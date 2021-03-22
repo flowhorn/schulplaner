@@ -13,7 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:schulplaner_widgets/schulplaner_common.dart';
 import 'package:schulplaner8/Data/Planner/SchoolEvent.dart';
 import 'package:schulplaner_widgets/schulplaner_dialogs.dart';
-import 'package:schulplaner8/Data/plannerdatabase.dart';
+import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 import 'package:schulplaner8/Views/SchoolPlanner/Pickers.dart';
 import 'package:schulplaner8/Views/SchoolPlanner/attachments/edit_attachments_view.dart';
 import 'package:schulplaner8/Views/SchoolPlanner/common/edit_page.dart';
@@ -136,8 +136,7 @@ class NewSchoolEventView extends StatelessWidget {
                         ),
                         FormDivider(),
                         EditCourseField(
-                          courseID: data.courseid,
-                          database: database,
+                          courseId: data.courseid,
                           editmode: editmode,
                           onChanged: (context, newCourse) {
                             data.courseid = newCourse.id;

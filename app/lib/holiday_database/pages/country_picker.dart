@@ -3,13 +3,13 @@ import 'package:schulplaner8/Helper/EasyWidget.dart';
 import 'package:schulplaner8/Helper/helper_data.dart';
 import 'package:schulplaner8/holiday_database/models/country.dart';
 
-Future<Country> selectCountry(BuildContext context, {Country? selected}) {
+Future<Country?> selectCountry(BuildContext context, {Country? selected}) {
   return selectItem(
       context: context,
       items: Country.values.toList(),
       builder: (context, country) {
         return ListTile(
-          title: Text(countryToName(context, country)),
+          title: Text(countryToName(context, country!)),
           trailing: country == selected
               ? Icon(
                   Icons.done,

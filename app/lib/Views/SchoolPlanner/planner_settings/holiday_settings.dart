@@ -1,9 +1,10 @@
 //@dart=2.11
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:schulplaner8/Data/plannerdatabase.dart';
+import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 import 'package:schulplaner8/Helper/Functions.dart';
 import 'package:schulplaner8/Helper/helper_data.dart';
+import 'package:schulplaner8/app_base/src/blocs/planner_database_bloc.dart';
 import 'package:schulplaner8/models/planner_settings.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
 import 'package:schulplaner_widgets/schulplaner_forms.dart';
@@ -14,14 +15,13 @@ import 'package:schulplaner8/holiday_database/models/region.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class HolidaySettings extends StatelessWidget {
-  final PlannerDatabase database;
-
-  HolidaySettings({Key key, this.database}) : super(key: key) {
+  HolidaySettings({Key key}) : super(key: key) {
     timeago.setLocaleMessages('de', timeago.DeMessages());
   }
 
   @override
   Widget build(BuildContext context) {
+    final database = PlannerDatabaseBloc.getDatabase(context);
     return SubSettingsPlanner(
         title: getString(context).vacations,
         plannerDatabase: database,
@@ -37,10 +37,9 @@ class HolidaySettings extends StatelessWidget {
                     ),
               onTap: () {
                 pushWidget(
-                    context,
-                    SelectRegionPage(
-                      database: database,
-                    ));
+                  context,
+                  SelectRegionPage(),
+                );
               },
               trailing: settings.vacationpackageid == null
                   ? null

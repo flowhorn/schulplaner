@@ -7,12 +7,12 @@ export const generatePublicCodeFunction = functions.https.onCall(async (data, co
     return generatePublicCodeInner(data.codetype, data.id);
 });
 
-export async function generatePublicCodeInner(codetype: number, id: string) {
+export async function generatePublicCodeInner(codetype: number, id: string,) {
     try {
         let attempt: number = 0;
         while (attempt < 10) {
             const randomCode = generateRandomString();
-            const dynamicLink = await DynamicLinksLogic.getJoinLink(randomCode, "???");
+            const dynamicLink: string | null = await DynamicLinksLogic.getJoinLink(randomCode, "???");
             const generatedCode = {
                 codetype: codetype,
                 referredid: id,

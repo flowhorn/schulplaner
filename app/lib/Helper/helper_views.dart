@@ -1249,7 +1249,7 @@ class QRCodeViewPublicCode extends StatelessWidget {
         ? Container()
         : InkWell(
             child: QrImage(
-              data: publiccode,
+              data: publiccode!,
               size: 112.0,
               foregroundColor: getTextColor(getBackgroundColor(context)),
             ),

@@ -2,7 +2,7 @@
 import 'package:bloc/bloc_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:schulplaner8/Data/plannerdatabase.dart';
+import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 import 'package:schulplaner8/Helper/EasyWidget.dart';
 import 'package:schulplaner8/Helper/MyCloudFunctions.dart';
 import 'package:schulplaner8/Helper/PermissionManagement.dart';

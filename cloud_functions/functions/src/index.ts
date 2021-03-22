@@ -12,6 +12,7 @@ import { courseUpdateMemberRoleFunction } from './groups/cloud_functions/course_
 import { schoolClassUpdateMemberRoleFunction } from './groups/cloud_functions/school_class_update_member_role';
 import { schoolClassAddCourseFunction } from './groups/cloud_functions/school_class_add_course';
 import { schoolClassRemoveCourseFunction } from './groups/cloud_functions/school_class_remove_course';
+import { exportUserDataRequestTriggerFunction } from './export_user_data/cloud_functions/export_user_data_request_trigger';
 
 
 export const onCourseCreated = functions.firestore.document("courses/{id}").onCreate(async (snapshot, context) => {
@@ -193,6 +194,7 @@ export const onUserCreated = onUserCreatedFunction;
 export const RemoveMemberFromGroup = removeMemberFromGroupFunction;
 export const LeaveGroup = leaveGroupFunction;
 export const JoinGroup = joinGroupFunction;
+export const ExportUserDataRequestTrigger = exportUserDataRequestTriggerFunction;
 
 export const handleRequests = functions.database.ref("requests/incoming/{requestID}").onCreate(async (snapshot, context) => {
     const data = snapshot.val();

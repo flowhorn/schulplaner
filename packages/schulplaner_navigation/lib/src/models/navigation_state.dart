@@ -1,17 +1,16 @@
-//@dart=2.11
 import 'package:flutter/widgets.dart';
 import 'navigation_item.dart';
 
 class NavigationState {
   NavigationItem navigationItem;
-  NavigationItem subChildNavigationItem;
+  NavigationItem? subChildNavigationItem;
   int index;
   bool showSubChild;
-  String subChildTag;
-  Widget child;
-  Widget subChild;
-  String subChildName;
-  List<Widget> Function(BuildContext context) actions;
+  String? subChildTag;
+  Widget? child;
+  Widget? subChild;
+  String? subChildName;
+  List<Widget> Function(BuildContext context)? actions;
   NavigationState({
     this.index = 0,
     this.showSubChild = false,
@@ -20,7 +19,7 @@ class NavigationState {
     this.subChildTag,
     this.child,
     this.actions,
-    this.navigationItem,
+    required this.navigationItem,
     this.subChildNavigationItem,
   });
 

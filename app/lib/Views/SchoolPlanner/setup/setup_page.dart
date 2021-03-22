@@ -1,4 +1,3 @@
-//@dart=2.11
 import 'package:bloc/bloc_provider.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +12,7 @@ import 'package:schulplaner8/Views/SchoolPlanner/Timetable.dart';
 import 'package:schulplaner8/app_base/src/blocs/planner_loader_bloc.dart';
 import 'package:schulplaner8/app_base/src/models/load_all_planner_status.dart';
 import 'package:schulplaner8/groups/src/pages/course_list.dart';
+import 'package:schulplaner8/models/planner.dart';
 
 import 'package:schulplaner_translations/schulplaner_translations.dart';
 import 'package:schulplaner_widgets/schulplaner_common.dart';
@@ -23,7 +23,7 @@ class SetupView extends StatelessWidget {
   const SetupView(this.status);
   @override
   Widget build(BuildContext context) {
-    final plannerdata = status.getPlanner();
+    final Planner plannerdata = status.getPlanner()!;
     final plannerLoaderBloc = BlocProvider.of<PlannerLoaderBloc>(context);
     return Scaffold(
       appBar: AppHeaderAdvanced(
@@ -37,7 +37,7 @@ class SetupView extends StatelessWidget {
               ),
             ),
             Text(
-              plannerdata?.name ?? '-',
+              plannerdata.name,
               style: TextStyle(
                 fontSize: 12.5,
                 fontWeight: FontWeight.w300,

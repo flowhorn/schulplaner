@@ -1,7 +1,7 @@
 import 'package:bloc/bloc_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Data/Planner/Lesson.dart';
-import 'package:schulplaner8/Data/plannerdatabase.dart';
+import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 import 'package:schulplaner8/Helper/EasyWidget.dart';
 import 'package:schulplaner8/Helper/Functions.dart';
 import 'package:schulplaner8/Helper/helper_data.dart';
@@ -47,9 +47,9 @@ class TimetableView extends StatelessWidget {
       initialData: plannerDatabase.getLessons(),
       builder: (context, snapshot) {
         return DefaultTabController(
-            length: plannerDatabase.settings!.data!.getAmountWeekTypes(),
+            length: plannerDatabase.settings.data!.getAmountWeekTypes(),
             child: Scaffold(
-              appBar: plannerDatabase.settings!.data!.multiple_weektypes
+              appBar: plannerDatabase.settings.data!.multiple_weektypes
                   ? PreferredSize(
                       child: TabBar(
                         tabs: getListOfWeekTypes(
@@ -94,7 +94,7 @@ class TimetableView extends StatelessWidget {
   List<Widget> getTimetableFragments(PlannerDatabase plannerDatabase,
       BuildContext context, Map<String, Lesson> datamap) {
     List<Widget> mlist = [];
-    PlannerSettingsData settingsData = plannerDatabase.settings!.data!;
+    PlannerSettingsData settingsData = plannerDatabase.settings.data!;
 
     TimetableFragment buildFragment(int weektype) {
       if (settingsData.timetable_timemode) {
@@ -154,11 +154,11 @@ class TimetableView extends StatelessWidget {
   }
 
   List<TimeTableElement> buildElements(PlannerDatabase plannerDatabase,
-      Map<String, Lesson> datamap, int weektype, bool timemode) {
+      Map<String, Lesson>? datamap, int weektype, bool timemode) {
     if (datamap == null) return [];
     List<TimeTableElement> mylist = [];
     Map<int, LessonTime> lessontimes =
-        plannerDatabase.settings!.data!.lessontimes;
+        plannerDatabase.settings.data!.lessontimes;
     datamap.values.forEach((l) {
       if (l.correctWeektype(weektype)) {
         mylist.add(TimeTableElement(
@@ -175,7 +175,7 @@ class TimetableView extends StatelessWidget {
   List<TimeTablePeriodElement> buildPeriodElements(
       PlannerDatabase plannerDatabase, bool timemode) {
     List<TimeTablePeriodElement> mylist = [];
-    PlannerSettingsData settingsData = plannerDatabase.settings!.data!;
+    PlannerSettingsData settingsData = plannerDatabase.settings.data!;
     Map<int, LessonTime> lessontimes = settingsData.lessontimes;
     if (timemode) {
       lessontimes.values.forEach((l) {
@@ -259,7 +259,7 @@ String getLessonPeriodString(
   if (lesson.overridentime != null) {
     return lesson.overridentime.start + ':' + lesson.overridentime.end;
   }
-  Map<int, LessonTime>? lessontimes = database.settings!.data!.lessontimes;
+  Map<int, LessonTime>? lessontimes = database.settings.data!.lessontimes;
   String? start_first = lessontimes[lesson.start]?.start;
   String? end_last = lessontimes[lesson.end]?.end;
   return (start_first ?? '?') + '-' + (end_last ?? '?');
@@ -272,7 +272,7 @@ void showLessonDetailSheet(BuildContext context,
   showDetailSheetBuilder(
       context: context,
       body: (context) {
-        return StreamBuilder<Lesson>(
+        return StreamBuilder<Lesson?>(
             stream: plannerdatabase.getLessonStream(lessonid),
             builder: (context, snapshot) {
               Lesson? lesson = snapshot.data;
@@ -340,9 +340,11 @@ void showLessonDetailSheet(BuildContext context,
                                                 (mInfo.place?.name ?? '-'))
                                             : nowidget(),
                                         mInfo.note != null
-                                            ? Text(getString(context).note +
-                                                ': ' +
-                                                mInfo.note)
+                                            ? Text(
+                                                getString(context).note +
+                                                    ': ' +
+                                                    mInfo.note!,
+                                              )
                                             : nowidget()
                                       ],
                                       mainAxisSize: MainAxisSize.min,

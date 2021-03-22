@@ -1,10 +1,10 @@
-//@dart=2.11
 import 'package:flutter/material.dart';
-import 'package:schulplaner8/Data/Planner/PublicCode.dart';
-import 'package:schulplaner8/Data/plannerdatabase.dart';
+import 'package:schulplaner8/Data/Planner/public_code_functions.dart';
+import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 import 'package:schulplaner8/Helper/PermissionManagement.dart';
 import 'package:schulplaner8/Helper/helper_views.dart';
 import 'package:schulplaner8/models/school_class.dart';
+import 'package:schulplaner_functions/schulplaner_functions.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
 import 'package:share/share.dart';
 import 'package:schulplaner_widgets/schulplaner_common.dart';
@@ -12,12 +12,12 @@ import 'package:schulplaner_widgets/schulplaner_common.dart';
 class SchoolClassPublicCodeView extends StatelessWidget {
   final String classid;
   final PlannerDatabase database;
-  SchoolClassPublicCodeView({@required this.classid, @required this.database});
+  SchoolClassPublicCodeView({required this.classid, required this.database});
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<SchoolClass>(
+    return StreamBuilder<SchoolClass?>(
       builder: (context, snapshot) {
-        SchoolClass info = snapshot.data;
+        final SchoolClass? info = snapshot.data;
         if (info == null) {
           return Center(
             child: CircularProgressIndicator(),
@@ -65,7 +65,7 @@ class SchoolClassPublicCodeView extends StatelessWidget {
                         RButton(
                             text: getString(context).generate,
                             onTap: () {
-                              ValueNotifier<bool> sheetnotifier =
+                              ValueNotifier<bool?> sheetnotifier =
                                   ValueNotifier(null);
                               showLoadingStateSheet(
                                   context: context, sheetUpdate: sheetnotifier);
@@ -75,9 +75,12 @@ class SchoolClassPublicCodeView extends StatelessWidget {
                                       classid: classid)
                                   .then((result) {
                                 if (result == true) {
-                                  generatePublicCode(id: info.id, codetype: 1)
+                                  PublicCodeFunctions(
+                                          SchulplanerFunctionsBloc.of(context))
+                                      .generatePublicCode(
+                                          id: info.id, codetype: 1)
                                       .then((code) {
-                                    print(code.toJson());
+                                    print(code?.toJson());
                                     sheetnotifier.value = code != null;
                                   });
                                 } else {
@@ -90,7 +93,7 @@ class SchoolClassPublicCodeView extends StatelessWidget {
                         RButton(
                             text: getString(context).removecode,
                             onTap: () {
-                              ValueNotifier<bool> sheetnotifier =
+                              ValueNotifier<bool?> sheetnotifier =
                                   ValueNotifier(null);
                               showLoadingStateSheet(
                                   context: context, sheetUpdate: sheetnotifier);
@@ -100,10 +103,12 @@ class SchoolClassPublicCodeView extends StatelessWidget {
                                       classid: classid)
                                   .then((result) {
                                 if (result == true) {
-                                  removePublicCode(id: info.id, codetype: 1)
+                                  PublicCodeFunctions(
+                                          SchulplanerFunctionsBloc.of(context))
+                                      .removePublicCode(
+                                          id: info.id, codetype: 1)
                                       .then((value) {
-                                    sheetnotifier.value =
-                                        value != null ? value : false;
+                                    sheetnotifier.value = value;
                                   });
                                 } else {
                                   sheetnotifier.value = false;

@@ -1,4 +1,3 @@
-//@dart=2.11
 import 'package:bloc/bloc_base.dart';
 import 'package:bloc/bloc_provider.dart';
 import 'package:flutter/material.dart';
@@ -20,13 +19,13 @@ class NavigationBloc extends BlocBase {
   );
 
   NavigationBloc({
-    @required this.router,
-    @required this.getNavigationActionItem,
+    required this.router,
+    required this.getNavigationActionItem,
   });
 
   Stream<NavigationState> get currentMainPage => _currentPageSubject;
 
-  NavigationState get currentMainPageValue => _currentPageSubject.value;
+  NavigationState get currentMainPageValue => _currentPageSubject.value!;
 
   Function(NavigationState) get setMainPage => _currentPageSubject.add;
 
@@ -34,10 +33,10 @@ class NavigationBloc extends BlocBase {
     String tag,
     Widget subChild,
     String title, {
-    WidgetListBuilder actions,
-    @required NavigationItem navigationItem,
+    WidgetListBuilder? actions,
+    required NavigationItem navigationItem,
   }) {
-    final newData = _currentPageSubject.value.copy();
+    final newData = currentMainPageValue.copy();
     newData.showSubChild = true;
     newData.subChildTag = tag;
     newData.subChild = SlideUp(
@@ -51,7 +50,7 @@ class NavigationBloc extends BlocBase {
   }
 
   void goBack() {
-    final newData = _currentPageSubject.value.copy();
+    final newData = currentMainPageValue.copy();
     newData.showSubChild = false;
     newData.subChild = null;
     newData.subChildName = null;
@@ -85,7 +84,7 @@ class NavigationBloc extends BlocBase {
         newdata.child = router.overviewBuilder(context);
         break;
       case 1:
-        newdata.child = getNavigationActionItem(1)?.builder(context);
+        newdata.child = getNavigationActionItem(1).builder(context);
         break;
       case 2:
         newdata.child = getNavigationActionItem(2).builder(context);
@@ -100,8 +99,8 @@ class NavigationBloc extends BlocBase {
     setMainPage(newdata);
   }
 
-  Future<T> openSubPage<T>({WidgetBuilder builder, String tag}) {
-    return navigatorKey.currentState.push(
+  Future<T?> openSubPage<T>({required WidgetBuilder builder, String? tag}) {
+    return navigatorKey.currentState!.push(
       MaterialPageRoute(
         builder: builder,
         settings: RouteSettings(name: tag),

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:schulplaner8/Data/Planner/Lesson.dart';
 import 'package:schulplaner8/Data/Planner/SchoolEvent.dart';
 import 'package:schulplaner8/Data/Planner/Task.dart';
-import 'package:schulplaner8/Data/plannerdatabase.dart';
+import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 import 'package:schulplaner8/Helper/DateAPI.dart';
 import 'package:schulplaner8/Helper/SmartCalAPI.dart';
 import 'package:schulplaner8/Helper/helper_data.dart';

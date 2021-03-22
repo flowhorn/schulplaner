@@ -1,0 +1,21 @@
+name: export_user_data_client_implementation
+publish_to: 'none'
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+
+dependencies:
+  export_user_data_models:
+    path: ../export_user_data_models
+  export_user_data_client:
+    path: ../export_user_data_client
+  cloud_firestore: any
+  
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:

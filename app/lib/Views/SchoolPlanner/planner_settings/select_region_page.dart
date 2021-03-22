@@ -1,8 +1,8 @@
-//@dart=2.11
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:schulplaner8/Data/plannerdatabase.dart';
+import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 import 'package:schulplaner8/Helper/helper_data.dart';
+import 'package:schulplaner8/app_base/src/blocs/planner_database_bloc.dart';
 import 'package:schulplaner8/models/planner_settings.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
 import 'package:schulplaner_widgets/schulplaner_forms.dart';
@@ -13,16 +13,16 @@ import 'package:schulplaner8/holiday_database/pages/country_picker.dart';
 import 'package:schulplaner_widgets/schulplaner_common.dart';
 
 class SelectRegionPage extends StatelessWidget {
-  final PlannerDatabase database;
   final ValueNotifier<RegionsFilter> regionsFilter;
 
-  const SelectRegionPage._({Key key, this.database, this.regionsFilter})
+  const SelectRegionPage._({Key? key, required this.regionsFilter})
       : super(key: key);
 
-  factory SelectRegionPage({Key key, PlannerDatabase database}) {
+  factory SelectRegionPage({
+    Key? key,
+  }) {
     return SelectRegionPage._(
       key: key,
-      database: database,
       regionsFilter: ValueNotifier(RegionsFilter(
         country: null,
         isOfficial: false,
@@ -32,15 +32,16 @@ class SelectRegionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final database = PlannerDatabaseBloc.getDatabase(context);
     return Scaffold(
       appBar: MyAppHeader(
         title: getString(context).select,
       ),
-      body: StreamBuilder<PlannerSettingsData>(
+      body: StreamBuilder<PlannerSettingsData?>(
           stream: database.settings.stream,
           initialData: database.settings.data,
           builder: (context, settingsSnapshot) {
-            final settingsData = settingsSnapshot.data;
+            final settingsData = settingsSnapshot.data!;
             return ValueListenableBuilder<RegionsFilter>(
               valueListenable: regionsFilter,
               builder: (context, filterValue, _) {
@@ -49,8 +50,9 @@ class SelectRegionPage extends StatelessWidget {
                     FormHeader2(bothlang(context, en: 'Filter', de: 'Filter')),
                     ListTile(
                       title: Text(bothlang(context, en: 'Country', de: 'Land')),
-                      trailing:
-                          Text(filterValue.country != null ? countryToName(context, filterValue.country) : '???'),
+                      trailing: Text(filterValue.country != null
+                          ? countryToName(context, filterValue.country!)
+                          : '???'),
                       onTap: () {
                         selectCountry(context, selected: filterValue.country)
                             .then((selectedCountry) {
@@ -74,14 +76,14 @@ class SelectRegionPage extends StatelessWidget {
                     ),
                     FormDivider(),
                     StreamBuilder<List<Region>>(
-                      stream: getRegionsStream(filterValue),
+                      stream: getRegionsStream(database, filterValue),
                       builder: (context, snapshot) {
                         if (!snapshot.hasData) {
                           return Center(
                             child: CircularProgressIndicator(),
                           );
                         }
-                        final regions = snapshot.data;
+                        final regions = snapshot.data ?? [];
                         return Expanded(
                           child: ListView(
                             children: <Widget>[
@@ -116,7 +118,8 @@ class SelectRegionPage extends StatelessWidget {
     );
   }
 
-  Stream<List<Region>> getRegionsStream(RegionsFilter filter) {
+  Stream<List<Region>> getRegionsStream(
+      PlannerDatabase database, RegionsFilter filter) {
     return database.holidayGateway
         .getRegions(isOfficial: filter.isOfficial, country: filter.country);
   }
@@ -131,8 +134,12 @@ class RegionTile extends StatelessWidget {
   final VoidCallback onTap;
   final bool isSelected;
 
-  const RegionTile({Key key, this.region, this.onTap, this.isSelected})
-      : super(key: key);
+  const RegionTile({
+    Key? key,
+    required this.region,
+    required this.onTap,
+    required this.isSelected,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return ListTile(
@@ -176,7 +183,7 @@ class RegionTile extends StatelessWidget {
 class RegionTileTag extends StatelessWidget {
   final String text;
 
-  const RegionTileTag({Key key, this.text}) : super(key: key);
+  const RegionTileTag({Key? key, required this.text}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -197,10 +204,13 @@ class RegionTileTag extends StatelessWidget {
 }
 
 class RegionsFilter {
-  final Country country;
+  final Country? country;
   final bool isOfficial;
 
-  const RegionsFilter({@required this.country, @required this.isOfficial});
+  const RegionsFilter({
+    @required this.country,
+    this.isOfficial = true,
+  });
 }
 
 void _updateSettings(PlannerSettingsData newdata, PlannerDatabase database) {

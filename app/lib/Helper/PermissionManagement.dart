@@ -1,9 +1,7 @@
-// @dart=2.11
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
 import 'package:schulplaner8/Data/Planner/File.dart';
-import 'package:schulplaner8/Data/plannerdatabase.dart';
+import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 import 'package:schulplaner8/Helper/helper_views.dart';
 import 'dart:async';
 
@@ -13,13 +11,15 @@ import 'package:schulplaner8/models/school_class.dart';
 import 'package:schulplaner_models/schulplaner_models.dart';
 export 'package:schulplaner8/models/coursepermission.dart';
 
-Future<bool> requestPermissionCourse(
-    {@required PlannerDatabase database,
-    @required PermissionAccessType category,
-    @required String courseid}) {
-  if (!areThereAdmins(database.courseinfo.data[courseid].membersData) &&
+Future<bool> requestPermissionCourse({
+  required PlannerDatabase database,
+  required PermissionAccessType category,
+  required String courseid,
+}) {
+  if (database.courseinfo.data[courseid]?.membersData != null &&
+      !areThereAdmins(database.courseinfo.data[courseid]!.membersData) &&
       !areClassesConnected(
-          database.courseinfo.data[courseid].connectedclasses)) {
+          database.courseinfo.data[courseid]!.connectedclasses)) {
     database.dataManager.courseRoot(courseid).set(
       {
         'membersList': FieldValue.arrayUnion([database.getMemberId()]),
@@ -35,16 +35,16 @@ Future<bool> requestPermissionCourse(
     );
     return Future.value(true);
   }
-  MemberData courseMember =
-      database.courseinfo.data[courseid].membersData[database.getMemberId()];
-  MemberRole courseRole = courseMember?.role;
+  MemberData? courseMember =
+      database.courseinfo.data[courseid]!.membersData[database.getMemberId()];
+  MemberRole? courseRole = courseMember?.role;
   bool courseResult =
       requestPermission(role: courseRole, permissiontype: category);
   if (courseResult == true) return Future.value(true);
 
   //CHECK IF CONNECTED WITH CLASSES:
-  List<SchoolClass> classes = database
-      .courseinfo.data[courseid].connectedclasses.keys
+  List<SchoolClass?> classes = database
+      .courseinfo.data[courseid]!.connectedclasses.keys
       .map((classid) => database.schoolClassInfos.data.containsKey(classid)
           ? database.schoolClassInfos.data[classid]
           : null)
@@ -52,9 +52,9 @@ Future<bool> requestPermissionCourse(
       .toList();
   if (classes.isNotEmpty) {
     //THERE ARE CONNECTED CLASSES, CHECK FOR EACH CLASS...
-    for (SchoolClass classInfo in classes) {
-      MemberData classMember = classInfo.membersData[database.getMemberId()];
-      MemberRole classRole = classMember?.role;
+    for (SchoolClass? classInfo in classes) {
+      MemberData? classMember = classInfo?.membersData[database.getMemberId()];
+      MemberRole? classRole = classMember?.role;
       bool classResult =
           requestPermission(role: classRole, permissiontype: category);
       if (classResult == true) return Future.value(true);
@@ -74,7 +74,7 @@ bool areThereAdmins(Map<String, MemberData> datamap) {
   }
 }
 
-bool areClassesConnected(Map<String, bool> connectedclasses) {
+bool areClassesConnected(Map<String, bool>? connectedclasses) {
   Iterable<bool> list =
       (connectedclasses ?? {}).values.where((it) => it == true);
   if (list.isNotEmpty) {
@@ -84,11 +84,13 @@ bool areClassesConnected(Map<String, bool> connectedclasses) {
   }
 }
 
-Future<bool> requestPermissionClass(
-    {@required PlannerDatabase database,
-    @required PermissionAccessType category,
-    @required String classid}) {
-  if (!areThereAdmins(database.schoolClassInfos.data[classid].membersData)) {
+Future<bool> requestPermissionClass({
+  required PlannerDatabase database,
+  required PermissionAccessType category,
+  required String classid,
+}) {
+  if (database.schoolClassInfos.data[classid]?.membersData != null &&
+      !areThereAdmins(database.schoolClassInfos.data[classid]!.membersData)) {
     database.dataManager.schoolClassRoot(classid).set(
       {
         'membersList': FieldValue.arrayUnion([database.getMemberId()]),
@@ -104,9 +106,9 @@ Future<bool> requestPermissionClass(
     );
     return Future.value(true);
   }
-  MemberData classMember = database
+  MemberData? classMember = database
       .schoolClassInfos.data[classid]?.membersData[database.getMemberId()];
-  MemberRole classRole = classMember?.role;
+  MemberRole? classRole = classMember?.role;
   bool classResult =
       requestPermission(role: classRole, permissiontype: category);
   if (classResult == true) return Future.value(true);
@@ -114,12 +116,12 @@ Future<bool> requestPermissionClass(
 }
 
 Future<bool> requestSimplePermission(
-    {@required BuildContext context,
-    @required PlannerDatabase database,
-    @required PermissionAccessType category,
-    @required String id,
+    {required BuildContext context,
+    required PlannerDatabase database,
+    required PermissionAccessType category,
+    required String id,
     int type = 0,
-    String routname}) async {
+    String? routname}) async {
   switch (type) {
     case 0:
       {
@@ -157,12 +159,13 @@ Future<bool> requestSimplePermission(
   return Future.value(false);
 }
 
-Future<bool> requestSavedInSimplePermission(
-    {@required BuildContext context,
-    @required PlannerDatabase database,
-    @required PermissionAccessType category,
-    @required SavedIn savedin,
-    String routname}) async {
+Future<bool> requestSavedInSimplePermission({
+  required BuildContext context,
+  required PlannerDatabase database,
+  required PermissionAccessType category,
+  required SavedIn savedin,
+  String? routname,
+}) async {
   switch (savedin.type) {
     case SavedInType.COURSE:
       {

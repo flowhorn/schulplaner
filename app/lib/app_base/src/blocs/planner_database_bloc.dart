@@ -3,7 +3,7 @@ import 'package:bloc/bloc_base.dart';
 import 'package:bloc/bloc_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:schulplaner8/Data/plannerdatabase.dart';
+import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 import 'package:schulplaner8/app_base/src/blocs/app_settings_bloc.dart';
 
 class PlannerDatabaseBloc extends BlocBase {

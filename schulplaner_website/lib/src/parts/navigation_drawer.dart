@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:persist_theme/ui/theme_widgets.dart';
 import 'package:schulplaner_website/src/blocs/website_bloc.dart';
 import 'package:schulplaner_website/src/models/navigation_item.dart';
 import 'package:schulplaner_website/src/routes.dart';
+import 'package:schulplaner_website/src/widgets/dark_mode_switch.dart';
 
 class NavigationDrawer extends StatelessWidget {
   const NavigationDrawer();
@@ -33,7 +33,7 @@ class _DrawerList extends StatelessWidget {
         SizedBox(height: 16),
         Divider(),
         SizedBox(height: 16),
-        DarkModeSwitch(),
+        DarkmodeSwitch(),
       ],
     );
   }

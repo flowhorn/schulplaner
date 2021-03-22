@@ -46,7 +46,7 @@ class MemberData {
     return MemberData(
       id: id,
       name: data['name'],
-      role: memberRoleEnumFromString(data['role'] ?? 'admin'),
+      role: memberRoleEnumFromString(data['role'] ?? 'standard'),
       pic: data['pic'],
       picThumb: data['picThumb'],
       avatar: data['avatar'],

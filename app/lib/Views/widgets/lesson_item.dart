@@ -38,9 +38,9 @@ class LessonItemTimeline extends StatelessWidget {
                 ),
                 borderRadius: BorderRadius.circular(32.0))
             : BoxDecoration(
-                color: getLessonInfoColor(lessonInfoType),
+                color: getLessonInfoColor(lessonInfoType!),
                 border: Border.all(
-                  color: getLessonInfoColor(lessonInfoType),
+                  color: getLessonInfoColor(lessonInfoType!),
                   width: 2.0,
                 ),
                 borderRadius: BorderRadius.circular(32.0)),

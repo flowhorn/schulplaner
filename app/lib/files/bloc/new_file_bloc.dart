@@ -4,7 +4,7 @@ import 'package:bloc/bloc_base.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:schulplaner8/Data/Planner/File.dart';
-import 'package:schulplaner8/Data/plannerdatabase.dart';
+import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 import 'package:schulplaner_addons/schulplaner_utils.dart';
 
 class NewFileBloc extends BlocBase {

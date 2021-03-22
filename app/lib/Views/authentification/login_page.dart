@@ -172,8 +172,7 @@ class _FailedSignInState extends StatelessWidget {
             ),
             borderRadius: BorderRadius.circular(5),
           ),
-          child: FlatButton.icon(
-            highlightColor: Colors.white,
+          child: TextButton.icon(
             icon: Icon(
               Icons.arrow_left_outlined,
               color: Colors.red,

@@ -1,4 +1,3 @@
-// @dart=2.11
 import 'package:bloc/bloc_base.dart';
 import 'package:bloc/bloc_provider.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +15,7 @@ class AppStatsBloc extends BlocBase {
 
   Stream<AppStats> get appStats => _appStatsSubject;
 
-  AppStats get currentAppStats => _appStatsSubject.value;
+  AppStats get currentAppStats => _appStatsSubject.value!;
 
   Future<void> _initializeAppStats() async {
     final instance = await SharedPreferences.getInstance();
@@ -35,21 +34,17 @@ class AppStatsBloc extends BlocBase {
   }
 
   void incrementOpenHomePage() {
-    final currentStatsData = _appStatsSubject.value;
+    final currentStatsData = currentAppStats.copy();
     currentStatsData.openedhomepage++;
 
-    SharedPreferences.getInstance().then((pref) {
-      pref.setString('appstats', currentStatsData.toJsonString());
-    });
+    updateAppStats(currentStatsData);
   }
 
   void incrementAddedTask() {
-    final currentStatsData = _appStatsSubject.value.copy();
+    final currentStatsData = currentAppStats.copy();
     currentStatsData.addedtask++;
 
-    SharedPreferences.getInstance().then((pref) {
-      pref.setString('appstats', currentStatsData.toJsonString());
-    });
+    updateAppStats(currentStatsData);
   }
 
   @override
@@ -58,7 +53,7 @@ class AppStatsBloc extends BlocBase {
   }
 
   void hideDonationCardForThisMonth() {
-    final currentStatsData = _appStatsSubject.value.copy();
+    final currentStatsData = currentAppStats.copy();
     currentStatsData.setHideThisMonth();
 
     updateAppStats(currentStatsData);

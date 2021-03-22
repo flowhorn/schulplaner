@@ -14,6 +14,7 @@ firestore.settings(settings);
 
 export class SchulplanerReferences {
 
+    static firestoreReference = firestore;
     static coursesCollection = firestore.collection('courses');
     static usersCollection = firestore.collection('users');
     static schoolClassesCollection = firestore.collection('schoolclasses');
@@ -41,4 +42,5 @@ export class SchulplanerReferences {
     static getConnectionsDocument(memberId: MemberId) {
         return this.getPlannersDocument(memberId).collection('data').doc('connections');
     }
+
 }

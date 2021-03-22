@@ -4,6 +4,11 @@ import 'package:flutter/services.dart';
 abstract class AppFunctionsException implements Exception {
   String get code;
   String get message;
+
+  @override
+  String toString() {
+    return 'AppFunctionsException: {Code: $code, Message: $message}';
+  }
 }
 
 class UnknownAppFunctionsException implements AppFunctionsException {
@@ -51,6 +56,7 @@ AppFunctionsException mapCloudFunctionsExceptionToAppFunctionsException(
     FirebaseFunctionsException cloudFunctionsException) {
   if (cloudFunctionsException.code == 'DeadlineExceeded')
     return TimeoutAppFunctionsException();
-
+  print('Code: ' + cloudFunctionsException.code);
+  print('Message: ' + (cloudFunctionsException.message ?? '??'));
   return UnknownAppFunctionsException(cloudFunctionsException);
 }

@@ -14,7 +14,7 @@ MemberRole memberRoleFromMemberType(int? membertype) {
 }
 
 MemberRole memberRoleEnumFromString(String data) =>
-    enumFromString(MemberRole.values, data)!;
+    enumFromString(MemberRole.values, data) ?? MemberRole.none;
 
 String memberRoleEnumToString(MemberRole memberRole) =>
     memberRole.toString().split('.')[1];

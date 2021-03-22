@@ -1,9 +1,8 @@
-//@dart=2.11
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/models/planner_settings.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
 import 'package:schulplaner_widgets/schulplaner_theme.dart';
-import 'package:schulplaner8/Data/plannerdatabase.dart';
+import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 import 'package:schulplaner8/Helper/PermissionManagement.dart';
 import 'package:schulplaner8/Helper/helper_data.dart';
 import 'package:schulplaner8/Helper/helper_views.dart';
@@ -16,23 +15,23 @@ class SchoolClassSharedSettingsView extends StatelessWidget {
   final String schoolClassID;
   final PlannerDatabase database;
   SchoolClassSharedSettingsView({
-    @required this.schoolClassID,
-    @required this.database,
+    required this.schoolClassID,
+    required this.database,
   }) {
     timeago.setLocaleMessages('de', timeago.DeMessages());
   }
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<SchoolClass>(
+    return StreamBuilder<SchoolClass?>(
       builder: (context, snapshot) {
-        SchoolClass schoolClassInfo = snapshot.data;
+        SchoolClass? schoolClassInfo = snapshot.data;
         if (schoolClassInfo == null) {
           return Center(
             child: CircularProgressIndicator(),
           );
         }
-        Design courseDesign = schoolClassInfo?.getDesign();
-        final sharedSettings = schoolClassInfo?.sharedSettings;
+        final Design? courseDesign = schoolClassInfo.getDesign();
+        final SharedSettings? sharedSettings = schoolClassInfo.sharedSettings;
         return Theme(
             data: newAppThemeDesign(context, courseDesign),
             child: Scaffold(
@@ -50,22 +49,25 @@ class SchoolClassSharedSettingsView extends StatelessWidget {
                       )),
                     ),
                   if (sharedSettings != null)
-                    StreamBuilder<PlannerSettingsData>(
+                    StreamBuilder<PlannerSettingsData?>(
                       stream: database.settings.stream,
                       builder: (context, snapshot) {
-                        PlannerSettingsData currentSettings = snapshot.data;
+                        PlannerSettingsData? currentSettings = snapshot.data;
 
                         bool enabled =
                             !(currentSettings == sharedSettings.settingsData);
 
                         return ListTile(
-                          title: Text(bothlang(context,
-                                  en: 'Last refreshed: ',
-                                  de: 'Zuletzt aktualisiert: ') +
-                              (sharedSettings.lastRefreshed != null
-                                  ? timeago.format(sharedSettings.lastRefreshed,
-                                      locale: getString(context).languagecode)
-                                  : '/')),
+                          title: Text(
+                            bothlang(context,
+                                    en: 'Last refreshed: ',
+                                    de: 'Zuletzt aktualisiert: ') +
+                                (sharedSettings.lastRefreshed != null
+                                    ? timeago.format(
+                                        sharedSettings.lastRefreshed!,
+                                        locale: getString(context).languagecode)
+                                    : '/'),
+                          ),
                           trailing: RButton(
                             iconData: Icons.file_download,
                             enabled: enabled,
@@ -78,28 +80,30 @@ class SchoolClassSharedSettingsView extends StatelessWidget {
                                 ? null
                                 : () {
                                     database.dataManager.UpdateSettings(
-                                        sharedSettings.settingsData);
-                                    ScaffoldMessenger.of(context)
-                                        .showSnackBar(SnackBar(
-                                      content:
-                                          Text(getString(context).refreshed),
-                                    ));
+                                        sharedSettings.settingsData!);
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content:
+                                            Text(getString(context).refreshed),
+                                      ),
+                                    );
                                   },
                           ),
                         );
                       },
                     ),
                   RButton(
-                      iconData: Icons.share,
-                      text: getString(context).share,
-                      onTap: () {
-                        requestSimplePermission(
-                          database: database,
-                          context: context,
-                          type: 1,
-                          id: schoolClassInfo.id,
-                          category: PermissionAccessType.edit,
-                        ).then((result) {
+                    iconData: Icons.share,
+                    text: getString(context).share,
+                    onTap: () {
+                      requestSimplePermission(
+                        database: database,
+                        context: context,
+                        type: 1,
+                        id: schoolClassInfo.id,
+                        category: PermissionAccessType.edit,
+                      ).then(
+                        (result) {
                           if (result == true) {
                             database.dataManager
                                 .UpdateSchoolClassSharedSettings(
@@ -110,8 +114,10 @@ class SchoolClassSharedSettingsView extends StatelessWidget {
                               ),
                             );
                           }
-                        });
-                      }),
+                        },
+                      );
+                    },
+                  ),
                 ],
               ),
             ));

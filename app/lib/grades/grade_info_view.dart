@@ -1,6 +1,6 @@
 // @dart=2.11
 import 'package:flutter/material.dart';
-import 'package:schulplaner8/Data/plannerdatabase.dart';
+import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 import 'package:schulplaner8/OldGrade/Grade.dart';
 import 'package:schulplaner_widgets/schulplaner_forms.dart';
 

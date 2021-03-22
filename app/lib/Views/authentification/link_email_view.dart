@@ -72,11 +72,12 @@ class LinkEmailView extends StatelessWidget {
                             ),
                           ]..add(InkWell(
                               child: Center(
-                                child: FlatButton.icon(
+                                child: TextButton.icon(
                                   icon: Icon(Icons.done),
                                   label: Text(getString(context).linkit),
                                   onPressed: null,
-                                  disabledTextColor: getAccentColor(context),
+                                  style: TextButton.styleFrom(
+                                      onSurface: getAccentColor(context)),
                                 ),
                               ),
                               onTap: () async {

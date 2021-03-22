@@ -43,8 +43,8 @@ class _AboutApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return FormSection(
       title: BothLangString(
-        de: 'Über die Schulplaner-App',
-        en: 'About the Schoolplanner-App',
+        de: 'Über Schulplaner Pro',
+        en: 'About Schoolplanner Pro',
       ).getText(context),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

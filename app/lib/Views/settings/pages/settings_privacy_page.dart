@@ -1,4 +1,6 @@
 import 'package:bloc/bloc_provider.dart';
+import 'package:export_user_data_client/export_user_data_client.dart';
+import 'package:export_user_data_client_implementation/export_user_data_client_implementation.dart';
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Data/userdatabase.dart';
 import 'package:schulplaner8/Helper/Functions.dart';
@@ -11,7 +13,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:schulplaner_widgets/schulplaner_theme.dart';
 
 class PrivacyView extends StatelessWidget {
-  PrivacyView();
+  const PrivacyView();
 
   @override
   Widget build(BuildContext context) {
@@ -53,17 +55,21 @@ class PrivacyView extends StatelessWidget {
                         leading: Icon(Icons.collections_bookmark),
                         title: Text(getString(context).retrieve_data),
                         onTap: () {
-                          void _launchURL() async {
-                            dynamic url =
-                                'mailto:danielfelixplay@gmail.com?subject=${getString(context).retrieve_data}&body= UID: ${userDatabase.uid}';
-                            if (await canLaunch(url)) {
-                              await launch(url);
-                            } else {
-                              throw 'Could not launch $url';
-                            }
-                          }
-
-                          _launchURL();
+                          pushWidget(
+                            context,
+                            BlocProvider(
+                              bloc: ExportUserDataClientBloc(
+                                downloadService: MockDownloadService(),
+                                exportUserDataService:
+                                    FirestoreExportUserDataService(
+                                  userId: userDatabase.uid,
+                                  firestore:
+                                      userDatabase.getRootReference().firestore,
+                                ),
+                              ),
+                              child: ExportUserDataPage(),
+                            ),
+                          );
                         },
                       ),
                       ListTile(
@@ -147,7 +153,7 @@ Future<void> openPrivacyPolicyPage(BuildContext context) {
         title: Text(getString(context).privacy_policy),
       ),
       body: SingleChildScrollView(
-        child:  PrivacyPageContent(),
+        child: PrivacyPageContent(),
       ),
     ),
   );

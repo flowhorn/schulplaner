@@ -1,10 +1,10 @@
-//@dart=2.11
 import 'package:flutter/material.dart';
-import 'package:schulplaner8/Data/Planner/PublicCode.dart';
-import 'package:schulplaner8/Data/plannerdatabase.dart';
+import 'package:schulplaner8/Data/Planner/public_code_functions.dart';
+import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 import 'package:schulplaner8/Helper/PermissionManagement.dart';
 import 'package:schulplaner8/Helper/helper_views.dart';
 import 'package:schulplaner8/groups/src/models/course.dart';
+import 'package:schulplaner_functions/schulplaner_functions.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
 import 'package:share/share.dart';
 import 'package:schulplaner_widgets/schulplaner_common.dart';
@@ -12,12 +12,12 @@ import 'package:schulplaner_widgets/schulplaner_common.dart';
 class CoursePublicCodeView extends StatelessWidget {
   final String courseid;
   final PlannerDatabase database;
-  CoursePublicCodeView({@required this.courseid, @required this.database});
+  CoursePublicCodeView({required this.courseid, required this.database});
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<Course>(
+    return StreamBuilder<Course?>(
       builder: (context, snapshot) {
-        Course courseInfo = snapshot.data;
+        final Course? courseInfo = snapshot.data;
         if (courseInfo == null) {
           return Center(
             child: CircularProgressIndicator(),
@@ -36,7 +36,7 @@ class CoursePublicCodeView extends StatelessWidget {
                   ),
                 ),
                 ListTile(
-                  title: Text(
+                  title: SelectableText(
                     courseInfo.publiccode != null
                         ? ('#' + courseInfo.publiccode)
                         : ('#??????'),
@@ -68,7 +68,7 @@ class CoursePublicCodeView extends StatelessWidget {
                           : RButton(
                               text: getString(context).generate,
                               onTap: () {
-                                ValueNotifier<bool> sheetnotifier =
+                                ValueNotifier<bool?> sheetnotifier =
                                     ValueNotifier(null);
                                 showLoadingStateSheet(
                                     context: context,
@@ -79,8 +79,13 @@ class CoursePublicCodeView extends StatelessWidget {
                                         courseid: courseid)
                                     .then((result) {
                                   if (result == true) {
-                                    generatePublicCode(
-                                            id: courseInfo.id, codetype: 0)
+                                    PublicCodeFunctions(
+                                            SchulplanerFunctionsBloc.of(
+                                                context))
+                                        .generatePublicCode(
+                                      id: courseInfo.id,
+                                      codetype: 0,
+                                    )
                                         .then((code) {
                                       sheetnotifier.value = code != null;
                                     });
@@ -95,7 +100,7 @@ class CoursePublicCodeView extends StatelessWidget {
                           : RButton(
                               text: getString(context).removecode,
                               onTap: () {
-                                ValueNotifier<bool> sheetnotifier =
+                                ValueNotifier<bool?> sheetnotifier =
                                     ValueNotifier(null);
                                 showLoadingStateSheet(
                                     context: context,
@@ -106,14 +111,16 @@ class CoursePublicCodeView extends StatelessWidget {
                                         courseid: courseInfo.id)
                                     .then((result) {
                                   if (result == true) {
-                                    removePublicCode(
+                                    PublicCodeFunctions(
+                                            SchulplanerFunctionsBloc.of(
+                                                context))
+                                        .removePublicCode(
                                             id: courseInfo.id, codetype: 0)
                                         .then((value) {
-                                      sheetnotifier.value =
-                                          (value != null ? value : false);
+                                      sheetnotifier.value = value;
                                     });
                                   } else {
-                                    print('NOT OERMISSION');
+                                    print('NOT PERMISSION');
                                     sheetnotifier.value = false;
                                   }
                                 });

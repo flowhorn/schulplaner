@@ -1,4 +1,3 @@
-//@dart=2.11
 library schulplaner_navigation;
 
 export 'src/blocs/navigation_bloc.dart';

@@ -64,7 +64,6 @@ class ShortSchoolClassView extends StatelessWidget {
                     context,
                     SchoolClassView(
                       classid: classinfo.id,
-                      database: plannerDatabase,
                     ),
                     routname: 'schoolclass');
               },
@@ -139,7 +138,6 @@ class LibraryView extends StatelessWidget {
                               context,
                               SchoolClassView(
                                 classid: classinfo.id,
-                                database: plannerDatabase,
                               ),
                               routname: 'schoolclass');
                         },
@@ -315,9 +313,7 @@ class LibraryView extends StatelessWidget {
                       iconData: Icons.wb_sunny, onTap: () {
                     navigationBloc.openSubChild(
                       'vacations',
-                      HolidayList(
-                        plannerDatabase: plannerDatabase,
-                      ),
+                      HolidayList(),
                       getString(context).vacations,
                       navigationItem: NavigationItem.vacations,
                     );
@@ -581,9 +577,7 @@ class LibraryTabletView extends StatelessWidget {
                 onTap: () {
                   navigationBloc.openSubChild(
                     'vacations',
-                    HolidayList(
-                      plannerDatabase: plannerDatabase,
-                    ),
+                    HolidayList(),
                     getString(context).vacations,
                     navigationItem: NavigationItem.vacations,
                   );
@@ -724,29 +718,30 @@ class _SchoolClassSection extends StatelessWidget {
     final plannerDatabase =
         BlocProvider.of<PlannerDatabaseBloc>(context).plannerDatabase;
     return StreamBuilder<bool>(
-        stream: drawerBloc.isCollapsed,
-        initialData: drawerBloc.isCollapsedValue,
-        builder: (context, snapshot) {
-          final isCollapsed = snapshot.data;
-          if (isCollapsed) {
-            return IconButton(
-              icon: Icon(
-                Icons.location_city,
-                color: Theme.of(context).disabledColor,
-              ),
-              onPressed: () {
-                drawerBloc.setCollapsed(false);
-              },
-            );
-          }
-          return FormSection(
-            title: getString(context).schoolclass,
-            child: StreamBuilder<Map<String, SchoolClass>>(
-              builder: (context, snapshot) {
-                Map<String, SchoolClass> data = snapshot.data ?? {};
-                return Column(
-                  children: data.values.map<Widget>((classinfo) {
-                    return ListTile(
+      stream: drawerBloc.isCollapsed,
+      initialData: drawerBloc.isCollapsedValue,
+      builder: (context, snapshot) {
+        final isCollapsed = snapshot.data;
+        if (isCollapsed) {
+          return IconButton(
+            icon: Icon(
+              Icons.location_city,
+              color: Theme.of(context).disabledColor,
+            ),
+            onPressed: () {
+              drawerBloc.setCollapsed(false);
+            },
+          );
+        }
+        return FormSection(
+          title: getString(context).schoolclass,
+          child: StreamBuilder<Map<String, SchoolClass>>(
+            builder: (context, snapshot) {
+              Map<String, SchoolClass> data = snapshot.data ?? {};
+              return Column(
+                children: [
+                  for (final classinfo in data.values)
+                    ListTile(
                       leading: Hero(
                           tag: 'classtag:' + classinfo.id,
                           child: ColoredCircleText(
@@ -767,40 +762,39 @@ class _SchoolClassSection extends StatelessWidget {
                             context,
                             SchoolClassView(
                               classid: classinfo.id,
-                              database: plannerDatabase,
                             ),
                             routname: 'schoolclass');
                       },
-                    );
-                  }).toList()
-                    ..add(data.isNotEmpty
-                        ? FormSpace(0.0)
-                        : ButtonBar(
-                            children: <Widget>[
-                              RButton(
-                                  text: getString(context).create,
-                                  onTap: () {
-                                    pushWidget(
-                                        context,
-                                        NewSchoolClassView(
-                                          database: plannerDatabase,
-                                        ));
-                                  },
-                                  iconData: Icons.add_circle_outline),
-                              RButton(
-                                  text: getString(context).join,
-                                  onTap: () {
-                                    openGroupJoinPage(context: context);
-                                  },
-                                  iconData: Icons.link),
-                            ],
-                          )),
-                );
-              },
-              stream: plannerDatabase.schoolClassInfos.stream,
-              initialData: plannerDatabase.schoolClassInfos.data,
-            ),
-          );
-        });
+                    ),
+                  if (data.isEmpty)
+                    ButtonBar(
+                      children: <Widget>[
+                        RButton(
+                            text: getString(context).create,
+                            onTap: () {
+                              pushWidget(
+                                  context,
+                                  NewSchoolClassView(
+                                    database: plannerDatabase,
+                                  ));
+                            },
+                            iconData: Icons.add_circle_outline),
+                        RButton(
+                            text: getString(context).join,
+                            onTap: () {
+                              openGroupJoinPage(context: context);
+                            },
+                            iconData: Icons.link),
+                      ],
+                    ),
+                ],
+              );
+            },
+            stream: plannerDatabase.schoolClassInfos.stream,
+            initialData: plannerDatabase.schoolClassInfos.data,
+          ),
+        );
+      },
+    );
   }
 }

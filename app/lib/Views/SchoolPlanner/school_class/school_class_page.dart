@@ -1,12 +1,11 @@
-//@dart=2.11
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Chat/chatview.dart';
 import 'package:schulplaner8/Views/SchoolPlanner/school_class/school_class_security_settings.dart';
+import 'package:schulplaner8/app_base/src/blocs/planner_database_bloc.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
 import 'package:schulplaner_widgets/schulplaner_theme.dart';
 import 'package:schulplaner8/Data/Planner/File.dart';
 import 'package:schulplaner8/Data/Planner/Letter.dart';
-import 'package:schulplaner8/Data/plannerdatabase.dart';
 import 'package:schulplaner8/Helper/Functions.dart';
 import 'package:schulplaner8/Helper/helper_data.dart';
 import 'package:schulplaner_widgets/schulplaner_forms.dart';
@@ -21,18 +20,17 @@ import 'package:schulplaner_widgets/schulplaner_common.dart';
 
 class SchoolClassView extends StatelessWidget {
   final String classid;
-  final PlannerDatabase database;
 
   const SchoolClassView({
-    @required this.classid,
-    @required this.database,
+    required this.classid,
   });
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<SchoolClass>(
+    final database = PlannerDatabaseBloc.getDatabase(context);
+    return StreamBuilder<SchoolClass?>(
       builder: (context, snapshot) {
-        SchoolClass info = snapshot.data;
+        SchoolClass? info = snapshot.data;
         if (info == null) {
           return Center(
             child: CircularProgressIndicator(),
@@ -79,9 +77,9 @@ class SchoolClassView extends StatelessWidget {
                     FormHeader2(getString(context).schoolletters),
                     StreamBuilder<Map<String, Letter>>(
                       builder: (context, snapshot) {
-                        List<Letter> datalist = snapshot.data.values.where(
+                        List<Letter> datalist = snapshot.data!.values.where(
                             (letter) {
-                          return letter.savedin.id == info.id;
+                          return letter.savedin?.id == info.id;
                         }).toList()
                           ..sort(
                               (l1, l2) => l1.published.compareTo(l2.published));

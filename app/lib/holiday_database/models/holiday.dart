@@ -1,7 +1,5 @@
-// @dart=2.11
 import 'package:schulplaner8/holiday_database/models/holiday_type.dart';
 import 'package:date/date.dart';
-import 'package:meta/meta.dart';
 import 'package:schulplaner8/utils/models/errors.dart';
 import 'package:schulplaner8/utils/models/id.dart';
 import 'package:schulplaner8/utils/models/name.dart';
@@ -14,21 +12,21 @@ class Holiday {
   final bool isFromDatabase;
 
   const Holiday({
-    @required this.id,
-    @required this.start,
-    @required this.end,
-    @required this.name,
-    @required this.type,
-    @required this.isFromDatabase,
+    required this.id,
+    required this.start,
+    required this.end,
+    required this.name,
+    required this.type,
+    required this.isFromDatabase,
   });
 
   Holiday copyWith({
-    ID id,
-    Date start,
+    ID? id,
+    Date? start,
     end,
-    Name name,
-    HolidayType type,
-    bool isFromDatabase,
+    Name? name,
+    HolidayType? type,
+    bool? isFromDatabase,
   }) {
     return Holiday(
       id: id ?? this.id,
@@ -43,10 +41,7 @@ class Holiday {
 
 class HolidayValidator {
   static bool validate(Holiday holiday) {
-    if (holiday.id == null) return false;
-    if (holiday.name == null || holiday.name.isEmpty) return false;
-    if (holiday.start == null) return false;
-    if (holiday.end == null) return false;
+    if (holiday.name.isEmpty) return false;
     return true;
   }
 }

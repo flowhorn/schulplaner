@@ -21,7 +21,7 @@ dependencies:
   universal_commons:
     path: ../universal_commons
   firebase_auth: 1.0.1
-  google_sign_in: 5.0.0
+  google_sign_in: 5.0.1
   sign_in_with_apple: ^3.0.0
   firebase_auth_oauth: 1.0.1
   rxdart: ^0.26.0

@@ -8,7 +8,7 @@ final kPlayStoreURL =
     'https://play.google.com/store/apps/details?id=com.xla.school&hl=de';
 final kAppstoreURL =
     'https://apps.apple.com/de/app/schulplaner-pro/id1425606459';
-final kWebAppURL = 'https://schulplaner-beta.web.app';
+final kWebAppURL = 'https://web.schulplaner.pro';
 
 class DownloadButtons extends StatelessWidget {
   const DownloadButtons();

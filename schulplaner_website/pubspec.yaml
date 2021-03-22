@@ -18,8 +18,7 @@ dependencies:
   flutter_svg: ^0.21.0-nullsafety.0
   community_material_icon: ^5.9.55
   carousel_slider: ^4.0.0-nullsafety.0
-  persist_theme: ^1.7.0
-  provider: ^4.0.2
+  easy_dynamic_theme: ^2.0.0
   #url_strategy: 0.2.0
 
 
@@ -28,7 +27,11 @@ dev_dependencies:
     sdk: flutter
 
 dependency_overrides:
-  shared_preferences: ^2.0.4
+  shared_preferences: ^2.0.5
+  plugin_platform_interface: ^2.0.0
+  flutter_material_color_picker: 
+    git:
+      url: https://github.com/Bwolfs2/flutter_material_color_picker
 
 
 flutter:

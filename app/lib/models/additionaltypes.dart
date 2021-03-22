@@ -15,5 +15,5 @@ ProfileDisplayMode profileDisplayModeEnumFromString(String data) {
       ProfileDisplayMode.none;
 }
 
-String profileDisplayModeEnumToString(ProfileDisplayMode memberRole) =>
-    memberRole.toString().split('.')[1];
+String profileDisplayModeEnumToString(ProfileDisplayMode displayMode) =>
+    displayMode.toString().split('.')[1];

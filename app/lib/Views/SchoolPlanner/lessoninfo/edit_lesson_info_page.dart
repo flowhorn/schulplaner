@@ -4,7 +4,7 @@ import 'package:schulplaner8/groups/src/models/place_link.dart';
 import 'package:schulplaner8/groups/src/models/teacher_link.dart';
 import 'package:schulplaner_addons/common/widgets/editpage.dart';
 import 'package:schulplaner8/Data/Planner/Lesson.dart';
-import 'package:schulplaner8/Data/plannerdatabase.dart';
+import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 import 'package:schulplaner8/Helper/EasyWidget.dart';
 import 'package:schulplaner8/Helper/PermissionManagement.dart';
 import 'package:schulplaner8/Helper/helper_data.dart';
@@ -179,8 +179,7 @@ class NewLessonInfoViewState extends State<NewLessonInfoView> {
             child: Column(
               children: <Widget>[
                 EditCourseField(
-                  courseID: lessoninfo.courseid,
-                  database: database,
+                  courseId: lessoninfo.courseid,
                   editmode: !course_selectable(),
                   onChanged: (context, newCourse) {
                     setState(() {

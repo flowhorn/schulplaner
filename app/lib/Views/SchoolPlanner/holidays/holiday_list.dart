@@ -1,32 +1,28 @@
-//@dart=2.11
 import 'package:flutter/material.dart';
-import 'package:schulplaner8/Data/plannerdatabase.dart';
 import 'package:schulplaner8/Helper/Functions.dart';
 import 'package:schulplaner8/Helper/helper_views.dart';
 import 'package:schulplaner8/Views/SchoolPlanner/holidays/edit_holiday_page.dart';
 import 'package:schulplaner8/Views/SchoolPlanner/holidays/holiday_details_page.dart';
+import 'package:schulplaner8/app_base/src/blocs/planner_database_bloc.dart';
 import 'package:schulplaner8/holiday_database/models/holiday.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
 import 'package:schulplaner_widgets/schulplaner_common.dart';
 
 class HolidayList extends StatelessWidget {
-  final PlannerDatabase plannerDatabase;
-
-  HolidayList({
-    @required this.plannerDatabase,
-  });
+  const HolidayList();
   @override
   Widget build(BuildContext context) {
+    final plannerDatabase = PlannerDatabaseBloc.getDatabase(context);
     return Scaffold(
       body: StreamBuilder<Map<String, Holiday>>(
         stream: plannerDatabase.vacations.stream,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            List<Holiday> vacationlist = snapshot.data.values.toList();
+            List<Holiday> vacationlist = snapshot.data!.values.toList();
             vacationlist.sort((h1, h2) {
               return h1.start.toDateString.compareTo(h2.end.toDateString);
             });
-            return UpListView(
+            return UpListView<Holiday>(
               items: vacationlist,
               builder: (context, holiday) {
                 if (holiday == null ||
@@ -36,7 +32,6 @@ class HolidayList extends StatelessWidget {
                 }
                 return HolidayTile(
                   holiday: holiday,
-                  database: plannerDatabase,
                 );
               },
             );
@@ -62,9 +57,8 @@ class HolidayList extends StatelessWidget {
 
 class HolidayTile extends StatelessWidget {
   final Holiday holiday;
-  final PlannerDatabase database;
 
-  const HolidayTile({Key key, this.holiday, this.database}) : super(key: key);
+  const HolidayTile({Key? key, required this.holiday}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -106,7 +100,9 @@ class HolidayTile extends StatelessWidget {
       isThreeLine: holiday.start != holiday.end,
       onTap: () {
         showVacationDetail(
-            context: context, plannerdatabase: database, holidayID: holiday.id);
+          context: context,
+          holidayID: holiday.id,
+        );
       },
     );
   }

@@ -1,11 +1,10 @@
-//@dart=2.11
 import 'package:bloc/bloc_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Views/SchoolPlanner/attachments/edit_attachments_view.dart';
 import 'package:schulplaner8/app_base/src/blocs/app_stats_bloc.dart';
 import 'package:schulplaner_addons/common/widgets/editpage.dart';
 import 'package:schulplaner8/Data/Planner/Task.dart';
-import 'package:schulplaner8/Data/plannerdatabase.dart';
+import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 import 'package:schulplaner8/Helper/DateAPI.dart';
 import 'package:schulplaner8/Helper/PermissionManagement.dart';
 import 'package:schulplaner8/Helper/SmartCalAPI.dart';
@@ -22,28 +21,27 @@ import 'package:schulplaner_widgets/schulplaner_dialogs.dart';
 class NewSchoolTaskView extends StatelessWidget {
   final PlannerDatabase database;
   final bool editmode;
-  final String editmode_taskid;
+  final String? editmode_taskid;
   bool changedValues = false;
-  List<String> _nextlessons;
-  List<RecommendedDate> recommendeddates;
-  SchoolTask data;
-  ValueNotifier<SchoolTask> notifier;
+  List<String>? _nextlessons;
+  List<RecommendedDate>? recommendeddates;
+  late SchoolTask data;
+  late ValueNotifier<SchoolTask> notifier;
 
   ValueNotifier<bool> showmore = ValueNotifier(false);
 
   NewSchoolTaskView(
-      {@required this.database, this.editmode = false, this.editmode_taskid}) {
+      {required this.database, this.editmode = false, this.editmode_taskid}) {
     if (editmode) {
-      data = database.tasks.data[editmode_taskid].copy();
+      data = database.tasks.data[editmode_taskid!]!.copy();
     } else {
       data = SchoolTask();
       try {
-        data = data.copy();
         data.courseid = potentialcourseidnow(database);
         if (data.due == null && data.courseid != null) {
           _nextlessons = getNextLessons(database, data.courseid, count: 2);
-          if (_nextlessons.isNotEmpty) {
-            data.due = _nextlessons[0];
+          if (_nextlessons?.isNotEmpty ?? false) {
+            data.due = _nextlessons![0];
           }
         }
       } catch (_) {}
@@ -51,7 +49,8 @@ class NewSchoolTaskView extends StatelessWidget {
     notifier = ValueNotifier(data);
   }
 
-  NewSchoolTaskView.fromCriticalEdit({@required this.database, SchoolTask task})
+  NewSchoolTaskView.fromCriticalEdit(
+      {required this.database, required SchoolTask task})
       : editmode = true,
         editmode_taskid = null {
     data = task.copy();
@@ -59,20 +58,20 @@ class NewSchoolTaskView extends StatelessWidget {
   }
 
   NewSchoolTaskView.CreateWithData(
-      {@required this.database, String due, String courseid})
+      {required this.database, String? due, String? courseid})
       : editmode = false,
         editmode_taskid = null {
     data = SchoolTask(due: due, courseid: courseid);
     if (data.due == null && data.courseid != null) {
       _nextlessons = getNextLessons(database, data.courseid, count: 2);
-      if (_nextlessons.isNotEmpty) {
-        data.due = _nextlessons[0];
+      if (_nextlessons?.isNotEmpty ?? false) {
+        data.due = _nextlessons![0];
       }
     }
     notifier = ValueNotifier(data);
   }
 
-  List<RecommendedDate> getRecommendedDatesSimple(BuildContext context) {
+  List<RecommendedDate> getRecommendedDatesSimple(BuildContext? context) {
     return [
       RecommendedDate(text: getString(context).today, date: getDateToday()),
       RecommendedDate(
@@ -84,8 +83,8 @@ class NewSchoolTaskView extends StatelessWidget {
   Widget build(BuildContext context) {
     if (recommendeddates == null) {
       recommendeddates = (_nextlessons ?? []).map((date) {
-        int index = _nextlessons.indexOf(date);
-        String text;
+        int? index = _nextlessons?.indexOf(date);
+        String? text;
         if (index == 0) {
           text = getString(context).nextlesson;
         } else if (index == 1) {
@@ -126,8 +125,7 @@ class NewSchoolTaskView extends StatelessWidget {
                         FormSpace(12.0),
                         const Divider(),
                         EditCourseField(
-                          courseID: data.courseid,
-                          database: database,
+                          courseId: data.courseid,
                           editmode: editmode,
                           onChanged: (context, newCourse) {
                             data.courseid = newCourse.id;
@@ -283,11 +281,11 @@ class NewSchoolTaskView extends StatelessWidget {
   ThemeData getTaskTheme(BuildContext context) {
     if (data.courseid != null) {
       return newAppThemeDesign(
-          context, database.courseinfo.data[data.courseid].getDesign());
+          context, database.courseinfo.data[data.courseid]?.getDesign());
     } else {
       if (data.classid != null) {
         return newAppThemeDesign(
-            context, database.schoolClassInfos.data[data.classid].getDesign());
+            context, database.schoolClassInfos.data[data.classid]?.getDesign());
       } else {
         return clearAppThemeData(context: context);
       }

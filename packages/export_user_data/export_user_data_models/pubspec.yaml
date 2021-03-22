@@ -1,0 +1,15 @@
+name: export_user_data_models
+publish_to: none
+
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cloud_firestore: any
+  filesize_ns: ^1.1.0
+
+dev_dependencies:
+

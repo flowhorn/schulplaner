@@ -4,29 +4,29 @@ import 'package:schulplaner_widgets/schulplaner_theme.dart';
 import 'package:schulplaner8/OldRest/flutter_calendar/date_utils.dart';
 
 class CalendarTile extends StatelessWidget {
-  final VoidCallback onDateSelected;
-  final DateTime date;
-  final String dayOfWeek;
+  final VoidCallback? onDateSelected;
+  final DateTime? date;
+  final String? dayOfWeek;
   final bool isDayOfWeek;
   final bool isSelected;
-  final TextStyle dayOfWeekStyles;
-  final TextStyle dateStyles;
-  final Widget child;
-  final Widget indicators;
+  final TextStyle? dayOfWeekStyles;
+  final TextStyle? dateStyles;
+  final Widget? child;
+  final Widget? indicators;
 
   final Color background;
 
   CalendarTile(
     this.background, {
-    required this.onDateSelected,
-    required this.date,
-    required this.child,
-    required this.dateStyles,
-    required this.dayOfWeek,
-    required this.dayOfWeekStyles,
+    this.onDateSelected,
+    this.date,
+    this.child,
+    this.dateStyles,
+    this.dayOfWeek,
+    this.dayOfWeekStyles,
     this.isDayOfWeek = false,
     this.isSelected = false,
-    required this.indicators,
+    this.indicators,
   });
 
   Widget renderDateOrDayOfWeek(BuildContext context) {
@@ -35,7 +35,7 @@ class CalendarTile extends StatelessWidget {
         child: Container(
           alignment: Alignment.center,
           child: Text(
-            dayOfWeek,
+            dayOfWeek!,
             style: dayOfWeekStyles,
           ),
         ),
@@ -59,11 +59,11 @@ class CalendarTile extends StatelessWidget {
                   : BoxDecoration(),
               alignment: Alignment.center,
               child: Text(
-                Utils.formatDay(date).toString(),
+                Utils.formatDay(date!).toString(),
                 style: isSelected
                     ? TextStyle(
                         color: getTextColor(Theme.of(context).primaryColor),
-                        fontWeight: isToday(date) ? FontWeight.bold : null,
+                        fontWeight: isToday(date!) ? FontWeight.bold : null,
                       )
                     : dateStyles,
                 textAlign: TextAlign.center,
@@ -80,7 +80,7 @@ class CalendarTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (child != null) {
-      return child;
+      return child!;
     }
     return Container(
       decoration: BoxDecoration(

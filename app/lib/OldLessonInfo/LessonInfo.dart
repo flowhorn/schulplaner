@@ -1,6 +1,5 @@
-//@dart=2.11
 import 'package:schulplaner8/Data/Planner/Lesson.dart';
-import 'package:schulplaner8/Data/plannerdatabase.dart';
+import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 import 'package:schulplaner8/Helper/DateAPI.dart';
 import 'package:schulplaner8/Helper/Functions.dart';
 import 'package:schulplaner8/Helper/helper_views.dart';
@@ -32,25 +31,25 @@ Color getLessonInfoColor(LessonInfoType type) {
     case LessonInfoType.OUT:
       return Colors.red;
   }
-  return Colors.transparent;
 }
 
 class LessonInfo {
   String id, lessonid, date, courseid;
   LessonInfoType type;
-  String note;
-  PlaceLink place;
-  TeacherLink teacher;
+  String? note;
+  PlaceLink? place;
+  TeacherLink? teacher;
 
-  LessonInfo(
-      {this.id,
-      this.lessonid,
-      this.teacher,
-      this.place,
-      this.note,
-      this.type,
-      this.courseid,
-      this.date});
+  LessonInfo({
+    required this.id,
+    required this.lessonid,
+    this.teacher,
+    this.place,
+    required this.note,
+    required this.type,
+    required this.courseid,
+    required this.date,
+  });
 
   LessonInfo.fromData(Map<String, dynamic> data)
       : id = data['id'],
@@ -66,7 +65,7 @@ class LessonInfo {
         type = LessonInfoType.values[data['type']],
         note = data['note'];
 
-  Map<String, Object> toJson() {
+  Map<String, dynamic> toJson() {
     return {
       'id': id,
       'cid': courseid,
@@ -89,15 +88,16 @@ class LessonInfo {
     return true;
   }
 
-  LessonInfo copy(
-      {String id,
-      String lessonid,
-      TeacherLink teacher,
-      PlaceLink place,
-      String note,
-      LessonInfoType type,
-      String courseid,
-      String date}) {
+  LessonInfo copy({
+    String? id,
+    String? lessonid,
+    TeacherLink? teacher,
+    PlaceLink? place,
+    String? note,
+    LessonInfoType? type,
+    String? courseid,
+    String? date,
+  }) {
     return LessonInfo(
       id: id ?? this.id,
       lessonid: lessonid ?? this.lessonid,
@@ -110,7 +110,7 @@ class LessonInfo {
     );
   }
 
-  Lesson getLesson(PlannerDatabase database) {
+  Lesson? getLesson(PlannerDatabase database) {
     if (lessonid != null && courseid != null) {
       return database.getLessons()[lessonid];
     }
@@ -128,26 +128,25 @@ class DataUtil_LessonInfo {
 
 class LessonInfosList extends StatelessWidget {
   final PlannerDatabase plannerDatabase;
-  LessonInfosList({@required this.plannerDatabase});
+  LessonInfosList({required this.plannerDatabase});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: StreamBuilder<List<LessonInfo>>(
         stream: plannerDatabase.lessoninfos.stream
-            .map((data) => (data ?? {}).values.toList()
+            .map((data) => data.values.toList()
               ..sort((l1, l2) {
                 return l1.date.compareTo(l2.date);
               })),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            List<LessonInfo> list = snapshot.data;
+            List<LessonInfo> list = snapshot.data ?? [];
             return ListView.builder(
               itemBuilder: (context, index) {
                 LessonInfo item = list[index];
-                Lesson lesson = item.getLesson(plannerDatabase);
-                Course courseInfo = item.courseid != null
-                    ? plannerDatabase.getCourseInfo(item.courseid)
-                    : null;
+                Lesson? lesson = item.getLesson(plannerDatabase);
+                Course? courseInfo =
+                    plannerDatabase.getCourseInfo(item.courseid);
                 return ListTile(
                   onTap: () {
                     pushWidget(

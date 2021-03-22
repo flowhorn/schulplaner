@@ -1,4 +1,3 @@
-// @dart=2.11
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -8,7 +7,6 @@ import 'package:schulplaner8/holiday_database/models/holiday.dart';
 import 'package:schulplaner8/holiday_database/models/region.dart';
 import 'package:schulplaner8/utils/models/coder.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:meta/meta.dart';
 import 'package:tuple/tuple.dart';
 
 class HolidayGateway {
@@ -21,7 +19,8 @@ class HolidayGateway {
 
   const HolidayGateway(this._firestore, this.holidayCacheManager);
 
-  Stream<List<Region>> getRegions({bool isOfficial, Country country}) {
+  Stream<List<Region>> getRegions(
+      {required bool isOfficial, Country? country}) {
     var query =
         _regionsReference.orderBy('name').where('published', isEqualTo: true);
     if (isOfficial == true) {
@@ -35,7 +34,7 @@ class HolidayGateway {
         .toList());
   }
 
-  Stream<Region> getRegion(String regionID) {
+  Stream<Region?> getRegion(String regionID) {
     return _regionsReference.doc(regionID).snapshots().map((snapshot) {
       if (snapshot.exists) {
         return RegionConverter.fromJson(snapshot.data());
@@ -45,7 +44,7 @@ class HolidayGateway {
     });
   }
 
-  Future<List<Holiday>> loadHolidays(
+  Future<List<Holiday>?> loadHolidays(
     String regionID,
   ) async {
     final cacheValue = await holidayCacheManager.loadCache(regionID: regionID);
@@ -58,15 +57,6 @@ class HolidayGateway {
     if (holidays == null && cacheValue != null) {
       return cacheValue.item1;
     }
-    await holidayCacheManager.putIntoCache(regionID: regionID, data: holidays);
-    return holidays;
-  }
-
-  Future<List<Holiday>> loadHolidaysForceRefresh(
-    String regionID,
-  ) async {
-    final holidays =
-        await loadHolidaysFromFirestore(regionID, source: Source.server);
     if (holidays != null) {
       await holidayCacheManager.putIntoCache(
           regionID: regionID, data: holidays);
@@ -76,17 +66,30 @@ class HolidayGateway {
     }
   }
 
-  Future<List<Holiday>> loadHolidaysFromFirestore(String regionID,
+  Future<List<Holiday>?> loadHolidaysForceRefresh(
+    String regionID,
+  ) async {
+    final holidays =
+        await loadHolidaysFromFirestore(regionID, source: Source.server);
+    if (holidays != null && holidays.isNotEmpty) {
+      await holidayCacheManager.putIntoCache(
+          regionID: regionID, data: holidays);
+      return holidays;
+    } else {
+      return null;
+    }
+  }
+
+  Future<List<Holiday>?> loadHolidaysFromFirestore(String regionID,
       {Source source = Source.serverAndCache}) async {
     final snapshot =
         await _regionsDataReference(regionID).get(GetOptions(source: source));
     final documents = snapshot.docs;
     final holidaysMaps = documents
-            .map((queryDocSnapshot) => decodeMap(queryDocSnapshot.data(),
-                (key, value) => HolidayConverter.fromJson(value, true)))
-            .toList() ??
-        [];
-    if (holidaysMaps.isEmpty) return [];
+        .map((queryDocSnapshot) => decodeMap(queryDocSnapshot.data(),
+            (key, value) => HolidayConverter.fromJson(value, true)))
+        .toList();
+    if (holidaysMaps.isEmpty) return null;
     if (holidaysMaps.length == 1) return holidaysMaps[0].values.toList();
     final holidays = holidaysMaps.reduce((map1, map2) => map1..addAll(map2));
     return holidays.values.toList();
@@ -97,10 +100,10 @@ class HolidayCacheManager {
   static final _key = 'holiday_database:';
   static final _lastRefreshed = 'last_refreshed';
 
-  final ValueNotifier<int> lastRefreshedNotifier = ValueNotifier(null);
+  final ValueNotifier<int?> lastRefreshedNotifier = ValueNotifier(null);
 
-  Future<Tuple2<List<Holiday>, bool>> loadCache(
-      {@required String regionID}) async {
+  Future<Tuple2<List<Holiday>, bool>?> loadCache(
+      {required String regionID}) async {
     final sharedPrefInstance = await SharedPreferences.getInstance();
     final value = sharedPrefInstance.getString(_key + regionID);
     if (value != null) {
@@ -120,7 +123,7 @@ class HolidayCacheManager {
   }
 
   Future<bool> putIntoCache(
-      {@required String regionID, @required List<Holiday> data}) async {
+      {required String regionID, required List<Holiday> data}) async {
     final sharedPrefInstance = await SharedPreferences.getInstance();
     final lastRefreshed = DateTime.now().millisecondsSinceEpoch;
     lastRefreshedNotifier.value = lastRefreshed;

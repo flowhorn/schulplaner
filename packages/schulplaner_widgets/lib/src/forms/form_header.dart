@@ -1,10 +1,12 @@
-//@dart=2.11
 import 'package:flutter/material.dart';
 
 class FormHeader extends StatelessWidget {
   final String title;
-  final Color color;
-  const FormHeader(this.title, {this.color});
+  final Color? color;
+  const FormHeader(
+    this.title, {
+    this.color,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +33,12 @@ class FormHeader extends StatelessWidget {
 }
 
 class FormHeader2 extends StatelessWidget {
-  final String title;
-  final Color color;
-  const FormHeader2(this.title, {this.color});
+  final String? title;
+  final Color? color;
+  const FormHeader2(
+    this.title, {
+    this.color,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -61,8 +66,11 @@ class FormHeader2 extends StatelessWidget {
 
 class FormHeaderAdvanced extends StatelessWidget {
   final String title;
-  final Widget trailing;
-  FormHeaderAdvanced(this.title, {this.trailing});
+  final Widget? trailing;
+  FormHeaderAdvanced(
+    this.title, {
+    this.trailing,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +96,7 @@ class FormHeaderAdvanced extends StatelessWidget {
               right: 16.0,
               top: 8.0,
               bottom: 8.0,
-              child: trailing,
+              child: trailing!,
             ),
         ],
       ),

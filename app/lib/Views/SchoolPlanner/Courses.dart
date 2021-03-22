@@ -1,19 +1,18 @@
 //@dart=2.11
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:community_material_icon/community_material_icon.dart';
-import 'package:diff_match_patch/diff_match_patch.dart';
 import 'package:flutter/material.dart';
-import 'package:schulplaner8/Data/Objects.dart';
 import 'package:schulplaner8/Data/Planner/CourseTemplates.dart';
+import 'package:schulplaner8/Data/planner_database/planner_connections.dart';
+import 'package:schulplaner8/Data/planner_database/planner_connections_state.dart';
 import 'package:schulplaner8/grades/pages/edit_grade_page.dart';
-
 import 'package:schulplaner8/groups/src/bloc/edit_course_bloc.dart';
 import 'package:schulplaner8/groups/src/gateway/course_gateway.dart';
 import 'package:schulplaner8/groups/src/pages/edit_course_page.dart';
 import 'package:schulplaner8/groups/src/pages/join_group_page.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
 import 'package:schulplaner_widgets/schulplaner_theme.dart';
-import 'package:schulplaner8/Data/plannerdatabase.dart';
+import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 import 'package:schulplaner8/Helper/EasyWidget.dart';
 import 'package:schulplaner8/Helper/Functions.dart';
 import 'package:schulplaner8/Helper/MyCloudFunctions.dart';
@@ -333,7 +332,7 @@ class CourseTemplatesView extends StatelessWidget {
               itemBuilder: (context, index) {
                 dynamic item = templates[index];
                 if (item is CourseTemplate) {
-                  bool enabledtemplate = !isAlreadyaCourse(item, allmycourses);
+                  bool enabledtemplate = !item.isAlreadyaCourse(allmycourses);
                   return ListTile(
                     leading: ColoredCircleText(
                         text: item.shortname,
@@ -404,24 +403,6 @@ class CourseTemplatesView extends StatelessWidget {
             );
           }),
     );
-  }
-
-  bool isAlreadyaCourse(CourseTemplate template, List<Course> allcourses) {
-    int lowest;
-    for (Course info in allcourses) {
-      int levdistance = DiffMatchPatch()
-          .diff_levenshtein(DiffMatchPatch().diff(template.name, info.name));
-      if (lowest == null) {
-        lowest = levdistance;
-      } else if (lowest > levdistance) {
-        lowest = levdistance;
-      }
-    }
-    if ((lowest ?? 100) < 1) {
-      return true;
-    } else {
-      return false;
-    }
   }
 }
 

@@ -10,7 +10,6 @@ import 'package:schulplaner8/app_base/src/blocs/app_settings_bloc.dart';
 import 'package:schulplaner8/dynamic_links/src/bloc/dynamic_link_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:universal_commons/platform_check.dart';
-
 import 'schulplaner_blocs.dart';
 
 void main() async {
@@ -19,9 +18,8 @@ void main() async {
   await Firebase.initializeApp();
   if (!PlatformCheck.isWeb) {
     await FirebaseDatabase.instance.setPersistenceEnabled(true);
-  }
+  } else {}
   final dynamicLinksLogic = DynamicLinksBloc(FirebaseDynamicLinks.instance);
-
   runApp(
     SchulplanerBlocs.create(
       dynamicLinksBloc: dynamicLinksLogic,

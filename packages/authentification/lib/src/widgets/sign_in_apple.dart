@@ -1,4 +1,3 @@
-//@dart=2.11
 import 'package:authentification/src/blocs/sign_in_bloc.dart';
 import 'package:bloc/bloc_provider.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +11,7 @@ class SignInAppleButton extends StatelessWidget {
     return FutureBuilder<bool>(
       future: signInBloc.isAppleSignInAvailable(),
       builder: (context, snapshot) {
-        final value = snapshot.hasData ? snapshot.data : false;
+        final value = snapshot.hasData ? snapshot.data! : false;
         if (!value) return Container();
         return SignInWithAppleButton(
           onPressed: () => signInBloc.tryAppleSignIn(),

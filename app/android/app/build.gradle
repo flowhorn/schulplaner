@@ -55,8 +55,8 @@ android {
         applicationId "com.xla.school"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 621
-        versionName "11.1.2"
+        versionCode 624
+        versionName "11.2.2"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 

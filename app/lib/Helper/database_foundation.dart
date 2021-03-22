@@ -469,11 +469,11 @@ class DataCollectionPackage<T> {
         .map((streamData) => streamData?.where(filter).toList());
   }
 
-  Stream<List<T>?> get stream {
+  Stream<List<T>> get stream {
     if (_islocked == false) if (_isinitiated == false) _initiate();
-    StreamController<List<T>?> newcontroller = StreamController();
+    StreamController<List<T>> newcontroller = StreamController();
     _list_streamcontroller.add(newcontroller);
-    newcontroller.add(data);
+    newcontroller.add(data ?? []);
     newcontroller.onCancel = () {
       _list_streamcontroller.remove(newcontroller);
     };

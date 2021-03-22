@@ -5,7 +5,7 @@ import 'package:bloc/bloc_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Data/Planner/SchoolEvent.dart';
 import 'package:schulplaner8/Data/Planner/Task.dart';
-import 'package:schulplaner8/Data/plannerdatabase.dart';
+import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 import 'package:schulplaner8/Helper/DateAPI.dart';
 import 'package:schulplaner8/Helper/Functions.dart';
 import 'package:schulplaner8/Views/widgets/quick_create_view.dart';
@@ -49,10 +49,7 @@ class UpcomingView extends StatelessWidget {
                                 item.end.parser.toMMMEd,
                           ),
                     onTap: () {
-                      showVacationDetail(
-                          context: context,
-                          plannerdatabase: plannerDatabase,
-                          holidayID: item.id);
+                      showVacationDetail(context: context, holidayID: item.id);
                     },
                     trailing: Card(
                       child: Padding(

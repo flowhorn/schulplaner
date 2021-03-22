@@ -14,6 +14,7 @@ import 'package:firebase_core_web/firebase_core_web.dart';
 import 'package:firebase_messaging_web/firebase_messaging_web.dart';
 import 'package:firebase_storage_web/firebase_storage_web.dart';
 import 'package:google_sign_in_web/google_sign_in_web.dart';
+import 'package:image_picker_for_web/image_picker_for_web.dart';
 import 'package:printing/printing_web.dart';
 import 'package:shared_preferences_web/shared_preferences_web.dart';
 import 'package:url_launcher_web/url_launcher_web.dart';
@@ -32,6 +33,7 @@ void registerPlugins(Registrar registrar) {
   FirebaseMessagingWeb.registerWith(registrar);
   FirebaseStorageWeb.registerWith(registrar);
   GoogleSignInPlugin.registerWith(registrar);
+  ImagePickerPlugin.registerWith(registrar);
   PrintingPlugin.registerWith(registrar);
   SharedPreferencesPlugin.registerWith(registrar);
   UrlLauncherPlugin.registerWith(registrar);

@@ -5,7 +5,7 @@ import 'package:schulplaner8/groups/src/models/teacher_link.dart';
 import 'package:schulplaner8/models/lesson_time.dart';
 import 'package:schulplaner_addons/common/widgets/editpage.dart';
 import 'package:schulplaner8/Data/Planner/Lesson.dart';
-import 'package:schulplaner8/Data/plannerdatabase.dart';
+import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 import 'package:schulplaner8/Helper/EasyWidget.dart';
 import 'package:schulplaner8/Helper/PermissionManagement.dart';
 import 'package:schulplaner8/Helper/helper_data.dart';
@@ -69,8 +69,7 @@ class NewLessonView extends StatelessWidget {
                       children: <Widget>[
                         FormSpace(12.0),
                         EditCourseField(
-                          courseID: data.courseid,
-                          database: database,
+                          courseId: data.courseid,
                           editmode: editmode,
                           onChanged: (context, newCourse) {
                             data.courseid = newCourse.id;

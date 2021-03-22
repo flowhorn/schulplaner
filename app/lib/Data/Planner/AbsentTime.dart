@@ -1,19 +1,20 @@
-//@dart=2.11
 import 'package:schulplaner8/Data/Planner/File.dart';
 
 class AbsentTime {
-  String id, date, detail;
-  bool unexcused;
-  int amount;
-  Map<String, CloudFile> files;
+  late String id, date;
+  late String? detail;
+  late bool unexcused;
+  late int? amount;
+  late Map<String, CloudFile>? files;
 
-  AbsentTime(
-      {this.id,
-      this.date,
-      this.unexcused = true,
-      this.amount,
-      this.detail,
-      this.files});
+  AbsentTime({
+    required this.id,
+    required this.date,
+    this.amount,
+    this.detail,
+    this.files,
+    this.unexcused = true,
+  });
 
   AbsentTime.fromData(Map<String, dynamic> data) {
     id = data['id'];
@@ -29,7 +30,7 @@ class AbsentTime {
         MapEntry(key, CloudFile.fromData(value?.cast<String, dynamic>())));
   }
 
-  Map<String, Object> toJson() => {
+  Map<String, dynamic> toJson() => {
         'id': id,
         'date': date,
         'detail': detail,
@@ -42,7 +43,7 @@ class AbsentTime {
     if (id == null || id == '') return false;
     if (date == null || date == '') return false;
     if (unexcused == null) return false;
-    if (amount == null || amount < 0) return false;
+    if (amount == null || (amount ?? -1) < 0) return false;
     return true;
   }
 

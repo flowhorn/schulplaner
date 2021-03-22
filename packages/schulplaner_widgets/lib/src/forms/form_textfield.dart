@@ -1,30 +1,30 @@
-//@dart=2.11
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../theme/app_theme.dart';
 
 class FormTextField extends StatelessWidget {
-  const FormTextField(
-      {@required this.text,
-      this.labeltext,
-      this.iconData,
-      @required this.valueChanged,
-      this.keyBoardType,
-      this.obscureText = false,
-      this.maxLength,
-      this.maxLines,
-      this.autofocus = false,
-      this.maxLengthEnforced = false,
-      this.prefixtext});
-  final String text;
-  final String labeltext;
-  final IconData iconData;
+  const FormTextField({
+    this.text,
+    this.labeltext,
+    this.iconData,
+    required this.valueChanged,
+    this.keyBoardType,
+    this.obscureText = false,
+    this.maxLength,
+    this.maxLines,
+    this.autofocus = false,
+    this.maxLengthEnforced = false,
+    this.prefixtext,
+  });
+  final String? text;
+  final String? labeltext;
+  final IconData? iconData;
   final ValueChanged<String> valueChanged;
-  final TextInputType keyBoardType;
+  final TextInputType? keyBoardType;
   final bool obscureText, maxLengthEnforced, autofocus;
-  final int maxLength, maxLines;
-  final String prefixtext;
+  final int? maxLength, maxLines;
+  final String? prefixtext;
 
   @override
   Widget build(BuildContext context) {

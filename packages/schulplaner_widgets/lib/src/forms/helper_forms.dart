@@ -1,4 +1,3 @@
-//@dart=2.11
 import 'package:flutter/material.dart';
 import 'form_header.dart';
 import '../theme/app_theme.dart';
@@ -8,8 +7,11 @@ class FormHideable extends StatefulWidget {
   final WidgetBuilder builder;
   final ValueNotifier<bool> notifier;
 
-  const FormHideable(
-      {@required this.title, @required this.notifier, @required this.builder});
+  const FormHideable({
+    required this.title,
+    required this.notifier,
+    required this.builder,
+  });
 
   @override
   State<StatefulWidget> createState() => _FormHideableState();
@@ -19,27 +21,28 @@ class _FormHideableState extends State<FormHideable>
     with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-        valueListenable: widget.notifier,
-        builder: (context, value, _) {
-          return Column(
-            children: <Widget>[
-              FormHeaderAdvanced(
-                widget.title,
-                trailing: IconButton(
-                    icon: Icon(value ? Icons.expand_less : Icons.expand_more),
-                    onPressed: () {
-                      widget.notifier.value = !(widget.notifier.value);
-                    }),
-              ),
-              AnimatedSize(
-                duration: Duration(milliseconds: 250),
-                vsync: this,
-                child: value ? widget.builder(context) : Container(),
-              ),
-            ],
-          );
-        });
+    return ValueListenableBuilder<bool>(
+      valueListenable: widget.notifier,
+      builder: (context, value, _) {
+        return Column(
+          children: <Widget>[
+            FormHeaderAdvanced(
+              widget.title,
+              trailing: IconButton(
+                  icon: Icon(value ? Icons.expand_less : Icons.expand_more),
+                  onPressed: () {
+                    widget.notifier.value = !(widget.notifier.value);
+                  }),
+            ),
+            AnimatedSize(
+              duration: Duration(milliseconds: 250),
+              vsync: this,
+              child: value ? widget.builder(context) : Container(),
+            ),
+          ],
+        );
+      },
+    );
   }
 }
 
@@ -50,11 +53,11 @@ class FormStreamHideable extends StatefulWidget {
   final Function(bool) switchState;
 
   const FormStreamHideable({
-    Key key,
-    @required this.shouldShow,
-    @required this.title,
-    @required this.builder,
-    @required this.switchState,
+    Key? key,
+    required this.shouldShow,
+    required this.title,
+    required this.builder,
+    required this.switchState,
   }) : super(key: key);
   @override
   _FormStreamHideableState createState() => _FormStreamHideableState();
@@ -68,7 +71,7 @@ class _FormStreamHideableState extends State<FormStreamHideable>
         initialData: false,
         stream: widget.shouldShow,
         builder: (context, snapshot) {
-          final shouldShowValue = snapshot.data;
+          final shouldShowValue = snapshot.data ?? false;
           return Column(
             children: <Widget>[
               FormHeaderAdvanced(
@@ -93,15 +96,15 @@ class _FormStreamHideableState extends State<FormStreamHideable>
 }
 
 class FormSection extends StatelessWidget {
-  final String title;
+  final String? title;
   final Widget child;
-  const FormSection({this.title, @required this.child});
+  const FormSection({this.title, required this.child});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        if (title != null) FormHeader2(title.toUpperCase()),
+        if (title != null) FormHeader2(title!.toUpperCase()),
         Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(8)),
@@ -124,7 +127,7 @@ class FormSection extends StatelessWidget {
 class FormSectionText extends StatelessWidget {
   final TextSpan text;
 
-  const FormSectionText({@required this.text});
+  const FormSectionText({required this.text});
   @override
   Widget build(BuildContext context) {
     return Padding(

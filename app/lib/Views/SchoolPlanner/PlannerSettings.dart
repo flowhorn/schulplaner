@@ -16,7 +16,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:schulplaner8/Data/Objects.dart';
 import 'package:schulplaner8/Data/Planner/Lesson.dart';
-import 'package:schulplaner8/Data/plannerdatabase.dart';
+import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 import 'package:schulplaner8/Helper/DateAPI.dart';
 import 'package:schulplaner8/Helper/EasyWidget.dart';
 import 'package:schulplaner8/Helper/Functions.dart';
@@ -65,11 +65,7 @@ class PlannerSettings extends StatelessWidget {
           leading: Icon(Icons.wb_sunny),
           title: Text(getString(context).vacations),
           onTap: () {
-            pushWidget(
-                context,
-                HolidaySettings(
-                  database: plannerDatabase,
-                ));
+            pushWidget(context, HolidaySettings());
           },
         ),
         ListTile(
@@ -1298,11 +1294,7 @@ class ShortPlannerSettings extends StatelessWidget {
                       holidayGateway: plannerDatabase.holidayGateway,
                     ),
               onTap: () {
-                pushWidget(
-                    context,
-                    SelectRegionPage(
-                      database: plannerDatabase,
-                    ));
+                pushWidget(context, SelectRegionPage());
               },
               trailing: settings.vacationpackageid == null
                   ? null

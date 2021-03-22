@@ -69,6 +69,7 @@ class _Logo extends StatelessWidget {
 }
 
 class _AppTitle extends StatelessWidget {
+  const _AppTitle();
   @override
   Widget build(BuildContext context) {
     return Text(

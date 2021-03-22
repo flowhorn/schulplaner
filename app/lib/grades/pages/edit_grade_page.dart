@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:schulplaner8/grades/models/grade_type.dart';
 import 'package:schulplaner8/models/planner_settings.dart';
 import 'package:schulplaner_addons/common/widgets/editpage.dart';
-import 'package:schulplaner8/Data/plannerdatabase.dart';
+import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 import 'package:schulplaner8/Helper/DateAPI.dart';
 import 'package:schulplaner8/Helper/EasyWidget.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
@@ -143,8 +143,7 @@ class NewGradeViewState extends State<NewGradeView> {
                 FormDivider(),
                 EditCourseField(
                   editmode: editmode,
-                  database: database,
-                  courseID: grade.courseid,
+                  courseId: grade.courseid,
                   onChanged: (context, newCourse) {
                     setState(() {
                       grade = grade.copy(courseid: newCourse.id);

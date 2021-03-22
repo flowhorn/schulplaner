@@ -7,4 +7,4 @@ GroupVersion groupVersionFromData(String data) =>
     GroupVersion.outdated;
 
 String groupVersionToData(GroupVersion groupVersion) =>
-    enumToString(groupVersion)!;
+    enumToString(groupVersion) ?? 'outdated';

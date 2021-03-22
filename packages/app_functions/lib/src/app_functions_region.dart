@@ -5,4 +5,5 @@ class AppFunctionsRegion {
 
 class AppFunctionsRegions {
   static const europeWest3 = AppFunctionsRegion('europe-west3');
+  static const usCentral1 = AppFunctionsRegion('us-central1');
 }

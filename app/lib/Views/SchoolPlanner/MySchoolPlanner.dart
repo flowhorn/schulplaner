@@ -2,7 +2,7 @@
 import 'dart:async';
 import 'package:bloc/bloc_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:schulplaner8/Data/plannerdatabase.dart';
+import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 import 'package:schulplaner8/Helper/LogAnalytics.dart';
 import 'package:schulplaner8/Views/SchoolPlanner/Library.dart';
 import 'package:schulplaner8/Views/SchoolPlanner/MyTasks.dart';

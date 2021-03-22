@@ -90,7 +90,7 @@ final Map<int, NavigationActionItem> allNavigationActions = {
     name: TranslationString((context) => getString(context).lessoninfos),
     builder: (context) => LessonInfosList(
       plannerDatabase:
-          BlocProvider.of<PlannerDatabaseBloc>(context).plannerDatabase,
+          BlocProvider.of<PlannerDatabaseBloc>(context).plannerDatabase!,
     ),
     navigationItem: NavigationItem.lessonInfos,
   ),
