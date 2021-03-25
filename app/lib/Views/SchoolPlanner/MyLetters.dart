@@ -1,4 +1,4 @@
-//@dart=2.11
+//
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -24,11 +24,11 @@ import 'package:schulplaner_widgets/schulplaner_dialogs.dart';
 import 'attachments/edit_attachments_view.dart';
 
 void showSchoolLetterMoreSheet(BuildContext context,
-    {@required Letter initialData, @required PlannerDatabase database}) {
+    {required Letter initialData, required PlannerDatabase database}) {
   showDetailSheetBuilder(
       context: context,
       body: (context) {
-        return StreamBuilder<Letter>(
+        return StreamBuilder<Letter?>(
             stream: database.letters.getItemStream(initialData.id),
             initialData: initialData,
             builder: (context, snapshot) {
@@ -71,7 +71,7 @@ void showSchoolLetterMoreSheet(BuildContext context,
                                   context: context,
                                   database: database,
                                   category: PermissionAccessType.creator,
-                                  savedin: letter.savedin)
+                                  savedin: letter.savedin!)
                               .then((result) {
                             if (result == true) {
                               Navigator.popUntil(context, (Route predicate) {
@@ -102,7 +102,7 @@ void showSchoolLetterMoreSheet(BuildContext context,
                                   context: context,
                                   database: database,
                                   category: PermissionAccessType.creator,
-                                  savedin: letter.savedin)
+                                  savedin: letter.savedin!)
                               .then((result) {
                             if (result == true) {
                               Navigator.popUntil(context, (Route predicate) {
@@ -129,10 +129,10 @@ void showSchoolLetterMoreSheet(BuildContext context,
 String getSavedInValue(SavedIn savedin, PlannerDatabase database) {
   if (savedin == null) return '???';
   if (savedin.type == SavedInType.CLASS) {
-    return database.getClassInfo(savedin.id).getName();
+    return database.getClassInfo(savedin.id!)!.getName();
   }
   if (savedin.type == SavedInType.COURSE) {
-    return database.getCourseInfo(savedin.id).getName();
+    return database.getCourseInfo(savedin.id!)!.getName();
   }
   throw Exception('Saved in value error!');
 }
@@ -141,11 +141,11 @@ String getSavedInValue(SavedIn savedin, PlannerDatabase database) {
 class NewLetterView extends StatelessWidget {
   final PlannerDatabase database;
   final bool editmode;
-  final ValueNotifier<Letter> notifier = ValueNotifier(null);
+  final ValueNotifier<Letter?> notifier = ValueNotifier(null);
   final ValueNotifier<bool> showOptions = ValueNotifier(false);
   bool changedValues = false;
 
-  Letter data;
+  late Letter data;
 
   void update(Letter newdata) {
     data = newdata;
@@ -158,7 +158,7 @@ class NewLetterView extends StatelessWidget {
     changedValues = true;
   }
 
-  NewLetterView.Create({@required this.database, SavedIn savein})
+  NewLetterView.Create({required this.database, SavedIn? savein})
       : editmode = false {
     data = Letter.Create(
             id: database.dataManager.generateCourseId(),
@@ -169,7 +169,7 @@ class NewLetterView extends StatelessWidget {
     notifier.value = data;
   }
 
-  NewLetterView.Edit({@required this.database, Letter letter})
+  NewLetterView.Edit({required this.database, required Letter letter})
       : editmode = true {
     data = letter.copyWith();
     notifier.value = data;
@@ -178,7 +178,7 @@ class NewLetterView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-        child: ValueListenableBuilder<Letter>(
+        child: ValueListenableBuilder<Letter?>(
             valueListenable: notifier,
             builder: (context, _, _2) {
               if (data == null) return CircularProgressIndicator();
@@ -216,12 +216,13 @@ class NewLetterView extends StatelessWidget {
                     ListTile(
                       leading: Icon(Icons.widgets),
                       title: Text(data.savedin != null
-                          ? (getSavedInValue(data.savedin, database))
+                          ? (getSavedInValue(data.savedin!, database))
                           : '-'),
                       onTap: editmode
                           ? null
                           : () {
-                              selectSavedin(context, database, data.savedin?.id)
+                              selectSavedin(
+                                      context, database, data.savedin!.id!)
                                   .then((newsavedin) {
                                 if (newsavedin != null) {
                                   print(newsavedin.id);
@@ -274,14 +275,14 @@ class NewLetterView extends StatelessWidget {
                         if (data.files == null) {
                           update(data.copyWith(files: {}));
                         }
-                        data.files[file.fileid] = file;
+                        data.files[file.fileid!] = file;
                         notifier.notifyListeners();
                       },
                       onRemoved: (file) {
                         if (data.files == null) {
                           update(data.copyWith(files: {}));
                         }
-                        data.files[file.fileid] = null;
+                        data.files[file.fileid!] = null;
                         notifier.notifyListeners();
                       },
                     ),
@@ -343,16 +344,16 @@ class NewLetterView extends StatelessWidget {
     if (data.savedin == null) {
       return Future.value(true);
     } else {
-      if (data.savedin.type == SavedInType.COURSE) {
+      if (data.savedin!.type == SavedInType.COURSE) {
         return requestPermissionCourse(
             database: database,
             category: PermissionAccessType.creator,
-            courseid: data.savedin.id);
-      } else if (data.savedin.type == SavedInType.CLASS) {
+            courseid: data.savedin!.id!);
+      } else if (data.savedin!.type == SavedInType.CLASS) {
         return requestPermissionClass(
             database: database,
             category: PermissionAccessType.creator,
-            classid: data.savedin.id);
+            classid: data.savedin!.id!);
       }
       throw Exception('SOMETHING WENT WRONG???');
     }
@@ -362,7 +363,7 @@ class NewLetterView extends StatelessWidget {
 class LetterCard extends StatelessWidget {
   final Letter letter;
   final PlannerDatabase database;
-  LetterCard({@required this.letter, @required this.database});
+  LetterCard({required this.letter, required this.database});
 
   @override
   Widget build(BuildContext context) {
@@ -496,19 +497,19 @@ class LetterCard extends StatelessWidget {
 class LetterDetailedView extends StatelessWidget {
   final Letter initialdata;
   final PlannerDatabase database;
-  LetterDetailedView({@required this.initialdata, @required this.database});
+  LetterDetailedView({required this.initialdata, required this.database});
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
+    return StreamBuilder<Letter?>(
         initialData: initialdata,
         stream: database.letters.getItemStream(initialdata.id),
         builder: (context, snapshot) {
-          Letter letter = snapshot.data;
+          Letter? letter = snapshot.data;
           if (letter == null) return CircularProgressIndicator();
           return Scaffold(
             appBar:
-                MyAppHeader(title: getSavedInValue(letter.savedin, database)),
+                MyAppHeader(title: getSavedInValue(letter.savedin!, database)),
             backgroundColor: getBackgroundColor(context),
             body: ListView(
               children: <Widget>[
@@ -564,13 +565,13 @@ class LetterDetailedView extends StatelessWidget {
                           children: letter.files.values.map((file) {
                             return ListTile(
                               leading: Icon(
-                                file.isImage()
+                                file!.isImage()
                                     ? Icons.image
                                     : Icons.attach_file,
                                 color: Colors.blue,
                               ),
                               title: Text(
-                                file.name,
+                                file.name!,
                                 style: TextStyle(color: Colors.blue),
                               ),
                               onTap: () {
@@ -655,7 +656,7 @@ class LetterDetailedView extends StatelessWidget {
                             context: context,
                             database: database,
                             category: PermissionAccessType.creator,
-                            savedin: letter.savedin)
+                            savedin: letter.savedin!)
                         .then((result) {
                       if (result == true) {
                         pushWidget(
@@ -700,7 +701,7 @@ class LetterDetailedView extends StatelessWidget {
                                 context: context,
                                 database: database,
                                 category: PermissionAccessType.creator,
-                                savedin: letter.savedin)
+                                savedin: letter.savedin!)
                             .then((result) {
                           if (result == true) {
                             database.dataManager.ResetResponseLetter(letter);
@@ -725,7 +726,7 @@ class LetterDetailedView extends StatelessWidget {
                                 context: context,
                                 database: database,
                                 category: PermissionAccessType.creator,
-                                savedin: letter.savedin)
+                                savedin: letter.savedin!)
                             .then((result) {
                           if (result == true) {
                             Navigator.popUntil(context, (Route predicate) {
@@ -752,12 +753,12 @@ Stream<Map<String, MemberData>> getMemberStream(
     SavedIn savedin, PlannerDatabase database) {
   if (savedin.type == SavedInType.COURSE) {
     return database.courseinfo
-        .getItemStream(savedin.id)
-        .map((it) => it.membersData);
+        .getItemStream(savedin.id!)
+        .map((it) => it!.membersData);
   } else if (savedin.type == SavedInType.CLASS) {
     return database.schoolClassInfos
-        .getItemStream(savedin.id)
-        .map((it) => it.membersData);
+        .getItemStream(savedin!.id!)
+        .map((it) => it!.membersData);
   }
   throw Exception('Unsupported SavedIn Type!');
 }
@@ -765,9 +766,9 @@ Stream<Map<String, MemberData>> getMemberStream(
 Map<String, MemberData> getMemberInitial(
     SavedIn savedin, PlannerDatabase database) {
   if (savedin.type == SavedInType.COURSE) {
-    return database.getCourseInfo(savedin.id).membersData;
+    return database.getCourseInfo(savedin.id!)!.membersData;
   } else if (savedin.type == SavedInType.CLASS) {
-    return database.getClassInfo(savedin.id).membersData;
+    return database.getClassInfo(savedin.id!)!.membersData;
   }
   throw Exception('Unsupported SavedIn Type!');
 }
@@ -775,227 +776,229 @@ Map<String, MemberData> getMemberInitial(
 class LetterResponsesView extends StatelessWidget {
   final Letter initialdata;
   final PlannerDatabase database;
-  LetterResponsesView({@required this.initialdata, @required this.database});
+  LetterResponsesView({required this.initialdata, required this.database});
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<TwoObjects<Letter, Map<String, MemberData>>>(
-        initialData: TwoObjects(
-            item: initialdata,
-            item2: getMemberInitial(initialdata.savedin, database)),
-        stream: getMergedStream(database.letters.getItemStream(initialdata.id),
-            getMemberStream(initialdata.savedin, database)),
-        builder: (context, snapshot) {
-          Letter letter = snapshot.data.item;
-          Map<String, MemberData> members = snapshot.data.item2;
-          if (letter == null) return CircularProgressIndicator();
-          return Scaffold(
-            appBar:
-                MyAppHeader(title: getSavedInValue(letter.savedin, database)),
-            backgroundColor: getBackgroundColor(context),
-            body: ListView(
-              children: <Widget>[
-                Hero(
-                  tag: 'lettercard:${letter.id}',
-                  flightShuttleBuilder: (
-                    BuildContext flightContext,
-                    Animation<double> animation,
-                    HeroFlightDirection flightDirection,
-                    BuildContext fromHeroContext,
-                    BuildContext toHeroContext,
-                  ) {
-                    return SingleChildScrollView(
-                      child: fromHeroContext.widget,
-                    );
-                  },
-                  child: Card(
-                    child: Column(
-                      children: <Widget>[
-                        ListTile(
-                          title: Text(letter.title),
-                          subtitle: Row(
-                            children: <Widget>[
-                              Icon(
-                                Icons.public,
-                                size: 15.0,
-                                color: getTextColorLight(
-                                    getBackgroundColor(context)),
-                              ),
-                              SizedBox(
-                                width: 4.0,
-                              ),
-                              Text(getDateTextDetailed(
-                                  context, letter.published.toDate()))
-                            ],
-                          ),
-                        ),
-                        InkWell(
-                          child: Padding(
-                            padding: EdgeInsets.only(
-                                left: 8.0, right: 8.0, top: 8.0, bottom: 8.0),
-                            child: RichText(
-                              text: TextSpan(
-                                  text: letter.content ?? '-',
-                                  style: TextStyle(
-                                      color: getClearTextColor(context),
-                                      fontWeight: FontWeight.w400)),
-                              textAlign: TextAlign.start,
-                              maxLines: 3,
-                              overflow: TextOverflow.fade,
+    return StreamBuilder<TwoObjects<Letter?, Map<String, MemberData>?>>(
+      initialData: TwoObjects(
+          item: initialdata,
+          item2: getMemberInitial(initialdata.savedin!, database)),
+      stream: getMergedStream<Letter?, Map<String, MemberData>?>(
+        database.letters.getItemStream(initialdata.id),
+        getMemberStream(initialdata.savedin!, database),
+      ),
+      builder: (context, snapshot) {
+        Letter? letter = snapshot.data!.item;
+        Map<String, MemberData>? members = snapshot.data!.item2;
+        if (letter == null) return CircularProgressIndicator();
+        return Scaffold(
+          appBar:
+              MyAppHeader(title: getSavedInValue(letter.savedin!, database)),
+          backgroundColor: getBackgroundColor(context),
+          body: ListView(
+            children: <Widget>[
+              Hero(
+                tag: 'lettercard:${letter.id}',
+                flightShuttleBuilder: (
+                  BuildContext flightContext,
+                  Animation<double> animation,
+                  HeroFlightDirection flightDirection,
+                  BuildContext fromHeroContext,
+                  BuildContext toHeroContext,
+                ) {
+                  return SingleChildScrollView(
+                    child: fromHeroContext.widget,
+                  );
+                },
+                child: Card(
+                  child: Column(
+                    children: <Widget>[
+                      ListTile(
+                        title: Text(letter.title),
+                        subtitle: Row(
+                          children: <Widget>[
+                            Icon(
+                              Icons.public,
+                              size: 15.0,
+                              color: getTextColorLight(
+                                  getBackgroundColor(context)),
                             ),
-                          ),
+                            SizedBox(
+                              width: 4.0,
+                            ),
+                            Text(getDateTextDetailed(
+                                context, letter.published.toDate()))
+                          ],
                         ),
-                        Padding(
+                      ),
+                      InkWell(
+                        child: Padding(
                           padding: EdgeInsets.only(
-                              top: 4.0, bottom: 4.0, left: 4.0, right: 4.0),
-                          child: Row(
-                            children: <Widget>[
-                              letter.isRead(database)
-                                  ? nowidget()
-                                  : TextButton.icon(
-                                      onPressed: () {
-                                        database.dataManager.SetResponseLetter(
-                                            letter,
-                                            LetterResponse.Create(
-                                                    id: database.getMemberId())
-                                                .copyWith(
-                                                    type: ResponseType.READ));
-                                      },
-                                      icon: Icon(Icons.check),
-                                      label: Text(getString(context)
-                                          .markasread
-                                          .toUpperCase()),
-                                      style: ButtonStyle(
-                                        foregroundColor:
-                                            MaterialStateProperty.all(
-                                                getEventualTextColor(context,
-                                                    getPrimaryColor(context))),
-                                      ),
-                                    ),
-                            ],
-                            mainAxisAlignment: MainAxisAlignment.end,
+                              left: 8.0, right: 8.0, top: 8.0, bottom: 8.0),
+                          child: RichText(
+                            text: TextSpan(
+                                text: letter.content ?? '-',
+                                style: TextStyle(
+                                    color: getClearTextColor(context),
+                                    fontWeight: FontWeight.w400)),
+                            textAlign: TextAlign.start,
+                            maxLines: 3,
+                            overflow: TextOverflow.fade,
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                            top: 4.0, bottom: 4.0, left: 4.0, right: 4.0),
+                        child: Row(
+                          children: <Widget>[
+                            letter.isRead(database)
+                                ? nowidget()
+                                : TextButton.icon(
+                                    onPressed: () {
+                                      database.dataManager.SetResponseLetter(
+                                          letter,
+                                          LetterResponse.Create(
+                                                  id: database.getMemberId())
+                                              .copyWith(
+                                                  type: ResponseType.READ));
+                                    },
+                                    icon: Icon(Icons.check),
+                                    label: Text(getString(context)
+                                        .markasread
+                                        .toUpperCase()),
+                                    style: ButtonStyle(
+                                      foregroundColor:
+                                          MaterialStateProperty.all(
+                                              getEventualTextColor(context,
+                                                  getPrimaryColor(context))),
+                                    ),
+                                  ),
+                          ],
+                          mainAxisAlignment: MainAxisAlignment.end,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                FormHeader2(
-                    bothlang(context, de: 'Beantwortet', en: 'Replied')),
-                Column(
-                  children: letter.responses.values
-                      .where((it) => it.type == ResponseType.REPLY)
-                      .map((it) => FutureBuilder<DocumentSnapshot>(
-                            builder: (context, snapshot) {
-                              final data = snapshot.data?.data();
-                              UserProfile userprofile = data != null
-                                  ? UserProfile.fromData(data)
-                                  : null;
-                              return Card(
-                                child: Column(
-                                  children: <Widget>[
-                                    ListTile(
-                                      leading: UserImageView(
-                                        userProfile: userprofile,
+              ),
+              FormHeader2(bothlang(context, de: 'Beantwortet', en: 'Replied')),
+              Column(
+                children: letter.responses.values
+                    .where((it) => it.type == ResponseType.REPLY)
+                    .map((it) => FutureBuilder<DocumentSnapshot>(
+                          builder: (context, snapshot) {
+                            final data = snapshot.data?.data();
+                            UserProfile? userprofile = data != null
+                                ? UserProfile.fromData(data)
+                                : null;
+                            return Card(
+                              child: Column(
+                                children: <Widget>[
+                                  ListTile(
+                                    leading: UserImageView(
+                                      userProfile: userprofile,
+                                    ),
+                                    title: Text(userprofile?.name ??
+                                        getString(context).anonymoususer),
+                                    subtitle: Text(getDateTextDetailed(
+                                        context, it.lastchanged.toDate())),
+                                    trailing: IconButton(
+                                        icon: Icon(Icons.content_copy),
+                                        onPressed: () {
+                                          Clipboard.setData(ClipboardData(
+                                              text: it.message ?? '-'));
+                                          showToastMessage(
+                                              msg: getString(context)
+                                                  .addtoclipboard);
+                                        }),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text(
+                                      it.message ?? '-',
+                                      textAlign: TextAlign.start,
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w300,
+                                        fontSize: 16.0,
                                       ),
-                                      title: Text(userprofile?.name ??
-                                          getString(context).anonymoususer),
-                                      subtitle: Text(getDateTextDetailed(
-                                          context, it.lastchanged.toDate())),
-                                      trailing: IconButton(
-                                          icon: Icon(Icons.content_copy),
-                                          onPressed: () {
-                                            Clipboard.setData(ClipboardData(
-                                                text: it.message ?? '-'));
-                                            showToastMessage(
-                                                msg: getString(context)
-                                                    .addtoclipboard);
-                                          }),
                                     ),
-                                    Padding(
-                                      padding: EdgeInsets.all(8.0),
-                                      child: Text(
-                                        it.message ?? '-',
-                                        textAlign: TextAlign.start,
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w300,
-                                          fontSize: 16.0,
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 8.0,
-                                    ),
-                                  ],
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                ),
-                              );
-                            },
-                            future: database.dataManager
-                                .getMemberInfo(it.getUid())
-                                .get(),
-                          ))
-                      .toList(),
-                ),
-                FormHeader2(getString(context).readby),
-                Column(
-                  children: letter.responses.values
-                      .where((it) => it.type == ResponseType.READ)
-                      .map((it) => FutureBuilder<DocumentSnapshot>(
-                            builder: (context, snapshot) {
-                              final data = snapshot.data?.data();
-                              UserProfile userprofile = data != null
-                                  ? UserProfile.fromData(data)
-                                  : null;
-                              return ListTile(
-                                leading: UserImageView(
-                                  userProfile: userprofile,
-                                ),
-                                title: Text(userprofile?.name ??
-                                    getString(context).anonymoususer),
-                                subtitle: Text(getDateTextDetailed(
-                                    context, it.lastchanged.toDate())),
-                              );
-                            },
-                            future: database.dataManager
-                                .getMemberInfo(it.getUid())
-                                .get(),
-                          ))
-                      .toList(),
-                ),
-                FormHeader2(getString(context).none),
-                Column(
-                  children: members.values
-                      .where((it) {
-                        LetterResponse itresponse = letter.responses[it.id];
-                        if (itresponse == null) return true;
-                        if (itresponse.type == ResponseType.READ ||
-                            itresponse.type == ResponseType.REPLY) return false;
-                        return true;
-                      })
-                      .map((it) => FutureBuilder<DocumentSnapshot>(
-                            builder: (context, snapshot) {
-                              final data = snapshot.data?.data();
-                              UserProfile userprofile = data != null
-                                  ? UserProfile.fromData(data)
-                                  : null;
-                              return ListTile(
-                                leading: UserImageView(
-                                  userProfile: userprofile,
-                                ),
-                                title: Text(userprofile?.name ??
-                                    getString(context).anonymoususer),
-                              );
-                            },
-                            future: database.dataManager
-                                .getMemberInfo(it.getUid())
-                                .get(),
-                          ))
-                      .toList(),
-                ),
-              ],
-            ),
-          );
-        });
+                                  ),
+                                  SizedBox(
+                                    height: 8.0,
+                                  ),
+                                ],
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                              ),
+                            );
+                          },
+                          future: database.dataManager
+                              .getMemberInfo(it.getUid())
+                              .get(),
+                        ))
+                    .toList(),
+              ),
+              FormHeader2(getString(context).readby),
+              Column(
+                children: letter.responses.values
+                    .where((it) => it.type == ResponseType.READ)
+                    .map((it) => FutureBuilder<DocumentSnapshot>(
+                          builder: (context, snapshot) {
+                            final data = snapshot.data?.data();
+                            UserProfile? userprofile = data != null
+                                ? UserProfile.fromData(data)
+                                : null;
+                            return ListTile(
+                              leading: UserImageView(
+                                userProfile: userprofile,
+                              ),
+                              title: Text(userprofile?.name ??
+                                  getString(context).anonymoususer),
+                              subtitle: Text(getDateTextDetailed(
+                                  context, it.lastchanged.toDate())),
+                            );
+                          },
+                          future: database.dataManager
+                              .getMemberInfo(it.getUid())
+                              .get(),
+                        ))
+                    .toList(),
+              ),
+              FormHeader2(getString(context).none),
+              Column(
+                children: members!.values
+                    .where((it) {
+                      LetterResponse? itresponse = letter.responses[it.id];
+                      if (itresponse == null) return true;
+                      if (itresponse.type == ResponseType.READ ||
+                          itresponse.type == ResponseType.REPLY) return false;
+                      return true;
+                    })
+                    .map((it) => FutureBuilder<DocumentSnapshot>(
+                          builder: (context, snapshot) {
+                            final data = snapshot.data?.data();
+                            UserProfile? userprofile = data != null
+                                ? UserProfile.fromData(data)
+                                : null;
+                            return ListTile(
+                              leading: UserImageView(
+                                userProfile: userprofile,
+                              ),
+                              title: Text(userprofile?.name ??
+                                  getString(context).anonymoususer),
+                            );
+                          },
+                          future: database.dataManager
+                              .getMemberInfo(it.getUid())
+                              .get(),
+                        ))
+                    .toList(),
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 }

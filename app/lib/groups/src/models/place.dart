@@ -1,8 +1,8 @@
-// @dart=2.11
+//
 class Place {
-  String placeid, name, address;
+  late String placeid, name, address;
 
-  Place({this.placeid, this.name, this.address});
+  Place({required this.placeid, required this.name, required this.address});
 
   Place.fromData(Map<String, dynamic> data) {
     placeid = data['placeid'];

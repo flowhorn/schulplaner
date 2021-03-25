@@ -1,14 +1,13 @@
-// @dart=2.11
 import 'package:meta/meta.dart';
 import 'teacher.dart';
 
 class TeacherLink {
-  String teacherid, name;
+  late String teacherid;
+  late String name;
 
-  TeacherLink({this.teacherid, this.name});
+  TeacherLink({required this.teacherid, required this.name});
 
-  factory TeacherLink.fromData({@required String id, @required dynamic data}) {
-    if (data == null) return null;
+  factory TeacherLink.fromData({String? id, required dynamic data}) {
     return TeacherLink(
       teacherid: id ?? data['teacherid'],
       name: data['name'],

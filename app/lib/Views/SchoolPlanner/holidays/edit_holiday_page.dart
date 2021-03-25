@@ -1,4 +1,4 @@
-//@dart=2.11
+//
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
@@ -17,14 +17,14 @@ class NewHolidayPage extends StatelessWidget {
   final PlannerDatabase database;
   bool changedValues = false;
   final bool editMode;
-  final String editvacationid;
+  final String? editvacationid;
 
-  Holiday data;
-  ValueNotifier<Holiday> notifier;
+  late Holiday data;
+  late ValueNotifier<Holiday> notifier;
   NewHolidayPage(
-      {@required this.database, this.editMode = false, this.editvacationid}) {
+      {required this.database, this.editMode = false, this.editvacationid}) {
     data = editMode
-        ? database.vacations.data[editvacationid].copyWith()
+        ? database.vacations.data[editvacationid]!.copyWith()
         : Holiday(
             id: ID(database.dataManager.generateVacationId()),
             name: Name(''),
@@ -67,7 +67,7 @@ class NewHolidayPage extends StatelessWidget {
                       leading: Icon(Icons.event),
                       title: Text(getString(context).start),
                       subtitle: Text(data.start != null
-                          ? data.start.parser.toYMMMMEEEEd
+                          ? data.start!.parser.toYMMMMEEEEd
                           : '-'),
                       onTap: () {
                         selectDateString(context, data.start?.toDateString)
@@ -83,7 +83,7 @@ class NewHolidayPage extends StatelessWidget {
                       leading: Icon(Icons.event),
                       title: Text(getString(context).end),
                       subtitle: Text(data.end != null
-                          ? data.end.parser.toYMMMMEEEEd
+                          ? data.end!.parser.toYMMMMEEEEd
                           : '-'),
                       onTap: () {
                         selectDateString(context, data.end?.toDateString)

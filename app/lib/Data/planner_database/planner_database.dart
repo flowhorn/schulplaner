@@ -144,10 +144,10 @@ class PlannerDatabase {
         }
       },
     );
-    tasks = DataCombinedPackage(getKey: (it) => it.taskid);
+    tasks = DataCombinedPackage(getKey: (it) => it.taskid!);
     letters = DataCombinedPackage(getKey: (it) => it.id);
-    events = DataCombinedPackage(getKey: (it) => it.eventid);
-    lessoninfos = DataCombinedPackage(getKey: (it) => it.id);
+    events = DataCombinedPackage(getKey: (it) => it.eventid!);
+    lessoninfos = DataCombinedPackage(getKey: (it) => it.id!);
     schoolClassInfos = DataCombinedPackage(getKey: (it) => it.id);
     connections = DataDocumentPackage(
         reference: dataManager.plannerConnections,
@@ -170,26 +170,26 @@ class PlannerDatabase {
         });
     places = DataCollectionPackage(
         reference: dataManager.placesRef,
-        objectBuilder: (key, it) => Place.fromData(it),
+        objectBuilder: (key, it) => Place.fromData(it!),
         getKey: (it) => it.placeid,
         sorter: (item1, item2) {
           return (item1.name ?? '').compareTo(item2.name ?? '');
         });
     notes = DataCollectionPackage(
       reference: dataManager.notesRef.where('archived', isEqualTo: false),
-      objectBuilder: (key, it) => NoteData.fromData(it),
-      getKey: (it) => it.noteid,
+      objectBuilder: (key, it) => NoteData.fromData(it!),
+      getKey: (it) => it.noteid!,
     );
     personalfiles = DataCollectionPackage(
       reference: dataManager.filesPersonalRef,
       objectBuilder: (key, it) => CloudFile.fromData(it),
-      getKey: (it) => it.fileid,
+      getKey: (it) => it.fileid!,
       sorter: (i1, i2) => (i1.name ?? '').compareTo(i2.name ?? ''),
     );
     grades = DataCollectionPackage(
         reference: dataManager.gradesRef,
-        objectBuilder: (key, it) => Grade.fromData(it),
-        getKey: (it) => it.id,
+        objectBuilder: (key, it) => Grade.fromData(it!),
+        getKey: (it) => it.id!,
         sorter: (item1, item2) {
           return (item1.date ?? '').compareTo(item2.date ?? '');
         });
@@ -200,7 +200,7 @@ class PlannerDatabase {
     );
     schoolreports = DataCollectionPackage(
       reference: dataManager.schoolReportsRef,
-      objectBuilder: (key, it) => SchoolReport.fromData(it),
+      objectBuilder: (key, it) => SchoolReport.fromData(it!),
       getKey: (it) => it.id,
     );
     holidayGateway = HolidayGateway(root, HolidayCacheManager());
@@ -214,7 +214,7 @@ class PlannerDatabase {
         (snapshot) {
           snapshot.docChanges.forEach(
             (change) {
-              tasks.updateData(SchoolTask.fromData(change.doc.data()),
+              tasks.updateData(SchoolTask.fromData(change.doc.data()!),
                   fromDocumentChange(change.type));
             },
           );
@@ -230,7 +230,7 @@ class PlannerDatabase {
         (snapshot) {
           snapshot.docChanges.forEach(
             (change) {
-              events.updateData(SchoolEvent.fromData(change.doc.data()),
+              events.updateData(SchoolEvent.fromData(change.doc.data()!),
                   fromDocumentChange(change.type));
             },
           );
@@ -309,7 +309,7 @@ class PlannerDatabase {
         .listen((snapshot) {
       print(snapshot.docs.map((e) => (e.data())));
       snapshot.docChanges.forEach((change) {
-        tasks.updateData(SchoolTask.fromData(change.doc.data()),
+        tasks.updateData(SchoolTask.fromData(change.doc.data()!),
             fromDocumentChange(change.type));
       });
     }));
@@ -319,7 +319,7 @@ class PlannerDatabase {
           .map((snap) => Lesson.fromData(id: snap.id, data: snap.data()))
           .toList()
           .asMap()
-          .map(((_, value) => MapEntry(value.lessonid, value)));
+          .map(((_, value) => MapEntry(value.lessonid!, value)));
       courseinfo.notifyDataSetChanged();
     }));
     mCourseListeners.add(dataManager
@@ -328,7 +328,7 @@ class PlannerDatabase {
         .snapshots()
         .listen((snapshot) {
       snapshot.docChanges.forEach((change) {
-        events.updateData(SchoolEvent.fromData(change.doc.data()),
+        events.updateData(SchoolEvent.fromData(change.doc.data()!),
             fromDocumentChange(change.type));
       });
     }));
@@ -373,7 +373,7 @@ class PlannerDatabase {
         dataManager.getSchoolClassInfo(classid).snapshots().listen((snapshot) {
       if (snapshot.exists) {
         schoolClassInfos.updateData(
-          SchoolClass.fromData(snapshot.data()),
+          SchoolClass.fromData(snapshot.data()!),
           ChangeType.MODIFIED,
         );
       } else {
@@ -386,7 +386,7 @@ class PlannerDatabase {
         .snapshots()
         .listen((snapshot) {
       snapshot.docChanges.forEach((change) {
-        tasks.updateData(SchoolTask.fromData(change.doc.data()),
+        tasks.updateData(SchoolTask.fromData(change.doc.data()!),
             fromDocumentChange(change.type));
       });
     }));

@@ -1,4 +1,4 @@
-//@dart=2.11
+//
 import 'package:schulplaner_addons/chat/chat_attachment.dart';
 import 'package:schulplaner_addons/chat/chat_bubble.dart';
 import 'package:schulplaner_addons/chat/chat_page.dart';
@@ -12,7 +12,7 @@ import 'package:schulplaner_addons/utils/color_utils.dart';
 class ChatThread extends StatelessWidget {
   final ChatRoom chatRoom;
 
-  const ChatThread({Key key, this.chatRoom}) : super(key: key);
+  const ChatThread({Key? key, required this.chatRoom}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +23,10 @@ class ChatThread extends StatelessWidget {
       ),
       body: Column(children: [
         Expanded(
-          child: StreamBuilder(
+          child: StreamBuilder<List<Message>>(
             stream: bloc.streamMessages(),
             builder: (context, snapshot) {
-              List<Message> messages = snapshot.hasData ? snapshot.data : [];
+              List<Message> messages = snapshot.hasData ? snapshot.data! : [];
               return ChatThreadList.build(
                 messages: messages,
                 messageBuilder: (
@@ -52,7 +52,7 @@ class ChatThread extends StatelessWidget {
         ),
         ChatInput(
           onPressedAdd: () async {
-            ChatAttachment attachment = await selectChatAttachment(context);
+            ChatAttachment? attachment = await selectChatAttachment(context);
             if (attachment != null) {
               switch (attachment.type) {
                 case ChatAttachmentType.image:
@@ -82,7 +82,7 @@ class ChatThread extends StatelessWidget {
 class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
 
-  const ChatAppBar({Key key, this.title}) : super(key: key);
+  const ChatAppBar({Key? key, required this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -123,9 +123,9 @@ class ChatInput extends StatelessWidget {
   final TextEditingController textEditingController =
       TextEditingController(text: '');
   ChatInput({
-    Key key,
-    @required this.onSendMessage,
-    @required this.onPressedAdd,
+    Key? key,
+    required this.onSendMessage,
+    required this.onPressedAdd,
     this.accentColor = Colors.blueGrey,
   }) : super(key: key);
 

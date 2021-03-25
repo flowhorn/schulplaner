@@ -1,16 +1,16 @@
-//@dart=2.11
+//
 import 'package:color/color.dart' as colorlib;
 import 'package:flutter/material.dart';
 
 class OldDesign {
-  Color primary;
-  Color accent;
-  String name;
-  String id;
+  late Color? primary;
+  late Color? accent;
+  late String? name;
+  late String? id;
 
   OldDesign({this.id, this.name, this.primary, this.accent});
 
-  String getKey() => id;
+  String getKey() => id!;
 
   OldDesign.fromSnapshot(dynamic it)
       : id = it['id'],
@@ -18,12 +18,12 @@ class OldDesign {
         primary = DataUtil_Design.fromHex(it['primary']),
         accent = DataUtil_Design.fromHex(it['accent']);
 
-  Map<String, Object> toJson() {
+  Map<String, dynamic> toJson() {
     return {
       'id': id,
       'name': name,
-      'primary': DataUtil_Design.getHex(primary),
-      'accent': DataUtil_Design.getHex(accent)
+      'primary': DataUtil_Design.getHex(primary!),
+      'accent': accent != null ? DataUtil_Design.getHex(accent!) : null,
     };
   }
 }
@@ -166,10 +166,14 @@ class DataUtil_Design {
           return OldDesign(
               id: values[0],
               name: values[1],
-              primary: Color.fromARGB(
-                  255, primary_rgb.r, primary_rgb.g, primary_rgb.b),
+              primary: Color.fromARGB(255, primary_rgb.r.toInt(),
+                  primary_rgb.g.toInt(), primary_rgb.b.toInt()),
               accent: Color.fromARGB(
-                  255, accent_rgb.r, accent_rgb.g, accent_rgb.b));
+                255,
+                accent_rgb.r.toInt(),
+                accent_rgb.g.toInt(),
+                accent_rgb.b.toInt(),
+              ));
         }
       case 'ID':
         {
@@ -202,7 +206,12 @@ class DataUtil_Design {
 
   static Color fromHex(String hex) {
     colorlib.RgbColor primary_rgb = colorlib.HexColor(hex).toRgbColor();
-    return Color.fromARGB(255, primary_rgb.r, primary_rgb.g, primary_rgb.b);
+    return Color.fromARGB(
+      255,
+      primary_rgb.r.toInt(),
+      primary_rgb.g.toInt(),
+      primary_rgb.b.toInt(),
+    );
   }
 
   static OldDesign getMainDesign() {

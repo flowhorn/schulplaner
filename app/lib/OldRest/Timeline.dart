@@ -377,7 +377,7 @@ class TimeLineLessonItem extends StatelessWidget {
             Align(
               alignment: Alignment.center,
               child: ColoredCircleText(
-                color: course!.getDesign().primary,
+                color: course!.getDesign()?.primary,
                 text: toShortNameLength(context, course!.getShortname_full()),
                 radius: 24.0,
                 textsize: 19.0,
@@ -393,10 +393,12 @@ class TimeLineLessonItem extends StatelessWidget {
                 : null),
       ),
       onTap: () {
-        showLessonDetailSheet(context,
-            lessonid: lesson.lessonid,
-            plannerdatabase: database,
-            datestring: datestring);
+        showLessonDetailSheet(
+          context,
+          lessonid: lesson.lessonid!,
+          plannerdatabase: database,
+          datestring: datestring,
+        );
       },
       onLongPress: () {
         pushWidget(

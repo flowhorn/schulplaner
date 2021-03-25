@@ -34,7 +34,7 @@ Color getLessonInfoColor(LessonInfoType type) {
 }
 
 class LessonInfo {
-  String id, lessonid, date, courseid;
+  String? id, lessonid, date, courseid;
   LessonInfoType type;
   String? note;
   PlaceLink? place;
@@ -42,13 +42,13 @@ class LessonInfo {
 
   LessonInfo({
     required this.id,
-    required this.lessonid,
+    this.lessonid,
     this.teacher,
     this.place,
-    required this.note,
+    this.note = '',
     required this.type,
-    required this.courseid,
-    required this.date,
+    this.courseid,
+    this.date,
   });
 
   LessonInfo.fromData(Map<String, dynamic> data)
@@ -78,7 +78,7 @@ class LessonInfo {
     };
   }
 
-  String getKey() => courseid + '--' + id;
+  String getKey() => courseid! + '--' + id!;
 
   bool validate() {
     if (date == null || date == '') return false;
@@ -122,7 +122,7 @@ class DataUtil_LessonInfo {
   String getKey(LessonInfo item) => item.getKey();
 
   int sort(LessonInfo item1, LessonInfo item2) {
-    return item1.date.compareTo(item2.date);
+    return item1.date!.compareTo(item2.date!);
   }
 }
 
@@ -136,7 +136,7 @@ class LessonInfosList extends StatelessWidget {
         stream: plannerDatabase.lessoninfos.stream
             .map((data) => data.values.toList()
               ..sort((l1, l2) {
-                return l1.date.compareTo(l2.date);
+                return l1.date!.compareTo(l2.date!);
               })),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
@@ -146,7 +146,7 @@ class LessonInfosList extends StatelessWidget {
                 LessonInfo item = list[index];
                 Lesson? lesson = item.getLesson(plannerDatabase);
                 Course? courseInfo =
-                    plannerDatabase.getCourseInfo(item.courseid);
+                    plannerDatabase.getCourseInfo(item.courseid!);
                 return ListTile(
                   onTap: () {
                     pushWidget(
@@ -165,7 +165,7 @@ class LessonInfosList extends StatelessWidget {
                   title: Text(courseInfo?.getName() ?? '???'),
                   subtitle: Column(
                     children: <Widget>[
-                      Text(getDateText(item.date)),
+                      Text(getDateText(item.date!)),
                       Text(lesson != null
                           ? getLessonTitle(context, lesson)
                           : '-'),

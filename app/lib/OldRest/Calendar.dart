@@ -1,12 +1,12 @@
-//@dart=2.11
+//
 import 'package:flutter/material.dart';
 import 'package:schulplaner_widgets/schulplaner_theme.dart';
 
 enum CalIndicator { EVENT, TASK, TESTANDEXAM, VACATION, WEEKEND }
 
 class CalValue {
-  bool enabled;
-  Color color;
+  late bool enabled;
+  late Color color;
 
   CalValue(this.enabled, this.color);
 
@@ -36,8 +36,8 @@ class CalValue {
 }
 
 class CalendarSettings {
-  Map<CalIndicator, CalValue> indicators;
-  CalendarSettings({this.indicators}) {
+  late Map<CalIndicator, CalValue> indicators;
+  CalendarSettings({required this.indicators}) {
     if (indicators == null) {
       indicators = {
         CalIndicator.EVENT: CalValue(true, Colors.blueGrey),
@@ -79,7 +79,7 @@ class CalendarSettings {
 
   Map<String, Object> toJson() {
     return {
-      'indicators': indicators?.map<String, dynamic>((key, value) {
+      'indicators': indicators.map<String, dynamic>((key, value) {
         return MapEntry<String, dynamic>(key.index.toString(), value?.toJson());
       }),
     };

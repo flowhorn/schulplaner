@@ -1,4 +1,4 @@
-//@dart=2.11
+//
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -11,8 +11,8 @@ import 'package:schulplaner_widgets/schulplaner_theme.dart';
 
 // ignore: must_be_immutable
 class LinkEmailView extends StatelessWidget {
-  String _email;
-  String _password;
+  String _email = '';
+  String _password = '';
 
   @override
   Widget build(BuildContext context) {
@@ -97,7 +97,7 @@ class LinkEmailView extends StatelessWidget {
                                       );
                                     },
                                     barrierDismissible: false);
-                                await FirebaseAuth.instance.currentUser
+                                await FirebaseAuth.instance.currentUser!
                                     .linkWithCredential(
                                         EmailAuthProvider.credential(
                                             email: _email, password: _password))

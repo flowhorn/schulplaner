@@ -128,7 +128,7 @@ class PlannerConnectionsState {
         .snapshots()
         .listen((snapshot) {
       if (snapshot.data() == null) return;
-      SchoolClass schoolClassInfo = SchoolClass.fromData(snapshot.data());
+      SchoolClass schoolClassInfo = SchoolClass.fromData(snapshot.data()!);
       indirectconnections.removeWhere((key, value) {
         if (value.classid == classid) {
           if (schoolClassInfo.courses.containsKey(value.courseid)) {

@@ -1,4 +1,4 @@
-//@dart=2.11
+//
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -58,12 +58,12 @@ void showGradeSpanSheet(BuildContext context, PlannerDatabase database) {
 }
 
 class DateRange {
-  final String start, end;
+  final String? start, end;
   const DateRange({this.start, this.end});
 
   DateRange copyWith({
-    String start,
-    String end,
+    String? start,
+    String? end,
   }) {
     return DateRange(
       start: start ?? this.start,
@@ -72,12 +72,12 @@ class DateRange {
   }
 }
 
-Future<DateRange> selectDateRange(BuildContext context) {
+Future<DateRange?> selectDateRange(BuildContext context) {
   ValueNotifier<DateRange> notifier = ValueNotifier(DateRange());
   return showSheetBuilder(
           context: context,
           child: (context) {
-            return ValueListenableBuilder(
+            return ValueListenableBuilder<DateRange>(
                 valueListenable: notifier,
                 builder: (context, value, _) {
                   DateRange range = value;
@@ -85,7 +85,7 @@ Future<DateRange> selectDateRange(BuildContext context) {
                     ListTile(
                       title: Text(getString(context).start),
                       subtitle: Text(range.start != null
-                          ? getDateText(range.start)
+                          ? getDateText(range.start!)
                           : getString(context).open),
                       onTap: () {
                         selectDateString(context, range.start)
@@ -100,7 +100,7 @@ Future<DateRange> selectDateRange(BuildContext context) {
                     ListTile(
                       title: Text(getString(context).end),
                       subtitle: Text(range.end != null
-                          ? getDateText(range.end)
+                          ? getDateText(range.end!)
                           : getString(context).open),
                       onTap: () {
                         selectDateString(context, range.end)
@@ -121,7 +121,7 @@ Future<DateRange> selectDateRange(BuildContext context) {
                 });
           },
           title: getString(context).selecttimespan)
-      .then<DateRange>((value) {
+      .then<DateRange?>((value) {
     if (value is DateRange) {
       return value;
     } else {
@@ -131,16 +131,16 @@ Future<DateRange> selectDateRange(BuildContext context) {
 }
 
 void showGradeInfoSheet(PlannerDatabase database,
-    {BuildContext context, String gradeid}) {
+    {required BuildContext context, required String gradeid}) {
   showDetailSheetBuilder(
     context: context,
     body: (BuildContext context) {
-      return StreamBuilder<Grade>(
+      return StreamBuilder<Grade?>(
           stream: database.grades.getItemStream(gradeid),
           builder: (BuildContext context, snapshot) {
-            Grade item = snapshot.data;
+            Grade? item = snapshot.data;
             if (item == null) return loadedView();
-            Course courseInfo = database.getCourseInfo(item.courseid);
+            Course? courseInfo = database.getCourseInfo(item.courseid!);
 
             return Expanded(
                 child: Column(
@@ -162,11 +162,11 @@ void showGradeInfoSheet(PlannerDatabase database,
                   ListTile(
                       leading: Icon(Icons.grade),
                       title: Text(DataUtil_Grade()
-                          .getGradeValueOf(item.valuekey)
+                          .getGradeValueOf(item.valuekey!)
                           .getLongName())),
                   ListTile(
                       leading: Icon(Icons.today),
-                      title: Text(getDateText(item.date))),
+                      title: Text(getDateText(item.date!))),
                   ListTile(
                       leading: Icon(Icons.line_weight),
                       title: Text(item.weight.toString())),
@@ -246,7 +246,10 @@ void showGradeInfoSheet(PlannerDatabase database,
 }
 
 Widget getTitleCard(
-    {IconData iconData, String title, List<Widget> content, Widget bottom}) {
+    {IconData? iconData,
+    required String title,
+    required List<Widget> content,
+    Widget? bottom}) {
   List<Widget> widgetlist = [
     Padding(
         padding: const EdgeInsets.only(

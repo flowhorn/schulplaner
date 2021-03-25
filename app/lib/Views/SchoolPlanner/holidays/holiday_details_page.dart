@@ -31,13 +31,15 @@ Future<void> showVacationDetail({
                 title: Text(
                   getString(context).from +
                       ' ' +
-                      item.start.parser.toYMMMMEEEEd,
+                      item.start!.parser.toYMMMMEEEEd,
                 ),
               ),
               ListTile(
                 leading: Icon(Icons.event),
                 title: Text(
-                  getString(context).until + ' ' + item.end.parser.toYMMMMEEEEd,
+                  getString(context).until +
+                      ' ' +
+                      item.end!.parser.toYMMMMEEEEd,
                 ),
               ),
               ButtonBar(

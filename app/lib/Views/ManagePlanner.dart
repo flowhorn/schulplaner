@@ -1,4 +1,4 @@
-//@dart=2.11
+//
 import 'package:bloc/bloc_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -270,8 +270,8 @@ class ArchivedPlanner extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return ListView(
-              children: snapshot.data.docs.map((data) {
-                final planner = Planner.fromData(data.data());
+              children: snapshot.data!.docs.map((data) {
+                final planner = Planner.fromData(data.data()!);
                 return Padding(
                   padding: EdgeInsets.only(
                       left: 8.0, right: 8.0, top: 5.0, bottom: 0.0),
@@ -368,7 +368,7 @@ class ArchivedPlanner extends StatelessWidget {
             );
           }
         },
-        stream: getPlannerRef(plannerLoaderBloc.currentUserId)
+        stream: getPlannerRef(plannerLoaderBloc.currentUserId!)
             .where('deleted', isEqualTo: false)
             .where('archived', isEqualTo: true)
             .snapshots(),
@@ -380,11 +380,11 @@ class ArchivedPlanner extends StatelessWidget {
 class NewPlannerView extends StatefulWidget {
   final PlannerLoaderBloc plannerLoaderBloc;
   final bool editmode;
-  final String plannerid;
-  final Planner previousplanner;
+  final String? plannerid;
+  final Planner? previousplanner;
   final bool activateplanner;
   NewPlannerView(
-      {@required this.plannerLoaderBloc,
+      {required this.plannerLoaderBloc,
       this.plannerid,
       this.editmode = false,
       this.previousplanner,
@@ -400,24 +400,24 @@ class NewPlannerView extends StatefulWidget {
 class _NewPlannerViewState extends State<NewPlannerView> {
   final PlannerLoaderBloc plannerLoaderBloc;
   final bool editmode;
-  final String plannerid;
+  final String? plannerid;
   _NewPlannerViewState(
-      {@required this.plannerLoaderBloc,
+      {required this.plannerLoaderBloc,
       this.plannerid,
       this.editmode = false,
-      Planner previousplanner}) {
+      Planner? previousplanner}) {
     if (editmode) {
-      planner = previousplanner ??
-          plannerLoaderBloc.loadAllPlannerStatusValue.plannermap[plannerid];
+      planner = (previousplanner ??
+          plannerLoaderBloc.loadAllPlannerStatusValue.plannermap[plannerid])!;
     } else {
       planner = Planner(
-          id: getPlannerRef(plannerLoaderBloc.currentUserId).doc().id,
-          uid: plannerLoaderBloc.currentUserId.uid,
+          id: getPlannerRef(plannerLoaderBloc.currentUserId!).doc().id,
+          uid: plannerLoaderBloc.currentUserId!.uid,
           name: '');
     }
   }
 
-  Planner planner;
+  late Planner planner;
 
   @override
   Widget build(BuildContext context) {

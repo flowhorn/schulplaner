@@ -1,5 +1,3 @@
-//@dart=2.11
-import 'package:meta/meta.dart';
 import 'package:flutter/material.dart';
 import 'package:decimal/decimal.dart';
 import 'package:schulplaner8/Helper/DateAPI.dart';
@@ -17,7 +15,7 @@ typedef GradeValue GetGradeValue(String gradevalueid);
 class Choice {
   dynamic id;
   String name;
-  IconData iconData;
+  IconData? iconData;
 
   Choice(this.id, this.name, {this.iconData});
 }
@@ -41,23 +39,24 @@ class Grade {
     this.title,
     this.date,
     this.valuekey,
-    this.weight,
-    this.type,
+    this.weight = 1.0,
+    required this.type,
   });
 
-  String id, courseid, title, date, valuekey;
-  double weight;
-  GradeType type;
+  String? id, courseid, title, date, valuekey;
+  late double weight;
+  late GradeType type;
 
-  Grade copy(
-      {String id,
-      String courseid,
-      String title,
-      String date,
-      String valuekey,
-      String sectionid,
-      double weight,
-      int type}) {
+  Grade copy({
+    String? id,
+    String? courseid,
+    String? title,
+    String? date,
+    String? valuekey,
+    String? sectionid,
+    double? weight,
+    GradeType? type,
+  }) {
     return Grade(
       id: id ?? this.id,
       courseid: courseid ?? this.courseid,
@@ -69,7 +68,7 @@ class Grade {
     );
   }
 
-  String getKey() => courseid + '--' + id;
+  String getKey() => courseid! + '--' + id!;
 
   Grade.fromData(Map<String, dynamic> data) {
     id = data['gradeid'] ?? data['id'];
@@ -82,7 +81,7 @@ class Grade {
     type = GradeType.values[data['type'] - 1];
   }
 
-  Map<String, Object> toJson() {
+  Map<String, dynamic> toJson() {
     return {
       'gradeid': id,
       'courseid': courseid,
@@ -117,11 +116,11 @@ class DataUtil_Grade {
   }
 
   int sort(Grade item1, Grade item2) {
-    return item1.date.compareTo(item2.date);
+    return item1.date!.compareTo(item2.date!);
   }
 
   GradeValue getGradeValueOf(String gradevaluekey) {
-    return getGradePackageOf(gradevaluekey).getGradeValue(gradevaluekey);
+    return getGradePackageOf(gradevaluekey).getGradeValue!(gradevaluekey);
   }
 
   GradePackage getGradePackageOf(String gradevaluekey) {
@@ -130,16 +129,19 @@ class DataUtil_Grade {
 }
 
 class GradeValue {
-  final String id, name, name2;
+  final String id, name;
+  final String? name2;
   final int gradepackage;
-  final double value, value_notendency;
-  const GradeValue(
-      {this.id,
-      this.name,
-      this.name2,
-      this.gradepackage,
-      this.value,
-      this.value_notendency});
+  final double value;
+  final double? value_notendency;
+  const GradeValue({
+    required this.id,
+    required this.name,
+    this.name2,
+    required this.gradepackage,
+    required this.value,
+    this.value_notendency,
+  });
 
   String getLongName() {
     if (name2 == null) {
@@ -167,9 +169,9 @@ class AverageDisplay {
 }
 
 class AverageSettings {
-  bool automatic;
-  Map<GradeType, double> weightperType;
-  AverageSettings({this.automatic = true, this.weightperType}) {
+  late bool automatic;
+  late Map<GradeType, double> weightperType;
+  AverageSettings({this.automatic = true, required this.weightperType}) {
     if (weightperType == null) {
       weightperType = {
         GradeType.HOMEWORK: 1.0,
@@ -217,7 +219,7 @@ class AppWidgetSettings {
   final bool darkmode;
 
   const AppWidgetSettings({
-    @required this.darkmode,
+    required this.darkmode,
   });
 
   factory AppWidgetSettings.fromData(dynamic data) {
@@ -233,7 +235,7 @@ class AppWidgetSettings {
   }
 
   AppWidgetSettings copyWith({
-    bool darkmode,
+    bool? darkmode,
   }) {
     return AppWidgetSettings(
       darkmode: darkmode ?? this.darkmode,
@@ -242,15 +244,16 @@ class AppWidgetSettings {
 }
 
 class GradeSpan {
-  final String id, start, end, name;
+  final String id, name;
+  final String? start, end;
   final bool activated;
 
   const GradeSpan({
-    @required this.id,
-    @required this.start,
-    @required this.end,
-    @required this.name,
-    @required this.activated,
+    required this.id,
+    required this.start,
+    required this.end,
+    required this.name,
+    required this.activated,
   });
 
   factory GradeSpan.fromData(Map<String, dynamic> data) {
@@ -283,11 +286,11 @@ class GradeSpan {
   }
 
   GradeSpan copyWith({
-    String id,
-    String start,
-    String end,
-    String name,
-    bool activated,
+    String? id,
+    String? start,
+    String? end,
+    String? name,
+    bool? activated,
   }) {
     return GradeSpan(
       id: id ?? this.id,
@@ -302,7 +305,7 @@ class GradeSpan {
     if (start == null) {
       return getString(context).open;
     } else {
-      return getDateTextShort2(start);
+      return getDateTextShort2(start!);
     }
   }
 
@@ -310,16 +313,16 @@ class GradeSpan {
     if (end == null) {
       return getString(context).open;
     } else {
-      return getDateTextShort2(end);
+      return getDateTextShort2(end!);
     }
   }
 }
 
 class AverageCalculator {
-  Map<String, AverageCourse> averageperCourse;
-  double totalaverage;
+  late Map<String, AverageCourse> averageperCourse;
+  late double totalaverage;
   AverageCalculator(PlannerSettingsData settingsData,
-      {List<Grade> grades, List<Course> courses}) {
+      {required List<Grade> grades, required List<Course> courses}) {
     averageperCourse = {};
     double total_count = 0.0;
     double total_value = 0.0;
@@ -329,7 +332,7 @@ class AverageCalculator {
         grades: grades.where((Grade g) {
           return g.courseid == c.id;
         }).toList(),
-        gradeprofileid: c.personalgradeprofile,
+        gradeprofileid: c.personalgradeprofile!,
       );
       averageperCourse[c.id] = courseaverage;
       if (courseaverage.totalaverage != null) {
@@ -346,11 +349,11 @@ class AverageCalculator {
 }
 
 class AverageCourse {
-  Map<GradeTypeItem, double> averageperType;
-  double totalaverage;
+  late Map<GradeTypeItem, double> averageperType;
+  late double totalaverage;
   double weight_schoolreport = 1.0;
   AverageCourse(PlannerSettingsData settingsData,
-      {List<Grade> grades, String gradeprofileid}) {
+      {required List<Grade> grades, required String gradeprofileid}) {
     averageperType = {};
     double total_value = 0.0;
     double total_weight = 0.0;
@@ -362,12 +365,12 @@ class AverageCourse {
         if (settingsData == null) {
           total_weight = total_weight + g.weight;
           total_value = total_value +
-              (DataUtil_Grade().getGradeValueOf(g.valuekey).value * g.weight);
+              (DataUtil_Grade().getGradeValueOf(g.valuekey!).value * g.weight);
         } else {
           if (settingsData.weight_tendencies == false) {
-            double value0 = DataUtil_Grade().getGradeValueOf(g.valuekey).value;
-            double value_notendency =
-                DataUtil_Grade().getGradeValueOf(g.valuekey).value_notendency;
+            double value0 = DataUtil_Grade().getGradeValueOf(g.valuekey!).value;
+            double? value_notendency =
+                DataUtil_Grade().getGradeValueOf(g.valuekey!).value_notendency;
             total_weight = total_weight + g.weight;
             total_value = total_value +
                 ((value_notendency != null ? value_notendency : value0) *
@@ -375,30 +378,31 @@ class AverageCourse {
           } else {
             total_weight = total_weight + g.weight;
             total_value = total_value +
-                (DataUtil_Grade().getGradeValueOf(g.valuekey).value * g.weight);
+                (DataUtil_Grade().getGradeValueOf(g.valuekey!).value *
+                    g.weight);
           }
         }
       });
     } else {
-      for (GradeTypeItem mTypeItem in gradeProfile.types.values) {
+      for (GradeTypeItem? mTypeItem in gradeProfile.types.values) {
         double eachtype_total_value = 0.0;
         double eachtype_total_weight = 0.0;
         List<Grade> eachtype_grades = grades.where((Grade g) {
-          return mTypeItem.isValidGrade(g);
+          return mTypeItem!.isValidGrade(g);
         }).toList();
         if (eachtype_grades.length != null) {
           eachtype_grades.forEach((Grade g) {
             if (settingsData == null) {
               eachtype_total_weight = eachtype_total_weight + g.weight;
               eachtype_total_value = eachtype_total_value +
-                  (DataUtil_Grade().getGradeValueOf(g.valuekey).value *
+                  (DataUtil_Grade().getGradeValueOf(g.valuekey!).value *
                       g.weight);
             } else {
               if (settingsData.weight_tendencies == false) {
-                double value0 =
-                    DataUtil_Grade().getGradeValueOf(g.valuekey).value;
-                double value_notendency = DataUtil_Grade()
-                    .getGradeValueOf(g.valuekey)
+                final value0 =
+                    DataUtil_Grade().getGradeValueOf(g.valuekey!).value;
+                final value_notendency = DataUtil_Grade()
+                    .getGradeValueOf(g.valuekey!)
                     .value_notendency;
                 eachtype_total_weight = eachtype_total_weight + g.weight;
                 eachtype_total_value = eachtype_total_value +
@@ -407,12 +411,12 @@ class AverageCourse {
               } else {
                 eachtype_total_weight = eachtype_total_weight + g.weight;
                 eachtype_total_value = eachtype_total_value +
-                    (DataUtil_Grade().getGradeValueOf(g.valuekey).value *
+                    (DataUtil_Grade().getGradeValueOf(g.valuekey!).value *
                         g.weight);
               }
             }
           });
-          if (mTypeItem.testsasoneexam == true) {
+          if (mTypeItem!.testsasoneexam == true) {
             Iterable<Grade> grades_test =
                 grades.where((it) => it.type == GradeType.TEST);
             double typetest_total_value = 0.0;
@@ -421,14 +425,14 @@ class AverageCourse {
               if (settingsData == null) {
                 typetest_total_weight = typetest_total_weight + g.weight;
                 typetest_total_value = typetest_total_value +
-                    (DataUtil_Grade().getGradeValueOf(g.valuekey).value *
+                    (DataUtil_Grade().getGradeValueOf(g.valuekey!).value *
                         g.weight);
               } else {
                 if (settingsData.weight_tendencies == false) {
-                  double value0 =
-                      DataUtil_Grade().getGradeValueOf(g.valuekey).value;
-                  double value_notendency = DataUtil_Grade()
-                      .getGradeValueOf(g.valuekey)
+                  final value0 =
+                      DataUtil_Grade().getGradeValueOf(g.valuekey!).value;
+                  final value_notendency = DataUtil_Grade()
+                      .getGradeValueOf(g.valuekey!)
                       .value_notendency;
                   typetest_total_weight = typetest_total_weight + g.weight;
                   typetest_total_value = typetest_total_value +
@@ -437,7 +441,7 @@ class AverageCourse {
                 } else {
                   typetest_total_weight = typetest_total_weight + g.weight;
                   typetest_total_value = typetest_total_value +
-                      (DataUtil_Grade().getGradeValueOf(g.valuekey).value *
+                      (DataUtil_Grade().getGradeValueOf(g.valuekey!).value *
                           g.weight);
                 }
               }
@@ -459,7 +463,7 @@ class AverageCourse {
             averageperType[mTypeItem] = type_average.toDouble();
 
             total_value =
-                total_value + (averageperType[mTypeItem] * mTypeItem.weight);
+                total_value + (averageperType[mTypeItem]! * mTypeItem.weight);
             total_weight = total_weight + mTypeItem.weight;
           }
         }
@@ -475,8 +479,8 @@ class AverageCourse {
 }
 
 class AverageReport {
-  double totalaverage;
-  AverageReport(PlannerSettingsData settingsData, {List<ReportValue> values}) {
+  late double totalaverage;
+  AverageReport(PlannerSettingsData settingsData, {List<ReportValue>? values}) {
     double total_value = 0.0;
     double total_weight = 0.0;
 
@@ -485,11 +489,11 @@ class AverageReport {
     }
 
     for (ReportValue item in values) {
-      GradeValue g = DataUtil_Grade().getGradeValueOf(item.grade_key);
+      GradeValue g = DataUtil_Grade().getGradeValueOf(item.grade_key!);
 
       if (settingsData.weight_tendencies == false) {
         double value0 = g.value;
-        double value_notendency = g.value_notendency;
+        final value_notendency = g.value_notendency;
         total_weight = total_weight + item.weight;
         total_value = total_value +
             ((value_notendency != null ? value_notendency : value0) *

@@ -2,7 +2,7 @@ import 'package:schulplaner8/Data/ConfigurationData.dart';
 import 'package:schulplaner8/OldRest/Calendar.dart';
 
 class ConfigurationData {
-  final Map<int, int> navigationactions;
+  final Map<int, int?> navigationactions;
   final bool showfavorites;
   final bool smalldevice;
   final CalendarSettings calendarSettings;
@@ -67,7 +67,7 @@ class ConfigurationData {
   }
 
   ConfigurationData copyWith({
-    Map<int, int>? navigationactions,
+    Map<int, int?>? navigationactions,
     bool? showfavorites,
     bool? smalldevice,
     CalendarSettings? calendarSettings,

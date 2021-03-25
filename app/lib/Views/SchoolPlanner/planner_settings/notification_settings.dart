@@ -1,4 +1,4 @@
-//@dart=2.11
+//
 import 'package:date/time.dart';
 import 'package:firebase_messaging/firebase_messaging.dart'
     as firebase_messaging;
@@ -30,7 +30,7 @@ class NotificationSettingsSubPage extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final notificationSettings = snapshot.data;
-            return _Inner(notificationSettings: notificationSettings);
+            return _Inner(notificationSettings: notificationSettings!);
           } else {
             return Center(child: CircularProgressIndicator());
           }
@@ -49,7 +49,7 @@ void _updateNotificationSettings(
 class _Inner extends StatelessWidget {
   final NotificationSettings notificationSettings;
 
-  const _Inner({Key key, @required this.notificationSettings})
+  const _Inner({Key? key, required this.notificationSettings})
       : super(key: key);
 
   Future<bool> getWebInitFuture() async {
@@ -108,7 +108,7 @@ class _Inner extends StatelessWidget {
                                       ? getTimeOfUTC(notificationSettings
                                           .dailyNotificationTime)
                                       : TimeOfDay(hour: 16, minute: 0))
-                              .then((TimeOfDay newTime) {
+                              .then((TimeOfDay? newTime) {
                             if (newTime != null) {
                               Time localTime = Time.fromTimeOfDay(newTime);
                               Time utcTime = getUTCTimeOfLocal(localTime);
@@ -150,7 +150,7 @@ class _Inner extends StatelessWidget {
                   enabled: notificationSettings.notifydaily,
                   onTap: notificationSettings.notifydaily
                       ? () {
-                          selectItem(
+                          selectItem<int>(
                               context: context,
                               items: buildIntList(7, start: 1),
                               builder: (context, item) {
@@ -190,7 +190,7 @@ class _Inner extends StatelessWidget {
                       trailing: IconButton(
                           icon: Icon(Icons.cancel),
                           onPressed: () {
-                            notificationSettings.devices[device.devicetoken] =
+                            notificationSettings.devices[device.devicetoken!] =
                                 null;
                             _updateNotificationSettings(
                                 context, notificationSettings);
@@ -215,12 +215,12 @@ class _Inner extends StatelessWidget {
 class _Devices extends StatelessWidget {
   final NotificationSettings notificationSettings;
 
-  const _Devices({Key key, @required this.notificationSettings})
+  const _Devices({Key? key, required this.notificationSettings})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
+    return FutureBuilder<String?>(
       builder: (context, snapshot) {
         if (snapshot.data != null) {
           if (notificationSettings.devices.containsKey(snapshot.data)) {
@@ -238,7 +238,8 @@ class _Devices extends StatelessWidget {
                   enabled: true,
                   devicename: getDeviceName(),
                 );
-                notificationSettings.devices[newdevice.devicetoken] = newdevice;
+                notificationSettings.devices[newdevice.devicetoken!] =
+                    newdevice;
                 _updateNotificationSettings(context, notificationSettings);
               },
               icon: Icon(Icons.devices),

@@ -1,4 +1,4 @@
-// @dart=2.11
+//
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 import 'package:schulplaner8/Helper/Functions.dart';
@@ -16,17 +16,21 @@ class GradeCoursesView extends StatelessWidget {
   final AverageCalculator calculator;
 
   const GradeCoursesView(
-      {Key key, this.database, this.list, this.calculator, this.courseList})
+      {Key? key,
+      required this.database,
+      required this.list,
+      required this.calculator,
+      required this.courseList})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return UpListView(
+    return UpListView<Course>(
       items: courseList,
       builder: (context, course) {
         return ListTile(
           leading: ColoredCircleText(
-            color: course.getDesign().primary,
+            color: course.getDesign()?.primary,
             text: toShortNameLength(context, course.getShortname_full()),
           ),
           title: Text(course.getName()),
@@ -40,7 +44,7 @@ class GradeCoursesView extends StatelessWidget {
                         .getSettings()
                         .getCurrentAverageDisplay(context: context)
                         .input(calculator
-                            .averageperCourse[course.id].totalaverage))
+                            .averageperCourse[course.id]!.totalaverage))
                 : '/',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
           ),

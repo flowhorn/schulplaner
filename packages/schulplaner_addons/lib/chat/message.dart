@@ -1,4 +1,4 @@
-//@dart=2.11
+//
 import 'package:schulplaner_addons/common/model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -11,14 +11,15 @@ class Message {
   final String content;
   final ContentType contentType;
   final Map<String, bool> readBy;
-  Message(
-      {this.id,
-      this.uID,
-      this.text,
-      this.createdOn,
-      this.contentType,
-      this.content,
-      this.readBy});
+  Message({
+    required this.id,
+    required this.uID,
+    required this.text,
+    required this.createdOn,
+    required this.contentType,
+    required this.content,
+    required this.readBy,
+  });
 }
 
 class MessageConverter {
@@ -33,7 +34,7 @@ class MessageConverter {
         ContentType.values,
         data['contentType'],
         orElse: ContentType.none,
-      ),
+      )!,
       readBy: decodeMap(data['readBy'], (key, value) => value),
     );
   }

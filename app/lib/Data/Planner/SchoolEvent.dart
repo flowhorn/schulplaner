@@ -1,4 +1,3 @@
-//@dart = 2.11
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Data/Planner/File.dart';
 import 'package:schulplaner8/Helper/DateAPI.dart';
@@ -10,7 +9,7 @@ class EventTypeData {
   int id;
   String name;
   IconData iconData;
-  EventTypeData({this.id, this.name, this.iconData});
+  EventTypeData({required this.id, required this.name, required this.iconData});
 }
 
 Map<int, EventTypeData> eventtype_data(BuildContext context) {
@@ -26,24 +25,28 @@ Map<int, EventTypeData> eventtype_data(BuildContext context) {
 }
 
 class SchoolEvent {
-  String eventid, title, date, courseid, classid, creatorid;
-  String detail;
-  String enddate, starttime, endtime;
-  int type;
-  bool archived, private;
-  Map<String, CloudFile> files;
+  late String? eventid;
+  late String title;
+  late String? date, courseid;
+  late String? creatorid;
+  late String? classid;
+  late String detail;
+  late String? enddate, starttime, endtime;
+  late int type;
+  late bool archived, private;
+  late Map<String, CloudFile?> files;
 
   SchoolEvent({
     this.eventid,
-    this.title,
+    this.title = '',
     this.date,
     this.classid,
     this.courseid,
-    this.detail,
-    this.type,
+    this.detail = '',
+    required this.type,
     this.archived = false,
     this.private = false,
-    this.files,
+    this.files = const {},
     this.creatorid,
     this.starttime,
     this.enddate,
@@ -120,7 +123,7 @@ class SchoolEvent {
       'creatorid': creatorid,
       'detail': detail,
       'type': type,
-      'files': files?.map((key, value) => MapEntry(key, value?.toJson())),
+      'files': files.map((key, value) => MapEntry(key, value?.toJson())),
       'archived': archived,
       'private': private,
       'starttime': starttime,
@@ -140,7 +143,7 @@ class SchoolEvent {
       type: type,
       archived: archived,
       private: private,
-      files: files != null ? Map.of(files) : null,
+      files: Map.of(files),
       creatorid: creatorid,
       enddate: enddate,
       starttime: starttime,
@@ -154,7 +157,7 @@ class SchoolEvent {
       if (date == null) return false;
       if (type == null) return false;
       if (enddate != null && date != null) {
-        var diff = parseDate(enddate).difference(parseDate(date));
+        var diff = parseDate(enddate!).difference(parseDate(date!));
         if (diff > Duration(days: 7)) return false;
       }
       return true;
@@ -164,7 +167,7 @@ class SchoolEvent {
       if (courseid == null && classid == null) return false;
       if (type == null) return false;
       if (enddate != null && date != null) {
-        var diff = parseDate(enddate).difference(parseDate(date)).abs();
+        var diff = parseDate(enddate!).difference(parseDate(date!)).abs();
         if (diff > Duration(days: 7)) return false;
       }
       return true;
@@ -172,11 +175,11 @@ class SchoolEvent {
   }
 
   List<String> getDateKeys() {
-    var start = parseDate(date);
-    final end = parseDate(enddate ?? date);
+    var start = parseDate(date!);
+    final end = parseDate(enddate ?? date!);
     final items = <String>[];
-    if (end.isBefore(start)) return [date];
-    if (start.difference(end).abs() > Duration(days: 7)) return [date];
+    if (end.isBefore(start)) return [date!];
+    if (start.difference(end).abs() > Duration(days: 7)) return [date!];
     while (!start.isAfter(end)) {
       items.add(parseDateString(start));
       start = start.add(Duration(days: 1));
@@ -190,7 +193,7 @@ class SchoolEvent {
     if (title == null || title == '') return false;
     if (type == null) return false;
     if (enddate != null && date != null) {
-      var diff = parseDate(enddate).difference(parseDate(date)).abs();
+      var diff = parseDate(enddate!).difference(parseDate(date!)).abs();
       if (diff > Duration(days: 7)) return false;
     }
     return true;

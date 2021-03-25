@@ -1,4 +1,4 @@
-//@dart=2.11
+//
 import 'package:authentification/authentification_blocs.dart';
 import 'package:authentification/authentification_models.dart';
 import 'package:bloc/bloc_provider.dart';
@@ -181,14 +181,17 @@ class AuthenticationMethodes extends StatelessWidget {
 class AuthProviderElement extends StatelessWidget {
   final AuthProviderType authProviderType;
 
-  const AuthProviderElement({Key key, this.authProviderType}) : super(key: key);
+  const AuthProviderElement({Key? key, required this.authProviderType})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     if (authProviderType is EmailAuthProviderType) {
-      return EmailAuthProviderTile(authProviderType: authProviderType);
+      return EmailAuthProviderTile(
+          authProviderType: authProviderType as EmailAuthProviderType);
     }
     if (authProviderType is GoogleAuthProviderType) {
-      return GoogleAuthProviderTile(authProviderType: authProviderType);
+      return GoogleAuthProviderTile(
+          authProviderType: authProviderType as GoogleAuthProviderType);
     }
     return Card(
       child: ListTile(

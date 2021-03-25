@@ -1,4 +1,4 @@
-//@dart=2.11
+//
 import 'package:schulplaner_addons/chat/message.dart';
 import 'package:schulplaner_addons/utils/color_utils.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -12,9 +12,13 @@ class ChatBubble extends StatelessWidget {
   final bool isMe;
   final bool isSingleChat;
 
-  const ChatBubble(
-      {Key key, this.message, this.name, this.isMe, this.isSingleChat})
-      : super(key: key);
+  const ChatBubble({
+    Key? key,
+    required this.message,
+    required this.name,
+    required this.isMe,
+    required this.isSingleChat,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -41,11 +45,11 @@ class _ChatBubbleLeft extends StatelessWidget {
   final Color color;
 
   const _ChatBubbleLeft(
-      {Key key,
-      this.message,
-      this.name,
-      this.isSingleChat,
-      @required this.color})
+      {Key? key,
+      required this.message,
+      required this.name,
+      required this.isSingleChat,
+      required this.color})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -93,8 +97,7 @@ class _ChatBubbleRight extends StatelessWidget {
   final Message message;
   final Color color;
 
-  const _ChatBubbleRight(
-      {Key key, @required this.message, @required this.color})
+  const _ChatBubbleRight({Key? key, required this.message, required this.color})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -137,7 +140,7 @@ class _BubbleTimeView extends StatelessWidget {
   final Color color;
 
   const _BubbleTimeView(
-      {Key key, @required this.timeOfDay, @required this.color})
+      {Key? key, required this.timeOfDay, required this.color})
       : super(key: key);
 
   @override
@@ -156,8 +159,12 @@ class BubbleInner extends StatelessWidget {
   final bool isBigChild;
   final Widget child, subChild;
 
-  const BubbleInner({Key key, this.isBigChild, this.child, this.subChild})
-      : super(key: key);
+  const BubbleInner({
+    Key? key,
+    required this.isBigChild,
+    required this.child,
+    required this.subChild,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -195,19 +202,17 @@ class BubbleInner extends StatelessWidget {
 }
 
 class _BubbleBase extends StatelessWidget {
-  final bool isSelected;
   final _BubbleAlignment alignment;
   final Color background, borderColor;
   final Widget child;
 
-  const _BubbleBase(
-      {Key key,
-      this.isSelected,
-      this.background,
-      this.borderColor,
-      this.child,
-      this.alignment})
-      : super(key: key);
+  const _BubbleBase({
+    Key? key,
+    required this.background,
+    required this.borderColor,
+    required this.child,
+    required this.alignment,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -249,7 +254,7 @@ class MessageInner extends StatelessWidget {
   final Message message;
   final Color color;
 
-  const MessageInner({Key key, @required this.message, @required this.color})
+  const MessageInner({Key? key, required this.message, required this.color})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -305,7 +310,7 @@ class MessageInner extends StatelessWidget {
 class FullImageView extends StatelessWidget {
   final String imageUrl;
 
-  const FullImageView({Key key, this.imageUrl}) : super(key: key);
+  const FullImageView({Key? key, required this.imageUrl}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -129,7 +129,7 @@ class TimelineTile extends StatelessWidget {
   List<SchoolTask> _getSortedTasks() {
     return tasks
       ..sort((task1, task2) {
-        int compareDue = task1.due.compareTo(task2.due);
+        int compareDue = task1.due!.compareTo(task2.due!);
         if (compareDue != 0) return compareDue;
         int compareFinished = task1
             .isFinished(database.getMemberId())
@@ -203,20 +203,20 @@ class _TimelineTileSectionLessons extends StatelessWidget {
                   }))
                 .map(
               (it) {
-                final Course? courseInfo = database.getCourseInfo(it.courseid);
+                final Course? courseInfo = database.getCourseInfo(it.courseid!);
                 final LessonInfo? lessonInfo =
                     getFirst(lessonInfos.where((lit) {
                   return lit.lessonid == it.lessonid;
                 }));
                 return LessonItemTimeline(
-                  color: courseInfo?.getDesign().primary,
+                  color: courseInfo?.getDesign()?.primary,
                   courseName: courseInfo?.getShortname_full(),
                   start: it.start,
                   end: it.end,
                   lessonInfoType: lessonInfo == null ? null : lessonInfo.type,
                   onTap: () {
                     showLessonDetailSheet(context,
-                        lessonid: it.lessonid,
+                        lessonid: it.lessonid!,
                         plannerdatabase: database,
                         datestring: date);
                   },
@@ -263,14 +263,14 @@ class _TimelineTileSectionTasks extends StatelessWidget {
           children: tasks.map((item) {
             bool isFinished = item.isFinished(database.getMemberId());
             final Course? courseInfo = item.courseid != null
-                ? database.getCourseInfo(item.courseid)
+                ? database.getCourseInfo(item.courseid!)
                 : null;
             final listTile = ListTile(
               leading: courseInfo != null
                   ? ColoredCircleText(
                       text: toShortNameLength(
                           context, courseInfo.getShortname_full()),
-                      color: courseInfo.getDesign().primary,
+                      color: courseInfo.getDesign()?.primary,
                       radius: 18.0)
                   : ColoredCircleIcon(
                       icon: Icon(Icons.person_outline),
@@ -300,12 +300,12 @@ class _TimelineTileSectionTasks extends StatelessWidget {
                       }),
               onTap: () {
                 showTaskDetailSheet(context,
-                    taskid: item.taskid, plannerdatabase: database);
+                    taskid: item.taskid!, plannerdatabase: database);
               },
             );
             return (isFinished == false)
                 ? Dismissible(
-                    key: Key(item.taskid + isFinished.toString()),
+                    key: Key(item.taskid! + isFinished.toString()),
                     onDismissed: (direction) {
                       database.dataManager.SetFinishedSchoolTask(item, true);
                     },
@@ -360,14 +360,14 @@ class _TimelineTileSectionEvents extends StatelessWidget {
         Column(
           children: events.map((item) {
             final Course? courseInfo = item.courseid != null
-                ? database.getCourseInfo(item.courseid)
+                ? database.getCourseInfo(item.courseid!)
                 : null;
             ListTile listTile = ListTile(
               leading: courseInfo != null
                   ? ColoredCircleText(
                       text: toShortNameLength(
                           context, courseInfo.getShortname_full()),
-                      color: courseInfo.getDesign().primary,
+                      color: courseInfo.getDesign()?.primary,
                       radius: 18.0)
                   : ColoredCircleIcon(
                       icon: Icon(Icons.person_outline),
@@ -407,8 +407,9 @@ class HolidayTile_Timeline extends StatelessWidget {
       child: Tile(
         leading: Icon(Icons.wb_sunny),
         title: Text(holiday.name.text),
-        subtitle: Text(
-            holiday.start.parser.toMMMEd + ' - ' + holiday.end.parser.toMMMEd),
+        subtitle: Text(holiday.start!.parser.toMMMEd +
+            ' - ' +
+            holiday.end!.parser.toMMMEd),
       ),
       decoration: ShapeDecoration(
         shape: RoundedRectangleBorder(

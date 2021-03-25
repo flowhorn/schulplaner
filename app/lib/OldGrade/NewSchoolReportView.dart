@@ -1,4 +1,4 @@
-//@dart=2.11
+//
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Data/planner_database/planner_database.dart';
@@ -15,7 +15,7 @@ import 'package:schulplaner8/groups/src/models/course.dart';
 
 class NewSchoolReportView extends StatefulWidget {
   final PlannerDatabase database;
-  final String reportid;
+  final String? reportid;
   final bool editmode;
   NewSchoolReportView(this.database, {this.reportid, this.editmode = false});
 
@@ -26,19 +26,22 @@ class NewSchoolReportView extends StatefulWidget {
 
 class NewSchoolReportViewState extends State<NewSchoolReportView> {
   final PlannerDatabase database;
-  bool editmode;
-  String reportid;
+  late bool editmode;
+  late String? reportid;
   NewSchoolReportViewState(this.database, this.reportid, this.editmode) {
     if (editmode) {
-      schoolReport = database.schoolreports.getItem(reportid);
+      schoolReport = database.schoolreports.getItem(reportid!)!;
     } else {
-      schoolReport =
-          SchoolReport(id: database.dataManager.schoolReportsRef.doc().id);
+      schoolReport = SchoolReport(
+        id: database.dataManager.schoolReportsRef.doc().id,
+        name: '',
+        values: {},
+      );
     }
     prefilled_name = (schoolReport.name ?? '');
   }
 
-  SchoolReport schoolReport;
+  late SchoolReport schoolReport;
 
   String prefilled_name = '';
 
@@ -104,7 +107,8 @@ class NewReportValueView extends StatefulWidget {
   final PlannerDatabase database;
   final SchoolReport report;
   final String courseid;
-  NewReportValueView(this.database, {this.report, this.courseid});
+  NewReportValueView(this.database,
+      {required this.report, required this.courseid});
 
   @override
   State<StatefulWidget> createState() =>
@@ -113,8 +117,8 @@ class NewReportValueView extends StatefulWidget {
 
 class NewReportValueViewiewState extends State<NewReportValueView> {
   final PlannerDatabase database;
-  SchoolReport report;
-  String courseid;
+  late SchoolReport report;
+  late String courseid;
   String prefilled_grade = '';
   double prefilled_weight = 1.0;
   ValueNotifier<bool> showWeight = ValueNotifier(false);
@@ -123,7 +127,7 @@ class NewReportValueViewiewState extends State<NewReportValueView> {
     if (report.values == null || report.values[courseid] == null) {
       reportValue = ReportValue(weight: 1.0);
     } else {
-      reportValue = report.getValue(courseid);
+      reportValue = report.getValue(courseid)!;
       if (reportValue == null) reportValue = ReportValue(weight: 1.0);
     }
     prefilled_grade = reportValue.grade_key ?? '';
@@ -131,14 +135,14 @@ class NewReportValueViewiewState extends State<NewReportValueView> {
     if (getGradePackage(database.getSettings().gradepackageid).inputSupport) {
       if (reportValue.grade_key != null) {
         prefilled_grade = DataUtil_Grade()
-            .getGradeValueOf(reportValue.grade_key)
+            .getGradeValueOf(reportValue.grade_key!)
             .value
             .toString();
       }
     }
   }
 
-  ReportValue reportValue;
+  late ReportValue reportValue;
   bool correct_double = true;
 
   @override
@@ -153,9 +157,9 @@ class NewReportValueViewiewState extends State<NewReportValueView> {
 
   @override
   Widget build(BuildContext context) {
-    Course course = database.getCourseInfo(courseid);
+    Course? course = database.getCourseInfo(courseid);
 
-    ThemeData themeData = newAppThemeDesign(context, course.getDesign());
+    ThemeData themeData = newAppThemeDesign(context, course!.getDesign());
     return Theme(
         data: themeData,
         child: Scaffold(
@@ -221,7 +225,7 @@ class NewReportValueViewiewState extends State<NewReportValueView> {
                         ),
                         subtitle: Text(reportValue.grade_key != null
                             ? DataUtil_Grade()
-                                .getGradeValueOf(reportValue.grade_key)
+                                .getGradeValueOf(reportValue.grade_key!)
                                 .getLongName()
                             : '-'),
                         dense: false,

@@ -1,4 +1,4 @@
-//@dart=2.11
+//
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 import 'package:schulplaner8/Helper/Functions.dart';
@@ -11,16 +11,16 @@ import 'package:schulplaner_widgets/schulplaner_forms.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 Future<void> showTeacherDetail(
-    {@required BuildContext context,
-    @required PlannerDatabase plannerdatabase,
-    @required String teacherid}) async {
+    {required BuildContext context,
+    required PlannerDatabase plannerdatabase,
+    required String teacherid}) async {
   await showDetailSheetBuilder(
       context: context,
       body: (BuildContext context) {
-        return StreamBuilder<Teacher>(
+        return StreamBuilder<Teacher?>(
             stream: plannerdatabase.teachers.getItemStream(teacherid),
             builder: (BuildContext context, snapshot) {
-              Teacher item = snapshot.data;
+              Teacher? item = snapshot.data;
               if (item == null) return loadedView();
               return Column(
                 children: <Widget>[
@@ -42,14 +42,14 @@ Future<void> showTeacherDetail(
                             text: 'Anrufen',
                             onTap: () {
                               if (item.tel != null) {
-                                launch('tel:' + item.tel);
+                                launch('tel:' + item.tel!);
                               }
                             }),
                         RButton(
                             text: 'E-Mail Schreiben',
                             onTap: () {
                               if (item.email != null) {
-                                launch('mailto:' + item.email);
+                                launch('mailto:' + item.email!);
                               }
                             }),
                         RButton(

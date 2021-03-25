@@ -166,41 +166,43 @@ Future<bool> requestSavedInSimplePermission({
   required SavedIn savedin,
   String? routname,
 }) async {
-  switch (savedin.type) {
-    case SavedInType.COURSE:
-      {
-        return await requestPermissionCourse(
-                database: database, category: category, courseid: savedin.id)
-            .then((result) {
-          if (result) {
-            if (routname != null) popNavigatorBy(context, text: routname);
-            return Future.value(true);
-          } else {
-            var sheet = showPermissionStateSheet(context: context);
-            sheet.value = false;
-            return Future.value(false);
-          }
-        });
-      }
-    case SavedInType.CLASS:
-      {
-        return await requestPermissionClass(
-                database: database, category: category, classid: savedin.id)
-            .then((result) {
-          if (result) {
-            if (routname != null) popNavigatorBy(context, text: routname);
-            return Future.value(true);
-          } else {
-            var sheet = showPermissionStateSheet(context: context);
-            sheet.value = false;
-            return Future.value(false);
-          }
-        });
-      }
-    case SavedInType.PERSONAL:
-      {
-        return Future.value(true);
-      }
+  if (savedin.type != null) {
+    switch (savedin.type!) {
+      case SavedInType.COURSE:
+        {
+          return await requestPermissionCourse(
+                  database: database, category: category, courseid: savedin.id!)
+              .then((result) {
+            if (result) {
+              if (routname != null) popNavigatorBy(context, text: routname);
+              return Future.value(true);
+            } else {
+              var sheet = showPermissionStateSheet(context: context);
+              sheet.value = false;
+              return Future.value(false);
+            }
+          });
+        }
+      case SavedInType.CLASS:
+        {
+          return await requestPermissionClass(
+                  database: database, category: category, classid: savedin.id!)
+              .then((result) {
+            if (result) {
+              if (routname != null) popNavigatorBy(context, text: routname);
+              return Future.value(true);
+            } else {
+              var sheet = showPermissionStateSheet(context: context);
+              sheet.value = false;
+              return Future.value(false);
+            }
+          });
+        }
+      case SavedInType.PERSONAL:
+        {
+          return Future.value(true);
+        }
+    }
   }
   var sheet = showPermissionStateSheet(context: context);
   sheet.value = false;

@@ -56,7 +56,7 @@ class PlannerLoaderBloc extends BlocBase {
             _hasLoadedDataSubject.add(true);
             final plannerMap = (snapshot.docs.asMap().map<String, Planner>(
               (_, snapshot) {
-                final mPlanner = Planner.fromData(snapshot.data());
+                final mPlanner = Planner.fromData(snapshot.data()!);
                 return MapEntry(mPlanner.id, mPlanner);
               },
             ));

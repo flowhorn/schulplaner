@@ -1,4 +1,4 @@
-//@dart=2.11
+//
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 import 'package:schulplaner8/Helper/Functions.dart';
@@ -12,7 +12,7 @@ import 'package:schulplaner_widgets/schulplaner_dialogs.dart';
 
 class TeacherList extends StatelessWidget {
   final PlannerDatabase plannerDatabase;
-  TeacherList({@required this.plannerDatabase});
+  TeacherList({required this.plannerDatabase});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +20,7 @@ class TeacherList extends StatelessWidget {
         stream: plannerDatabase.teachers.stream,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            List<Teacher> teacherlist = snapshot.data;
+            List<Teacher> teacherlist = snapshot.data ?? [];
             return ListView.builder(
               itemBuilder: (context, index) {
                 Teacher teacher = teacherlist[index];
@@ -68,25 +68,31 @@ class NewTeacherView extends StatelessWidget {
 
   bool changedValues = false;
   final bool editMode;
-  final String editteacherid;
+  final String? editteacherid;
 
-  Teacher data;
-  ValueNotifier<Teacher> notifier;
+  Teacher? data;
+  ValueNotifier<Teacher?> notifier = ValueNotifier(null);
   NewTeacherView(
-      {@required this.database, this.editMode = false, this.editteacherid}) {
+      {required this.database, this.editMode = false, this.editteacherid}) {
     data = editMode
-        ? database.teachers.getItem(editteacherid)
-        : Teacher(teacherid: database.dataManager.generateTeacherId());
-    notifier = ValueNotifier(data);
+        ? database.teachers.getItem(editteacherid!)
+        : Teacher(
+            teacherid: database.dataManager.generateTeacherId(),
+            name: '',
+            tel: '',
+            email: '',
+          );
+    notifier.value = data;
   }
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-        child: ValueListenableBuilder<Teacher>(
+        child: ValueListenableBuilder<Teacher?>(
             valueListenable: notifier,
             builder: (context, _, _2) {
               if (data == null) return CircularProgressIndicator();
+
               return Scaffold(
                 appBar: MyAppHeader(
                     title: editMode
@@ -97,18 +103,18 @@ class NewTeacherView extends StatelessWidget {
                   children: <Widget>[
                     FormHeader(getString(context).general),
                     FormTextField(
-                      text: data.name,
+                      text: data!.name,
                       valueChanged: (newtext) {
-                        data.name = newtext;
+                        data!.name = newtext;
                         changedValues = true;
                       },
                       labeltext: getString(context).name,
                     ),
                     FormSpace(16.0),
                     FormTextField(
-                        text: data.tel,
+                        text: data!.tel,
                         valueChanged: (newtext) {
-                          data.tel = newtext;
+                          data!.tel = newtext;
                           changedValues = true;
                         },
                         iconData: Icons.phone,
@@ -116,9 +122,9 @@ class NewTeacherView extends StatelessWidget {
                         keyBoardType: TextInputType.phone),
                     FormSpace(16.0),
                     FormTextField(
-                      text: data.email,
+                      text: data!.email,
                       valueChanged: (newtext) {
-                        data.email = newtext;
+                        data!.email = newtext;
                         changedValues = true;
                       },
                       iconData: Icons.alternate_email,
@@ -132,12 +138,12 @@ class NewTeacherView extends StatelessWidget {
                 )),
                 floatingActionButton: FloatingActionButton.extended(
                     onPressed: () {
-                      if (data.validate()) {
+                      if (data!.validate()) {
                         if (editMode) {
-                          database.dataManager.ModifyTeacher(data);
+                          database.dataManager.ModifyTeacher(data!);
                           Navigator.pop(context);
                         } else {
-                          database.dataManager.AddTeacher(data);
+                          database.dataManager.AddTeacher(data!);
                           Navigator.pop(context);
                         }
                       } else {

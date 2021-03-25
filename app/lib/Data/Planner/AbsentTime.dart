@@ -1,15 +1,16 @@
 import 'package:schulplaner8/Data/Planner/File.dart';
 
 class AbsentTime {
-  late String id, date;
+  late String id;
+  late String? date;
   late String? detail;
   late bool unexcused;
   late int? amount;
-  late Map<String, CloudFile>? files;
+  late Map<String, CloudFile?>? files;
 
   AbsentTime({
     required this.id,
-    required this.date,
+    this.date,
     this.amount,
     this.detail,
     this.files,
@@ -36,7 +37,7 @@ class AbsentTime {
         'detail': detail,
         'unexcused': unexcused,
         'amount': amount,
-        'files': files?.map((key, value) => MapEntry(key, value.toJson())),
+        'files': files?.map((key, value) => MapEntry(key, value?.toJson())),
       };
 
   bool validate() {

@@ -1,4 +1,4 @@
-//@dart=2.11
+//
 import 'package:schulplaner_addons/common/widgets/pickers.dart';
 import 'package:schulplaner_addons/common/widgets/widgets.dart';
 import 'package:schulplaner_addons/tools/image/cloud_photo.dart';
@@ -15,17 +15,17 @@ class EditPage<T> extends StatefulWidget {
   final ValueWidgetBuilder<T> builder;
   final bool Function(T data) onFinished;
   EditPage({
-    @required this.data,
-    @required this.editPageType,
-    @required this.onFinished,
-    @required this.builder,
+    required this.data,
+    required this.editPageType,
+    required this.onFinished,
+    required this.builder,
   });
   @override
   State<StatefulWidget> createState() => _EditPageState<T>();
 }
 
 class _EditPageState<T> extends State<EditPage<T>> {
-  ScrollController scrollController;
+  late ScrollController scrollController;
 
   @override
   void initState() {
@@ -70,13 +70,13 @@ class _EditPageState<T> extends State<EditPage<T>> {
 class EditTextField extends StatelessWidget {
   final String initialValue;
   final void Function(String newText) onChanged;
-  final IconData iconData;
-  final String label, hint;
-  final int maxLines, maxLength;
+  final IconData? iconData;
+  final String? label, hint;
+  final int? maxLines, maxLength;
 
   EditTextField(
-      {@required this.initialValue,
-      @required this.onChanged,
+      {required this.initialValue,
+      required this.onChanged,
       this.iconData,
       this.label,
       this.hint,
@@ -109,14 +109,14 @@ class EditTextField extends StatelessWidget {
 }
 
 class EditDateField extends StatelessWidget {
-  final String date;
+  final String? date;
   final void Function(String newDate) onChanged;
-  final String label;
+  final String? label;
   final ValueNotifier<bool> isSelected = ValueNotifier(false);
 
   EditDateField({
-    @required this.date,
-    @required this.onChanged,
+    required this.date,
+    required this.onChanged,
     this.label,
   });
 
@@ -129,7 +129,7 @@ class EditDateField extends StatelessWidget {
         top: 6.0,
         bottom: 6.0,
       ),
-      child: ValueListenableBuilder(
+      child: ValueListenableBuilder<bool>(
         valueListenable: isSelected,
         builder: (context, value, _) {
           return InkWell(
@@ -147,7 +147,7 @@ class EditDateField extends StatelessWidget {
                   height: 18.0,
                   child: date == null
                       ? Container()
-                      : Text(date_utils.DateUtils.getDateText(date),
+                      : Text(date_utils.DateUtils.getDateText(date!),
                           style: TextStyle(fontSize: 16.0)),
                 ),
               ),
@@ -167,15 +167,15 @@ class EditDateField extends StatelessWidget {
 }
 
 class EditTimeField extends StatelessWidget {
-  final TimeOfDay timeOfDay;
+  final TimeOfDay? timeOfDay;
   final void Function(TimeOfDay newTimeOfDay) onChanged;
-  final String label;
-  final void Function(BuildContext context) onRemoved;
+  final String? label;
+  final void Function(BuildContext context)? onRemoved;
   final ValueNotifier<bool> isSelected = ValueNotifier(false);
 
   EditTimeField({
-    @required this.timeOfDay,
-    @required this.onChanged,
+    required this.timeOfDay,
+    required this.onChanged,
     this.onRemoved,
     this.label,
   });
@@ -189,7 +189,7 @@ class EditTimeField extends StatelessWidget {
         top: 6.0,
         bottom: 6.0,
       ),
-      child: ValueListenableBuilder(
+      child: ValueListenableBuilder<bool>(
         valueListenable: isSelected,
         builder: (context, value, _) {
           return InkWell(
@@ -202,7 +202,7 @@ class EditTimeField extends StatelessWidget {
                   border: OutlineInputBorder(),
                   suffixIcon: (onRemoved != null && timeOfDay != null)
                       ? IconButton(
-                          onPressed: () => onRemoved(context),
+                          onPressed: () => onRemoved!(context),
                           icon: Icon(Icons.cancel),
                         )
                       : null),
@@ -212,7 +212,7 @@ class EditTimeField extends StatelessWidget {
                   height: 18.0,
                   child: timeOfDay == null
                       ? Container()
-                      : Text(timeOfDay.format(context),
+                      : Text(timeOfDay!.format(context),
                           style: TextStyle(fontSize: 16.0)),
                 ),
               ),
@@ -232,16 +232,16 @@ class EditTimeField extends StatelessWidget {
 }
 
 class EditCustomField extends StatelessWidget {
-  final String value;
+  final String? value;
   final Future<void> Function(BuildContext context) onClicked;
-  final IconData iconData;
-  final String label;
-  final void Function(BuildContext context) onRemoved;
+  final IconData? iconData;
+  final String? label;
+  final void Function(BuildContext context)? onRemoved;
   final ValueNotifier<bool> isSelected = ValueNotifier(false);
 
   EditCustomField({
-    @required this.value,
-    @required this.onClicked,
+    required this.value,
+    required this.onClicked,
     this.iconData,
     this.label,
     this.onRemoved,
@@ -256,7 +256,7 @@ class EditCustomField extends StatelessWidget {
         top: 6.0,
         bottom: 6.0,
       ),
-      child: ValueListenableBuilder(
+      child: ValueListenableBuilder<bool>(
         valueListenable: isSelected,
         builder: (context, selected, _) {
           return InkWell(
@@ -269,7 +269,7 @@ class EditCustomField extends StatelessWidget {
                   border: OutlineInputBorder(),
                   suffixIcon: (onRemoved != null && value != null)
                       ? IconButton(
-                          onPressed: () => onRemoved(context),
+                          onPressed: () => onRemoved!(context),
                           icon: Icon(Icons.cancel),
                         )
                       : null),
@@ -279,7 +279,7 @@ class EditCustomField extends StatelessWidget {
                   height: 18.0,
                   child: value == null
                       ? Container()
-                      : Text(value, style: TextStyle(fontSize: 16.0)),
+                      : Text(value!, style: TextStyle(fontSize: 16.0)),
                 ),
               ),
             ),
@@ -301,9 +301,9 @@ class EditPhotoField extends StatelessWidget {
   final void Function() onClickedRemove;
   final void Function(LocalFile file) onAddedFile;
   EditPhotoField(
-      {@required this.cloudPhoto,
-      @required this.onClickedRemove,
-      @required this.onAddedFile});
+      {required this.cloudPhoto,
+      required this.onClickedRemove,
+      required this.onAddedFile});
 
   @override
   Widget build(BuildContext context) {
@@ -323,7 +323,7 @@ class EditPhotoField extends StatelessWidget {
                     size: 48.0,
                   )
                 : CachedNetworkImage(
-                    imageUrl: cloudPhoto.compUrl,
+                    imageUrl: cloudPhoto.compUrl!,
                   ),
             backgroundColor: Colors.blue,
             foregroundColor: Colors.white,

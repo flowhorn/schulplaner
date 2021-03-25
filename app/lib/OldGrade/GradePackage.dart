@@ -1,4 +1,4 @@
-//@dart=2.11
+//
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/OldGrade/Grade.dart';
 import 'package:schulplaner8/Helper/helper_data.dart';
@@ -11,12 +11,12 @@ class GradePackage {
   List<GradeValue> gradevalues;
   bool supportSecondName;
   bool inputSupport;
-  List<AverageDisplay> averagedisplays;
-  GetGradeValue getGradeValue;
+  List<AverageDisplay>? averagedisplays;
+  GetGradeValue? getGradeValue;
   GradePackage(
-      {this.id,
-      this.name,
-      this.gradevalues,
+      {required this.id,
+      required this.name,
+      required this.gradevalues,
       this.supportSecondName = false,
       this.inputSupport = false,
       this.getGradeValue,
@@ -56,7 +56,7 @@ List<GradePackage> getGradePackages(BuildContext context) {
   ];
 }
 
-GradePackage getGradePackage(int id, {BuildContext context}) {
+GradePackage getGradePackage(int id, {BuildContext? context}) {
   switch (id) {
     case 1:
       {

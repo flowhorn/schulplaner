@@ -26,7 +26,7 @@ class EditCourseField extends StatelessWidget {
       return ListTile(
         leading: ColoredCircleText(
             text: toShortNameLength(context, course.getShortname_full()),
-            color: course.getDesign().primary,
+            color: course.getDesign()?.primary,
             radius: 20.0),
         title: Text(course.getName()),
         enabled: !editmode,

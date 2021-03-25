@@ -1,6 +1,4 @@
-//@dart=2.11
 import 'dart:async';
-
 import 'package:bloc/bloc_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +21,7 @@ import 'package:share/share.dart';
 
 class RecommendedDate {
   String text, date;
-  RecommendedDate({this.date, this.text});
+  RecommendedDate({required this.date, required this.text});
 }
 
 Stream<Map<String, SchoolTask>> streamFinished(
@@ -37,7 +35,7 @@ Stream<Map<String, SchoolTask>> streamFinished(
           }
           return (it.isFinished(database.getMemberId()) == finished);
         }))
-          it.taskid: it,
+          it.taskid!: it,
       };
     },
   );
@@ -47,7 +45,7 @@ class MyTasksList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final plannerDatabase =
-        BlocProvider.of<PlannerDatabaseBloc>(context).plannerDatabase;
+        BlocProvider.of<PlannerDatabaseBloc>(context).plannerDatabase!;
     return DefaultTabController(
         length: 2,
         child: Scaffold(
@@ -105,7 +103,7 @@ class MyTaskListInnerState extends State<MyTaskListInner>
       builder: (context, data) {
         if (data != null) {
           List<SchoolTask> tasklist = (data.data ?? {}).values.toList()
-            ..sort((item1, item2) => item1.due.compareTo(item2.due));
+            ..sort((item1, item2) => item1.due!.compareTo(item2.due!));
           return ListView.builder(
             itemBuilder: (context, index) {
               SchoolTask item = tasklist[index];
@@ -117,15 +115,15 @@ class MyTaskListInnerState extends State<MyTaskListInner>
                   ),
                 );
               }
-              Course courseInfo = item.courseid != null
-                  ? plannerDatabase.getCourseInfo(item.courseid)
+              Course? courseInfo = item.courseid != null
+                  ? plannerDatabase.getCourseInfo(item.courseid!)
                   : null;
               ListTile listTile = ListTile(
                 leading: courseInfo != null
                     ? ColoredCircleText(
                         text: toShortNameLength(
                             context, courseInfo.getShortname_full()),
-                        color: courseInfo.getDesign().primary,
+                        color: courseInfo.getDesign()?.primary,
                         radius: 22.0)
                     : ColoredCircleIcon(
                         icon: Icon(Icons.person_outline),
@@ -144,13 +142,13 @@ class MyTaskListInnerState extends State<MyTaskListInner>
                                 ': ' +
                                 (courseInfo != null
                                     ? courseInfo.getName()
-                                    : item.courseid),
+                                    : item.courseid!),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           )
                         : nowidget(),
                     Text(
-                      getString(context).due + ': ' + getDateText(item.due),
+                      getString(context).due + ': ' + getDateText(item.due!),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -179,12 +177,12 @@ class MyTaskListInnerState extends State<MyTaskListInner>
                         }),
                 onTap: () {
                   showTaskDetailSheet(context,
-                      taskid: item.taskid, plannerdatabase: plannerDatabase);
+                      taskid: item.taskid!, plannerdatabase: plannerDatabase);
                 },
               );
               return (widget.finished == false)
                   ? Dismissible(
-                      key: Key(item.taskid +
+                      key: Key(item.taskid! +
                           item
                               .isFinished(plannerDatabase.getMemberId())
                               .toString()),
@@ -231,15 +229,15 @@ class MyTaskListInnerState extends State<MyTaskListInner>
 
 class MyTaskArchive extends StatelessWidget {
   final PlannerDatabase plannerDatabase;
-  MyTaskArchive({this.plannerDatabase});
+  MyTaskArchive({required this.plannerDatabase});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MyAppHeader(title: getString(context).archive),
-      body: StreamBuilder(
+      body: StreamBuilder<Map<String, SchoolTask>?>(
         builder: (context, snapshot) {
-          Map<String, SchoolTask> datamap = snapshot.data;
+          Map<String, SchoolTask>? datamap = snapshot.data;
           if (datamap == null) {
             return Center(
               child: CircularProgressIndicator(),
@@ -249,25 +247,25 @@ class MyTaskArchive extends StatelessWidget {
             ..sort((t1, t2) {
               if (t1.isFinished(plannerDatabase.getMemberId())) return -1;
               if (t2.isFinished(plannerDatabase.getMemberId())) return 1;
-              int compare = t1.due.compareTo(t2.due);
+              int compare = t1.due!.compareTo(t2.due!);
               if (compare != null) {
                 return compare;
               } else {
-                return t1.courseid?.compareTo(t2?.courseid) ?? 0;
+                return t1.courseid!.compareTo(t2.courseid!) ?? 0;
               }
             });
           return ListView.builder(
             itemBuilder: (context, index) {
               SchoolTask item = list[index];
-              Course courseInfo = item.courseid != null
-                  ? plannerDatabase.getCourseInfo(item.courseid)
+              Course? courseInfo = item.courseid != null
+                  ? plannerDatabase.getCourseInfo(item.courseid!)
                   : null;
               ListTile listTile = ListTile(
                 leading: courseInfo != null
                     ? ColoredCircleText(
                         text: toShortNameLength(
                             context, courseInfo.getShortname_full()),
-                        color: courseInfo.getDesign().primary,
+                        color: courseInfo.getDesign()?.primary,
                         radius: 22.0)
                     : ColoredCircleIcon(
                         icon: Icon(Icons.person_outline),
@@ -286,13 +284,13 @@ class MyTaskArchive extends StatelessWidget {
                                 ': ' +
                                 (courseInfo != null
                                     ? courseInfo.getName()
-                                    : item.courseid),
+                                    : item.courseid!),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           )
                         : nowidget(),
                     Text(
-                      getString(context).due + ': ' + getDateText(item.due),
+                      getString(context).due + ': ' + getDateText(item.due!),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -347,9 +345,9 @@ Stream<Map<String, SchoolTask>> getArchiveStream(PlannerDatabase database) {
   void update() {
     Map<String, SchoolTask> compounddata = {};
     unmergeddata_archived.values.forEach((it) => compounddata
-        .addAll(it.asMap().map((_, value) => MapEntry(value.taskid, value))));
+        .addAll(it.asMap().map((_, value) => MapEntry(value.taskid!, value))));
     unmergeddata_tooold.values.forEach((it) => compounddata
-        .addAll(it.asMap().map((_, value) => MapEntry(value.taskid, value))));
+        .addAll(it.asMap().map((_, value) => MapEntry(value.taskid!, value))));
     newcontroller.add(compounddata);
   }
 
@@ -360,7 +358,7 @@ Stream<Map<String, SchoolTask>> getArchiveStream(PlannerDatabase database) {
         .snapshots()
         .listen((data) {
       unmergeddata_archived[courseid] = data.docs
-          .map((snapshot) => SchoolTask.fromData(snapshot.data()))
+          .map((snapshot) => SchoolTask.fromData(snapshot.data()!))
           .toList();
       update();
     }));
@@ -371,7 +369,7 @@ Stream<Map<String, SchoolTask>> getArchiveStream(PlannerDatabase database) {
         .snapshots()
         .listen((data) {
       unmergeddata_tooold[courseid] = data.docs
-          .map((snapshot) => SchoolTask.fromData(snapshot.data()))
+          .map((snapshot) => SchoolTask.fromData(snapshot.data()!))
           .toList();
       update();
     }));
@@ -382,7 +380,7 @@ Stream<Map<String, SchoolTask>> getArchiveStream(PlannerDatabase database) {
       .snapshots()
       .listen((data) {
     unmergeddata_archived['private'] = data.docs
-        .map((snapshot) => SchoolTask.fromData(snapshot.data()))
+        .map((snapshot) => SchoolTask.fromData(snapshot.data()!))
         .toList();
     update();
   }));
@@ -393,7 +391,7 @@ Stream<Map<String, SchoolTask>> getArchiveStream(PlannerDatabase database) {
       .snapshots()
       .listen((data) {
     unmergeddata_tooold['private'] = data.docs
-        .map((snapshot) => SchoolTask.fromData(snapshot.data()))
+        .map((snapshot) => SchoolTask.fromData(snapshot.data()!))
         .toList();
     update();
   }));
@@ -405,14 +403,14 @@ Stream<Map<String, SchoolTask>> getArchiveStream(PlannerDatabase database) {
 }
 
 void showTaskDetailSheet(BuildContext context,
-    {@required String taskid, @required PlannerDatabase plannerdatabase}) {
+    {required String taskid, required PlannerDatabase plannerdatabase}) {
   showDetailSheetBuilder(
       context: context,
       body: (context) {
-        return StreamBuilder<SchoolTask>(
+        return StreamBuilder<SchoolTask?>(
             stream: plannerdatabase.tasks.getItemStream(taskid),
             builder: (context, snapshot) {
-              SchoolTask schoolTask = snapshot.data;
+              SchoolTask? schoolTask = snapshot.data;
               if (schoolTask == null) return loadedView();
               return Expanded(
                   child: Column(
@@ -429,15 +427,17 @@ void showTaskDetailSheet(BuildContext context,
                         ? nowidget()
                         : ListTile(
                             leading: Icon(Icons.widgets),
-                            title: Text(plannerdatabase
-                                .getCourseInfo(schoolTask.courseid)
-                                .getName()),
+                            title: Text(
+                              plannerdatabase
+                                  .getCourseInfo(schoolTask.courseid!)!
+                                  .getName(),
+                            ),
                           ),
                     ListTile(
                       leading: Icon(Icons.event),
                       title: Text(getString(context).due +
                           ': ' +
-                          getDateText(schoolTask.due)),
+                          getDateText(schoolTask.due!)),
                     ),
                     schoolTask.detail == null
                         ? nowidget()
@@ -450,17 +450,17 @@ void showTaskDetailSheet(BuildContext context,
                         : Column(
                             children: schoolTask.files.values
                                 .map((cloudfile) => ListTile(
-                                      title: Text(cloudfile.name),
+                                      title: Text(cloudfile!.name!),
                                       leading: Icon(Icons.attach_file),
                                       subtitle: cloudfile.url == null
                                           ? null
                                           : Text(
-                                              cloudfile.url,
+                                              cloudfile.url!,
                                               style:
                                                   TextStyle(color: Colors.blue),
                                             ),
                                       onTap: () {
-                                        OpenCloudFile(context, cloudfile);
+                                        OpenCloudFile(context, cloudfile!);
                                       },
                                     ))
                                 .toList(),
@@ -528,7 +528,7 @@ void showTaskDetailSheet(BuildContext context,
                                               schoolTask.courseid != null
                                                   ? plannerdatabase
                                                       .getCourseInfo(
-                                                          schoolTask.courseid)
+                                                          schoolTask.courseid!)!
                                                       .getName()
                                                   : '/';
                                           String msg = schoolTask.title +
@@ -542,7 +542,7 @@ void showTaskDetailSheet(BuildContext context,
                                               '\n' +
                                               getString(context).due +
                                               ': ' +
-                                              getDateText(schoolTask.due);
+                                              getDateText(schoolTask.due!);
 
                                           Share.share(msg);
                                         },
@@ -568,7 +568,7 @@ void showTaskDetailSheet(BuildContext context,
                                                               PermissionAccessType
                                                                   .creator,
                                                           id: schoolTask
-                                                              .courseid,
+                                                              .courseid!,
                                                           routname:
                                                               'schooltaskid')
                                                       .then((result) {
@@ -603,7 +603,7 @@ void showTaskDetailSheet(BuildContext context,
                                                               PermissionAccessType
                                                                   .creator,
                                                           id: schoolTask
-                                                              .courseid,
+                                                              .courseid!,
                                                           routname:
                                                               'schooltaskid')
                                                       .then((result) {
@@ -628,7 +628,7 @@ void showTaskDetailSheet(BuildContext context,
                                             context: context,
                                             title: getString(context).delete,
                                           ).then((delete) {
-                                            if (delete) {
+                                            if (delete == true) {
                                               if (schoolTask.private) {
                                                 plannerdatabase.dataManager
                                                     .DeleteSchoolTask(
@@ -643,7 +643,8 @@ void showTaskDetailSheet(BuildContext context,
                                                         category:
                                                             PermissionAccessType
                                                                 .creator,
-                                                        id: schoolTask.courseid,
+                                                        id: schoolTask
+                                                            .courseid!,
                                                         routname:
                                                             'schooltaskid')
                                                     .then((result) {
@@ -677,17 +678,17 @@ void showTaskDetailSheet(BuildContext context,
 }
 
 void showTaskDetailSheetCritical(BuildContext context,
-    {@required SchoolTask task, @required PlannerDatabase plannerdatabase}) {
+    {required SchoolTask task, required PlannerDatabase plannerdatabase}) {
   showDetailSheetBuilder(
       context: context,
       body: (context) {
-        return StreamBuilder<SchoolTask>(
-            stream: identifyTaskRef(plannerdatabase, task).snapshots().map(
-                (snap) => snap.data != null
-                    ? SchoolTask.fromData(snap.data())
+        return StreamBuilder<SchoolTask?>(
+            stream: identifyTaskRef(plannerdatabase, task)!.snapshots().map(
+                (snap) => snap.data() != null
+                    ? SchoolTask.fromData(snap.data()!)
                     : null),
             builder: (context, snapshot) {
-              SchoolTask schoolTask = snapshot.data;
+              SchoolTask? schoolTask = snapshot.data;
               if (schoolTask == null) return loadedView();
               return Expanded(
                   child: Column(
@@ -705,14 +706,14 @@ void showTaskDetailSheetCritical(BuildContext context,
                         : ListTile(
                             leading: Icon(Icons.widgets),
                             title: Text(plannerdatabase
-                                .getCourseInfo(schoolTask.courseid)
+                                .getCourseInfo(schoolTask.courseid!)!
                                 .getName()),
                           ),
                     ListTile(
                       leading: Icon(Icons.event),
                       title: Text(getString(context).due +
                           ': ' +
-                          getDateText(schoolTask.due)),
+                          getDateText(schoolTask.due!)),
                     ),
                     schoolTask.detail == null
                         ? nowidget()
@@ -725,12 +726,12 @@ void showTaskDetailSheetCritical(BuildContext context,
                         : Column(
                             children: schoolTask.files.values
                                 .map((cloudfile) => ListTile(
-                                      title: Text(cloudfile.name),
+                                      title: Text(cloudfile!.name!),
                                       leading: Icon(Icons.attach_file),
                                       subtitle: cloudfile.url == null
                                           ? null
                                           : Text(
-                                              cloudfile.url,
+                                              cloudfile.url!,
                                               style:
                                                   TextStyle(color: Colors.blue),
                                             ),
@@ -786,7 +787,7 @@ void showTaskDetailSheetCritical(BuildContext context,
                                               schoolTask.courseid != null
                                                   ? plannerdatabase
                                                       .getCourseInfo(
-                                                          schoolTask.courseid)
+                                                          schoolTask.courseid!)!
                                                       .getName()
                                                   : '/';
                                           String msg = schoolTask.title +
@@ -799,7 +800,7 @@ void showTaskDetailSheetCritical(BuildContext context,
                                               '\n' +
                                               getString(context).due +
                                               ': ' +
-                                              getDateText(schoolTask.due);
+                                              getDateText(schoolTask.due!);
 
                                           Share.share(msg);
                                         },
@@ -825,7 +826,7 @@ void showTaskDetailSheetCritical(BuildContext context,
                                                               PermissionAccessType
                                                                   .creator,
                                                           id: schoolTask
-                                                              .courseid,
+                                                              .courseid!,
                                                           routname:
                                                               'schooltaskid')
                                                       .then((result) {
@@ -852,7 +853,7 @@ void showTaskDetailSheetCritical(BuildContext context,
                                             context: context,
                                             title: getString(context).delete,
                                           ).then((delete) {
-                                            if (delete) {
+                                            if (delete == true) {
                                               if (schoolTask.private) {
                                                 plannerdatabase.dataManager
                                                     .DeleteSchoolTask(
@@ -867,7 +868,8 @@ void showTaskDetailSheetCritical(BuildContext context,
                                                         category:
                                                             PermissionAccessType
                                                                 .creator,
-                                                        id: schoolTask.courseid,
+                                                        id: schoolTask
+                                                            .courseid!,
                                                         routname:
                                                             'schooltaskid')
                                                     .then((result) {
@@ -900,7 +902,7 @@ void showTaskDetailSheetCritical(BuildContext context,
       routname: 'schooltaskid');
 }
 
-DocumentReference identifyTaskRef(
+DocumentReference? identifyTaskRef(
     PlannerDatabase plannerdatabase, SchoolTask schoolTask) {
   if (schoolTask.private) {
     return plannerdatabase.dataManager
@@ -909,7 +911,7 @@ DocumentReference identifyTaskRef(
   } else {
     if (schoolTask.courseid != null) {
       return plannerdatabase.dataManager
-          .getTaskRefCourse(schoolTask.courseid)
+          .getTaskRefCourse(schoolTask.courseid!)
           .doc(schoolTask.taskid);
     } else {
       return null;

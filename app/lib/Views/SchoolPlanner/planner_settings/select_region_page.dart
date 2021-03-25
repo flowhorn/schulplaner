@@ -208,7 +208,7 @@ class RegionsFilter {
   final bool isOfficial;
 
   const RegionsFilter({
-    @required this.country,
+    required this.country,
     this.isOfficial = true,
   });
 }

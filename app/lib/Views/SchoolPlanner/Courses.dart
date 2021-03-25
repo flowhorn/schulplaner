@@ -1,4 +1,4 @@
-//@dart=2.11
+//
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/material.dart';
@@ -76,15 +76,15 @@ void showNewCourseSheet(BuildContext context, PlannerDatabase database) {
 }
 
 void showCourseMoreSheet(BuildContext context,
-    {@required String courseid, @required PlannerDatabase plannerdatabase}) {
+    {required String courseid, required PlannerDatabase plannerdatabase}) {
   showDetailSheetBuilder(
       context: context,
       body: (context) {
-        return StreamBuilder<Course>(
+        return StreamBuilder<Course?>(
             initialData: plannerdatabase.getCourseInfo(courseid),
             stream: plannerdatabase.courseinfo.getItemStream(courseid),
             builder: (context, snapshot) {
-              Course courseInfo = snapshot.data;
+              Course? courseInfo = snapshot.data;
               if (courseInfo == null) return loadedView();
               return Column(
                 children: <Widget>[
@@ -116,9 +116,9 @@ void showCourseMoreSheet(BuildContext context,
                             )
                           : nowidget(),
                       FormSpace(16.0),
-                      StreamBuilder<PlannerConnections>(
+                      StreamBuilder<PlannerConnections?>(
                         builder: (context, snapshot) {
-                          PlannerConnections connectionsdata = snapshot.data;
+                          PlannerConnections? connectionsdata = snapshot.data;
                           if (connectionsdata == null) {
                             return CircularProgressIndicator();
                           }
@@ -179,7 +179,7 @@ void showCourseMoreSheet(BuildContext context,
 class QuickCreateCourseView extends StatelessWidget {
   final PlannerDatabase database;
   final String courseid;
-  QuickCreateCourseView({@required this.database, @required this.courseid});
+  QuickCreateCourseView({required this.database, required this.courseid});
 
   @override
   Widget build(BuildContext context) {
@@ -256,58 +256,59 @@ class QuickCreateCourseView extends StatelessWidget {
 class CourseSecurityView extends StatelessWidget {
   final String courseid;
   final PlannerDatabase database;
-  CourseSecurityView({@required this.courseid, @required this.database});
+  CourseSecurityView({required this.courseid, required this.database});
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<Course>(
+    return StreamBuilder<Course?>(
       builder: (context, snapshot) {
-        Course courseInfo = snapshot.data;
+        Course? courseInfo = snapshot.data;
         if (courseInfo == null) {
           return Center(
             child: CircularProgressIndicator(),
           );
         }
-        Design courseDesign = courseInfo?.getDesign();
+        Design? courseDesign = courseInfo?.getDesign();
         return Theme(
-            data: newAppThemeDesign(context, courseDesign),
-            child: Scaffold(
-              appBar: MyAppHeader(
-                  title: getString(context).security +
-                      ' ' +
-                      getString(context).in_ +
-                      ' ' +
-                      courseInfo.getName()),
-              body: getDefaultList([
-                SwitchListTile(
-                  value: courseInfo.settings.isPublic,
-                  title: Text(bothlang(context,
-                      de: 'Öffentliches Fach', en: 'Public course')),
-                  onChanged: (newvalue) {
-                    ValueNotifier<bool> notifier =
-                        showPermissionStateSheet(context: context);
-                    requestPermissionCourse(
-                            database: database,
-                            category: PermissionAccessType.settings,
-                            courseid: courseid)
-                        .then((result) {
-                      notifier.value = result;
-                      if (result == true) {
-                        database.dataManager.getCourseInfo(courseid).set(
-                          {
-                            'settings': {
-                              'isPublic': newvalue,
-                            }
-                          },
-                          SetOptions(
-                            merge: true,
-                          ),
-                        );
-                      }
-                    });
-                  },
-                ),
-              ]),
-            ));
+          data: newAppThemeDesign(context, courseDesign),
+          child: Scaffold(
+            appBar: MyAppHeader(
+                title: getString(context).security +
+                    ' ' +
+                    getString(context).in_ +
+                    ' ' +
+                    courseInfo.getName()),
+            body: getDefaultList([
+              SwitchListTile(
+                value: courseInfo.settings.isPublic,
+                title: Text(bothlang(context,
+                    de: 'Öffentliches Fach', en: 'Public course')),
+                onChanged: (newvalue) {
+                  ValueNotifier<bool?> notifier =
+                      showPermissionStateSheet(context: context);
+                  requestPermissionCourse(
+                          database: database,
+                          category: PermissionAccessType.settings,
+                          courseid: courseid)
+                      .then((result) {
+                    notifier.value = result;
+                    if (result == true) {
+                      database.dataManager.getCourseInfo(courseid).set(
+                        {
+                          'settings': {
+                            'isPublic': newvalue,
+                          }
+                        },
+                        SetOptions(
+                          merge: true,
+                        ),
+                      );
+                    }
+                  });
+                },
+              ),
+            ]),
+          ),
+        );
       },
       stream: database.courseinfo.getItemStream(courseid),
     );
@@ -318,7 +319,7 @@ class CourseTemplatesView extends StatelessWidget {
   final List<dynamic> templates = getTemplateList_DE();
   final PlannerDatabase database;
 
-  CourseTemplatesView({@required this.database});
+  CourseTemplatesView({required this.database});
 
   @override
   Widget build(BuildContext context) {
@@ -409,14 +410,13 @@ class CourseTemplatesView extends StatelessWidget {
 class CourseConnectedClassesView extends StatelessWidget {
   final String courseid;
   final PlannerDatabase database;
-  CourseConnectedClassesView(
-      {@required this.courseid, @required this.database});
+  CourseConnectedClassesView({required this.courseid, required this.database});
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<Course>(
+    return StreamBuilder<Course?>(
       builder: (context, snapshot) {
-        Course courseInfo = snapshot.data;
-        Design courseDesign = courseInfo?.getDesign();
+        Course? courseInfo = snapshot.data;
+        Design? courseDesign = courseInfo?.getDesign();
         if (courseInfo == null) {
           return Center(
             child: CircularProgressIndicator(),
@@ -431,7 +431,8 @@ class CourseConnectedClassesView extends StatelessWidget {
                           courseInfo.getName()),
               body: ListView(
                 children: courseInfo.connectedclasses.keys.map((item) {
-                  SchoolClass mClassinfo = database.schoolClassInfos.data[item];
+                  SchoolClass? mClassinfo =
+                      database.schoolClassInfos.data[item];
                   if (mClassinfo != null) {
                     return Card(
                       child: Column(
@@ -485,7 +486,7 @@ class CourseConnectedClassesView extends StatelessWidget {
                                         .then((result) {
                                       if (result == true) {
                                         Navigator.pop(context);
-                                        ValueNotifier<bool> sheet_notifier =
+                                        ValueNotifier<bool?> sheet_notifier =
                                             ValueNotifier(null);
                                         showLoadingStateSheet(
                                             context: context,
@@ -518,7 +519,7 @@ class CourseConnectedClassesView extends StatelessWidget {
                   } else {
                     return FutureBuilder<SchoolClass>(
                       builder: (context, snapshot) {
-                        SchoolClass info = snapshot.data;
+                        SchoolClass? info = snapshot.data;
                         if (info == null) return CircularProgressIndicator();
                         return Card(
                           child: Column(
@@ -571,7 +572,8 @@ class CourseConnectedClassesView extends StatelessWidget {
                                             .then((result) {
                                           if (result == true) {
                                             Navigator.pop(context);
-                                            ValueNotifier<bool> sheet_notifier =
+                                            ValueNotifier<bool?>
+                                                sheet_notifier =
                                                 ValueNotifier(null);
                                             showLoadingStateSheet(
                                                 context: context,

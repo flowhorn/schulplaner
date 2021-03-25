@@ -1,4 +1,4 @@
-//@dart=2.11
+//
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/groups/src/models/place_link.dart';
 import 'package:schulplaner8/groups/src/models/teacher_link.dart';
@@ -23,7 +23,7 @@ import 'package:schulplaner_widgets/schulplaner_dialogs.dart';
 
 class NewLessonInfoView extends StatefulWidget {
   final PlannerDatabase database;
-  final String courseid, lessonid, lessoninfoid, datestring;
+  final String? courseid, lessonid, lessoninfoid, datestring;
   final bool editmode;
 
   NewLessonInfoView(
@@ -49,20 +49,24 @@ class NewLessonInfoView extends StatefulWidget {
 class NewLessonInfoViewState extends State<NewLessonInfoView> {
   final PlannerDatabase database;
   final bool editmode;
-  final String courseid, lessonid, lessoninfoid, datestring;
+  final String? courseid, lessonid, lessoninfoid, datestring;
 
   NewLessonInfoViewState(this.database, this.courseid, this.lessonid,
       this.editmode, this.lessoninfoid, this.datestring) {
     if (editmode) {
-      lessoninfo = database.lessoninfos.getItem(lessoninfoid);
+      lessoninfo = database.lessoninfos.getItem(lessoninfoid!)!;
     } else {
       if (courseid == null) {
-        lessoninfo = LessonInfo(type: LessonInfoType.NONE, date: datestring);
+        lessoninfo = LessonInfo(
+          type: LessonInfoType.NONE,
+          date: datestring!,
+          id: database.dataManager.getLessonInfoRefCourse(courseid!).doc().id,
+        );
       } else {
         if (lessonid == null) {
           lessoninfo = LessonInfo(
               id: database.dataManager
-                  .getLessonInfoRefCourse(courseid)
+                  .getLessonInfoRefCourse(courseid!)
                   .doc()
                   .id,
               courseid: courseid,
@@ -70,14 +74,12 @@ class NewLessonInfoViewState extends State<NewLessonInfoView> {
               type: LessonInfoType.NONE);
         } else {
           lessoninfo = LessonInfo(
-              id: database.dataManager
-                  .getLessonInfoRefCourse(courseid)
-                  .doc()
-                  .id,
-              courseid: courseid,
-              lessonid: lessonid,
-              date: datestring,
-              type: LessonInfoType.NONE);
+            id: database.dataManager.getLessonInfoRefCourse(courseid!).doc().id,
+            courseid: courseid!,
+            lessonid: lessonid!,
+            date: datestring!,
+            type: LessonInfoType.NONE,
+          );
         }
       }
       ;
@@ -85,7 +87,7 @@ class NewLessonInfoViewState extends State<NewLessonInfoView> {
     prefilled_detail = lessoninfo.note ?? '';
   }
 
-  LessonInfo lessoninfo;
+  late LessonInfo lessoninfo;
 
   String prefilled_detail = '';
 
@@ -104,13 +106,13 @@ class NewLessonInfoViewState extends State<NewLessonInfoView> {
     ThemeData themeData;
     if (lessoninfo.courseid != null) {
       themeData = newAppThemeDesign(
-          context, database.getCourseInfo(lessoninfo.courseid)?.getDesign());
+          context, database.getCourseInfo(lessoninfo.courseid!)?.getDesign());
     } else {
       themeData = clearAppThemeData(context: context);
     }
-    Lesson lesson;
+    Lesson? lesson;
     if (lessoninfo.lessonid != null && lessoninfo.courseid != null) {
-      lesson = database.getLessons()[lessoninfo.lessonid];
+      lesson = database.getLessons()[lessoninfo.lessonid]!;
     }
 
     return Theme(
@@ -222,7 +224,7 @@ class NewLessonInfoViewState extends State<NewLessonInfoView> {
                 FormDivider(),
                 EditCustomField(
                   value: (lesson != null
-                      ? (getWeekDays(context)[lesson.day].name +
+                      ? (getWeekDays(context)[lesson.day]!.name +
                           ', ' +
                           (lesson.isMultiLesson()
                               ? lesson.start.toString() +
@@ -230,11 +232,11 @@ class NewLessonInfoViewState extends State<NewLessonInfoView> {
                                   lesson.end.toString() +
                                   '. '
                               : lesson.start.toString() + '. '))
-                      : null),
+                      : null)!,
                   onClicked: (context) {
                     if (lessoninfo.courseid != null) {
                       return showLessonPicker(
-                              database, context, lessoninfo.courseid,
+                              database, context, lessoninfo.courseid!,
                               currentid: lessoninfo.lessonid)
                           .then((newLesson) {
                         if (newLesson != null) {
@@ -264,13 +266,16 @@ class NewLessonInfoViewState extends State<NewLessonInfoView> {
                   subtitle: Text(lessoninfo.teacher?.name ?? '-'),
                   onTap: () {
                     selectTeacher(
-                            context,
-                            database,
-                            singleToMap(lessoninfo.teacher,
-                                lessoninfo.teacher?.teacherid))
-                        .then((newteacher) {
-                      setState(() => lessoninfo = lessoninfo.copy(
-                          teacher: TeacherLink.fromTeacher(newteacher)));
+                        context,
+                        database,
+                        singleToMap(
+                          lessoninfo.teacher,
+                          lessoninfo.teacher!.teacherid,
+                        )).then((newteacher) {
+                      if (newteacher != null) {
+                        setState(() => lessoninfo = lessoninfo.copy(
+                            teacher: TeacherLink.fromTeacher(newteacher)));
+                      }
                     });
                   },
                   enabled: lessoninfo.type == LessonInfoType.CHANGED,
@@ -285,10 +290,12 @@ class NewLessonInfoViewState extends State<NewLessonInfoView> {
                             context,
                             database,
                             singleToMap(
-                                lessoninfo.place, lessoninfo.place?.placeid))
+                                lessoninfo.place, lessoninfo.place!.placeid))
                         .then((newplace) {
-                      setState(() => lessoninfo = lessoninfo.copy(
-                          place: PlaceLink.fromPlace(newplace)));
+                      if (newplace != null) {
+                        setState(() => lessoninfo = lessoninfo.copy(
+                            place: PlaceLink.fromPlace(newplace)));
+                      }
                     });
                   },
                   enabled: lessoninfo.type == LessonInfoType.CHANGED,
@@ -320,18 +327,19 @@ class NewLessonInfoViewState extends State<NewLessonInfoView> {
   Future<bool> requestPermission() {
     if (lessoninfo.courseid != null) {
       return requestPermissionCourse(
-          database: database,
-          category: PermissionAccessType.creator,
-          courseid: lessoninfo.courseid);
+        database: database,
+        category: PermissionAccessType.creator,
+        courseid: lessoninfo.courseid!,
+      );
     } else {
       throw Exception('SOMETHING WENT WRONG???');
     }
   }
 }
 
-Future<Lesson> showLessonPicker(
+Future<Lesson?> showLessonPicker(
     PlannerDatabase database, BuildContext context, String courseid,
-    {String currentid}) {
+    {String? currentid}) {
   List<Lesson> mylist = database
       .getLessons()
       .values
@@ -342,7 +350,7 @@ Future<Lesson> showLessonPicker(
       items: mylist,
       builder: (context, item) {
         return ListTile(
-            title: Text((getWeekDays(context)[item.day].name +
+            title: Text((getWeekDays(context)[item.day]!.name +
                 ', ' +
                 (item.isMultiLesson()
                     ? item.start.toString() +
@@ -361,7 +369,7 @@ Future<Lesson> showLessonPicker(
 
 void showLessonInfotypePicker(
     PlannerDatabase database, BuildContext context, ValueSetter<int> onTapData,
-    {int currentid}) {
+    {int? currentid}) {
   List<Choice> mylist = [];
   mylist..addAll(getLessonInfoTypes(context));
   selectItem<Choice>(

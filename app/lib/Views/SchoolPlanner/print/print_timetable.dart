@@ -142,7 +142,7 @@ List<TimeTableElement> buildElements(
       mylist.add(TimeTableElement(
         startpos: getStartPositionForFragment(l),
         endpos: getEndPositionForFragment(l),
-        course: database.getCourseInfo(l.courseid),
+        course: database.getCourseInfo(l.courseid!)!,
         lesson: l,
       ));
     }
@@ -188,7 +188,7 @@ List<Widget> buildLessons(
       });
       if (lesson != null) {
         widgets.add(
-            LessonPdfTile(lesson, database.getCourseInfo(lesson.courseid)!));
+            LessonPdfTile(lesson, database.getCourseInfo(lesson.courseid!)!));
       } else {
         widgets.add(Container());
       }
@@ -225,7 +225,7 @@ class LessonPdfTile extends StatelessWidget {
   Widget build(Context context) {
     final place = lesson.place?.name ?? course.getPlaceFirst() ?? '';
     return Container(
-      color: PdfColor.fromInt(course.getDesign().primary.value),
+      color: PdfColor.fromInt(course.getDesign()!.primary.value),
       child: Stack(children: [
         Center(
             child: Text(

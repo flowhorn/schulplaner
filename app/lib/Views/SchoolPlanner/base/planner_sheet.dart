@@ -1,4 +1,4 @@
-//@dart=2.11
+//
 import 'package:bloc/bloc_provider.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +10,7 @@ import 'package:schulplaner8/app_base/src/models/load_all_planner_status.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
 import 'package:schulplaner_widgets/schulplaner_common.dart';
 
-void showPlannerSheet({BuildContext context}) {
+void showPlannerSheet({required BuildContext context}) {
   final plannerLoaderBloc = BlocProvider.of<PlannerLoaderBloc>(context);
   showSheet(
       context: context,
@@ -29,14 +29,15 @@ void showPlannerSheet({BuildContext context}) {
                   return ListTile(
                     leading: Icon(Icons.school),
                     title: Text(planner.name),
-                    trailing: planner.id == loadAllPlannerStatus.getPlanner().id
-                        ? RButton(
-                            text: getString(context).selected,
-                            onTap: null,
-                            enabled: false,
-                            iconData: Icons.done,
-                            disabledColor: Colors.green)
-                        : null,
+                    trailing:
+                        planner.id == loadAllPlannerStatus.getPlanner()?.id
+                            ? RButton(
+                                text: getString(context).selected,
+                                onTap: null,
+                                enabled: false,
+                                iconData: Icons.done,
+                                disabledColor: Colors.green)
+                            : null,
                     onTap: () {
                       plannerLoaderBloc.setActivePlanner(planner.id);
                       Navigator.pop(context);

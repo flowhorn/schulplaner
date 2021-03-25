@@ -1,19 +1,18 @@
-// @dart=2.11
+//
 import 'package:meta/meta.dart';
 import 'package:schulplaner8/groups/src/models/place.dart';
 
 class PlaceLink {
-  String placeid, name;
+  late String placeid, name;
 
-  PlaceLink({this.placeid, this.name});
+  PlaceLink({required this.placeid, required this.name});
 
   PlaceLink.fromPlace(Place item) {
     placeid = item.placeid;
     name = item.name;
   }
 
-  factory PlaceLink.fromData({@required String id, @required dynamic data}) {
-    if (data == null) return null;
+  factory PlaceLink.fromData({String? id, required dynamic data}) {
     return PlaceLink(
       placeid: id ?? data['teacherid'],
       name: data['name'],

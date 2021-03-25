@@ -1,4 +1,4 @@
-// @dart=2.11
+//
 import 'package:authentification/authentification_blocs.dart';
 import 'package:bloc/bloc_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';

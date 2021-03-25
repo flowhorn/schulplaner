@@ -1,4 +1,4 @@
-//@dart=2.11
+//
 import 'dart:async';
 import 'package:bloc/bloc_provider.dart';
 import 'package:flutter/material.dart';
@@ -24,18 +24,18 @@ class SchoolPlannerLoader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final plannerDatabase =
-        BlocProvider.of<PlannerDatabaseBloc>(context).plannerDatabase;
+        BlocProvider.of<PlannerDatabaseBloc>(context).plannerDatabase!;
     final appLogicControllerBloc =
         BlocProvider.of<AppLogicControllerBloc>(context);
     final navigationBloc = NavigationBloc.of(context);
-    return StreamBuilder<PlannerSettingsData>(
+    return StreamBuilder<PlannerSettingsData?>(
         stream: plannerDatabase.settings.stream,
         initialData: plannerDatabase.settings.data,
         builder: (BuildContext context, snapshot) {
           if (snapshot.hasData) {
             return MySchoolPlanner(
               plannerDatabase: plannerDatabase,
-              plannerSettingsData: snapshot.data,
+              plannerSettingsData: snapshot.data!,
               appLogicControllerBloc: appLogicControllerBloc,
               key: ValueKey(plannerDatabase.plannerid),
               navigationBloc: navigationBloc,
@@ -55,11 +55,11 @@ class MySchoolPlanner extends StatefulWidget {
   final AppLogicControllerBloc appLogicControllerBloc;
   final NavigationBloc navigationBloc;
   MySchoolPlanner({
-    @required this.plannerSettingsData,
-    @required this.plannerDatabase,
-    @required this.appLogicControllerBloc,
-    @required this.navigationBloc,
-    Key key,
+    required this.plannerSettingsData,
+    required this.plannerDatabase,
+    required this.appLogicControllerBloc,
+    required this.navigationBloc,
+    Key? key,
   }) : super(key: key) {
     print('SchoolPlannerHead Rebuilt!');
     if (appLogicControllerBloc.startArgument != null) {
@@ -103,10 +103,10 @@ class _MySchoolPlannerState extends State<MySchoolPlanner>
   final PlannerSettingsData plannerSettingsData;
   final PlannerDatabase plannerDatabase;
 
-  StreamSubscription _streamSubscription;
+  late StreamSubscription _streamSubscription;
   _MySchoolPlannerState({
-    @required this.plannerSettingsData,
-    @required this.plannerDatabase,
+    required this.plannerSettingsData,
+    required this.plannerDatabase,
   }) {
     print('SchoolPlannerState Rebuilt!');
   }
@@ -157,8 +157,8 @@ class _MySchoolPlannerState extends State<MySchoolPlanner>
           initialData: plannerLoaderBloc.loadAllPlannerStatusValue,
           builder: (context, snapshot) {
             final status = snapshot.data;
-            if (status.getPlanner().setup_done == false) {
-              return SetupView(status);
+            if (status?.getPlanner()!.setup_done == false) {
+              return SetupView(status!);
             } else {
               final tabletmode = MediaQuery.of(context).size.width > 700;
               if (tabletmode) {

@@ -1,4 +1,4 @@
-//@dart=2.11
+//
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -25,16 +25,17 @@ class NewAbsentTimeView extends StatelessWidget {
   final bool editmode;
   bool changedValues = false;
 
-  AbsentTime data;
-  ValueNotifier<AbsentTime> notifier;
-  NewAbsentTimeView.Create({@required this.database, String date})
+  late AbsentTime data;
+  late ValueNotifier<AbsentTime> notifier;
+  NewAbsentTimeView.Create({required this.database, String? date})
       : editmode = false {
     data =
         AbsentTime(id: database.dataManager.absentTimeRef.doc().id, date: date);
     notifier = ValueNotifier(data);
   }
 
-  NewAbsentTimeView.Edit({@required this.database, AbsentTime absenttimedata})
+  NewAbsentTimeView.Edit(
+      {required this.database, required AbsentTime absenttimedata})
       : editmode = true {
     data = absenttimedata.copy();
     notifier = ValueNotifier(data);
@@ -82,8 +83,9 @@ class NewAbsentTimeView extends StatelessWidget {
                         ListTile(
                           leading: Icon(Icons.event),
                           title: Text(getString(context).date),
-                          subtitle: Text(
-                              data.date != null ? getDateText(data.date) : '-'),
+                          subtitle: Text(data.date != null
+                              ? getDateText(data.date!)
+                              : '-'),
                           onTap: () {
                             selectDateString(context, data.date)
                                 .then((newDateString) {
@@ -133,7 +135,7 @@ class NewAbsentTimeView extends StatelessWidget {
                                   ' ' +
                                   getString(context).lessons)),
                           onTap: () {
-                            selectItem(
+                            selectItem<int>(
                                 context: context,
                                 items: buildIntList(
                                     database.getSettings().maxlessons,
@@ -167,12 +169,12 @@ class NewAbsentTimeView extends StatelessWidget {
                           attachments: data.files,
                           onAdded: (file) {
                             if (data.files == null) data.files = {};
-                            data.files[file.fileid] = file;
+                            data.files![file.fileid!] = file;
                             notifier.notifyListeners();
                           },
                           onRemoved: (file) {
                             if (data.files == null) data.files = {};
-                            data.files[file.fileid] = null;
+                            data.files![file.fileid!] = null;
                             notifier.notifyListeners();
                           },
                         ),
@@ -239,7 +241,7 @@ class NewAbsentTimeView extends StatelessWidget {
 class MyAbsentList extends StatelessWidget {
   final PlannerDatabase plannerDatabase;
 
-  MyAbsentList({@required this.plannerDatabase});
+  MyAbsentList({required this.plannerDatabase});
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -279,7 +281,7 @@ class MyAbsentListInnerState extends State<MyAbsentListInner>
       stream: plannerDatabase.absentTime.stream,
       builder: (context, snapshot) {
         if (snapshot.data == null) return CircularProgressIndicator();
-        List<AbsentTime> list = snapshot.data;
+        List<AbsentTime> list = snapshot.data ?? [];
         return ListView.builder(
           itemBuilder: (context, index) {
             AbsentTime item = list[index];
@@ -296,7 +298,7 @@ class MyAbsentListInnerState extends State<MyAbsentListInner>
               subtitle: Column(
                 children: <Widget>[
                   Text(
-                    getString(context).date + ': ' + getDateText(item.date),
+                    getString(context).date + ': ' + getDateText(item.date!),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -334,21 +336,21 @@ class MyAbsentListInnerState extends State<MyAbsentListInner>
 
 void showAbsentTimeDetailSheetCritical(
   BuildContext context, {
-  @required AbsentTime absentTimeData,
-  @required PlannerDatabase plannerdatabase,
+  required AbsentTime absentTimeData,
+  required PlannerDatabase plannerdatabase,
 }) {
   showDetailSheetBuilder(
       context: context,
       body: (context) {
-        return StreamBuilder<AbsentTime>(
+        return StreamBuilder<AbsentTime?>(
             stream: plannerdatabase.dataManager.absentTimeRef
                 .doc(absentTimeData.id)
                 .snapshots()
                 .map((snap) => snap.data != null
-                    ? AbsentTime.fromData(snap.data())
+                    ? AbsentTime.fromData(snap.data()!)
                     : null),
             builder: (context, snapshot) {
-              AbsentTime absenttime = snapshot.data;
+              AbsentTime? absenttime = snapshot.data;
               if (absenttime == null) return loadedView();
               return Expanded(
                   child: Column(
@@ -365,13 +367,13 @@ void showAbsentTimeDetailSheetCritical(
                             leading: Icon(Icons.event),
                             title: Text(getString(context).date +
                                 ': ' +
-                                getDateText(absenttime.date)),
+                                getDateText(absenttime.date!)),
                           ),
                     absenttime.detail == null
                         ? nowidget()
                         : ListTile(
                             leading: Icon(Icons.note),
-                            title: Text(absenttime.detail),
+                            title: Text(absenttime.detail!),
                           ),
                     ListTile(
                       leading: Icon(Icons.help_outline),
@@ -386,14 +388,14 @@ void showAbsentTimeDetailSheetCritical(
                     absenttime.files == null
                         ? nowidget()
                         : Column(
-                            children: absenttime.files.values
+                            children: absenttime.files!.values
                                 .map((cloudfile) => ListTile(
-                                      title: Text(cloudfile.name),
+                                      title: Text(cloudfile!.name!),
                                       leading: Icon(Icons.attach_file),
                                       subtitle: cloudfile.url == null
                                           ? null
                                           : Text(
-                                              cloudfile.url,
+                                              cloudfile.url!,
                                               style:
                                                   TextStyle(color: Colors.blue),
                                             ),
@@ -439,7 +441,7 @@ void showAbsentTimeDetailSheetCritical(
                                             context: context,
                                             title: getString(context).delete,
                                           ).then((delete) {
-                                            if (delete) {
+                                            if (delete == true) {
                                               plannerdatabase.dataManager
                                                   .DeleteAbsentTime(absenttime);
                                               popNavigatorBy(context,

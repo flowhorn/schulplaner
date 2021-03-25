@@ -1,4 +1,3 @@
-//@dart=2.11
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Helper/Functions.dart';
 import 'package:schulplaner8/Helper/helper_views.dart';
@@ -16,13 +15,15 @@ enum SavedInType {
 }
 
 class SavedIn {
-  String id;
-  SavedInType type;
-  SavedIn({this.id, this.type});
+  final String? id;
+  final SavedInType? type;
+  const SavedIn({required this.id, required this.type});
 
-  SavedIn.fromData(dynamic data) {
-    id = data['id'];
-    type = SavedInType.values[data['type']];
+  factory SavedIn.fromData(dynamic data) {
+    return SavedIn(
+      id: data['id'],
+      type: data['type'] == null ? null : SavedInType.values[data['type']],
+    );
   }
 
   Map<String, dynamic> toJson() {
@@ -34,27 +35,32 @@ class SavedIn {
 }
 
 class CloudFile {
-  String fileid, name;
-  FileForm fileform;
-  String url;
-  SavedIn savedin;
-  String type;
+  final String? fileid, name;
+  final FileForm fileform;
+  final String? url;
+  final SavedIn? savedin;
+  final String? type;
 
-  CloudFile(
-      {this.fileid,
-      this.name,
-      this.fileform,
-      this.url,
-      this.type,
-      this.savedin});
+  CloudFile({
+    this.fileid,
+    this.name,
+    this.fileform = FileForm.STANDARD,
+    this.url,
+    this.type,
+    this.savedin,
+  });
 
-  CloudFile.fromData(dynamic data) {
-    fileid = data['fileid'];
-    name = data['name'];
-    fileform = FileForm.values[data['fileform']];
-    url = data['url'];
-    type = data['type'];
-    savedin = SavedIn.fromData(data['savedin']?.cast<String, dynamic>());
+  factory CloudFile.fromData(dynamic data) {
+    return CloudFile(
+      fileid: data['fileid'],
+      name: data['name'],
+      fileform: FileForm.values[data['fileform']],
+      url: data['url'],
+      type: data['type'],
+      savedin: data['savedin'] != null
+          ? SavedIn.fromData(data['savedin']?.cast<String, dynamic>())
+          : null,
+    );
   }
 
   Map<String, dynamic> toJson() {
@@ -78,7 +84,7 @@ class CloudFile {
 
   bool isImage() {
     if (type != null) {
-      if (type.contains('image')) {
+      if (type!.contains('image')) {
         return true;
       } else {
         return false;
@@ -86,13 +92,31 @@ class CloudFile {
     } else {
       if (url == null) return false;
       final fileExtension =
-          url.substring(url.lastIndexOf('.') + 1)?.toLowerCase() ?? '';
+          url?.substring(url!.lastIndexOf('.') + 1).toLowerCase() ?? '';
       if (fileExtension == 'jpg' || fileExtension == 'png') {
         return true;
       } else {
         return false;
       }
     }
+  }
+
+  CloudFile copyWith({
+    String? fileid,
+    name,
+    FileForm? fileform,
+    String? url,
+    SavedIn? savedin,
+    String? type,
+  }) {
+    return CloudFile(
+      fileid: this.fileid,
+      name: this.name,
+      fileform: this.fileform,
+      url: this.url,
+      type: this.type,
+      savedin: this.savedin,
+    );
   }
 }
 
@@ -104,8 +128,8 @@ void OpenCloudFile(BuildContext context, CloudFile cloudfile) {
             .ref()
             .child('files')
             .child('personal')
-            .child(cloudfile.savedin.id)
-            .child(cloudfile.fileid)
+            .child(cloudfile.savedin!.id!)
+            .child(cloudfile.fileid!)
             .getDownloadURL()
             .then((dynamic url) async {
           if (url != null) {
@@ -113,10 +137,10 @@ void OpenCloudFile(BuildContext context, CloudFile cloudfile) {
                 .ref()
                 .child('files')
                 .child('personal')
-                .child(cloudfile.savedin.id)
-                .child(cloudfile.fileid)
+                .child(cloudfile.savedin!.id!)
+                .child(cloudfile.fileid!)
                 .getMetadata();
-            if (metaData.contentType.contains('image')) {
+            if (metaData.contentType?.contains('image') == true) {
               showImage(context, url, cloudfile.name);
             } else {
               final finalUrl = url.toString();
@@ -134,16 +158,16 @@ void OpenCloudFile(BuildContext context, CloudFile cloudfile) {
       {
         try {
           final fileExtension = cloudfile.url
-                  .substring(cloudfile.url.lastIndexOf('.') + 1)
-                  ?.toLowerCase() ??
+                  ?.substring(cloudfile.url!.lastIndexOf('.') + 1)
+                  .toLowerCase() ??
               '';
           if (fileExtension == 'jpg' || fileExtension == 'png') {
-            showImage(context, cloudfile.url, cloudfile.name);
+            showImage(context, cloudfile.url ?? '', cloudfile.name);
           } else {
-            launchUrlWithOrWithoutHttps(cloudfile.url);
+            launchUrlWithOrWithoutHttps(cloudfile.url!);
           }
         } catch (e) {
-          launchUrlWithOrWithoutHttps(cloudfile.url);
+          launchUrlWithOrWithoutHttps(cloudfile.url!);
         }
         break;
       }
@@ -152,10 +176,10 @@ void OpenCloudFile(BuildContext context, CloudFile cloudfile) {
         FirebaseStorage.instance
             .ref()
             .child('attachments')
-            .child(cloudfile.fileid)
+            .child(cloudfile.fileid!)
             .getDownloadURL()
             .then((url) {
-          if (url != null) launchUrlWithOrWithoutHttps(url);
+          launchUrlWithOrWithoutHttps(url);
         });
         break;
       }
@@ -170,7 +194,7 @@ void launchUrlWithOrWithoutHttps(String url) {
   }
 }
 
-void showImage(BuildContext context, String url, String name) {
+void showImage(BuildContext context, String url, String? name) {
   pushWidget(
     context,
     Theme(

@@ -1,4 +1,4 @@
-//@dart=2.11
+//
 import 'package:schulplaner8/Data/ObjectsPlanner.dart';
 import 'package:schulplaner8/groups/src/models/group_version.dart';
 import 'package:schulplaner8/models/planner_settings.dart';
@@ -17,7 +17,7 @@ class SchoolClass {
   final Design design;
   final Map<String, bool> courses;
 
-  final String publiccode, description, joinLink;
+  final String? publiccode, description, joinLink;
   final bool creatorRequiresAdmin;
   final bool enablechat;
 
@@ -30,32 +30,32 @@ class SchoolClass {
   final GroupVersion groupVersion;
 
   const SchoolClass._({
-    @required this.id,
-    @required this.name,
-    @required this.design,
-    @required this.shortname,
-    @required this.courses,
-    @required this.publiccode,
-    @required this.joinLink,
-    @required this.description,
-    @required this.membersList,
-    @required this.membersData,
-    @required this.userRoles,
-    @required this.creatorRequiresAdmin,
-    @required this.enablechat,
-    @required this.settings,
-    @required this.sharedSettings,
-    @required this.groupVersion,
+    required this.id,
+    required this.name,
+    required this.design,
+    required this.shortname,
+    required this.courses,
+    required this.publiccode,
+    required this.joinLink,
+    required this.description,
+    required this.membersList,
+    required this.membersData,
+    required this.userRoles,
+    required this.creatorRequiresAdmin,
+    required this.enablechat,
+    required this.settings,
+    required this.sharedSettings,
+    required this.groupVersion,
   });
 
   factory SchoolClass.Create(
       String id, PlannerSettingsData settingsData, String authorID) {
     return SchoolClass._(
       id: id,
-      name: null,
-      design: null,
-      shortname: null,
-      courses: null,
+      name: '',
+      design: getRandomDesign(),
+      shortname: '',
+      courses: {},
       publiccode: null,
       joinLink: null,
       description: null,
@@ -80,8 +80,8 @@ class SchoolClass {
 
     Map<String, MemberData> membersData = decodeMap(data['membersData'],
         (key, value) => MemberData.fromData(id: key, data: value));
-    Map<String, CourseMember> oldMembers = decodeMap(
-        data['members'], (key, value) => CourseMember.fromData(value));
+    Map<String, OldCourseMember> oldMembers = decodeMap(
+        data['members'], (key, value) => OldCourseMember.fromData(value));
 
     for (final courseMember in oldMembers.values) {
       if (!membersData.containsKey(courseMember.memberid)) {
@@ -130,7 +130,8 @@ class SchoolClass {
       'enablechat': enablechat,
       'membersList': membersList,
       'membersData': encodeMap<MemberData>(membersData, (it) => it.toJson()),
-      'userRoles': encodeMap(userRoles, (it) => memberRoleEnumToString(it)),
+      'userRoles':
+          encodeMap<MemberRole>(userRoles, (it) => memberRoleEnumToString(it)),
       'settings': settings.toJson(),
       'sharedSettings': sharedSettings?.toJson(),
       'groupVersion': groupVersionToData(groupVersion),
@@ -154,19 +155,19 @@ class SchoolClass {
   }
 
   SchoolClass copyWith({
-    String id,
-    String name,
-    Design design,
-    String shortname,
-    Map<String, bool> courses,
-    String publiccode,
-    String description,
-    List<String> membersList,
-    Map<String, MemberData> membersData,
-    Map<String, MemberRole> userRoles,
-    bool creatorRequiresAdmin = false,
-    bool enablechat = false,
-    CourseSettings settings,
+    String? id,
+    String? name,
+    Design? design,
+    String? shortname,
+    Map<String, bool>? courses,
+    String? publiccode,
+    String? description,
+    List<String>? membersList,
+    Map<String, MemberData>? membersData,
+    Map<String, MemberRole>? userRoles,
+    bool? creatorRequiresAdmin,
+    bool? enablechat,
+    CourseSettings? settings,
   }) {
     return SchoolClass._(
       id: id ?? this.id,

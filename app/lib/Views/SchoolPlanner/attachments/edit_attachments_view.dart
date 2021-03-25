@@ -31,11 +31,11 @@ class EditAttachementsView extends StatelessWidget {
               leading: ColoredCircleIcon(
                 icon: Icon(Icons.attach_file),
               ),
-              title: Text(it!.name),
+              title: Text(it!.name ?? '???'),
               subtitle: it.url == null
                   ? null
                   : Text(
-                      it.url,
+                      it.url!,
                       style: TextStyle(color: Colors.blue),
                     ),
               trailing: IconButton(

@@ -1,4 +1,4 @@
-//@dart=2.11
+//
 import 'package:bloc/bloc_provider.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +37,7 @@ class ShortSchoolClassView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final plannerDatabase =
-        BlocProvider.of<PlannerDatabaseBloc>(context).plannerDatabase;
+        BlocProvider.of<PlannerDatabaseBloc>(context).plannerDatabase!;
     return StreamBuilder<Map<String, SchoolClass>>(
       builder: (context, snapshot) {
         Map<String, SchoolClass> data = snapshot.data ?? {};
@@ -103,7 +103,7 @@ class LibraryView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final plannerDatabase =
-        BlocProvider.of<PlannerDatabaseBloc>(context).plannerDatabase;
+        BlocProvider.of<PlannerDatabaseBloc>(context).plannerDatabase!;
     final navigationBloc = NavigationBloc.of(context);
     return Container(
       color: getBackgroundColor(context),
@@ -394,7 +394,7 @@ class LibraryTabletView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final plannerDatabase =
-        BlocProvider.of<PlannerDatabaseBloc>(context).plannerDatabase;
+        BlocProvider.of<PlannerDatabaseBloc>(context).plannerDatabase!;
     final navigationBloc = BlocProvider.of<NavigationBloc>(context);
     return SingleChildScrollView(
       child: Column(
@@ -671,8 +671,12 @@ class LibraryTabletView extends StatelessWidget {
   }
 }
 
-Widget getFunctionTile(BuildContext context,
-    {String name, IconData iconData, VoidCallback onTap}) {
+Widget getFunctionTile(
+  BuildContext context, {
+  required String name,
+  IconData? iconData,
+  VoidCallback? onTap,
+}) {
   return ListTile(
     leading: ColoredCircleIcon(
       color: getAccentColor(context),
@@ -690,10 +694,10 @@ Widget getFunctionTile(BuildContext context,
 
 Widget getDrawerFunctionTile(
   BuildContext context, {
-  String name,
-  IconData iconData,
-  VoidCallback onTap,
-  @required NavigationItem navigationItem,
+  required String name,
+  required IconData iconData,
+  required VoidCallback onTap,
+  required NavigationItem navigationItem,
 }) {
   return DrawerTile(
     icon: iconData,
@@ -704,7 +708,7 @@ Widget getDrawerFunctionTile(
 }
 
 Widget getFunctionScaffhold(BuildContext context,
-    {@required String name, @required Widget child}) {
+    {required String name, required Widget child}) {
   return Scaffold(
     appBar: MyAppHeader(title: name),
     body: child,
@@ -716,12 +720,12 @@ class _SchoolClassSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final drawerBloc = BlocProvider.of<DrawerBloc>(context);
     final plannerDatabase =
-        BlocProvider.of<PlannerDatabaseBloc>(context).plannerDatabase;
+        BlocProvider.of<PlannerDatabaseBloc>(context).plannerDatabase!;
     return StreamBuilder<bool>(
       stream: drawerBloc.isCollapsed,
       initialData: drawerBloc.isCollapsedValue,
       builder: (context, snapshot) {
-        final isCollapsed = snapshot.data;
+        final isCollapsed = snapshot.data!;
         if (isCollapsed) {
           return IconButton(
             icon: Icon(

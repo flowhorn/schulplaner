@@ -151,7 +151,7 @@ Future<Course?> selectCourse(
       builder: (context, item) => ListTile(
             leading: ColoredCircleText(
               text: toShortNameLength(context, item.getShortname_full()),
-              color: item.getDesign().primary,
+              color: item.getDesign()?.primary,
               radius: 18.0,
               textsize: 14.0,
             ),
@@ -214,7 +214,7 @@ Future<SavedInValueItem?> selectSavedin(
         newlist.addAll(courses.map((it) => SavedInValueItem(
             id: it.id,
             name: it.getName(),
-            color: it.getDesign().primary,
+            color: it.getDesign()?.primary,
             type: SavedInType.COURSE)));
         return newlist;
       }),

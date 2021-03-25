@@ -1,4 +1,4 @@
-//@dart=2.11
+//
 import 'package:bloc/bloc_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:flutter/material.dart';
@@ -65,11 +65,12 @@ class AppSettingsView extends StatelessWidget {
                     title: Text(getString(context).configure),
                     onTap: () {
                       pushWidget(
-                          context,
-                          AppConfigurationView(
-                            appSettingsBloc: appSettingsBloc,
-                            userDatabase: userDatabaseBloc.userDatabase,
-                          ));
+                        context,
+                        AppConfigurationView(
+                          appSettingsBloc: appSettingsBloc,
+                          userDatabase: userDatabaseBloc.userDatabase!,
+                        ),
+                      );
                     },
                   ),
                   ListTile(
@@ -139,8 +140,8 @@ class AppSettingsView extends StatelessWidget {
                 getString(context).apptitle,
             child: Builder(builder: (BuildContext context) {
               if (plannerDatabaseBloc.plannerDatabase == null ||
-                  plannerDatabaseBloc.plannerDatabase.isClosed() ||
-                  plannerDatabaseBloc.plannerDatabase.plannerid !=
+                  plannerDatabaseBloc.plannerDatabase!.isClosed() ||
+                  plannerDatabaseBloc.plannerDatabase!.plannerid !=
                       plannerLoaderBloc.loadAllPlannerStatusValue
                           ?.getPlanner()
                           ?.id) {
@@ -202,7 +203,7 @@ class AppSettingsView extends StatelessWidget {
                   children: <Widget>[
                     DataDocumentWidget<UserProfile>(
                       allowNull: true,
-                      package: userDatabaseBloc.userDatabase.userprofile,
+                      package: userDatabaseBloc.userDatabase!.userprofile,
                       builder: (context, data) {
                         return ListTile(
                           leading: UserImageView(
@@ -304,7 +305,7 @@ class AppConfigurationView extends StatelessWidget {
   final AppSettingsBloc appSettingsBloc;
   final UserDatabase userDatabase;
   AppConfigurationView(
-      {@required this.appSettingsBloc, @required this.userDatabase});
+      {required this.appSettingsBloc, required this.userDatabase});
 
   @override
   Widget build(BuildContext context) {
@@ -383,7 +384,7 @@ class AppConfigurationView extends StatelessWidget {
       stream: appSettingsBloc.appSettingsData,
       builder: (context, snapshot) {
         if (snapshot.data == null) return CircularProgressIndicator();
-        final configurationData = snapshot.data.configurationData;
+        final configurationData = snapshot.data!.configurationData;
         return ListView(
           children: <Widget>[
             ListTile(
@@ -394,7 +395,7 @@ class AppConfigurationView extends StatelessWidget {
                       ' ' +
                       getString(context).letters)),
               onTap: () {
-                selectItem(
+                selectItem<int>(
                     context: context,
                     items: buildIntList(4, start: 0),
                     builder: (context, item) {
@@ -419,7 +420,7 @@ class AppConfigurationView extends StatelessWidget {
                   ' ' +
                   getString(context).days_normal)),
               onTap: () {
-                selectItem(
+                selectItem<int>(
                     context: context,
                     items: buildIntList(7, start: 2),
                     builder: (context, item) {
@@ -447,7 +448,7 @@ class AppConfigurationView extends StatelessWidget {
       stream: appSettingsBloc.appSettingsData,
       builder: (context, snapshot) {
         if (snapshot.data == null) return CircularProgressIndicator();
-        ConfigurationData configurationData = snapshot.data.configurationData;
+        ConfigurationData configurationData = snapshot.data!.configurationData;
         return ListView(
           children: <Widget>[
             SwitchListTile(
@@ -516,7 +517,7 @@ class AppConfigurationView extends StatelessWidget {
       stream: appSettingsBloc.appSettingsData,
       builder: (context, snapshot) {
         if (snapshot.data == null) return CircularProgressIndicator();
-        final configurationData = snapshot.data.configurationData;
+        final configurationData = snapshot.data!.configurationData;
         return ListView(
           children: <Widget>[
             SwitchListTile(
@@ -540,8 +541,8 @@ class AppConfigurationView extends StatelessWidget {
       stream: appSettingsBloc.appSettingsData,
       builder: (context, snapshot) {
         if (snapshot.data == null) return CircularProgressIndicator();
-        ConfigurationData configurationData = snapshot.data.configurationData;
-        Map<int, int> actionsdata = configurationData?.navigationactions ?? {};
+        ConfigurationData configurationData = snapshot.data!.configurationData;
+        Map<int, int?> actionsdata = configurationData?.navigationactions ?? {};
 
         int getActionNumber(int index) {
           if (actionsdata.containsKey(index)) {
@@ -569,8 +570,8 @@ class AppConfigurationView extends StatelessWidget {
             ),
             ListTile(
               title: Text('2. Tab'),
-              leading: Icon(allNavigationActions[getActionNumber(1)].iconData),
-              subtitle: Text(allNavigationActions[getActionNumber(1)]
+              leading: Icon(allNavigationActions[getActionNumber(1)]!.iconData),
+              subtitle: Text(allNavigationActions[getActionNumber(1)]!
                   .name
                   .getText(context)),
               trailing: isDefault(1)
@@ -609,8 +610,8 @@ class AppConfigurationView extends StatelessWidget {
             ),
             ListTile(
               title: Text('3. Tab'),
-              leading: Icon(allNavigationActions[getActionNumber(2)].iconData),
-              subtitle: Text(allNavigationActions[getActionNumber(2)]
+              leading: Icon(allNavigationActions[getActionNumber(2)]!.iconData),
+              subtitle: Text(allNavigationActions[getActionNumber(2)]!
                   .name
                   .getText(context)),
               trailing: isDefault(2)
@@ -649,8 +650,8 @@ class AppConfigurationView extends StatelessWidget {
             ),
             ListTile(
               title: Text('4. Tab'),
-              leading: Icon(allNavigationActions[getActionNumber(3)].iconData),
-              subtitle: Text(allNavigationActions[getActionNumber(3)]
+              leading: Icon(allNavigationActions[getActionNumber(3)]!.iconData),
+              subtitle: Text(allNavigationActions[getActionNumber(3)]!
                   .name
                   .getText(context)),
               trailing: isDefault(3)
@@ -704,7 +705,7 @@ class AppConfigurationView extends StatelessWidget {
       stream: appSettingsBloc.appSettingsData,
       builder: (context, snapshot) {
         if (snapshot.data == null) return CircularProgressIndicator();
-        ConfigurationData configurationData = snapshot.data.configurationData;
+        ConfigurationData configurationData = snapshot.data!.configurationData;
         CalendarSettings calsettings = configurationData.calendarSettings;
         return Column(
           children: <Widget>[
@@ -712,7 +713,8 @@ class AppConfigurationView extends StatelessWidget {
               trailing: Checkbox(
                   value: calsettings.getEvent().enabled,
                   onChanged: (value) {
-                    calsettings.indicators[CalIndicator.EVENT].enabled = value;
+                    calsettings.indicators[CalIndicator.EVENT]!.enabled =
+                        value!;
                     appSettingsBloc.setAppConfiguration(configurationData
                         .copyWith(calendarSettings: calsettings));
                   }),
@@ -726,8 +728,8 @@ class AppConfigurationView extends StatelessWidget {
               ),
               onTap: () {
                 selectDesign(context, null).then((newdesign) {
-                  calsettings.indicators[CalIndicator.EVENT].color =
-                      newdesign.primary;
+                  calsettings.indicators[CalIndicator.EVENT]!.color =
+                      newdesign!.primary;
                   appSettingsBloc.setAppConfiguration(configurationData
                       .copyWith(calendarSettings: calsettings));
                 });
@@ -737,8 +739,8 @@ class AppConfigurationView extends StatelessWidget {
               trailing: Checkbox(
                   value: calsettings.getTestAndExam().enabled,
                   onChanged: (value) {
-                    calsettings.indicators[CalIndicator.TESTANDEXAM].enabled =
-                        value;
+                    calsettings.indicators[CalIndicator.TESTANDEXAM]!.enabled =
+                        value!;
                     appSettingsBloc.setAppConfiguration(configurationData
                         .copyWith(calendarSettings: calsettings));
                   }),
@@ -752,8 +754,8 @@ class AppConfigurationView extends StatelessWidget {
               ),
               onTap: () {
                 selectDesign(context, null).then((newdesign) {
-                  calsettings.indicators[CalIndicator.TESTANDEXAM].color =
-                      newdesign.primary;
+                  calsettings.indicators[CalIndicator.TESTANDEXAM]!.color =
+                      newdesign!.primary;
                   appSettingsBloc.setAppConfiguration(configurationData
                       .copyWith(calendarSettings: calsettings));
                 });
@@ -763,7 +765,7 @@ class AppConfigurationView extends StatelessWidget {
               trailing: Checkbox(
                   value: calsettings.getTask().enabled,
                   onChanged: (value) {
-                    calsettings.indicators[CalIndicator.TASK].enabled = value;
+                    calsettings.indicators[CalIndicator.TASK]!.enabled = value!;
                     appSettingsBloc.setAppConfiguration(configurationData
                         .copyWith(calendarSettings: calsettings));
                   }),
@@ -776,8 +778,8 @@ class AppConfigurationView extends StatelessWidget {
               ),
               onTap: () {
                 selectDesign(context, null).then((newdesign) {
-                  calsettings.indicators[CalIndicator.TASK].color =
-                      newdesign.primary;
+                  calsettings.indicators[CalIndicator.TASK]!.color =
+                      newdesign!.primary;
                   appSettingsBloc.setAppConfiguration(configurationData
                       .copyWith(calendarSettings: calsettings));
                 });
@@ -787,8 +789,8 @@ class AppConfigurationView extends StatelessWidget {
               trailing: Checkbox(
                   value: calsettings.getVacation().enabled,
                   onChanged: (value) {
-                    calsettings.indicators[CalIndicator.VACATION].enabled =
-                        value;
+                    calsettings.indicators[CalIndicator.VACATION]!.enabled =
+                        value!;
                     appSettingsBloc.setAppConfiguration(configurationData
                         .copyWith(calendarSettings: calsettings));
                   }),
@@ -802,8 +804,8 @@ class AppConfigurationView extends StatelessWidget {
               ),
               onTap: () {
                 selectDesign(context, null).then((newdesign) {
-                  calsettings.indicators[CalIndicator.VACATION].color =
-                      newdesign.primary;
+                  calsettings.indicators[CalIndicator.VACATION]!.color =
+                      newdesign!.primary;
                   appSettingsBloc.setAppConfiguration(configurationData
                       .copyWith(calendarSettings: calsettings));
                 });
@@ -813,8 +815,8 @@ class AppConfigurationView extends StatelessWidget {
               trailing: Checkbox(
                   value: calsettings.getWeekend().enabled,
                   onChanged: (value) {
-                    calsettings.indicators[CalIndicator.WEEKEND].enabled =
-                        value;
+                    calsettings.indicators[CalIndicator.WEEKEND]!.enabled =
+                        value!;
                     appSettingsBloc.setAppConfiguration(configurationData
                         .copyWith(calendarSettings: calsettings));
                   }),
@@ -828,8 +830,8 @@ class AppConfigurationView extends StatelessWidget {
               ),
               onTap: () {
                 selectDesign(context, null).then((newdesign) {
-                  calsettings.indicators[CalIndicator.WEEKEND].color =
-                      newdesign.primary;
+                  calsettings.indicators[CalIndicator.WEEKEND]!.color =
+                      newdesign!.primary;
                   appSettingsBloc.setAppConfiguration(configurationData
                       .copyWith(calendarSettings: calsettings));
                 });
@@ -846,7 +848,7 @@ class AppConfigurationView extends StatelessWidget {
       stream: appSettingsBloc.appSettingsData,
       builder: (context, snapshot) {
         if (snapshot.data == null) return CircularProgressIndicator();
-        ConfigurationData configurationData = snapshot.data.configurationData;
+        ConfigurationData configurationData = snapshot.data!.configurationData;
         return ListView(
           children: <Widget>[
             SwitchListTile(

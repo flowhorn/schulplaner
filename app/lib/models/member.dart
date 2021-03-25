@@ -1,4 +1,4 @@
-//@dart=2.11
+//
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:schulplaner8/models/additionaltypes.dart';
 import 'package:meta/meta.dart';
@@ -6,7 +6,8 @@ import 'package:schulplaner_models/schulplaner_models.dart';
 
 @immutable
 class MemberData {
-  final String id, pic, picThumb, avatar;
+  final String id;
+  final String? pic, picThumb, avatar;
   final ProfileDisplayMode displayMode;
   final String name;
   final MemberRole role;
@@ -19,17 +20,17 @@ class MemberData {
   */
 
   const MemberData({
-    @required this.id,
-    @required this.name,
-    @required this.role,
-    @required this.pic,
-    @required this.picThumb,
-    @required this.avatar,
-    @required this.displayMode,
-    @required this.joinedOn,
+    required this.id,
+    required this.name,
+    required this.role,
+    required this.pic,
+    required this.picThumb,
+    required this.avatar,
+    required this.displayMode,
+    required this.joinedOn,
   });
 
-  factory MemberData.create({@required String id, @required MemberRole role}) {
+  factory MemberData.create({required String id, required MemberRole role}) {
     return MemberData(
       id: id,
       name: '',
@@ -42,7 +43,7 @@ class MemberData {
     );
   }
 
-  factory MemberData.fromData({@required String id, @required dynamic data}) {
+  factory MemberData.fromData({required String id, required dynamic data}) {
     return MemberData(
       id: id,
       name: data['name'],
@@ -70,13 +71,13 @@ class MemberData {
   }
 
   MemberData copyWith({
-    String name,
+    String? name,
     pic,
     picThumb,
     avatar,
-    ProfileDisplayMode displayMode,
-    DateTime joinedOn,
-    MemberData role,
+    ProfileDisplayMode? displayMode,
+    DateTime? joinedOn,
+    MemberRole? role,
   }) {
     return MemberData(
       id: id,

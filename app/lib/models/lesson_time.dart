@@ -1,6 +1,5 @@
-//@dart=2.11
 class LessonTime {
-  String start, end;
+  late String? start, end;
   LessonTime({this.start, this.end});
 
   LessonTime.fromData(Map<String, dynamic> data) {

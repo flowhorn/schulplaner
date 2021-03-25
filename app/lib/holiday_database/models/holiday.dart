@@ -6,7 +6,7 @@ import 'package:schulplaner8/utils/models/name.dart';
 
 class Holiday {
   final ID id;
-  final Date start, end;
+  final Date? start, end;
   final Name name;
   final HolidayType type;
   final bool isFromDatabase;
@@ -63,8 +63,8 @@ class HolidayConverter {
     return {
       'id': holiday.id.key,
       'name': holiday.name.text,
-      'start': holiday.start.toDateString,
-      'end': holiday.end.toDateString,
+      'start': holiday.start!.toDateString,
+      'end': holiday.end!.toDateString,
       'type': holidayTypeToJson(holiday.type),
     };
   }

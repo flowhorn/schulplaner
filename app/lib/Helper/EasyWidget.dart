@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 typedef Widget DataWidgetBuilder<T>(BuildContext context, T data);
 
-Future<T> selectItem<T>({
+Future<T?> selectItem<T>({
   required BuildContext context,
   required List<T> items,
   required DataWidgetBuilder<T> builder,

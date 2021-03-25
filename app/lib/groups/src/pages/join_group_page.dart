@@ -208,7 +208,7 @@ class _Course extends StatelessWidget {
                   leading: ColoredCircleText(
                       text: toShortNameLength(
                           context, courseInfo.getShortname_full()),
-                      color: courseInfo.getDesign().primary,
+                      color: courseInfo.getDesign()?.primary,
                       radius: 22.0),
                   title: Text(courseInfo.name),
                   subtitle: Column(

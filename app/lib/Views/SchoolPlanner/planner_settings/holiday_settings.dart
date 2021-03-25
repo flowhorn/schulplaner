@@ -1,4 +1,4 @@
-//@dart=2.11
+//
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Data/planner_database/planner_database.dart';
@@ -15,7 +15,7 @@ import 'package:schulplaner8/holiday_database/models/region.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class HolidaySettings extends StatelessWidget {
-  HolidaySettings({Key key}) : super(key: key) {
+  HolidaySettings({Key? key}) : super(key: key) {
     timeago.setLocaleMessages('de', timeago.DeMessages());
   }
 
@@ -32,7 +32,7 @@ class HolidaySettings extends StatelessWidget {
               subtitle: settings.vacationpackageid == null
                   ? Text(getString(context).nothingselected)
                   : RegionName(
-                      regionID: settings.vacationpackageid,
+                      regionID: settings.vacationpackageid!,
                       holidayGateway: database.holidayGateway,
                     ),
               onTap: () {
@@ -52,7 +52,7 @@ class HolidaySettings extends StatelessWidget {
                       }),
             ),
             FormDivider(),
-            ValueListenableBuilder<int>(
+            ValueListenableBuilder<int?>(
               valueListenable: database
                   .holidayGateway.holidayCacheManager.lastRefreshedNotifier,
               builder: (context, lastRefreshedValue, _) {
@@ -107,16 +107,17 @@ class RegionName extends StatelessWidget {
   final String regionID;
   final HolidayGateway holidayGateway;
 
-  const RegionName({Key key, this.regionID, this.holidayGateway})
+  const RegionName(
+      {Key? key, required this.regionID, required this.holidayGateway})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<Region>(
+    return StreamBuilder<Region?>(
       builder: (context, snapshot) {
         if (snapshot.data == null) {
           return Text(getString(context).pleasewait);
         }
-        return Text(snapshot.data.name.text ?? getString(context).error);
+        return Text(snapshot.data?.name.text ?? getString(context).error);
       },
       stream: holidayGateway.getRegion(regionID),
     );

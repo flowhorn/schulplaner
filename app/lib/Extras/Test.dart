@@ -1,10 +1,9 @@
-//@dart = 2.11
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class Item {
-  String id, name, date;
-  bool enabled;
+  late String? id, name, date;
+  late bool? enabled;
 
   Item({
     this.id,
@@ -29,7 +28,12 @@ class Item {
     };
   }
 
-  Item copyWith({String id, String name, String date, bool enabled}) {
+  Item copyWith({
+    String? id,
+    String? name,
+    String? date,
+    bool? enabled,
+  }) {
     return Item(
       id: this.id ?? id,
       name: this.name ?? name,
@@ -53,7 +57,7 @@ class ItemList extends StatelessWidget {
           if (!snapshot.hasData) {
             return CircularProgressIndicator();
           } else {
-            final items = snapshot.data;
+            final items = snapshot.data ?? [];
             return ListView.builder(
                 itemCount: items.length,
                 itemBuilder: (context, index) {
@@ -70,12 +74,12 @@ class ItemList extends StatelessWidget {
 class DetailItemView extends StatelessWidget {
   final String itemid;
   DetailItemView({
-    @required this.itemid,
+    required this.itemid,
   });
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<Item>(
+    return StreamBuilder<Item?>(
       stream: FirebaseFirestore.instance
           .collection('tasks')
           .doc(itemid)
@@ -92,7 +96,7 @@ class DetailItemView extends StatelessWidget {
           return CircularProgressIndicator();
         } else {
           final item = snapshot.data;
-          return Text(item.name ?? '-');
+          return Text(item?.name ?? '-');
         }
       },
     );

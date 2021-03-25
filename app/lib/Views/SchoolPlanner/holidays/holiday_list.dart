@@ -20,7 +20,7 @@ class HolidayList extends StatelessWidget {
           if (snapshot.hasData) {
             List<Holiday> vacationlist = snapshot.data!.values.toList();
             vacationlist.sort((h1, h2) {
-              return h1.start.toDateString.compareTo(h2.end.toDateString);
+              return h1.start!.toDateString.compareTo(h2.end!.toDateString);
             });
             return UpListView<Holiday>(
               items: vacationlist,
@@ -72,7 +72,7 @@ class HolidayTile extends StatelessWidget {
               children: <Widget>[
                 Text(
                   (holiday.start != null
-                      ? holiday.start.parser.toYMMMMEEEEd
+                      ? holiday.start!.parser.toYMMMMEEEEd
                       : '-'),
                 ),
               ],
@@ -84,14 +84,14 @@ class HolidayTile extends StatelessWidget {
                   getString(context).start +
                       ': ' +
                       (holiday.start != null
-                          ? holiday.start.parser.toYMMMMEEEEd
+                          ? holiday.start!.parser.toYMMMMEEEEd
                           : '-'),
                 ),
                 Text(
                   getString(context).end +
                       ': ' +
                       (holiday.end != null
-                          ? holiday.end.parser.toYMMMMEEEEd
+                          ? holiday.end!.parser.toYMMMMEEEEd
                           : '-'),
                 ),
               ],

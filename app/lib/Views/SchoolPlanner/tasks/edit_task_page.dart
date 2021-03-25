@@ -35,11 +35,16 @@ class NewSchoolTaskView extends StatelessWidget {
     if (editmode) {
       data = database.tasks.data[editmode_taskid!]!.copy();
     } else {
-      data = SchoolTask();
+      data = SchoolTask(
+        files: {},
+        title: '',
+        detail: '',
+        finished: {},
+      );
       try {
-        data.courseid = potentialcourseidnow(database);
+        data.courseid = potentialcourseidnow(database)!;
         if (data.due == null && data.courseid != null) {
-          _nextlessons = getNextLessons(database, data.courseid, count: 2);
+          _nextlessons = getNextLessons(database, data.courseid!, count: 2);
           if (_nextlessons?.isNotEmpty ?? false) {
             data.due = _nextlessons![0];
           }
@@ -61,9 +66,9 @@ class NewSchoolTaskView extends StatelessWidget {
       {required this.database, String? due, String? courseid})
       : editmode = false,
         editmode_taskid = null {
-    data = SchoolTask(due: due, courseid: courseid);
+    data = SchoolTask(due: due, courseid: courseid, title: '', files: {}, finished: {}, detail: '',);
     if (data.due == null && data.courseid != null) {
-      _nextlessons = getNextLessons(database, data.courseid, count: 2);
+      _nextlessons = getNextLessons(database, data.courseid!, count: 2);
       if (_nextlessons?.isNotEmpty ?? false) {
         data.due = _nextlessons![0];
       }
@@ -132,7 +137,7 @@ class NewSchoolTaskView extends StatelessWidget {
                             notifier.value = data;
 
                             List<String> nextlessons = getNextLessons(
-                                database, data.courseid,
+                                database, data.courseid!,
                                 count: 1);
                             if (data.due == null && nextlessons.isNotEmpty) {
                               data.due = nextlessons[0];
@@ -212,12 +217,12 @@ class NewSchoolTaskView extends StatelessWidget {
                           attachments: data.files,
                           onAdded: (file) {
                             if (data.files == null) data.files = {};
-                            data.files[file.fileid] = file;
+                            data.files[file.fileid!] = file;
                             notifier.notifyListeners();
                           },
                           onRemoved: (file) {
                             if (data.files == null) data.files = {};
-                            data.files[file.fileid] = null;
+                            data.files[file.fileid!] = null;
                             notifier.notifyListeners();
                           },
                         ),
@@ -300,13 +305,13 @@ class NewSchoolTaskView extends StatelessWidget {
         return requestPermissionCourse(
             database: database,
             category: PermissionAccessType.creator,
-            courseid: data.courseid);
+            courseid: data.courseid!);
       } else {
         if (data.classid != null) {
           return requestPermissionClass(
               database: database,
               category: PermissionAccessType.creator,
-              classid: data.classid);
+              classid: data.classid!);
         } else {
           throw Exception('SOMETHING WENT WRONG???');
         }

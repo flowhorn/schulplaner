@@ -1,4 +1,4 @@
-//@dart=2.11
+//
 import 'package:bloc/bloc_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Helper/Functions.dart';
@@ -32,7 +32,7 @@ class _EditApperancePage extends StatelessWidget {
       builder: (context, snapshot) {
         final appSettingsData = snapshot.data;
         return Theme(
-          data: appSettingsData.getThemeData(),
+          data: appSettingsData!.getThemeData(),
           child: Scaffold(
             appBar: MyAppHeader(title: getString(context).appearance),
             body: SingleChildScrollView(

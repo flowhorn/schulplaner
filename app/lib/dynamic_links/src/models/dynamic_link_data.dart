@@ -1,4 +1,3 @@
-//@dart = 2.11
 import 'package:meta/meta.dart';
 
 import '../bloc/dynamic_link_bloc.dart';
@@ -10,12 +9,12 @@ class DynamicLinkData {
   final bool hasBeenHandled;
 
   DynamicLinkData({
-    @required this.id,
-    @required this.link,
+    required this.id,
+    required this.link,
     this.hasBeenHandled = false,
   });
 
-  DynamicLinkData copyWith({bool hasBeenHandled}) {
+  DynamicLinkData copyWith({bool? hasBeenHandled}) {
     return DynamicLinkData(
       id: id,
       link: link,
@@ -24,7 +23,7 @@ class DynamicLinkData {
   }
 
   Map<String, String> getValues() {
-    return link?.queryParameters;
+    return link.queryParameters;
   }
 
   DynamicLinksType getType() {
@@ -38,7 +37,7 @@ class DynamicLinkData {
 
   DynamicLinkJoinByKey getJoinByKeyData() {
     return DynamicLinkJoinByKey(
-      publicKey: getValues()['data'],
+      publicKey: getValues()['data']!,
     );
   }
 }

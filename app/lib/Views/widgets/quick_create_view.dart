@@ -16,7 +16,7 @@ class QuickCreateView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final database =
-        BlocProvider.of<PlannerDatabaseBloc>(context).plannerDatabase;
+        BlocProvider.of<PlannerDatabaseBloc>(context).plannerDatabase!;
     return Column(
       children: <Widget>[
         FormSpace(8.0),

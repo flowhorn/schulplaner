@@ -1,4 +1,4 @@
-//@dart=2.11
+//
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/groups/src/models/place_link.dart';
 import 'package:schulplaner8/groups/src/models/teacher_link.dart';
@@ -22,28 +22,32 @@ import 'package:schulplaner_widgets/schulplaner_dialogs.dart';
 class NewLessonView extends StatelessWidget {
   final PlannerDatabase database;
   final bool editmode;
-  final String editmode_lessonid;
+  String? editmode_lessonid;
   bool changedValues = false;
 
   bool showlongerlessons = false;
 
-  ValueNotifier<bool> showTeacherAndPlace;
-  ValueNotifier<bool> showOverrideTimes;
+  late ValueNotifier<bool> showTeacherAndPlace;
+  late ValueNotifier<bool> showOverrideTimes;
 
-  Lesson data;
-  ValueNotifier<Lesson> notifier;
+  late Lesson data;
+  late ValueNotifier<Lesson> notifier;
   NewLessonView({
-    @required this.database,
+    required this.database,
     this.editmode = false,
     this.editmode_lessonid,
   }) {
     if (editmode) {
-      data = database.getLessons()[editmode_lessonid]?.copy();
+      data = database.getLessons()[editmode_lessonid]!.copy();
       if (data.isMultiLesson()) {
         showlongerlessons = true;
       }
     } else {
-      data = Lesson();
+      data = Lesson(
+        day: 1,
+        start: 1,
+        end: 1,
+      );
     }
     notifier = ValueNotifier(data);
 
@@ -80,14 +84,14 @@ class NewLessonView extends StatelessWidget {
                         Divider(),
                         EditCustomField(
                           value: data.day != null
-                              ? getWeekDays(context)[data.day].name
+                              ? getWeekDays(context)[data.day]!.name
                               : null,
                           label: getString(context).weekday,
                           onClicked: (context) {
                             return selectItem<Weekday>(
                                 context: context,
                                 items: getListOfWeekDays(
-                                    context, database.settings.data),
+                                    context, database.settings.data!),
                                 builder: (context, item) {
                                   return ListTile(
                                     trailing: data.day == item.day
@@ -119,12 +123,13 @@ class NewLessonView extends StatelessWidget {
                                             getString(context).lesson)
                                         : '-'),
                                     onTap: () {
-                                      selectItem(
+                                      selectItem<int>(
                                           context: context,
                                           items: buildIntList(
-                                              database.settings.data.maxlessons,
-                                              start: database
-                                                      .settings.data.zero_lesson
+                                              database
+                                                  .settings.data!.maxlessons,
+                                              start: database.settings.data!
+                                                      .zero_lesson
                                                   ? 0
                                                   : 1),
                                           builder: (context, item) {
@@ -164,12 +169,13 @@ class NewLessonView extends StatelessWidget {
                                           notifier.notifyListeners();
                                         }),
                                     onTap: () {
-                                      selectItem(
+                                      selectItem<int>(
                                           context: context,
                                           items: buildIntList(
-                                              database.settings.data.maxlessons,
+                                              database
+                                                  .settings.data!.maxlessons,
                                               start: data.start ??
-                                                  (database.settings.data
+                                                  (database.settings.data!
                                                           .zero_lesson
                                                       ? 0
                                                       : 1)),
@@ -211,14 +217,14 @@ class NewLessonView extends StatelessWidget {
                                       notifier.notifyListeners();
                                     }),
                                 onTap: () {
-                                  selectItem(
+                                  selectItem<int>(
                                       context: context,
                                       items: buildIntList(
-                                          database.settings.data.maxlessons,
-                                          start:
-                                              database.settings.data.zero_lesson
-                                                  ? 0
-                                                  : 1),
+                                          database.settings.data!.maxlessons,
+                                          start: database
+                                                  .settings.data!.zero_lesson
+                                              ? 0
+                                              : 1),
                                       builder: (context, item) {
                                         return ListTile(
                                           title: Text(item.toString() +
@@ -241,19 +247,19 @@ class NewLessonView extends StatelessWidget {
                                       });
                                 },
                               ),
-                        database.settings.data.multiple_weektypes == false
+                        database.settings.data!.multiple_weektypes == false
                             ? nowidget()
                             : ListTile(
                                 leading: Icon(Icons.view_week),
                                 title: Text(getString(context).weektype),
                                 subtitle: Text(data.weektype != null
-                                    ? weektypes(context)[data.weektype].name
+                                    ? weektypes(context)[data.weektype]!.name
                                     : '-'),
                                 onTap: () {
                                   selectItem<WeekType>(
                                       context: context,
                                       items: getListOfWeekTypes(
-                                          context, database.settings.data,
+                                          context, database.settings.data!,
                                           includealways: true),
                                       builder: (context, item) {
                                         return ListTile(
@@ -286,7 +292,7 @@ class NewLessonView extends StatelessWidget {
                                     value: data.teacher?.name ??
                                         (data.courseid != null
                                             ? database
-                                                .getCourseInfo(data.courseid)
+                                                .getCourseInfo(data.courseid!)
                                                 ?.getTeacherFirst()
                                             : null),
                                     onClicked: (context) {
@@ -294,7 +300,7 @@ class NewLessonView extends StatelessWidget {
                                               context,
                                               database,
                                               singleToMap(data.teacher,
-                                                  data.teacher?.teacherid))
+                                                  data.teacher!.teacherid))
                                           .then((newteacher) {
                                         if (newteacher != null) {
                                           data.teacher =
@@ -318,7 +324,7 @@ class NewLessonView extends StatelessWidget {
                                     value: data.place?.name ??
                                         (data.courseid != null
                                             ? database
-                                                .getCourseInfo(data.courseid)
+                                                .getCourseInfo(data.courseid!)
                                                 ?.getPlaceFirst()
                                             : null),
                                     onClicked: (context) {
@@ -326,7 +332,7 @@ class NewLessonView extends StatelessWidget {
                                               context,
                                               database,
                                               singleToMap(data.place,
-                                                  data.place?.placeid))
+                                                  data.place!.placeid))
                                           .then((newplace) {
                                         if (newplace != null) {
                                           data.place =
@@ -350,12 +356,12 @@ class NewLessonView extends StatelessWidget {
                             title: getString(context).overritetimes,
                             notifier: showOverrideTimes,
                             builder: (context) {
-                              String getStartTime() {
+                              String? getStartTime() {
                                 if (data.overridentime?.start != null) {
-                                  return data.overridentime.start;
+                                  return data.overridentime?.start;
                                 } else {
                                   if (data.start != null) {
-                                    LessonTime lessontimestart = database
+                                    LessonTime? lessontimestart = database
                                         .getSettings()
                                         .lessontimes[data.start];
                                     if (lessontimestart != null) {
@@ -366,12 +372,12 @@ class NewLessonView extends StatelessWidget {
                                 }
                               }
 
-                              String getEndTime() {
+                              String? getEndTime() {
                                 if (data.overridentime?.end != null) {
-                                  return data.overridentime.end;
+                                  return data.overridentime?.end;
                                 } else {
                                   if (data.end != null) {
-                                    LessonTime lessontimeend = database
+                                    LessonTime? lessontimeend = database
                                         .getSettings()
                                         .lessontimes[data.end];
                                     if (lessontimeend != null) {
@@ -389,7 +395,7 @@ class NewLessonView extends StatelessWidget {
                                     onChanged: (newTime) {
                                       if (newTime != null) {
                                         if (data.overridentime != null) {
-                                          data.overridentime.start =
+                                          data.overridentime?.start =
                                               parseTimeString(newTime);
                                         } else {
                                           data.overridentime = OverrridenTime(
@@ -404,8 +410,8 @@ class NewLessonView extends StatelessWidget {
                                     onRemoved: data.overridentime?.start == null
                                         ? null
                                         : (context) {
-                                            data.overridentime.start = null;
-                                            if (data.overridentime.end ==
+                                            data.overridentime?.start = null;
+                                            if (data.overridentime?.end ==
                                                 null) {
                                               data.overridentime = null;
                                             }
@@ -417,7 +423,7 @@ class NewLessonView extends StatelessWidget {
                                     onChanged: (newTime) {
                                       if (newTime != null) {
                                         if (data.overridentime != null) {
-                                          data.overridentime.end =
+                                          data.overridentime?.end =
                                               parseTimeString(newTime);
                                         } else {
                                           data.overridentime = OverrridenTime(
@@ -432,8 +438,8 @@ class NewLessonView extends StatelessWidget {
                                     onRemoved: data.overridentime?.start == null
                                         ? null
                                         : (context) {
-                                            data.overridentime.start = null;
-                                            if (data.overridentime.end ==
+                                            data.overridentime?.start = null;
+                                            if (data.overridentime?.end ==
                                                 null) {
                                               data.overridentime = null;
                                             }
@@ -499,7 +505,7 @@ class NewLessonView extends StatelessWidget {
   ThemeData getLessonTheme(BuildContext context) {
     if (data.courseid != null) {
       return newAppThemeDesign(
-          context, database.courseinfo.data[data.courseid].getDesign());
+          context, database.courseinfo.data[data.courseid]?.getDesign());
     } else {
       return clearAppThemeData(context: context);
     }
@@ -510,7 +516,7 @@ class NewLessonView extends StatelessWidget {
       return requestPermissionCourse(
           database: database,
           category: PermissionAccessType.creator,
-          courseid: data.courseid);
+          courseid: data.courseid!);
     } else {
       throw Exception('SOMETHING WENT WRONG???');
     }

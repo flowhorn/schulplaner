@@ -1,4 +1,4 @@
-//@dart=2.11
+//
 import 'package:universal_commons/platform_check.dart';
 import 'package:date/time.dart';
 
@@ -14,9 +14,9 @@ String getDeviceName() {
 }
 
 class NotificationDevice {
-  String devicetoken;
-  bool enabled;
-  String devicename;
+  String? devicetoken;
+  bool? enabled;
+  String? devicename;
   NotificationDevice({this.devicetoken, this.enabled, this.devicename});
 
   NotificationDevice.fromData(String token, Map<String, dynamic> data) {
@@ -34,12 +34,12 @@ class NotificationDevice {
 }
 
 class NotificationSettings {
-  bool notifycreatetasks, notifydaily, notifyassist;
-  Time dailyNotificationTime;
-  int dailydaterange;
-  Map<String, NotificationDevice> devices;
+  late bool notifycreatetasks, notifydaily, notifyassist;
+  late Time? dailyNotificationTime;
+  late int dailydaterange;
+  late Map<String, NotificationDevice?> devices;
 
-  NotificationSettings.fromData(Map<String, dynamic> data) {
+  NotificationSettings.fromData(Map<String, dynamic>? data) {
     if (data == null) {
       notifycreatetasks = false;
       notifydaily = false;

@@ -1,4 +1,4 @@
-// @dart=2.11
+//
 import 'package:meta/meta.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:schulplaner8/Data/ObjectsPlanner.dart';
@@ -18,12 +18,14 @@ import 'teacher_link.dart';
 
 @immutable
 class Course {
-  final String id, name, title, shortname;
-  final String publiccode, description, joinLink;
-  final String personalshortname, personalgradeprofile;
+  final String id, name, title;
+  final String? shortname;
+  final String? publiccode, description, joinLink;
+  final String? personalshortname, personalgradeprofile;
   final DateTime createdOn;
 
-  final Design design, personaldesign;
+  final Design? design;
+  final Design? personaldesign;
   final List<String> membersList;
   final Map<String, MemberData> membersData;
   final Map<String, MemberRole> userRoles;
@@ -31,35 +33,35 @@ class Course {
 
   final Map<String, bool> connectedclasses;
   final Map<String, Lesson> lessons;
-  final Map<String, TeacherLink> teachers;
-  final Map<String, PlaceLink> places;
+  final Map<String, TeacherLink?> teachers;
+  final Map<String, PlaceLink?> places;
   final GroupVersion groupVersion;
 
   const Course._({
-    @required this.id,
-    @required this.name,
-    @required this.title,
-    @required this.description,
-    @required this.shortname,
-    @required this.publiccode,
-    @required this.joinLink,
-    @required this.createdOn,
-    @required this.membersList,
-    @required this.membersData,
-    @required this.userRoles,
-    @required this.settings,
-    @required this.lessons,
-    @required this.personalshortname,
-    @required this.personalgradeprofile,
-    @required this.design,
-    @required this.personaldesign,
-    @required this.connectedclasses,
-    @required this.teachers,
-    @required this.places,
-    @required this.groupVersion,
+    required this.id,
+    required this.name,
+    required this.title,
+    required this.description,
+    required this.shortname,
+    required this.publiccode,
+    required this.joinLink,
+    required this.createdOn,
+    required this.membersList,
+    required this.membersData,
+    required this.userRoles,
+    required this.settings,
+    required this.lessons,
+    required this.personalshortname,
+    required this.personalgradeprofile,
+    required this.design,
+    required this.personaldesign,
+    required this.connectedclasses,
+    required this.teachers,
+    required this.places,
+    required this.groupVersion,
   });
 
-  factory Course.create({@required String id}) {
+  factory Course.create({required String id}) {
     return Course._(
       id: id,
       name: '',
@@ -89,7 +91,8 @@ class Course {
     return CourseConverter.fromData(data);
   }
 
-  factory Course.fromTemplate({String courseid, CourseTemplate template}) {
+  factory Course.fromTemplate(
+      {required String courseid, required CourseTemplate template}) {
     return Course._(
       id: courseid,
       name: template.name,
@@ -116,24 +119,24 @@ class Course {
   }
 
   Course copyWith({
-    String name,
+    String? name,
     title,
     description,
     shortname,
-    String publiccode,
-    DateTime createdOn,
-    List<String> membersList,
-    Map<String, MemberData> membersData,
-    Map<String, MemberRole> userRoles,
-    CourseSettings settings,
-    Map<String, Lesson> lessons,
-    String personalshortname,
+    String? publiccode,
+    DateTime? createdOn,
+    List<String>? membersList,
+    Map<String, MemberData>? membersData,
+    Map<String, MemberRole>? userRoles,
+    CourseSettings? settings,
+    Map<String, Lesson>? lessons,
+    String? personalshortname,
     personalgradeprofile,
-    Design design,
+    Design? design,
     personaldesign,
-    Map<String, bool> connectedclasses,
-    Map<String, TeacherLink> teachers,
-    Map<String, PlaceLink> places,
+    Map<String, bool>? connectedclasses,
+    Map<String, TeacherLink>? teachers,
+    Map<String, PlaceLink>? places,
   }) {
     return Course._(
       id: id,
@@ -161,9 +164,9 @@ class Course {
   }
 
   Course copyWithNull({
-    Design personaldesign,
-    String personalshortname,
-    String personalgradeprofile,
+    Design? personaldesign,
+    String? personalshortname,
+    String? personalgradeprofile,
   }) {
     return Course._(
       id: id,
@@ -206,16 +209,18 @@ class Course {
     return name ?? '-';
   }
 
-  Design getDesign() {
+  Design? getDesign() {
     return personaldesign ?? design;
   }
 
   List<TeacherLink> getTeacherLinks() {
-    return teachers?.values?.where((it) => it != null)?.toList() ?? [];
+    return teachers.values.where((it) => it != null).toList()
+        as List<TeacherLink>;
   }
 
   List<PlaceLink> getPlaceLinks() {
-    return places?.values?.where((it) => it != null)?.toList() ?? [];
+    return places?.values?.where((it) => it != null).toList()
+        as List<PlaceLink>;
   }
 
   String getTeachersListed() {
@@ -236,7 +241,7 @@ class Course {
     }
   }
 
-  String getTeacherFirst() {
+  String? getTeacherFirst() {
     final list = getTeacherLinks();
     if (list.isNotEmpty) {
       return list[0]?.name ?? '-';
@@ -245,7 +250,7 @@ class Course {
     }
   }
 
-  TeacherLink getTeacherFirstItem() {
+  TeacherLink? getTeacherFirstItem() {
     List<TeacherLink> list = getTeacherLinks();
     if (list.isNotEmpty) {
       return list[0];
@@ -254,7 +259,7 @@ class Course {
     }
   }
 
-  String getPlaceFirst() {
+  String? getPlaceFirst() {
     final list = getPlaceLinks();
     if (list.isNotEmpty) {
       return list[0]?.name;
@@ -263,7 +268,7 @@ class Course {
     }
   }
 
-  PlaceLink getPlaceFirstItem() {
+  PlaceLink? getPlaceFirstItem() {
     final list = getPlaceLinks();
     if (list.isNotEmpty) {
       return list[0];
@@ -279,9 +284,10 @@ Design _getDesign(dynamic data) {
         DataUtil_Design.decodeDesignHash(data['olddata']['designid']);
     if (oldDesign != null) {
       return Design(
-          name: oldDesign.name,
-          primary: oldDesign.primary,
-          accent: oldDesign.accent);
+        name: oldDesign.name!,
+        primary: oldDesign.primary!,
+        accent: oldDesign.accent,
+      );
     }
   }
   final newDesignData = data['design'];
@@ -319,8 +325,8 @@ extension CourseConverter on Course {
 
     Map<String, MemberData> membersData = decodeMap(data['membersData'],
         (key, value) => MemberData.fromData(id: key, data: value));
-    Map<String, CourseMember> oldMembers = decodeMap(
-        data['members'], (key, value) => CourseMember.fromData(value));
+    Map<String, OldCourseMember> oldMembers = decodeMap(
+        data['members'], (key, value) => OldCourseMember.fromData(value));
     for (final courseMember in oldMembers.values) {
       if (!membersData.containsKey(courseMember.memberid)) {
         membersData[courseMember.memberid] = MemberData.create(
@@ -362,11 +368,11 @@ extension CourseConverter on Course {
     return {
       'name': name,
       'title': title,
-      'design': design.toJson(),
+      'design': design?.toJson(),
       'description': description,
       'shortname': shortname != '' ? shortname : null,
-      'teachers': encodeMap<TeacherLink>(teachers, (it) => it?.toJson()),
-      'places': encodeMap<PlaceLink>(places, (it) => it?.toJson()),
+      'teachers': encodeMap<TeacherLink?>(teachers, (it) => it?.toJson()),
+      'places': encodeMap<PlaceLink?>(places, (it) => it?.toJson()),
     };
   }
 
@@ -375,9 +381,9 @@ extension CourseConverter on Course {
       'id': id,
       'name': name,
       'shortname': personalshortname ?? shortname,
-      'design': personaldesign?.toJson() ?? design.toJson(),
-      'teachers': encodeMap<TeacherLink>(teachers, (it) => it.toJson()),
-      'places': encodeMap<PlaceLink>(places, (it) => it.toJson()),
+      'design': personaldesign?.toJson() ?? design?.toJson(),
+      'teachers': encodeMap<TeacherLink?>(teachers, (it) => it?.toJson()),
+      'places': encodeMap<PlaceLink?>(places, (it) => it?.toJson()),
     };
   }
 
@@ -390,9 +396,9 @@ extension CourseConverter on Course {
       'description': description,
       'shortname': shortname != '' ? shortname : null,
       'publiccode': publiccode,
-      'design': design.toJson(),
-      'teachers': encodeMap<TeacherLink>(teachers, (it) => it?.toJson()),
-      'places': encodeMap<PlaceLink>(places, (it) => it?.toJson()),
+      'design': design?.toJson(),
+      'teachers': encodeMap<TeacherLink?>(teachers, (it) => it?.toJson()),
+      'places': encodeMap<PlaceLink?>(places, (it) => it?.toJson()),
       'createdOn': Timestamp.fromDate(createdOn),
       'membersList': membersList,
       'membersData': membersData.map(
@@ -401,7 +407,8 @@ extension CourseConverter on Course {
           value.toJson(),
         ),
       ),
-      'userRoles': encodeMap(userRoles, (it) => memberRoleEnumToString(it)),
+      'userRoles':
+          encodeMap<MemberRole>(userRoles, (it) => memberRoleEnumToString(it)),
       'settings': settings.toJson(),
       'lessons': lessons.map((key, value) => MapEntry(key, value.toJson())),
       'groupVersion': groupVersionToData(groupVersion),

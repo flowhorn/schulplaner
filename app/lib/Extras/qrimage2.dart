@@ -1,11 +1,10 @@
-//@dart = 2.11
 import 'package:flutter/material.dart';
 import 'package:qr/qr.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class QrImage2 extends StatelessWidget {
   QrImage2({
-    @required String data,
+    required String data,
     this.size,
     this.padding = const EdgeInsets.all(10.0),
     this.backgroundColor,
@@ -22,9 +21,9 @@ class QrImage2 extends StatelessWidget {
         );
 
   final QrPainter _painter;
-  final Color backgroundColor;
+  final Color? backgroundColor;
   final EdgeInsets padding;
-  final double size;
+  final double? size;
   final bool gapless;
 
   @override

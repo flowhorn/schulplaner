@@ -37,7 +37,7 @@ class MyProfile extends StatelessWidget {
                       pushWidget(
                           context,
                           EditProfileView(
-                            userDatabase: userDatabaseBloc.userDatabase,
+                            userDatabase: userDatabaseBloc.userDatabase!,
                           ));
                     },
                     style:

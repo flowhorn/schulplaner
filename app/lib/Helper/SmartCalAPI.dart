@@ -31,12 +31,12 @@ List<String> getNextLessons(PlannerDatabase database, String courseid,
         if (!mlist.contains(parseDateString(theday))) {
           if (dayOfWeek == lesson.day) {
             if (!settingsData.multiple_weektypes || lesson.weektype == 0) {
-              if (isLessonActive(database, lesson.courseid, lesson.lessonid,
+              if (isLessonActive(database, lesson.courseid!, lesson.lessonid!,
                   parseDateString(theday))) mlist.add(parseDateString(theday));
               return;
             } else if (lesson.weektype ==
                 getWeektypeofDate(parseDateString(theday), database)) {
-              if (isLessonActive(database, lesson.courseid, lesson.lessonid,
+              if (isLessonActive(database, lesson.courseid!, lesson.lessonid!,
                   parseDateString(theday))) mlist.add(parseDateString(theday));
               return;
             }
@@ -86,9 +86,9 @@ String? potentialcourseidnow(PlannerDatabase database) {
   List<Lesson> potential = getLessonsToday(database).where((lesson) {
     String? start, end;
     if (lesson.overridentime?.start != null) {
-      start = lesson.overridentime.start;
+      start = lesson.overridentime!.start;
     }
-    if (lesson.overridentime?.end != null) end = lesson.overridentime.end;
+    if (lesson.overridentime?.end != null) end = lesson.overridentime!.end;
 
     if (start == null) {
       LessonTime? lessonTime = times[lesson.start];
@@ -155,14 +155,14 @@ bool isAfter(TimeOfDay one, TimeOfDay compare) {
 Holiday? getVacation(DateTime datetime, PlannerDatabase database) {
   List<Holiday> vacationlist =
       database.vacations.data.values.where((Holiday v) {
-    DateTime vacationstart = v.start.toDateTime;
-    DateTime vacationend = v.end.toDateTime;
+    DateTime vacationstart = v.start!.toDateTime;
+    DateTime vacationend = v.end!.toDateTime;
     if ((vacationstart.isBefore(datetime) ||
-                isSameDay(v.start.toDateString,
+                isSameDay(v.start!.toDateString,
                     parseDateString(datetime))) //CONDITION 1
             &&
             (vacationend.isAfter(datetime) ||
-                isSameDay(v.end.toDateString,
+                isSameDay(v.end!.toDateString,
                     parseDateString(datetime))) //CONDITION 2
         ) {
       return true;
@@ -179,14 +179,14 @@ Holiday? getVacation(DateTime datetime, PlannerDatabase database) {
 
 bool isVacation(DateTime datetime, List<Holiday> vacationlist) {
   List<Holiday> filteredlist = vacationlist.where((Holiday v) {
-    DateTime vacationstart = v.start.toDateTime;
-    DateTime vacationend = v.end.toDateTime;
+    DateTime vacationstart = v.start!.toDateTime;
+    DateTime vacationend = v.end!.toDateTime;
     if ((vacationstart.isBefore(datetime) ||
-                isSameDay(v.start.toDateString,
+                isSameDay(v.start!.toDateString,
                     parseDateString(datetime))) //CONDITION 1
             &&
             (vacationend.isAfter(datetime) ||
-                isSameDay(v.end.toDateString,
+                isSameDay(v.end!.toDateString,
                     parseDateString(datetime))) //CONDITION 2
         ) {
       return true;

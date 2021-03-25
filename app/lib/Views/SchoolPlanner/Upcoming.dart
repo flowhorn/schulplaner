@@ -1,4 +1,4 @@
-//@dart=2.11
+//
 import 'dart:async';
 
 import 'package:bloc/bloc_provider.dart';
@@ -27,7 +27,7 @@ class UpcomingView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final plannerDatabase =
-        BlocProvider.of<PlannerDatabaseBloc>(context).plannerDatabase;
+        BlocProvider.of<PlannerDatabaseBloc>(context).plannerDatabase!;
     List<Holiday> nextvacations = getNextVacations(context, plannerDatabase);
     return ListView(
       children: <Widget>[
@@ -42,11 +42,11 @@ class UpcomingView extends StatelessWidget {
                     ),
                     title: Text(item.name.text),
                     subtitle: item.start == item.end
-                        ? Text(item.start.parser.toMMMEd)
+                        ? Text(item.start!.parser.toMMMEd)
                         : Text(
-                            item.start.parser.toMMMEd +
+                            item.start!.parser.toMMMEd +
                                 ' - ' +
-                                item.end.parser.toMMMEd,
+                                item.end!.parser.toMMMEd,
                           ),
                     onTap: () {
                       showVacationDetail(context: context, holidayID: item.id);
@@ -69,7 +69,7 @@ class UpcomingView extends StatelessWidget {
               ),
         FormDivider(),
         FormHeader2(getString(context).briefly),
-        UpcomingTasksEventsView(plannerDatabase),
+        UpcomingTasksEventsView(plannerDatabase!),
         FormSpace(16.0),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
@@ -151,7 +151,7 @@ class UpcomingTasksEventsView extends StatelessWidget {
       stream: getTaskEventUpcomingStream(database),
       initialData: getTaskEventUpcomingStream_initialdata(database),
       builder: (context, snapshot) {
-        List<dynamic> list = snapshot.data;
+        List<dynamic> list = snapshot.data!;
         if (list == null) {
           return Center(
             child: CircularProgressIndicator(),
@@ -161,15 +161,13 @@ class UpcomingTasksEventsView extends StatelessWidget {
           children: list.map((item) {
             if (item is SchoolTask) {
               bool isFinished = item.isFinished(database.getMemberId());
-              Course courseInfo = item.courseid != null
-                  ? database.getCourseInfo(item.courseid)
-                  : null;
+              Course courseInfo = database.getCourseInfo(item.courseid!)!;
               ListTile listTile = ListTile(
                 leading: courseInfo != null
                     ? ColoredCircleText(
                         text: toShortNameLength(
                             context, courseInfo.getShortname_full()),
-                        color: courseInfo.getDesign().primary,
+                        color: courseInfo.getDesign()?.primary,
                         radius: 18.0)
                     : ColoredCircleIcon(
                         icon: Icon(Icons.person_outline),
@@ -181,7 +179,7 @@ class UpcomingTasksEventsView extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
                 subtitle:
-                    Text(getString(context).due + ': ' + getDateText(item.due)),
+                    Text(getString(context).due + ': ' + getDateText(item.due!)),
                 trailing: isFinished
                     ? IconButton(
                         icon: Icon(
@@ -204,14 +202,14 @@ class UpcomingTasksEventsView extends StatelessWidget {
                 onTap: () {
                   showTaskDetailSheet(
                     context,
-                    taskid: item.taskid,
+                    taskid: item.taskid!,
                     plannerdatabase: database,
                   );
                 },
               );
               return (isFinished == false)
                   ? Dismissible(
-                      key: Key(item.taskid + isFinished.toString()),
+                      key: Key(item.taskid! + isFinished.toString()),
                       onDismissed: (direction) {
                         database.dataManager.SetFinishedSchoolTask(item, true);
                       },
@@ -240,15 +238,13 @@ class UpcomingTasksEventsView extends StatelessWidget {
                   : listTile;
             }
             if (item is SchoolEvent) {
-              Course courseInfo = item.courseid != null
-                  ? database.getCourseInfo(item.courseid)
-                  : null;
+              Course courseInfo = database.getCourseInfo(item.courseid!)!;
               ListTile listTile = ListTile(
                 leading: courseInfo != null
                     ? ColoredCircleText(
                         text: toShortNameLength(
                             context, courseInfo.getShortname_full()),
-                        color: courseInfo.getDesign().primary,
+                        color: courseInfo.getDesign()!.primary,
                         radius: 18.0)
                     : ColoredCircleIcon(
                         icon: Icon(Icons.person_outline),
@@ -260,7 +256,7 @@ class UpcomingTasksEventsView extends StatelessWidget {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
-                subtitle: Text('' + getDateText(item.date)),
+                subtitle: Text('' + getDateText(item.date!)),
                 onTap: () {
                   showEventDetailSheet(
                     context,
@@ -283,17 +279,17 @@ Stream<List<dynamic>> getTaskEventUpcomingStream(PlannerDatabase database) {
   final controller = StreamController<List<dynamic>>();
   final subs = <StreamSubscription>[];
 
-  Iterable<SchoolTask> tasks;
-  Iterable<SchoolEvent> events;
+  late Iterable<SchoolTask>? tasks;
+  late Iterable<SchoolEvent>? events;
 
   void update() {
     final newlist = <dynamic>[];
-    if (tasks != null) newlist.addAll(tasks);
-    if (events != null) newlist.addAll(events);
+    if (tasks != null) newlist.addAll(tasks!);
+    if (events != null) newlist.addAll(events!);
     newlist.sort((e1, e2) {
       String getdate(dynamic e) {
-        if (e is SchoolTask) return e.due;
-        if (e is SchoolEvent) return e.date;
+        if (e is SchoolTask) return e.due!;
+        if (e is SchoolEvent) return e.date!;
         return '-';
       }
 
@@ -322,14 +318,14 @@ Stream<List<dynamic>> getTaskEventUpcomingStream(PlannerDatabase database) {
   subs.add(database.tasks.stream.listen((data) {
     tasks = data.values.where((taskitem) {
       if (taskitem.archived == true) return false;
-      return isInNextXDays(taskitem.due, 5);
+      return isInNextXDays(taskitem.due!, 5);
     });
     update();
   }));
   subs.add(database.events.stream.listen((data) {
     events = data.values.where((evenitem) {
       if (evenitem.archived == true) return false;
-      return isInNextXDays(evenitem.date, 5);
+      return isInNextXDays(evenitem.date!, 5);
     });
     update();
   }));
@@ -342,11 +338,11 @@ Stream<List<dynamic>> getTaskEventUpcomingStream(PlannerDatabase database) {
 List<dynamic> getTaskEventUpcomingStream_initialdata(PlannerDatabase database) {
   final tasks = database.tasks.data.values.where((taskitem) {
     if (taskitem.archived == true) return false;
-    return isInNextXDays(taskitem.due, 5);
+    return isInNextXDays(taskitem.due!, 5);
   });
   final events = database.events.data.values.where((evenitem) {
     if (evenitem.archived == true) return false;
-    return isInNextXDays(evenitem.date, 5);
+    return isInNextXDays(evenitem.date!, 5);
   });
 
   final newlist = <dynamic>[];
@@ -354,8 +350,8 @@ List<dynamic> getTaskEventUpcomingStream_initialdata(PlannerDatabase database) {
   if (events != null) newlist.addAll(events);
   newlist.sort((e1, e2) {
     String getdate(dynamic e) {
-      if (e is SchoolTask) return e.due;
-      if (e is SchoolEvent) return e.date;
+      if (e is SchoolTask) return e.due!;
+      if (e is SchoolEvent) return e.date!;
       return '-';
     }
 
@@ -385,18 +381,18 @@ List<Holiday> getNextVacations(BuildContext context, PlannerDatabase database,
     {int length = 2}) {
   Iterable<Holiday> vacations = database.vacations.data.values.where((item) {
     DateTime datetime = DateTime.now();
-    DateTime vacationstart = item.start.toDateTime;
-    DateTime vacationend = item.end.toDateTime;
+    DateTime vacationstart = item.start!.toDateTime;
+    DateTime vacationend = item.end!.toDateTime;
     if (vacationstart.isAfter(datetime)) {
       if (getDiffToVacation(item, context) > 50) return false;
       return true;
     }
     if ((vacationstart.isBefore(datetime) ||
-                isSameDay(item.start.toDateString,
+                isSameDay(item.start!.toDateString,
                     parseDateString(datetime))) //CONDITION 1
             &&
             (vacationend.isAfter(datetime) ||
-                isSameDay(item.end.toDateString,
+                isSameDay(item.end!.toDateString,
                     parseDateString(datetime))) //CONDITION 2
         ) {
       return true;
@@ -406,15 +402,15 @@ List<Holiday> getNextVacations(BuildContext context, PlannerDatabase database,
   });
   List<Holiday> list = vacations.toList();
   list.sort((v1, v2) {
-    return v1.start.toDateString.compareTo(v2.start.toDateString);
+    return v1.start!.toDateString.compareTo(v2.start!.toDateString);
   });
   return list.getRange(0, list.length > length ? length : list.length).toList();
 }
 
 String getVacationText(Holiday item, BuildContext context) {
   DateTime datetime = parseDate(getDateToday());
-  DateTime vacationstart = item.start.toDateTime;
-  DateTime vacationend = item.end.toDateTime;
+  DateTime vacationstart = item.start!.toDateTime;
+  DateTime vacationend = item.end!.toDateTime;
   if (vacationstart.isAfter(datetime)) {
     Duration duration = vacationstart.difference(datetime);
     return getString(context).in_ +
@@ -424,11 +420,11 @@ String getVacationText(Holiday item, BuildContext context) {
         getString(context).indays;
   } else {
     if ((vacationstart.isBefore(datetime) ||
-                isSameDay(item.start.toDateString,
+                isSameDay(item.start!.toDateString,
                     parseDateString(datetime))) //CONDITION 1
             &&
             (vacationend.isAfter(datetime) ||
-                isSameDay(item.end.toDateString,
+                isSameDay(item.end!.toDateString,
                     parseDateString(datetime))) //CONDITION 2
         ) {
       return getString(context).current;
@@ -440,7 +436,7 @@ String getVacationText(Holiday item, BuildContext context) {
 
 int getDiffToVacation(Holiday item, BuildContext context) {
   DateTime datetime = parseDate(getDateToday());
-  DateTime vacationstart = item.start.toDateTime;
+  DateTime vacationstart = item.start!.toDateTime;
   Duration duration = vacationstart.difference(datetime);
   return duration.inDays;
 }

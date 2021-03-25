@@ -1,4 +1,4 @@
-//@dart=2.11
+//
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 import 'package:schulplaner8/Helper/Functions.dart';
@@ -12,7 +12,7 @@ import 'package:schulplaner_widgets/schulplaner_dialogs.dart';
 
 class PlaceList extends StatelessWidget {
   final PlannerDatabase plannerDatabase;
-  PlaceList({@required this.plannerDatabase});
+  PlaceList({required this.plannerDatabase});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +20,7 @@ class PlaceList extends StatelessWidget {
         stream: plannerDatabase.places.stream,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            List<Place> itemlist = snapshot.data;
+            List<Place> itemlist = snapshot.data ?? [];
             return ListView.builder(
               itemBuilder: (context, index) {
                 Place item = itemlist[index];
@@ -67,15 +67,19 @@ class NewPlaceView extends StatelessWidget {
 
   bool changedValues = false;
   final bool editMode;
-  final String editplaceid;
+  final String? editplaceid;
 
-  Place data;
-  ValueNotifier<Place> notifier;
+  late Place data;
+  late ValueNotifier<Place> notifier;
   NewPlaceView(
-      {@required this.database, this.editMode = false, this.editplaceid}) {
+      {required this.database, this.editMode = false, this.editplaceid}) {
     data = editMode
-        ? database.places.getItem(editplaceid)
-        : Place(placeid: database.dataManager.generatePlaceId());
+        ? database.places.getItem(editplaceid!)!
+        : Place(
+            placeid: database.dataManager.generatePlaceId(),
+            name: '',
+            address: '',
+          );
     notifier = ValueNotifier(data);
   }
 
@@ -161,16 +165,16 @@ class NewPlaceView extends StatelessWidget {
 }
 
 Future<void> showPlaceDetail(
-    {@required BuildContext context,
-    @required PlannerDatabase plannerdatabase,
-    @required String placeid}) async {
+    {required BuildContext context,
+    required PlannerDatabase plannerdatabase,
+    required String placeid}) async {
   await showDetailSheetBuilder(
       context: context,
       body: (BuildContext context) {
-        return StreamBuilder<Place>(
+        return StreamBuilder<Place?>(
             stream: plannerdatabase.places.getItemStream(placeid),
             builder: (BuildContext context, snapshot) {
-              Place item = snapshot.data;
+              Place? item = snapshot.data;
               if (item == null) return loadedView();
               return Column(
                 children: <Widget>[

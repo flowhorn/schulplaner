@@ -1,4 +1,4 @@
-// @dart=2.11
+//
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -26,9 +26,9 @@ class GradeDetailList extends StatefulWidget {
 class GradeDetailListState extends State<GradeDetailList> {
   final PlannerDatabase database;
   GradeDetailListState(this.database) {
-    list = (database.grades.data.toList() ?? [])
+    list = (database.grades.data?.toList() ?? [])
       ..sort((g1, g2) {
-        return g1.date.compareTo(g2.date);
+        return g1.date!.compareTo(g2.date!);
       });
     list_course = (database.courseinfo.data ?? {}).values.toList()
       ..sort((c1, c2) {
@@ -38,15 +38,15 @@ class GradeDetailListState extends State<GradeDetailList> {
         grades: list ?? [], courses: []);
   }
 
-  AverageCalculator calculator;
+  late AverageCalculator calculator;
   List<Grade> originallist = [];
   List<Grade> list = [];
-  StreamSubscription<List<Grade>> datalistener;
+  late StreamSubscription<List<Grade>?> datalistener;
   List<Course> list_course = [];
-  StreamSubscription<List<Course>> datalistener_course;
-  StreamSubscription<GradeSpan> listener_gradespan;
+  late StreamSubscription<List<Course>?> datalistener_course;
+  late StreamSubscription<GradeSpan?> listener_gradespan;
 
-  GradeSpan gradespan;
+  late GradeSpan? gradespan;
 
   @override
   void initState() {
@@ -55,7 +55,7 @@ class GradeDetailListState extends State<GradeDetailList> {
       setState(() {
         originallist = snapshot == null ? [] : snapshot
           ..sort((g1, g2) {
-            return g2.date.compareTo(g1.date);
+            return g2.date!.compareTo(g1.date!);
           });
         list = getFilteredList();
         _newCalculation();
@@ -98,11 +98,11 @@ class GradeDetailListState extends State<GradeDetailList> {
   List<Grade> getFilteredList() {
     if (gradespan != null) {
       return originallist.where((grade) {
-        if (gradespan.start != null) {
-          if (gradespan.start.compareTo(grade.date) > 0) return false;
+        if (gradespan!.start != null) {
+          if (gradespan!.start!.compareTo(grade.date!) > 0) return false;
         }
-        if (gradespan.end != null) {
-          if (gradespan.end.compareTo(grade.date) < 0) return false;
+        if (gradespan!.end != null) {
+          if (gradespan!.end!.compareTo(grade.date!) < 0) return false;
         }
         return true;
       }).toList();
@@ -137,6 +137,7 @@ class GradeDetailListState extends State<GradeDetailList> {
                 database: database,
                 courseList: list_course,
                 calculator: calculator,
+                list: list,
               ),
               Builder(builder: (context) {
                 return GradeInfoView(
@@ -159,16 +160,16 @@ class GradeDetailListState extends State<GradeDetailList> {
 
 class _AppBar extends StatelessWidget implements PreferredSizeWidget {
   final AverageCalculator averageCalculator;
-  final GradeSpan gradeSpan;
+  final GradeSpan? gradeSpan;
   final PlannerDatabase database;
   final List<Choice> tabs;
 
   const _AppBar({
-    Key key,
-    @required this.averageCalculator,
-    @required this.gradeSpan,
-    @required this.database,
-    @required this.tabs,
+    Key? key,
+    required this.averageCalculator,
+    required this.gradeSpan,
+    required this.database,
+    required this.tabs,
   }) : super(key: key);
 
   @override
@@ -201,9 +202,9 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
                                 style: TextStyle(fontSize: 15.0),
                               ),
                               Text(
-                                gradeSpan.getStartText(context) +
+                                gradeSpan!.getStartText(context) +
                                     ' - ' +
-                                    gradeSpan.getEndText(context),
+                                    gradeSpan!.getEndText(context),
                                 style: TextStyle(
                                     fontSize: 12.0,
                                     fontWeight: FontWeight.w300),

@@ -38,7 +38,7 @@ class CoursePublicCodeView extends StatelessWidget {
                 ListTile(
                   title: SelectableText(
                     courseInfo.publiccode != null
-                        ? ('#' + courseInfo.publiccode)
+                        ? ('#' + courseInfo.publiccode!)
                         : ('#??????'),
                     style: TextStyle(fontSize: 22.0),
                   ),
@@ -55,7 +55,7 @@ class CoursePublicCodeView extends StatelessWidget {
                   trailing: IconButton(
                     icon: Icon(Icons.share),
                     onPressed: () {
-                      Share.share(courseInfo.joinLink);
+                      Share.share(courseInfo.joinLink!);
                     },
                   ),
                 ),
@@ -129,7 +129,7 @@ class CoursePublicCodeView extends StatelessWidget {
                       RButton(
                           text: getString(context).sharecode,
                           onTap: () {
-                            Share.share(courseInfo.publiccode);
+                            Share.share(courseInfo.publiccode!);
                           },
                           iconData: Icons.share),
                     ],

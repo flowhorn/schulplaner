@@ -97,10 +97,10 @@ class DataManager {
   DocumentReference? getLetterRef(Letter letter) {
     if (letter.savedin == null) return null;
     if (letter.savedin?.type == SavedInType.COURSE) {
-      return getLetterRefCourse(letter.savedin!.id).doc(letter.id);
+      return getLetterRefCourse(letter.savedin!.id!).doc(letter.id);
     }
     if (letter.savedin?.type == SavedInType.CLASS) {
-      return getLetterRefClass(letter.savedin!.id).doc(letter.id);
+      return getLetterRefClass(letter.savedin!.id!).doc(letter.id);
     }
     return null;
   }
@@ -129,7 +129,7 @@ class DataManager {
           .ref()
           .child('files')
           .child('personal')
-          .child(savedin.id)
+          .child(savedin.id!)
           .child(fileid);
     }
     return null;
@@ -287,9 +287,9 @@ class DataManager {
           );
     } else {
       if (schoolTask.courseid != null) {
-        String newTaskid = getTaskRefCourse(schoolTask.courseid).doc().id;
+        String newTaskid = getTaskRefCourse(schoolTask.courseid!).doc().id;
         schoolTask.taskid = newTaskid;
-        getTaskRefCourse(schoolTask.courseid).doc(schoolTask.taskid).set(
+        getTaskRefCourse(schoolTask.courseid!).doc(schoolTask.taskid).set(
               schoolTask.toJson(),
               SetOptions(
                 merge: true,
@@ -297,9 +297,9 @@ class DataManager {
             );
       } else {
         if (schoolTask.classid != null) {
-          String newTaskid = getTaskRefClass(schoolTask.classid).doc().id;
+          String newTaskid = getTaskRefClass(schoolTask.classid!).doc().id;
           schoolTask.taskid = newTaskid;
-          getTaskRefClass(schoolTask.classid).doc(schoolTask.taskid).set(
+          getTaskRefClass(schoolTask.classid!).doc(schoolTask.taskid).set(
                 schoolTask.toJson(),
                 SetOptions(
                   merge: true,
@@ -323,7 +323,7 @@ class DataManager {
           );
     } else {
       if (schoolTask.courseid != null) {
-        getTaskRefCourse(schoolTask.courseid).doc(schoolTask.taskid).set(
+        getTaskRefCourse(schoolTask.courseid!).doc(schoolTask.taskid).set(
               schoolTask.toJson(),
               SetOptions(
                 merge: true,
@@ -331,7 +331,7 @@ class DataManager {
             );
       } else {
         if (schoolTask.classid != null) {
-          getTaskRefClass(schoolTask.classid).doc(schoolTask.taskid).set(
+          getTaskRefClass(schoolTask.classid!).doc(schoolTask.taskid).set(
                 schoolTask.toJson(),
                 SetOptions(
                   merge: true,
@@ -371,7 +371,7 @@ class DataManager {
           );
     } else {
       if (schoolEvent.courseid != null) {
-        getEventRefCourse(schoolEvent.courseid).doc(schoolEvent.eventid).set(
+        getEventRefCourse(schoolEvent.courseid!).doc(schoolEvent.eventid).set(
               schoolEvent.toJson(),
               SetOptions(
                 merge: true,
@@ -379,7 +379,7 @@ class DataManager {
             );
       } else {
         if (schoolEvent.classid != null) {
-          getEventRefClass(schoolEvent.classid).doc(schoolEvent.eventid).set(
+          getEventRefClass(schoolEvent.classid!).doc(schoolEvent.eventid).set(
                 schoolEvent.toJson(),
                 SetOptions(
                   merge: true,
@@ -405,9 +405,9 @@ class DataManager {
           );
     } else {
       if (schoolEvent.courseid != null) {
-        String neweventid = getEventRefCourse(schoolEvent.courseid).doc().id;
+        String neweventid = getEventRefCourse(schoolEvent.courseid!).doc().id;
         schoolEvent.eventid = neweventid;
-        getEventRefCourse(schoolEvent.courseid).doc(schoolEvent.eventid).set(
+        getEventRefCourse(schoolEvent.courseid!).doc(schoolEvent.eventid).set(
               schoolEvent.toJson(),
               SetOptions(
                 merge: true,
@@ -415,9 +415,9 @@ class DataManager {
             );
       } else {
         if (schoolEvent.classid != null) {
-          String neweventid = getEventRefClass(schoolEvent.classid).doc().id;
+          String neweventid = getEventRefClass(schoolEvent.classid!).doc().id;
           schoolEvent.eventid = neweventid;
-          getEventRefClass(schoolEvent.classid).doc(schoolEvent.eventid).set(
+          getEventRefClass(schoolEvent.classid!).doc(schoolEvent.eventid).set(
                 schoolEvent.toJson(),
                 SetOptions(
                   merge: true,
@@ -432,7 +432,7 @@ class DataManager {
 
   void ModifyLesson(Lesson lesson) {
     if (lesson.courseid != null) {
-      getCourseInfo(lesson.courseid).set(
+      getCourseInfo(lesson.courseid!).set(
         {
           'lessons': {lesson.lessonid: lesson.toJson()},
         },
@@ -441,7 +441,7 @@ class DataManager {
         ),
       );
       try {
-        getLessonRefCourse(lesson.courseid).doc(lesson.lessonid).delete();
+        getLessonRefCourse(lesson.courseid!).doc(lesson.lessonid).delete();
       } catch (e) {
         print(e);
       }
@@ -452,7 +452,7 @@ class DataManager {
 
   void DeleteLesson(Lesson lesson) {
     if (lesson.courseid != null) {
-      getCourseInfo(lesson.courseid).set(
+      getCourseInfo(lesson.courseid!).set(
         {
           'lessons': {lesson.lessonid: FieldValue.delete()},
         },
@@ -461,7 +461,7 @@ class DataManager {
         ),
       );
       try {
-        getLessonRefCourse(lesson.courseid).doc(lesson.lessonid).delete();
+        getLessonRefCourse(lesson.courseid!).doc(lesson.lessonid).delete();
       } catch (e) {
         print(e);
       }
@@ -472,9 +472,9 @@ class DataManager {
 
   void CreateLesson(Lesson lesson) {
     if (lesson.courseid != null) {
-      String newlessonid = getLessonRefCourse(lesson.courseid).doc().id;
+      String newlessonid = getLessonRefCourse(lesson.courseid!).doc().id;
       lesson.lessonid = newlessonid;
-      getCourseInfo(lesson.courseid).set(
+      getCourseInfo(lesson.courseid!).set(
         {
           'lessons': {lesson.lessonid: lesson.toJson()},
         },
@@ -488,7 +488,7 @@ class DataManager {
   }
 
   void ModifyLessonInfo(LessonInfo lessoninfo) {
-    getLessonInfoRefCourse(lessoninfo.courseid).doc(lessoninfo.id).set(
+    getLessonInfoRefCourse(lessoninfo.courseid!).doc(lessoninfo.id).set(
           lessoninfo.toJson(),
           SetOptions(
             merge: true,
@@ -497,14 +497,14 @@ class DataManager {
   }
 
   void DeleteLessonInfo(LessonInfo lessoninfo) {
-    getLessonInfoRefCourse(lessoninfo.courseid).doc(lessoninfo.id).delete();
+    getLessonInfoRefCourse(lessoninfo.courseid!).doc(lessoninfo.id).delete();
   }
 
   void CreateLessonInfo(LessonInfo lessoninfo) {
     String newlessoninfoid =
-        getLessonInfoRefCourse(lessoninfo.courseid).doc().id;
+        getLessonInfoRefCourse(lessoninfo.courseid!).doc().id;
     lessoninfo.id = newlessoninfoid;
-    getLessonInfoRefCourse(lessoninfo.courseid).doc(lessoninfo.id).set(
+    getLessonInfoRefCourse(lessoninfo.courseid!).doc(lessoninfo.id).set(
           lessoninfo.toJson(),
           SetOptions(
             merge: true,
@@ -531,7 +531,7 @@ class DataManager {
     } else {
       if (schoolTask.courseid != null) {
         print('Set Task as DOne');
-        getTaskRefCourse(schoolTask.courseid).doc(schoolTask.taskid).set(
+        getTaskRefCourse(schoolTask.courseid!).doc(schoolTask.taskid).set(
               finishedmap,
               SetOptions(
                 merge: true,
@@ -539,7 +539,7 @@ class DataManager {
             );
       } else {
         if (schoolTask.classid != null) {
-          getTaskRefClass(schoolTask.classid).doc(schoolTask.taskid).set(
+          getTaskRefClass(schoolTask.classid!).doc(schoolTask.taskid).set(
                 finishedmap,
                 SetOptions(
                   merge: true,
@@ -563,7 +563,7 @@ class DataManager {
           );
     } else {
       if (schoolTask.courseid != null) {
-        getTaskRefCourse(schoolTask.courseid).doc(schoolTask.taskid).set(
+        getTaskRefCourse(schoolTask.courseid!).doc(schoolTask.taskid).set(
               archivedmap,
               SetOptions(
                 merge: true,
@@ -571,7 +571,7 @@ class DataManager {
             );
       } else {
         if (schoolTask.classid != null) {
-          getTaskRefClass(schoolTask.classid).doc(schoolTask.taskid).set(
+          getTaskRefClass(schoolTask.classid!).doc(schoolTask.taskid).set(
                 archivedmap,
                 SetOptions(
                   merge: true,
@@ -589,10 +589,10 @@ class DataManager {
       getTaskRefPrivate().doc(schoolTask.taskid).delete();
     } else {
       if (schoolTask.courseid != null) {
-        getTaskRefCourse(schoolTask.courseid).doc(schoolTask.taskid).delete();
+        getTaskRefCourse(schoolTask.courseid!).doc(schoolTask.taskid).delete();
       } else {
         if (schoolTask.classid != null) {
-          getTaskRefClass(schoolTask.classid).doc(schoolTask.taskid).delete();
+          getTaskRefClass(schoolTask.classid!).doc(schoolTask.taskid).delete();
         } else {
           throw Exception('NO PLACE TO SAVE TASK???');
         }
@@ -612,7 +612,7 @@ class DataManager {
           );
     } else {
       if (schoolEvent.courseid != null) {
-        getEventRefCourse(schoolEvent.courseid).doc(schoolEvent.eventid).set(
+        getEventRefCourse(schoolEvent.courseid!).doc(schoolEvent.eventid).set(
               archivedmap,
               SetOptions(
                 merge: true,
@@ -620,7 +620,7 @@ class DataManager {
             );
       } else {
         if (schoolEvent.classid != null) {
-          getEventRefClass(schoolEvent.classid).doc(schoolEvent.eventid).set(
+          getEventRefClass(schoolEvent.classid!).doc(schoolEvent.eventid).set(
                 archivedmap,
                 SetOptions(
                   merge: true,
@@ -638,12 +638,12 @@ class DataManager {
       getEventRefPrivate().doc(schoolEvent.eventid).delete();
     } else {
       if (schoolEvent.courseid != null) {
-        getEventRefCourse(schoolEvent.courseid)
+        getEventRefCourse(schoolEvent.courseid!)
             .doc(schoolEvent.eventid)
             .delete();
       } else {
         if (schoolEvent.classid != null) {
-          getEventRefClass(schoolEvent.classid)
+          getEventRefClass(schoolEvent.classid!)
               .doc(schoolEvent.eventid)
               .delete();
         } else {
@@ -698,17 +698,17 @@ class DataManager {
   }
 
   void CreateNewFile(CloudFile file) {
-    if (file.savedin.type == SavedInType.PERSONAL) {
+    if (file.savedin?.type == SavedInType.PERSONAL) {
       filesPersonalRef.doc(file.fileid).set(file.toJson());
     }
   }
 
   void DeleteFile(CloudFile file) {
-    if (file.savedin.type == SavedInType.PERSONAL) {
+    if (file.savedin?.type == SavedInType.PERSONAL) {
       print('DELETING FILE');
       filesPersonalRef.doc(file.fileid).delete();
       if (file.fileform == FileForm.STANDARD) {
-        getFileStorageRef(file.fileid, file.savedin)?.delete().then((_) {
+        getFileStorageRef(file.fileid!, file.savedin!)?.delete().then((_) {
           showToastMessage(msg: 'Succesful/Erfolgreich');
         });
       }

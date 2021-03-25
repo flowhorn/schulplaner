@@ -1,4 +1,4 @@
-//@dart=2.11
+//
 import 'package:schulplaner8/Helper/DateAPI.dart';
 import 'package:schulplaner8/Helper/EasyWidget.dart';
 import 'package:schulplaner8/Helper/PermissionManagement.dart';
@@ -25,21 +25,21 @@ class NewSchoolEventView extends StatelessWidget {
   final bool editmode;
   bool changedValues = false;
 
-  List<String> _nextlessons;
-  List<RecommendedDate> recommendeddates;
-  SchoolEvent data;
-  ValueNotifier<SchoolEvent> notifier;
+  late List<String> _nextlessons;
+  late List<RecommendedDate> recommendeddates;
+  late SchoolEvent data;
+  late ValueNotifier<SchoolEvent> notifier;
   ValueNotifier<bool> showtimeofday = ValueNotifier(false);
   ValueNotifier<bool> showenddate = ValueNotifier(false);
 
   NewSchoolEventView.Create(
-      {@required this.database, int type = 0, String date, String courseid})
+      {required this.database, int type = 0, String? date, String? courseid})
       : editmode = false {
     data = SchoolEvent(type: type, date: date, courseid: courseid);
     notifier = ValueNotifier(data);
 
     if (data.date == null && data.courseid != null) {
-      _nextlessons = getNextLessons(database, data.courseid, count: 1);
+      _nextlessons = getNextLessons(database, data.courseid!, count: 1);
       if (_nextlessons.isNotEmpty) {
         data.date = _nextlessons[0];
       }
@@ -47,8 +47,8 @@ class NewSchoolEventView extends StatelessWidget {
   }
 
   NewSchoolEventView.Edit({
-    @required this.database,
-    @required SchoolEvent eventData,
+    required this.database,
+    required SchoolEvent eventData,
   }) : editmode = true {
     data = eventData.copy();
     notifier = ValueNotifier(data);
@@ -63,13 +63,12 @@ class NewSchoolEventView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (recommendeddates == null) {
-      recommendeddates = (_nextlessons ?? [])
-          .map((date) =>
-              RecommendedDate(date: date, text: getString(context).nextlesson))
-          .toList()
-            ..addAll(getRecommendedDatesSimple(null));
-    }
+    recommendeddates = (_nextlessons ?? [])
+        .map((date) =>
+            RecommendedDate(date: date, text: getString(context).nextlesson))
+        .toList()
+          ..addAll(getRecommendedDatesSimple(context));
+
     return WillPopScope(
         child: ValueListenableBuilder<SchoolEvent>(
             valueListenable: notifier,
@@ -103,10 +102,10 @@ class NewSchoolEventView extends StatelessWidget {
                           title: Text(getString(context).eventtype),
                           leading: data.type != null
                               ? Icon(
-                                  eventtype_data(context)[data.type].iconData)
+                                  eventtype_data(context)[data.type]!.iconData)
                               : Icon(Icons.warning),
                           subtitle: Text(data.type != null
-                              ? eventtype_data(context)[data.type].name
+                              ? eventtype_data(context)[data.type]!.name
                               : '-'),
                           onTap: () {
                             selectItem<EventTypeData>(
@@ -143,7 +142,7 @@ class NewSchoolEventView extends StatelessWidget {
                             data.classid = null;
                             notifier.value = data;
                             List<String> nextlessons = getNextLessons(
-                                database, data.courseid,
+                                database, data.courseid!,
                                 count: 1);
                             if (data.date == null && nextlessons.isNotEmpty) {
                               data.date = nextlessons[0];
@@ -172,8 +171,9 @@ class NewSchoolEventView extends StatelessWidget {
                         ListTile(
                           leading: Icon(Icons.event),
                           title: Text(getString(context).date),
-                          subtitle: Text(
-                              data.date != null ? getDateText(data.date) : '-'),
+                          subtitle: Text(data.date != null
+                              ? getDateText(data.date!)
+                              : '-'),
                           onTap: () {
                             selectDateString(context, data.date)
                                 .then((newDateString) {
@@ -198,7 +198,7 @@ class NewSchoolEventView extends StatelessWidget {
                                 leading: Icon(Icons.date_range),
                                 title: Text(getString(context).end),
                                 subtitle: Text(data.enddate != null
-                                    ? getDateText(data.enddate)
+                                    ? getDateText(data.enddate!)
                                     : '-'),
                                 onTap: () {
                                   selectDateString(context, data.enddate)
@@ -248,7 +248,7 @@ class NewSchoolEventView extends StatelessWidget {
                                               context: context,
                                               initialTime: parseTimeOfDay(
                                                   data.starttime))
-                                          .then((TimeOfDay newtime) {
+                                          .then((TimeOfDay? newtime) {
                                         if (newtime != null) {
                                           data.starttime =
                                               parseTimeString(newtime);
@@ -265,7 +265,7 @@ class NewSchoolEventView extends StatelessWidget {
                                               context: context,
                                               initialTime:
                                                   parseTimeOfDay(data.endtime))
-                                          .then((TimeOfDay newtime) {
+                                          .then((TimeOfDay? newtime) {
                                         if (newtime != null) {
                                           data.endtime =
                                               parseTimeString(newtime);
@@ -294,12 +294,12 @@ class NewSchoolEventView extends StatelessWidget {
                           attachments: data.files,
                           onAdded: (file) {
                             if (data.files == null) data.files = {};
-                            data.files[file.fileid] = file;
+                            data.files[file.fileid!] = file;
                             notifier.notifyListeners();
                           },
                           onRemoved: (file) {
                             if (data.files == null) data.files = {};
-                            data.files[file.fileid] = null;
+                            data.files[file.fileid!] = null;
                             notifier.notifyListeners();
                           },
                         ),
@@ -359,11 +359,11 @@ class NewSchoolEventView extends StatelessWidget {
   ThemeData getEventTheme(BuildContext context) {
     if (data.courseid != null) {
       return newAppThemeDesign(
-          context, database.courseinfo.data[data.courseid].getDesign());
+          context, database.courseinfo.data[data.courseid]!.getDesign());
     } else {
       if (data.classid != null) {
         return newAppThemeDesign(
-            context, database.schoolClassInfos.data[data.classid].getDesign());
+            context, database.schoolClassInfos.data[data.classid]!.getDesign());
       } else {
         return clearAppThemeData(context: context);
       }
@@ -376,15 +376,16 @@ class NewSchoolEventView extends StatelessWidget {
     } else {
       if (data.courseid != null) {
         return requestPermissionCourse(
-            database: database,
-            category: PermissionAccessType.creator,
-            courseid: data.courseid);
+          database: database,
+          category: PermissionAccessType.creator,
+          courseid: data.courseid!,
+        );
       } else {
         if (data.classid != null) {
           return requestPermissionClass(
               database: database,
               category: PermissionAccessType.creator,
-              classid: data.classid);
+              classid: data.classid!);
         } else {
           throw Exception('SOMETHING WENT WRONG???');
         }

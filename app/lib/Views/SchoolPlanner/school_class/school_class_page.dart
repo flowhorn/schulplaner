@@ -69,7 +69,7 @@ class SchoolClassView extends StatelessWidget {
                                   )),
                               title: Text(info.getName()),
                               subtitle: info.description != null
-                                  ? Text(info.description)
+                                  ? Text(info.description!)
                                   : null,
                             ),
                           ],

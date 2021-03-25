@@ -1,4 +1,4 @@
-// @dart=2.11
+//
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/grades/models/grade_type.dart';
 import 'package:schulplaner8/models/planner_settings.dart';
@@ -18,7 +18,8 @@ import 'package:schulplaner_widgets/schulplaner_theme.dart';
 
 class NewGradeView extends StatefulWidget {
   final PlannerDatabase database;
-  final String courseid, gradeid, date;
+  final String? courseid, gradeid;
+  final String? date;
   final bool editmode;
   NewGradeView(this.database,
       {this.courseid, this.date, this.gradeid, this.editmode = false});
@@ -30,30 +31,31 @@ class NewGradeView extends StatefulWidget {
 
 class NewGradeViewState extends State<NewGradeView> {
   final PlannerDatabase database;
-  bool editmode;
-  String courseid, gradeid;
+  late bool editmode;
+  late String? courseid, gradeid;
   ValueNotifier<bool> showWeight = ValueNotifier(false);
   NewGradeViewState(
-      this.database, this.courseid, this.gradeid, this.editmode, String date) {
+      this.database, this.courseid, this.gradeid, this.editmode, String? date) {
     if (editmode) {
-      grade = database.grades.getItem(gradeid);
+      grade = database.grades.getItem(gradeid!)!;
     } else {
       grade = Grade(
-          id: database.dataManager.gradesRef.doc().id,
-          courseid: courseid,
-          type: GradeType.EXAM,
-          date: date);
+        id: database.dataManager.gradesRef.doc().id,
+        courseid: courseid,
+        type: GradeType.EXAM,
+        date: date!,
+      );
     }
     prefilled_title = grade.title ?? '';
     prefilled_weight = grade.weight ?? 1.0;
     if (getGradePackage(database.getSettings().gradepackageid).inputSupport) {
       if (grade.valuekey != null) {
         prefilled_grade =
-            DataUtil_Grade().getGradeValueOf(grade.valuekey).value.toString();
+            DataUtil_Grade().getGradeValueOf(grade.valuekey!).value.toString();
       }
     }
   }
-  Grade grade;
+  late Grade grade;
 
   String prefilled_title = '';
   String prefilled_grade = '';
@@ -169,7 +171,7 @@ class NewGradeViewState extends State<NewGradeView> {
                               ': ' +
                               (grade.valuekey != null
                                   ? DataUtil_Grade()
-                                      .getGradeValueOf(grade.valuekey)
+                                      .getGradeValueOf(grade.valuekey!)
                                       .getLongName()
                                   : '-'),
                         ),
@@ -229,14 +231,14 @@ class NewGradeViewState extends State<NewGradeView> {
                     getString(context).type,
                   ),
                   subtitle: Text(
-                      getGradeTypes(context)[grade.type.index].name ?? '-'),
+                      getGradeTypes(context)[grade.type!.index].name ?? '-'),
                   dense: false,
                   trailing:
-                      Icon(getGradeTypes(context)[grade.type.index].iconData),
+                      Icon(getGradeTypes(context)[grade.type!.index].iconData),
                   onTap: () {
                     showGradetypePicker(database, context, (int mType) {
                       setState(() => grade.type = GradeType.values[mType]);
-                    }, currentid: grade.type.index);
+                    }, currentid: grade.type!.index);
                   },
                 ),
                 FormDivider(),
@@ -296,7 +298,7 @@ const formPaddingText =
 
 void showGradeValuePicker(PlannerDatabase database, BuildContext context,
     ValueSetter<GradeValue> onTapData,
-    {String currentid}) {
+    {String? currentid}) {
   PlannerSettingsData settings = database.getSettings();
   selectItem<GradeValue>(
       context: context,
@@ -318,7 +320,7 @@ void showGradeValuePicker(PlannerDatabase database, BuildContext context,
 
 void showGradetypePicker(
     PlannerDatabase database, BuildContext context, ValueSetter<int> onTapData,
-    {int currentid}) {
+    {int? currentid}) {
   List<Choice> mylist = [];
   mylist..addAll(getGradeTypes(context));
   selectItem<Choice>(

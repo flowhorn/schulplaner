@@ -1,4 +1,4 @@
-//@dart=2.11
+//
 import 'package:bloc/bloc_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:schulplaner8/Views/SchoolPlanner/planner_settings/notification_settings.dart';
@@ -38,7 +38,7 @@ typedef List<Widget> SubSettingsBuilder(
 
 class PlannerSettings extends StatelessWidget {
   const PlannerSettings({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -300,28 +300,29 @@ Widget getSubSettingsGrades(BuildContext context, PlannerDatabase database) {
             onTap: () {
               final list = settings
                   .getCurrentGradePackage(context: context)
-                  .averagedisplays;
+                  .averagedisplays!;
               selectItem<AverageDisplay>(
-                  context: context,
-                  items: list,
-                  builder: (context, item) {
-                    int index = list.indexOf(item);
-                    return ListTile(
-                      title: Text(item.name),
-                      onTap: () {
-                        PlannerSettingsData newsettings = settings;
-                        newsettings.average_display_id = index;
-                        _updateSettings(newsettings, database);
-                        Navigator.pop(context);
-                      },
-                      trailing: index == settings.average_display_id
-                          ? Icon(
-                              Icons.done,
-                              color: Colors.green,
-                            )
-                          : null,
-                    );
-                  });
+                context: context,
+                items: list,
+                builder: (context, item) {
+                  int index = list.indexOf(item);
+                  return ListTile(
+                    title: Text(item.name),
+                    onTap: () {
+                      PlannerSettingsData newsettings = settings;
+                      newsettings.average_display_id = index;
+                      _updateSettings(newsettings, database);
+                      Navigator.pop(context);
+                    },
+                    trailing: index == settings.average_display_id
+                        ? Icon(
+                            Icons.done,
+                            color: Colors.green,
+                          )
+                        : null,
+                  );
+                },
+              );
             },
           ),
           ListTile(
@@ -390,7 +391,7 @@ Widget getSubSettingsWidget(BuildContext context, PlannerDatabase database) {
                 FormHeader(getString(context).options),
                 SwitchListTile(
                   title: Text(getString(context).darkmode),
-                  value: settingsdata.appwidgetsettings.darkmode,
+                  value: settingsdata!.appwidgetsettings.darkmode,
                   onChanged: (newvalue) {
                     AppSettingsData newdata = settingsdata.copyWith(
                         appwidgetsettings: settingsdata.appwidgetsettings
@@ -462,9 +463,9 @@ class SubSettingsPlanner extends StatelessWidget {
   final PlannerDatabase plannerDatabase;
 
   const SubSettingsPlanner({
-    @required this.title,
-    @required this.plannerDatabase,
-    @required this.builder,
+    required this.title,
+    required this.plannerDatabase,
+    required this.builder,
   });
 
   @override
@@ -474,12 +475,12 @@ class SubSettingsPlanner extends StatelessWidget {
         title: title,
       ),
       body: SingleChildScrollView(
-        child: StreamBuilder<PlannerSettingsData>(
+        child: StreamBuilder<PlannerSettingsData?>(
             stream: plannerDatabase.settings.stream,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return Column(
-                  children: builder(context, snapshot.data),
+                  children: builder(context, snapshot.data!),
                   mainAxisSize: MainAxisSize.min,
                 );
               } else {
@@ -498,19 +499,19 @@ class SubSettingsPlannerFloating extends StatelessWidget {
   final PlannerDatabase plannerDatabase;
 
   const SubSettingsPlannerFloating({
-    @required this.plannerDatabase,
-    @required this.builder,
+    required this.plannerDatabase,
+    required this.builder,
   });
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: StreamBuilder<PlannerSettingsData>(
+      child: StreamBuilder<PlannerSettingsData?>(
           stream: plannerDatabase.settings.stream,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return Column(
-                children: builder(context, snapshot.data),
+                children: builder(context, snapshot.data!),
                 mainAxisSize: MainAxisSize.min,
               );
             } else {
@@ -536,16 +537,16 @@ void _updateSettings(PlannerSettingsData newdata, PlannerDatabase database) {
 class LessonTimeSettings extends StatelessWidget {
   final PlannerDatabase database;
   bool changedValues = false;
-  Map<int, LessonTime> lessontimes;
-  ValueNotifier<Map<int, LessonTime>> notifier;
-  LessonTimeSettings({@required this.database}) {
+  late Map<int, LessonTime> lessontimes;
+  late ValueNotifier<Map<int, LessonTime>> notifier;
+  LessonTimeSettings({required this.database}) {
     lessontimes = Map.from(database.settings.data?.lessontimes ?? {});
     notifier = ValueNotifier(lessontimes);
   }
 
   @override
   Widget build(BuildContext context) {
-    final PlannerSettingsData settings = database.settings.data;
+    final PlannerSettingsData settings = database.settings.data!;
     return WillPopScope(
         child: Scaffold(
           appBar: MyAppHeader(title: getString(context).timesoflessons),
@@ -553,9 +554,9 @@ class LessonTimeSettings extends StatelessWidget {
               valueListenable: notifier,
               builder: (context, data, _) {
                 return ListView(
-                    children: buildIntList(24,
-                            start: database.settings.data.zero_lesson ? 0 : 1)
-                        .map((value) {
+                    children:
+                        buildIntList(24, start: settings.zero_lesson ? 0 : 1)
+                            .map((value) {
                   LessonTime time = data[value] ?? LessonTime();
                   return Padding(
                     padding: EdgeInsets.only(
@@ -685,19 +686,19 @@ class LessonTimeSettings extends StatelessWidget {
 
 class GradeProfileSettings extends StatelessWidget {
   final PlannerDatabase database;
-  GradeProfileSettings({@required this.database});
+  GradeProfileSettings({required this.database});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MyAppHeader(title: getString(context).gradeprofiles),
-      body: StreamBuilder<PlannerSettingsData>(
+      body: StreamBuilder<PlannerSettingsData?>(
         builder: (context, snapshot) {
-          List<GradeProfile> gradeprofiles =
-              snapshot.data.gradeprofiles.values.toList();
+          List<GradeProfile?> gradeprofiles =
+              snapshot.data!.gradeprofiles.values.toList();
           return ListView.builder(
             itemBuilder: (context, index) {
-              GradeProfile profile = gradeprofiles[index];
+              GradeProfile profile = gradeprofiles[index]!;
               return Padding(
                 padding: EdgeInsets.all(4.0),
                 child: Card(
@@ -729,7 +730,7 @@ class GradeProfileSettings extends StatelessWidget {
                                             .then((result) {
                                           if (result == true) {
                                             PlannerSettingsData newdata =
-                                                database.settings.data.copy();
+                                                database.settings.data!.copy();
                                             newdata.gradeprofiles[
                                                 profile.profileid] = null;
                                             _updateSettings(newdata, database);
@@ -766,7 +767,7 @@ class GradeProfileSettings extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton.extended(
           onPressed: () {
-            PlannerSettingsData newdata = database.settings.data.copy();
+            PlannerSettingsData newdata = database.settings.data!.copy();
             String newprofileid = database.dataManager.generateCourseId();
             newdata.gradeprofiles[newprofileid] =
                 GradeProfile.Create(newprofileid).copyWith(
@@ -785,17 +786,20 @@ class EditGradeProfileSettings extends StatelessWidget {
   final PlannerDatabase database;
   bool changedValues = false;
   GradeProfile gradeprofile;
-  ValueNotifier<GradeProfile> notifier;
+  late ValueNotifier<GradeProfile> notifier;
 
   ValueNotifier<bool> showWeight = ValueNotifier(false);
 
-  EditGradeProfileSettings({this.database, this.gradeprofile}) {
+  EditGradeProfileSettings({
+    required this.database,
+    required this.gradeprofile,
+  }) {
     notifier = ValueNotifier(gradeprofile);
   }
 
   @override
   Widget build(BuildContext context) {
-    final PlannerSettingsData settings = database.settings.data;
+    final PlannerSettingsData settings = database.settings.data!;
     return WillPopScope(
         child: Scaffold(
           appBar: MyAppHeader(title: getString(context).editgradeprofile),
@@ -850,17 +854,18 @@ class EditGradeProfileSettings extends StatelessWidget {
                       : Padding(
                           padding: EdgeInsets.all(8.0),
                           child: getTitleCard(
-                              iconData: Icons.merge_type,
-                              title: getString(context).types,
-                              content: gradeprofile.types.values
-                                  .where((it) => it != null)
-                                  .map<Widget>((gradetypeitem) {
+                            iconData: Icons.merge_type,
+                            title: getString(context).types,
+                            content: gradeprofile.types.values
+                                .where((it) => it != null)
+                                .map<Widget>(
+                              (gradetypeitem) {
                                 String inPercent() {
                                   double total = gradeprofile.types.values
                                       .where((it) => it != null)
-                                      .map((item) => item.weight)
+                                      .map((item) => item!.weight)
                                       .reduce((a, b) => a + b);
-                                  return ((Decimal.parse(gradetypeitem.weight
+                                  return ((Decimal.parse(gradetypeitem!.weight
                                                   .toString()) /
                                               Decimal.parse(total.toString())) *
                                           Decimal.fromInt(100))
@@ -869,7 +874,7 @@ class EditGradeProfileSettings extends StatelessWidget {
 
                                 return ListTile(
                                   leading: Text(
-                                      gradetypeitem.weight.toString() +
+                                      gradetypeitem!.weight.toString() +
                                           '\n(${inPercent()}%)'),
                                   title: Text(gradetypeitem.name ?? '-'),
                                   subtitle: Text(
@@ -909,7 +914,7 @@ class EditGradeProfileSettings extends StatelessWidget {
                                                 gradeprofile =
                                                     gradeprofile.copyWith();
                                                 gradeprofile.types[
-                                                    gradetypeitem.id] = null;
+                                                    gradetypeitem!.id] = null;
                                                 notifier.value = gradeprofile;
                                               }
                                             });
@@ -918,32 +923,40 @@ class EditGradeProfileSettings extends StatelessWidget {
                                     mainAxisSize: MainAxisSize.min,
                                   ),
                                 );
-                              }).toList()
-                                    ..add(FormButton(getString(context).newtype,
-                                        () {
-                                      String newid =
-                                          gradeprofile.getNewTypeId();
-                                      gradeprofile = gradeprofile.copyWith();
-                                      gradeprofile.types[newid] =
-                                          GradeTypeItem.Create(newid).copyWith(
-                                              name: getString(context).newtype);
-                                      notifier.value = gradeprofile;
-                                      pushWidget(
-                                          context,
-                                          EditGradeTypeItemSettings(
-                                            gradetypeitem:
-                                                gradeprofile.types[newid],
-                                          )).then((newdata) {
-                                        if (newdata != null &&
-                                            newdata is GradeTypeItem) {
-                                          gradeprofile =
-                                              gradeprofile.copyWith();
-                                          gradeprofile.types[newdata.id] =
-                                              newdata;
-                                          notifier.value = gradeprofile;
-                                        }
-                                      });
-                                    }))),
+                              },
+                            ).toList()
+                                  ..add(
+                                    FormButton(
+                                      getString(context).newtype,
+                                      () {
+                                        String newid =
+                                            gradeprofile.getNewTypeId()!;
+                                        gradeprofile = gradeprofile.copyWith();
+                                        gradeprofile.types[newid] =
+                                            GradeTypeItem.Create(newid)
+                                                .copyWith(
+                                                    name: getString(context)
+                                                        .newtype);
+                                        notifier.value = gradeprofile;
+                                        pushWidget(
+                                            context,
+                                            EditGradeTypeItemSettings(
+                                              gradetypeitem:
+                                                  gradeprofile.types[newid]!,
+                                            )).then((newdata) {
+                                          if (newdata != null &&
+                                              newdata is GradeTypeItem) {
+                                            gradeprofile =
+                                                gradeprofile.copyWith();
+                                            gradeprofile.types[newdata.id] =
+                                                newdata;
+                                            notifier.value = gradeprofile;
+                                          }
+                                        });
+                                      },
+                                    ),
+                                  ),
+                          ),
                         ),
                   FormDivider(),
                   FormSpace(64.0),
@@ -983,12 +996,12 @@ class EditGradeProfileSettings extends StatelessWidget {
 class EditGradeTypeItemSettings extends StatelessWidget {
   bool changedValues = false;
   GradeTypeItem gradetypeitem;
-  ValueNotifier<GradeTypeItem> notifier;
+  late ValueNotifier<GradeTypeItem> notifier;
 
   ValueNotifier<bool> showWeight = ValueNotifier(true);
   ValueNotifier<bool> showextras = ValueNotifier(false);
 
-  EditGradeTypeItemSettings({this.gradetypeitem}) {
+  EditGradeTypeItemSettings({required this.gradetypeitem}) {
     notifier = ValueNotifier(gradetypeitem);
   }
 
@@ -1049,7 +1062,7 @@ class EditGradeTypeItemSettings extends StatelessWidget {
                         onChanged: (newvalue) {
                           gradetypeitem = gradetypeitem.copyWith();
                           gradetypeitem.gradetypes[GradeType.values[item.id]] =
-                              newvalue;
+                              newvalue!;
                           notifier.value = gradetypeitem;
                         },
                         title: Text(item.name),
@@ -1107,25 +1120,25 @@ class EditGradeTypeItemSettings extends StatelessWidget {
 }
 
 class ShortPlannerSettings extends StatelessWidget {
-  const ShortPlannerSettings({Key key}) : super(key: key);
+  const ShortPlannerSettings({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final appSettingsBloc = BlocProvider.of<AppSettingsBloc>(context);
     final plannerDatabase =
-        BlocProvider.of<PlannerDatabaseBloc>(context).plannerDatabase;
+        BlocProvider.of<PlannerDatabaseBloc>(context).plannerDatabase!;
     return SubSettingsPlannerFloating(
         plannerDatabase: plannerDatabase,
         builder: (context, settings) {
           return [
-            StreamBuilder(
+            StreamBuilder<AppSettingsData?>(
               builder: (context, snapshot) {
-                AppSettingsData appSettingsData = snapshot.data;
+                final appSettingsData = snapshot.data;
                 return SwitchListTile(
-                  value: appSettingsData.darkmode ?? false,
+                  value: appSettingsData?.darkmode ?? false,
                   onChanged: (newvalue) {
                     appSettingsBloc.setAppSettings(
-                        appSettingsData.copyWith(darkmode: newvalue));
+                        appSettingsData!.copyWith(darkmode: newvalue));
                   },
                   title: Text(getString(context).darkmode),
                 );
@@ -1178,7 +1191,7 @@ class ShortPlannerSettings extends StatelessWidget {
                   ' ' +
                   getString(context).lessonsperday),
               onTap: () {
-                selectItem(
+                selectItem<int>(
                     context: context,
                     items: buildIntList(24, start: 1),
                     builder: (context, item) {
@@ -1188,7 +1201,7 @@ class ShortPlannerSettings extends StatelessWidget {
                         trailing: selectedView(item == settings.maxlessons),
                         onTap: () {
                           PlannerSettingsData newdata = settings.copy();
-                          newdata.maxlessons = item;
+                          newdata.maxlessons = item!;
                           _updateSettings(newdata, plannerDatabase);
                           Navigator.pop(context);
                         },
@@ -1227,7 +1240,7 @@ class ShortPlannerSettings extends StatelessWidget {
                         ' ${getString(context).weektypes}' +
                         ' (${weektypesamount_meaning(context)[settings.weektypes_amount]})'),
                     onTap: () {
-                      selectItem(
+                      selectItem<int>(
                           context: context,
                           items: [2, 3, 4],
                           builder: (context, item) {
@@ -1290,7 +1303,7 @@ class ShortPlannerSettings extends StatelessWidget {
               subtitle: settings.vacationpackageid == null
                   ? Text(getString(context).nothingselected)
                   : RegionName(
-                      regionID: settings.vacationpackageid,
+                      regionID: settings.vacationpackageid!,
                       holidayGateway: plannerDatabase.holidayGateway,
                     ),
               onTap: () {
