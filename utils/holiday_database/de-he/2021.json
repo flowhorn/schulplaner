@@ -2,7 +2,7 @@
     "2021-ostern": {
         "id": "2021-ostern",
         "name": "Osterferien",
-        "start": "2021-04-06",
+        "start": "2021-04-05",
         "end": "2021-04-16",
         "type": "holiday"
     },
