@@ -47,7 +47,7 @@ class NewGradeViewState extends State<NewGradeView> {
       );
     }
     prefilled_title = grade.title ?? '';
-    prefilled_weight = grade.weight ?? 1.0;
+    prefilled_weight = grade.weight;
     if (getGradePackage(database.getSettings().gradepackageid).inputSupport) {
       if (grade.valuekey != null) {
         prefilled_grade =
@@ -230,15 +230,14 @@ class NewGradeViewState extends State<NewGradeView> {
                   title: Text(
                     getString(context).type,
                   ),
-                  subtitle: Text(
-                      getGradeTypes(context)[grade.type!.index].name ?? '-'),
+                  subtitle: Text(getGradeTypes(context)[grade.type.index].name),
                   dense: false,
                   trailing:
-                      Icon(getGradeTypes(context)[grade.type!.index].iconData),
+                      Icon(getGradeTypes(context)[grade.type.index].iconData),
                   onTap: () {
                     showGradetypePicker(database, context, (int mType) {
                       setState(() => grade.type = GradeType.values[mType]);
-                    }, currentid: grade.type!.index);
+                    }, currentid: grade.type.index);
                   },
                 ),
                 FormDivider(),

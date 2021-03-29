@@ -113,7 +113,7 @@ class SchoolTask {
       'courseid': courseid,
       'creatorid': creatorid,
       'detail': detail,
-      'files': files?.map((key, value) => MapEntry(key, value?.toJson())),
+      'files': files.map((key, value) => MapEntry(key, value?.toJson())),
       'archived': archived,
       'private': private,
     };

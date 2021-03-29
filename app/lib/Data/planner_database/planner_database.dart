@@ -166,14 +166,14 @@ class PlannerDatabase {
         objectBuilder: (key, it) => Teacher.fromData(it),
         getKey: (it) => it.teacherid,
         sorter: (item1, item2) {
-          return (item1.name ?? '').compareTo(item2.name ?? '');
+          return (item1.name).compareTo(item2.name);
         });
     places = DataCollectionPackage(
         reference: dataManager.placesRef,
         objectBuilder: (key, it) => Place.fromData(it!),
         getKey: (it) => it.placeid,
         sorter: (item1, item2) {
-          return (item1.name ?? '').compareTo(item2.name ?? '');
+          return (item1.name).compareTo(item2.name);
         });
     notes = DataCollectionPackage(
       reference: dataManager.notesRef.where('archived', isEqualTo: false),
