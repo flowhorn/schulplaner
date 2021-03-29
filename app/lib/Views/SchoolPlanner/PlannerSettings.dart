@@ -914,7 +914,7 @@ class EditGradeProfileSettings extends StatelessWidget {
                                                 gradeprofile =
                                                     gradeprofile.copyWith();
                                                 gradeprofile.types[
-                                                    gradetypeitem!.id] = null;
+                                                    gradetypeitem.id] = null;
                                                 notifier.value = gradeprofile;
                                               }
                                             });
@@ -1201,7 +1201,7 @@ class ShortPlannerSettings extends StatelessWidget {
                         trailing: selectedView(item == settings.maxlessons),
                         onTap: () {
                           PlannerSettingsData newdata = settings.copy();
-                          newdata.maxlessons = item!;
+                          newdata.maxlessons = item;
                           _updateSettings(newdata, plannerDatabase);
                           Navigator.pop(context);
                         },

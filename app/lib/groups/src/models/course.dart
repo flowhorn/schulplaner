@@ -206,7 +206,7 @@ class Course {
   }
 
   String getName() {
-    return name ?? '-';
+    return name;
   }
 
   Design? getDesign() {
@@ -219,12 +219,11 @@ class Course {
   }
 
   List<PlaceLink> getPlaceLinks() {
-    return places?.values?.where((it) => it != null).toList()
-        as List<PlaceLink>;
+    return places.values.where((it) => it != null).toList() as List<PlaceLink>;
   }
 
   String getTeachersListed() {
-    final text = teachers?.values?.map((data) => data?.name ?? '-')?.join(', ');
+    final text = teachers.values.map((data) => data?.name ?? '-').join(', ');
     if (text == null || text == '') {
       return '-';
     } else {
@@ -233,8 +232,8 @@ class Course {
   }
 
   String getPlacesListed() {
-    final text = places?.values?.map((data) => data?.name ?? '-')?.join(', ');
-    if (text == null || text == '') {
+    final text = places.values.map((data) => data?.name ?? '-').join(', ');
+    if (text == '') {
       return '-';
     } else {
       return text;
@@ -244,7 +243,7 @@ class Course {
   String? getTeacherFirst() {
     final list = getTeacherLinks();
     if (list.isNotEmpty) {
-      return list[0]?.name ?? '-';
+      return list[0].name;
     } else {
       return null;
     }
@@ -262,7 +261,7 @@ class Course {
   String? getPlaceFirst() {
     final list = getPlaceLinks();
     if (list.isNotEmpty) {
-      return list[0]?.name;
+      return list[0].name;
     } else {
       return null;
     }

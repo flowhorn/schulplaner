@@ -26,21 +26,21 @@ class GradeDetailList extends StatefulWidget {
 class GradeDetailListState extends State<GradeDetailList> {
   final PlannerDatabase database;
   GradeDetailListState(this.database) {
-    list = (database.grades.data?.toList() ?? [])
-      ..sort((g1, g2) {
-        return g1.date!.compareTo(g2.date!);
-      });
-    list_course = (database.courseinfo.data ?? {}).values.toList()
+    list = database.grades.data?.toList() ?? [];
+    list.sort((g1, g2) {
+      return g1.date!.compareTo(g2.date!);
+    });
+    list_course = (database.courseinfo.data).values.toList()
       ..sort((c1, c2) {
         return c1.getName().compareTo(c2.getName());
       });
-    calculator = AverageCalculator(database.getSettings(),
-        grades: list ?? [], courses: []);
+    calculator =
+        AverageCalculator(database.getSettings(), grades: list, courses: []);
   }
 
   late AverageCalculator calculator;
   List<Grade> originallist = [];
-  List<Grade> list = [];
+  late List<Grade> list;
   late StreamSubscription<List<Grade>?> datalistener;
   List<Course> list_course = [];
   late StreamSubscription<List<Course>?> datalistener_course;
@@ -62,7 +62,7 @@ class GradeDetailListState extends State<GradeDetailList> {
       });
     });
     datalistener_course = database.courseinfo.stream.map((datamap) {
-      return (datamap ?? {}).values.toList()
+      return (datamap).values.toList()
         ..sort((c1, c2) {
           return c1.getName().compareTo(c2.getName());
         });

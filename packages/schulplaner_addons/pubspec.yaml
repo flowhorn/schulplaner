@@ -21,7 +21,7 @@ dependencies:
   #GENERAL
   uuid: ^3.0.0
   #FILES AND IMAGES
-  cached_network_image: 3.0.0-nullsafety
+  cached_network_image: 3.0.0
   path_provider: ^2.0.1
   image: 3.0.2
   image_cropper: ^1.4.0
@@ -30,11 +30,11 @@ dependencies:
   file_picker: ^3.0.0
   photo_view: ^0.11.1
   #FIREBASE
-  firebase_storage: ^8.0.0
-  cloud_firestore: 1.0.2
+  firebase_storage: ^8.0.1
+  cloud_firestore: 1.0.3
   #MORE
-  url_launcher: 6.0.2
-  universal_io: ^2.0.1
+  url_launcher: 6.0.3
+  universal_io: ^2.0.3
 
 dev_dependencies:
   flutter_test:

@@ -460,7 +460,7 @@ void showTaskDetailSheet(BuildContext context,
                                                   TextStyle(color: Colors.blue),
                                             ),
                                       onTap: () {
-                                        OpenCloudFile(context, cloudfile!);
+                                        OpenCloudFile(context, cloudfile);
                                       },
                                     ))
                                 .toList(),

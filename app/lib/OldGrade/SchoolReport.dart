@@ -76,12 +76,11 @@ class SchoolReport {
     return {
       'id': id,
       'name': name,
-      'values': values.map((key, value) => MapEntry(key, value?.toJson())),
+      'values': values.map((key, value) => MapEntry(key, value.toJson())),
     };
   }
 
   ReportValue? getValue(String courseid) {
-    if (values == null) return null;
     if (values[courseid] == null) return null;
     return values[courseid];
   }
@@ -138,7 +137,7 @@ class ReportViewState extends State<ReportView> {
             height: 50.0,
             child: ListTile(
               title: Text(
-                myreport?.name ?? '',
+                myreport.name,
                 style: TextStyle(color: getTextColor(getPrimaryColor(context))),
               ),
               leading: Icon(
@@ -151,7 +150,7 @@ class ReportViewState extends State<ReportView> {
                         ? database
                             .getSettings()
                             .getCurrentAverageDisplay(context: context)
-                            .input(averageReport.totalaverage)
+                            .input(averageReport.totalaverage!)
                         : '/'),
                 style: TextStyle(
                     color: getTextColor(getPrimaryColor(context)),
@@ -165,21 +164,21 @@ class ReportViewState extends State<ReportView> {
           IconButton(
             icon: Icon(Icons.share),
             onPressed: () {
-              String firstpart = (myreport?.name ?? '-') +
+              String firstpart = (myreport.name) +
                   ': \n ' +
                   getString(context).average +
                   ': ' +
                   database
                       .getSettings()
                       .getCurrentAverageDisplay(context: context)
-                      .input(averageReport.totalaverage)
+                      .input(averageReport.totalaverage!)
                       .toString() +
                   '\n';
               for (Course c in courses) {
                 firstpart = firstpart +
                     c.name +
                     ': ' +
-                    (myreport?.getValue(c.id)?.grade_key != null
+                    (myreport.getValue(c.id)?.grade_key != null
                         ? (DataUtil_Grade()
                             .getGradeValueOf(
                                 myreport.getValue(c.id)!.grade_key!)
@@ -213,7 +212,7 @@ class ReportViewState extends State<ReportView> {
                   ));
             },
             trailing: Text(
-              myreport?.getValue(course.id)?.grade_key != null
+              myreport.getValue(course.id)?.grade_key != null
                   ? (DataUtil_Grade()
                       .getGradeValueOf(myreport.getValue(course.id)!.grade_key!)
                       .name)
@@ -227,7 +226,6 @@ class ReportViewState extends State<ReportView> {
   }
 
   List<ReportValue>? getValue() {
-    if (myreport?.values == null) return null;
     return myreport.values.values.toList();
   }
 }
@@ -298,7 +296,7 @@ void showSchoolReportMoreSheet(BuildContext context,
               if (item == null) return loadedView();
               return Column(
                 children: <Widget>[
-                  getSheetText(context, item.name ?? '-'),
+                  getSheetText(context, item.name),
                   ListTile(
                     leading: Icon(Icons.edit),
                     title: Text(getString(context).edit),

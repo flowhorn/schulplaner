@@ -116,7 +116,7 @@ class CoursePersonalPage extends StatelessWidget {
                           builder: (context, item) {
                             return ListTile(
                               title: Text(item!.name),
-                              trailing: item!.profileid ==
+                              trailing: item.profileid ==
                                       courseInfo.personalgradeprofile
                                   ? Icon(Icons.done, color: Colors.green)
                                   : null,

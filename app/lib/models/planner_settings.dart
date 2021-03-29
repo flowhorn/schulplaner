@@ -64,7 +64,7 @@ class PlannerSettingsData {
       Map<String, dynamic> predata_lessontimes =
           data['lessontimes']?.cast<String, dynamic>();
 
-      lessontimes = (predata_lessontimes ?? {}).map<int, LessonTime>(
+      lessontimes = (predata_lessontimes).map<int, LessonTime>(
           (String key, dynamic value) => MapEntry<int, LessonTime>(
               int.parse(key),
               LessonTime.fromData(value.cast<String, dynamic>())));
@@ -72,7 +72,7 @@ class PlannerSettingsData {
       Map<String, dynamic> predata_gradespans =
           data['gradespans']?.cast<String, dynamic>();
 
-      gradespans = (predata_gradespans ?? {}).map<String, GradeSpan>(
+      gradespans = (predata_gradespans).map<String, GradeSpan>(
           (String key, dynamic value) => MapEntry<String, GradeSpan>(
               key, GradeSpan.fromData(value.cast<String, dynamic>())));
 
@@ -135,16 +135,16 @@ class PlannerSettingsData {
       'weektypes_amount': weektypes_amount,
       'multiple_weektypes': multiple_weektypes,
       'timetable_timemode': timetable_timemode,
-      'weektype_fixpoint': weekTypeFixPoint?.toJson(),
+      'weektype_fixpoint': weekTypeFixPoint.toJson(),
       //data
       'vacationpackageid': vacationpackageid,
       'gradedataid': gradedataid,
 
       //datamaps
       'lessontimes': lessontimes
-          ?.map((key, value) => MapEntry(key.toString(), value?.toJson())),
+          .map((key, value) => MapEntry(key.toString(), value.toJson())),
       'gradespans': gradespans
-          ?.map((key, value) => MapEntry(key.toString(), value?.toJson())),
+          .map((key, value) => MapEntry(key.toString(), value.toJson())),
 
       //GRADES::
       'weight_tendencies': weight_tendencies,

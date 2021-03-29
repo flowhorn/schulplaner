@@ -69,7 +69,7 @@ class UpcomingView extends StatelessWidget {
               ),
         FormDivider(),
         FormHeader2(getString(context).briefly),
-        UpcomingTasksEventsView(plannerDatabase!),
+        UpcomingTasksEventsView(plannerDatabase),
         FormSpace(16.0),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,

@@ -90,7 +90,7 @@ class AppSettingsView extends StatelessWidget {
                         (getLanguage(
                               context,
                               getAppSettingsData(context).languagecode,
-                            )?.name ??
+                            ).name ??
                             '-')),
                     onTap: () {
                       selectItem<SimpleItem>(
@@ -135,7 +135,7 @@ class AppSettingsView extends StatelessWidget {
 
           FormSection(
             title: plannerLoaderBloc.loadAllPlannerStatusValue
-                    ?.getPlanner()
+                    .getPlanner()
                     ?.name ??
                 getString(context).apptitle,
             child: Builder(builder: (BuildContext context) {
@@ -143,7 +143,7 @@ class AppSettingsView extends StatelessWidget {
                   plannerDatabaseBloc.plannerDatabase!.isClosed() ||
                   plannerDatabaseBloc.plannerDatabase!.plannerid !=
                       plannerLoaderBloc.loadAllPlannerStatusValue
-                          ?.getPlanner()
+                          .getPlanner()
                           ?.id) {
                 return ListTile(
                   title: Text(
@@ -296,9 +296,10 @@ List<SimpleItem> availableLanguages(BuildContext context) {
 }
 
 SimpleItem getLanguage(BuildContext context, String languagecode) {
-  return availableLanguages(context)
-          .firstWhere((it) => it.id == languagecode) ??
-      availableLanguages(context)[0];
+  return availableLanguages(context).firstWhere(
+    (it) => it.id == languagecode,
+    orElse: () => availableLanguages(context)[0],
+  );
 }
 
 class AppConfigurationView extends StatelessWidget {
@@ -542,7 +543,7 @@ class AppConfigurationView extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.data == null) return CircularProgressIndicator();
         ConfigurationData configurationData = snapshot.data!.configurationData;
-        Map<int, int?> actionsdata = configurationData?.navigationactions ?? {};
+        Map<int, int?> actionsdata = configurationData.navigationactions;
 
         int getActionNumber(int index) {
           if (actionsdata.containsKey(index)) {

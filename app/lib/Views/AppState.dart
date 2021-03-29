@@ -153,6 +153,7 @@ class SelectPlannerViewState extends State<SelectPlannerView> {
     final plannerLoaderBloc = BlocProvider.of<PlannerLoaderBloc>(context);
     return Scaffold(
       body: Column(
+        mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Expanded(
               child: Center(
@@ -187,6 +188,7 @@ class SelectPlannerViewState extends State<SelectPlannerView> {
                     padding: EdgeInsets.only(left: 4.0, right: 4.0),
                     child: Card(
                       child: Column(
+                        mainAxisSize: MainAxisSize.min,
                         children: ((plannerLoaderBloc.loadAllPlannerStatusValue
                                         ?.getAllPlanner() ??
                                     [])
@@ -251,7 +253,6 @@ class SelectPlannerViewState extends State<SelectPlannerView> {
                     height: 16.0,
                   ),
                 ],
-                mainAxisSize: MainAxisSize.min,
               ),
             ),
           )),
@@ -295,7 +296,6 @@ class SelectPlannerViewState extends State<SelectPlannerView> {
             ),
           ),
         ],
-        mainAxisSize: MainAxisSize.min,
       ),
     );
   }

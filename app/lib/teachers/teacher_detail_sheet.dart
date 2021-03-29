@@ -93,7 +93,7 @@ Future<void> showTeacherDetail(
                                                 Navigator.popUntil(context,
                                                     (Route predicate) {
                                                   return (predicate
-                                                              ?.settings?.name
+                                                              .settings.name
                                                               ?.startsWith(
                                                                   'teacherid') ??
                                                           false) ==

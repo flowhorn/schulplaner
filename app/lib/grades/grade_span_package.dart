@@ -28,7 +28,7 @@ class GradeSpanPackage {
   ) {
     _listener = settingspackage.stream.listen((newsettingsdata) {
       _gradeSpanListSubject
-          .add(newsettingsdata?.gradespans?.values.toList() ?? []);
+          .add(newsettingsdata?.gradespans.values.toList() ?? []);
       sortAndSetActivatedCorrectly();
     });
     _listenerappsettings =
@@ -104,6 +104,6 @@ class GradeSpanPackage {
 
 extension on List<GradeSpan> {
   void sortGradeSpans() {
-    sort((i1, i2) => (i1.name ?? '').compareTo(i2.name ?? ''));
+    sort((i1, i2) => (i1.name).compareTo(i2.name));
   }
 }

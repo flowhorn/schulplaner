@@ -9,7 +9,7 @@ Future<Country?> selectCountry(BuildContext context, {Country? selected}) {
       items: Country.values.toList(),
       builder: (context, country) {
         return ListTile(
-          title: Text(countryToName(context, country!)),
+          title: Text(countryToName(context, country)),
           trailing: country == selected
               ? Icon(
                   Icons.done,

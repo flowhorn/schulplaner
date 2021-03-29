@@ -757,7 +757,7 @@ Stream<Map<String, MemberData>> getMemberStream(
         .map((it) => it!.membersData);
   } else if (savedin.type == SavedInType.CLASS) {
     return database.schoolClassInfos
-        .getItemStream(savedin!.id!)
+        .getItemStream(savedin.id!)
         .map((it) => it!.membersData);
   }
   throw Exception('Unsupported SavedIn Type!');

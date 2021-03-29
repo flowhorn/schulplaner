@@ -38,7 +38,7 @@ class QuickCreateView extends StatelessWidget {
                         pushWidget(
                           context,
                           NewSchoolTaskView(
-                            database: database!,
+                            database: database,
                           ),
                         );
                       },

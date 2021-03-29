@@ -25,7 +25,7 @@ void showGradeSpanSheet(BuildContext context, PlannerDatabase database) {
               List<GradeSpan> gradespanlist = snapshot.data ?? [];
               return getFlexList(gradespanlist.map((gradespan) {
                 return ListTile(
-                  title: Text(gradespan.getName(context) ?? '-'),
+                  title: Text(gradespan.getName(context)),
                   trailing: gradespan.activated
                       ? Icon(
                           Icons.done,
@@ -136,110 +136,109 @@ void showGradeInfoSheet(PlannerDatabase database,
     context: context,
     body: (BuildContext context) {
       return StreamBuilder<Grade?>(
-          stream: database.grades.getItemStream(gradeid),
-          builder: (BuildContext context, snapshot) {
-            Grade? item = snapshot.data;
-            if (item == null) return loadedView();
-            Course? courseInfo = database.getCourseInfo(item.courseid!);
+        stream: database.grades.getItemStream(gradeid),
+        builder: (BuildContext context, snapshot) {
+          Grade? item = snapshot.data;
+          if (item == null) return loadedView();
+          Course? courseInfo = database.getCourseInfo(item.courseid!);
 
-            return Expanded(
-                child: Column(
-              children: <Widget>[
-                getSheetText(context, item.title ?? '-'),
-                getExpandList([
-                  ListTile(
-                    leading: Icon(
-                      Icons.school,
-                      color: courseInfo == null
-                          ? null
-                          : courseInfo?.getDesign()?.primary,
-                    ),
-                    title: Text(courseInfo == null
-                        ? '???'
-                        : courseInfo?.getName() ?? getString(context).error),
-                    onTap: () {},
+          return Expanded(
+              child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              getSheetText(context, item.title ?? '-'),
+              getExpandList([
+                ListTile(
+                  leading: Icon(
+                    Icons.school,
+                    color: courseInfo == null
+                        ? null
+                        : courseInfo.getDesign()?.primary,
                   ),
-                  ListTile(
-                      leading: Icon(Icons.grade),
-                      title: Text(DataUtil_Grade()
-                          .getGradeValueOf(item.valuekey!)
-                          .getLongName())),
-                  ListTile(
-                      leading: Icon(Icons.today),
-                      title: Text(getDateText(item.date!))),
-                  ListTile(
-                      leading: Icon(Icons.line_weight),
-                      title: Text(item.weight.toString())),
-                  ListTile(
-                      leading: Icon(
-                          getGradeTypes(context)[item.type.index].iconData),
-                      title:
-                          Text(getGradeTypes(context)[item.type.index].name)),
-                ]),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: ButtonBar(
-                    children: <Widget>[
-                      //RButton(text: "Anrufen", onTap: () {}),
-                      RButton(
-                          text: getString(context).more,
-                          onTap: () {
-                            showSheetBuilder(
-                                context: context,
-                                child: (context) {
-                                  return Column(
-                                    children: <Widget>[
-                                      ListTile(
-                                        leading: Icon(Icons.edit),
-                                        title: Text(getString(context).edit),
-                                        onTap: () {
-                                          Navigator.pop(context);
-                                          pushWidget(
-                                            context,
-                                            NewGradeView(
-                                              database,
-                                              editmode: true,
-                                              gradeid: item.id,
-                                            ),
-                                          );
-                                        },
-                                      ),
-                                      ListTile(
-                                        leading: Icon(Icons.delete_outline),
-                                        title: Text(getString(context).delete),
-                                        onTap: () {
-                                          showConfirmDialog(
-                                                  context: context,
-                                                  title:
-                                                      getString(context).delete,
-                                                  action:
-                                                      getString(context).delete,
-                                                  richtext: null)
-                                              .then((result) {
-                                            if (result == true) {
-                                              database.dataManager
-                                                  .DeleteGrade(item);
-                                              popNavigatorBy(context,
-                                                  text: 'gradeid');
-                                            }
-                                          });
-                                        },
-                                      ),
-                                    ],
-                                  );
-                                },
-                                title: getString(context).more,
-                                routname: 'gradeidview');
-                          },
-                          iconData: Icons.more_horiz),
-                    ],
-                  ),
+                  title:
+                      Text(courseInfo == null ? '???' : courseInfo.getName()),
+                  onTap: () {},
                 ),
-                FormSpace(16.0),
-              ],
-              mainAxisSize: MainAxisSize.min,
-            ));
-          });
+                ListTile(
+                    leading: Icon(Icons.grade),
+                    title: Text(DataUtil_Grade()
+                        .getGradeValueOf(item.valuekey!)
+                        .getLongName())),
+                ListTile(
+                    leading: Icon(Icons.today),
+                    title: Text(getDateText(item.date!))),
+                ListTile(
+                    leading: Icon(Icons.line_weight),
+                    title: Text(item.weight.toString())),
+                ListTile(
+                    leading:
+                        Icon(getGradeTypes(context)[item.type.index].iconData),
+                    title: Text(getGradeTypes(context)[item.type.index].name)),
+              ]),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: ButtonBar(
+                  children: <Widget>[
+                    //RButton(text: "Anrufen", onTap: () {}),
+                    RButton(
+                        text: getString(context).more,
+                        onTap: () {
+                          showSheetBuilder(
+                              context: context,
+                              child: (context) {
+                                return Column(
+                                  children: <Widget>[
+                                    ListTile(
+                                      leading: Icon(Icons.edit),
+                                      title: Text(getString(context).edit),
+                                      onTap: () {
+                                        Navigator.pop(context);
+                                        pushWidget(
+                                          context,
+                                          NewGradeView(
+                                            database,
+                                            editmode: true,
+                                            gradeid: item.id,
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                    ListTile(
+                                      leading: Icon(Icons.delete_outline),
+                                      title: Text(getString(context).delete),
+                                      onTap: () {
+                                        showConfirmDialog(
+                                                context: context,
+                                                title:
+                                                    getString(context).delete,
+                                                action:
+                                                    getString(context).delete,
+                                                richtext: null)
+                                            .then((result) {
+                                          if (result == true) {
+                                            database.dataManager
+                                                .DeleteGrade(item);
+                                            popNavigatorBy(context,
+                                                text: 'gradeid');
+                                          }
+                                        });
+                                      },
+                                    ),
+                                  ],
+                                );
+                              },
+                              title: getString(context).more,
+                              routname: 'gradeidview');
+                        },
+                        iconData: Icons.more_horiz),
+                  ],
+                ),
+              ),
+              FormSpace(16.0),
+            ],
+          ));
+        },
+      );
     },
     routname: 'gradeidview',
   );

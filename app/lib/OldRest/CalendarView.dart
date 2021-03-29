@@ -172,16 +172,16 @@ void showCalendarItemSheet(
               child: TimelineTile(database,
                   weektype: weektype,
                   date: datestring,
-                  tasks: (schooltasks ?? {}).values.where((item) {
+                  tasks: (schooltasks).values.where((item) {
                     return item.due == datestring;
                   }).toList(),
-                  events: (schoolevents ?? {}).values.where((item) {
+                  events: (schoolevents).values.where((item) {
                     return item.date == datestring;
                   }).toList(),
-                  lessonInfos: (lessoninfos ?? {}).values.where((item) {
+                  lessonInfos: (lessoninfos).values.where((item) {
                     return item.date == datestring;
                   }).toList(),
-                  lessons: (lessons ?? {}).values.where((lesson) {
+                  lessons: (lessons).values.where((lesson) {
                     if (lesson.day != weekday) return false;
                     if (lesson.correctWeektype(weektype)) {
                       return true;

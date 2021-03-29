@@ -38,7 +38,7 @@ class NewSchoolReportViewState extends State<NewSchoolReportView> {
         values: {},
       );
     }
-    prefilled_name = (schoolReport.name ?? '');
+    prefilled_name = (schoolReport.name);
   }
 
   late SchoolReport schoolReport;
@@ -131,7 +131,7 @@ class NewReportValueViewiewState extends State<NewReportValueView> {
       if (reportValue == null) reportValue = ReportValue(weight: 1.0);
     }
     prefilled_grade = reportValue.grade_key ?? '';
-    prefilled_weight = reportValue.weight ?? 1.0;
+    prefilled_weight = reportValue.weight ;
     if (getGradePackage(database.getSettings().gradepackageid).inputSupport) {
       if (reportValue.grade_key != null) {
         prefilled_grade = DataUtil_Grade()

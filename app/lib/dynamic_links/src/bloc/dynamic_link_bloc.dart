@@ -45,7 +45,7 @@ class DynamicLinksBloc extends BlocBase {
     }
   }
 
-  void addDynamicLinkDataFromFirebase(PendingDynamicLinkData incominLinkData) {
+  void addDynamicLinkDataFromFirebase(PendingDynamicLinkData? incominLinkData) {
     if (incominLinkData != null && !_hasLinkBeenProcessed(incominLinkData)) {
       final id = Random().nextInt(999999).toString();
       final data = DynamicLinkData(id: id, link: incominLinkData.link);

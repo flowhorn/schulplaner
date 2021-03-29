@@ -74,7 +74,7 @@ class NotificationSettings {
       'notifyassist': notifyassist,
       'dailytime': dailyNotificationTime.toString(),
       'dailydaterange': dailydaterange,
-      'devices': devices?.map((key, value) => MapEntry(key, value?.toJson())),
+      'devices': devices.map((key, value) => MapEntry(key, value?.toJson())),
     };
   }
 }

@@ -72,11 +72,11 @@ class SchoolClass {
 
   factory SchoolClass.fromData(Map<String, dynamic> data) {
     //MAPS:
-    Map<String, dynamic> predata_courses =
+    Map<String, dynamic>? predata_courses =
         data['courses']?.cast<String, dynamic>();
-    Map<String, bool> courses = (predata_courses ?? {}).map<String, bool>(
+    final Map<String, bool> courses = (predata_courses ?? {}).map<String, bool>(
         (String key, dynamic value) => MapEntry<String, bool>(key, value));
-    courses?.removeWhere((key, value) => value != true);
+    courses.removeWhere((key, value) => value != true);
 
     Map<String, MemberData> membersData = decodeMap(data['membersData'],
         (key, value) => MemberData.fromData(id: key, data: value));
@@ -122,7 +122,7 @@ class SchoolClass {
       'classid': id,
       'name': name,
       'shortname': shortname,
-      'courses': courses?.cast<String, bool>(),
+      'courses': courses.cast<String, bool>(),
       'design': design.toJson(),
       'publiccode': publiccode,
       'description': description,
@@ -133,7 +133,7 @@ class SchoolClass {
       'userRoles':
           encodeMap<MemberRole>(userRoles, (it) => memberRoleEnumToString(it)),
       'settings': settings.toJson(),
-      'sharedSettings': sharedSettings?.toJson(),
+      'sharedSettings': sharedSettings.toJson(),
       'groupVersion': groupVersionToData(groupVersion),
     };
   }
@@ -190,12 +190,12 @@ class SchoolClass {
   }
 
   String getShortname({int length = 2}) {
-    String text = shortname ?? name ?? '-';
+    String text = shortname != '' ? shortname :  name ;
     return text.substring(0, text.length > length ? length : text.length);
   }
 
   String getShortname_full() {
-    String text = shortname ?? name ?? '-';
+    String text = shortname != '' ? shortname :  name ;
     return text;
   }
 

@@ -41,7 +41,7 @@ class CourseAllGradeViewState extends State<CourseAllGradeView> {
             return g1.date!.compareTo(g2.date!);
           });
     calculator = AverageCourse(database.getSettings(),
-        grades: list ?? [],
+        grades: list,
         gradeprofileid:
             database.getCourseInfo(courseid)!.personalgradeprofile!);
   }

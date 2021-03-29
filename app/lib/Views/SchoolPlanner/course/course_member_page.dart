@@ -76,7 +76,7 @@ class _MemberItem extends StatelessWidget {
           UserProfile? userProfile =
               data != null ? UserProfile.fromData(data) : null;
           return CourseMemberTile(
-            isMe: memberData.id == database!.getMemberId(),
+            isMe: memberData.id == database.getMemberId(),
             userProfile: userProfile,
             memberData: memberData,
             onTap: () {},
@@ -84,11 +84,11 @@ class _MemberItem extends StatelessWidget {
               _tryReportMember(context);
             },
             onTrailing: () {
-              if (memberData.id == database!.getMemberId()) return;
+              if (memberData.id == database.getMemberId()) return;
               _showMemberSheet(
                 context: context,
                 courseId: courseId,
-                database: database!,
+                database: database,
                 memberData: memberData,
                 userProfile: userProfile,
               );

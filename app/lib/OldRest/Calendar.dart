@@ -80,7 +80,7 @@ class CalendarSettings {
   Map<String, Object> toJson() {
     return {
       'indicators': indicators.map<String, dynamic>((key, value) {
-        return MapEntry<String, dynamic>(key.index.toString(), value?.toJson());
+        return MapEntry<String, dynamic>(key.index.toString(), value.toJson());
       }),
     };
   }

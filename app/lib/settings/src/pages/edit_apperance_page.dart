@@ -76,14 +76,14 @@ class _EditApperancePage extends StatelessWidget {
                   FormDivider(),
                   FormHeader(getString(context).configure),
                   SwitchListTile(
-                    value: appSettingsData.darkmode ?? false,
+                    value: appSettingsData.darkmode,
                     onChanged: (newvalue) {
                       bloc.setDarkMode(newvalue);
                     },
                     title: Text(getString(context).darkmode),
                   ),
                   SwitchListTile(
-                    value: appSettingsData.autodark ?? false,
+                    value: appSettingsData.autodark,
                     onChanged: appSettingsData.darkmode
                         ? null
                         : (newvalue) {
@@ -92,7 +92,7 @@ class _EditApperancePage extends StatelessWidget {
                     title: Text(getString(context).automaticdarkmode),
                   ),
                   SwitchListTile(
-                      value: appSettingsData.coloredAppBar ?? true,
+                      value: appSettingsData.coloredAppBar,
                       onChanged: (newvalue) {
                         bloc.setColoredAppBar(newvalue);
                       },

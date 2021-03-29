@@ -479,7 +479,7 @@ class AverageCourse {
 }
 
 class AverageReport {
-  late double totalaverage;
+  late double? totalaverage;
   AverageReport(PlannerSettingsData settingsData, {List<ReportValue>? values}) {
     double total_value = 0.0;
     double total_weight = 0.0;
