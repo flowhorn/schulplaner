@@ -1,15 +1,18 @@
-// @dart=2.11
+//
 import 'package:flutter/material.dart';
+import 'package:schulplaner8/OldGrade/models/choice.dart';
+import 'package:schulplaner8/OldGrade/models/grade.dart';
+import 'package:schulplaner8/OldGrade/models/grade_value.dart';
 import 'package:schulplaner8/grades/models/grade_type.dart';
 import 'package:schulplaner8/models/planner_settings.dart';
 import 'package:schulplaner_addons/common/widgets/editpage.dart';
-import 'package:schulplaner8/Data/plannerdatabase.dart';
+import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 import 'package:schulplaner8/Helper/DateAPI.dart';
 import 'package:schulplaner8/Helper/EasyWidget.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
 import 'package:schulplaner_widgets/schulplaner_forms.dart';
 import 'package:schulplaner8/Helper/helper_views.dart';
-import 'package:schulplaner8/OldGrade/Grade.dart';
+
 import 'package:schulplaner8/OldGrade/GradePackage.dart';
 import 'package:schulplaner8/Views/SchoolPlanner/MyTasks.dart';
 import 'package:schulplaner8/Views/SchoolPlanner/common/edit_page.dart';
@@ -18,7 +21,8 @@ import 'package:schulplaner_widgets/schulplaner_theme.dart';
 
 class NewGradeView extends StatefulWidget {
   final PlannerDatabase database;
-  final String courseid, gradeid, date;
+  final String? courseid, gradeid;
+  final String? date;
   final bool editmode;
   NewGradeView(this.database,
       {this.courseid, this.date, this.gradeid, this.editmode = false});
@@ -30,30 +34,31 @@ class NewGradeView extends StatefulWidget {
 
 class NewGradeViewState extends State<NewGradeView> {
   final PlannerDatabase database;
-  bool editmode;
-  String courseid, gradeid;
+  late bool editmode;
+  late String? courseid, gradeid;
   ValueNotifier<bool> showWeight = ValueNotifier(false);
   NewGradeViewState(
-      this.database, this.courseid, this.gradeid, this.editmode, String date) {
+      this.database, this.courseid, this.gradeid, this.editmode, String? date) {
     if (editmode) {
-      grade = database.grades.getItem(gradeid);
+      grade = database.grades.getItem(gradeid!)!;
     } else {
       grade = Grade(
-          id: database.dataManager.gradesRef.doc().id,
-          courseid: courseid,
-          type: GradeType.EXAM,
-          date: date);
+        id: database.dataManager.gradesRef.doc().id,
+        courseid: courseid,
+        type: GradeType.EXAM,
+        date: date!,
+      );
     }
     prefilled_title = grade.title ?? '';
-    prefilled_weight = grade.weight ?? 1.0;
+    prefilled_weight = grade.weight;
     if (getGradePackage(database.getSettings().gradepackageid).inputSupport) {
       if (grade.valuekey != null) {
         prefilled_grade =
-            DataUtil_Grade().getGradeValueOf(grade.valuekey).value.toString();
+            DataUtil_Grade().getGradeValueOf(grade.valuekey!).value.toString();
       }
     }
   }
-  Grade grade;
+  late Grade grade;
 
   String prefilled_title = '';
   String prefilled_grade = '';
@@ -143,8 +148,7 @@ class NewGradeViewState extends State<NewGradeView> {
                 FormDivider(),
                 EditCourseField(
                   editmode: editmode,
-                  database: database,
-                  courseID: grade.courseid,
+                  courseId: grade.courseid,
                   onChanged: (context, newCourse) {
                     setState(() {
                       grade = grade.copy(courseid: newCourse.id);
@@ -170,7 +174,7 @@ class NewGradeViewState extends State<NewGradeView> {
                               ': ' +
                               (grade.valuekey != null
                                   ? DataUtil_Grade()
-                                      .getGradeValueOf(grade.valuekey)
+                                      .getGradeValueOf(grade.valuekey!)
                                       .getLongName()
                                   : '-'),
                         ),
@@ -229,8 +233,7 @@ class NewGradeViewState extends State<NewGradeView> {
                   title: Text(
                     getString(context).type,
                   ),
-                  subtitle: Text(
-                      getGradeTypes(context)[grade.type.index].name ?? '-'),
+                  subtitle: Text(getGradeTypes(context)[grade.type.index].name),
                   dense: false,
                   trailing:
                       Icon(getGradeTypes(context)[grade.type.index].iconData),
@@ -297,7 +300,7 @@ const formPaddingText =
 
 void showGradeValuePicker(PlannerDatabase database, BuildContext context,
     ValueSetter<GradeValue> onTapData,
-    {String currentid}) {
+    {String? currentid}) {
   PlannerSettingsData settings = database.getSettings();
   selectItem<GradeValue>(
       context: context,
@@ -319,7 +322,7 @@ void showGradeValuePicker(PlannerDatabase database, BuildContext context,
 
 void showGradetypePicker(
     PlannerDatabase database, BuildContext context, ValueSetter<int> onTapData,
-    {int currentid}) {
+    {int? currentid}) {
   List<Choice> mylist = [];
   mylist..addAll(getGradeTypes(context));
   selectItem<Choice>(

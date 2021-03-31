@@ -1,23 +1,24 @@
-//@dart=2.11
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:schulplaner8/Data/plannerdatabase.dart';
+import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 import 'package:schulplaner8/Helper/Functions.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
 import 'package:schulplaner_widgets/schulplaner_forms.dart';
 import 'package:schulplaner_widgets/schulplaner_theme.dart';
 import 'package:schulplaner8/Helper/helper_views.dart';
-import 'package:schulplaner8/OldGrade/Grade.dart';
 import 'package:schulplaner8/OldGrade/NewSchoolReportView.dart';
 import 'package:schulplaner8/groups/src/models/course.dart';
 import 'package:share/share.dart';
 
-class ReportValue {
-  String grade_key;
-  double weight;
+import 'models/average_report.dart';
+import 'models/grade.dart';
 
-  ReportValue({this.grade_key, this.weight});
+class ReportValue {
+  late String? grade_key;
+  late double weight;
+
+  ReportValue({this.grade_key, required this.weight});
 
   ReportValue.fromData(Map<String, dynamic> data) {
     grade_key = data['grade_key'];
@@ -31,7 +32,7 @@ class ReportValue {
     return true;
   }
 
-  Map<String, Object> toJson() {
+  Map<String, dynamic> toJson() {
     return {
       'grade_key': grade_key,
       'weight': weight,
@@ -40,10 +41,10 @@ class ReportValue {
 }
 
 class SchoolReport {
-  String id;
-  String name;
-  Map<String, ReportValue> values;
-  SchoolReport({this.id, this.name, this.values});
+  late String id;
+  late String name;
+  late Map<String, ReportValue> values;
+  SchoolReport({required this.id, required this.name, required this.values});
 
   SchoolReport.fromData(Map<String, dynamic> data) {
     id = data['id'];
@@ -57,7 +58,8 @@ class SchoolReport {
         MapEntry(key, ReportValue.fromData(value?.cast<String, dynamic>())));
   }
 
-  SchoolReport copyWith({String id, String name, Map<String, dynamic> values}) {
+  SchoolReport copyWith(
+      {String? id, String? name, Map<String, ReportValue>? values}) {
     return SchoolReport(
       id: id ?? this.id,
       name: name ?? this.name,
@@ -75,12 +77,11 @@ class SchoolReport {
     return {
       'id': id,
       'name': name,
-      'values': values?.map((key, value) => MapEntry(key, value?.toJson())),
+      'values': values.map((key, value) => MapEntry(key, value.toJson())),
     };
   }
 
-  ReportValue getValue(String courseid) {
-    if (values == null) return null;
+  ReportValue? getValue(String courseid) {
     if (values[courseid] == null) return null;
     return values[courseid];
   }
@@ -89,7 +90,7 @@ class SchoolReport {
 class ReportView extends StatefulWidget {
   final PlannerDatabase database;
   final String reportid;
-  ReportView({this.database, this.reportid});
+  ReportView({required this.database, required this.reportid});
 
   @override
   State<StatefulWidget> createState() => ReportViewState(database, reportid);
@@ -101,15 +102,15 @@ class ReportViewState extends State<ReportView> {
   ReportViewState(this.database, this.reportid);
 
   List<Grade> list = [];
-  StreamSubscription<SchoolReport> datalistener;
-  SchoolReport myreport;
+  late StreamSubscription<SchoolReport?> datalistener;
+  late SchoolReport myreport;
 
   @override
   void initState() {
     datalistener =
         database.schoolreports.getItemStream(reportid).listen((newreport) {
       setState(() {
-        myreport = newreport;
+        myreport = newreport!;
       });
     });
     super.initState();
@@ -125,7 +126,7 @@ class ReportViewState extends State<ReportView> {
   Widget build(BuildContext context) {
     List<Course> courses = database.getCourseList();
 
-    AverageReport averageReport =
+    final AverageReport averageReport =
         AverageReport(database.getSettings(), values: getValue());
 
     return Scaffold(
@@ -137,7 +138,7 @@ class ReportViewState extends State<ReportView> {
             height: 50.0,
             child: ListTile(
               title: Text(
-                myreport?.name ?? '',
+                myreport.name,
                 style: TextStyle(color: getTextColor(getPrimaryColor(context))),
               ),
               leading: Icon(
@@ -150,7 +151,7 @@ class ReportViewState extends State<ReportView> {
                         ? database
                             .getSettings()
                             .getCurrentAverageDisplay(context: context)
-                            .input(averageReport.totalaverage)
+                            .input(averageReport.totalaverage!)
                         : '/'),
                 style: TextStyle(
                     color: getTextColor(getPrimaryColor(context)),
@@ -164,23 +165,24 @@ class ReportViewState extends State<ReportView> {
           IconButton(
             icon: Icon(Icons.share),
             onPressed: () {
-              String firstpart = (myreport?.name ?? '-') +
+              String firstpart = (myreport.name) +
                   ': \n ' +
                   getString(context).average +
                   ': ' +
                   database
                       .getSettings()
                       .getCurrentAverageDisplay(context: context)
-                      .input(averageReport.totalaverage)
+                      .input(averageReport.totalaverage!)
                       .toString() +
                   '\n';
               for (Course c in courses) {
                 firstpart = firstpart +
                     c.name +
                     ': ' +
-                    (myreport?.getValue(c.id)?.grade_key != null
+                    (myreport.getValue(c.id)?.grade_key != null
                         ? (DataUtil_Grade()
-                            .getGradeValueOf(myreport.getValue(c.id).grade_key)
+                            .getGradeValueOf(
+                                myreport.getValue(c.id)!.grade_key!)
                             .name)
                         : '/') +
                     '\n';
@@ -198,7 +200,7 @@ class ReportViewState extends State<ReportView> {
           return ListTile(
             leading: ColoredCircleText(
               text: toShortNameLength(context, course.getShortname_full()),
-              color: course.getDesign().primary,
+              color: course.getDesign()?.primary,
             ),
             title: Text(course.getName()),
             onTap: () {
@@ -211,9 +213,9 @@ class ReportViewState extends State<ReportView> {
                   ));
             },
             trailing: Text(
-              myreport?.getValue(course.id)?.grade_key != null
+              myreport.getValue(course.id)?.grade_key != null
                   ? (DataUtil_Grade()
-                      .getGradeValueOf(myreport.getValue(course.id).grade_key)
+                      .getGradeValueOf(myreport.getValue(course.id)!.grade_key!)
                       .name)
                   : '/',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
@@ -224,15 +226,14 @@ class ReportViewState extends State<ReportView> {
     );
   }
 
-  List<ReportValue> getValue() {
-    if (myreport?.values == null) return null;
+  List<ReportValue>? getValue() {
     return myreport.values.values.toList();
   }
 }
 
 class SchoolReportList extends StatelessWidget {
   final PlannerDatabase plannerDatabase;
-  SchoolReportList({@required this.plannerDatabase});
+  SchoolReportList({required this.plannerDatabase});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -240,7 +241,7 @@ class SchoolReportList extends StatelessWidget {
         stream: plannerDatabase.schoolreports.stream,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            List<SchoolReport> list = snapshot.data;
+            List<SchoolReport> list = snapshot.data ?? [];
             return ListView.builder(
               itemBuilder: (context, index) {
                 SchoolReport item = list[index];
@@ -285,18 +286,18 @@ class SchoolReportList extends StatelessWidget {
 }
 
 void showSchoolReportMoreSheet(BuildContext context,
-    {@required String reportid, @required PlannerDatabase plannerdatabase}) {
+    {required String reportid, required PlannerDatabase plannerdatabase}) {
   showDetailSheetBuilder(
       context: context,
       body: (context) {
-        return StreamBuilder<SchoolReport>(
+        return StreamBuilder<SchoolReport?>(
             stream: plannerdatabase.schoolreports.getItemStream(reportid),
             builder: (context, snapshot) {
-              SchoolReport item = snapshot.data;
+              SchoolReport? item = snapshot.data;
               if (item == null) return loadedView();
               return Column(
                 children: <Widget>[
-                  getSheetText(context, item.name ?? '-'),
+                  getSheetText(context, item.name),
                   ListTile(
                     leading: Icon(Icons.edit),
                     title: Text(getString(context).edit),

@@ -1,4 +1,4 @@
-//@dart=2.11
+//
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Helper/Functions.dart';
 import 'package:schulplaner8/Helper/helper_views.dart';
@@ -7,9 +7,9 @@ import 'package:schulplaner_widgets/schulplaner_forms.dart';
 import 'package:schulplaner_widgets/schulplaner_theme.dart';
 
 class FAQ_Entry {
-  IconData icon;
+  IconData? icon;
   String title, content;
-  FAQ_Entry({this.title, this.content, this.icon});
+  FAQ_Entry({required this.title, required this.content, this.icon});
 }
 
 List<FAQ_Entry> getFAQ_German() {
@@ -273,7 +273,7 @@ class FAQ_ListView extends StatelessWidget {
 class FAQ_DetailPage extends StatelessWidget {
   final FAQ_Entry entry;
 
-  const FAQ_DetailPage({this.entry});
+  const FAQ_DetailPage({required this.entry});
 
   @override
   Widget build(BuildContext context) {

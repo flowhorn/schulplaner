@@ -73,7 +73,7 @@ class _CourseTile extends StatelessWidget {
             child: ColoredCircleText(
                 text:
                     toShortNameLength(context, courseInfo!.getShortname_full()),
-                color: courseInfo!.getDesign().primary,
+                color: courseInfo!.getDesign()!.primary,
                 radius: 22.0)),
       ),
       title: Text(courseInfo!.name),
@@ -95,7 +95,7 @@ class _CourseTile extends StatelessWidget {
             showCourseMoreSheet(
               context,
               courseid: courseInfo!.id,
-              plannerdatabase: plannerDatabase,
+              plannerdatabase: plannerDatabase!,
             );
           }),
       onTap: () {
@@ -103,7 +103,7 @@ class _CourseTile extends StatelessWidget {
           context,
           CourseView(
             courseid: courseInfo!.id,
-            database: plannerDatabase,
+            database: plannerDatabase!,
           ),
           routname: 'course',
         );

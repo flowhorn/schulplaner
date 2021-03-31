@@ -1,11 +1,11 @@
-//@dart=2.11
+//
 import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Data/Planner/Lesson.dart';
 import 'package:schulplaner8/Data/Planner/SchoolEvent.dart';
 import 'package:schulplaner8/Data/Planner/Task.dart';
-import 'package:schulplaner8/Data/plannerdatabase.dart';
+import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 import 'package:schulplaner8/Helper/DateAPI.dart';
 import 'package:schulplaner8/Helper/SmartCalAPI.dart';
 import 'package:schulplaner8/Helper/helper_data.dart';
@@ -26,13 +26,13 @@ class CalendarView extends StatefulWidget {
 class CalendarViewState extends State<CalendarView> {
   final PlannerDatabase database;
 
-  Map<String, Lesson> lessons;
-  Map<String, LessonInfo> lessoninfos;
-  List<Holiday> vacations;
-  Map<String, SchoolEvent> schoolevents;
-  Map<String, SchoolTask> schooltasks;
+  late Map<String, Lesson> lessons;
+  late Map<String, LessonInfo> lessoninfos;
+  late List<Holiday> vacations;
+  late Map<String, SchoolEvent> schoolevents;
+  late Map<String, SchoolTask> schooltasks;
 
-  List<StreamSubscription> subs;
+  late List<StreamSubscription> subs;
 
   CalendarViewState(this.database) {
     subs = [];
@@ -154,34 +154,34 @@ void showCalendarItemSheet(
       child: (context) {
         int weekday = parseDate(datestring).weekday;
         int weektype = getWeektypeofDate(datestring, database);
-        return StreamBuilder(
+        return StreamBuilder<Map<String, dynamic>>(
           builder: (context, data) {
             if (data.data == null) {
               return Center(
                 child: CircularProgressIndicator(),
               );
             }
-            Map<String, Lesson> lessons = data.data['lessons'];
-            Map<String, LessonInfo> lessoninfos = data.data['lessoninfos'];
+            Map<String, Lesson> lessons = data.data!['lessons']!;
+            Map<String, LessonInfo> lessoninfos = data.data!['lessoninfos']!;
             ;
-            Map<String, SchoolEvent> schoolevents = data.data['schoolevents'];
-            Map<String, SchoolTask> schooltasks = data.data['schooltasks'];
+            Map<String, SchoolEvent> schoolevents = data.data!['schoolevents']!;
+            Map<String, SchoolTask> schooltasks = data.data!['schooltasks']!;
 
             return Flexible(
                 child: SingleChildScrollView(
               child: TimelineTile(database,
                   weektype: weektype,
                   date: datestring,
-                  tasks: (schooltasks ?? {}).values.where((item) {
+                  tasks: (schooltasks).values.where((item) {
                     return item.due == datestring;
                   }).toList(),
-                  events: (schoolevents ?? {}).values.where((item) {
+                  events: (schoolevents).values.where((item) {
                     return item.date == datestring;
                   }).toList(),
-                  lessonInfos: (lessoninfos ?? {}).values.where((item) {
+                  lessonInfos: (lessoninfos).values.where((item) {
                     return item.date == datestring;
                   }).toList(),
-                  lessons: (lessons ?? {}).values.where((lesson) {
+                  lessons: (lessons).values.where((lesson) {
                     if (lesson.day != weekday) return false;
                     if (lesson.correctWeektype(weektype)) {
                       return true;
@@ -253,10 +253,10 @@ Stream<Map<String, dynamic>> getAdvancedCalendarStream(
     PlannerDatabase database, String date) {
   StreamController<Map<String, dynamic>> controller = StreamController();
   List<StreamSubscription> subs = [];
-  Map<String, Lesson> lessons;
-  Map<String, LessonInfo> lessoninfos;
-  Map<String, SchoolEvent> schoolevents;
-  Map<String, SchoolTask> schooltasks;
+  late Map<String, Lesson>? lessons;
+  late Map<String, LessonInfo>? lessoninfos;
+  late Map<String, SchoolEvent>? schoolevents;
+  late Map<String, SchoolTask>? schooltasks;
 
   void update() {
     controller.add({

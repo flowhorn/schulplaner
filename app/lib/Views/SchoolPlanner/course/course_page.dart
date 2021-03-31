@@ -1,4 +1,4 @@
-//@dart=2.11
+//
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Views/SchoolPlanner/course/leave_course.dart';
 import 'package:schulplaner8/groups/src/bloc/edit_course_bloc.dart';
@@ -8,7 +8,7 @@ import 'package:schulplaner_translations/schulplaner_translations.dart';
 import 'package:schulplaner_widgets/schulplaner_theme.dart';
 import 'package:schulplaner8/Data/Planner/File.dart';
 import 'package:schulplaner8/Data/Planner/Letter.dart';
-import 'package:schulplaner8/Data/plannerdatabase.dart';
+import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 import 'package:schulplaner8/Helper/Functions.dart';
 import 'package:schulplaner8/Helper/helper_data.dart';
 import 'package:schulplaner_widgets/schulplaner_forms.dart';
@@ -26,19 +26,19 @@ class CourseView extends StatelessWidget {
   final String courseid;
   final PlannerDatabase database;
 
-  CourseView({@required this.courseid, @required this.database});
+  CourseView({required this.courseid, required this.database});
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<Course>(
+    return StreamBuilder<Course?>(
       builder: (context, snapshot) {
-        Course courseInfo = snapshot.data;
+        Course? courseInfo = snapshot.data;
         if (courseInfo == null) {
           return Center(
             child: CircularProgressIndicator(),
           );
         }
-        Design courseDesign = courseInfo.getDesign();
+        Design courseDesign = courseInfo.getDesign()!;
         return Theme(
           data: newAppThemeDesign(context, courseDesign),
           child: Scaffold(
@@ -55,9 +55,9 @@ class CourseView extends StatelessWidget {
                   FormHeader2(getString(context).schoolletters),
                   StreamBuilder<Map<String, Letter>>(
                     builder: (context, snapshot) {
-                      List<Letter> datalist = snapshot.data.values.where(
+                      List<Letter> datalist = snapshot.data!.values.where(
                           (letter) {
-                        return letter.savedin.id == courseInfo.id;
+                        return letter.savedin!.id == courseInfo.id;
                       }).toList()
                         ..sort(
                             (l1, l2) => l1.published.compareTo(l2.published));
@@ -98,7 +98,7 @@ class CourseView extends StatelessWidget {
                           leading: Hero(
                               tag: 'courestag:' + courseInfo.id,
                               child: ColoredCircleText(
-                                color: courseInfo.getDesign().primary,
+                                color: courseInfo.getDesign()!.primary,
                                 text: toShortNameLength(
                                     context, courseInfo.getShortname_full()),
                               )),
@@ -113,7 +113,7 @@ class CourseView extends StatelessWidget {
                                 showTeacherDetail(
                                     context: context,
                                     plannerdatabase: database,
-                                    teacherid: it.teacherid);
+                                    teacherid: it!.teacherid);
                               },
                             );
                           }).toList(),
@@ -122,12 +122,12 @@ class CourseView extends StatelessWidget {
                           children: courseInfo.places.values.map((it) {
                             return ListTile(
                               leading: Icon(Icons.place),
-                              title: Text(it.name ?? '-'),
+                              title: Text(it?.name ?? '-'),
                               onTap: () {
                                 showPlaceDetail(
                                     context: context,
                                     plannerdatabase: database,
-                                    placeid: it.placeid);
+                                    placeid: it!.placeid);
                               },
                             );
                           }).toList(),

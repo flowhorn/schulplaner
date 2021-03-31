@@ -6,7 +6,6 @@ analyzer:
       invalid_use_of_protected_member: ignore
       invalid_use_of_visible_for_testing_member: ignore
       import_of_legacy_library_into_null_safe: ignore
-
       
       
 

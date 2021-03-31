@@ -1,12 +1,10 @@
-//@dart = 2.11
-
 import 'package:schulplaner8/Data/Planner/File.dart';
 
 class NoteData {
-  String noteid, title, creatorid, date;
-  String detail;
-  bool archived;
-  Map<String, CloudFile> files;
+  String? noteid, title, creatorid, date;
+  String? detail;
+  bool? archived;
+  Map<String, CloudFile?>? files;
 
   NoteData(
       {this.noteid,
@@ -45,7 +43,7 @@ class NoteData {
                     fileform: FileForm.OLDTTYPE,
                     savedin: SavedIn(type: SavedInType.PERSONAL, id: null),
                   )));
-          files.addAll(attachments);
+          files!.addAll(attachments);
         }
         if (data['olddata']['attachments'] != null) {
           Map<dynamic, dynamic> rawdata = data['olddata']['attachments'];
@@ -58,7 +56,7 @@ class NoteData {
                     fileform: FileForm.OLDTTYPE,
                     savedin: SavedIn(type: SavedInType.PERSONAL, id: null),
                   )));
-          files.addAll(attachments);
+          files!.addAll(attachments);
         }
       } catch (e) {
         print(e);
@@ -85,7 +83,7 @@ class NoteData {
       detail: detail,
       date: date,
       archived: archived,
-      files: files != null ? Map.of(files) : null,
+      files: files != null ? Map.of(files!) : null,
     );
   }
 

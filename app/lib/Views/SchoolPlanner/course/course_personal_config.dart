@@ -1,11 +1,11 @@
-//@dart=2.11
+//
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Data/ObjectsPlanner.dart';
 import 'package:schulplaner8/grades/models/grade_profile.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
 import 'package:schulplaner_widgets/schulplaner_common.dart';
 import 'package:schulplaner_widgets/schulplaner_theme.dart';
-import 'package:schulplaner8/Data/plannerdatabase.dart';
+import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 import 'package:schulplaner8/Helper/EasyWidget.dart';
 import 'package:schulplaner_widgets/schulplaner_forms.dart';
 import 'package:schulplaner8/Helper/helper_views.dart';
@@ -16,19 +16,19 @@ import 'package:schulplaner_widgets/schulplaner_dialogs.dart';
 class CoursePersonalPage extends StatelessWidget {
   final String courseID;
   final PlannerDatabase database;
-  CoursePersonalPage({@required this.courseID, @required this.database});
+  CoursePersonalPage({required this.courseID, required this.database});
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<Course>(
+    return StreamBuilder<Course?>(
       builder: (context, snapshot) {
-        Course courseInfo = snapshot.data;
+        Course? courseInfo = snapshot.data;
         if (courseInfo == null) {
           return Center(
             child: CircularProgressIndicator(),
           );
         }
-        Design courseDesign = courseInfo.getDesign();
+        Design courseDesign = courseInfo.getDesign()!;
         return Theme(
             data: newAppThemeDesign(context, courseDesign),
             child: Scaffold(
@@ -40,7 +40,7 @@ class CoursePersonalPage extends StatelessWidget {
                     onPressed: () {
                       final infoDialog = InfoDialog(
                         title: 'CourseId:',
-                        message: courseID ?? '???',
+                        message: courseID,
                       );
                       // ignore: unawaited_futures
                       infoDialog.show(context);
@@ -68,7 +68,7 @@ class CoursePersonalPage extends StatelessWidget {
                       selectDesign(context, courseInfo.personaldesign?.id)
                           .then((newdesign) {
                         if (newdesign != null) {
-                          CoursePersonal newcoursepersonal =
+                          CoursePersonal? newcoursepersonal =
                               database.courseinfo.secondarydata[courseInfo.id];
                           if (newcoursepersonal == null) {
                             newcoursepersonal =
@@ -83,7 +83,7 @@ class CoursePersonalPage extends StatelessWidget {
                     trailing: IconButton(
                         icon: Icon(Icons.delete_outline),
                         onPressed: () {
-                          CoursePersonal newcoursepersonal =
+                          CoursePersonal? newcoursepersonal =
                               database.courseinfo.secondarydata[courseInfo.id];
                           if (newcoursepersonal == null) {
                             newcoursepersonal =
@@ -103,10 +103,10 @@ class CoursePersonalPage extends StatelessWidget {
                     ),
                     subtitle: Text(database
                         .getSettings()
-                        .getGradeProfile(courseInfo.personalgradeprofile)
+                        .getGradeProfile(courseInfo.personalgradeprofile!)
                         .name),
                     onTap: () {
-                      selectItem<GradeProfile>(
+                      selectItem<GradeProfile?>(
                           context: context,
                           items: database
                               .getSettings()
@@ -115,13 +115,13 @@ class CoursePersonalPage extends StatelessWidget {
                               .toList(),
                           builder: (context, item) {
                             return ListTile(
-                              title: Text(item.name),
+                              title: Text(item!.name),
                               trailing: item.profileid ==
                                       courseInfo.personalgradeprofile
                                   ? Icon(Icons.done, color: Colors.green)
                                   : null,
                               onTap: () {
-                                CoursePersonal newcoursepersonal = database
+                                CoursePersonal? newcoursepersonal = database
                                     .courseinfo.secondarydata[courseInfo.id];
                                 if (newcoursepersonal == null) {
                                   newcoursepersonal =
@@ -139,7 +139,7 @@ class CoursePersonalPage extends StatelessWidget {
                     trailing: IconButton(
                         icon: Icon(Icons.delete_outline),
                         onPressed: () {
-                          CoursePersonal newcoursepersonal =
+                          CoursePersonal? newcoursepersonal =
                               database.courseinfo.secondarydata[courseInfo.id];
                           if (newcoursepersonal == null) {
                             newcoursepersonal =
@@ -163,7 +163,7 @@ class CoursePersonalPage extends StatelessWidget {
                               maxlength: 5)
                           .then((newtext) {
                         if (newtext != null && newtext != '') {
-                          CoursePersonal newcoursepersonal =
+                          CoursePersonal? newcoursepersonal =
                               database.courseinfo.secondarydata[courseInfo.id];
                           if (newcoursepersonal == null) {
                             newcoursepersonal =
@@ -178,7 +178,7 @@ class CoursePersonalPage extends StatelessWidget {
                     trailing: IconButton(
                         icon: Icon(Icons.delete_outline),
                         onPressed: () {
-                          CoursePersonal newcoursepersonal =
+                          CoursePersonal? newcoursepersonal =
                               database.courseinfo.secondarydata[courseInfo.id];
                           if (newcoursepersonal == null) {
                             newcoursepersonal =

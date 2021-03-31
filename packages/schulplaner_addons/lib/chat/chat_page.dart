@@ -1,4 +1,4 @@
-//@dart=2.11
+//
 import 'package:schulplaner_addons/chat/chat_room.dart';
 import 'package:schulplaner_addons/chat/chat_thread.dart';
 import 'package:schulplaner_addons/chat/message.dart';
@@ -12,7 +12,7 @@ class ChatPageBloc extends BlocBase {
 
   ChatPageBloc(this.chatRoomID);
 
-  Stream<ChatRoom> streamChatRoom() {
+  Stream<ChatRoom?> streamChatRoom() {
     return FirebaseFirestore.instance
         .collection('chatRooms')
         .doc(chatRoomID)
@@ -49,14 +49,14 @@ class ChatPageBloc extends BlocBase {
 class ChatPage extends StatelessWidget {
   final String chatRoomID;
   final ChatPageBloc bloc;
-  ChatPage({Key key, this.chatRoomID})
+  ChatPage({Key? key, required this.chatRoomID})
       : bloc = ChatPageBloc(chatRoomID),
         super(key: key);
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       bloc: bloc,
-      child: StreamBuilder(
+      child: StreamBuilder<ChatRoom>(
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return Scaffold(
@@ -65,9 +65,9 @@ class ChatPage extends StatelessWidget {
               ),
             );
           }
-          ChatRoom chatRoom = snapshot.data;
+          ChatRoom? chatRoom = snapshot.data;
           return ChatThread(
-            chatRoom: chatRoom,
+            chatRoom: chatRoom!,
           );
         },
       ),

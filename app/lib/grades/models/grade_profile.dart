@@ -1,21 +1,18 @@
-//@dart = 2.11
 import 'package:schulplaner8/utils/models/coder.dart';
-import 'package:meta/meta.dart';
-
 import 'grade_type_item.dart';
 
 class GradeProfile {
   final String profileid, name;
   final bool averagebytype;
   final double weight_totalaverage;
-  final Map<String, GradeTypeItem> types;
+  final Map<String, GradeTypeItem?> types;
 
   GradeProfile._({
-    @required this.profileid,
-    @required this.name,
-    @required this.averagebytype,
-    @required this.weight_totalaverage,
-    @required this.types,
+    required this.profileid,
+    required this.name,
+    required this.averagebytype,
+    required this.weight_totalaverage,
+    required this.types,
   });
 
   factory GradeProfile.Create(String id) {
@@ -48,7 +45,7 @@ class GradeProfile {
     };
   }
 
-  String getNewTypeId() {
+  String? getNewTypeId() {
     for (var i = 0; i < 100; i++) {
       if (types[i.toString()] == null) return i.toString();
     }
@@ -56,11 +53,11 @@ class GradeProfile {
   }
 
   GradeProfile copyWith({
-    String profileid,
-    String name,
-    bool averagebytype,
-    double weight_totalaverage,
-    Map<String, GradeTypeItem> types,
+    String? profileid,
+    String? name,
+    bool? averagebytype,
+    double? weight_totalaverage,
+    Map<String, GradeTypeItem?>? types,
   }) {
     return GradeProfile._(
       profileid: profileid ?? this.profileid,

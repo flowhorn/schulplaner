@@ -2,7 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Helper/helper_views.dart';
-import 'package:schulplaner8/OldGrade/Grade.dart';
+
+import 'package:schulplaner8/OldGrade/models/app_widget_settings.dart';
+import 'package:schulplaner8/OldGrade/models/grade_span.dart';
 import 'package:schulplaner_widgets/schulplaner_theme.dart';
 
 import 'configuration_data.dart';
@@ -10,7 +12,7 @@ import 'configuration_data.dart';
 class AppSettingsData {
   final bool darkmode, autodark, coloredAppBar;
   final Color primary, accent;
-  final String languagecode;
+  final String? languagecode;
   final ConfigurationData configurationData;
   final GradeSpan? gradespan;
   final AppWidgetSettings appwidgetsettings;

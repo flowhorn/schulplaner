@@ -1,4 +1,4 @@
-//@dart=2.11
+//
 import 'package:flutter/material.dart';
 
 class PageViewModel {
@@ -10,20 +10,20 @@ class PageViewModel {
   /// Text of page (description)
   ///
   /// @Default style `fontSize: 18.0, fontWeight: FontWeight.normal`
-  final String bodytext;
+  final String? bodytext;
 
-  final Widget body;
+  final Widget? body;
 
   /// Image of page
-  final Widget image;
+  final Widget? image;
 
   /// Footer
-  final Widget footer;
+  final Widget? footer;
 
   /// Background page color
   ///
   /// @Default `Colors.white`
-  final Color pageColor;
+  final Color? pageColor;
 
   /// Progress indicator color
   ///
@@ -44,8 +44,8 @@ class PageViewModel {
   final bool isDetailed;
 
   PageViewModel({
-    this.title,
-    this.body,
+    required this.title,
+   this.body,
     this.bodytext,
     this.image,
     this.footer,

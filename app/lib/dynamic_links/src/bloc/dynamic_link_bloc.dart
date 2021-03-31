@@ -1,4 +1,3 @@
-//@dart = 2.11
 import 'dart:async';
 import 'dart:math';
 
@@ -46,7 +45,7 @@ class DynamicLinksBloc extends BlocBase {
     }
   }
 
-  void addDynamicLinkDataFromFirebase(PendingDynamicLinkData incominLinkData) {
+  void addDynamicLinkDataFromFirebase(PendingDynamicLinkData? incominLinkData) {
     if (incominLinkData != null && !_hasLinkBeenProcessed(incominLinkData)) {
       final id = Random().nextInt(999999).toString();
       final data = DynamicLinkData(id: id, link: incominLinkData.link);
@@ -74,7 +73,7 @@ class DynamicLinksBloc extends BlocBase {
 
   /// This function has to be called after using the dynamic link to mark this link
   void setLinkHandled(String id) {
-    incomingLinks[id] = incomingLinks[id].copyWith(hasBeenHandled: true);
+    incomingLinks[id] = incomingLinks[id]!.copyWith(hasBeenHandled: true);
   }
 
   @override

@@ -1,11 +1,10 @@
-//@dart=2.11
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/groups/src/pages/edit_design_page.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
 import 'package:schulplaner_widgets/schulplaner_common.dart';
 import 'package:schulplaner_widgets/schulplaner_theme.dart';
 import 'package:schulplaner8/Data/Planner/File.dart';
-import 'package:schulplaner8/Data/plannerdatabase.dart';
+import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 import 'package:schulplaner8/Helper/DateAPI.dart';
 import 'package:schulplaner8/Helper/EasyWidget.dart';
 import 'package:schulplaner8/Helper/Functions.dart';
@@ -18,8 +17,8 @@ import 'package:schulplaner8/groups/src/models/place.dart';
 import 'package:schulplaner8/groups/src/models/teacher.dart';
 import 'package:schulplaner8/models/school_class.dart';
 
-Future<Design> selectDesign(BuildContext context, String currentkey) async {
-  Design selected;
+Future<Design?> selectDesign(BuildContext context, String? currentkey) async {
+  Design? selected;
   return await selectItem<Design>(
       context: context,
       items: designPresets(),
@@ -36,8 +35,8 @@ Future<Design> selectDesign(BuildContext context, String currentkey) async {
           ),
       actions: (context) => [
             RButton(
-                onTap: () {
-                  return createNewDesignFromEditDesignPage(context: context)
+                onTap: () async {
+                  await createNewDesignFromEditDesignPage(context: context)
                       .then((newDesign) {
                     if (newDesign != null && newDesign is Design) {
                       selected = newDesign;
@@ -58,14 +57,17 @@ Future<Design> selectDesign(BuildContext context, String currentkey) async {
   });
 }
 
-Future<Teacher> selectTeacher(BuildContext context, PlannerDatabase database,
-    Map<String, dynamic> current) async {
-  Teacher selected;
+Future<Teacher?> selectTeacher(
+  BuildContext context,
+  PlannerDatabase database,
+  Map<String, dynamic>? current,
+) async {
+  Teacher? selected;
   return await selectItemAsync<Teacher>(
       context: context,
       itemstream: database.teachers.stream,
       builder: (context, teacher) {
-        bool isSelected = ((current ?? {})[teacher.teacherid] != null) ?? false;
+        bool isSelected = (current ?? {})[teacher.teacherid] != null;
         return ListTile(
           title: Text(teacher.name),
           trailing: selectedView(isSelected),
@@ -94,16 +96,19 @@ Future<Teacher> selectTeacher(BuildContext context, PlannerDatabase database,
   });
 }
 
-Future<Place> selectPlace(BuildContext context, PlannerDatabase database,
-    Map<String, dynamic> current) async {
-  Place selected;
+Future<Place?> selectPlace(
+  BuildContext context,
+  PlannerDatabase database,
+  Map<String, dynamic>? current,
+) async {
+  Place? selected;
   return await selectItemAsync<Place>(
       context: context,
       itemstream: database.places.stream,
       builder: (context, item) {
-        bool isSelected = ((current ?? {})[item.placeid] != null) ?? false;
+        bool isSelected = ((current ?? {})[item.placeid] != null);
         return ListTile(
-          title: Text(item.name ?? '-'),
+          title: Text(item.name),
           trailing: selectedView(isSelected),
           onTap: isSelected
               ? null
@@ -129,9 +134,12 @@ Future<Place> selectPlace(BuildContext context, PlannerDatabase database,
   });
 }
 
-Future<Course> selectCourse(
-    BuildContext context, PlannerDatabase database, String currentkey) async {
-  Course selected;
+Future<Course?> selectCourse(
+  BuildContext context,
+  PlannerDatabase database,
+  String? currentkey,
+) async {
+  Course? selected;
   return await selectItemAsync<Course>(
       context: context,
       itemstream: database.courseinfo.stream.map((data) {
@@ -143,7 +151,7 @@ Future<Course> selectCourse(
       builder: (context, item) => ListTile(
             leading: ColoredCircleText(
               text: toShortNameLength(context, item.getShortname_full()),
-              color: item.getDesign().primary,
+              color: item.getDesign()?.primary,
               radius: 18.0,
               textsize: 14.0,
             ),
@@ -166,13 +174,20 @@ Future<Course> selectCourse(
 }
 
 class SavedInValueItem {
-  String id, name;
-  SavedInType type;
-  Color color;
-  SavedInValueItem({this.id, this.name, this.type, this.color});
+  final String id;
+  final String name;
+  final SavedInType type;
+  final Color? color;
+
+  const SavedInValueItem({
+    required this.id,
+    required this.name,
+    required this.type,
+    this.color,
+  });
 }
 
-Future<SavedInValueItem> selectSavedin(
+Future<SavedInValueItem?> selectSavedin(
     BuildContext context, PlannerDatabase database, String currentkey) async {
   dynamic selected;
   return await selectItemAsync<SavedInValueItem>(
@@ -199,7 +214,7 @@ Future<SavedInValueItem> selectSavedin(
         newlist.addAll(courses.map((it) => SavedInValueItem(
             id: it.id,
             name: it.getName(),
-            color: it.getDesign().primary,
+            color: it.getDesign()?.primary,
             type: SavedInType.COURSE)));
         return newlist;
       }),
@@ -226,9 +241,9 @@ Future<SavedInValueItem> selectSavedin(
   });
 }
 
-Future<String> selectDateString(
+Future<String?> selectDateString(
   BuildContext context,
-  String currentDate,
+  String? currentDate,
 ) {
   return showDatePicker(
           context: context,

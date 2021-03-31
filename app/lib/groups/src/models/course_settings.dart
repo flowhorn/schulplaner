@@ -20,12 +20,13 @@ class CourseSettings {
       onlyVerifiedMembers: false,
       defaultRole: MemberRole.standard);
 
-  factory CourseSettings.fromData(dynamic data) {
+  factory CourseSettings.fromData(dynamic? data) {
     if (data == null) return standard;
     return CourseSettings._(
-        isPublic: data['isPublic'],
-        defaultRole: memberRoleEnumFromString(data['defaultRole']),
-        onlyVerifiedMembers: data['onlyVerifiedMembers'],
+        isPublic: data['isPublic'] ?? true,
+        defaultRole:
+            memberRoleEnumFromString(data['defaultRole'] ?? 'standard'),
+        onlyVerifiedMembers: data['onlyVerifiedMembers'] ?? false,
         lastChanged:
             ((data['lastChanged'] ?? Timestamp.now()) as Timestamp).toDate());
   }

@@ -1,8 +1,9 @@
 import 'package:bloc/bloc_base.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/subjects.dart';
-import 'package:schulplaner8/Data/Planner/PublicCode.dart';
+import 'package:schulplaner8/Data/Planner/public_code_functions.dart';
 import 'package:schulplaner8/Helper/helper_views.dart';
+import 'package:schulplaner_models/schulplaner_models.dart';
 
 class JoinGroupBloc extends BlocBase {
   final _enteredCodeSubject = BehaviorSubject<String>.seeded('');
@@ -31,7 +32,8 @@ class JoinGroupBloc extends BlocBase {
   }
 
   Future<bool> _searchPublicCode() async {
-    final publicCodeValue = await getPublicCodeValue(enteredCodeValue);
+    final publicCodeValue =
+        await PublicCodeFunctions.getPublicCodeValue(enteredCodeValue);
     _publicCodeResultSubject.add(publicCodeValue);
     return publicCodeValue != null;
   }

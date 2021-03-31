@@ -1,16 +1,16 @@
-//@dart=2.11
+//
 import 'dart:async';
-import 'package:diff_match_patch/diff_match_patch.dart';
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Data/Objects.dart';
 import 'package:schulplaner8/Data/Planner/CourseTemplates.dart';
+import 'package:schulplaner8/Data/planner_database/planner_connections.dart';
 import 'package:schulplaner8/Views/SchoolPlanner/school_class/leave_schoolclass.dart';
 import 'package:schulplaner8/groups/src/bloc/edit_course_bloc.dart';
 import 'package:schulplaner8/groups/src/gateway/course_gateway.dart';
 import 'package:schulplaner8/groups/src/pages/edit_course_page.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
 import 'package:schulplaner_widgets/schulplaner_theme.dart';
-import 'package:schulplaner8/Data/plannerdatabase.dart';
+import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 import 'package:schulplaner8/Helper/EasyWidget.dart';
 import 'package:schulplaner8/Helper/Functions.dart';
 import 'package:schulplaner8/Helper/MyCloudFunctions.dart';
@@ -26,18 +26,18 @@ import 'package:schulplaner8/models/school_class.dart';
 import 'package:schulplaner_widgets/schulplaner_dialogs.dart';
 
 void showSchoolClassMoreSheet(BuildContext context,
-    {@required String classid, @required PlannerDatabase plannerdatabase}) {
+    {required String classid, required PlannerDatabase plannerdatabase}) {
   showDetailSheetBuilder(
       context: context,
       body: (context) {
-        return StreamBuilder<SchoolClass>(
+        return StreamBuilder<SchoolClass?>(
             stream: plannerdatabase.schoolClassInfos.getItemStream(classid),
             builder: (context, snapshot) {
               final info = snapshot.data;
               if (info == null) return loadedView();
               return Column(
                 children: <Widget>[
-                  getSheetText(context, info.getName() ?? '-'),
+                  getSheetText(context, info.getName()),
                   ListTile(
                     leading: Icon(Icons.edit),
                     title: Text(getString(context).edit),
@@ -85,20 +85,20 @@ void showSchoolClassMoreSheet(BuildContext context,
 class NewSchoolClassView extends StatelessWidget {
   final PlannerDatabase database;
   final bool editmode;
-  final String editmode_classid;
+  final String? editmode_classid;
   bool changedValues = false;
-  bool addToPrivateCourses = true;
-  String addToClass;
+  late bool addToPrivateCourses = true;
+  String? addToClass;
 
-  SchoolClass data;
-  ValueNotifier<SchoolClass> notifier;
+  late SchoolClass data;
+  late ValueNotifier<SchoolClass> notifier;
 
   ValueNotifier<bool> showSeveralForm = ValueNotifier(false);
 
   NewSchoolClassView(
-      {@required this.database, this.editmode = false, this.editmode_classid}) {
+      {required this.database, this.editmode = false, this.editmode_classid}) {
     if (editmode) {
-      data = database.schoolClassInfos.data[editmode_classid].copyWith();
+      data = database.schoolClassInfos.data[editmode_classid!]!.copyWith();
     } else {
       data = SchoolClass.Create(
         database.dataManager.generateSchoolClassId(),
@@ -112,167 +112,167 @@ class NewSchoolClassView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-        child: ValueListenableBuilder<SchoolClass>(
-            valueListenable: notifier,
-            builder: (context, _, _2) {
-              if (data == null) return CircularProgressIndicator();
-              return Theme(
-                  data: newAppThemeDesign(context, data?.design),
-                  child: Scaffold(
-                    appBar: MyAppHeader(
-                        title: editmode
-                            ? getString(context).editschoolclass
-                            : getString(context).newschoolclass),
-                    body: SingleChildScrollView(
-                        child: Column(
-                      children: <Widget>[
-                        FormHeader(getString(context).general),
-                        FormTextField(
-                          text: data.name,
-                          valueChanged: (newtext) {
-                            data = data.copyWith(name: newtext);
-                            changedValues = true;
-                          },
-                          labeltext: getString(context).name,
-                        ),
-                        FormSpace(12.0),
-                        FormTextField(
-                          text: data.shortname,
-                          valueChanged: (newtext) {
-                            data = data.copyWith(shortname: newtext);
-                            changedValues = true;
-                          },
-                          iconData: Icons.short_text,
-                          labeltext: getString(context).shortname,
-                          maxLengthEnforced: true,
-                          maxLength: 5,
-                        ),
-                        FormSpace(6.0),
-                        ListTile(
-                          leading: Icon(
-                            Icons.color_lens,
-                            color: data.design?.primary ?? Colors.grey,
-                          ),
-                          title: Text(getString(context).design),
-                          subtitle: Text(data.design?.name ?? '-'),
-                          trailing: IconButton(
-                              icon: Icon(Icons.autorenew),
-                              onPressed: () {
-                                changedValues = true;
-                                SchoolClass newdata =
-                                    data.copyWith(design: getRandomDesign());
-                                data = newdata;
-                                notifier.value = newdata;
-                              }),
-                          onTap: () {
-                            selectDesign(context, data.design?.id)
-                                .then((newdesign) {
-                              if (newdesign != null) {
-                                changedValues = true;
-                                SchoolClass newdata =
-                                    data.copyWith(design: newdesign);
-                                data = newdata;
-                                notifier.value = newdata;
-                              }
-                            });
-                          },
-                        ),
-                        FormSpace(6.0),
-                        FormDivider(),
-                        FormHideable(
-                            title: getString(context).advanced,
-                            notifier: showSeveralForm,
-                            builder: (context) => Column(
-                                  children: <Widget>[
-                                    FormSpace(8.0),
-                                    FormTextField(
-                                      text: data.description,
-                                      valueChanged: (newtext) {
-                                        data = data.copyWith(
-                                          description: newtext,
-                                        );
-                                        changedValues = true;
-                                      },
-                                      labeltext: getString(context).description,
-                                    ),
-                                    FormSpace(8.0),
-                                  ],
-                                )),
-                        FormDivider(),
-                        FormSpace(64.0),
-                      ],
-                    )),
-                    floatingActionButton: FloatingActionButton.extended(
-                        onPressed: () {
-                          if (data.validate()) {
-                            if (editmode) {
-                              requestSimplePermission(
-                                      context: context,
-                                      database: database,
-                                      category: PermissionAccessType.edit,
-                                      id: data.id,
-                                      type: 1)
-                                  .then((result) {
-                                if (result == true) {
-                                  database.dataManager.ModifySchoolClass(data);
-                                  Navigator.pop(context);
-                                }
-                              });
-                            } else {
-                              database.schoolClassGateway
-                                  .CreateSchoolClassAsCreator(data);
-                              Navigator.pop(context);
-                            }
-                          } else {
-                            final infoDialog = InfoDialog(
-                              title: getString(context).failed,
-                              message: getString(context).pleasecheckdata,
-                            );
-                            // ignore: unawaited_futures
-                            infoDialog.show(context);
-                          }
-                        },
-                        icon: Icon(Icons.done),
-                        label: Text(getString(context).done)),
-                  ));
-            }),
-        onWillPop: () async {
-          if (changedValues == false) return true;
-          return showConfirmDialog(
-              context: context,
-              title: getString(context).discardchanges,
-              action: getString(context).confirm,
-              richtext: RichText(
-                  text: TextSpan(
-                text: getString(context).currentchangesnotsaved,
-              ))).then((value) {
-            if (value == true) {
-              return true;
-            } else {
-              return false;
-            }
-          });
+      onWillPop: () async {
+        if (changedValues == false) return true;
+        return showConfirmDialog(
+            context: context,
+            title: getString(context).discardchanges,
+            action: getString(context).confirm,
+            richtext: RichText(
+                text: TextSpan(
+              text: getString(context).currentchangesnotsaved,
+            ))).then((value) {
+          if (value == true) {
+            return true;
+          } else {
+            return false;
+          }
         });
+      },
+      child: ValueListenableBuilder<SchoolClass>(
+        valueListenable: notifier,
+        builder: (context, _, _2) {
+          return Theme(
+            data: newAppThemeDesign(context, data.design),
+            child: Scaffold(
+              appBar: MyAppHeader(
+                  title: editmode
+                      ? getString(context).editschoolclass
+                      : getString(context).newschoolclass),
+              body: SingleChildScrollView(
+                  child: Column(
+                children: <Widget>[
+                  FormHeader(getString(context).general),
+                  FormTextField(
+                    text: data.name,
+                    valueChanged: (newtext) {
+                      data = data.copyWith(name: newtext);
+                      changedValues = true;
+                    },
+                    labeltext: getString(context).name,
+                  ),
+                  FormSpace(12.0),
+                  FormTextField(
+                    text: data.shortname,
+                    valueChanged: (newtext) {
+                      data = data.copyWith(shortname: newtext);
+                      changedValues = true;
+                    },
+                    iconData: Icons.short_text,
+                    labeltext: getString(context).shortname,
+                    maxLengthEnforced: true,
+                    maxLength: 5,
+                  ),
+                  FormSpace(6.0),
+                  ListTile(
+                    leading: Icon(
+                      Icons.color_lens,
+                      color: data.design.primary,
+                    ),
+                    title: Text(getString(context).design),
+                    subtitle: Text(data.design.name),
+                    trailing: IconButton(
+                        icon: Icon(Icons.autorenew),
+                        onPressed: () {
+                          changedValues = true;
+                          SchoolClass newdata =
+                              data.copyWith(design: getRandomDesign());
+                          data = newdata;
+                          notifier.value = newdata;
+                        }),
+                    onTap: () {
+                      selectDesign(context, data.design.id).then((newdesign) {
+                        if (newdesign != null) {
+                          changedValues = true;
+                          SchoolClass newdata =
+                              data.copyWith(design: newdesign);
+                          data = newdata;
+                          notifier.value = newdata;
+                        }
+                      });
+                    },
+                  ),
+                  FormSpace(6.0),
+                  FormDivider(),
+                  FormHideable(
+                      title: getString(context).advanced,
+                      notifier: showSeveralForm,
+                      builder: (context) => Column(
+                            children: <Widget>[
+                              FormSpace(8.0),
+                              FormTextField(
+                                text: data.description,
+                                valueChanged: (newtext) {
+                                  data = data.copyWith(
+                                    description: newtext,
+                                  );
+                                  changedValues = true;
+                                },
+                                labeltext: getString(context).description,
+                              ),
+                              FormSpace(8.0),
+                            ],
+                          )),
+                  FormDivider(),
+                  FormSpace(64.0),
+                ],
+              )),
+              floatingActionButton: FloatingActionButton.extended(
+                  onPressed: () {
+                    if (data.validate()) {
+                      if (editmode) {
+                        requestSimplePermission(
+                                context: context,
+                                database: database,
+                                category: PermissionAccessType.edit,
+                                id: data.id,
+                                type: 1)
+                            .then((result) {
+                          if (result == true) {
+                            database.dataManager.ModifySchoolClass(data);
+                            Navigator.pop(context);
+                          }
+                        });
+                      } else {
+                        database.schoolClassGateway
+                            .CreateSchoolClassAsCreator(data);
+                        Navigator.pop(context);
+                      }
+                    } else {
+                      final infoDialog = InfoDialog(
+                        title: getString(context).failed,
+                        message: getString(context).pleasecheckdata,
+                      );
+                      // ignore: unawaited_futures
+                      infoDialog.show(context);
+                    }
+                  },
+                  icon: Icon(Icons.done),
+                  label: Text(getString(context).done)),
+            ),
+          );
+        },
+      ),
+    );
   }
 }
 
 class SchoolClassCoursesView extends StatelessWidget {
   final String classid;
   final PlannerDatabase database;
-  SchoolClassCoursesView({@required this.classid, @required this.database});
+  SchoolClassCoursesView({required this.classid, required this.database});
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<
-        ThreeObjects<SchoolClass, PlannerConnections, Map<String, Course>>>(
+        ThreeObjects<SchoolClass?, PlannerConnections?, Map<String, Course>?>>(
       builder: (context, snapshot) {
         if (snapshot.data == null) return CircularProgressIndicator();
-        SchoolClass classInfo = snapshot.data.item;
+        SchoolClass classInfo = snapshot.data!.item!;
         //PlannerConnections connections = snapshot.data.item2;
-        Map<String, Course> allcourses = snapshot.data.item3;
+        Map<String, Course> allcourses = snapshot.data!.item3!;
         Future.value(null).then((_) {
           classInfo.courses.forEach((key, value) {
-            if (classInfo?.id == null) return;
-            Course courseinfo = database.courseinfo.data[key];
+            Course? courseinfo = database.courseinfo.data[key];
             if (courseinfo != null) {
               if (courseinfo.connectedclasses.containsKey(classInfo.id) ==
                   false) {
@@ -282,7 +282,7 @@ class SchoolClassCoursesView extends StatelessWidget {
             }
           });
         });
-        Design classDesign = classInfo?.getDesign();
+        Design? classDesign = classInfo.getDesign();
         return Theme(
             data: newAppThemeDesign(context, classDesign),
             child: Scaffold(
@@ -295,16 +295,16 @@ class SchoolClassCoursesView extends StatelessWidget {
                   children: [
                     ...(classInfo.courses.keys.map((item) {
                       String courseid = item;
-                      Course courseInfo = allcourses[courseid];
+                      Course? courseInfo = allcourses[courseid];
 
                       Widget getListTileCourse(Course courseInfo) {
-                        return StreamBuilder<PlannerConnections>(
+                        return StreamBuilder<PlannerConnections?>(
                           stream: database.connections.stream,
                           initialData: database.connections.data,
                           builder: (context, snapshot) {
-                            PlannerConnections connections = snapshot.data;
-                            bool isActivated = connections.isCourseActivated(
-                                courseid, classid);
+                            PlannerConnections? connections = snapshot.data;
+                            bool isActivated = connections!
+                                .isCourseActivated(courseid, classid);
                             return ListTile(
                               leading: SizedBox(
                                 height: 44.0,
@@ -316,14 +316,12 @@ class SchoolClassCoursesView extends StatelessWidget {
                                       child: Hero(
                                           tag: 'courestag:' + courseInfo.id,
                                           child: ColoredCircleText(
-                                              text: toShortNameLength(
-                                                  context,
-                                                  courseInfo
-                                                      .getShortname_full()),
-                                              color: courseInfo
-                                                  .getDesign()
-                                                  .primary,
-                                              radius: 22.0)),
+                                            text: toShortNameLength(context,
+                                                courseInfo.getShortname_full()),
+                                            color:
+                                                courseInfo.getDesign()?.primary,
+                                            radius: 22.0,
+                                          )),
                                     ),
                                     isActivated
                                         ? Container()
@@ -429,7 +427,7 @@ class SchoolClassCoursesView extends StatelessWidget {
                                                     .then((result) {
                                                   if (result == true) {
                                                     Navigator.pop(context);
-                                                    ValueNotifier<bool>
+                                                    ValueNotifier<bool?>
                                                         sheet_notifier =
                                                         ValueNotifier(null);
                                                     showLoadingStateSheet(
@@ -470,7 +468,7 @@ class SchoolClassCoursesView extends StatelessWidget {
                       }
 
                       if (courseInfo == null) {
-                        return StreamBuilder<Course>(
+                        return StreamBuilder<Course?>(
                           stream: database.dataManager
                               .courseRoot(courseid)
                               .snapshots()
@@ -482,7 +480,7 @@ class SchoolClassCoursesView extends StatelessWidget {
                             }
                           }),
                           builder: (context, snapshot) {
-                            Course courseInfo = snapshot.data;
+                            final Course? courseInfo = snapshot.data;
                             if (courseInfo == null) {
                               return LinearProgressIndicator();
                             }
@@ -571,17 +569,17 @@ class SchoolClassCoursesView extends StatelessWidget {
 class SchoolClassSelectCourses extends StatelessWidget {
   final String classid;
   final PlannerDatabase database;
-  SchoolClassSelectCourses({@required this.classid, @required this.database});
+  SchoolClassSelectCourses({required this.classid, required this.database});
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<TwoObjects<SchoolClass, Map<String, Course>>>(
+    return StreamBuilder<TwoObjects<SchoolClass?, Map<String, Course>?>>(
       builder: (context, snapshot) {
         if (snapshot.data == null) return CircularProgressIndicator();
-        SchoolClass classInfo = snapshot.data.item;
-        List<Course> courses = snapshot.data.item2.values.toList()
+        SchoolClass classInfo = snapshot.data!.item!;
+        List<Course> courses = snapshot.data!.item2!.values.toList()
           ..sort((it1, it2) => it1.getName().compareTo(it2.getName()));
-        Design classDesign = classInfo?.getDesign();
+        final Design? classDesign = classInfo.getDesign();
         return Theme(
             data: newAppThemeDesign(context, classDesign),
             child: Scaffold(
@@ -597,7 +595,7 @@ class SchoolClassSelectCourses extends StatelessWidget {
                     leading: ColoredCircleText(
                         text: toShortNameLength(
                             context, courseInfo.getShortname_full()),
-                        color: courseInfo.getDesign().primary,
+                        color: courseInfo.getDesign()?.primary,
                         radius: 22.0),
                     title: Text(courseInfo.name),
                     subtitle: Column(
@@ -621,7 +619,7 @@ class SchoolClassSelectCourses extends StatelessWidget {
                         icon: Icon(Icons.add_circle_outline),
                         onPressed: enablecourse
                             ? () {
-                                ValueNotifier<bool> sheetnotifier =
+                                ValueNotifier<bool?> sheetnotifier =
                                     ValueNotifier(null);
                                 showLoadingStateSheet(
                                     context: context,
@@ -652,22 +650,23 @@ class SchoolClassCourseTemplatesView extends StatelessWidget {
   final PlannerDatabase database;
 
   SchoolClassCourseTemplatesView(
-      {@required this.database, @required this.classid});
+      {required this.database, required this.classid});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MyAppHeader(title: getString(context).templates),
-      body: StreamBuilder<TwoObjects<Map<String, Course>, SchoolClass>>(
+      body: StreamBuilder<TwoObjects<Map<String, Course>?, SchoolClass?>>(
           stream: getMergedStream(database.courseinfo.stream,
               database.schoolClassInfos.getItemStream(classid)),
           builder: (context, snapshot) {
-            Map<String, Course> predata_allmycourses = snapshot.data?.item;
-            SchoolClass schoolClassInfo = snapshot.data?.item2;
+            final Map<String, Course>? predata_allmycourses =
+                snapshot.data?.item;
+            final SchoolClass? schoolClassInfo = snapshot.data?.item2;
             if (predata_allmycourses == null || schoolClassInfo == null) {
               return CircularProgressIndicator();
             }
-            List<Course> allmycourses = schoolClassInfo.courses.keys
+            List<Course?> allmycourses = schoolClassInfo.courses.keys
                 .map((key) => predata_allmycourses[key])
                 .toList();
             allmycourses.removeWhere((it) => it == null);
@@ -675,7 +674,7 @@ class SchoolClassCourseTemplatesView extends StatelessWidget {
               itemBuilder: (context, index) {
                 dynamic item = templates[index];
                 if (item is CourseTemplate) {
-                  bool enabledtemplate = !isAlreadyaCourse(item, allmycourses);
+                  bool enabledtemplate = !item.isAlreadyaCourse(allmycourses);
                   return ListTile(
                     leading: ColoredCircleText(
                         text: toShortNameLength(context, item.shortname),
@@ -748,21 +747,5 @@ class SchoolClassCourseTemplatesView extends StatelessWidget {
             );
           }),
     );
-  }
-
-  bool isAlreadyaCourse(CourseTemplate template, List<Course> allcourses) {
-    int lowest;
-    for (Course info in allcourses) {
-      int levdistance = DiffMatchPatch()
-          .diff_levenshtein(DiffMatchPatch().diff(template.name, info.name));
-      if (lowest == null) {
-        lowest = levdistance;
-      } else if (lowest > levdistance) lowest = levdistance;
-    }
-    if ((lowest ?? 100) < 1) {
-      return true;
-    } else {
-      return false;
-    }
   }
 }

@@ -1,4 +1,4 @@
-//@dart=2.11
+//
 import 'package:bloc/bloc_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +7,7 @@ import 'package:schulplaner8/profile/user_image_view.dart';
 import 'package:schulplaner_models/schulplaner_models.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
 import 'package:schulplaner_widgets/schulplaner_theme.dart';
-import 'package:schulplaner8/Data/plannerdatabase.dart';
+import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 import 'package:schulplaner8/Helper/helper_data.dart';
 import 'package:schulplaner8/Helper/helper_views.dart';
 import 'package:schulplaner8/groups/src/models/course.dart';
@@ -18,20 +18,20 @@ import 'course_member_sheet.dart';
 
 class CourseMemberView extends StatelessWidget {
   final String courseID;
-  CourseMemberView({@required this.courseID});
+  CourseMemberView({required this.courseID});
   @override
   Widget build(BuildContext context) {
     final database =
         BlocProvider.of<PlannerDatabaseBloc>(context).plannerDatabase;
-    return StreamBuilder<Course>(
+    return StreamBuilder<Course?>(
       builder: (context, snapshot) {
-        Course courseInfo = snapshot.data;
+        Course? courseInfo = snapshot.data;
         if (courseInfo == null) {
           return Center(
             child: CircularProgressIndicator(),
           );
         }
-        Design courseDesign = courseInfo?.getDesign();
+        Design? courseDesign = courseInfo.getDesign();
         return Theme(
             data: newAppThemeDesign(context, courseDesign),
             child: Scaffold(
@@ -50,7 +50,7 @@ class CourseMemberView extends StatelessWidget {
               ),
             ));
       },
-      stream: database.courseinfo.getItemStream(courseID),
+      stream: database!.courseinfo.getItemStream(courseID),
     );
   }
 }
@@ -60,9 +60,9 @@ class _MemberItem extends StatelessWidget {
   final MemberData memberData;
 
   const _MemberItem({
-    Key key,
-    @required this.memberData,
-    @required this.courseId,
+    Key? key,
+    required this.memberData,
+    required this.courseId,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -70,10 +70,10 @@ class _MemberItem extends StatelessWidget {
         BlocProvider.of<PlannerDatabaseBloc>(context).plannerDatabase;
     String memberuid = memberData.getUid();
     return FutureBuilder<DocumentSnapshot>(
-        future: database.dataManager.getMemberInfo(memberuid).get(),
+        future: database!.dataManager.getMemberInfo(memberuid).get(),
         builder: (context, snapshot) {
           final data = snapshot.data?.data();
-          UserProfile userProfile =
+          UserProfile? userProfile =
               data != null ? UserProfile.fromData(data) : null;
           return CourseMemberTile(
             isMe: memberData.id == database.getMemberId(),
@@ -114,18 +114,18 @@ class _MemberItem extends StatelessWidget {
 
 class CourseMemberTile extends StatelessWidget {
   final bool isMe;
-  final UserProfile userProfile;
+  final UserProfile? userProfile;
   final MemberData memberData;
   final VoidCallback onTap, onTrailing, onLongPress;
 
   const CourseMemberTile({
-    Key key,
-    this.userProfile,
-    this.memberData,
-    this.onTap,
-    this.onTrailing,
-    this.onLongPress,
-    this.isMe,
+    Key? key,
+    required this.userProfile,
+    required this.memberData,
+    required this.onTap,
+    required this.onTrailing,
+    required this.onLongPress,
+    required this.isMe,
   }) : super(key: key);
 
   @override
@@ -164,11 +164,11 @@ class CourseMemberTile extends StatelessWidget {
 }
 
 Future<void> _showMemberSheet(
-    {@required BuildContext context,
-    @required String courseId,
-    @required PlannerDatabase database,
-    @required UserProfile userProfile,
-    @required MemberData memberData}) {
+    {required BuildContext context,
+    required String courseId,
+    required PlannerDatabase database,
+    required UserProfile? userProfile,
+    required MemberData memberData}) {
   final memberSheet = CourseMemberSheet(
     courseId: courseId,
     database: database,
@@ -187,7 +187,8 @@ Future<void> _showMemberSheet(
 
 class CourseMemberRoleCard extends StatelessWidget {
   final MemberRole memberRole;
-  const CourseMemberRoleCard({Key key, this.memberRole}) : super(key: key);
+  const CourseMemberRoleCard({Key? key, required this.memberRole})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     if (memberRole.isAdminOrOwner()) {

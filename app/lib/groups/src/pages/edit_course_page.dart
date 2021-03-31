@@ -1,4 +1,4 @@
-// @dart=2.11
+//
 import 'package:bloc/bloc_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Helper/Functions.dart';
@@ -11,8 +11,8 @@ import 'package:schulplaner_widgets/schulplaner_forms.dart';
 import 'package:schulplaner_widgets/schulplaner_theme.dart';
 
 Future<void> openEditCoursePage({
-  @required BuildContext context,
-  @required EditCourseBloc editCourseBloc,
+  required BuildContext context,
+  required EditCourseBloc editCourseBloc,
 }) async {
   await pushWidget(
     context,
@@ -25,7 +25,7 @@ Future<void> openEditCoursePage({
 
 class EditCoursePage extends StatelessWidget {
   const EditCoursePage({
-    Key key,
+    Key? key,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -47,7 +47,7 @@ class EditCoursePage extends StatelessWidget {
                         : getString(context).newcourse),
                 body: SingleChildScrollView(
                   child: _Inner(
-                    course: course,
+                    course: course!,
                   ),
                 ),
                 floatingActionButton: _Fab(),
@@ -79,8 +79,8 @@ class _Inner extends StatelessWidget {
   final Course course;
 
   const _Inner({
-    Key key,
-    @required this.course,
+    Key? key,
+    required this.course,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -249,12 +249,12 @@ class _Fab extends StatelessWidget {
 
 class _Connect extends StatelessWidget {
   const _Connect({
-    Key key,
+    Key? key,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final bloc = BlocProvider.of<EditCourseBloc>(context);
-    return StreamBuilder<String>(
+    return StreamBuilder<String?>(
         stream: bloc.schoolClassId,
         builder: (context, snapshot) {
           final schoolClassId = snapshot.data;
@@ -277,7 +277,7 @@ class _Connect extends StatelessWidget {
                 title: Text(schoolClassId == null
                     ? getString(context).addtoclass
                     : getString(context).addto +
-                        ' ${bloc.database.schoolClassInfos.data[schoolClassId].getName()}'),
+                        ' ${bloc.database.schoolClassInfos.data[schoolClassId]?.getName()}'),
               ),
             ],
             mainAxisSize: MainAxisSize.min,

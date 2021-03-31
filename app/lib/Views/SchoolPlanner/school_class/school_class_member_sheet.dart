@@ -1,7 +1,7 @@
 import 'package:bloc/bloc_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:schulplaner8/Data/plannerdatabase.dart';
+import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 import 'package:schulplaner8/Helper/EasyWidget.dart';
 import 'package:schulplaner8/Helper/MyCloudFunctions.dart';
 import 'package:schulplaner8/Helper/PermissionManagement.dart';
@@ -18,7 +18,7 @@ import 'package:schulplaner_widgets/schulplaner_dialogs.dart';
 class SchoolClassMemberSheet extends SchulplanerSheet {
   final String schoolClassId;
   final MemberData memberData;
-  final UserProfile userProfile;
+  final UserProfile? userProfile;
   final PlannerDatabase database;
 
   const SchoolClassMemberSheet({
@@ -113,7 +113,7 @@ class SchoolClassMemberSheet extends SchulplanerSheet {
   Future<void> _tapRemoveMember(BuildContext context) async {
     final confirmResult = await ConfirmDialog(
       title:
-          '${userProfile.name ?? getString(context).anonymoususer} ${getString(context).remove}',
+          '${userProfile?.name ?? getString(context).anonymoususer} ${getString(context).remove}',
       message: '',
     ).show<bool>(context);
     if (confirmResult == true) {

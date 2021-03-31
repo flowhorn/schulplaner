@@ -31,56 +31,60 @@ dependencies:
     path: ../packages/schulplaner_navigation
   schulplaner_website:
     path: ../schulplaner_website
+  export_user_data_client:
+    path: ../packages/export_user_data/export_user_data_client
+  export_user_data_client_implementation:
+    path: ../packages/export_user_data/export_user_data_client_implementation
   flutter:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
 
-  shared_preferences: 2.0.4
+  shared_preferences: 2.0.6
   cupertino_icons: 1.0.2
 
   #GOOGLE
-  cloud_firestore: 1.0.1
+  cloud_firestore: 1.0.3
   firebase_auth: 1.0.1
-  firebase_messaging: 9.0.0
-  firebase_storage: 8.0.0
-  firebase_analytics: 7.1.1
-  firebase_database: 6.1.0
-  firebase_performance: 0.6.0
+  firebase_messaging: 9.1.0
+  firebase_storage: 8.0.1
+  firebase_analytics: ^8.0.0-dev.0
+  firebase_database: 6.1.1
+  firebase_performance: 0.6.0+1
   firebase_crashlytics: 1.0.0
-  firebase_dynamic_links: ^0.8.0
+  firebase_dynamic_links: ^2.0.0-dev.0
 
   intl: ^0.17.0
   intl_translation: 0.17.10+1
   rxdart: ^0.26.0
   
   community_material_icon: 5.9.55
-  font_awesome_flutter: ^9.0.0-nullsafety
+  font_awesome_flutter: ^9.0.0
   color: 3.0.0
   flutter_material_color_picker: 1.0.5
-  diff_match_patch: 0.3.0
-  qr_flutter: 3.2.0
+  string_similarity: ^2.0.0
+  qr_flutter: 4.0.0
   device_info: 2.0.0
-  url_launcher: 6.0.2
-  decimal: 1.0.0
+  url_launcher: 6.0.3
+  decimal: 1.0.0+1
   share: 2.0.1
   tuple: 2.0.0
   launch_review: 3.0.1
-  flutter_image_compress: 1.0.0-nullsafety
+  flutter_image_compress: 1.0.0
   photo_view: 0.11.1
   path_provider: 2.0.1
-  cached_network_image: 3.0.0-nullsafety
-  flutter_cache_manager: 3.0.0-nullsafety.1
+  cached_network_image: 3.0.0
+  flutter_cache_manager: 3.0.1
   auto_size_text: 3.0.0-nullsafety.0
-  filesize: 1.0.4
-  image: 3.0.1
+  filesize_ns: ^1.1.0
+  image: 3.0.2
   dots_indicator: ^2.0.0
   timeago: ^3.0.2
-  fl_chart: ^0.20.1
+  fl_chart: ^0.30.0
   percent_indicator: ^3.3.0-nullsafety.1
-  printing: ^5.0.3
-  pdf: ^3.0.1
-  universal_io: ^2.0.0
+  printing: ^5.0.4
+  pdf: ^3.1.0
+  universal_io: ^2.0.3
   
 dev_dependencies:
   flutter_test:
@@ -94,11 +98,14 @@ dependency_overrides:
       ref: patch-1
   qr: ^2.0.0
   plugin_platform_interface: ^2.0.0
-  shared_preferences: ^2.0.4
-  firebase: ^9.0.0
+  shared_preferences: ^2.0.5
+  firebase: ^9.0.1
   petitparser: ^4.0.2
   xml: ^5.0.2
   crypto: ^3.0.0
+  flutter_material_color_picker: 
+    git: 
+      url: https://github.com/Bwolfs2/flutter_material_color_picker
 
 
 flutter:

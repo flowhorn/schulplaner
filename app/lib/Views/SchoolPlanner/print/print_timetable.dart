@@ -1,7 +1,7 @@
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
 import 'package:schulplaner8/Data/Planner/Lesson.dart';
-import 'package:schulplaner8/Data/plannerdatabase.dart';
+import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 import 'package:schulplaner8/Helper/helper_data.dart';
 import 'package:schulplaner8/Views/SchoolPlanner/TimetableFragment.dart';
 import 'package:schulplaner8/groups/src/models/course.dart';
@@ -142,7 +142,7 @@ List<TimeTableElement> buildElements(
       mylist.add(TimeTableElement(
         startpos: getStartPositionForFragment(l),
         endpos: getEndPositionForFragment(l),
-        course: database.getCourseInfo(l.courseid),
+        course: database.getCourseInfo(l.courseid!)!,
         lesson: l,
       ));
     }
@@ -188,7 +188,7 @@ List<Widget> buildLessons(
       });
       if (lesson != null) {
         widgets.add(
-            LessonPdfTile(lesson, database.getCourseInfo(lesson.courseid)));
+            LessonPdfTile(lesson, database.getCourseInfo(lesson.courseid!)!));
       } else {
         widgets.add(Container());
       }
@@ -225,11 +225,11 @@ class LessonPdfTile extends StatelessWidget {
   Widget build(Context context) {
     final place = lesson.place?.name ?? course.getPlaceFirst() ?? '';
     return Container(
-      color: PdfColor.fromInt(course.getDesign().primary.value),
+      color: PdfColor.fromInt(course.getDesign()!.primary.value),
       child: Stack(children: [
         Center(
             child: Text(
-          course.getName() ?? '/',
+          course.getName(),
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 14.0,

@@ -1,4 +1,3 @@
-//@dart=2.11
 import 'dart:async';
 import 'dart:math';
 
@@ -16,22 +15,22 @@ class IntroductionScreen extends StatefulWidget {
   final List<PageViewModel> pages;
   final bool showSkipButton;
   final VoidCallback onDone;
-  final ValueChanged<int> onChange;
+  final ValueChanged<int>? onChange;
   final Size progressSizes;
   final EdgeInsets dotsSpacing;
   final bool isProgress;
   final bool freeze;
-  final Widget next;
+  final Widget? next;
   final Widget done;
-  final Widget skip;
+  final Widget? skip;
   final int animationDuration;
   final int initialPage;
 
   const IntroductionScreen({
-    Key key,
-    @required this.pages,
-    @required this.onDone,
-    @required this.done,
+    Key? key,
+    required this.pages,
+    required this.onDone,
+    required this.done,
     this.next,
     this.skip,
     this.showSkipButton = false,
@@ -42,10 +41,7 @@ class IntroductionScreen extends StatefulWidget {
     this.freeze = false,
     this.animationDuration = 350,
     this.initialPage = 0,
-  })  : assert(pages != null),
-        assert(onDone != null),
-        assert(done != null),
-        assert((skip != null && showSkipButton) || !showSkipButton),
+  })  : assert((skip != null && showSkipButton) || !showSkipButton),
         super(key: key);
 
   @override
@@ -53,7 +49,7 @@ class IntroductionScreen extends StatefulWidget {
 }
 
 class _IntroductionScreenState extends State<IntroductionScreen> {
-  PageController _pageController;
+  late PageController _pageController;
   int _currentPage = 0;
   bool _isSkipPressed = false;
   bool _isScrolling = false;
@@ -126,11 +122,11 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
 
     final skipBtn = Opacity(
       opacity: isSkipBtn ? 1.0 : 0.0,
-      child: IntroButton(child: widget.skip, onPressed: _onSkip),
+      child: IntroButton(child: widget.skip!, onPressed: _onSkip),
     );
 
     final nextBtn = IntroButton(
-      child: widget.next,
+      child: widget.next!,
       onPressed: _isScrolling ? null : _onNext,
     );
 
@@ -153,7 +149,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                 children: _buildPages(),
                 onPageChanged: (index) {
                   setState(() => _currentPage = index);
-                  if (widget.onChange != null) widget.onChange(index);
+                  if (widget.onChange != null) widget.onChange!(index);
                 },
               ),
             ),

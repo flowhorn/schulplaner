@@ -1,12 +1,10 @@
-//@dart=2.11
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:meta/meta.dart';
 
 class Time {
   final String _time;
 
-  factory Time({@required int hour, int minute = 0}) {
+  factory Time({required int hour, int minute = 0}) {
     final numberFormat = NumberFormat("00");
     return Time._(
         "${numberFormat.format(hour)}:${numberFormat.format(minute)}");
@@ -18,7 +16,7 @@ class Time {
     return Time.fromTimeOfDay(TimeOfDay.now());
   }
 
-  factory Time.parse(String timeString) {
+  static Time? parse(String timeString) {
     try {
       final time = Time._(timeString);
       time.hour;
@@ -30,7 +28,6 @@ class Time {
   }
 
   factory Time.fromTimeOfDay(TimeOfDay timeOfDay) {
-    if (timeOfDay == null) return null;
     final numberFormat = NumberFormat("00");
     return Time._(
         "${numberFormat.format(timeOfDay.hour)}:${numberFormat.format(timeOfDay.minute)}");

@@ -1,4 +1,4 @@
-//@dart=2.11
+//
 import 'package:schulplaner_addons/chat/chat_member.dart';
 import 'package:schulplaner_addons/common/model.dart';
 
@@ -8,8 +8,13 @@ class ChatRoom {
   final bool isSingleChat;
   final dynamic settings;
 
-  ChatRoom(
-      {this.id, this.name, this.members, this.settings, this.isSingleChat});
+  ChatRoom({
+    required this.id,
+    required this.name,
+    required this.members,
+    required this.settings,
+    required this.isSingleChat,
+  });
 }
 
 class ChatRoomConverter {
@@ -30,8 +35,8 @@ class ChatRoomConverter {
       'name': chatRoom.name,
       'settings': chatRoom.settings,
       'isSingleChat': chatRoom.isSingleChat,
-      'members':
-          encodeMap(chatRoom.members, (it) => ChatMemberConverter.toJson(it)),
+      'members': encodeMap<ChatMember>(
+          chatRoom.members, (it) => ChatMemberConverter.toJson(it)),
     };
   }
 }

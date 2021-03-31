@@ -1,8 +1,9 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Helper/helper_data.dart';
-import 'package:schulplaner8/OldGrade/Grade.dart';
+
 import 'package:schulplaner8/OldGrade/GradePackage.dart';
+import 'package:schulplaner8/OldGrade/models/grade.dart';
 import 'package:schulplaner_widgets/schulplaner_forms.dart';
 
 class GradeDevelopmentView extends StatelessWidget {
@@ -23,7 +24,7 @@ class GradeDevelopmentView extends StatelessWidget {
     double highestGradeValue = 100.0;
     try {
       final List<double> gradevalues = grades
-          .map((it) => gradePackage.getGradeValue(it.valuekey).value)
+          .map((it) => gradePackage.getGradeValue!(it.valuekey!).value)
           .toList()
             ..sort((item1, item2) => item1.compareTo(item2));
 
@@ -136,8 +137,7 @@ class GradeDevelopmentView extends StatelessWidget {
                                 .map((grade) => FlSpot(
                                     grades.indexOf(grade).toDouble(),
                                     gradePackage
-                                        .getGradeValue(grade.valuekey)
-                                        .value))
+                                        .getGradeValue!(grade.valuekey!).value))
                                 .toList(),
                             isCurved: true,
                             colors: gradientColors,

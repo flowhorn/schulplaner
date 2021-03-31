@@ -1,11 +1,11 @@
-//@dart=2.11
+//
 import 'package:schulplaner_addons/common/model.dart';
 
 class ChatMember {
   final String uID, name;
   final List<String> pushKeys;
 
-  ChatMember({this.uID, this.name, this.pushKeys});
+  ChatMember({required this.uID, required this.name, required this.pushKeys});
 }
 
 class ChatMemberConverter {

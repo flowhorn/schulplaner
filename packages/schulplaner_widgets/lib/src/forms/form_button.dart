@@ -1,11 +1,10 @@
-//@dart=2.11
 import 'package:flutter/material.dart';
 
 import '../common/r_button.dart';
 
 class FormButton extends StatelessWidget {
-  final String text;
-  final IconData iconData;
+  final String? text;
+  final IconData? iconData;
   final VoidCallback onTap;
   const FormButton(this.text, this.onTap, {this.iconData});
 
@@ -15,7 +14,11 @@ class FormButton extends StatelessWidget {
       height: 48.0,
       width: double.infinity,
       child: Center(
-        child: RButton(text: text ?? '-', onTap: onTap, iconData: iconData),
+        child: RButton(
+          text: text ?? '-',
+          onTap: onTap,
+          iconData: iconData,
+        ),
       ),
     );
   }

@@ -1,4 +1,4 @@
-//@dart=2.11
+//
 
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/groups/src/models/course.dart';
@@ -8,7 +8,7 @@ import 'package:schulplaner8/models/planner_settings.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
 
 class OverrridenTime {
-  String start, end;
+  late String? start, end;
   OverrridenTime({this.start, this.end});
 
   OverrridenTime.fromData(Map<String, dynamic> data) {
@@ -16,7 +16,7 @@ class OverrridenTime {
     end = data['end'];
   }
 
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic>? toJson() {
     if (start == null || end == null) return null;
     return {
       'start': start,
@@ -30,27 +30,27 @@ class OverrridenTime {
 }
 
 class Lesson {
-  String courseid, lessonid;
-  int day, start, end, weektype;
-  TeacherLink teacher;
-  PlaceLink place;
-  OverrridenTime overridentime;
-  bool newimplementation;
+  late String? courseid, lessonid;
+  late int day, start, end, weektype;
+  late TeacherLink? teacher;
+  late PlaceLink? place;
+  late OverrridenTime? overridentime;
+  late bool newimplementation;
 
-  Lesson(
-      {this.courseid,
-      this.lessonid,
-      this.day,
-      this.start,
-      this.end,
-      this.weektype = 0,
-      this.teacher,
-      this.place,
-      this.overridentime,
-      this.newimplementation = true});
+  Lesson({
+    this.courseid,
+    this.lessonid,
+    required this.day,
+    required this.start,
+    required this.end,
+    this.weektype = 0,
+    this.teacher,
+    this.place,
+    this.overridentime,
+    this.newimplementation = true,
+  });
 
-  factory Lesson.fromData({@required String id, @required dynamic data}) {
-    if (data == null) return null;
+  factory Lesson.fromData({required String id, required dynamic data}) {
     return Lesson(
       courseid: data['courseid'],
       lessonid: id,
@@ -124,12 +124,14 @@ class Lesson {
     if (start == null || end == null) return false;
     if (start > end) return false;
     if (overridentime != null) {
-      if (overridentime.start == null && overridentime.end == null) {
+      if (overridentime!.start == null && overridentime!.end == null) {
       } else {
-        if (overridentime.start == null || overridentime.end == null) {
+        if (overridentime!.start == null || overridentime!.end == null) {
           return false;
         }
-        if (overridentime.start.compareTo(overridentime.end) >= 0) return false;
+        if (overridentime!.start!.compareTo(overridentime!.end!) >= 0) {
+          return false;
+        }
       }
     }
     return true;
@@ -157,12 +159,14 @@ class Lesson {
     if (start == null || end == null) return false;
     if (start > end) return false;
     if (overridentime != null) {
-      if (overridentime.start == null && overridentime.end == null) {
+      if (overridentime!.start == null && overridentime!.end == null) {
       } else {
-        if (overridentime.start == null || overridentime.end == null) {
+        if (overridentime!.start == null || overridentime!.end == null) {
           return false;
         }
-        if (overridentime.start.compareTo(overridentime.end) >= 0) return false;
+        if (overridentime!.start!.compareTo(overridentime!.end!) >= 0) {
+          return false;
+        }
       }
     }
     return true;
@@ -172,13 +176,13 @@ class Lesson {
 class WeekType {
   int type;
   String name;
-  WeekType({@required this.type, @required this.name});
+  WeekType({required this.type, required this.name});
 }
 
 class Weekday {
   int day;
   String name;
-  Weekday({@required this.day, @required this.name});
+  Weekday({required this.day, required this.name});
 }
 
 Map<int, String> weektypesamount_meaning(BuildContext context) {
@@ -202,7 +206,7 @@ Map<int, WeekType> weektypes(BuildContext context) {
 List<WeekType> getListOfWeekTypes(
     BuildContext context, PlannerSettingsData settingsdata,
     {bool includealways = true}) {
-  Map data = weektypes(context);
+  final data = weektypes(context);
   if (!includealways) data.remove(0);
   data.removeWhere((key, _) => key > settingsdata.weektypes_amount);
   return data.values.toList();
@@ -212,7 +216,7 @@ String getCurrentWeekTypeName(
     BuildContext context, PlannerSettingsData settingsdata) {
   final weektype = settingsdata.getCurrentWeekType();
   if (weektype == 0) return '-';
-  return weektypes(context)[weektype].name;
+  return weektypes(context)[weektype]!.name;
 }
 
 Map<int, Weekday> getWeekDays(BuildContext context) {
@@ -228,13 +232,13 @@ Map<int, Weekday> getWeekDays(BuildContext context) {
 }
 
 List<Weekday> getListOfWeekDaysFull(BuildContext context) {
-  Map data = getWeekDays(context);
+  final data = getWeekDays(context);
   return data.values.toList();
 }
 
 List<Weekday> getListOfWeekDays(
     BuildContext context, PlannerSettingsData settingsdata) {
-  Map data = getWeekDays(context);
+  final data = getWeekDays(context);
   if (!settingsdata.saturday_enabled) data.remove(6);
   if (!settingsdata.sunday_enabled) data.remove(7);
   return data.values.toList();

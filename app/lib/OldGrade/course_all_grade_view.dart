@@ -1,8 +1,7 @@
-//@dart=2.11
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:schulplaner8/Data/plannerdatabase.dart';
+import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 import 'package:schulplaner8/Helper/DateAPI.dart';
 import 'package:schulplaner8/Helper/Functions.dart';
 import 'package:schulplaner8/Helper/helper_views.dart';
@@ -12,8 +11,9 @@ import 'package:schulplaner8/groups/src/models/course.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
 import 'package:schulplaner_widgets/schulplaner_theme.dart';
 
-import 'Grade.dart';
 import 'GradeDetail.dart';
+import 'models/average_course.dart';
+import 'models/grade.dart';
 
 class CourseAllGradeView extends StatefulWidget {
   final String courseid;
@@ -27,10 +27,10 @@ class CourseAllGradeView extends StatefulWidget {
 }
 
 class CourseAllGradeViewState extends State<CourseAllGradeView> {
-  String courseid;
-  Course item;
-  StreamSubscription<Course> datalistener;
-  StreamSubscription<List<Grade>> datalistener_grade;
+  late String courseid;
+  late Course? item;
+  late StreamSubscription<Course?> datalistener;
+  late StreamSubscription<List<Grade>?> datalistener_grade;
   final PlannerDatabase database;
 
   CourseAllGradeViewState(this.database, this.courseid) {
@@ -38,20 +38,22 @@ class CourseAllGradeViewState extends State<CourseAllGradeView> {
         .where((grade) => grade.courseid == courseid)
         .toList()
           ..sort((g1, g2) {
-            return g1.date.compareTo(g2.date);
+            return g1.date!.compareTo(g2.date!);
           });
     calculator = AverageCourse(database.getSettings(),
-        grades: list ?? [],
-        gradeprofileid: database.getCourseInfo(courseid).personalgradeprofile);
+        grades: list,
+        gradeprofileid:
+            database.getCourseInfo(courseid)!.personalgradeprofile!);
   }
 
   List<Grade> list = [];
-  AverageCourse calculator;
+  late AverageCourse calculator;
 
   void _newCalculation() {
     calculator = AverageCourse(database.getSettings(),
         grades: list,
-        gradeprofileid: database.getCourseInfo(courseid).personalgradeprofile);
+        gradeprofileid:
+            database.getCourseInfo(courseid)!.personalgradeprofile!);
   }
 
   @override
@@ -66,7 +68,7 @@ class CourseAllGradeViewState extends State<CourseAllGradeView> {
       setState(() {
         list = newlist.where((grade) => grade.courseid == courseid).toList()
           ..sort((g1, g2) {
-            return g1.date.compareTo(g2.date);
+            return g1.date!.compareTo(g2.date!);
           });
         _newCalculation();
       });
@@ -91,6 +93,7 @@ class CourseAllGradeViewState extends State<CourseAllGradeView> {
             item?.getName() ?? '-',
           ),
           bottom: PreferredSize(
+            preferredSize: Size(double.infinity, 50.0),
             child: Container(
               height: 50.0,
               child: ListTile(
@@ -101,7 +104,7 @@ class CourseAllGradeViewState extends State<CourseAllGradeView> {
                           ? database
                               .getSettings()
                               .getCurrentAverageDisplay(context: context)
-                              .input(calculator.totalaverage)
+                              .input(calculator.totalaverage!)
                           : '/'),
                   style: TextStyle(
                       color: getTextColor(item?.getDesign()?.primary),
@@ -110,7 +113,6 @@ class CourseAllGradeViewState extends State<CourseAllGradeView> {
                 ),
               ),
             ),
-            preferredSize: Size(double.infinity, 50.0),
           ),
         ),
         body: ListView.builder(
@@ -124,16 +126,16 @@ class CourseAllGradeViewState extends State<CourseAllGradeView> {
               ListTile(
                 onTap: () {
                   showGradeInfoSheet(database,
-                      context: context, gradeid: grade.id);
+                      context: context, gradeid: grade.id!);
                 },
                 leading: ColoredCircleText(
                   color: item?.getDesign()?.primary,
                   text: toShortNameLength(context, item?.getShortname_full()),
                 ),
-                title: Text(grade.title),
+                title: Text(grade.title!),
                 subtitle: Column(
                   children: <Widget>[
-                    Text(getDateText(grade.date)),
+                    Text(getDateText(grade.date!)),
                   ],
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -141,7 +143,7 @@ class CourseAllGradeViewState extends State<CourseAllGradeView> {
                 ),
                 isThreeLine: false,
                 trailing: Text(
-                  DataUtil_Grade().getGradeValueOf(grade.valuekey).name,
+                  DataUtil_Grade().getGradeValueOf(grade.valuekey!).name,
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
                 ),
               )
@@ -157,7 +159,7 @@ class CourseAllGradeViewState extends State<CourseAllGradeView> {
 class _Fab extends StatelessWidget {
   final String courseId;
 
-  const _Fab({Key key, @required this.courseId}) : super(key: key);
+  const _Fab({Key? key, required this.courseId}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final database = PlannerDatabaseBloc.getDatabase(context);

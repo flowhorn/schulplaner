@@ -50,7 +50,7 @@ final Map<int, NavigationActionItem> allNavigationActions = {
     iconData: Icons.event,
     name: TranslationString((context) => getString(context).calendar),
     builder: (context) => CalendarView(
-      BlocProvider.of<PlannerDatabaseBloc>(context).plannerDatabase,
+      BlocProvider.of<PlannerDatabaseBloc>(context).plannerDatabase!,
     ),
     navigationItem: NavigationItem.calendar,
   ),
@@ -80,7 +80,7 @@ final Map<int, NavigationActionItem> allNavigationActions = {
     iconData: CommunityMaterialIcons.trophy_outline,
     name: TranslationString((context) => getString(context).grades),
     builder: (context) => GradeDetailList(
-      BlocProvider.of<PlannerDatabaseBloc>(context).plannerDatabase,
+      BlocProvider.of<PlannerDatabaseBloc>(context).plannerDatabase!,
     ),
     navigationItem: NavigationItem.grades,
   ),
@@ -90,7 +90,7 @@ final Map<int, NavigationActionItem> allNavigationActions = {
     name: TranslationString((context) => getString(context).lessoninfos),
     builder: (context) => LessonInfosList(
       plannerDatabase:
-          BlocProvider.of<PlannerDatabaseBloc>(context).plannerDatabase,
+          BlocProvider.of<PlannerDatabaseBloc>(context).plannerDatabase!,
     ),
     navigationItem: NavigationItem.lessonInfos,
   ),

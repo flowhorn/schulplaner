@@ -1,4 +1,3 @@
-//@dart=2.11
 import 'package:flutter/material.dart';
 import 'package:schulplaner_navigation/schulplaner_navigation.dart';
 import 'package:schulplaner_navigation/src/logic/navigation_router.dart';
@@ -11,8 +10,8 @@ import 'body_builder.dart';
 class MobileUI extends StatelessWidget {
   final WidgetBuilder plannerStateBuilder;
   const MobileUI({
-    Key key,
-    @required this.plannerStateBuilder,
+    Key? key,
+    required this.plannerStateBuilder,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -24,7 +23,7 @@ class MobileUI extends StatelessWidget {
         final navigationState = snapshot.data;
         return Scaffold(
           appBar: _AppBar(
-            navigationState: navigationState,
+            navigationState: navigationState!,
             plannerStateBuilder: plannerStateBuilder,
           ),
           body: BodyBuilder(),
@@ -41,9 +40,9 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
   final NavigationState navigationState;
   final WidgetBuilder plannerStateBuilder;
   const _AppBar({
-    Key key,
-    @required this.navigationState,
-    @required this.plannerStateBuilder,
+    Key? key,
+    required this.navigationState,
+    required this.plannerStateBuilder,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -65,14 +64,14 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
       );
     } else {
       return AppHeaderAdvanced(
-        title: Text(navigationState.subChildName),
+        title: Text(navigationState.subChildName ?? ''),
         leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () {
               NavigationBloc.of(context).goBack();
             }),
         actions: navigationState.actions != null
-            ? navigationState.actions(context)
+            ? navigationState.actions!(context)
             : null,
       );
     }
@@ -85,14 +84,14 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
 class _BottomNavBar extends StatelessWidget {
   final NavigationState navigationState;
   const _BottomNavBar({
-    Key key,
-    @required this.navigationState,
+    Key? key,
+    required this.navigationState,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Builder(
       builder: (context) {
-        int currentindex = navigationState.index ?? 0;
+        int currentindex = navigationState.index;
         return Container(
           child: BottomNavigationBar(
             backgroundColor: getDrawerBackgroundColor(context),
@@ -121,8 +120,8 @@ class _BottomNavBar extends StatelessWidget {
   BottomNavigationBarItem buildNavigationItem(BuildContext context, int index) {
     final item = NavigationBloc.of(context).getNavigationActionItem(index);
     return BottomNavigationBarItem(
-      icon: Icon(item?.iconData ?? Icons.navigation),
-      label: item?.name?.getText(context) ?? '-',
+      icon: Icon(item.iconData),
+      label: item.name.getText(context),
     );
   }
 }

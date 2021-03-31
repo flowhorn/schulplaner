@@ -1,7 +1,6 @@
-// @dart=2.11
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Data/Planner/Lesson.dart';
-import 'package:schulplaner8/Data/plannerdatabase.dart';
+import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 import 'package:schulplaner8/Helper/DateAPI.dart';
 import 'package:schulplaner8/Helper/helper_data.dart';
 import 'package:schulplaner8/OldLessonInfo/LessonInfo.dart';
@@ -25,19 +24,19 @@ List<String> getNextLessons(PlannerDatabase database, String courseid,
   while (mlist.length < count && attempt < 100) {
     theday = theday.add(Duration(days: 1));
     attempt++;
-    Holiday mVacation = getVacation(theday, database);
+    final Holiday? mVacation = getVacation(theday, database);
     if (mVacation == null) {
       int dayOfWeek = theday.weekday;
       alllessons.forEach((Lesson lesson) {
         if (!mlist.contains(parseDateString(theday))) {
           if (dayOfWeek == lesson.day) {
             if (!settingsData.multiple_weektypes || lesson.weektype == 0) {
-              if (isLessonActive(database, lesson.courseid, lesson.lessonid,
+              if (isLessonActive(database, lesson.courseid!, lesson.lessonid!,
                   parseDateString(theday))) mlist.add(parseDateString(theday));
               return;
             } else if (lesson.weektype ==
                 getWeektypeofDate(parseDateString(theday), database)) {
-              if (isLessonActive(database, lesson.courseid, lesson.lessonid,
+              if (isLessonActive(database, lesson.courseid!, lesson.lessonid!,
                   parseDateString(theday))) mlist.add(parseDateString(theday));
               return;
             }
@@ -81,26 +80,26 @@ List<Lesson> getLessonsToday(PlannerDatabase database) {
   }).toList();
 }
 
-String potentialcourseidnow(PlannerDatabase database) {
+String? potentialcourseidnow(PlannerDatabase database) {
   TimeOfDay nowtime = TimeOfDay.fromDateTime(DateTime.now());
   Map<int, LessonTime> times = database.getSettings().lessontimes;
   List<Lesson> potential = getLessonsToday(database).where((lesson) {
-    String start, end;
-    if (lesson?.overridentime?.start != null) {
-      start = lesson.overridentime.start;
+    String? start, end;
+    if (lesson.overridentime?.start != null) {
+      start = lesson.overridentime!.start;
     }
-    if (lesson?.overridentime?.end != null) end = lesson.overridentime.end;
+    if (lesson.overridentime?.end != null) end = lesson.overridentime!.end;
 
     if (start == null) {
-      LessonTime lessonTime = times[lesson.start];
+      LessonTime? lessonTime = times[lesson.start];
       if (lessonTime?.start != null) {
-        start = lessonTime.start;
+        start = lessonTime?.start;
       }
     }
     if (end == null) {
-      LessonTime lessonTime = times[lesson.end];
+      LessonTime? lessonTime = times[lesson.end];
       if (lessonTime?.end != null) {
-        end = lessonTime.end;
+        end = lessonTime?.end;
       }
     }
     if (start != null && end != null) {
@@ -153,17 +152,17 @@ bool isAfter(TimeOfDay one, TimeOfDay compare) {
   }
 }
 
-Holiday getVacation(DateTime datetime, PlannerDatabase database) {
+Holiday? getVacation(DateTime datetime, PlannerDatabase database) {
   List<Holiday> vacationlist =
       database.vacations.data.values.where((Holiday v) {
-    DateTime vacationstart = v.start.toDateTime;
-    DateTime vacationend = v.end.toDateTime;
+    DateTime vacationstart = v.start!.toDateTime;
+    DateTime vacationend = v.end!.toDateTime;
     if ((vacationstart.isBefore(datetime) ||
-                isSameDay(v.start.toDateString,
+                isSameDay(v.start!.toDateString,
                     parseDateString(datetime))) //CONDITION 1
             &&
             (vacationend.isAfter(datetime) ||
-                isSameDay(v.end.toDateString,
+                isSameDay(v.end!.toDateString,
                     parseDateString(datetime))) //CONDITION 2
         ) {
       return true;
@@ -180,14 +179,14 @@ Holiday getVacation(DateTime datetime, PlannerDatabase database) {
 
 bool isVacation(DateTime datetime, List<Holiday> vacationlist) {
   List<Holiday> filteredlist = vacationlist.where((Holiday v) {
-    DateTime vacationstart = v.start.toDateTime;
-    DateTime vacationend = v.end.toDateTime;
+    DateTime vacationstart = v.start!.toDateTime;
+    DateTime vacationend = v.end!.toDateTime;
     if ((vacationstart.isBefore(datetime) ||
-                isSameDay(v.start.toDateString,
+                isSameDay(v.start!.toDateString,
                     parseDateString(datetime))) //CONDITION 1
             &&
             (vacationend.isAfter(datetime) ||
-                isSameDay(v.end.toDateString,
+                isSameDay(v.end!.toDateString,
                     parseDateString(datetime))) //CONDITION 2
         ) {
       return true;
@@ -223,8 +222,12 @@ enum DayTypes {
 class DayType {
   DayTypes type;
   String date;
-  Holiday vacationItem;
-  DayType({this.type, this.date, this.vacationItem});
+  Holiday? vacationItem;
+  DayType({
+    required this.type,
+    required this.date,
+    this.vacationItem,
+  });
 
   bool isSchoolDay() {
     if (type == DayTypes.SCHOOLDAY) {
@@ -236,7 +239,7 @@ class DayType {
 }
 
 DayType getDayType(String date, PlannerDatabase database) {
-  Holiday vacationItem = getVacation(parseDate(date), database);
+  Holiday? vacationItem = getVacation(parseDate(date), database);
   if (vacationItem != null) {
     return DayType(
         type: DayTypes.VACATION, date: date, vacationItem: vacationItem);

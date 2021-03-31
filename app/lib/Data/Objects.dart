@@ -1,5 +1,3 @@
-import 'package:schulplaner8/Data/plannerdatabase.dart';
-
 class TwoObjects<T, T2> {
   T item;
   T2 item2;
@@ -39,60 +37,5 @@ class WeekTypeFixPoint {
       'date': date,
       'weektype': weektype,
     };
-  }
-}
-
-class PlannerConnections {
-  late Map<String, bool> mycourses;
-  late Map<String, bool> myclasses;
-  late Map<String, ClassSettings> myclasssettings;
-
-  PlannerConnections({
-    required this.mycourses,
-    required this.myclasses,
-  });
-
-  PlannerConnections.fromData(Map<String, dynamic>? data) {
-    if (data != null) {
-      //datamaps
-      Map<String, dynamic> predata_mycourses =
-          data['mycourses']?.cast<String, dynamic>() ?? {};
-      mycourses = predata_mycourses.map<String, bool>(
-          (String key, dynamic value) => MapEntry<String, bool>(key, value));
-      mycourses.removeWhere((key, value) => value != true);
-      Map<String, dynamic> predata_myclasses =
-          data['myclasses']?.cast<String, dynamic>() ?? {};
-      myclasses = predata_myclasses.map<String, bool>(
-          (String key, dynamic value) => MapEntry<String, bool>(key, value));
-      myclasses.removeWhere((key, value) => value != true);
-
-      Map<String, dynamic> predata_myclasssettings =
-          data['myclasssettings']?.cast<String, dynamic>() ?? {};
-      predata_myclasssettings.removeWhere((key, value) => value == null);
-      myclasssettings = predata_myclasssettings.map<String, ClassSettings>(
-          (String key, dynamic value) =>
-              MapEntry(key, ClassSettings.fromData(value, key)));
-    } else {
-      mycourses = {};
-      myclasses = {};
-
-      myclasssettings = {};
-    }
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'mycourses': mycourses.map((key, value) => MapEntry(key, true)),
-      'myclasses': myclasses.map((key, value) => MapEntry(key, true)),
-    };
-  }
-
-  bool isCourseActivated(String courseid, String classid) {
-    if (myclasssettings[classid]?.disabledcourses?.containsKey(courseid) ??
-        false) {
-      return false;
-    } else {
-      return true;
-    }
   }
 }

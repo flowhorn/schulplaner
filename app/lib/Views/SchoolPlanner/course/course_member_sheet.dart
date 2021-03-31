@@ -1,8 +1,8 @@
-//@dart=2.11
+//
 import 'package:bloc/bloc_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:schulplaner8/Data/plannerdatabase.dart';
+import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 import 'package:schulplaner8/Helper/EasyWidget.dart';
 import 'package:schulplaner8/Helper/MyCloudFunctions.dart';
 import 'package:schulplaner8/Helper/PermissionManagement.dart';
@@ -19,17 +19,17 @@ import 'package:schulplaner_widgets/schulplaner_dialogs.dart';
 class CourseMemberSheet extends SchulplanerSheet {
   final String courseId;
   final MemberData memberData;
-  final UserProfile userProfile;
+  final UserProfile? userProfile;
   final PlannerDatabase database;
   CourseMemberSheet({
-    @required this.courseId,
-    @required this.database,
-    @required this.memberData,
-    @required this.userProfile,
+    required this.courseId,
+    required this.database,
+    required this.memberData,
+    required this.userProfile,
   });
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<MemberData>(
+    return StreamBuilder<MemberData?>(
       stream: database.courseinfo
           .getItemStream(courseId)
           .map((settings) => settings?.membersData[memberData.id]),

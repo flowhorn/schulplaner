@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:persist_theme/persist_theme.dart';
 import 'package:schulplaner_website/src/models/navigation_item.dart';
 import 'package:schulplaner_website/src/routes.dart';
+import 'package:schulplaner_website/src/widgets/dark_mode_switch.dart';
 
 class FooterLinks extends StatelessWidget {
   const FooterLinks();
@@ -9,10 +9,7 @@ class FooterLinks extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: const [
-        SizedBox(
-          width: 200,
-          child: DarkModeSwitch(),
-        ),
+        DarkmodeSwitch(width: 250),
         _PrivacyPolicy(),
         _Imprint(),
         _About(),

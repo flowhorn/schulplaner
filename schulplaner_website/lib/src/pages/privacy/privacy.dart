@@ -155,7 +155,8 @@ class _PolicyContent extends StatelessWidget {
             ),
             _ContentText(
               '- Cloud Firestore\n'
-              '- Cloud Functions for Firebase - Cloud Storage for Firebase\n'
+              '- Cloud Functions for Firebase\n'
+              ' - Cloud Storage for Firebase\n'
               '- Firebase Cloud Messaging\n'
               '- Firebase Hosting\n',
             ),

@@ -32,7 +32,7 @@ Future<SchoolClass> getSchoolClassInformation(String classid) {
       .collection('schoolclasses')
       .doc(classid)
       .get()
-      .then((snap) => SchoolClass.fromData(snap.data()));
+      .then((snap) => SchoolClass.fromData(snap.data()!));
   /*
   return FirebaseFunctions.instance
       .httpsCallable( "getSchoolClassInfo")

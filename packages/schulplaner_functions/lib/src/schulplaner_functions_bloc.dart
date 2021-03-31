@@ -61,6 +61,30 @@ class SchulplanerFunctionsBloc extends BlocBase {
     );
   }
 
+  Future<AppFunctionsResult<dynamic>> generatePublicCode(
+      {required String id, required int codetype}) async {
+    return _appFunctionsBloc.callCloudFunction(
+      functionName: 'generatePublicCode',
+      region: AppFunctionsRegions.usCentral1,
+      parameters: {
+        'codetype': codetype,
+        'id': id,
+      },
+    );
+  }
+
+  Future<AppFunctionsResult<dynamic>> removePublicCode(
+      {required String id, required int codetype}) {
+    return _appFunctionsBloc.callCloudFunction(
+      functionName: 'removePublicCode',
+      region: AppFunctionsRegions.usCentral1,
+      parameters: {
+        'codetype': codetype,
+        'id': id,
+      },
+    );
+  }
+
   static SchulplanerFunctionsBloc of(BuildContext context) {
     return BlocProvider.of<SchulplanerFunctionsBloc>(context);
   }

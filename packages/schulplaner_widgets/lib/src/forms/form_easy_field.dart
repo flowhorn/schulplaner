@@ -1,14 +1,13 @@
-//@dart=2.11
 import 'package:flutter/material.dart';
 import 'form_divider.dart';
 
 class FormEasyField extends StatelessWidget {
   final Widget child;
-  final EdgeInsets padding;
+  final EdgeInsets? padding;
   final double spaceBottom;
   final double spaceTop;
   const FormEasyField(
-      {@required this.child,
+      {required this.child,
       this.padding,
       this.spaceBottom = 0.0,
       this.spaceTop = 0.0});
@@ -24,7 +23,7 @@ class FormEasyField extends StatelessWidget {
         padding == null
             ? child
             : Padding(
-                padding: padding,
+                padding: padding!,
                 child: child,
               ),
         FormDivider(),

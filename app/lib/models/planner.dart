@@ -1,15 +1,13 @@
-//@dart=2.11
 import 'dart:ui';
-import 'package:meta/meta.dart';
 
 class Planner {
   final String id, uid, name;
   final bool archived, setup_done;
 
   Planner({
-    @required this.id,
-    @required this.uid,
-    @required this.name,
+    required this.id,
+    required this.uid,
+    required this.name,
     this.archived = false,
     this.setup_done = false,
   });
@@ -35,7 +33,13 @@ class Planner {
     };
   }
 
-  Planner copyWith({String id, uid, name, bool archived, setup_done}) {
+  Planner copyWith({
+    String? id,
+    uid,
+    name,
+    bool? archived,
+    setup_done,
+  }) {
     return Planner(
       id: id ?? this.id,
       uid: uid ?? this.uid,

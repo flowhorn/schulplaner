@@ -1,4 +1,4 @@
-//@dart=2.11
+//
 typedef ObjectMapBuilder<T> = T Function(String key, dynamic value);
 typedef ObjectBuilder<T> = T Function(dynamic value);
 
@@ -19,12 +19,12 @@ List<T> decodeList<T>(dynamic data, ObjectBuilder<T> builder) {
   return originaldata.map((dynamic value) => builder(value)).toList();
 }
 
-T enumFromJson<T>(List<T> values, String json, {T orElse}) => json != null
+T enumFromJson<T>(List<T> values, String? json, {T? orElse}) => (json != null
     ? values.firstWhere(
         (it) =>
             '$it'.split('.')[1].toString().toLowerCase() == json.toLowerCase(),
-        orElse: () => orElse)
-    : orElse;
+        orElse: orElse != null ? () => orElse : null)
+    : orElse)!;
 
-String enumToJson<T>(T value) =>
+String? enumToJson<T>(T value) =>
     value != null ? value.toString().split('\.')[1] : null;

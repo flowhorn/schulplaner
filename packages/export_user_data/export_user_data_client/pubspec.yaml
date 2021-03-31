@@ -1,0 +1,24 @@
+name: export_user_data_client
+publish_to: none
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+
+dependencies:
+  bloc: 
+    path: ../../bloc
+  export_user_data_models:
+    path: ../export_user_data_models
+  universal_commons:
+    path: ../../universal_commons
+  url_launcher: any
+  rxdart: ^0.26.0
+  intl: any
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:

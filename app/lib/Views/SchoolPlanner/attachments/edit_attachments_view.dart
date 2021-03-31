@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Data/Planner/File.dart';
-import 'package:schulplaner8/Data/plannerdatabase.dart';
+import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 import 'package:schulplaner8/Helper/Functions.dart';
 import 'package:schulplaner8/Views/SchoolPlanner/overview/action_view.dart';
 import 'package:schulplaner8/files/pages/new_file_page.dart';
@@ -31,11 +31,11 @@ class EditAttachementsView extends StatelessWidget {
               leading: ColoredCircleIcon(
                 icon: Icon(Icons.attach_file),
               ),
-              title: Text(it!.name),
+              title: Text(it!.name ?? '???'),
               subtitle: it.url == null
                   ? null
                   : Text(
-                      it.url,
+                      it.url!,
                       style: TextStyle(color: Colors.blue),
                     ),
               trailing: IconButton(

@@ -1,4 +1,4 @@
-//@dart=2.11
+//
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Data/userdatabase.dart';
@@ -20,10 +20,10 @@ class EditProfileView extends StatelessWidget {
   final UserDatabase userDatabase;
 
   bool changedValues = false;
-  UserProfile data;
-  final ValueNotifier<UserProfile> notifier = ValueNotifier(null);
+  late UserProfile data;
+  final ValueNotifier<UserProfile?> notifier = ValueNotifier(null);
 
-  EditProfileView({@required this.userDatabase}) {
+  EditProfileView({required this.userDatabase}) {
     data = userDatabase.userprofile.data ??
         UserProfile.create(uid: userDatabase.uid);
     notifier.value = data;
@@ -42,7 +42,7 @@ class EditProfileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<UserProfile>(
+    return ValueListenableBuilder<UserProfile?>(
       valueListenable: notifier,
       builder: (context, _, _a) {
         return Scaffold(
@@ -111,7 +111,7 @@ class EditProfileView extends StatelessWidget {
                                     ],
                                     builder: (context, item) {
                                       return ListTile(
-                                          title: Text(item.name),
+                                          title: Text(item.name!),
                                           leading: Icon(item.iconData),
                                           onTap: () async {
                                             await _selectImageMethod(
@@ -159,7 +159,9 @@ class EditProfileView extends StatelessWidget {
           await ImageHelper.pickImageCamera(maxWidth: 1024, maxHeight: 1024);
       if (file != null) {
         final compressedFile = await ImageCompresser.compressImage(file);
-        final croppedFile = await ImageHelper.cropImage(compressedFile);
+        final croppedFile = compressedFile != null
+            ? await ImageHelper.cropImage(compressedFile)
+            : null;
         if (croppedFile != null) {
           final ref = FirebaseStorage.instance
               .ref()
@@ -181,7 +183,9 @@ class EditProfileView extends StatelessWidget {
 
       if (file != null) {
         final compressedFile = await ImageCompresser.compressImage(file);
-        final croppedFile = await ImageHelper.cropImage(compressedFile);
+        final croppedFile = compressedFile != null
+            ? await ImageHelper.cropImage(compressedFile)
+            : null;
         if (croppedFile != null) {
           final ref = FirebaseStorage.instance
               .ref()
@@ -207,14 +211,14 @@ class MemberImageView extends StatelessWidget {
   final MemberData memberData;
 
   const MemberImageView(
-      {@required this.thumbnailMode, @required this.memberData});
+      {required this.thumbnailMode, required this.memberData});
 
   @override
   Widget build(BuildContext context) {
-    switch (memberData?.displayMode) {
+    switch (memberData.displayMode) {
       case ProfileDisplayMode.pic:
         {
-          String url = memberData.pic;
+          String? url = memberData.pic;
           if (thumbnailMode && memberData.picThumb != null) {
             url = memberData.picThumb;
           }
@@ -244,6 +248,5 @@ class MemberImageView extends StatelessWidget {
           );
         }
     }
-    throw 'No DisplayMode selected';
   }
 }

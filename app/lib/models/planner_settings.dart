@@ -1,11 +1,12 @@
-//@dart=2.11
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Data/Objects.dart';
 import 'package:schulplaner8/Helper/DateAPI.dart';
-import 'package:schulplaner8/OldGrade/Grade.dart';
 import 'package:schulplaner8/OldGrade/GradePackage.dart';
+import 'package:schulplaner8/OldGrade/models/average_display.dart';
+import 'package:schulplaner8/OldGrade/models/average_settings.dart';
+import 'package:schulplaner8/OldGrade/models/grade_span.dart';
 import 'package:schulplaner8/grades/models/default_grade_profile.dart';
 import 'package:schulplaner8/grades/models/grade_profile.dart';
 import 'package:schulplaner8/grades/models/grade_type_item.dart';
@@ -14,31 +15,32 @@ import 'package:schulplaner8/utils/models/coder.dart';
 import 'lesson_time.dart';
 
 class PlannerSettingsData {
-  bool saturday_enabled,
+  late bool saturday_enabled,
       sunday_enabled,
       zero_lesson,
       multiple_weektypes,
       timetable_timemode;
-  int maxlessons, weektypes_amount;
-  WeekTypeFixPoint weekTypeFixPoint;
+  late int maxlessons, weektypes_amount;
+  late WeekTypeFixPoint weekTypeFixPoint;
   //datamaps
-  Map<int, LessonTime> lessontimes;
-  Map<int, CalendarIndicator> calendarindicators;
-  Map<String, GradeProfile> gradeprofiles;
-  Map<String, GradeSpan> gradespans;
+  late Map<int, LessonTime> lessontimes;
+  late Map<int, CalendarIndicator> calendarindicators;
+  late Map<String, GradeProfile?> gradeprofiles;
+  late Map<String, GradeSpan> gradespans;
 
   //data
-  String vacationpackageid, gradedataid;
+  late String gradedataid;
+  late String? vacationpackageid;
 
   //GRADES:::
-  AverageSettings averageSettings;
-  bool weight_tendencies;
-  int gradepackageid = 2;
-  int average_display_id;
+  late AverageSettings averageSettings;
+  late bool weight_tendencies;
+  late int gradepackageid = 2;
+  late int average_display_id;
   //personaltypes
-  Map<String, PersonalType> personaltypes_task;
-  Map<String, PersonalType> personaltypes_event;
-  Map<String, PersonalType> personaltypes_grade;
+  late Map<String, PersonalType> personaltypes_task;
+  late Map<String, PersonalType> personaltypes_event;
+  late Map<String, PersonalType> personaltypes_grade;
 
   PlannerSettingsData.fromData(dynamic data) {
     if (data != null) {
@@ -63,7 +65,7 @@ class PlannerSettingsData {
       Map<String, dynamic> predata_lessontimes =
           data['lessontimes']?.cast<String, dynamic>();
 
-      lessontimes = (predata_lessontimes ?? {}).map<int, LessonTime>(
+      lessontimes = (predata_lessontimes).map<int, LessonTime>(
           (String key, dynamic value) => MapEntry<int, LessonTime>(
               int.parse(key),
               LessonTime.fromData(value.cast<String, dynamic>())));
@@ -71,7 +73,7 @@ class PlannerSettingsData {
       Map<String, dynamic> predata_gradespans =
           data['gradespans']?.cast<String, dynamic>();
 
-      gradespans = (predata_gradespans ?? {}).map<String, GradeSpan>(
+      gradespans = (predata_gradespans).map<String, GradeSpan>(
           (String key, dynamic value) => MapEntry<String, GradeSpan>(
               key, GradeSpan.fromData(value.cast<String, dynamic>())));
 
@@ -84,10 +86,10 @@ class PlannerSettingsData {
       try {
         if (gradeprofiles['default']?.types['1'] != null &&
             gradeprofiles['default']?.types['1']?.id == '0') {
-          Map<String, GradeTypeItem> datamap = gradeprofiles['default']?.types;
-          datamap['1'] = datamap['1'].copyWith(id: '1');
+          Map<String, GradeTypeItem?> datamap = gradeprofiles['default']!.types;
+          datamap['1'] = datamap['1']!.copyWith(id: '1');
           gradeprofiles['default'] =
-              gradeprofiles['default'].copyWith(types: datamap);
+              gradeprofiles['default']!.copyWith(types: datamap);
         }
       } catch (e) {
         print(e);
@@ -134,16 +136,16 @@ class PlannerSettingsData {
       'weektypes_amount': weektypes_amount,
       'multiple_weektypes': multiple_weektypes,
       'timetable_timemode': timetable_timemode,
-      'weektype_fixpoint': weekTypeFixPoint?.toJson(),
+      'weektype_fixpoint': weekTypeFixPoint.toJson(),
       //data
       'vacationpackageid': vacationpackageid,
       'gradedataid': gradedataid,
 
       //datamaps
       'lessontimes': lessontimes
-          ?.map((key, value) => MapEntry(key.toString(), value?.toJson())),
+          .map((key, value) => MapEntry(key.toString(), value.toJson())),
       'gradespans': gradespans
-          ?.map((key, value) => MapEntry(key.toString(), value?.toJson())),
+          .map((key, value) => MapEntry(key.toString(), value.toJson())),
 
       //GRADES::
       'weight_tendencies': weight_tendencies,
@@ -154,10 +156,10 @@ class PlannerSettingsData {
     };
   }
 
-  GradeProfile getGradeProfile(String profileid) {
-    if (profileid == null) return gradeprofiles['default'];
+  GradeProfile getGradeProfile(String? profileid) {
+    if (profileid == null) return gradeprofiles['default']!;
     var item = gradeprofiles[profileid];
-    return item ?? gradeprofiles['default'];
+    return item ?? gradeprofiles['default']!;
   }
 
   PlannerSettingsData copy() {
@@ -178,7 +180,7 @@ class PlannerSettingsData {
     if (multiple_weektypes == false) return 0;
     DateTime mondayOfToday = getFirstDayOfWeek(DateTime.parse(getDateToday()));
     DateTime mondayOfFixPoint =
-        getFirstDayOfWeek(DateTime.parse(weekTypeFixPoint?.date));
+        getFirstDayOfWeek(DateTime.parse(weekTypeFixPoint.date));
     Duration difference = mondayOfFixPoint.difference(mondayOfToday);
     int diffinWeeks = (difference.abs().inDays + 1) ~/ 7;
     int index = weekTypeFixPoint.weektype + (diffinWeeks % weektypes_amount);
@@ -191,21 +193,21 @@ class PlannerSettingsData {
     return weektypes_amount;
   }
 
-  GradePackage getCurrentGradePackage({BuildContext context}) {
+  GradePackage getCurrentGradePackage({BuildContext? context}) {
     return getGradePackage(gradepackageid, context: context);
   }
 
-  AverageDisplay getCurrentAverageDisplay({BuildContext context}) {
+  AverageDisplay getCurrentAverageDisplay({BuildContext? context}) {
     GradePackage package = getCurrentGradePackage(context: context);
     print(average_display_id);
-    if (package.averagedisplays.length > 1) {
-      if ((package.averagedisplays.length) > average_display_id) {
-        return package.averagedisplays[average_display_id];
+    if (package.averagedisplays!.length > 1) {
+      if ((package.averagedisplays!.length) > average_display_id) {
+        return package.averagedisplays![average_display_id];
       } else {
-        return package.averagedisplays.first;
+        return package.averagedisplays!.first;
       }
     } else {
-      return package.averagedisplays.first;
+      return package.averagedisplays!.first;
     }
   }
 

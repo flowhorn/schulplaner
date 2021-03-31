@@ -1,4 +1,4 @@
-//@dart=2.11
+//
 import 'package:schulplaner_addons/chat/message.dart';
 import 'package:schulplaner_addons/utils/date_utils.dart' as date_utils;
 import 'package:flutter/material.dart';
@@ -30,27 +30,27 @@ class _ChatThreadDate implements _ChatThreadElement {
 
 class ChatThreadList extends StatelessWidget {
   final List<_ChatThreadElement> elements;
-  final ScrollController scrollController;
+  final ScrollController? scrollController;
   final Widget Function(BuildContext context, _ChatThreadMessage threadMessage)
       messageBuilder;
   final VoidCallback loadMore;
 
   const ChatThreadList._(
-      {Key key,
-      this.elements,
-      this.messageBuilder,
-      this.loadMore,
-      this.scrollController})
+      {Key? key,
+      required this.elements,
+      required this.messageBuilder,
+      required this.loadMore,
+      required this.scrollController})
       : super(key: key);
 
   factory ChatThreadList.build({
-    Key key,
-    @required List<Message> messages,
-    @required
-        Widget Function(BuildContext context, _ChatThreadMessage threadMessage)
-            messageBuilder,
-    @required VoidCallback loadMore,
-    ScrollController scrollController,
+    Key? key,
+    required List<Message> messages,
+    required Widget Function(
+            BuildContext context, _ChatThreadMessage threadMessage)
+        messageBuilder,
+    required VoidCallback loadMore,
+    ScrollController? scrollController,
   }) {
     return ChatThreadList._(
       key: key,
@@ -94,7 +94,8 @@ class ChatThreadList extends StatelessWidget {
 class ChatThreadDateView extends StatelessWidget {
   final _ChatThreadDate threadDate;
 
-  const ChatThreadDateView({Key key, this.threadDate}) : super(key: key);
+  const ChatThreadDateView({Key? key, required this.threadDate})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

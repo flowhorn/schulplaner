@@ -1,8 +1,7 @@
-//@dart=2.11
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:schulplaner8/Data/plannerdatabase.dart';
+import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 import 'package:schulplaner8/Helper/DateAPI.dart';
 import 'package:schulplaner8/Helper/EasyWidget.dart';
 import 'package:schulplaner8/Helper/Functions.dart';
@@ -11,9 +10,12 @@ import 'package:schulplaner_translations/schulplaner_translations.dart';
 import 'package:schulplaner_widgets/schulplaner_forms.dart';
 import 'package:schulplaner_widgets/schulplaner_common.dart';
 import 'package:schulplaner8/Helper/helper_views.dart';
-import 'package:schulplaner8/OldGrade/Grade.dart';
 import 'package:schulplaner8/Views/SchoolPlanner/Pickers.dart';
 import 'package:schulplaner8/groups/src/models/course.dart';
+
+import 'models/choice.dart';
+import 'models/grade.dart';
+import 'models/grade_span.dart';
 
 void showGradeSpanSheet(BuildContext context, PlannerDatabase database) {
   showSheetBuilder(
@@ -25,7 +27,7 @@ void showGradeSpanSheet(BuildContext context, PlannerDatabase database) {
               List<GradeSpan> gradespanlist = snapshot.data ?? [];
               return getFlexList(gradespanlist.map((gradespan) {
                 return ListTile(
-                  title: Text(gradespan.getName(context) ?? '-'),
+                  title: Text(gradespan.getName(context)),
                   trailing: gradespan.activated
                       ? Icon(
                           Icons.done,
@@ -58,12 +60,12 @@ void showGradeSpanSheet(BuildContext context, PlannerDatabase database) {
 }
 
 class DateRange {
-  final String start, end;
+  final String? start, end;
   const DateRange({this.start, this.end});
 
   DateRange copyWith({
-    String start,
-    String end,
+    String? start,
+    String? end,
   }) {
     return DateRange(
       start: start ?? this.start,
@@ -72,12 +74,12 @@ class DateRange {
   }
 }
 
-Future<DateRange> selectDateRange(BuildContext context) {
+Future<DateRange?> selectDateRange(BuildContext context) {
   ValueNotifier<DateRange> notifier = ValueNotifier(DateRange());
   return showSheetBuilder(
           context: context,
           child: (context) {
-            return ValueListenableBuilder(
+            return ValueListenableBuilder<DateRange>(
                 valueListenable: notifier,
                 builder: (context, value, _) {
                   DateRange range = value;
@@ -85,7 +87,7 @@ Future<DateRange> selectDateRange(BuildContext context) {
                     ListTile(
                       title: Text(getString(context).start),
                       subtitle: Text(range.start != null
-                          ? getDateText(range.start)
+                          ? getDateText(range.start!)
                           : getString(context).open),
                       onTap: () {
                         selectDateString(context, range.start)
@@ -100,7 +102,7 @@ Future<DateRange> selectDateRange(BuildContext context) {
                     ListTile(
                       title: Text(getString(context).end),
                       subtitle: Text(range.end != null
-                          ? getDateText(range.end)
+                          ? getDateText(range.end!)
                           : getString(context).open),
                       onTap: () {
                         selectDateString(context, range.end)
@@ -121,7 +123,7 @@ Future<DateRange> selectDateRange(BuildContext context) {
                 });
           },
           title: getString(context).selecttimespan)
-      .then<DateRange>((value) {
+      .then<DateRange?>((value) {
     if (value is DateRange) {
       return value;
     } else {
@@ -131,122 +133,124 @@ Future<DateRange> selectDateRange(BuildContext context) {
 }
 
 void showGradeInfoSheet(PlannerDatabase database,
-    {BuildContext context, String gradeid}) {
+    {required BuildContext context, required String gradeid}) {
   showDetailSheetBuilder(
     context: context,
     body: (BuildContext context) {
-      return StreamBuilder<Grade>(
-          stream: database.grades.getItemStream(gradeid),
-          builder: (BuildContext context, snapshot) {
-            Grade item = snapshot.data;
-            if (item == null) return loadedView();
-            Course courseInfo = database.getCourseInfo(item.courseid);
+      return StreamBuilder<Grade?>(
+        stream: database.grades.getItemStream(gradeid),
+        builder: (BuildContext context, snapshot) {
+          Grade? item = snapshot.data;
+          if (item == null) return loadedView();
+          Course? courseInfo = database.getCourseInfo(item.courseid!);
 
-            return Expanded(
-                child: Column(
-              children: <Widget>[
-                getSheetText(context, item.title ?? '-'),
-                getExpandList([
-                  ListTile(
-                    leading: Icon(
-                      Icons.school,
-                      color: courseInfo == null
-                          ? null
-                          : courseInfo?.getDesign()?.primary,
-                    ),
-                    title: Text(courseInfo == null
-                        ? '???'
-                        : courseInfo?.getName() ?? getString(context).error),
-                    onTap: () {},
+          return Expanded(
+              child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              getSheetText(context, item.title ?? '-'),
+              getExpandList([
+                ListTile(
+                  leading: Icon(
+                    Icons.school,
+                    color: courseInfo == null
+                        ? null
+                        : courseInfo.getDesign()?.primary,
                   ),
-                  ListTile(
-                      leading: Icon(Icons.grade),
-                      title: Text(DataUtil_Grade()
-                          .getGradeValueOf(item.valuekey)
-                          .getLongName())),
-                  ListTile(
-                      leading: Icon(Icons.today),
-                      title: Text(getDateText(item.date))),
-                  ListTile(
-                      leading: Icon(Icons.line_weight),
-                      title: Text(item.weight.toString())),
-                  ListTile(
-                      leading: Icon(
-                          getGradeTypes(context)[item.type.index].iconData),
-                      title:
-                          Text(getGradeTypes(context)[item.type.index].name)),
-                ]),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: ButtonBar(
-                    children: <Widget>[
-                      //RButton(text: "Anrufen", onTap: () {}),
-                      RButton(
-                          text: getString(context).more,
-                          onTap: () {
-                            showSheetBuilder(
-                                context: context,
-                                child: (context) {
-                                  return Column(
-                                    children: <Widget>[
-                                      ListTile(
-                                        leading: Icon(Icons.edit),
-                                        title: Text(getString(context).edit),
-                                        onTap: () {
-                                          Navigator.pop(context);
-                                          pushWidget(
-                                            context,
-                                            NewGradeView(
-                                              database,
-                                              editmode: true,
-                                              gradeid: item.id,
-                                            ),
-                                          );
-                                        },
-                                      ),
-                                      ListTile(
-                                        leading: Icon(Icons.delete_outline),
-                                        title: Text(getString(context).delete),
-                                        onTap: () {
-                                          showConfirmDialog(
-                                                  context: context,
-                                                  title:
-                                                      getString(context).delete,
-                                                  action:
-                                                      getString(context).delete,
-                                                  richtext: null)
-                                              .then((result) {
-                                            if (result == true) {
-                                              database.dataManager
-                                                  .DeleteGrade(item);
-                                              popNavigatorBy(context,
-                                                  text: 'gradeid');
-                                            }
-                                          });
-                                        },
-                                      ),
-                                    ],
-                                  );
-                                },
-                                title: getString(context).more,
-                                routname: 'gradeidview');
-                          },
-                          iconData: Icons.more_horiz),
-                    ],
-                  ),
+                  title:
+                      Text(courseInfo == null ? '???' : courseInfo.getName()),
+                  onTap: () {},
                 ),
-                FormSpace(16.0),
-              ],
-              mainAxisSize: MainAxisSize.min,
-            ));
-          });
+                ListTile(
+                    leading: Icon(Icons.grade),
+                    title: Text(DataUtil_Grade()
+                        .getGradeValueOf(item.valuekey!)
+                        .getLongName())),
+                ListTile(
+                    leading: Icon(Icons.today),
+                    title: Text(getDateText(item.date!))),
+                ListTile(
+                    leading: Icon(Icons.line_weight),
+                    title: Text(item.weight.toString())),
+                ListTile(
+                    leading:
+                        Icon(getGradeTypes(context)[item.type.index].iconData),
+                    title: Text(getGradeTypes(context)[item.type.index].name)),
+              ]),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: ButtonBar(
+                  children: <Widget>[
+                    //RButton(text: "Anrufen", onTap: () {}),
+                    RButton(
+                        text: getString(context).more,
+                        onTap: () {
+                          showSheetBuilder(
+                              context: context,
+                              child: (context) {
+                                return Column(
+                                  children: <Widget>[
+                                    ListTile(
+                                      leading: Icon(Icons.edit),
+                                      title: Text(getString(context).edit),
+                                      onTap: () {
+                                        Navigator.pop(context);
+                                        pushWidget(
+                                          context,
+                                          NewGradeView(
+                                            database,
+                                            editmode: true,
+                                            gradeid: item.id,
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                    ListTile(
+                                      leading: Icon(Icons.delete_outline),
+                                      title: Text(getString(context).delete),
+                                      onTap: () {
+                                        showConfirmDialog(
+                                                context: context,
+                                                title:
+                                                    getString(context).delete,
+                                                action:
+                                                    getString(context).delete,
+                                                richtext: null)
+                                            .then((result) {
+                                          if (result == true) {
+                                            database.dataManager
+                                                .DeleteGrade(item);
+                                            popNavigatorBy(context,
+                                                text: 'gradeid');
+                                          }
+                                        });
+                                      },
+                                    ),
+                                  ],
+                                );
+                              },
+                              title: getString(context).more,
+                              routname: 'gradeidview');
+                        },
+                        iconData: Icons.more_horiz),
+                  ],
+                ),
+              ),
+              FormSpace(16.0),
+            ],
+          ));
+        },
+      );
     },
     routname: 'gradeidview',
   );
 }
 
 Widget getTitleCard(
-    {IconData iconData, String title, List<Widget> content, Widget bottom}) {
+    {IconData? iconData,
+    required String title,
+    required List<Widget> content,
+    Widget? bottom}) {
   List<Widget> widgetlist = [
     Padding(
         padding: const EdgeInsets.only(

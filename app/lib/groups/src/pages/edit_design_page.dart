@@ -94,9 +94,7 @@ class _Inner extends StatelessWidget {
             color: design.primary,
           ),
           title: Text(getString(context).primary),
-          subtitle: Text(design.primary == null
-              ? '-'
-              : '#' + getHex(design.primary).toString()),
+          subtitle: Text('#' + getHex(design.primary).toString()),
           onTap: () {
             selectColor(context, design.primary).then((newColor) {
               if (newColor != null) {

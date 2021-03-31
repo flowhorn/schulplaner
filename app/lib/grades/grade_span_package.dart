@@ -1,10 +1,10 @@
-// @dart=2.11
 import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:schulplaner8/Helper/database_foundation.dart';
-import 'package:schulplaner8/OldGrade/Grade.dart';
+
+import 'package:schulplaner8/OldGrade/models/grade_span.dart';
 import 'package:schulplaner8/app_base/src/blocs/app_settings_bloc.dart';
 import 'package:schulplaner8/app_base/src/models/app_settings_data.dart';
 import 'package:schulplaner8/models/planner_settings.dart';
@@ -12,7 +12,7 @@ import 'package:schulplaner8/models/planner_settings.dart';
 class GradeSpanPackage {
   final AppSettingsBloc appSettingsBloc;
 
-  final _currentGradeSpanSubject = BehaviorSubject<GradeSpan>.seeded(
+  final _currentGradeSpanSubject = BehaviorSubject<GradeSpan?>.seeded(
     GradeSpan(
       id: 'full',
       start: null,
@@ -29,7 +29,7 @@ class GradeSpanPackage {
   ) {
     _listener = settingspackage.stream.listen((newsettingsdata) {
       _gradeSpanListSubject
-          .add(newsettingsdata?.gradespans?.values?.toList() ?? []);
+          .add(newsettingsdata?.gradespans.values.toList() ?? []);
       sortAndSetActivatedCorrectly();
     });
     _listenerappsettings =
@@ -40,15 +40,15 @@ class GradeSpanPackage {
     });
   }
 
-  StreamSubscription<PlannerSettingsData> _listener;
-  StreamSubscription<AppSettingsData> _listenerappsettings;
+  late StreamSubscription<PlannerSettingsData?> _listener;
+  late StreamSubscription<AppSettingsData> _listenerappsettings;
 
-  GradeSpan get _current => _currentGradeSpanSubject.valueWrapper.value;
+  GradeSpan? get _current => _currentGradeSpanSubject.valueWrapper?.value;
 
-  GradeSpan getCurrent(BuildContext context) =>
-      _currentGradeSpanSubject.valueWrapper.value;
+  GradeSpan? getCurrent(BuildContext context) =>
+      _currentGradeSpanSubject.valueWrapper!.value;
 
-  Stream<GradeSpan> streamcurrent() => _currentGradeSpanSubject;
+  Stream<GradeSpan?> streamcurrent() => _currentGradeSpanSubject;
 
   Stream<List<GradeSpan>> get streamlist => _gradeSpanListSubject;
 
@@ -86,7 +86,7 @@ class GradeSpanPackage {
   }
 
   void sortAndSetActivatedCorrectly() {
-    final list = _gradeSpanListSubject.valueWrapper.value
+    final list = _gradeSpanListSubject.valueWrapper!.value
         .map(
           (gradeSpan) => gradeSpan.copyWith(
             activated: gradeSpan.id == _current?.id,
@@ -105,6 +105,6 @@ class GradeSpanPackage {
 
 extension on List<GradeSpan> {
   void sortGradeSpans() {
-    sort((i1, i2) => (i1.name ?? '').compareTo(i2.name ?? ''));
+    sort((i1, i2) => (i1.name).compareTo(i2.name));
   }
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:schulplaner8/OldGrade/Grade.dart';
+
 import 'package:schulplaner8/OldGrade/GradePackage.dart';
+import 'package:schulplaner8/OldGrade/models/average_display.dart';
+import 'package:schulplaner8/OldGrade/models/grade_value.dart';
 
 class GradePackageSwitzerland extends GradePackage {
   static const List<GradeValue> values = [

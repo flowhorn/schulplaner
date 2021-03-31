@@ -22,7 +22,7 @@ class DrawerBloc extends BlocBase {
   Future<void> setCollapsed(bool value) async {
     _isCollapsedSubject.add(value);
     final instance = await SharedPreferences.getInstance();
-    instance.setBool('drawer_is_collapsed', value);
+    await instance.setBool('drawer_is_collapsed', value);
   }
 
   @override

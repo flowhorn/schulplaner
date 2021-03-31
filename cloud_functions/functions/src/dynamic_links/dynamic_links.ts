@@ -6,9 +6,8 @@ import * as dotenv from 'dotenv';
 
 dotenv.config();
 const globalSocialTitle = "Schulplaner App";
-
 const globalSocialDescription = "Organisiere deinen Schulalltag - gemeinsam mit deinen Mitschülern. Auf all deinen Geräten";
-const globalSocialImageLink = "https://firebasestorage.googleapis.com/v0/b/mainprojects-32581.appspot.com/o/appdata%2Fappicon_schulplaner_png.png?alt=media&token=e0eacab3-2884-48f7-be33-7fced4d38366";
+const globalSocialImageLink = "https://schulplaner.pro/assets/logo";
 
 const APIKEY = process.env.DYNAMIC_LINKS_API_KEY;
 
@@ -18,10 +17,10 @@ const LINK_PREFIX = "https://schulplaner.web.app/link/";
 
 
 export class DynamicLinksLogic {
-    static async getJoinLink(publicKey: string, name: string) {
+    static async getJoinLink(publicKey: string, name: string): Promise<string | null> {
         const type = DynamicLinksType.JOIN_BY_KEY;
         const title = `Schulplaner: ${name} beitreten`;
-        const shortLink: string = await this.generateShortLink(`?type=${type}&data=${publicKey}`,
+        const shortLink: string | null = await this.generateShortLink(`?type=${type}&data=${publicKey}`,
             title,
             globalSocialDescription,
             globalSocialImageLink,
@@ -30,9 +29,9 @@ export class DynamicLinksLogic {
         return shortLink;
     }
 
-    static async getInvitationLink(uid: string) {
+    static async getInvitationLink(uid: string): Promise<string | null> {
         const type = DynamicLinksType.REFERRAL_PERSONAL;
-        const shortLink: string = await this.generateShortLink(`?type=${type}&referredby=${uid}`,
+        const shortLink: string | null = await this.generateShortLink(`?type=${type}&referredby=${uid}`,
             globalSocialTitle,
             globalSocialDescription,
             globalSocialImageLink,
@@ -41,7 +40,7 @@ export class DynamicLinksLogic {
         return shortLink;
     }
 
-    private static async generateShortLink(queryParams: string, socialTitle: string, socialDescription: string, socialImageUrl: string, type: DynamicLinksLengthType): Promise<string> {
+    private static async generateShortLink(queryParams: string, socialTitle: string, socialDescription: string, socialImageUrl: string, type: DynamicLinksLengthType): Promise<string | null> {
         const options = {
             method: 'POST',
             uri: `https://firebasedynamiclinks.googleapis.com/v1/shortLinks?key=${APIKEY}`,
@@ -56,9 +55,13 @@ export class DynamicLinksLogic {
             json: true
         };
 
-        const shortLink: string = await request(options)
+        const shortLink: string | null = await request(options)
             .then(function (parsedBody) {
-                return parsedBody.shortLink;
+                if (parsedBody != null && parsedBody.shortLink != null)
+                    return parsedBody.shortLink;
+                else return null;
+            }).catch((e) => {
+                return null;
             });
         return shortLink;
     }

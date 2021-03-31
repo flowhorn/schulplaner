@@ -1,7 +1,7 @@
 import 'package:bloc/bloc_base.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:schulplaner8/Data/Planner/Task.dart';
-import 'package:schulplaner8/Data/plannerdatabase.dart';
+import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 
 class EditTaskBloc extends BlocBase {
   final PlannerDatabase database;

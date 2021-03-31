@@ -1,18 +1,17 @@
-//@dart=2.11
 import 'package:flutter/material.dart';
 
 /// Eine ListView mit einer Endzone am Ende von 72dp, zusätzlich einem emptyViewBuilder
 class UpListView<T> extends StatelessWidget {
   final List<T> items;
   final Widget Function(BuildContext context, T item) builder;
-  final Widget Function(BuildContext context) emptyViewBuilder;
+  final Widget Function(BuildContext context)? emptyViewBuilder;
 
-  const UpListView(
-      {Key key,
-      @required this.items,
-      @required this.builder,
-      this.emptyViewBuilder})
-      : super(key: key);
+  const UpListView({
+    Key? key,
+    required this.items,
+    required this.builder,
+    this.emptyViewBuilder,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     if (items.isNotEmpty) {
@@ -31,7 +30,7 @@ class UpListView<T> extends StatelessWidget {
     } else {
       return Center(
         child:
-            emptyViewBuilder != null ? emptyViewBuilder(context) : Container(),
+            emptyViewBuilder != null ? emptyViewBuilder!(context) : Container(),
       );
     }
   }

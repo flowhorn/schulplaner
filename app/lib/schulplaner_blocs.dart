@@ -106,7 +106,7 @@ class SchulplanerBlocs extends StatelessWidget {
             }
 
             final actionNumber = getActionNumber(index);
-            return allNavigationActions[actionNumber];
+            return allNavigationActions[actionNumber]!; //maybeTodo
           },
           router: NavigationRouter(
             overviewBuilder: (context) => OverviewView(),

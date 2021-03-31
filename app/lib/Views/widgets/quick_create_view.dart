@@ -1,4 +1,3 @@
-//@dart=2.11
 import 'package:bloc/bloc_provider.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +16,7 @@ class QuickCreateView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final database =
-        BlocProvider.of<PlannerDatabaseBloc>(context).plannerDatabase;
+        BlocProvider.of<PlannerDatabaseBloc>(context).plannerDatabase!;
     return Column(
       children: <Widget>[
         FormSpace(8.0),
@@ -30,39 +29,45 @@ class QuickCreateView extends StatelessWidget {
               child: Row(
                 children: <Widget>[
                   Hero(
-                      tag: 'fab',
-                      child: QuickActionView(
-                          iconData: Icons.book,
-                          text: getString(context).task,
-                          color: Colors.greenAccent,
-                          onTap: () {
-                            pushWidget(
-                                context,
-                                NewSchoolTaskView(
-                                  database: database,
-                                ));
-                          })),
-                  QuickActionView(
-                      iconData: Icons.event_note,
-                      text: getString(context).event,
-                      color: Colors.blueGrey,
+                    tag: 'fab',
+                    child: QuickActionView(
+                      iconData: Icons.book,
+                      text: getString(context).task,
+                      color: Colors.greenAccent,
                       onTap: () {
                         pushWidget(
-                            context,
-                            NewSchoolEventView.Create(
-                              database: database,
-                            ));
-                      }),
+                          context,
+                          NewSchoolTaskView(
+                            database: database,
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                  QuickActionView(
+                    iconData: Icons.event_note,
+                    text: getString(context).event,
+                    color: Colors.blueGrey,
+                    onTap: () {
+                      pushWidget(
+                        context,
+                        NewSchoolEventView.Create(
+                          database: database,
+                        ),
+                      );
+                    },
+                  ),
                   QuickActionView(
                     iconData: CommunityMaterialIcons.trophy_outline,
                     text: getString(context).grade,
                     color: Colors.indigoAccent,
                     onTap: () {
                       pushWidget(
-                          context,
-                          NewGradeView(
-                            database,
-                          ));
+                        context,
+                        NewGradeView(
+                          database,
+                        ),
+                      );
                     },
                   ),
                   QuickActionView(
@@ -71,23 +76,26 @@ class QuickCreateView extends StatelessWidget {
                     color: Colors.purpleAccent,
                     onTap: () {
                       pushWidget(
-                          context,
-                          NewLessonInfoView(
-                            database,
-                          ));
+                        context,
+                        NewLessonInfoView(
+                          database,
+                        ),
+                      );
                     },
                   ),
                   QuickActionView(
-                      iconData: Icons.not_interested,
-                      text: getString(context).absenttime,
-                      color: Colors.redAccent,
-                      onTap: () {
-                        pushWidget(
-                            context,
-                            NewAbsentTimeView.Create(
-                              database: database,
-                            ));
-                      }),
+                    iconData: Icons.not_interested,
+                    text: getString(context).absenttime,
+                    color: Colors.redAccent,
+                    onTap: () {
+                      pushWidget(
+                        context,
+                        NewAbsentTimeView.Create(
+                          database: database,
+                        ),
+                      );
+                    },
+                  ),
                 ],
               ),
               scrollDirection: Axis.horizontal,

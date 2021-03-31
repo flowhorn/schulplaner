@@ -1,6 +1,8 @@
-//@dart=2.11
+//
 import 'package:bloc/bloc_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:schulplaner8/OldGrade/models/average_display.dart';
+import 'package:schulplaner8/OldGrade/models/choice.dart';
 import 'package:schulplaner8/Views/SchoolPlanner/planner_settings/notification_settings.dart';
 import 'package:schulplaner8/app_base/src/blocs/app_settings_bloc.dart';
 import 'package:schulplaner8/app_base/src/blocs/planner_database_bloc.dart';
@@ -16,7 +18,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:schulplaner8/Data/Objects.dart';
 import 'package:schulplaner8/Data/Planner/Lesson.dart';
-import 'package:schulplaner8/Data/plannerdatabase.dart';
+import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 import 'package:schulplaner8/Helper/DateAPI.dart';
 import 'package:schulplaner8/Helper/EasyWidget.dart';
 import 'package:schulplaner8/Helper/Functions.dart';
@@ -24,7 +26,7 @@ import 'package:schulplaner8/Helper/helper_data.dart';
 import 'package:schulplaner_widgets/schulplaner_forms.dart';
 import 'package:schulplaner8/Helper/helper_views.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:schulplaner8/OldGrade/Grade.dart';
+
 import 'package:schulplaner8/OldGrade/GradeDetail.dart';
 import 'package:schulplaner8/OldGrade/GradePackage.dart';
 import 'package:schulplaner8/Views/SchoolPlanner/planner_settings/holiday_settings.dart';
@@ -38,7 +40,7 @@ typedef List<Widget> SubSettingsBuilder(
 
 class PlannerSettings extends StatelessWidget {
   const PlannerSettings({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -65,11 +67,7 @@ class PlannerSettings extends StatelessWidget {
           leading: Icon(Icons.wb_sunny),
           title: Text(getString(context).vacations),
           onTap: () {
-            pushWidget(
-                context,
-                HolidaySettings(
-                  database: plannerDatabase,
-                ));
+            pushWidget(context, HolidaySettings());
           },
         ),
         ListTile(
@@ -304,28 +302,29 @@ Widget getSubSettingsGrades(BuildContext context, PlannerDatabase database) {
             onTap: () {
               final list = settings
                   .getCurrentGradePackage(context: context)
-                  .averagedisplays;
+                  .averagedisplays!;
               selectItem<AverageDisplay>(
-                  context: context,
-                  items: list,
-                  builder: (context, item) {
-                    int index = list.indexOf(item);
-                    return ListTile(
-                      title: Text(item.name),
-                      onTap: () {
-                        PlannerSettingsData newsettings = settings;
-                        newsettings.average_display_id = index;
-                        _updateSettings(newsettings, database);
-                        Navigator.pop(context);
-                      },
-                      trailing: index == settings.average_display_id
-                          ? Icon(
-                              Icons.done,
-                              color: Colors.green,
-                            )
-                          : null,
-                    );
-                  });
+                context: context,
+                items: list,
+                builder: (context, item) {
+                  int index = list.indexOf(item);
+                  return ListTile(
+                    title: Text(item.name),
+                    onTap: () {
+                      PlannerSettingsData newsettings = settings;
+                      newsettings.average_display_id = index;
+                      _updateSettings(newsettings, database);
+                      Navigator.pop(context);
+                    },
+                    trailing: index == settings.average_display_id
+                        ? Icon(
+                            Icons.done,
+                            color: Colors.green,
+                          )
+                        : null,
+                  );
+                },
+              );
             },
           ),
           ListTile(
@@ -394,7 +393,7 @@ Widget getSubSettingsWidget(BuildContext context, PlannerDatabase database) {
                 FormHeader(getString(context).options),
                 SwitchListTile(
                   title: Text(getString(context).darkmode),
-                  value: settingsdata.appwidgetsettings.darkmode,
+                  value: settingsdata!.appwidgetsettings.darkmode,
                   onChanged: (newvalue) {
                     AppSettingsData newdata = settingsdata.copyWith(
                         appwidgetsettings: settingsdata.appwidgetsettings
@@ -466,9 +465,9 @@ class SubSettingsPlanner extends StatelessWidget {
   final PlannerDatabase plannerDatabase;
 
   const SubSettingsPlanner({
-    @required this.title,
-    @required this.plannerDatabase,
-    @required this.builder,
+    required this.title,
+    required this.plannerDatabase,
+    required this.builder,
   });
 
   @override
@@ -478,12 +477,12 @@ class SubSettingsPlanner extends StatelessWidget {
         title: title,
       ),
       body: SingleChildScrollView(
-        child: StreamBuilder<PlannerSettingsData>(
+        child: StreamBuilder<PlannerSettingsData?>(
             stream: plannerDatabase.settings.stream,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return Column(
-                  children: builder(context, snapshot.data),
+                  children: builder(context, snapshot.data!),
                   mainAxisSize: MainAxisSize.min,
                 );
               } else {
@@ -502,19 +501,19 @@ class SubSettingsPlannerFloating extends StatelessWidget {
   final PlannerDatabase plannerDatabase;
 
   const SubSettingsPlannerFloating({
-    @required this.plannerDatabase,
-    @required this.builder,
+    required this.plannerDatabase,
+    required this.builder,
   });
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: StreamBuilder<PlannerSettingsData>(
+      child: StreamBuilder<PlannerSettingsData?>(
           stream: plannerDatabase.settings.stream,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return Column(
-                children: builder(context, snapshot.data),
+                children: builder(context, snapshot.data!),
                 mainAxisSize: MainAxisSize.min,
               );
             } else {
@@ -540,16 +539,16 @@ void _updateSettings(PlannerSettingsData newdata, PlannerDatabase database) {
 class LessonTimeSettings extends StatelessWidget {
   final PlannerDatabase database;
   bool changedValues = false;
-  Map<int, LessonTime> lessontimes;
-  ValueNotifier<Map<int, LessonTime>> notifier;
-  LessonTimeSettings({@required this.database}) {
+  late Map<int, LessonTime> lessontimes;
+  late ValueNotifier<Map<int, LessonTime>> notifier;
+  LessonTimeSettings({required this.database}) {
     lessontimes = Map.from(database.settings.data?.lessontimes ?? {});
     notifier = ValueNotifier(lessontimes);
   }
 
   @override
   Widget build(BuildContext context) {
-    final PlannerSettingsData settings = database.settings.data;
+    final PlannerSettingsData settings = database.settings.data!;
     return WillPopScope(
         child: Scaffold(
           appBar: MyAppHeader(title: getString(context).timesoflessons),
@@ -557,9 +556,9 @@ class LessonTimeSettings extends StatelessWidget {
               valueListenable: notifier,
               builder: (context, data, _) {
                 return ListView(
-                    children: buildIntList(24,
-                            start: database.settings.data.zero_lesson ? 0 : 1)
-                        .map((value) {
+                    children:
+                        buildIntList(24, start: settings.zero_lesson ? 0 : 1)
+                            .map((value) {
                   LessonTime time = data[value] ?? LessonTime();
                   return Padding(
                     padding: EdgeInsets.only(
@@ -689,19 +688,19 @@ class LessonTimeSettings extends StatelessWidget {
 
 class GradeProfileSettings extends StatelessWidget {
   final PlannerDatabase database;
-  GradeProfileSettings({@required this.database});
+  GradeProfileSettings({required this.database});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MyAppHeader(title: getString(context).gradeprofiles),
-      body: StreamBuilder<PlannerSettingsData>(
+      body: StreamBuilder<PlannerSettingsData?>(
         builder: (context, snapshot) {
-          List<GradeProfile> gradeprofiles =
-              snapshot.data.gradeprofiles.values.toList();
+          List<GradeProfile?> gradeprofiles =
+              snapshot.data!.gradeprofiles.values.toList();
           return ListView.builder(
             itemBuilder: (context, index) {
-              GradeProfile profile = gradeprofiles[index];
+              GradeProfile profile = gradeprofiles[index]!;
               return Padding(
                 padding: EdgeInsets.all(4.0),
                 child: Card(
@@ -733,7 +732,7 @@ class GradeProfileSettings extends StatelessWidget {
                                             .then((result) {
                                           if (result == true) {
                                             PlannerSettingsData newdata =
-                                                database.settings.data.copy();
+                                                database.settings.data!.copy();
                                             newdata.gradeprofiles[
                                                 profile.profileid] = null;
                                             _updateSettings(newdata, database);
@@ -770,7 +769,7 @@ class GradeProfileSettings extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton.extended(
           onPressed: () {
-            PlannerSettingsData newdata = database.settings.data.copy();
+            PlannerSettingsData newdata = database.settings.data!.copy();
             String newprofileid = database.dataManager.generateCourseId();
             newdata.gradeprofiles[newprofileid] =
                 GradeProfile.Create(newprofileid).copyWith(
@@ -789,144 +788,170 @@ class EditGradeProfileSettings extends StatelessWidget {
   final PlannerDatabase database;
   bool changedValues = false;
   GradeProfile gradeprofile;
-  ValueNotifier<GradeProfile> notifier;
+  late ValueNotifier<GradeProfile> notifier;
 
   ValueNotifier<bool> showWeight = ValueNotifier(false);
 
-  EditGradeProfileSettings({this.database, this.gradeprofile}) {
+  EditGradeProfileSettings({
+    required this.database,
+    required this.gradeprofile,
+  }) {
     notifier = ValueNotifier(gradeprofile);
   }
 
   @override
   Widget build(BuildContext context) {
-    final PlannerSettingsData settings = database.settings.data;
+    final PlannerSettingsData settings = database.settings.data!;
     return WillPopScope(
-        child: Scaffold(
-          appBar: MyAppHeader(title: getString(context).editgradeprofile),
-          body: ValueListenableBuilder<GradeProfile>(
-              valueListenable: notifier,
-              builder: (context, _, _2) {
-                print(gradeprofile.toJson());
-                return getDefaultList([
-                  FormSpace(8.0),
-                  FormTextField(
-                    text: gradeprofile.name ?? '',
-                    valueChanged: (newtext) {
-                      gradeprofile = gradeprofile.copyWith(name: newtext);
-                    },
-                  ),
-                  FormSpace(8.0),
-                  FormDivider(),
-                  FormHideable(
-                      title: getString(context).weight,
-                      notifier: showWeight,
-                      builder: (context) {
-                        return FormTextField(
-                          iconData: Icons.line_weight,
-                          labeltext: getString(context).weight,
-                          text: gradeprofile.weight_totalaverage.toString(),
-                          valueChanged: (String s) {
-                            try {
-                              double possibledouble = double.parse(s);
-                              gradeprofile = gradeprofile.copyWith(
-                                  weight_totalaverage: possibledouble);
-                            } catch (exception) {
-                              //bool correct_double = false;
-                            }
-                          },
-                          keyBoardType: TextInputType.numberWithOptions(),
-                          maxLines: 1,
-                        );
-                      }),
-                  FormDivider(),
-                  FormHeader(getString(context).average),
-                  SwitchListTile(
-                    value: gradeprofile.averagebytype,
-                    onChanged: (newvalue) {
-                      gradeprofile =
-                          gradeprofile.copyWith(averagebytype: newvalue);
-                      notifier.value = gradeprofile;
-                    },
-                    title: Text(getString(context).averagebytype),
-                  ),
-                  gradeprofile.averagebytype == false
-                      ? nowidget()
-                      : Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: getTitleCard(
-                              iconData: Icons.merge_type,
-                              title: getString(context).types,
-                              content: gradeprofile.types.values
-                                  .where((it) => it != null)
-                                  .map<Widget>((gradetypeitem) {
-                                String inPercent() {
-                                  double total = gradeprofile.types.values
-                                      .where((it) => it != null)
-                                      .map((item) => item.weight)
-                                      .reduce((a, b) => a + b);
-                                  return ((Decimal.parse(gradetypeitem.weight
-                                                  .toString()) /
-                                              Decimal.parse(total.toString())) *
-                                          Decimal.fromInt(100))
-                                      .toStringAsFixed(1);
-                                }
+      onWillPop: () async {
+        if (changedValues == false) return true;
+        return showConfirmDialog(
+                context: context,
+                title: getString(context).discardchanges,
+                action: getString(context).confirm,
+                richtext: RichText(
+                    text: TextSpan(
+                        text: getString(context).currentchangesnotsaved)))
+            .then(
+          (value) {
+            if (value == true) {
+              return true;
+            } else {
+              return false;
+            }
+          },
+        );
+      },
+      child: Scaffold(
+        appBar: MyAppHeader(title: getString(context).editgradeprofile),
+        body: ValueListenableBuilder<GradeProfile>(
+            valueListenable: notifier,
+            builder: (context, _, _2) {
+              print(gradeprofile.toJson());
+              return getDefaultList([
+                FormSpace(8.0),
+                FormTextField(
+                  text: gradeprofile.name,
+                  valueChanged: (newtext) {
+                    gradeprofile = gradeprofile.copyWith(name: newtext);
+                  },
+                ),
+                FormSpace(8.0),
+                FormDivider(),
+                FormHideable(
+                    title: getString(context).weight,
+                    notifier: showWeight,
+                    builder: (context) {
+                      return FormTextField(
+                        iconData: Icons.line_weight,
+                        labeltext: getString(context).weight,
+                        text: gradeprofile.weight_totalaverage.toString(),
+                        valueChanged: (String s) {
+                          try {
+                            double possibledouble = double.parse(s);
+                            gradeprofile = gradeprofile.copyWith(
+                                weight_totalaverage: possibledouble);
+                          } catch (exception) {
+                            //bool correct_double = false;
+                          }
+                        },
+                        keyBoardType: TextInputType.numberWithOptions(),
+                        maxLines: 1,
+                      );
+                    }),
+                FormDivider(),
+                FormHeader(getString(context).average),
+                SwitchListTile(
+                  value: gradeprofile.averagebytype,
+                  onChanged: (newvalue) {
+                    gradeprofile =
+                        gradeprofile.copyWith(averagebytype: newvalue);
+                    notifier.value = gradeprofile;
+                  },
+                  title: Text(getString(context).averagebytype),
+                ),
+                gradeprofile.averagebytype == false
+                    ? nowidget()
+                    : Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: getTitleCard(
+                          iconData: Icons.merge_type,
+                          title: getString(context).types,
+                          content: gradeprofile.types.values
+                              .where((it) => it != null)
+                              .map<Widget>(
+                            (gradetypeitem) {
+                              String inPercent() {
+                                double total = gradeprofile.types.values
+                                    .where((it) => it != null)
+                                    .map((item) => item!.weight)
+                                    .reduce((a, b) => a + b);
+                                return ((Decimal.parse(gradetypeitem!.weight
+                                                .toString()) /
+                                            Decimal.parse(total.toString())) *
+                                        Decimal.fromInt(100))
+                                    .toStringAsFixed(1);
+                              }
 
-                                return ListTile(
-                                  leading: Text(
-                                      gradetypeitem.weight.toString() +
-                                          '\n(${inPercent()}%)'),
-                                  title: Text(gradetypeitem.name ?? '-'),
-                                  subtitle: Text(
-                                    gradetypeitem.getGradeTypesListed(context),
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 2,
-                                  ),
-                                  trailing: Row(
-                                    children: <Widget>[
-                                      IconButton(
-                                          icon: Icon(Icons.edit),
-                                          onPressed: () {
-                                            pushWidget(
-                                                context,
-                                                EditGradeTypeItemSettings(
-                                                  gradetypeitem: gradetypeitem,
-                                                )).then((newdata) {
-                                              if (newdata != null &&
-                                                  newdata is GradeTypeItem) {
-                                                gradeprofile =
-                                                    gradeprofile.copyWith();
-                                                gradeprofile.types[newdata.id] =
-                                                    newdata;
-                                                notifier.value = gradeprofile;
-                                              }
-                                            });
-                                          }),
-                                      IconButton(
-                                          icon: Icon(Icons.delete_outline),
-                                          onPressed: () {
-                                            showConfirmDialog(
-                                                    context: context,
-                                                    title: getString(context)
-                                                        .delete)
-                                                .then((result) {
-                                              if (result == true) {
-                                                gradeprofile =
-                                                    gradeprofile.copyWith();
-                                                gradeprofile.types[
-                                                    gradetypeitem.id] = null;
-                                                notifier.value = gradeprofile;
-                                              }
-                                            });
-                                          })
-                                    ],
-                                    mainAxisSize: MainAxisSize.min,
-                                  ),
-                                );
-                              }).toList()
-                                    ..add(FormButton(getString(context).newtype,
-                                        () {
+                              return ListTile(
+                                leading: Text(gradetypeitem!.weight.toString() +
+                                    '\n(${inPercent()}%)'),
+                                title: Text(gradetypeitem.name),
+                                subtitle: Text(
+                                  gradetypeitem.getGradeTypesListed(context),
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 2,
+                                ),
+                                trailing: Row(
+                                  children: <Widget>[
+                                    IconButton(
+                                        icon: Icon(Icons.edit),
+                                        onPressed: () {
+                                          pushWidget(
+                                              context,
+                                              EditGradeTypeItemSettings(
+                                                gradetypeitem: gradetypeitem,
+                                              )).then((newdata) {
+                                            if (newdata != null &&
+                                                newdata is GradeTypeItem) {
+                                              gradeprofile =
+                                                  gradeprofile.copyWith();
+                                              gradeprofile.types[newdata.id] =
+                                                  newdata;
+                                              notifier.value = gradeprofile;
+                                            }
+                                          });
+                                        }),
+                                    IconButton(
+                                        icon: Icon(Icons.delete_outline),
+                                        onPressed: () {
+                                          showConfirmDialog(
+                                                  context: context,
+                                                  title:
+                                                      getString(context).delete)
+                                              .then((result) {
+                                            if (result == true) {
+                                              gradeprofile =
+                                                  gradeprofile.copyWith();
+                                              gradeprofile
+                                                      .types[gradetypeitem.id] =
+                                                  null;
+                                              notifier.value = gradeprofile;
+                                            }
+                                          });
+                                        })
+                                  ],
+                                  mainAxisSize: MainAxisSize.min,
+                                ),
+                              );
+                            },
+                          ).toList()
+                                ..add(
+                                  FormButton(
+                                    getString(context).newtype,
+                                    () {
                                       String newid =
-                                          gradeprofile.getNewTypeId();
+                                          gradeprofile.getNewTypeId()!;
                                       gradeprofile = gradeprofile.copyWith();
                                       gradeprofile.types[newid] =
                                           GradeTypeItem.Create(newid).copyWith(
@@ -936,7 +961,7 @@ class EditGradeProfileSettings extends StatelessWidget {
                                           context,
                                           EditGradeTypeItemSettings(
                                             gradetypeitem:
-                                                gradeprofile.types[newid],
+                                                gradeprofile.types[newid]!,
                                           )).then((newdata) {
                                         if (newdata != null &&
                                             newdata is GradeTypeItem) {
@@ -947,39 +972,26 @@ class EditGradeProfileSettings extends StatelessWidget {
                                           notifier.value = gradeprofile;
                                         }
                                       });
-                                    }))),
+                                    },
+                                  ),
+                                ),
                         ),
-                  FormDivider(),
-                  FormSpace(64.0),
-                ]);
-              }),
-          floatingActionButton: FloatingActionButton.extended(
-              onPressed: () {
-                PlannerSettingsData newdata = settings.copy();
-                newdata.gradeprofiles[gradeprofile.profileid] = gradeprofile;
-                _updateSettings(newdata, database);
-                Navigator.pop(context);
-              },
-              icon: Icon(Icons.done),
-              label: Text(getString(context).done)),
-        ),
-        onWillPop: () async {
-          if (changedValues == false) return true;
-          return showConfirmDialog(
-                  context: context,
-                  title: getString(context).discardchanges,
-                  action: getString(context).confirm,
-                  richtext: RichText(
-                      text: TextSpan(
-                          text: getString(context).currentchangesnotsaved)))
-              .then((value) {
-            if (value == true) {
-              return true;
-            } else {
-              return false;
-            }
-          });
-        });
+                      ),
+                FormDivider(),
+                FormSpace(64.0),
+              ]);
+            }),
+        floatingActionButton: FloatingActionButton.extended(
+            onPressed: () {
+              PlannerSettingsData newdata = settings.copy();
+              newdata.gradeprofiles[gradeprofile.profileid] = gradeprofile;
+              _updateSettings(newdata, database);
+              Navigator.pop(context);
+            },
+            icon: Icon(Icons.done),
+            label: Text(getString(context).done)),
+      ),
+    );
   }
 }
 
@@ -987,149 +999,152 @@ class EditGradeProfileSettings extends StatelessWidget {
 class EditGradeTypeItemSettings extends StatelessWidget {
   bool changedValues = false;
   GradeTypeItem gradetypeitem;
-  ValueNotifier<GradeTypeItem> notifier;
+  late ValueNotifier<GradeTypeItem> notifier;
 
   ValueNotifier<bool> showWeight = ValueNotifier(true);
   ValueNotifier<bool> showextras = ValueNotifier(false);
 
-  EditGradeTypeItemSettings({this.gradetypeitem}) {
+  EditGradeTypeItemSettings({required this.gradetypeitem}) {
     notifier = ValueNotifier(gradetypeitem);
   }
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-        child: Scaffold(
-          appBar: MyAppHeader(title: getString(context).type),
-          body: ValueListenableBuilder<GradeTypeItem>(
-              valueListenable: notifier,
-              builder: (context, _, _2) {
-                return getDefaultList([
-                  FormSpace(8.0),
-                  FormTextField(
-                    text: gradetypeitem.name ?? '',
-                    valueChanged: (newtext) {
-                      gradetypeitem = gradetypeitem.copyWith(name: newtext);
-                    },
-                  ),
-                  FormSpace(8.0),
-                  FormDivider(),
-                  FormHideable(
-                      title: getString(context).weight,
-                      notifier: showWeight,
-                      builder: (context) {
-                        return FormTextField(
-                          iconData: Icons.line_weight,
-                          labeltext: getString(context).weight,
-                          text: gradetypeitem.weight.toString(),
-                          valueChanged: (String s) {
-                            try {
-                              double possibledouble = double.parse(s);
-                              gradetypeitem = gradetypeitem.copyWith(
-                                  weight: possibledouble);
-                              // bool correct_double = true;
-                            } catch (exception) {
-                              //bool correct_double = false;
-                            }
-                          },
-                          keyBoardType: TextInputType.numberWithOptions(),
-                          maxLines: 1,
-                        );
-                      }),
-                  FormDivider(),
-                  FormHeader(getString(context).gradetypes),
-                  Column(
-                    children: getGradeTypes(context).map((item) {
-                      bool getCurrentValue() {
-                        if (GradeType.values[item.id] == GradeType.TEST &&
-                            gradetypeitem.testsasoneexam == true) return true;
-                        return gradetypeitem
-                                .gradetypes[GradeType.values[item.id]] ??
-                            false;
-                      }
-
-                      return CheckboxListTile(
-                        value: getCurrentValue(),
-                        onChanged: (newvalue) {
-                          gradetypeitem = gradetypeitem.copyWith();
-                          gradetypeitem.gradetypes[GradeType.values[item.id]] =
-                              newvalue;
-                          notifier.value = gradetypeitem;
-                        },
-                        title: Text(item.name),
-                      );
-                    }).toList(),
-                  ),
-                  FormDivider(),
-                  FormHideable(
-                      title: getString(context).extras,
-                      notifier: showextras,
-                      builder: (context) {
-                        return Column(
-                          children: <Widget>[
-                            SwitchListTile(
-                              title: Text(getString(context).testsasoneexam),
-                              value: gradetypeitem.testsasoneexam ?? false,
-                              onChanged: (newvalue) {
-                                gradetypeitem = gradetypeitem.copyWith(
-                                    testsasoneexam: newvalue);
-                                notifier.value = gradetypeitem;
-                              },
-                            ),
-                          ],
-                        );
-                      }),
-                  FormDivider(),
-                  FormSpace(64.0),
-                ]);
-              }),
-          floatingActionButton: FloatingActionButton.extended(
-              onPressed: () {
-                Navigator.pop(context, gradetypeitem);
-              },
-              icon: Icon(Icons.done),
-              label: Text(getString(context).done)),
-        ),
-        onWillPop: () async {
-          if (changedValues == false) return true;
-          return showConfirmDialog(
-                  context: context,
-                  title: getString(context).discardchanges,
-                  action: getString(context).confirm,
-                  richtext: RichText(
-                      text: TextSpan(
-                          text: getString(context).currentchangesnotsaved)))
-              .then((value) {
+      onWillPop: () async {
+        if (changedValues == false) return true;
+        return showConfirmDialog(
+                context: context,
+                title: getString(context).discardchanges,
+                action: getString(context).confirm,
+                richtext: RichText(
+                    text: TextSpan(
+                        text: getString(context).currentchangesnotsaved)))
+            .then(
+          (value) {
             if (value == true) {
               return true;
             } else {
               return false;
             }
-          });
-        });
+          },
+        );
+      },
+      child: Scaffold(
+        appBar: MyAppHeader(title: getString(context).type),
+        body: ValueListenableBuilder<GradeTypeItem>(
+            valueListenable: notifier,
+            builder: (context, _, _2) {
+              return getDefaultList([
+                FormSpace(8.0),
+                FormTextField(
+                  text: gradetypeitem.name,
+                  valueChanged: (newtext) {
+                    gradetypeitem = gradetypeitem.copyWith(name: newtext);
+                  },
+                ),
+                FormSpace(8.0),
+                FormDivider(),
+                FormHideable(
+                    title: getString(context).weight,
+                    notifier: showWeight,
+                    builder: (context) {
+                      return FormTextField(
+                        iconData: Icons.line_weight,
+                        labeltext: getString(context).weight,
+                        text: gradetypeitem.weight.toString(),
+                        valueChanged: (String s) {
+                          try {
+                            double possibledouble = double.parse(s);
+                            gradetypeitem =
+                                gradetypeitem.copyWith(weight: possibledouble);
+                            // bool correct_double = true;
+                          } catch (exception) {
+                            //bool correct_double = false;
+                          }
+                        },
+                        keyBoardType: TextInputType.numberWithOptions(),
+                        maxLines: 1,
+                      );
+                    }),
+                FormDivider(),
+                FormHeader(getString(context).gradetypes),
+                Column(
+                  children: getGradeTypes(context).map((item) {
+                    bool getCurrentValue() {
+                      if (GradeType.values[item.id] == GradeType.TEST &&
+                          gradetypeitem.testsasoneexam == true) return true;
+                      return gradetypeitem
+                              .gradetypes[GradeType.values[item.id]] ??
+                          false;
+                    }
+
+                    return CheckboxListTile(
+                      value: getCurrentValue(),
+                      onChanged: (newvalue) {
+                        gradetypeitem = gradetypeitem.copyWith();
+                        gradetypeitem.gradetypes[GradeType.values[item.id]] =
+                            newvalue!;
+                        notifier.value = gradetypeitem;
+                      },
+                      title: Text(item.name),
+                    );
+                  }).toList(),
+                ),
+                FormDivider(),
+                FormHideable(
+                    title: getString(context).extras,
+                    notifier: showextras,
+                    builder: (context) {
+                      return Column(
+                        children: <Widget>[
+                          SwitchListTile(
+                            title: Text(getString(context).testsasoneexam),
+                            value: gradetypeitem.testsasoneexam,
+                            onChanged: (newvalue) {
+                              gradetypeitem = gradetypeitem.copyWith(
+                                  testsasoneexam: newvalue);
+                              notifier.value = gradetypeitem;
+                            },
+                          ),
+                        ],
+                      );
+                    }),
+                FormDivider(),
+                FormSpace(64.0),
+              ]);
+            }),
+        floatingActionButton: FloatingActionButton.extended(
+            onPressed: () {
+              Navigator.pop(context, gradetypeitem);
+            },
+            icon: Icon(Icons.done),
+            label: Text(getString(context).done)),
+      ),
+    );
   }
 }
 
 class ShortPlannerSettings extends StatelessWidget {
-  const ShortPlannerSettings({Key key}) : super(key: key);
+  const ShortPlannerSettings({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final appSettingsBloc = BlocProvider.of<AppSettingsBloc>(context);
     final plannerDatabase =
-        BlocProvider.of<PlannerDatabaseBloc>(context).plannerDatabase;
+        BlocProvider.of<PlannerDatabaseBloc>(context).plannerDatabase!;
     return SubSettingsPlannerFloating(
         plannerDatabase: plannerDatabase,
         builder: (context, settings) {
           return [
-            StreamBuilder(
+            StreamBuilder<AppSettingsData?>(
               builder: (context, snapshot) {
-                AppSettingsData appSettingsData = snapshot.data;
+                final appSettingsData = snapshot.data;
                 return SwitchListTile(
-                  value: appSettingsData.darkmode ?? false,
+                  value: appSettingsData?.darkmode ?? false,
                   onChanged: (newvalue) {
                     appSettingsBloc.setAppSettings(
-                        appSettingsData.copyWith(darkmode: newvalue));
+                        appSettingsData!.copyWith(darkmode: newvalue));
                   },
                   title: Text(getString(context).darkmode),
                 );
@@ -1182,7 +1197,7 @@ class ShortPlannerSettings extends StatelessWidget {
                   ' ' +
                   getString(context).lessonsperday),
               onTap: () {
-                selectItem(
+                selectItem<int>(
                     context: context,
                     items: buildIntList(24, start: 1),
                     builder: (context, item) {
@@ -1231,7 +1246,7 @@ class ShortPlannerSettings extends StatelessWidget {
                         ' ${getString(context).weektypes}' +
                         ' (${weektypesamount_meaning(context)[settings.weektypes_amount]})'),
                     onTap: () {
-                      selectItem(
+                      selectItem<int>(
                           context: context,
                           items: [2, 3, 4],
                           builder: (context, item) {
@@ -1294,15 +1309,11 @@ class ShortPlannerSettings extends StatelessWidget {
               subtitle: settings.vacationpackageid == null
                   ? Text(getString(context).nothingselected)
                   : RegionName(
-                      regionID: settings.vacationpackageid,
+                      regionID: settings.vacationpackageid!,
                       holidayGateway: plannerDatabase.holidayGateway,
                     ),
               onTap: () {
-                pushWidget(
-                    context,
-                    SelectRegionPage(
-                      database: plannerDatabase,
-                    ));
+                pushWidget(context, SelectRegionPage());
               },
               trailing: settings.vacationpackageid == null
                   ? null

@@ -1,8 +1,13 @@
-// @dart=2.11
+//
 class Teacher {
-  String teacherid, name, tel, email;
+  late String teacherid, name;
+  late String? tel, email;
 
-  Teacher({this.teacherid, this.name, this.tel, this.email});
+  Teacher(
+      {required this.teacherid,
+      required this.name,
+      required this.tel,
+      required this.email});
 
   Teacher.fromData(dynamic data) {
     teacherid = data['teacherid'];

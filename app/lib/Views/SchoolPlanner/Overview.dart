@@ -1,4 +1,4 @@
-//@dart=2.11
+//
 import 'package:bloc/bloc_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Views/widgets/overview_tips.dart';
@@ -21,7 +21,7 @@ class OverviewView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final plannerDatabase =
-        BlocProvider.of<PlannerDatabaseBloc>(context).plannerDatabase;
+        BlocProvider.of<PlannerDatabaseBloc>(context).plannerDatabase!;
     final appStats = AppStatsBloc.of(context);
     appStats.incrementOpenHomePage();
     return SingleChildScrollView(
@@ -31,10 +31,11 @@ class OverviewView extends StatelessWidget {
           OverviewTips(),
           StreamBuilder<Map<String, Letter>>(
             builder: (context, snapshot) {
-              List<Letter> datalist = snapshot.data.values.where((letter) {
-                return letter.isRead(plannerDatabase) == false;
-              }).toList()
-                ..sort((l1, l2) => l1.published.compareTo(l2.published));
+              List<Letter> datalist = snapshot.data?.values.where((letter) {
+                    return letter.isRead(plannerDatabase) == false;
+                  }).toList() ??
+                  [];
+              datalist.sort((l1, l2) => l1.published.compareTo(l2.published));
               if (datalist.isNotEmpty) {
                 return Column(
                   children: <Widget>[

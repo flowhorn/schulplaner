@@ -1,11 +1,10 @@
-//@dart=2.11
 import 'package:bloc/bloc_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Views/SchoolPlanner/attachments/edit_attachments_view.dart';
 import 'package:schulplaner8/app_base/src/blocs/app_stats_bloc.dart';
 import 'package:schulplaner_addons/common/widgets/editpage.dart';
 import 'package:schulplaner8/Data/Planner/Task.dart';
-import 'package:schulplaner8/Data/plannerdatabase.dart';
+import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 import 'package:schulplaner8/Helper/DateAPI.dart';
 import 'package:schulplaner8/Helper/PermissionManagement.dart';
 import 'package:schulplaner8/Helper/SmartCalAPI.dart';
@@ -22,28 +21,32 @@ import 'package:schulplaner_widgets/schulplaner_dialogs.dart';
 class NewSchoolTaskView extends StatelessWidget {
   final PlannerDatabase database;
   final bool editmode;
-  final String editmode_taskid;
+  final String? editmode_taskid;
   bool changedValues = false;
-  List<String> _nextlessons;
-  List<RecommendedDate> recommendeddates;
-  SchoolTask data;
-  ValueNotifier<SchoolTask> notifier;
+  List<String>? _nextlessons;
+  List<RecommendedDate>? recommendeddates;
+  late SchoolTask data;
+  late ValueNotifier<SchoolTask> notifier;
 
   ValueNotifier<bool> showmore = ValueNotifier(false);
 
   NewSchoolTaskView(
-      {@required this.database, this.editmode = false, this.editmode_taskid}) {
+      {required this.database, this.editmode = false, this.editmode_taskid}) {
     if (editmode) {
-      data = database.tasks.data[editmode_taskid].copy();
+      data = database.tasks.data[editmode_taskid!]!.copy();
     } else {
-      data = SchoolTask();
+      data = SchoolTask(
+        files: {},
+        title: '',
+        detail: '',
+        finished: {},
+      );
       try {
-        data = data.copy();
-        data.courseid = potentialcourseidnow(database);
+        data.courseid = potentialcourseidnow(database)!;
         if (data.due == null && data.courseid != null) {
-          _nextlessons = getNextLessons(database, data.courseid, count: 2);
-          if (_nextlessons.isNotEmpty) {
-            data.due = _nextlessons[0];
+          _nextlessons = getNextLessons(database, data.courseid!, count: 2);
+          if (_nextlessons?.isNotEmpty ?? false) {
+            data.due = _nextlessons![0];
           }
         }
       } catch (_) {}
@@ -51,7 +54,8 @@ class NewSchoolTaskView extends StatelessWidget {
     notifier = ValueNotifier(data);
   }
 
-  NewSchoolTaskView.fromCriticalEdit({@required this.database, SchoolTask task})
+  NewSchoolTaskView.fromCriticalEdit(
+      {required this.database, required SchoolTask task})
       : editmode = true,
         editmode_taskid = null {
     data = task.copy();
@@ -59,20 +63,27 @@ class NewSchoolTaskView extends StatelessWidget {
   }
 
   NewSchoolTaskView.CreateWithData(
-      {@required this.database, String due, String courseid})
+      {required this.database, String? due, String? courseid})
       : editmode = false,
         editmode_taskid = null {
-    data = SchoolTask(due: due, courseid: courseid);
+    data = SchoolTask(
+      due: due,
+      courseid: courseid,
+      title: '',
+      files: {},
+      finished: {},
+      detail: '',
+    );
     if (data.due == null && data.courseid != null) {
-      _nextlessons = getNextLessons(database, data.courseid, count: 2);
-      if (_nextlessons.isNotEmpty) {
-        data.due = _nextlessons[0];
+      _nextlessons = getNextLessons(database, data.courseid!, count: 2);
+      if (_nextlessons?.isNotEmpty ?? false) {
+        data.due = _nextlessons![0];
       }
     }
     notifier = ValueNotifier(data);
   }
 
-  List<RecommendedDate> getRecommendedDatesSimple(BuildContext context) {
+  List<RecommendedDate> getRecommendedDatesSimple(BuildContext? context) {
     return [
       RecommendedDate(text: getString(context).today, date: getDateToday()),
       RecommendedDate(
@@ -84,8 +95,8 @@ class NewSchoolTaskView extends StatelessWidget {
   Widget build(BuildContext context) {
     if (recommendeddates == null) {
       recommendeddates = (_nextlessons ?? []).map((date) {
-        int index = _nextlessons.indexOf(date);
-        String text;
+        int? index = _nextlessons?.indexOf(date);
+        String? text;
         if (index == 0) {
           text = getString(context).nextlesson;
         } else if (index == 1) {
@@ -97,6 +108,23 @@ class NewSchoolTaskView extends StatelessWidget {
         ..addAll(getRecommendedDatesSimple(null));
     }
     return WillPopScope(
+      onWillPop: () async {
+          if (changedValues == false) return true;
+          return showConfirmDialog(
+                  context: context,
+                  title: getString(context).discardchanges,
+                  action: getString(context).confirm,
+                  richtext: RichText(
+                      text: TextSpan(
+                          text: getString(context).currentchangesnotsaved)))
+              .then((value) {
+            if (value == true) {
+              return true;
+            } else {
+              return false;
+            }
+          });
+        },
         child: ValueListenableBuilder<SchoolTask>(
             valueListenable: notifier,
             builder: (context, _, _2) {
@@ -126,15 +154,14 @@ class NewSchoolTaskView extends StatelessWidget {
                         FormSpace(12.0),
                         const Divider(),
                         EditCourseField(
-                          courseID: data.courseid,
-                          database: database,
+                          courseId: data.courseid,
                           editmode: editmode,
                           onChanged: (context, newCourse) {
                             data.courseid = newCourse.id;
                             notifier.value = data;
 
                             List<String> nextlessons = getNextLessons(
-                                database, data.courseid,
+                                database, data.courseid!,
                                 count: 1);
                             if (data.due == null && nextlessons.isNotEmpty) {
                               data.due = nextlessons[0];
@@ -151,7 +178,7 @@ class NewSchoolTaskView extends StatelessWidget {
                         const Divider(),
                         SwitchListTile(
                           title: Text(getString(context).saveprivately),
-                          value: data.private ?? false,
+                          value: data.private,
                           onChanged: editmode
                               ? null
                               : (newvalue) {
@@ -214,12 +241,12 @@ class NewSchoolTaskView extends StatelessWidget {
                           attachments: data.files,
                           onAdded: (file) {
                             if (data.files == null) data.files = {};
-                            data.files[file.fileid] = file;
+                            data.files[file.fileid!] = file;
                             notifier.notifyListeners();
                           },
                           onRemoved: (file) {
                             if (data.files == null) data.files = {};
-                            data.files[file.fileid] = null;
+                            data.files[file.fileid!] = null;
                             notifier.notifyListeners();
                           },
                         ),
@@ -259,35 +286,19 @@ class NewSchoolTaskView extends StatelessWidget {
                         },
                         icon: Icon(Icons.done),
                         label: Text(getString(context).done)),
-                  ));
-            }),
-        onWillPop: () async {
-          if (changedValues == false) return true;
-          return showConfirmDialog(
-                  context: context,
-                  title: getString(context).discardchanges,
-                  action: getString(context).confirm,
-                  richtext: RichText(
-                      text: TextSpan(
-                          text: getString(context).currentchangesnotsaved)))
-              .then((value) {
-            if (value == true) {
-              return true;
-            } else {
-              return false;
-            }
-          });
-        });
+                  ),);
+            },),
+        );
   }
 
   ThemeData getTaskTheme(BuildContext context) {
     if (data.courseid != null) {
       return newAppThemeDesign(
-          context, database.courseinfo.data[data.courseid].getDesign());
+          context, database.courseinfo.data[data.courseid]?.getDesign());
     } else {
       if (data.classid != null) {
         return newAppThemeDesign(
-            context, database.schoolClassInfos.data[data.classid].getDesign());
+            context, database.schoolClassInfos.data[data.classid]?.getDesign());
       } else {
         return clearAppThemeData(context: context);
       }
@@ -302,13 +313,13 @@ class NewSchoolTaskView extends StatelessWidget {
         return requestPermissionCourse(
             database: database,
             category: PermissionAccessType.creator,
-            courseid: data.courseid);
+            courseid: data.courseid!);
       } else {
         if (data.classid != null) {
           return requestPermissionClass(
               database: database,
               category: PermissionAccessType.creator,
-              classid: data.classid);
+              classid: data.classid!);
         } else {
           throw Exception('SOMETHING WENT WRONG???');
         }

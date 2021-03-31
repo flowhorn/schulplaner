@@ -1,4 +1,4 @@
-//@dart=2.11
+//
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:schulplaner8/Helper/GitHub.dart';
@@ -67,7 +67,7 @@ class _Contributors extends StatelessWidget {
 class _ContributorsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<Contributor>>(
+    return FutureBuilder<List<Contributor>?>(
       future: GitHub().getContributors(),
       builder: (context, snapshot) {
         final contributors = snapshot.data;
@@ -96,22 +96,22 @@ class _ContributorsList extends StatelessWidget {
 }
 
 class _ContributorListTile extends StatelessWidget {
-  final Contributor contributor;
+  final Contributor? contributor;
   const _ContributorListTile({this.contributor});
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       leading: Icon(FontAwesomeIcons.github),
-      title: Text(contributor.name),
+      title: Text(contributor!.name),
       trailing: Text(
         BothLangString(
-          de: 'Beiträge: ' + contributor.contributions.toString(),
-          en: 'Contributions: ' + contributor.contributions.toString(),
+          de: 'Beiträge: ' + contributor!.contributions.toString(),
+          en: 'Contributions: ' + contributor!.contributions.toString(),
         ).getText(context),
       ),
       onTap: () {
-        launch(contributor.url);
+        launch(contributor!.url);
       },
     );
   }

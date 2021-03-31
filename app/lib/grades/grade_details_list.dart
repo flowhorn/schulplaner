@@ -1,11 +1,15 @@
-// @dart=2.11
+//
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:schulplaner8/Data/plannerdatabase.dart';
+import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 import 'package:schulplaner8/Helper/Functions.dart';
-import 'package:schulplaner8/OldGrade/Grade.dart';
+
 import 'package:schulplaner8/OldGrade/GradeDetail.dart';
+import 'package:schulplaner8/OldGrade/models/average_calculator.dart';
+import 'package:schulplaner8/OldGrade/models/choice.dart';
+import 'package:schulplaner8/OldGrade/models/grade.dart';
+import 'package:schulplaner8/OldGrade/models/grade_span.dart';
 import 'package:schulplaner8/groups/src/models/course.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
 import 'package:schulplaner_widgets/schulplaner_theme.dart';
@@ -26,27 +30,27 @@ class GradeDetailList extends StatefulWidget {
 class GradeDetailListState extends State<GradeDetailList> {
   final PlannerDatabase database;
   GradeDetailListState(this.database) {
-    list = (database.grades.data.toList() ?? [])
-      ..sort((g1, g2) {
-        return g1.date.compareTo(g2.date);
-      });
-    list_course = (database.courseinfo.data ?? {}).values.toList()
+    list = database.grades.data?.toList() ?? [];
+    list.sort((g1, g2) {
+      return g1.date!.compareTo(g2.date!);
+    });
+    list_course = (database.courseinfo.data).values.toList()
       ..sort((c1, c2) {
         return c1.getName().compareTo(c2.getName());
       });
-    calculator = AverageCalculator(database.getSettings(),
-        grades: list ?? [], courses: []);
+    calculator =
+        AverageCalculator(database.getSettings(), grades: list, courses: []);
   }
 
-  AverageCalculator calculator;
+  late AverageCalculator calculator;
   List<Grade> originallist = [];
-  List<Grade> list = [];
-  StreamSubscription<List<Grade>> datalistener;
+  late List<Grade> list;
+  late StreamSubscription<List<Grade>?> datalistener;
   List<Course> list_course = [];
-  StreamSubscription<List<Course>> datalistener_course;
-  StreamSubscription<GradeSpan> listener_gradespan;
+  late StreamSubscription<List<Course>?> datalistener_course;
+  late StreamSubscription<GradeSpan?> listener_gradespan;
 
-  GradeSpan gradespan;
+  GradeSpan? gradespan;
 
   @override
   void initState() {
@@ -55,14 +59,14 @@ class GradeDetailListState extends State<GradeDetailList> {
       setState(() {
         originallist = snapshot == null ? [] : snapshot
           ..sort((g1, g2) {
-            return g2.date.compareTo(g1.date);
+            return g2.date!.compareTo(g1.date!);
           });
         list = getFilteredList();
         _newCalculation();
       });
     });
     datalistener_course = database.courseinfo.stream.map((datamap) {
-      return (datamap ?? {}).values.toList()
+      return (datamap).values.toList()
         ..sort((c1, c2) {
           return c1.getName().compareTo(c2.getName());
         });
@@ -98,11 +102,11 @@ class GradeDetailListState extends State<GradeDetailList> {
   List<Grade> getFilteredList() {
     if (gradespan != null) {
       return originallist.where((grade) {
-        if (gradespan.start != null) {
-          if (gradespan.start.compareTo(grade.date) > 0) return false;
+        if (gradespan!.start != null) {
+          if (gradespan!.start!.compareTo(grade.date!) > 0) return false;
         }
-        if (gradespan.end != null) {
-          if (gradespan.end.compareTo(grade.date) < 0) return false;
+        if (gradespan!.end != null) {
+          if (gradespan!.end!.compareTo(grade.date!) < 0) return false;
         }
         return true;
       }).toList();
@@ -137,6 +141,7 @@ class GradeDetailListState extends State<GradeDetailList> {
                 database: database,
                 courseList: list_course,
                 calculator: calculator,
+                list: list,
               ),
               Builder(builder: (context) {
                 return GradeInfoView(
@@ -159,16 +164,16 @@ class GradeDetailListState extends State<GradeDetailList> {
 
 class _AppBar extends StatelessWidget implements PreferredSizeWidget {
   final AverageCalculator averageCalculator;
-  final GradeSpan gradeSpan;
+  final GradeSpan? gradeSpan;
   final PlannerDatabase database;
   final List<Choice> tabs;
 
   const _AppBar({
-    Key key,
-    @required this.averageCalculator,
-    @required this.gradeSpan,
-    @required this.database,
-    @required this.tabs,
+    Key? key,
+    required this.averageCalculator,
+    required this.gradeSpan,
+    required this.database,
+    required this.tabs,
   }) : super(key: key);
 
   @override
@@ -183,8 +188,14 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
               right: 16.0,
             ),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 InkWell(
+                  onTap: () {
+                    showGradeSpanSheet(context, database);
+                  },
+                  borderRadius: BorderRadius.all(Radius.circular(16.0)),
                   child: Padding(
                     padding: EdgeInsets.all(4.0),
                     child: Row(
@@ -195,21 +206,21 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
                         ),
                         if (gradeSpan?.id == 'custom')
                           Column(
+                            mainAxisSize: MainAxisSize.min,
                             children: <Widget>[
                               Text(
                                 gradeSpan?.getName(context) ?? '-?-',
                                 style: TextStyle(fontSize: 15.0),
                               ),
                               Text(
-                                gradeSpan.getStartText(context) +
+                                gradeSpan!.getStartText(context) +
                                     ' - ' +
-                                    gradeSpan.getEndText(context),
+                                    gradeSpan!.getEndText(context),
                                 style: TextStyle(
                                     fontSize: 12.0,
                                     fontWeight: FontWeight.w300),
                               ),
                             ],
-                            mainAxisSize: MainAxisSize.min,
                           )
                         else
                           Text(
@@ -228,10 +239,6 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                     ),
                   ),
-                  onTap: () {
-                    showGradeSpanSheet(context, database);
-                  },
-                  borderRadius: BorderRadius.all(Radius.circular(16.0)),
                 ),
                 Text(
                   'Ø' +
@@ -239,7 +246,7 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
                           ? database
                               .getSettings()
                               .getCurrentAverageDisplay(context: context)
-                              .input(averageCalculator.totalaverage)
+                              .input(averageCalculator.totalaverage!)
                           : '/'),
                   style: TextStyle(
                       color: getTextColor(getBackgroundColor(context)),
@@ -247,8 +254,6 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
                       fontSize: 16.0),
                 ),
               ],
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
             ),
           ),
         ),

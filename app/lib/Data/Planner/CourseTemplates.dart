@@ -1,15 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:schulplaner8/groups/src/models/course.dart';
 import 'package:schulplaner_widgets/schulplaner_theme.dart';
+import 'package:string_similarity/string_similarity.dart';
 
 class CourseTemplate {
   String name, shortname;
   Design design;
   int category;
-  CourseTemplate(
-      {required this.name,
-      required this.shortname,
-      required this.design,
-      this.category = 0});
+  CourseTemplate({
+    required this.name,
+    required this.shortname,
+    required this.design,
+    this.category = 0,
+  });
+
+  /// The method checks for CourseTemplates whether there is already a course, which is named this way
+  bool isAlreadyaCourse(List<Course?> allcourses) {
+    if (allcourses.isEmpty) return false;
+    return (StringSimilarity.findBestMatch(
+              name,
+              allcourses
+                  .map((course) => course?.name != null ? course!.name : '')
+                  .toList(),
+            ).bestMatch.rating ??
+            0) >
+        0.89;
+  }
 }
 
 class TemplateCategory {

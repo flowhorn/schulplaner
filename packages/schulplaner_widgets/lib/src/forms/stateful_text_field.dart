@@ -1,11 +1,10 @@
-//@dart=2.11
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 /// Dieses Textfeld behält seinen State bei, auch wenn sich der Inhalt gerade ändert.
 class StatefulTextField extends StatefulWidget {
   const StatefulTextField({
-    Key key,
+    Key? key,
     this.initialText,
     this.autofocus = false,
     this.onEditingComplete,
@@ -24,7 +23,7 @@ class StatefulTextField extends StatefulWidget {
   }) : super(key: key);
 
   StatefulTextField.standard({
-    Key key,
+    Key? key,
     this.initialText,
     this.autofocus = false,
     this.onEditingComplete,
@@ -39,9 +38,9 @@ class StatefulTextField extends StatefulWidget {
     this.keyboardType,
     this.scrollPadding = const EdgeInsets.all(20.0),
     this.autofillHints,
-    String labelText,
-    IconData iconData,
-    String prefixText,
+    String? labelText,
+    IconData? iconData,
+    String? prefixText,
   })  : this.decoration = InputDecoration(
             icon: iconData != null ? Icon(iconData) : null,
             labelText: labelText,
@@ -49,28 +48,28 @@ class StatefulTextField extends StatefulWidget {
             prefixText: prefixText),
         super(key: key);
 
-  final String initialText;
-  final bool autofocus;
-  final FocusNode focusNode;
-  final VoidCallback onEditingComplete;
-  final ValueChanged<String> onChanged;
-  final TextInputAction textInputAction;
-  final InputDecoration decoration;
-  final int maxLength;
-  final int maxLines;
-  final bool maxLengthEnforced;
-  final TextStyle style;
-  final Color cursorColor;
-  final TextInputType keyboardType;
-  final EdgeInsets scrollPadding;
-  final Iterable<String> autofillHints;
+  final String? initialText;
+  final bool? autofocus;
+  final FocusNode? focusNode;
+  final VoidCallback? onEditingComplete;
+  final ValueChanged<String>? onChanged;
+  final TextInputAction? textInputAction;
+  final InputDecoration? decoration;
+  final int? maxLength;
+  final int? maxLines;
+  final bool? maxLengthEnforced;
+  final TextStyle? style;
+  final Color? cursorColor;
+  final TextInputType? keyboardType;
+  final EdgeInsets? scrollPadding;
+  final Iterable<String>? autofillHints;
 
   @override
   _StatefulTextFieldState createState() => _StatefulTextFieldState();
 }
 
 class _StatefulTextFieldState extends State<StatefulTextField> {
-  TextEditingController controller;
+  late TextEditingController controller;
 
   @override
   void initState() {
@@ -82,7 +81,7 @@ class _StatefulTextFieldState extends State<StatefulTextField> {
   Widget build(BuildContext context) {
     return TextField(
       controller: controller,
-      autofocus: widget.autofocus,
+      autofocus: widget.autofocus ?? false,
       onEditingComplete: widget.onEditingComplete,
       textInputAction: widget.textInputAction,
       decoration: widget.decoration,
@@ -97,7 +96,7 @@ class _StatefulTextFieldState extends State<StatefulTextField> {
       style: widget.style,
       keyboardType: widget.keyboardType,
       cursorColor: widget.cursorColor,
-      scrollPadding: widget.scrollPadding,
+      scrollPadding: widget.scrollPadding ?? const EdgeInsets.all(20),
     );
   }
 }

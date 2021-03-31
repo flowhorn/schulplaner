@@ -1,4 +1,4 @@
-//@dart=2.11
+//
 import 'dart:async';
 
 import 'package:bloc/bloc_provider.dart';
@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:schulplaner8/Data/Planner/File.dart';
 import 'package:schulplaner8/Data/Planner/SchoolEvent.dart';
 
-import 'package:schulplaner8/Data/plannerdatabase.dart';
+import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 import 'package:schulplaner8/Helper/DateAPI.dart';
 import 'package:schulplaner8/Helper/EasyWidget.dart';
 import 'package:schulplaner8/Helper/Functions.dart';
@@ -28,7 +28,7 @@ class MyEventsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final plannerDatabase =
-        BlocProvider.of<PlannerDatabaseBloc>(context).plannerDatabase;
+        BlocProvider.of<PlannerDatabaseBloc>(context).plannerDatabase!;
     return DefaultTabController(
         length: 1,
         child: Scaffold(
@@ -78,7 +78,7 @@ class MyEventsListInnerState extends State<MyEventsListInner>
   Widget build(BuildContext context) {
     super.build(context);
     final plannerDatabase =
-        BlocProvider.of<PlannerDatabaseBloc>(context).plannerDatabase;
+        BlocProvider.of<PlannerDatabaseBloc>(context).plannerDatabase!;
     return StreamBuilder<Map<String, SchoolEvent>>(
       stream: plannerDatabase.events.stream,
       builder: (context, snapshot) {
@@ -92,7 +92,7 @@ class MyEventsListInnerState extends State<MyEventsListInner>
             .values
             .where((event) => event.archived == false)
             .toList()
-              ..sort((item1, item2) => item1.date.compareTo(item2.date));
+              ..sort((item1, item2) => item1.date!.compareTo(item2.date!));
         return ListView.builder(
           itemBuilder: (context, index) {
             SchoolEvent item = list[index];
@@ -105,14 +105,14 @@ class MyEventsListInnerState extends State<MyEventsListInner>
               );
             }
             final courseInfo = item.courseid != null
-                ? plannerDatabase.getCourseInfo(item.courseid)
+                ? plannerDatabase.getCourseInfo(item.courseid!)
                 : null;
             final listTile = ListTile(
               leading: courseInfo != null
                   ? ColoredCircleText(
                       text: toShortNameLength(
                           context, courseInfo.getShortname_full()),
-                      color: courseInfo.getDesign().primary,
+                      color: courseInfo.getDesign()?.primary,
                       radius: 22.0)
                   : ColoredCircleIcon(
                       icon: Icon(Icons.person_outline),
@@ -131,13 +131,13 @@ class MyEventsListInnerState extends State<MyEventsListInner>
                               ': ' +
                               (courseInfo != null
                                   ? courseInfo.getName()
-                                  : item.courseid),
+                                  : item.courseid!),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         )
                       : nowidget(),
                   Text(
-                    getString(context).date + ': ' + getDateText(item.date),
+                    getString(context).date + ': ' + getDateText(item.date!),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -169,12 +169,12 @@ class MyEventsArchive extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final plannerDatabase =
-        BlocProvider.of<PlannerDatabaseBloc>(context).plannerDatabase;
+        BlocProvider.of<PlannerDatabaseBloc>(context).plannerDatabase!;
     return Scaffold(
       appBar: MyAppHeader(title: getString(context).archive),
-      body: StreamBuilder(
+      body: StreamBuilder<Map<String, SchoolEvent>?>(
         builder: (context, snapshot) {
-          Map<String, SchoolEvent> datamap = snapshot.data;
+          Map<String, SchoolEvent>? datamap = snapshot.data;
           if (datamap == null) {
             return Center(
               child: CircularProgressIndicator(),
@@ -182,25 +182,25 @@ class MyEventsArchive extends StatelessWidget {
           }
           List<SchoolEvent> list = datamap.values.toList()
             ..sort((t1, t2) {
-              int compare = t1.date.compareTo(t2.date);
+              int compare = t1.date!.compareTo(t2.date!);
               if (compare != null) {
                 return compare;
               } else {
-                return t1.courseid?.compareTo(t2?.courseid) ?? 0;
+                return t1.courseid?.compareTo(t2.courseid!) ?? 0;
               }
             });
           return ListView.builder(
             itemBuilder: (context, index) {
               SchoolEvent item = list[index];
-              Course courseInfo = item.courseid != null
-                  ? plannerDatabase.getCourseInfo(item.courseid)
+              Course? courseInfo = item.courseid != null
+                  ? plannerDatabase.getCourseInfo(item.courseid!)
                   : null;
               ListTile listTile = ListTile(
                 leading: courseInfo != null
                     ? ColoredCircleText(
                         text: toShortNameLength(
                             context, courseInfo.getShortname_full()),
-                        color: courseInfo.getDesign().primary,
+                        color: courseInfo.getDesign()?.primary,
                         radius: 22.0)
                     : ColoredCircleIcon(
                         icon: Icon(Icons.person_outline),
@@ -219,13 +219,13 @@ class MyEventsArchive extends StatelessWidget {
                                 ': ' +
                                 (courseInfo != null
                                     ? courseInfo.getName()
-                                    : item.courseid),
+                                    : item.courseid!),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           )
                         : nowidget(),
                     Text(
-                      getString(context).date + ': ' + getDateText(item.date),
+                      getString(context).date + ': ' + getDateText(item.date!),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -253,12 +253,12 @@ class MyEventsOnlyExams extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final plannerDatabase =
-        BlocProvider.of<PlannerDatabaseBloc>(context).plannerDatabase;
+        BlocProvider.of<PlannerDatabaseBloc>(context).plannerDatabase!;
     return Scaffold(
-      body: StreamBuilder(
+      body: StreamBuilder<Map<String, SchoolEvent>?>(
         stream: plannerDatabase.events.stream,
         builder: (context, snapshot) {
-          Map<String, SchoolEvent> datamap = snapshot.data;
+          Map<String, SchoolEvent>? datamap = snapshot.data;
           if (datamap == null) {
             return Center(
               child: CircularProgressIndicator(),
@@ -268,25 +268,25 @@ class MyEventsOnlyExams extends StatelessWidget {
               .where((event) => event.type == 1 && event.archived == false)
               .toList()
                 ..sort((t1, t2) {
-                  int compare = t1.date.compareTo(t2.date);
+                  int compare = t1.date!.compareTo(t2.date!);
                   if (compare != null) {
                     return compare;
                   } else {
-                    return t1.courseid?.compareTo(t2?.courseid) ?? 0;
+                    return t1.courseid?.compareTo(t2.courseid!) ?? 0;
                   }
                 });
           return ListView.builder(
             itemBuilder: (context, index) {
               SchoolEvent item = list[index];
-              Course courseInfo = item.courseid != null
-                  ? plannerDatabase.getCourseInfo(item.courseid)
+              Course? courseInfo = item.courseid != null
+                  ? plannerDatabase.getCourseInfo(item.courseid!)
                   : null;
               ListTile listTile = ListTile(
                 leading: courseInfo != null
                     ? ColoredCircleText(
                         text: toShortNameLength(
                             context, courseInfo.getShortname_full()),
-                        color: courseInfo.getDesign().primary,
+                        color: courseInfo.getDesign()?.primary,
                         radius: 22.0)
                     : ColoredCircleIcon(
                         icon: Icon(Icons.person_outline),
@@ -305,13 +305,13 @@ class MyEventsOnlyExams extends StatelessWidget {
                                 ': ' +
                                 (courseInfo != null
                                     ? courseInfo.getName()
-                                    : item.courseid),
+                                    : item.courseid!),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           )
                         : nowidget(),
                     Text(
-                      getString(context).date + ': ' + getDateText(item.date),
+                      getString(context).date + ': ' + getDateText(item.date!),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -356,9 +356,9 @@ Stream<Map<String, SchoolEvent>> getArchiveStreamEvents(
   void update() {
     Map<String, SchoolEvent> compounddata = {};
     unmergeddata_archived.values.forEach((it) => compounddata
-        .addAll(it.asMap().map((_, value) => MapEntry(value.eventid, value))));
+        .addAll(it.asMap().map((_, value) => MapEntry(value.eventid!, value))));
     unmergeddata_tooold.values.forEach((it) => compounddata
-        .addAll(it.asMap().map((_, value) => MapEntry(value.eventid, value))));
+        .addAll(it.asMap().map((_, value) => MapEntry(value.eventid!, value))));
     newcontroller.add(compounddata);
   }
 
@@ -369,7 +369,7 @@ Stream<Map<String, SchoolEvent>> getArchiveStreamEvents(
         .snapshots()
         .listen((data) {
       unmergeddata_archived[courseid] = data.docs
-          .map((snapshot) => SchoolEvent.fromData(snapshot.data()))
+          .map((snapshot) => SchoolEvent.fromData(snapshot.data()!))
           .toList();
       update();
     }));
@@ -380,7 +380,7 @@ Stream<Map<String, SchoolEvent>> getArchiveStreamEvents(
         .snapshots()
         .listen((data) {
       unmergeddata_tooold[courseid] = data.docs
-          .map((snapshot) => SchoolEvent.fromData(snapshot.data()))
+          .map((snapshot) => SchoolEvent.fromData(snapshot.data()!))
           .toList();
       update();
     }));
@@ -391,7 +391,7 @@ Stream<Map<String, SchoolEvent>> getArchiveStreamEvents(
       .snapshots()
       .listen((data) {
     unmergeddata_archived['private'] = data.docs
-        .map((snapshot) => SchoolEvent.fromData(snapshot.data()))
+        .map((snapshot) => SchoolEvent.fromData(snapshot.data()!))
         .toList();
     update();
   }));
@@ -402,7 +402,7 @@ Stream<Map<String, SchoolEvent>> getArchiveStreamEvents(
       .snapshots()
       .listen((data) {
     unmergeddata_tooold['private'] = data.docs
-        .map((snapshot) => SchoolEvent.fromData(snapshot.data()))
+        .map((snapshot) => SchoolEvent.fromData(snapshot.data()!))
         .toList();
     update();
   }));
@@ -415,25 +415,26 @@ Stream<Map<String, SchoolEvent>> getArchiveStreamEvents(
 
 void showEventDetailSheet(
   BuildContext context, {
-  @required SchoolEvent eventdata,
-  @required PlannerDatabase plannerdatabase,
+  required SchoolEvent eventdata,
+  required PlannerDatabase plannerdatabase,
 }) {
   showDetailSheetBuilder(
       context: context,
       body: (context) {
-        return StreamBuilder<SchoolEvent>(
-            stream: identifyEventRef(plannerdatabase, eventdata)
+        return StreamBuilder<SchoolEvent?>(
+            stream: identifyEventRef(plannerdatabase, eventdata)!
                 .snapshots()
-                .map((snap) => snap.data != null
-                    ? SchoolEvent.fromData(snap.data())
+                .map((snap) => snap.data() != null
+                    ? SchoolEvent.fromData(snap.data()!)
                     : null),
             builder: (context, snapshot) {
-              SchoolEvent schoolEvent = snapshot.data;
+              SchoolEvent? schoolEvent = snapshot.data;
               if (schoolEvent == null) return loadedView();
               return Expanded(
                   child: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  getSheetText(context, schoolEvent.title ?? '-'),
+                  getSheetText(context, schoolEvent.title),
                   getExpandList([
                     schoolEvent.private == true
                         ? ListTile(
@@ -446,23 +447,23 @@ void showEventDetailSheet(
                         : ListTile(
                             leading: Icon(Icons.widgets),
                             title: Text(plannerdatabase
-                                .getCourseInfo(schoolEvent.courseid)
+                                .getCourseInfo(schoolEvent.courseid!)!
                                 .getName()),
                           ),
                     ListTile(
                       leading: Icon(Icons.event),
                       title: Text(getString(context).date +
                           ': ' +
-                          getDateText(schoolEvent.date) +
+                          getDateText(schoolEvent.date!) +
                           (schoolEvent.enddate != null
-                              ? (' - ' + getDateTextShort(schoolEvent.enddate))
+                              ? (' - ' + getDateTextShort(schoolEvent.enddate!))
                               : '')),
                     ),
                     ListTile(
                       leading: Icon(
-                          eventtype_data(context)[schoolEvent.type].iconData),
+                          eventtype_data(context)[schoolEvent.type]!.iconData),
                       title:
-                          Text(eventtype_data(context)[schoolEvent.type].name),
+                          Text(eventtype_data(context)[schoolEvent.type]!.name),
                     ),
                     (schoolEvent.starttime != null ||
                             schoolEvent.endtime != null)
@@ -486,12 +487,12 @@ void showEventDetailSheet(
                         : Column(
                             children: schoolEvent.files.values
                                 .map((cloudfile) => ListTile(
-                                      title: Text(cloudfile.name),
+                                      title: Text(cloudfile!.name!),
                                       leading: Icon(Icons.attach_file),
                                       subtitle: cloudfile.url == null
                                           ? null
                                           : Text(
-                                              cloudfile.url,
+                                              cloudfile.url!,
                                               style:
                                                   TextStyle(color: Colors.blue),
                                             ),
@@ -547,7 +548,7 @@ void showEventDetailSheet(
                                                               PermissionAccessType
                                                                   .creator,
                                                           id: eventdata
-                                                              .courseid,
+                                                              .courseid!,
                                                           routname:
                                                               'schooleventid')
                                                       .then((result) {
@@ -581,7 +582,7 @@ void showEventDetailSheet(
                                                               PermissionAccessType
                                                                   .creator,
                                                           id: eventdata
-                                                              .courseid,
+                                                              .courseid!,
                                                           routname:
                                                               'schooleventid')
                                                       .then((result) {
@@ -606,7 +607,7 @@ void showEventDetailSheet(
                                             context: context,
                                             title: getString(context).delete,
                                           ).then((delete) {
-                                            if (delete) {
+                                            if (delete == true) {
                                               if (schoolEvent.private) {
                                                 plannerdatabase.dataManager
                                                     .DeleteSchoolEvent(
@@ -622,7 +623,7 @@ void showEventDetailSheet(
                                                             PermissionAccessType
                                                                 .creator,
                                                         id: schoolEvent
-                                                            .courseid,
+                                                            .courseid!,
                                                         routname:
                                                             'schooleventid')
                                                     .then((result) {
@@ -648,14 +649,13 @@ void showEventDetailSheet(
                   ),
                   FormSpace(16.0),
                 ],
-                mainAxisSize: MainAxisSize.min,
               ));
             });
       },
       routname: 'schooleventid');
 }
 
-DocumentReference identifyEventRef(
+DocumentReference? identifyEventRef(
     PlannerDatabase plannerdatabase, SchoolEvent schoolEvent) {
   if (schoolEvent.private) {
     return plannerdatabase.dataManager
@@ -664,7 +664,7 @@ DocumentReference identifyEventRef(
   } else {
     if (schoolEvent.courseid != null) {
       return plannerdatabase.dataManager
-          .getEventRefCourse(schoolEvent.courseid)
+          .getEventRefCourse(schoolEvent.courseid!)
           .doc(schoolEvent.eventid);
     } else {
       return null;

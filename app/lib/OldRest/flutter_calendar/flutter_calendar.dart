@@ -1,8 +1,8 @@
-//@dart=2.11
+//
 import 'dart:async';
 
 import 'package:schulplaner8/Data/Planner/Lesson.dart';
-import 'package:schulplaner8/Data/plannerdatabase.dart';
+import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 import 'package:schulplaner8/Helper/DateAPI.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
 import 'package:schulplaner_widgets/schulplaner_theme.dart';
@@ -14,14 +14,14 @@ import 'package:schulplaner8/OldRest/flutter_calendar/date_utils.dart';
 typedef Widget DayBuilder(BuildContext context, DateTime day);
 
 class Calendar extends StatefulWidget {
-  final ValueChanged<DateTime> onDateSelected;
-  final ValueChanged<Tuple2<DateTime, DateTime>> onSelectedRangeChange;
+  final ValueChanged<DateTime>? onDateSelected;
+  final ValueChanged<Tuple2<DateTime, DateTime>>? onSelectedRangeChange;
   final bool isExpandable;
-  final DayBuilder dayBuilder;
+  final DayBuilder? dayBuilder;
   final bool showChevronsToChangeRange;
   final bool showTodayAction;
   final bool showCalendarPickerIcon;
-  final DateTime initialCalendarDateOverride;
+  final DateTime? initialCalendarDateOverride;
 
   final PlannerDatabase database;
 
@@ -42,13 +42,13 @@ class Calendar extends StatefulWidget {
 class _CalendarState extends State<Calendar> {
   final calendarUtils = Utils();
   DateTime today = DateTime.now();
-  List<DateTime> selectedMonthsDays;
-  Iterable<DateTime> selectedWeeksDays;
-  DateTime _selectedDate;
-  Tuple2<DateTime, DateTime> selectedRange;
-  String currentMonth;
+  late List<DateTime> selectedMonthsDays;
+  late Iterable<DateTime> selectedWeeksDays;
+  late DateTime _selectedDate;
+  late Tuple2<DateTime, DateTime> selectedRange;
+  late String currentMonth;
   bool isExpanded = true;
-  String displayMonth;
+  late String displayMonth;
 
   DateTime get selectedDate => _selectedDate;
 
@@ -56,7 +56,7 @@ class _CalendarState extends State<Calendar> {
   void initState() {
     super.initState();
     if (widget.initialCalendarDateOverride != null) {
-      today = widget.initialCalendarDateOverride;
+      today = widget.initialCalendarDateOverride!;
     }
     selectedMonthsDays = Utils.daysInMonth(today);
     var firstDayOfCurrentWeek = Utils.firstDayOfWeek(today);
@@ -152,7 +152,7 @@ class _CalendarState extends State<Calendar> {
   List<Widget> calendarBuilder() {
     List<Widget> dayWidgets = [];
     List<DateTime> calendarDays =
-        isExpanded ? selectedMonthsDays : selectedWeeksDays;
+        isExpanded ? selectedMonthsDays : selectedWeeksDays.toList();
 
     getWeekDays(context).values.forEach(
       (day) {
@@ -186,7 +186,7 @@ class _CalendarState extends State<Calendar> {
               dateStyles: configureDateStyle(
                   monthStarted, monthEnded, Theme.of(context).brightness, day),
               isSelected: Utils.isSameDay(selectedDate, day),
-              indicators: widget.dayBuilder(context, day)),
+              indicators: widget.dayBuilder!(context, day)),
         );
       },
     );
@@ -333,14 +333,14 @@ class _CalendarState extends State<Calendar> {
   void updateSelectedRange(DateTime start, DateTime end) {
     selectedRange = Tuple2<DateTime, DateTime>(start, end);
     if (widget.onSelectedRangeChange != null) {
-      widget.onSelectedRangeChange(selectedRange);
+      widget.onSelectedRangeChange!(selectedRange);
     }
   }
 
   Future<Null> selectDateFromPicker() async {
-    DateTime selected = await showDatePicker(
+    DateTime? selected = await showDatePicker(
       context: context,
-      initialDate: _selectedDate ?? DateTime.now(),
+      initialDate: _selectedDate,
       firstDate: DateTime(2018),
       lastDate: DateTime(2050),
     );
@@ -414,7 +414,7 @@ class _CalendarState extends State<Calendar> {
 
   void _launchDateSelectionCallback(DateTime day) {
     if (widget.onDateSelected != null) {
-      widget.onDateSelected(day);
+      widget.onDateSelected!(day);
     }
   }
 }
@@ -424,7 +424,10 @@ class ExpansionCrossFade extends StatelessWidget {
   final Widget expanded;
   final bool isExpanded;
 
-  ExpansionCrossFade({this.collapsed, this.expanded, this.isExpanded});
+  ExpansionCrossFade(
+      {required this.collapsed,
+      required this.expanded,
+      required this.isExpanded});
 
   @override
   Widget build(BuildContext context) {

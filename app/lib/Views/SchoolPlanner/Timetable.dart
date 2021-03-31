@@ -1,7 +1,7 @@
 import 'package:bloc/bloc_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Data/Planner/Lesson.dart';
-import 'package:schulplaner8/Data/plannerdatabase.dart';
+import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 import 'package:schulplaner8/Helper/EasyWidget.dart';
 import 'package:schulplaner8/Helper/Functions.dart';
 import 'package:schulplaner8/Helper/helper_data.dart';
@@ -47,19 +47,22 @@ class TimetableView extends StatelessWidget {
       initialData: plannerDatabase.getLessons(),
       builder: (context, snapshot) {
         return DefaultTabController(
-            length: plannerDatabase.settings!.data!.getAmountWeekTypes(),
+            length: plannerDatabase.settings.data!.getAmountWeekTypes(),
             child: Scaffold(
-              appBar: plannerDatabase.settings!.data!.multiple_weektypes
+              appBar: plannerDatabase.settings.data!.multiple_weektypes
                   ? PreferredSize(
                       child: TabBar(
                         tabs: getListOfWeekTypes(
-                                context, plannerDatabase.settings.data,
-                                includealways: false)
-                            .map((WeekType weektype) {
-                          return Tab(
-                            text: weektype.name,
-                          );
-                        }).toList(),
+                          context,
+                          plannerDatabase.settings.data!,
+                          includealways: false,
+                        ).map(
+                          (WeekType weektype) {
+                            return Tab(
+                              text: weektype.name,
+                            );
+                          },
+                        ).toList(),
                         indicatorColor: getAccentColor(context),
                         labelColor: getClearTextColor(context),
                         unselectedLabelColor: getDividerColor(context),
@@ -94,14 +97,15 @@ class TimetableView extends StatelessWidget {
   List<Widget> getTimetableFragments(PlannerDatabase plannerDatabase,
       BuildContext context, Map<String, Lesson> datamap) {
     List<Widget> mlist = [];
-    PlannerSettingsData settingsData = plannerDatabase.settings!.data!;
+    PlannerSettingsData settingsData = plannerDatabase.settings.data!;
 
     TimetableFragment buildFragment(int weektype) {
       if (settingsData.timetable_timemode) {
         return TimetableFragment(
+          onTapEmpty: (_) {},
           onTapLesson: (lesson) {
             showLessonDetailSheet(context,
-                lessonid: lesson.lessonid, plannerdatabase: plannerDatabase);
+                lessonid: lesson.lessonid!, plannerdatabase: plannerDatabase);
           },
           daysOfWeek: settingsData.getAmountDaysOfWeek(),
           events: buildElements(plannerDatabase, datamap, weektype, true),
@@ -126,8 +130,11 @@ class TimetableView extends StatelessWidget {
                 context, plannerDatabase, day, lesson, weektype);
           },
           onTapLesson: (lesson) {
-            showLessonDetailSheet(context,
-                lessonid: lesson.lessonid, plannerdatabase: plannerDatabase);
+            showLessonDetailSheet(
+              context,
+              lessonid: lesson.lessonid!,
+              plannerdatabase: plannerDatabase,
+            );
           },
           daysOfWeek: settingsData.getAmountDaysOfWeek(),
           events: buildElements(plannerDatabase, datamap, weektype, false),
@@ -154,17 +161,17 @@ class TimetableView extends StatelessWidget {
   }
 
   List<TimeTableElement> buildElements(PlannerDatabase plannerDatabase,
-      Map<String, Lesson> datamap, int weektype, bool timemode) {
+      Map<String, Lesson>? datamap, int weektype, bool timemode) {
     if (datamap == null) return [];
     List<TimeTableElement> mylist = [];
     Map<int, LessonTime> lessontimes =
-        plannerDatabase.settings!.data!.lessontimes;
+        plannerDatabase.settings.data!.lessontimes;
     datamap.values.forEach((l) {
       if (l.correctWeektype(weektype)) {
         mylist.add(TimeTableElement(
           startpos: getStartPositionForFragment(l, lessontimes, timemode),
           endpos: getEndPositionForFragment(l, lessontimes, timemode),
-          course: plannerDatabase.getCourseInfo(l.courseid),
+          course: plannerDatabase.getCourseInfo(l.courseid!)!,
           lesson: l,
         ));
       }
@@ -175,34 +182,45 @@ class TimetableView extends StatelessWidget {
   List<TimeTablePeriodElement> buildPeriodElements(
       PlannerDatabase plannerDatabase, bool timemode) {
     List<TimeTablePeriodElement> mylist = [];
-    PlannerSettingsData settingsData = plannerDatabase.settings!.data!;
+    PlannerSettingsData settingsData = plannerDatabase.settings.data!;
     Map<int, LessonTime> lessontimes = settingsData.lessontimes;
     if (timemode) {
       lessontimes.values.forEach((l) {
-        mylist.add(TimeTablePeriodElement(
+        mylist.add(
+          TimeTablePeriodElement(
             startpos: getPositionForTimeString(l.start),
             endpos: getPositionForTimeString(l.end),
-            lessonTime: l));
+            lessonTime: l,
+          ),
+        );
       });
     } else {
       buildIntList(settingsData.maxlessons,
               start: settingsData.zero_lesson ? 0 : 1)
-          .forEach((period) {
-        mylist.add(TimeTablePeriodElement(
-            startpos: period.toDouble(),
-            endpos: (period + 1).toDouble(),
-            period: period));
-      });
+          .forEach(
+        (period) {
+          mylist.add(
+            TimeTablePeriodElement(
+              startpos: period.toDouble(),
+              endpos: (period + 1).toDouble(),
+              period: period,
+            ),
+          );
+        },
+      );
     }
 
     return mylist;
   }
 
   double getStartPositionForFragment(
-      Lesson lesson, Map<int, LessonTime> lessontimes, bool timemode) {
+    Lesson lesson,
+    Map<int, LessonTime> lessontimes,
+    bool timemode,
+  ) {
     if (timemode) {
       var split_start = (lesson.overridentime != null
-              ? lesson.overridentime.start
+              ? lesson.overridentime!.start!
               : (lessontimes[lesson.start]?.start ?? '8:00'))
           .split(':');
       double inhours_start =
@@ -224,7 +242,7 @@ class TimetableView extends StatelessWidget {
       Lesson lesson, Map<int, LessonTime> lessontimes, bool timemode) {
     if (timemode) {
       var split_end = (lesson.overridentime != null
-              ? lesson.overridentime.end
+              ? lesson.overridentime!.end!
               : (lessontimes[lesson.end]?.end ?? '9:00'))
           .split(':');
       double inhours_end =
@@ -257,9 +275,9 @@ String getLessonTitle(BuildContext context, Lesson lesson) {
 String getLessonPeriodString(
     BuildContext context, Lesson lesson, PlannerDatabase database) {
   if (lesson.overridentime != null) {
-    return lesson.overridentime.start + ':' + lesson.overridentime.end;
+    return lesson.overridentime!.start! + ':' + lesson.overridentime!.end!;
   }
-  Map<int, LessonTime>? lessontimes = database.settings!.data!.lessontimes;
+  Map<int, LessonTime>? lessontimes = database.settings.data!.lessontimes;
   String? start_first = lessontimes[lesson.start]?.start;
   String? end_last = lessontimes[lesson.end]?.end;
   return (start_first ?? '?') + '-' + (end_last ?? '?');
@@ -272,13 +290,13 @@ void showLessonDetailSheet(BuildContext context,
   showDetailSheetBuilder(
       context: context,
       body: (context) {
-        return StreamBuilder<Lesson>(
+        return StreamBuilder<Lesson?>(
             stream: plannerdatabase.getLessonStream(lessonid),
             builder: (context, snapshot) {
               Lesson? lesson = snapshot.data;
               if (lesson == null) return loadedView();
               final Course? courseInfo =
-                  plannerdatabase.getCourseInfo(lesson.courseid);
+                  plannerdatabase.getCourseInfo(lesson.courseid!);
               return Expanded(
                   child: Column(
                 children: <Widget>[
@@ -340,9 +358,11 @@ void showLessonDetailSheet(BuildContext context,
                                                 (mInfo.place?.name ?? '-'))
                                             : nowidget(),
                                         mInfo.note != null
-                                            ? Text(getString(context).note +
-                                                ': ' +
-                                                mInfo.note)
+                                            ? Text(
+                                                getString(context).note +
+                                                    ': ' +
+                                                    mInfo.note!,
+                                              )
                                             : nowidget()
                                       ],
                                       mainAxisSize: MainAxisSize.min,
@@ -466,7 +486,7 @@ void showLessonDetailSheet(BuildContext context,
                                                       category:
                                                           PermissionAccessType
                                                               .creator,
-                                                      id: lesson.courseid,
+                                                      id: lesson.courseid!,
                                                       routname: 'lessonid')
                                                   .then((result) {
                                                 if (result == true) {

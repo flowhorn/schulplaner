@@ -7,6 +7,7 @@ import 'package:schulplaner8/models/user.dart';
 import 'package:schulplaner8/pages/MyProfilePage.dart';
 import 'package:schulplaner8/profile/user_image_view.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
+import 'package:schulplaner_widgets/schulplaner_theme.dart';
 
 class MyProfile extends StatelessWidget {
   MyProfile();
@@ -30,16 +31,17 @@ class MyProfile extends StatelessWidget {
                 centerTitle: true,
                 elevation: 2.0,
                 actions: <Widget>[
-                  FlatButton(
+                  TextButton(
                     child: Text(getString(context).edit.toUpperCase()),
                     onPressed: () {
                       pushWidget(
                           context,
                           EditProfileView(
-                            userDatabase: userDatabaseBloc.userDatabase,
+                            userDatabase: userDatabaseBloc.userDatabase!,
                           ));
                     },
-                    textTheme: ButtonTextTheme.accent,
+                    style:
+                        TextButton.styleFrom(primary: getAccentColor(context)),
                   ),
                 ],
                 bottom: PreferredSize(

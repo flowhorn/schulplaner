@@ -1,4 +1,4 @@
-//@dart=2.11
+//
 import 'dart:math';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
@@ -38,7 +38,12 @@ class TimeTableElement {
   Lesson lesson;
   Course course;
 
-  TimeTableElement({this.startpos, this.endpos, this.lesson, this.course});
+  TimeTableElement({
+    required this.startpos,
+    required this.endpos,
+    required this.lesson,
+    required this.course,
+  });
 
   double get duration {
     return endpos - startpos;
@@ -47,11 +52,15 @@ class TimeTableElement {
 
 class TimeTablePeriodElement {
   double startpos, endpos;
-  LessonTime lessonTime;
-  int period;
+  LessonTime? lessonTime;
+  int? period;
 
-  TimeTablePeriodElement(
-      {this.startpos, this.endpos, this.lessonTime, this.period});
+  TimeTablePeriodElement({
+    required this.startpos,
+    required this.endpos,
+    this.lessonTime,
+    this.period,
+  });
 
   double get duration {
     return endpos - startpos;
@@ -60,7 +69,7 @@ class TimeTablePeriodElement {
 
 class Weekview_LeftPanel_Lesson extends StatelessWidget {
   final int period;
-  final double hourHeight;
+  final double? hourHeight;
 
   Weekview_LeftPanel_Lesson(this.period, {this.hourHeight});
 
@@ -82,15 +91,15 @@ class Weekview_LeftPanel_Lesson extends StatelessWidget {
         ),
         height: hourHeight,
         decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey[600], width: 0.2)),
+            border: Border.all(color: Colors.grey[600]!, width: 0.2)),
       ),
     );
   }
 }
 
 class Weekview_LeftPanel_LessonTime extends StatelessWidget {
-  final LessonTime lessonTime;
-  final double hourHeight;
+  final LessonTime? lessonTime;
+  final double? hourHeight;
 
   Weekview_LeftPanel_LessonTime(this.lessonTime, {this.hourHeight});
 
@@ -106,7 +115,7 @@ class Weekview_LeftPanel_LessonTime extends StatelessWidget {
         child: Align(
           alignment: Alignment.center,
           child: Text(
-            lessonTime.start + '\n-\n' + lessonTime.end,
+            lessonTime!.start! + '\n-\n' + lessonTime!.end!,
             textAlign: TextAlign.center,
             style: TextStyle(
               fontWeight: FontWeight.w300,
@@ -115,7 +124,7 @@ class Weekview_LeftPanel_LessonTime extends StatelessWidget {
         ),
         height: hourHeight,
         decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey[600], width: 0.2)),
+            border: Border.all(color: Colors.grey[600]!, width: 0.2)),
       ),
     );
   }
@@ -130,7 +139,7 @@ class WeekView_LessonView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color color = course.getDesign().primary;
+    final color = course.getDesign()!.primary;
     return Container(
       margin: EdgeInsets.only(left: 1.5, right: 1.5, top: 1.5, bottom: 1.5),
       child: Material(
@@ -161,7 +170,7 @@ class WeekView_LessonView extends StatelessWidget {
                   item.place?.name ?? course.getPlaceFirst() ?? '-',
                   maxLines: 1,
                   style: TextStyle(
-                      color: getTextColor(course.getDesign().primary),
+                      color: getTextColor(course.getDesign()!.primary),
                       fontSize: 12.0,
                       fontWeight: FontWeight.w300),
                   textAlign:
@@ -204,13 +213,13 @@ class TimetableFragment extends StatelessWidget {
   const TimetableFragment(
       {this.starttime_calendar = 0,
       this.endtime_calendar = 24,
-      this.events,
-      this.haszerolesson,
-      this.onTapEmpty,
-      this.periods,
-      this.onTapLesson,
-      this.timemode,
-      this.daysOfWeek,
+      required this.events,
+      required this.haszerolesson,
+      required this.onTapEmpty,
+      required this.periods,
+      required this.onTapLesson,
+      required this.timemode,
+      required this.daysOfWeek,
       this.lessonheight = 60.0});
 
   @override
@@ -239,63 +248,68 @@ class TimetableFragment extends StatelessWidget {
                         height: lessonheight * period.duration,
                         child: timemode
                             ? Weekview_LeftPanel_LessonTime(period.lessonTime)
-                            : Weekview_LeftPanel_Lesson(period.period),
+                            : Weekview_LeftPanel_Lesson(period.period!),
                       );
                     }).toList(),
                   ),
                 ),
-                ...List.generate(daysOfWeek, (d) {
-                  return Expanded(
-                    child: Stack(
-                      children: List.generate(
+                ...List.generate(
+                  daysOfWeek,
+                  (d) {
+                    return Expanded(
+                      child: Stack(
+                        children: List.generate(
                           (((endtime_calendar) - starttime_calendar)
-                                  .toInt()
-                                  ?.abs() ??
-                              12),
+                              .toInt()
+                              .abs()),
                           (x) => Positioned(
-                                left: 0.0,
-                                top: lessonheight * x,
-                                right: 0.0,
-                                height: lessonheight,
-                                child: InkWell(
-                                  child: Container(
-                                    decoration: show_grid(context)
-                                        ? BoxDecoration(
-                                            border: Border.all(
-                                                color: getDividerColor(context),
-                                                width: 0.1))
-                                        : null,
-                                  ),
-                                  onTap: timemode
-                                      ? null
-                                      : () {
-                                          onTapEmpty(TwoObjects(
-                                              item: (d + 1),
-                                              item2:
-                                                  haszerolesson ? x : (x + 1)));
-                                        },
-                                ),
-                              ))
-                        ..addAll(events
-                            .where((t) => t.lesson.day == (d + 1))
-                            .map((t) {
-                          double topposition =
-                              lessonheight * (t.startpos - starttime_calendar);
-                          return Positioned(
                             left: 0.0,
-                            top: topposition <= 0 ? 0 : topposition,
+                            top: lessonheight * x,
                             right: 0.0,
-                            height: topposition <= 0
-                                ? (lessonheight * t.duration + topposition)
-                                : (lessonheight * t.duration),
-                            child: WeekView_LessonView(t.lesson, t.course, () {
-                              onTapLesson(t.lesson);
-                            }),
-                          );
-                        })),
-                    ),
-                  );
-                }),
+                            height: lessonheight,
+                            child: InkWell(
+                              onTap: timemode
+                                  ? null
+                                  : () {
+                                      onTapEmpty(TwoObjects(
+                                          item: (d + 1),
+                                          item2: haszerolesson ? x : (x + 1)));
+                                    },
+                              child: Container(
+                                decoration: show_grid(context)
+                                    ? BoxDecoration(
+                                        border: Border.all(
+                                            color: getDividerColor(context),
+                                            width: 0.1))
+                                    : null,
+                              ),
+                            ),
+                          ),
+                        )..addAll(
+                            events.where((t) => t.lesson.day == (d + 1)).map(
+                              (t) {
+                                double topposition = lessonheight *
+                                    (t.startpos - starttime_calendar);
+                                return Positioned(
+                                  left: 0.0,
+                                  top: topposition <= 0 ? 0 : topposition,
+                                  right: 0.0,
+                                  height: topposition <= 0
+                                      ? (lessonheight * t.duration +
+                                          topposition)
+                                      : (lessonheight * t.duration),
+                                  child: WeekView_LessonView(t.lesson, t.course,
+                                      () {
+                                    onTapLesson(t.lesson);
+                                  }),
+                                );
+                              },
+                            ),
+                          ),
+                      ),
+                    );
+                  },
+                ),
               ],
             ),
           ),

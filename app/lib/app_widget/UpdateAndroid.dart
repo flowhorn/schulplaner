@@ -2,7 +2,7 @@ import 'package:schulplaner8/app_base/src/blocs/app_settings_bloc.dart';
 import 'package:schulplaner8/models/lesson_time.dart';
 import 'package:schulplaner_widgets/schulplaner_theme.dart';
 import 'package:schulplaner8/Data/Planner/Lesson.dart';
-import 'package:schulplaner8/Data/plannerdatabase.dart';
+import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 import 'package:schulplaner8/groups/src/models/course.dart';
 import 'package:schulplaner8/groups/src/models/teacher.dart';
 
@@ -73,7 +73,7 @@ class UpdateData {
           accent: appSettingsData.accent,
         ).toWidgetJson()
           ..addAll({
-            'darkmode': appSettingsData.appwidgetsettings.darkmode ?? false,
+            'darkmode': appSettingsData.appwidgetsettings.darkmode,
             'autodark': false,
           }),
         maxlesson: database.getSettings().maxlessons,

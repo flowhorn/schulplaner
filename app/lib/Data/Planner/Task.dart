@@ -1,10 +1,9 @@
-//@dart = 2.11
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:schulplaner8/Data/Planner/File.dart';
 
 class TaskFinished {
-  Timestamp timestamp;
-  bool finished;
+  late Timestamp? timestamp;
+  late bool? finished;
 
   TaskFinished({this.timestamp, this.finished});
 
@@ -26,24 +25,27 @@ class TaskFinished {
 }
 
 class SchoolTask {
-  String taskid, title, due, courseid, classid, creatorid;
-  String detail;
-  bool archived, private;
-  Map<String, CloudFile> files;
-  Map<String, TaskFinished> finished;
+  late String title;
+  late String? taskid;
+  late String? due, courseid, classid, creatorid;
+  late String detail;
+  late bool archived, private;
+  late Map<String, CloudFile?> files;
+  late Map<String, TaskFinished> finished;
 
-  SchoolTask(
-      {this.taskid,
-      this.title,
-      this.due,
-      this.classid,
-      this.courseid,
-      this.detail,
-      this.archived = false,
-      this.private = false,
-      this.files,
-      this.finished,
-      this.creatorid});
+  SchoolTask({
+    this.taskid,
+    required this.title,
+    this.due,
+    this.classid,
+    this.courseid,
+    required this.detail,
+    this.archived = false,
+    this.private = false,
+    required this.files,
+    required this.finished,
+    this.creatorid,
+  });
 
   SchoolTask.fromData(Map<String, dynamic> data) {
     taskid = data['taskid'];
@@ -111,7 +113,7 @@ class SchoolTask {
       'courseid': courseid,
       'creatorid': creatorid,
       'detail': detail,
-      'files': files?.map((key, value) => MapEntry(key, value?.toJson())),
+      'files': files.map((key, value) => MapEntry(key, value?.toJson())),
       'archived': archived,
       'private': private,
     };
@@ -126,7 +128,7 @@ class SchoolTask {
       courseid: courseid,
       detail: detail,
       archived: archived,
-      files: files != null ? Map.of(files) : null,
+      files: Map.of(files),
       finished: finished,
       creatorid: creatorid,
     );

@@ -34,23 +34,23 @@ service cloud.firestore {
       }
       match /grades/{document=**} {
         allow read: if isCourseMember(courseID); 
-        allow write:if isCourseMemberAndIsCreator(courseID);
+        allow write:if isCourseMember(courseID);
       }
       match /tasks/{document=**} {
         allow read: if isCourseMember(courseID); 
-        allow write:if isCourseMemberAndIsCreator(courseID);
+        allow write:if isCourseMember(courseID);
       }
       match /events/{document=**} {
         allow read: if isCourseMember(courseID); 
-        allow write:if isCourseMemberAndIsCreator(courseID);
+        allow write:if isCourseMember(courseID);
       }
       match /letter/{document=**} {
         allow read: if isCourseMember(courseID); 
-        allow write:if isCourseMemberAndIsCreator(courseID);
+        allow write:if isCourseMember(courseID);
       }
       match /lessoninfos/{document=**} {
         allow read: if isCourseMember(courseID); 
-        allow write:if isCourseMemberAndIsCreator(courseID);
+        allow write:if isCourseMember(courseID);
       }
     }
 
@@ -62,15 +62,15 @@ service cloud.firestore {
 
       match /events/{document=**} {
         allow read: if isSchoolClassMember(schoolClassID);
-        allow write: if isSchoolClassMemberAndIsCreator(schoolClassID);
+        allow write: if isCourseMember(schoolClassID);
       }
       match /letter/{document=**} {
         allow read: if isSchoolClassMember(schoolClassID);
-        allow write: if isSchoolClassMemberAndIsCreator(schoolClassID);
+        allow write: if isCourseMember(schoolClassID);
       }
       match /tasks/{document=**} {
         allow read: if isSchoolClassMember(schoolClassID);
-        allow write: if isSchoolClassMemberAndIsCreator(schoolClassID);
+        allow write: if isCourseMember(schoolClassID);
       }
     }
 
@@ -99,6 +99,12 @@ service cloud.firestore {
       allow read: if isLoggedIn();
     }
 
+    // ExportUserDataRequests
+    match /ExportUserDataRequests/{document=**} {
+      allow create: if isLoggedIn() && request.resource.data.userId == currentUID();
+      allow  read: if isLoggedIn() && resource.data.userId == currentUID();
+    }
+
     //Functions
 
     function isOwnerAdminOrCreator(role) {
@@ -109,7 +115,7 @@ service cloud.firestore {
       let courseData = getDataFromDocument('courses', courseId);
       let isGroupVersionV3 = 'groupVersion' in courseData ? (courseData['groupVersion'] == 'v3') : false;
       let userRolesArray = (courseData != null ? 'userRoles' in courseData : false) == true ? courseData['userRoles'] : null;
-      let userRole = userRolesArray == null ? null : (currentUID() in userRolesArray ? userRolesArray[currentUID()] : null);
+      let userRole = (userRolesArray == null|| userRolesArray == {}) ? null : (currentUID() in userRolesArray ? userRolesArray[currentUID()] : null);
       return  isGroupVersionV3 == true ? vcheckIsCourseMember(courseData, userRole) : isLoggedIn();
     }
 
@@ -117,7 +123,7 @@ service cloud.firestore {
       let courseData = getDataFromDocument('courses', courseId);
       let isGroupVersionV3 = 'groupVersion' in courseData ? (courseData['groupVersion'] == 'v3') : false;
       let userRolesArray = (courseData != null ? 'userRoles' in courseData : false) == true ? courseData['userRoles'] : null;
-      let userRole = userRolesArray == null ? null :(currentUID() in userRolesArray ? userRolesArray[currentUID()] : null);
+      let userRole = (userRolesArray == null|| userRolesArray == {}) ? null :(currentUID() in userRolesArray ? userRolesArray[currentUID()] : null);
       return isGroupVersionV3 == true ?  vcheckIsCourseMemberAndIsCreator(courseData, userRole) : isLoggedIn();
     }
 
@@ -131,21 +137,21 @@ service cloud.firestore {
 
     function isCourseMemberInConnectedSchoolClass(courseData) {
       let class1 = 'class1' in courseData ? courseData['class1'] : null;
-      let class2 = 'class2' in courseData == true ? courseData['class2'] : null;
-      let class3 = 'class3' in courseData == true ? courseData['class3'] : null;
+      let class2 = 'class2' in courseData ? courseData['class2'] : null;
+      let class3 = 'class3' in courseData ? courseData['class3'] : null;
       let memberInClass1 = class1 != null ? isSchoolClassMember(class1) : false;
-      let memberInClass2 = memberInClass1 == true ? (class2 != null ? isSchoolClassMember(class2) : false) : false;
-      let memberInClass3 = (memberInClass1 == true || memberInClass2 == true) ? (class3 != null ? isSchoolClassMember(class3) : false): false;
+      let memberInClass2 = memberInClass1 == false ? (class2 != null ? isSchoolClassMember(class2) : false) : false;
+      let memberInClass3 = (memberInClass1 == false && memberInClass2 == false) ? (class3 != null ? isSchoolClassMember(class3) : false): false;
       return memberInClass1 ? true : (memberInClass2 ? true : memberInClass3 ? true : false);
     }
 
     function isCourseMemberAndIsCreatorInConnectedSchoolClass(courseData){
       let class1 = 'class1' in courseData ? courseData['class1'] : null;
-      let class2 = 'class2' in courseData == true ? courseData['class2'] : null;
-      let class3 = 'class3' in courseData == true ? courseData['class3'] : null;
+      let class2 = 'class2' in courseData ? courseData['class2'] : null;
+      let class3 = 'class3' in courseData ? courseData['class3'] : null;
       let memberInClass1 = class1 != null ? isSchoolClassMemberAndIsCreator(class1) : false;
-      let memberInClass2 = memberInClass1 == true ? (class2 != null ? isSchoolClassMemberAndIsCreator(class2) : false) : false;
-      let memberInClass3 = (memberInClass1 == true || memberInClass2 == true) ? (class3 != null ? isSchoolClassMemberAndIsCreator(class3) : false): false;
+      let memberInClass2 = memberInClass1 == false ? (class2 != null ? isSchoolClassMemberAndIsCreator(class2) : false) : false;
+      let memberInClass3 = (memberInClass1 == false && memberInClass2 == false) ? (class3 != null ? isSchoolClassMemberAndIsCreator(class3) : false): false;
       return memberInClass1 ? true : (memberInClass2 ? true : memberInClass3 ? true : false);
     }
 
@@ -154,7 +160,7 @@ service cloud.firestore {
       let schoolClassData = getDataFromDocument('schoolclasses', schoolClassId);
       let isGroupVersionV3 = 'groupVersion' in schoolClassData ? (schoolClassData['groupVersion'] == 'v3') : false;
       let userRolesArray = (schoolClassData != null ? 'userRoles' in schoolClassData : false) == true ? schoolClassData['userRoles'] : null;
-      let userRole = userRolesArray == null ? null : (currentUID() in userRolesArray ? userRolesArray[currentUID()] : null);
+      let userRole = (userRolesArray == null || userRolesArray == {})? null : (currentUID() in userRolesArray ? userRolesArray[currentUID()] : null);
       return isGroupVersionV3 == true ? 
       (userRolesArray == null ? isLoggedIn() : (userRole != null)) : isLoggedIn();
     }
@@ -163,7 +169,7 @@ service cloud.firestore {
       let schoolClassData = getDataFromDocument('schoolclasses', schoolClassId);
       let isGroupVersionV3 = 'groupVersion' in schoolClassData ? (schoolClassData['groupVersion'] == 'v3') : false;
       let userRolesArray = (schoolClassData != null ? 'userRoles' in schoolClassData : false) == true ? schoolClassData['userRoles'] : null;
-      let userRole = userRolesArray == null ? null : (currentUID() in userRolesArray ? userRolesArray[currentUID()] : null);
+      let userRole = (userRolesArray == null || userRolesArray == {}) ? null : (currentUID() in userRolesArray ? userRolesArray[currentUID()] : null);
       return isGroupVersionV3 == true ? 
       (userRolesArray == null ? isLoggedIn() : isOwnerAdminOrCreator(userRole)) : isLoggedIn();
     }

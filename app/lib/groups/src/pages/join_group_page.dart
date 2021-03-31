@@ -1,7 +1,5 @@
-// @dart=2.11
 import 'package:bloc/bloc_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:schulplaner8/Data/Planner/PublicCode.dart';
 import 'package:schulplaner8/Helper/MyCloudFunctions.dart';
 import 'package:schulplaner8/Helper/helper_data.dart';
 import 'package:schulplaner8/Helper/helper_views.dart';
@@ -17,8 +15,8 @@ import 'package:schulplaner_widgets/schulplaner_common.dart';
 import 'package:schulplaner_widgets/schulplaner_forms.dart';
 
 Future<void> openGroupJoinPage({
-  @required BuildContext context,
-  String initialCode,
+  required BuildContext context,
+  String? initialCode,
 }) async {
   return openGroupJoinPageByNavigationBloc(
     navigationBloc: NavigationBloc.of(context),
@@ -27,8 +25,8 @@ Future<void> openGroupJoinPage({
 }
 
 Future<void> openGroupJoinPageByNavigationBloc({
-  @required NavigationBloc navigationBloc,
-  String initialCode,
+  required NavigationBloc navigationBloc,
+  String? initialCode,
 }) async {
   final joinGroupBloc = JoinGroupBloc(initialCode: initialCode);
   await navigationBloc.openSubPage(
@@ -140,7 +138,7 @@ class _Result extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final joinGroupBloc = BlocProvider.of<JoinGroupBloc>(context);
-    return StreamBuilder<PublicCode>(
+    return StreamBuilder<PublicCode?>(
       stream: joinGroupBloc.publicCodeResult,
       builder: (context, snapshot) {
         final codeValue = snapshot.data;
@@ -149,8 +147,7 @@ class _Result extends StatelessWidget {
           children: <Widget>[
             Text(
               codeValue == null
-                  ? '${getString(context).noresultfor} #' +
-                      (enteredCodeValue ?? '??????')
+                  ? '${getString(context).noresultfor} #' + (enteredCodeValue)
                   : ('${getString(context).resultfor} #' + enteredCodeValue),
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 20.0),
@@ -171,7 +168,7 @@ class _Result extends StatelessWidget {
 class _CodeValueBuilder extends StatelessWidget {
   final PublicCode codeValue;
 
-  const _CodeValueBuilder({Key key, @required this.codeValue})
+  const _CodeValueBuilder({Key? key, required this.codeValue})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -188,17 +185,22 @@ class _CodeValueBuilder extends StatelessWidget {
 
 class _Course extends StatelessWidget {
   final PublicCode codeValue;
-  const _Course({Key key, this.codeValue}) : super(key: key);
+  const _Course({
+    Key? key,
+    required this.codeValue,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final database = PlannerDatabaseBloc.getDatabase(context);
-    return FutureBuilder<Course>(
+    return FutureBuilder<Course?>(
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           if (snapshot.data == null) {
             return Icon(Icons.error);
           }
           final courseInfo = snapshot.data;
+          if (courseInfo == null) return Container();
           return FormSection(
             child: Column(
               children: <Widget>[
@@ -206,7 +208,7 @@ class _Course extends StatelessWidget {
                   leading: ColoredCircleText(
                       text: toShortNameLength(
                           context, courseInfo.getShortname_full()),
-                      color: courseInfo.getDesign().primary,
+                      color: courseInfo.getDesign()?.primary,
                       radius: 22.0),
                   title: Text(courseInfo.name),
                   subtitle: Column(
@@ -231,7 +233,7 @@ class _Course extends StatelessWidget {
                         return CircularProgressIndicator();
                       }
                       final isAlreadyInCourse =
-                          snapshot.data.containsKey(courseInfo.id);
+                          snapshot.data?.containsKey(courseInfo.id) ?? false;
 
                       return isAlreadyInCourse
                           ? RButton(
@@ -253,14 +255,13 @@ class _Course extends StatelessWidget {
                 ),
                 ListTile(
                   leading: Icon(Icons.people),
-                  title: Text(
-                      (courseInfo?.membersData?.length?.toString() ?? '?') +
-                          ' ${getString(context).members}'),
+                  title: Text((courseInfo.membersData.length.toString()) +
+                      ' ${getString(context).members}'),
                 ),
                 ListTile(
                   leading: Icon(Icons.short_text),
                   title: Text(getString(context).description),
-                  subtitle: Text(courseInfo?.description ?? '-'),
+                  subtitle: Text(courseInfo.description ?? '-'),
                 )
               ],
             ),
@@ -282,7 +283,7 @@ class _Course extends StatelessWidget {
       ));
       return;
     }
-    final sheet_notifier = ValueNotifier<bool>(null);
+    final sheet_notifier = ValueNotifier<bool?>(null);
     showLoadingStateSheet(context: context, sheetUpdate: sheet_notifier);
     final schulPlanerFunctions = SchulplanerFunctionsBloc.of(context);
     final joinGroupResult = await schulPlanerFunctions.joinGroup(
@@ -296,17 +297,20 @@ class _Course extends StatelessWidget {
 
 class _SchoolClass extends StatelessWidget {
   final PublicCode codeValue;
-  const _SchoolClass({Key key, this.codeValue}) : super(key: key);
+  const _SchoolClass({Key? key, required this.codeValue}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final database = PlannerDatabaseBloc.getDatabase(context);
-    return FutureBuilder<SchoolClass>(
+    return FutureBuilder<SchoolClass?>(
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           if (snapshot.data == null) {
             return Icon(Icons.error);
           }
           final info = snapshot.data;
+          if (info == null) {
+            return Icon(Icons.error);
+          }
           return FormSection(
             child: Column(
               children: <Widget>[
@@ -345,12 +349,12 @@ class _SchoolClass extends StatelessWidget {
                 ),
                 ListTile(
                   leading: Icon(Icons.people),
-                  title: Text((info?.membersData?.length?.toString() ?? '?') +
+                  title: Text((info.membersData.length.toString()) +
                       ' ${getString(context).members}'),
                 ),
                 ListTile(
                   leading: Icon(Icons.widgets),
-                  title: Text((info?.courses?.length?.toString() ?? '?') +
+                  title: Text((info.courses.length.toString()) +
                       ' ${getString(context).courses}'),
                 ),
                 ListTile(
@@ -358,7 +362,7 @@ class _SchoolClass extends StatelessWidget {
                   title: Text(
                     getString(context).description,
                   ),
-                  subtitle: Text(info?.description ?? '-'),
+                  subtitle: Text(info.description ?? '-'),
                 )
               ],
             ),
@@ -382,7 +386,7 @@ class _SchoolClass extends StatelessWidget {
       return;
     }
 
-    final sheet_notifier = ValueNotifier<bool>(null);
+    final sheet_notifier = ValueNotifier<bool?>(null);
     showLoadingStateSheet(context: context, sheetUpdate: sheet_notifier);
     final schulPlanerFunctions = SchulplanerFunctionsBloc.of(context);
     final joinGroupResult = await schulPlanerFunctions.joinGroup(

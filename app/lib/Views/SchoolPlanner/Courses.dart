@@ -1,19 +1,18 @@
-//@dart=2.11
+//
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:community_material_icon/community_material_icon.dart';
-import 'package:diff_match_patch/diff_match_patch.dart';
 import 'package:flutter/material.dart';
-import 'package:schulplaner8/Data/Objects.dart';
 import 'package:schulplaner8/Data/Planner/CourseTemplates.dart';
+import 'package:schulplaner8/Data/planner_database/planner_connections.dart';
+import 'package:schulplaner8/Data/planner_database/planner_connections_state.dart';
 import 'package:schulplaner8/grades/pages/edit_grade_page.dart';
-
 import 'package:schulplaner8/groups/src/bloc/edit_course_bloc.dart';
 import 'package:schulplaner8/groups/src/gateway/course_gateway.dart';
 import 'package:schulplaner8/groups/src/pages/edit_course_page.dart';
 import 'package:schulplaner8/groups/src/pages/join_group_page.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
 import 'package:schulplaner_widgets/schulplaner_theme.dart';
-import 'package:schulplaner8/Data/plannerdatabase.dart';
+import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 import 'package:schulplaner8/Helper/EasyWidget.dart';
 import 'package:schulplaner8/Helper/Functions.dart';
 import 'package:schulplaner8/Helper/MyCloudFunctions.dart';
@@ -77,19 +76,19 @@ void showNewCourseSheet(BuildContext context, PlannerDatabase database) {
 }
 
 void showCourseMoreSheet(BuildContext context,
-    {@required String courseid, @required PlannerDatabase plannerdatabase}) {
+    {required String courseid, required PlannerDatabase plannerdatabase}) {
   showDetailSheetBuilder(
       context: context,
       body: (context) {
-        return StreamBuilder<Course>(
+        return StreamBuilder<Course?>(
             initialData: plannerdatabase.getCourseInfo(courseid),
             stream: plannerdatabase.courseinfo.getItemStream(courseid),
             builder: (context, snapshot) {
-              Course courseInfo = snapshot.data;
+              Course? courseInfo = snapshot.data;
               if (courseInfo == null) return loadedView();
               return Column(
                 children: <Widget>[
-                  getSheetText(context, courseInfo.getName() ?? '-'),
+                  getSheetText(context, courseInfo.getName()),
                   SingleChildScrollView(
                     child: Column(children: [
                       ListTile(
@@ -117,9 +116,9 @@ void showCourseMoreSheet(BuildContext context,
                             )
                           : nowidget(),
                       FormSpace(16.0),
-                      StreamBuilder<PlannerConnections>(
+                      StreamBuilder<PlannerConnections?>(
                         builder: (context, snapshot) {
-                          PlannerConnections connectionsdata = snapshot.data;
+                          PlannerConnections? connectionsdata = snapshot.data;
                           if (connectionsdata == null) {
                             return CircularProgressIndicator();
                           }
@@ -180,7 +179,7 @@ void showCourseMoreSheet(BuildContext context,
 class QuickCreateCourseView extends StatelessWidget {
   final PlannerDatabase database;
   final String courseid;
-  QuickCreateCourseView({@required this.database, @required this.courseid});
+  QuickCreateCourseView({required this.database, required this.courseid});
 
   @override
   Widget build(BuildContext context) {
@@ -257,58 +256,59 @@ class QuickCreateCourseView extends StatelessWidget {
 class CourseSecurityView extends StatelessWidget {
   final String courseid;
   final PlannerDatabase database;
-  CourseSecurityView({@required this.courseid, @required this.database});
+  CourseSecurityView({required this.courseid, required this.database});
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<Course>(
+    return StreamBuilder<Course?>(
       builder: (context, snapshot) {
-        Course courseInfo = snapshot.data;
+        Course? courseInfo = snapshot.data;
         if (courseInfo == null) {
           return Center(
             child: CircularProgressIndicator(),
           );
         }
-        Design courseDesign = courseInfo?.getDesign();
+        Design? courseDesign = courseInfo.getDesign();
         return Theme(
-            data: newAppThemeDesign(context, courseDesign),
-            child: Scaffold(
-              appBar: MyAppHeader(
-                  title: getString(context).security +
-                      ' ' +
-                      getString(context).in_ +
-                      ' ' +
-                      courseInfo.getName()),
-              body: getDefaultList([
-                SwitchListTile(
-                  value: courseInfo.settings.isPublic,
-                  title: Text(bothlang(context,
-                      de: 'Öffentliches Fach', en: 'Public course')),
-                  onChanged: (newvalue) {
-                    ValueNotifier<bool> notifier =
-                        showPermissionStateSheet(context: context);
-                    requestPermissionCourse(
-                            database: database,
-                            category: PermissionAccessType.settings,
-                            courseid: courseid)
-                        .then((result) {
-                      notifier.value = result;
-                      if (result == true) {
-                        database.dataManager.getCourseInfo(courseid).set(
-                          {
-                            'settings': {
-                              'isPublic': newvalue,
-                            }
-                          },
-                          SetOptions(
-                            merge: true,
-                          ),
-                        );
-                      }
-                    });
-                  },
-                ),
-              ]),
-            ));
+          data: newAppThemeDesign(context, courseDesign),
+          child: Scaffold(
+            appBar: MyAppHeader(
+                title: getString(context).security +
+                    ' ' +
+                    getString(context).in_ +
+                    ' ' +
+                    courseInfo.getName()),
+            body: getDefaultList([
+              SwitchListTile(
+                value: courseInfo.settings.isPublic,
+                title: Text(bothlang(context,
+                    de: 'Öffentliches Fach', en: 'Public course')),
+                onChanged: (newvalue) {
+                  ValueNotifier<bool?> notifier =
+                      showPermissionStateSheet(context: context);
+                  requestPermissionCourse(
+                          database: database,
+                          category: PermissionAccessType.settings,
+                          courseid: courseid)
+                      .then((result) {
+                    notifier.value = result;
+                    if (result == true) {
+                      database.dataManager.getCourseInfo(courseid).set(
+                        {
+                          'settings': {
+                            'isPublic': newvalue,
+                          }
+                        },
+                        SetOptions(
+                          merge: true,
+                        ),
+                      );
+                    }
+                  });
+                },
+              ),
+            ]),
+          ),
+        );
       },
       stream: database.courseinfo.getItemStream(courseid),
     );
@@ -319,7 +319,7 @@ class CourseTemplatesView extends StatelessWidget {
   final List<dynamic> templates = getTemplateList_DE();
   final PlannerDatabase database;
 
-  CourseTemplatesView({@required this.database});
+  CourseTemplatesView({required this.database});
 
   @override
   Widget build(BuildContext context) {
@@ -328,12 +328,12 @@ class CourseTemplatesView extends StatelessWidget {
       body: StreamBuilder<Map<String, Course>>(
           stream: database.courseinfo.stream,
           builder: (context, snapshot) {
-            List<Course> allmycourses = snapshot.data?.values?.toList() ?? [];
+            List<Course> allmycourses = snapshot.data?.values.toList() ?? [];
             return ListView.separated(
               itemBuilder: (context, index) {
                 dynamic item = templates[index];
                 if (item is CourseTemplate) {
-                  bool enabledtemplate = !isAlreadyaCourse(item, allmycourses);
+                  bool enabledtemplate = !item.isAlreadyaCourse(allmycourses);
                   return ListTile(
                     leading: ColoredCircleText(
                         text: item.shortname,
@@ -405,37 +405,18 @@ class CourseTemplatesView extends StatelessWidget {
           }),
     );
   }
-
-  bool isAlreadyaCourse(CourseTemplate template, List<Course> allcourses) {
-    int lowest;
-    for (Course info in allcourses) {
-      int levdistance = DiffMatchPatch()
-          .diff_levenshtein(DiffMatchPatch().diff(template.name, info.name));
-      if (lowest == null) {
-        lowest = levdistance;
-      } else if (lowest > levdistance) {
-        lowest = levdistance;
-      }
-    }
-    if ((lowest ?? 100) < 1) {
-      return true;
-    } else {
-      return false;
-    }
-  }
 }
 
 class CourseConnectedClassesView extends StatelessWidget {
   final String courseid;
   final PlannerDatabase database;
-  CourseConnectedClassesView(
-      {@required this.courseid, @required this.database});
+  CourseConnectedClassesView({required this.courseid, required this.database});
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<Course>(
+    return StreamBuilder<Course?>(
       builder: (context, snapshot) {
-        Course courseInfo = snapshot.data;
-        Design courseDesign = courseInfo?.getDesign();
+        Course? courseInfo = snapshot.data;
+        Design? courseDesign = courseInfo?.getDesign();
         if (courseInfo == null) {
           return Center(
             child: CircularProgressIndicator(),
@@ -450,7 +431,8 @@ class CourseConnectedClassesView extends StatelessWidget {
                           courseInfo.getName()),
               body: ListView(
                 children: courseInfo.connectedclasses.keys.map((item) {
-                  SchoolClass mClassinfo = database.schoolClassInfos.data[item];
+                  SchoolClass? mClassinfo =
+                      database.schoolClassInfos.data[item];
                   if (mClassinfo != null) {
                     return Card(
                       child: Column(
@@ -476,16 +458,14 @@ class CourseConnectedClassesView extends StatelessWidget {
                           ListTile(
                             leading: Icon(Icons.people),
                             title: Text(
-                                (mClassinfo?.membersData?.length?.toString() ??
-                                        '?') +
+                                (mClassinfo.membersData.length.toString() ) +
                                     bothlang(context,
                                         de: 'Mitglieder', en: 'Members')),
                           ),
                           ListTile(
                             leading: Icon(Icons.widgets),
-                            title: Text((mClassinfo?.courses?.length
-                                        ?.toString() ??
-                                    '?') +
+                            title: Text((mClassinfo.courses.length
+                                        .toString()) +
                                 bothlang(context, de: 'Fächer', en: 'Courses')),
                           ),
                           ButtonBar(
@@ -504,7 +484,7 @@ class CourseConnectedClassesView extends StatelessWidget {
                                         .then((result) {
                                       if (result == true) {
                                         Navigator.pop(context);
-                                        ValueNotifier<bool> sheet_notifier =
+                                        ValueNotifier<bool?> sheet_notifier =
                                             ValueNotifier(null);
                                         showLoadingStateSheet(
                                             context: context,
@@ -537,7 +517,7 @@ class CourseConnectedClassesView extends StatelessWidget {
                   } else {
                     return FutureBuilder<SchoolClass>(
                       builder: (context, snapshot) {
-                        SchoolClass info = snapshot.data;
+                        SchoolClass? info = snapshot.data;
                         if (info == null) return CircularProgressIndicator();
                         return Card(
                           child: Column(
@@ -563,14 +543,13 @@ class CourseConnectedClassesView extends StatelessWidget {
                               ListTile(
                                 leading: Icon(Icons.people),
                                 title: Text(
-                                    (info?.membersData?.length?.toString() ??
-                                            '?') +
+                                    (info.membersData.length.toString() ) +
                                         getString(context).members),
                               ),
                               ListTile(
                                 leading: Icon(Icons.widgets),
                                 title: Text(
-                                    (info?.courses?.length?.toString() ?? '?') +
+                                    (info.courses.length.toString() ) +
                                         getString(context).courses),
                               ),
                               ButtonBar(
@@ -590,7 +569,8 @@ class CourseConnectedClassesView extends StatelessWidget {
                                             .then((result) {
                                           if (result == true) {
                                             Navigator.pop(context);
-                                            ValueNotifier<bool> sheet_notifier =
+                                            ValueNotifier<bool?>
+                                                sheet_notifier =
                                                 ValueNotifier(null);
                                             showLoadingStateSheet(
                                                 context: context,

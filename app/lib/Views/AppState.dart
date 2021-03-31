@@ -1,4 +1,4 @@
-//@dart=2.11
+//
 import 'dart:async';
 import 'package:bloc/bloc_provider.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
@@ -24,10 +24,10 @@ import 'package:universal_commons/platform_check.dart';
 import 'home_of_app.dart';
 
 class SimpleItem {
-  IconData iconData;
-  Color color;
-  String id;
-  String name;
+  IconData? iconData;
+  Color? color;
+  String? id;
+  String? name;
   SimpleItem({this.id, this.name, this.iconData, this.color});
 }
 
@@ -37,10 +37,10 @@ class AppSettingsStateHead extends StatefulWidget {
   final AppSettingsBloc appSettingsBloc;
 
   const AppSettingsStateHead({
-    Key key,
-    @required this.dynamicLinksLogic,
-    @required this.authentificationBloc,
-    @required this.appSettingsBloc,
+    Key? key,
+    required this.dynamicLinksLogic,
+    required this.authentificationBloc,
+    required this.appSettingsBloc,
   }) : super(key: key);
 
   @override
@@ -60,13 +60,13 @@ class _AppSettingsState extends State<AppSettingsStateHead>
     this.appSettingsBloc,
   );
 
-  Timer _timerLink;
+  late Timer _timerLink;
 
   @override
   void initState() {
     super.initState();
     widget.dynamicLinksLogic.initDynamicLinks();
-    WidgetsBinding.instance.addObserver(this);
+    WidgetsBinding.instance!.addObserver(this);
   }
 
   @override
@@ -81,7 +81,7 @@ class _AppSettingsState extends State<AppSettingsStateHead>
 
   @override
   void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
+    WidgetsBinding.instance!.removeObserver(this);
     if (_timerLink != null) {
       _timerLink.cancel();
     }
@@ -100,7 +100,7 @@ class _AppSettingsState extends State<AppSettingsStateHead>
         final appSettingsData = snapshot.data;
         return MaterialApp(
           onGenerateTitle: (BuildContext context) =>
-              MyAppLocalizations.of(context).apptitle,
+              MyAppLocalizations.of(context)!.apptitle,
           localizationsDelegates: [
             const MyAppLocalizationsDelegate(),
             const CupertinoEnDefaultLocalizationsDelegate(),
@@ -113,7 +113,7 @@ class _AppSettingsState extends State<AppSettingsStateHead>
             // ... other locales the app supports
           ],
           locale: appSettingsData?.languagecode != null
-              ? Locale(appSettingsData.languagecode)
+              ? Locale(appSettingsData!.languagecode!)
               : null,
           theme: appSettingsData?.getThemeData() ??
               ThemeData(
@@ -142,7 +142,7 @@ class _AppSettingsState extends State<AppSettingsStateHead>
 }
 
 class SelectPlannerView extends StatefulWidget {
-  SelectPlannerView({Key key}) : super(key: key);
+  SelectPlannerView({Key? key}) : super(key: key);
   @override
   State<StatefulWidget> createState() => SelectPlannerViewState();
 }
@@ -153,6 +153,7 @@ class SelectPlannerViewState extends State<SelectPlannerView> {
     final plannerLoaderBloc = BlocProvider.of<PlannerLoaderBloc>(context);
     return Scaffold(
       body: Column(
+        mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Expanded(
               child: Center(
@@ -186,32 +187,45 @@ class SelectPlannerViewState extends State<SelectPlannerView> {
                   Padding(
                     padding: EdgeInsets.only(left: 4.0, right: 4.0),
                     child: Card(
+                      elevation: 12.0,
+                      margin: EdgeInsets.all(6.0),
+                      shape: RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(16.0))),
+                      clipBehavior: Clip.antiAlias,
                       child: Column(
-                        children: ((plannerLoaderBloc.loadAllPlannerStatusValue
-                                        ?.getAllPlanner() ??
-                                    [])
-                                .isNotEmpty
-                            ? plannerLoaderBloc.loadAllPlannerStatusValue
-                                .getAllPlanner()
-                                .map<Widget>((it) => ListTile(
-                                      title: Text(it.name),
-                                      leading: Icon(Icons.school),
-                                      onTap: () {
-                                        plannerLoaderBloc
-                                            .setActivePlanner(it.id);
-                                      },
-                                    ))
-                                .toList()
-                            : [
-                                ListTile(
-                                  leading: Icon(Icons.help_outline),
-                                  title: Text(
-                                    getString(context).noplannersavailable,
-                                    textAlign: TextAlign.start,
-                                  ),
-                                )
-                              ])
-                          ..add(InkWell(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          if (((plannerLoaderBloc.loadAllPlannerStatusValue
+                                  .getAllPlanner())
+                              .isNotEmpty)) ...[
+                            for (final it in plannerLoaderBloc
+                                .loadAllPlannerStatusValue
+                                .getAllPlanner())
+                              ListTile(
+                                title: Text(it.name),
+                                leading: Icon(Icons.school),
+                                onTap: () {
+                                  plannerLoaderBloc.setActivePlanner(it.id);
+                                },
+                              ),
+                          ] else
+                            ListTile(
+                              leading: Icon(Icons.help_outline),
+                              title: Text(
+                                getString(context).noplannersavailable,
+                                textAlign: TextAlign.start,
+                              ),
+                            ),
+                          InkWell(
+                            onTap: () {
+                              pushWidget(
+                                  context,
+                                  NewPlannerView(
+                                    plannerLoaderBloc: plannerLoaderBloc,
+                                    activateplanner: true,
+                                  ));
+                            },
                             child: SizedBox(
                               height: 72.0,
                               child: Center(
@@ -229,29 +243,15 @@ class SelectPlannerViewState extends State<SelectPlannerView> {
                                 ),
                               ),
                             ),
-                            onTap: () {
-                              pushWidget(
-                                  context,
-                                  NewPlannerView(
-                                    plannerLoaderBloc: plannerLoaderBloc,
-                                    activateplanner: true,
-                                  ));
-                            },
-                          )),
+                          ),
+                        ],
                       ),
-                      elevation: 12.0,
-                      margin: EdgeInsets.all(6.0),
-                      shape: RoundedRectangleBorder(
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(16.0))),
-                      clipBehavior: Clip.antiAlias,
                     ),
                   ),
                   SizedBox(
                     height: 16.0,
                   ),
                 ],
-                mainAxisSize: MainAxisSize.min,
               ),
             ),
           )),
@@ -295,7 +295,6 @@ class SelectPlannerViewState extends State<SelectPlannerView> {
             ),
           ),
         ],
-        mainAxisSize: MainAxisSize.min,
       ),
     );
   }

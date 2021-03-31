@@ -1510,7 +1510,7 @@ class MyAppLocalizations {
   //APPBASE
   String get apptitle {
     return Intl.message(
-      'Schoolplanner',
+      'Schoolplanner Pro',
       name: 'apptitle',
       desc: 'Title for application',
     );

@@ -1,5 +1,3 @@
-// @dart=2.11
-
 import 'dart:async';
 
 import 'package:authentification/authentification_models.dart';
@@ -13,10 +11,10 @@ import 'package:schulplaner8/models/planner.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PlannerLoaderBloc extends BlocBase {
-  final _currentUserIdSubject = BehaviorSubject<UserId>();
+  final _currentUserIdSubject = BehaviorSubject<UserId?>();
   final _plannerMapSubject = BehaviorSubject<Map<String, Planner>>();
   final _plannerOrderSubject = BehaviorSubject<Map<String, int>>();
-  final _activePlannerSubject = BehaviorSubject<String>();
+  final _activePlannerSubject = BehaviorSubject<String?>();
   final _hasLoadedDataSubject = BehaviorSubject<bool>();
 
   final List<StreamSubscription> _streamSubscriptions = [];
@@ -45,9 +43,9 @@ class PlannerLoaderBloc extends BlocBase {
       _streamSubscriptions.addAll(
         [
           getPlannerOrderRef(userId).snapshots().listen((snapshot) {
-            if (snapshot.data != null) {
+            if (snapshot.data() != null) {
               final plannerOrder = snapshot.data()?.cast<String, int>();
-              _plannerOrderSubject.add(plannerOrder);
+              _plannerOrderSubject.add(plannerOrder ?? {});
             }
           }),
           getPlannerRef(userId)
@@ -56,12 +54,12 @@ class PlannerLoaderBloc extends BlocBase {
               .snapshots()
               .listen((snapshot) {
             _hasLoadedDataSubject.add(true);
-            final plannerMap =
-                (snapshot.docs.asMap().map<String, Planner>((_, snapshot) {
-                      final mPlanner = Planner.fromData(snapshot.data());
-                      return MapEntry(mPlanner.id, mPlanner);
-                    })) ??
-                    {};
+            final plannerMap = (snapshot.docs.asMap().map<String, Planner>(
+              (_, snapshot) {
+                final mPlanner = Planner.fromData(snapshot.data()!);
+                return MapEntry(mPlanner.id, mPlanner);
+              },
+            ));
             _plannerMapSubject.add(plannerMap);
           }),
         ],
@@ -81,8 +79,8 @@ class PlannerLoaderBloc extends BlocBase {
       _plannerOrderSubject,
       _activePlannerSubject,
       _hasLoadedDataSubject,
-      (Map<String, Planner> plannerMap, Map<String, int> plannerOrder,
-          String activePlanner, bool hasLoaded) {
+      (Map<String, Planner> plannerMap, Map<String, int>? plannerOrder,
+          String? activePlanner, bool hasLoaded) {
         return LoadAllPlannerStatus(
           activePlanner: activePlanner,
           plannerlist: plannerMap,
@@ -97,30 +95,30 @@ class PlannerLoaderBloc extends BlocBase {
   LoadAllPlannerStatus get loadAllPlannerStatusValue {
     return LoadAllPlannerStatus(
       activePlanner: _activePlannerSubject.value,
-      plannerlist: _plannerMapSubject.value,
+      plannerlist: _plannerMapSubject.value ?? {},
       plannerorder: _plannerOrderSubject.value,
-      loadedData: _hasLoadedDataSubject.value,
+      loadedData: _hasLoadedDataSubject.value ?? false,
     );
   }
 
-  UserId get currentUserId => _currentUserIdSubject.value;
-  String get currentActivePlannerId => _activePlannerSubject.value;
+  UserId? get currentUserId => _currentUserIdSubject.value;
+  String? get currentActivePlannerId => _activePlannerSubject.value;
 
   void setActivePlanner(String plannerId) {
     if (currentActivePlannerId != plannerId) {
       _activePlannerSubject.add(plannerId);
     }
     SharedPreferences.getInstance().then((instance) {
-      instance.setString('activeplanner', currentActivePlannerId);
+      instance.setString('activeplanner', plannerId);
     });
   }
 
   void setNewPlannerOrder(Map<String, int> neworder) {
-    getPlannerOrderRef(currentUserId).set(neworder);
+    getPlannerOrderRef(currentUserId!).set(neworder);
   }
 
   void createPlanner(Planner planner) {
-    getPlannerRef(currentUserId).doc(planner.id).set(
+    getPlannerRef(currentUserId!).doc(planner.id).set(
           planner.toJson(),
           SetOptions(
             merge: true,
@@ -129,7 +127,7 @@ class PlannerLoaderBloc extends BlocBase {
   }
 
   void editPlanner(Planner planner) {
-    getPlannerRef(currentUserId).doc(planner.id).set(
+    getPlannerRef(currentUserId!).doc(planner.id).set(
           planner.toJson(),
           SetOptions(
             merge: true,
@@ -138,7 +136,7 @@ class PlannerLoaderBloc extends BlocBase {
   }
 
   void archivePlanner(Planner planner, bool archive) {
-    getPlannerRef(currentUserId).doc(planner.id).set(
+    getPlannerRef(currentUserId!).doc(planner.id).set(
       {'archived': archive},
       SetOptions(
         merge: true,
@@ -147,31 +145,31 @@ class PlannerLoaderBloc extends BlocBase {
   }
 
   void createCopy(Planner planner) {
-    final plannerID = getPlannerRef(currentUserId).doc().id;
+    final plannerID = getPlannerRef(currentUserId!).doc().id;
     final copyPlanner =
         planner.copyWith(id: plannerID, name: '(2)' + planner.name);
-    getPlannerRef(currentUserId).doc(copyPlanner.id).set(
+    getPlannerRef(currentUserId!).doc(copyPlanner.id).set(
           copyPlanner.toJson(),
           SetOptions(
             merge: true,
           ),
         );
-    getPlannerRef(currentUserId)
+    getPlannerRef(currentUserId!)
         .doc(planner.id)
         .collection('data')
         .doc('settings')
         .get()
         .then((result) {
-      getPlannerRef(currentUserId)
+      getPlannerRef(currentUserId!)
           .doc(copyPlanner.id)
           .collection('data')
           .doc('settings')
-          .set(result.data());
+          .set(result.data()!);
     });
   }
 
   void deletePlanner(Planner planner) {
-    getPlannerRef(currentUserId).doc(planner.id).set(
+    getPlannerRef(currentUserId!).doc(planner.id).set(
       {'deleted': true},
       SetOptions(
         merge: true,

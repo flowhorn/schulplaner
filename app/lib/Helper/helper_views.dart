@@ -765,8 +765,8 @@ ValueNotifier<bool?> showLoadingStateSheetFull({
   required BuildContext context,
 }) {
   ValueNotifier<bool?> sheetUpdate = ValueNotifier(null);
-  showBetterModalBottomSheet(
-      routname: 'loadingsheet',
+  showModalBottomSheet(
+      routeSettings: RouteSettings(name: 'loadingsheet'),
       context: context,
       builder: (BuildContext context) {
         return clearAppTheme(
@@ -854,14 +854,14 @@ ValueNotifier<bool?> showLoadingStateSheetFull({
   return sheetUpdate;
 }
 
-Future<T> showSheetBuilder<T>({
+Future<T?> showSheetBuilder<T>({
   required BuildContext context,
   required WidgetBuilder child,
   String? title,
   WidgetListBuilder? actions,
   String? routname,
 }) {
-  return showBetterModalBottomSheet<T>(
+  return showModalBottomSheet<T>(
     context: context,
     builder: (BuildContext sheetcontext) {
       return clearAppTheme(
@@ -929,7 +929,7 @@ Future<T> showSheetBuilder<T>({
             ),
           ));
     },
-    routname: routname,
+    routeSettings: RouteSettings(name: routname),
   );
 }
 
@@ -1064,7 +1064,7 @@ Future<void> showDetailSheetBuilder(
     {required BuildContext context,
     required WidgetBuilder body,
     String? routname}) {
-  return showBetterModalBottomSheet(
+  return showModalBottomSheet(
     context: context,
     builder: (BuildContext sheetcontext) {
       return clearAppTheme(
@@ -1103,7 +1103,7 @@ Future<void> showDetailSheetBuilder(
             ),
           ));
     },
-    routname: routname,
+    routeSettings: RouteSettings(name: routname),
   );
 }
 
@@ -1193,7 +1193,7 @@ class ColoredCircleIcon extends StatelessWidget {
 }
 
 Stream<TwoObjects<T1?, T2?>> getMergedStream<T1, T2>(
-    Stream<T1> stream1, Stream<T2> stream2) {
+    Stream<T1?> stream1, Stream<T2?> stream2) {
   StreamController<TwoObjects<T1?, T2?>> newcontroller = StreamController();
   T1? data1;
   T2? data2;
@@ -1213,7 +1213,7 @@ Stream<TwoObjects<T1?, T2?>> getMergedStream<T1, T2>(
 }
 
 Stream<ThreeObjects<T1?, T2?, T3?>> getThreeMergedStream<T1, T2, T3>(
-    Stream<T1> stream1, Stream<T2> stream2, Stream<T3> stream3) {
+    Stream<T1?> stream1, Stream<T2?> stream2, Stream<T3?> stream3) {
   StreamController<ThreeObjects<T1?, T2?, T3?>> newcontroller =
       StreamController();
   T1? data1;
@@ -1249,43 +1249,44 @@ class QRCodeViewPublicCode extends StatelessWidget {
         ? Container()
         : InkWell(
             child: QrImage(
-              data: publiccode,
+              data: publiccode!,
               size: 112.0,
               foregroundColor: getTextColor(getBackgroundColor(context)),
             ),
             onTap: () {
               showDialog(
-                  context: context,
-                  builder: (context) {
-                    return AlertDialog(
-                      title: Text(
-                        getString(context).qrcode,
-                        textAlign: TextAlign.center,
-                      ),
-                      content: Builder(builder: (context) {
-                        double value = MediaQuery.of(context).size.width - 130;
-                        return SizedBox(
-                          child: Container(
-                            child: QrImage2(
-                              data: publiccode,
-                              size: value,
-                              foregroundColor:
-                                  getTextColor(getBackgroundColor(context)),
-                            ),
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: Text(
+                      getString(context).qrcode,
+                      textAlign: TextAlign.center,
+                    ),
+                    content: Builder(builder: (context) {
+                      double value = MediaQuery.of(context).size.width - 130;
+                      return SizedBox(
+                        child: Container(
+                          child: QrImage2(
+                            data: publiccode!,
+                            size: value,
+                            foregroundColor:
+                                getTextColor(getBackgroundColor(context)),
                           ),
-                          height: value,
-                          width: value,
-                        );
-                      }),
-                      contentPadding:
-                          EdgeInsets.only(left: 24.0, right: 24.0, top: 24.0),
-                      actions: <Widget>[
-                        TextButton(
-                            onPressed: () => Navigator.pop(context),
-                            child: Text(getString(context).cancel))
-                      ],
-                    );
-                  });
+                        ),
+                        height: value,
+                        width: value,
+                      );
+                    }),
+                    contentPadding:
+                        EdgeInsets.only(left: 24.0, right: 24.0, top: 24.0),
+                    actions: <Widget>[
+                      TextButton(
+                          onPressed: () => Navigator.pop(context),
+                          child: Text(getString(context).cancel))
+                    ],
+                  );
+                },
+              );
             },
           );
   }

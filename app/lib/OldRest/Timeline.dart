@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:schulplaner8/Data/Planner/Lesson.dart';
 import 'package:schulplaner8/Data/Planner/SchoolEvent.dart';
 import 'package:schulplaner8/Data/Planner/Task.dart';
-import 'package:schulplaner8/Data/plannerdatabase.dart';
+import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 import 'package:schulplaner8/Helper/DateAPI.dart';
 import 'package:schulplaner8/Helper/EasyWidget.dart';
 import 'package:schulplaner8/Helper/Functions.dart';
@@ -343,7 +343,7 @@ T? getFirst<T>(Iterable<T>? iterable) {
 
 class TimeLineLessonItem extends StatelessWidget {
   final Lesson lesson;
-  final Course course;
+  final Course? course;
   final PlannerDatabase database;
   final LessonInfo? lessoninfo;
   final String datestring;
@@ -377,8 +377,8 @@ class TimeLineLessonItem extends StatelessWidget {
             Align(
               alignment: Alignment.center,
               child: ColoredCircleText(
-                color: course.getDesign().primary,
-                text: toShortNameLength(context, course.getShortname_full()),
+                color: course!.getDesign()?.primary,
+                text: toShortNameLength(context, course!.getShortname_full()),
                 radius: 24.0,
                 textsize: 19.0,
               ),
@@ -393,10 +393,12 @@ class TimeLineLessonItem extends StatelessWidget {
                 : null),
       ),
       onTap: () {
-        showLessonDetailSheet(context,
-            lessonid: lesson.lessonid,
-            plannerdatabase: database,
-            datestring: datestring);
+        showLessonDetailSheet(
+          context,
+          lessonid: lesson.lessonid!,
+          plannerdatabase: database,
+          datestring: datestring,
+        );
       },
       onLongPress: () {
         pushWidget(

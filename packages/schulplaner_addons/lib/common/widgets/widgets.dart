@@ -1,13 +1,15 @@
-//@dart=2.11
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class RoundButton extends StatelessWidget {
   final String label;
-  final void Function() onTap;
+  final void Function()? onTap;
 
-  const RoundButton({Key key, @required this.label, @required this.onTap})
-      : super(key: key);
+  const RoundButton({
+    Key? key,
+    required this.label,
+    this.onTap,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
@@ -27,14 +29,14 @@ class RoundButton extends StatelessWidget {
 }
 
 class SheetIconButton extends StatelessWidget {
-  const SheetIconButton(
-      {Key key,
-      @required this.title,
-      @required this.iconData,
-      @required this.onTap,
-      @required this.tooltip,
-      this.radius = 75.0})
-      : super(key: key);
+  const SheetIconButton({
+    Key? key,
+    required this.title,
+    required this.iconData,
+    required this.onTap,
+    required this.tooltip,
+    this.radius = 75.0,
+  }) : super(key: key);
 
   final String title, tooltip;
   final double radius;
@@ -63,7 +65,7 @@ class SheetIconButton extends StatelessWidget {
                   height: radius,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    border: Border.all(color: Colors.grey[300], width: 1.25),
+                    border: Border.all(color: Colors.grey[300]!, width: 1.25),
                   ),
                   child:
                       Icon(iconData, size: radius / 2, color: Colors.grey[600]),

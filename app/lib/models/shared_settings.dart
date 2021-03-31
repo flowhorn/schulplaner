@@ -1,23 +1,19 @@
-//@dart=2.11
-import 'package:meta/meta.dart';
 import 'package:schulplaner8/models/helper_functions.dart';
-
 import 'planner_settings.dart';
 
 class SharedSettings {
-  final DateTime lastRefreshed;
+  final DateTime? lastRefreshed;
   final String authorID;
-  final PlannerSettingsData settingsData;
+  final PlannerSettingsData? settingsData;
 
   const SharedSettings._({
-    @required this.lastRefreshed,
-    @required this.authorID,
-    @required this.settingsData,
+    required this.lastRefreshed,
+    required this.authorID,
+    required this.settingsData,
   });
 
   factory SharedSettings.Create(
       PlannerSettingsData settingsData, String authorID) {
-    if (settingsData == null) return null;
     return SharedSettings._(
       authorID: authorID,
       settingsData: settingsData,
@@ -26,16 +22,13 @@ class SharedSettings {
   }
 
   factory SharedSettings.FromData(dynamic data) {
-    if (data == null) return null;
-    try {
-      return SharedSettings._(
-        authorID: data['authorID'],
-        settingsData: PlannerSettingsData.fromData(data['settingsData']),
-        lastRefreshed: dateTimeFromTimestamp(data['lastRefreshed']),
-      );
-    } catch (e) {
-      return null;
-    }
+    return SharedSettings._(
+      authorID: data['authorID'],
+      settingsData: PlannerSettingsData.fromData(data['settingsData']),
+      lastRefreshed: data['lastRefreshed'] != null
+          ? dateTimeFromTimestamp(data['lastRefreshed'])
+          : null,
+    );
   }
 
   Map<String, dynamic> toJson() {

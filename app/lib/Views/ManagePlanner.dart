@@ -1,4 +1,4 @@
-//@dart=2.11
+//
 import 'package:bloc/bloc_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -34,6 +34,7 @@ class ManagePlannerView extends StatelessWidget {
             final loadAllPlannerStatus = snapshot.data;
             if (loadAllPlannerStatus != null) {
               return Column(
+                mainAxisSize: MainAxisSize.max,
                 children: <Widget>[
                   Padding(
                     padding: EdgeInsets.all(4.0),
@@ -61,53 +62,57 @@ class ManagePlannerView extends StatelessWidget {
                     ),
                   ),
                   Expanded(
-                      child: OrderableExample(
-                    plannerLoaderBloc,
-                    loadAllPlannerStatus,
-                    (context, Planner it, _) {
-                      return Padding(
-                        padding: EdgeInsets.only(
-                            left: 8.0, right: 8.0, top: 5.0, bottom: 0.0),
-                        child: Card(
-                          child: Column(
-                            children: <Widget>[
-                              ListTile(
-                                leading: Icon(Icons.reorder),
-                                title: Text(it.name),
-                                trailing: it.id ==
-                                        (loadAllPlannerStatus.getPlanner()?.id)
-                                    ? RButton(
-                                        text: getString(context).selected,
-                                        onTap: null,
-                                        enabled: false,
-                                        iconData: Icons.done,
-                                        disabledColor: Colors.green)
-                                    : RButton(
-                                        text: getString(context).select,
-                                        onTap: () {
-                                          plannerLoaderBloc
-                                              .setActivePlanner(it.id);
+                    child: OrderableExample(
+                      plannerLoaderBloc,
+                      loadAllPlannerStatus,
+                      (context, Planner it, _) {
+                        return Padding(
+                          padding: EdgeInsets.only(
+                              left: 8.0, right: 8.0, top: 5.0, bottom: 0.0),
+                          child: Card(
+                            child: Column(
+                              children: <Widget>[
+                                ListTile(
+                                  leading: Icon(Icons.reorder),
+                                  title: Text(it.name),
+                                  trailing: it.id ==
+                                          (loadAllPlannerStatus
+                                              .getPlanner()
+                                              ?.id)
+                                      ? RButton(
+                                          text: getString(context).selected,
+                                          onTap: null,
+                                          enabled: false,
+                                          iconData: Icons.done,
+                                          disabledColor: Colors.green)
+                                      : RButton(
+                                          text: getString(context).select,
+                                          onTap: () {
+                                            plannerLoaderBloc
+                                                .setActivePlanner(it.id);
+                                          },
+                                          enabled: true,
+                                          iconData: Icons.done,
+                                          disabledColor: Colors.green),
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: <Widget>[
+                                    TextButton.icon(
+                                        onPressed: () {
+                                          pushWidget(
+                                              context,
+                                              NewPlannerView(
+                                                plannerLoaderBloc:
+                                                    plannerLoaderBloc,
+                                                editmode: true,
+                                                plannerid: it.id,
+                                              ));
                                         },
-                                        enabled: true,
-                                        iconData: Icons.done,
-                                        disabledColor: Colors.green),
-                              ),
-                              Row(
-                                children: <Widget>[
-                                  TextButton.icon(
-                                      onPressed: () {
-                                        pushWidget(
-                                            context,
-                                            NewPlannerView(
-                                              plannerLoaderBloc:
-                                                  plannerLoaderBloc,
-                                              editmode: true,
-                                              plannerid: it.id,
-                                            ));
-                                      },
-                                      icon: Icon(Icons.edit),
-                                      label: Text(getString(context).edit)),
-                                  TextButton.icon(
+                                        icon: Icon(Icons.edit),
+                                        label: Text(getString(context).edit)),
+                                    TextButton.icon(
                                       onPressed: () {
                                         showSheet(
                                             context: context,
@@ -181,20 +186,19 @@ class ManagePlannerView extends StatelessWidget {
                                             title: it.name);
                                       },
                                       icon: Icon(Icons.more_horiz),
-                                      label: Text(getString(context).more)),
-                                ],
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                              ),
-                            ],
+                                      label: Text(getString(context).more),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      );
-                    },
-                    key: Key(loadAllPlannerStatus.hashCode.toString()),
-                  )),
+                        );
+                      },
+                      key: Key(loadAllPlannerStatus.hashCode.toString()),
+                    ),
+                  ),
                 ],
-                mainAxisSize: MainAxisSize.max,
               );
               /*
           return ListView(
@@ -270,8 +274,8 @@ class ArchivedPlanner extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return ListView(
-              children: snapshot.data.docs.map((data) {
-                final planner = Planner.fromData(data.data());
+              children: snapshot.data!.docs.map((data) {
+                final planner = Planner.fromData(data.data()!);
                 return Padding(
                   padding: EdgeInsets.only(
                       left: 8.0, right: 8.0, top: 5.0, bottom: 0.0),
@@ -368,7 +372,7 @@ class ArchivedPlanner extends StatelessWidget {
             );
           }
         },
-        stream: getPlannerRef(plannerLoaderBloc.currentUserId)
+        stream: getPlannerRef(plannerLoaderBloc.currentUserId!)
             .where('deleted', isEqualTo: false)
             .where('archived', isEqualTo: true)
             .snapshots(),
@@ -380,11 +384,11 @@ class ArchivedPlanner extends StatelessWidget {
 class NewPlannerView extends StatefulWidget {
   final PlannerLoaderBloc plannerLoaderBloc;
   final bool editmode;
-  final String plannerid;
-  final Planner previousplanner;
+  final String? plannerid;
+  final Planner? previousplanner;
   final bool activateplanner;
   NewPlannerView(
-      {@required this.plannerLoaderBloc,
+      {required this.plannerLoaderBloc,
       this.plannerid,
       this.editmode = false,
       this.previousplanner,
@@ -400,24 +404,24 @@ class NewPlannerView extends StatefulWidget {
 class _NewPlannerViewState extends State<NewPlannerView> {
   final PlannerLoaderBloc plannerLoaderBloc;
   final bool editmode;
-  final String plannerid;
+  final String? plannerid;
   _NewPlannerViewState(
-      {@required this.plannerLoaderBloc,
+      {required this.plannerLoaderBloc,
       this.plannerid,
       this.editmode = false,
-      Planner previousplanner}) {
+      Planner? previousplanner}) {
     if (editmode) {
-      planner = previousplanner ??
-          plannerLoaderBloc.loadAllPlannerStatusValue.plannermap[plannerid];
+      planner = (previousplanner ??
+          plannerLoaderBloc.loadAllPlannerStatusValue.plannermap[plannerid])!;
     } else {
       planner = Planner(
-          id: getPlannerRef(plannerLoaderBloc.currentUserId).doc().id,
-          uid: plannerLoaderBloc.currentUserId.uid,
+          id: getPlannerRef(plannerLoaderBloc.currentUserId!).doc().id,
+          uid: plannerLoaderBloc.currentUserId!.uid,
           name: '');
     }
   }
 
-  Planner planner;
+  late Planner planner;
 
   @override
   Widget build(BuildContext context) {
@@ -434,7 +438,7 @@ class _NewPlannerViewState extends State<NewPlannerView> {
                 valueChanged: (newtext) {
                   planner = planner.copyWith(name: newtext);
                 },
-                text: planner?.name ?? '',
+                text: planner.name,
                 labeltext: getString(context).name,
                 iconData: Icons.short_text,
                 autofocus: true,
@@ -452,7 +456,7 @@ class _NewPlannerViewState extends State<NewPlannerView> {
                   plannerLoaderBloc.editPlanner(planner);
                 } else {
                   plannerLoaderBloc.createPlanner(planner);
-                  if (widget?.activateplanner ?? false) {
+                  if (widget.activateplanner) {
                     plannerLoaderBloc.setActivePlanner(planner.id);
                   }
                 }

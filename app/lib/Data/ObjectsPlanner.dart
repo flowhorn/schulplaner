@@ -1,13 +1,12 @@
-//@dart = 2.11
-import 'package:meta/meta.dart';
 import 'package:schulplaner_widgets/schulplaner_theme.dart';
 
 class CoursePersonal {
-  String courseid, shortname, gradeprofileid;
-  Design design;
+  late String courseid;
+  late String? shortname, gradeprofileid;
+  late Design? design;
 
   CoursePersonal(
-      {@required this.courseid,
+      {required this.courseid,
       this.design,
       this.shortname,
       this.gradeprofileid});
@@ -77,13 +76,13 @@ class Term{
 }
  */
 
-class CourseMember {
-  String memberid;
-  int membertype;
+class OldCourseMember {
+  late String memberid;
+  late int membertype;
 
-  CourseMember({this.memberid, this.membertype});
+  OldCourseMember({required this.memberid, required this.membertype});
 
-  CourseMember.fromData(dynamic data) {
+  OldCourseMember.fromData(dynamic data) {
     memberid = data['memberid'];
     membertype = data['membertype'];
   }

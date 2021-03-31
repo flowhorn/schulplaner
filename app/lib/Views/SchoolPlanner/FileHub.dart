@@ -1,7 +1,7 @@
-//@dart=2.11
+//
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Data/Planner/File.dart';
-import 'package:schulplaner8/Data/plannerdatabase.dart';
+import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 import 'package:schulplaner8/Helper/Functions.dart';
 import 'package:schulplaner8/Helper/helper_data.dart';
 import 'package:schulplaner8/files/pages/new_file_page.dart';
@@ -15,7 +15,7 @@ import 'package:share/share.dart';
 
 class FileHub extends StatelessWidget {
   final PlannerDatabase database;
-  FileHub({@required this.database});
+  FileHub({required this.database});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class FileHub extends StatelessWidget {
       color: getBackgroundColor(context),
       child: StreamBuilder<Map<String, Course>>(
         builder: (context, snapshot) {
-          final courses = snapshot.data.values.toList()
+          final courses = snapshot.data!.values.toList()
             ..sort((c1, c2) => c1.getName().compareTo(c2.getName()));
           return SingleChildScrollView(
             child: Column(
@@ -55,12 +55,14 @@ class FileHub extends StatelessWidget {
                       children: courses
                           .map((courseInfo) => ListTile(
                                 leading: Hero(
-                                    tag: 'courseicon_' + courseInfo.id,
-                                    child: ColoredCircleText(
-                                        text: toShortNameLength(context,
-                                            courseInfo.getShortname_full()),
-                                        color: courseInfo.getDesign().primary,
-                                        radius: 22.0)),
+                                  tag: 'courseicon_' + courseInfo.id,
+                                  child: ColoredCircleText(
+                                    text: toShortNameLength(context,
+                                        courseInfo.getShortname_full()),
+                                    color: courseInfo.getDesign()?.primary,
+                                    radius: 22.0,
+                                  ),
+                                ),
                                 title: Hero(
                                     tag: 'coursetext_' + courseInfo.id,
                                     child: Material(
@@ -97,7 +99,7 @@ class FileHub extends StatelessWidget {
 
 class PersonalStorageView extends StatelessWidget {
   final PlannerDatabase database;
-  PersonalStorageView({@required this.database});
+  PersonalStorageView({required this.database});
 
   @override
   Widget build(BuildContext context) {
@@ -145,7 +147,7 @@ class PersonalStorageView extends StatelessWidget {
       body: StreamBuilder<List<CloudFile>>(
         builder: (context, snapshot) {
           List<CloudFile> files = snapshot.data ?? [];
-          return UpListView(
+          return UpListView<CloudFile?>(
             builder: (context, file) {
               if (file == null) return LinearProgressIndicator();
               return Builder(
@@ -166,7 +168,7 @@ class PersonalStorageView extends StatelessWidget {
                         icon: Icon(Icons.more_horiz),
                         onPressed: () {
                           showFilePersonalMoreSheet(context,
-                              fileid: file.fileid, database: database);
+                              fileid: file.fileid!, database: database);
                         }),
                   );
                 },
@@ -191,7 +193,7 @@ class PersonalStorageView extends StatelessWidget {
 class CourseStorageView extends StatelessWidget {
   final PlannerDatabase database;
   final Course courseInfo;
-  CourseStorageView({@required this.database, @required this.courseInfo});
+  CourseStorageView({required this.database, required this.courseInfo});
 
   @override
   Widget build(BuildContext context) {
@@ -248,15 +250,15 @@ class CourseStorageView extends StatelessWidget {
 }
 
 void showFilePersonalMoreSheet(BuildContext context,
-    {@required String fileid, @required PlannerDatabase database}) {
+    {required String fileid, required PlannerDatabase database}) {
   showDetailSheetBuilder(
       context: context,
       body: (context) {
-        return StreamBuilder<CloudFile>(
+        return StreamBuilder<CloudFile?>(
             initialData: database.personalfiles.getItem(fileid),
             stream: database.personalfiles.getItemStream(fileid),
             builder: (context, snapshot) {
-              CloudFile file = snapshot.data;
+              CloudFile? file = snapshot.data;
               if (file == null) return loadedView();
               return Column(
                 children: <Widget>[
@@ -274,7 +276,7 @@ void showFilePersonalMoreSheet(BuildContext context,
                         leading: Icon(Icons.share),
                         title: Text(getString(context).share),
                         onTap: () {
-                          Share.share(file.url);
+                          Share.share(file.url!);
                         },
                       ),
                       ListTile(

@@ -11,7 +11,7 @@ import 'package:schulplaner_addons/schulplaner_utils.dart';
 import 'package:schulplaner_addons/utils/color_utils.dart';
 import 'package:schulplaner8/Chat/message.dart';
 import 'package:schulplaner8/Data/Planner/File.dart';
-import 'package:schulplaner8/Data/plannerdatabase.dart';
+import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 import 'package:schulplaner_addons/chat/message.dart' as message2;
 
 class ChatThread extends StatefulWidget {
@@ -70,7 +70,7 @@ class ChatThreadState extends State<ChatThread> {
               setState(() {
                 isLoading = true;
               });
-              await uploadImage(attachment.file.file);
+              await uploadImage(attachment.file!.file);
             }
             break;
           }
@@ -80,7 +80,7 @@ class ChatThreadState extends State<ChatThread> {
               setState(() {
                 isLoading = true;
               });
-              await uploadFile(attachment.file.file);
+              await uploadFile(attachment.file!.file);
             }
             break;
           }

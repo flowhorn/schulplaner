@@ -1,10 +1,9 @@
-//@dart = 2.11
 import 'dart:io';
 import 'package:bloc/bloc_base.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:schulplaner8/Data/Planner/File.dart';
-import 'package:schulplaner8/Data/plannerdatabase.dart';
+import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 import 'package:schulplaner_addons/schulplaner_utils.dart';
 
 class NewFileBloc extends BlocBase {
@@ -31,13 +30,13 @@ class NewFileBloc extends BlocBase {
   }
 
   Stream<CloudFile> get cloudFile => _cloudFileSubject;
-  CloudFile get cloudFileValue => _cloudFileSubject.value;
-  bool get hasChangedValues => _hasChangedValuesSubject.value;
+  CloudFile get cloudFileValue => _cloudFileSubject.value!;
+  bool get hasChangedValues => _hasChangedValuesSubject.value!;
 
   Stream<bool> get isFileFormLocked => _isFileFormLockedSubject;
   Stream<TaskSnapshot> get uploadEvents => _uploadEventsSubject;
   Stream<int> get uploadState => _uploadStateSubject;
-  bool get isFileFormLockedValue => _isFileFormLockedSubject.value;
+  bool get isFileFormLockedValue => _isFileFormLockedSubject.value!;
 
   void _updateFile(CloudFile newFile) {
     _hasChangedValuesSubject.add(true);
@@ -45,30 +44,24 @@ class NewFileBloc extends BlocBase {
   }
 
   void changeName(String name) {
-    final cloudFile = cloudFileValue;
-    cloudFile.name = name;
-    _updateFile(cloudFileValue);
+    _updateFile(cloudFileValue.copyWith(name: name));
   }
 
   void changeUrl(String url) {
-    final cloudFile = cloudFileValue;
-    cloudFile.url = url;
-    _updateFile(cloudFileValue);
+    _updateFile(cloudFileValue.copyWith(url: url));
   }
 
   void changeFileForm(FileForm fileForm) {
-    final cloudFile = cloudFileValue;
-    cloudFile.fileform = fileForm;
-    _updateFile(cloudFileValue);
+    _updateFile(cloudFileValue.copyWith(fileform: fileForm));
   }
 
   Future<void> selectFileFromFilePicker() async {
-    final cloudFile = cloudFileValue;
+    var cloudFile = cloudFileValue;
     final pickedFile = await FileHelper().pickFile();
     if (pickedFile == null) return;
     File newFile;
     try {
-      final compressedFile = ImageCompresser.compressImage(pickedFile);
+      final compressedFile = await ImageCompresser.compressImage(pickedFile);
       newFile = compressedFile ?? pickedFile;
     } catch (e) {
       newFile = pickedFile;
@@ -79,18 +72,18 @@ class NewFileBloc extends BlocBase {
         .ref()
         .child('files')
         .child('personal')
-        .child(cloudFile.savedin.id)
-        .child(cloudFile.fileid)
+        .child(cloudFile.savedin!.id!)
+        .child(cloudFile.fileid!)
         .putFile(newFile);
     // ignore: unawaited_futures
     _uploadEventsSubject.addStream(uploadTask.snapshotEvents);
 
     await uploadTask.then(
       (event) {
-        cloudFile.type = event.metadata.contentType;
+        cloudFile = cloudFile.copyWith(type: event.metadata!.contentType);
         event.ref.getDownloadURL().then(
           (downloadurl) {
-            cloudFile.url = downloadurl.toString();
+            cloudFile = cloudFile.copyWith(url: downloadurl);
           },
         );
       },
