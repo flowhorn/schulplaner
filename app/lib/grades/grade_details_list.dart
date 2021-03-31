@@ -4,8 +4,12 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 import 'package:schulplaner8/Helper/Functions.dart';
-import 'package:schulplaner8/OldGrade/Grade.dart';
+
 import 'package:schulplaner8/OldGrade/GradeDetail.dart';
+import 'package:schulplaner8/OldGrade/models/average_calculator.dart';
+import 'package:schulplaner8/OldGrade/models/choice.dart';
+import 'package:schulplaner8/OldGrade/models/grade.dart';
+import 'package:schulplaner8/OldGrade/models/grade_span.dart';
 import 'package:schulplaner8/groups/src/models/course.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
 import 'package:schulplaner_widgets/schulplaner_theme.dart';
@@ -46,7 +50,7 @@ class GradeDetailListState extends State<GradeDetailList> {
   late StreamSubscription<List<Course>?> datalistener_course;
   late StreamSubscription<GradeSpan?> listener_gradespan;
 
-  late GradeSpan? gradespan;
+  GradeSpan? gradespan;
 
   @override
   void initState() {
@@ -184,8 +188,14 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
               right: 16.0,
             ),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 InkWell(
+                  onTap: () {
+                    showGradeSpanSheet(context, database);
+                  },
+                  borderRadius: BorderRadius.all(Radius.circular(16.0)),
                   child: Padding(
                     padding: EdgeInsets.all(4.0),
                     child: Row(
@@ -196,6 +206,7 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
                         ),
                         if (gradeSpan?.id == 'custom')
                           Column(
+                            mainAxisSize: MainAxisSize.min,
                             children: <Widget>[
                               Text(
                                 gradeSpan?.getName(context) ?? '-?-',
@@ -210,7 +221,6 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
                                     fontWeight: FontWeight.w300),
                               ),
                             ],
-                            mainAxisSize: MainAxisSize.min,
                           )
                         else
                           Text(
@@ -229,10 +239,6 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                     ),
                   ),
-                  onTap: () {
-                    showGradeSpanSheet(context, database);
-                  },
-                  borderRadius: BorderRadius.all(Radius.circular(16.0)),
                 ),
                 Text(
                   'Ø' +
@@ -240,7 +246,7 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
                           ? database
                               .getSettings()
                               .getCurrentAverageDisplay(context: context)
-                              .input(averageCalculator.totalaverage)
+                              .input(averageCalculator.totalaverage!)
                           : '/'),
                   style: TextStyle(
                       color: getTextColor(getBackgroundColor(context)),
@@ -248,8 +254,6 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
                       fontSize: 16.0),
                 ),
               ],
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
             ),
           ),
         ),

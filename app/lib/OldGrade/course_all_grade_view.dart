@@ -1,4 +1,3 @@
-//
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -12,8 +11,9 @@ import 'package:schulplaner8/groups/src/models/course.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
 import 'package:schulplaner_widgets/schulplaner_theme.dart';
 
-import 'Grade.dart';
 import 'GradeDetail.dart';
+import 'models/average_course.dart';
+import 'models/grade.dart';
 
 class CourseAllGradeView extends StatefulWidget {
   final String courseid;
@@ -93,6 +93,7 @@ class CourseAllGradeViewState extends State<CourseAllGradeView> {
             item?.getName() ?? '-',
           ),
           bottom: PreferredSize(
+            preferredSize: Size(double.infinity, 50.0),
             child: Container(
               height: 50.0,
               child: ListTile(
@@ -103,7 +104,7 @@ class CourseAllGradeViewState extends State<CourseAllGradeView> {
                           ? database
                               .getSettings()
                               .getCurrentAverageDisplay(context: context)
-                              .input(calculator.totalaverage)
+                              .input(calculator.totalaverage!)
                           : '/'),
                   style: TextStyle(
                       color: getTextColor(item?.getDesign()?.primary),
@@ -112,7 +113,6 @@ class CourseAllGradeViewState extends State<CourseAllGradeView> {
                 ),
               ),
             ),
-            preferredSize: Size(double.infinity, 50.0),
           ),
         ),
         body: ListView.builder(

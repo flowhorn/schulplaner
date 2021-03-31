@@ -248,10 +248,10 @@ class MyTaskArchive extends StatelessWidget {
               if (t1.isFinished(plannerDatabase.getMemberId())) return -1;
               if (t2.isFinished(plannerDatabase.getMemberId())) return 1;
               int compare = t1.due!.compareTo(t2.due!);
-              if (compare != null) {
+              if (compare != 0) {
                 return compare;
               } else {
-                return t1.courseid!.compareTo(t2.courseid!) ?? 0;
+                return t1.courseid!.compareTo(t2.courseid!);
               }
             });
           return ListView.builder(
@@ -408,14 +408,15 @@ void showTaskDetailSheet(BuildContext context,
       context: context,
       body: (context) {
         return StreamBuilder<SchoolTask?>(
-            stream: plannerdatabase.tasks.getItemStream(taskid),
-            builder: (context, snapshot) {
-              SchoolTask? schoolTask = snapshot.data;
-              if (schoolTask == null) return loadedView();
-              return Expanded(
-                  child: Column(
+          stream: plannerdatabase.tasks.getItemStream(taskid),
+          builder: (context, snapshot) {
+            SchoolTask? schoolTask = snapshot.data;
+            if (schoolTask == null) return loadedView();
+            return Expanded(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  getSheetText(context, schoolTask.title ?? '-'),
+                  getSheetText(context, schoolTask.title),
                   getExpandList([
                     schoolTask.private == true
                         ? ListTile(
@@ -670,9 +671,10 @@ void showTaskDetailSheet(BuildContext context,
                   ),
                   FormSpace(16.0),
                 ],
-                mainAxisSize: MainAxisSize.min,
-              ));
-            });
+              ),
+            );
+          },
+        );
       },
       routname: 'schooltaskid');
 }
@@ -692,56 +694,59 @@ void showTaskDetailSheetCritical(BuildContext context,
               if (schoolTask == null) return loadedView();
               return Expanded(
                   child: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  getSheetText(context, schoolTask.title ?? '-'),
-                  getExpandList([
-                    schoolTask.private == true
-                        ? ListTile(
-                            leading: Icon(Icons.person_outline),
-                            title: Text(getString(context).private),
-                          )
-                        : nowidget(),
-                    schoolTask.courseid == null
-                        ? nowidget()
-                        : ListTile(
-                            leading: Icon(Icons.widgets),
-                            title: Text(plannerdatabase
-                                .getCourseInfo(schoolTask.courseid!)!
-                                .getName()),
-                          ),
-                    ListTile(
-                      leading: Icon(Icons.event),
-                      title: Text(getString(context).due +
-                          ': ' +
-                          getDateText(schoolTask.due!)),
-                    ),
-                    schoolTask.detail == null
-                        ? nowidget()
-                        : ListTile(
-                            leading: Icon(Icons.note),
-                            title: Text(schoolTask.detail),
-                          ),
-                    schoolTask.files == null
-                        ? nowidget()
-                        : Column(
-                            children: schoolTask.files.values
-                                .map((cloudfile) => ListTile(
-                                      title: Text(cloudfile!.name!),
-                                      leading: Icon(Icons.attach_file),
-                                      subtitle: cloudfile.url == null
-                                          ? null
-                                          : Text(
-                                              cloudfile.url!,
-                                              style:
-                                                  TextStyle(color: Colors.blue),
-                                            ),
-                                      onTap: () {
-                                        OpenCloudFile(context, cloudfile);
-                                      },
-                                    ))
-                                .toList(),
-                          ),
-                  ]),
+                  getSheetText(context, schoolTask.title),
+                  getExpandList(
+                    [
+                      schoolTask.private == true
+                          ? ListTile(
+                              leading: Icon(Icons.person_outline),
+                              title: Text(getString(context).private),
+                            )
+                          : nowidget(),
+                      schoolTask.courseid == null
+                          ? nowidget()
+                          : ListTile(
+                              leading: Icon(Icons.widgets),
+                              title: Text(plannerdatabase
+                                  .getCourseInfo(schoolTask.courseid!)!
+                                  .getName()),
+                            ),
+                      ListTile(
+                        leading: Icon(Icons.event),
+                        title: Text(getString(context).due +
+                            ': ' +
+                            getDateText(schoolTask.due!)),
+                      ),
+                      schoolTask.detail == null
+                          ? nowidget()
+                          : ListTile(
+                              leading: Icon(Icons.note),
+                              title: Text(schoolTask.detail),
+                            ),
+                      schoolTask.files == null
+                          ? nowidget()
+                          : Column(
+                              children: schoolTask.files.values
+                                  .map((cloudfile) => ListTile(
+                                        title: Text(cloudfile!.name!),
+                                        leading: Icon(Icons.attach_file),
+                                        subtitle: cloudfile.url == null
+                                            ? null
+                                            : Text(
+                                                cloudfile.url!,
+                                                style: TextStyle(
+                                                    color: Colors.blue),
+                                              ),
+                                        onTap: () {
+                                          OpenCloudFile(context, cloudfile);
+                                        },
+                                      ))
+                                  .toList(),
+                            ),
+                    ],
+                  ),
                   Align(
                     alignment: Alignment.bottomCenter,
                     child: ButtonBar(
@@ -895,7 +900,6 @@ void showTaskDetailSheetCritical(BuildContext context,
                   ),
                   FormSpace(16.0),
                 ],
-                mainAxisSize: MainAxisSize.min,
               ));
             });
       },

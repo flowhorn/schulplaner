@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 import 'package:schulplaner8/Helper/Functions.dart';
 import 'package:schulplaner8/Helper/helper_views.dart';
-import 'package:schulplaner8/OldGrade/Grade.dart';
+
 import 'package:schulplaner8/OldGrade/course_all_grade_view.dart';
+import 'package:schulplaner8/OldGrade/models/average_calculator.dart';
+import 'package:schulplaner8/OldGrade/models/grade.dart';
 import 'package:schulplaner8/groups/src/models/course.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
 import 'package:schulplaner_widgets/schulplaner_common.dart';
@@ -44,7 +46,7 @@ class GradeCoursesView extends StatelessWidget {
                         .getSettings()
                         .getCurrentAverageDisplay(context: context)
                         .input(calculator
-                            .averageperCourse[course.id]!.totalaverage))
+                            .averageperCourse[course.id]!.totalaverage!))
                 : '/',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
           ),

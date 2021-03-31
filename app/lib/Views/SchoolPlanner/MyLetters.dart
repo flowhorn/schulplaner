@@ -36,7 +36,7 @@ void showSchoolLetterMoreSheet(BuildContext context,
               if (letter == null) return loadedView();
               return Column(
                 children: <Widget>[
-                  getSheetText(context, letter.title ?? '-'),
+                  getSheetText(context, letter.title),
                   ListTile(
                     leading: Icon(Icons.edit),
                     title: Text(getString(context).edit),
@@ -75,7 +75,7 @@ void showSchoolLetterMoreSheet(BuildContext context,
                               .then((result) {
                             if (result == true) {
                               Navigator.popUntil(context, (Route predicate) {
-                                return (predicate?.settings?.name
+                                return (predicate.settings.name
                                             ?.startsWith('schoollettermore') ??
                                         true) ==
                                     false;
@@ -106,7 +106,7 @@ void showSchoolLetterMoreSheet(BuildContext context,
                               .then((result) {
                             if (result == true) {
                               Navigator.popUntil(context, (Route predicate) {
-                                return (predicate?.settings?.name
+                                return (predicate.settings.name
                                             ?.startsWith('schoollettermore') ??
                                         true) ==
                                     false;
@@ -369,7 +369,9 @@ class LetterCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: Material(
+        color: Colors.transparent,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             ListTile(
               title: Text(letter.title),
@@ -394,12 +396,18 @@ class LetterCard extends StatelessWidget {
                   }),
             ),
             InkWell(
+              onTap: () {
+                pushWidget(
+                    context,
+                    LetterDetailedView(
+                        initialdata: letter, database: database));
+              },
               child: Padding(
                 padding: EdgeInsets.only(
                     left: 8.0, right: 8.0, top: 8.0, bottom: 8.0),
                 child: RichText(
                   text: TextSpan(
-                      text: letter.content ?? '-',
+                      text: letter.content,
                       style: TextStyle(
                           color: getClearTextColor(context),
                           fontWeight: FontWeight.w400)),
@@ -408,15 +416,10 @@ class LetterCard extends StatelessWidget {
                   overflow: TextOverflow.fade,
                 ),
               ),
-              onTap: () {
-                pushWidget(
-                    context,
-                    LetterDetailedView(
-                        initialdata: letter, database: database));
-              },
             ),
             letter.allowreply
                 ? Card(
+                    margin: EdgeInsets.all(4.0),
                     child: ListTile(
                       title: Text(letter.getMyResponse(database)?.message ??
                           getString(context).reply + '...'),
@@ -427,21 +430,23 @@ class LetterCard extends StatelessWidget {
                                 previousText:
                                     letter.getMyResponse(database)?.message,
                                 title: getString(context).reply)
-                            .then((newtext) {
-                          if (newtext != null) {
-                            database.dataManager.SetResponseLetter(
-                                letter,
-                                LetterResponse.Create(
-                                        id: database.dataManager.getMemberId())
-                                    .copyWith(
-                                        message: newtext,
-                                        type: ResponseType.REPLY));
-                          }
-                        });
+                            .then(
+                          (newtext) {
+                            if (newtext != null) {
+                              database.dataManager.SetResponseLetter(
+                                  letter,
+                                  LetterResponse.Create(
+                                          id: database.dataManager
+                                              .getMemberId())
+                                      .copyWith(
+                                          message: newtext,
+                                          type: ResponseType.REPLY));
+                            }
+                          },
+                        );
                       },
                       dense: true,
                     ),
-                    margin: EdgeInsets.all(4.0),
                   )
                 : nowidget(),
             Padding(
@@ -456,12 +461,12 @@ class LetterCard extends StatelessWidget {
                           LetterDetailedView(
                               initialdata: letter, database: database));
                     },
-                    child: Text(getString(context).details.toUpperCase()),
                     style: ButtonStyle(
                       foregroundColor: MaterialStateProperty.all(
                           getEventualTextColor(
                               context, getPrimaryColor(context))),
                     ),
+                    child: Text(getString(context).details.toUpperCase()),
                   ),
                   letter.isRead(database)
                       ? nowidget()
@@ -483,12 +488,10 @@ class LetterCard extends StatelessWidget {
                           ),
                         ),
                 ],
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
               ),
             ),
           ],
         ),
-        color: Colors.transparent,
       ),
     );
   }
@@ -553,7 +556,7 @@ class LetterDetailedView extends StatelessWidget {
                                 left: 8.0, right: 8.0, top: 8.0, bottom: 8.0),
                             child: RichText(
                               text: TextSpan(
-                                  text: letter.content ?? '-',
+                                  text: letter.content,
                                   style: TextStyle(
                                       color: getClearTextColor(context),
                                       fontWeight: FontWeight.w400)),
@@ -730,7 +733,7 @@ class LetterDetailedView extends StatelessWidget {
                             .then((result) {
                           if (result == true) {
                             Navigator.popUntil(context, (Route predicate) {
-                              return (predicate?.settings?.name
+                              return (predicate.settings.name
                                           ?.startsWith('schoollettermore') ??
                                       true) ==
                                   false;
@@ -838,7 +841,7 @@ class LetterResponsesView extends StatelessWidget {
                               left: 8.0, right: 8.0, top: 8.0, bottom: 8.0),
                           child: RichText(
                             text: TextSpan(
-                                text: letter.content ?? '-',
+                                text: letter.content ,
                                 style: TextStyle(
                                     color: getClearTextColor(context),
                                     fontWeight: FontWeight.w400)),

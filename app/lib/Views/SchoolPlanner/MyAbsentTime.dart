@@ -52,189 +52,189 @@ class NewAbsentTimeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-        child: ValueListenableBuilder<AbsentTime>(
-            valueListenable: notifier,
-            builder: (context, _, _2) {
-              if (data == null) return CircularProgressIndicator();
-              return Theme(
-                  data: clearAppThemeData(context: context),
-                  child: Scaffold(
-                    appBar: MyAppHeader(
-                        title: editmode
-                            ? getString(context).editabsenttime
-                            : getString(context).newabsenttime),
-                    body: SingleChildScrollView(
-                        child: Column(
-                      children: <Widget>[
-                        FormSpace(12.0),
-                        FormTextField(
-                          text: data.detail,
-                          valueChanged: (newtext) {
-                            data.detail = newtext;
-                            changedValues = true;
-                          },
-                          labeltext: getString(context).title,
-                          maxLength: 52,
-                          maxLengthEnforced: true,
-                          maxLines: 1,
-                        ),
-                        FormSpace(12.0),
-                        FormDivider(),
-                        ListTile(
-                          leading: Icon(Icons.event),
-                          title: Text(getString(context).date),
-                          subtitle: Text(data.date != null
-                              ? getDateText(data.date!)
-                              : '-'),
-                          onTap: () {
-                            selectDateString(context, data.date)
-                                .then((newDateString) {
-                              if (newDateString != null) {
-                                data.date = newDateString;
+      onWillPop: () async {
+        if (changedValues == false) return true;
+        return showConfirmDialog(
+                context: context,
+                title: getString(context).discardchanges,
+                action: getString(context).confirm,
+                richtext: RichText(
+                    text: TextSpan(text: getString(context).pleasecheckdata)))
+            .then((value) {
+          if (value == true) {
+            return true;
+          } else {
+            return false;
+          }
+        });
+      },
+      child: ValueListenableBuilder<AbsentTime>(
+        valueListenable: notifier,
+        builder: (context, _, _2) {
+          if (data == null) return CircularProgressIndicator();
+          return Theme(
+            data: clearAppThemeData(context: context),
+            child: Scaffold(
+              appBar: MyAppHeader(
+                  title: editmode
+                      ? getString(context).editabsenttime
+                      : getString(context).newabsenttime),
+              body: SingleChildScrollView(
+                  child: Column(
+                children: <Widget>[
+                  FormSpace(12.0),
+                  FormTextField(
+                    text: data.detail,
+                    valueChanged: (newtext) {
+                      data.detail = newtext;
+                      changedValues = true;
+                    },
+                    labeltext: getString(context).title,
+                    maxLength: 52,
+                    maxLengthEnforced: true,
+                    maxLines: 1,
+                  ),
+                  FormSpace(12.0),
+                  FormDivider(),
+                  ListTile(
+                    leading: Icon(Icons.event),
+                    title: Text(getString(context).date),
+                    subtitle:
+                        Text(data.date != null ? getDateText(data.date!) : '-'),
+                    onTap: () {
+                      selectDateString(context, data.date)
+                          .then((newDateString) {
+                        if (newDateString != null) {
+                          data.date = newDateString;
+                          notifier.value = data;
+                          notifier.notifyListeners();
+                        }
+                      });
+                    },
+                  ),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: ButtonBar(
+                      children: (getRecommendedDatesSimple(context)).map(
+                        (rec) {
+                          return RButton(
+                              text: rec.text,
+                              onTap: () {
+                                data.date = rec.date;
                                 notifier.value = data;
                                 notifier.notifyListeners();
-                              }
-                            });
-                          },
-                        ),
-                        SingleChildScrollView(
-                          child: ButtonBar(
-                            children:
-                                (getRecommendedDatesSimple(context)).map((rec) {
-                              return RButton(
-                                  text: rec.text,
-                                  onTap: () {
-                                    data.date = rec.date;
-                                    notifier.value = data;
-                                    notifier.notifyListeners();
-                                  },
-                                  enabled: rec.date != data.date,
-                                  disabledColor: Colors.green,
-                                  iconData: rec.date == data.date
-                                      ? Icons.done
-                                      : null);
-                            }).toList(),
-                          ),
-                          scrollDirection: Axis.horizontal,
-                        ),
-                        FormDivider(),
-                        SwitchListTile(
-                          value: data.unexcused,
-                          onChanged: (newvalue) {
-                            data.unexcused = newvalue;
-                            notifier.value = data;
-                            notifier.notifyListeners();
-                          },
-                          title: Text(getString(context).unexcused),
-                        ),
-                        ListTile(
-                          title: Text(getString(context).amountoflessons),
-                          subtitle: Text(data.amount == null
-                              ? '-'
-                              : (data.amount.toString() +
-                                  ' ' +
-                                  getString(context).lessons)),
-                          onTap: () {
-                            selectItem<int>(
-                                context: context,
-                                items: buildIntList(
-                                    database.getSettings().maxlessons,
-                                    start: 1),
-                                builder: (context, item) {
-                                  bool isSelected = item == data.amount;
-                                  return ListTile(
-                                    title: Text(item.toString() +
-                                        ' ' +
-                                        getString(context).lessons),
-                                    enabled: !isSelected,
-                                    trailing: isSelected
-                                        ? Icon(
-                                            Icons.done,
-                                            color: Colors.green,
-                                          )
-                                        : null,
-                                    onTap: () {
-                                      Navigator.pop(context);
-                                      data.amount = item;
-                                      notifier.value = data;
-                                      notifier.notifyListeners();
-                                    },
-                                  );
-                                });
-                          },
-                        ),
-                        FormDivider(),
-                        EditAttachementsView(
-                          database: database,
-                          attachments: data.files,
-                          onAdded: (file) {
-                            if (data.files == null) data.files = {};
-                            data.files![file.fileid!] = file;
-                            notifier.notifyListeners();
-                          },
-                          onRemoved: (file) {
-                            if (data.files == null) data.files = {};
-                            data.files![file.fileid!] = null;
-                            notifier.notifyListeners();
-                          },
-                        ),
-                        FormDivider(),
-                        FormSpace(64.0),
-                      ],
-                    )),
-                    floatingActionButton: FloatingActionButton.extended(
-                        onPressed: () {
-                          if (data.validate()) {
-                            var sheet =
-                                showPermissionStateSheet(context: context);
-                            Future.value(true).then((result) {
-                              if (result) {
-                                if (editmode) {
-                                  database.dataManager.ModifyAbsentTime(data);
-                                } else {
-                                  database.dataManager.CreateAbsentTime(data);
-                                }
-                                sheet.value = true;
-                                Future.delayed(Duration(milliseconds: 500))
-                                    .then((_) {
-                                  Navigator.pop(context);
-                                  Navigator.pop(context);
-                                });
-                              } else {
-                                sheet.value = false;
-                              }
-                            });
-                          } else {
-                            final infoDialog = InfoDialog(
-                              title: getString(context).failed,
-                              message: getString(context).pleasecheckdata,
-                            );
-                            // ignore: unawaited_futures
-                            infoDialog.show(context);
-                          }
+                              },
+                              enabled: rec.date != data.date,
+                              disabledColor: Colors.green,
+                              iconData:
+                                  rec.date == data.date ? Icons.done : null);
                         },
-                        icon: Icon(Icons.done),
-                        label: Text(
-                          getString(context).done,
-                        )),
-                  ));
-            }),
-        onWillPop: () async {
-          if (changedValues == false) return true;
-          return showConfirmDialog(
-                  context: context,
-                  title: getString(context).discardchanges,
-                  action: getString(context).confirm,
-                  richtext: RichText(
-                      text: TextSpan(text: getString(context).pleasecheckdata)))
-              .then((value) {
-            if (value == true) {
-              return true;
-            } else {
-              return false;
-            }
-          });
-        });
+                      ).toList(),
+                    ),
+                  ),
+                  FormDivider(),
+                  SwitchListTile(
+                    value: data.unexcused,
+                    onChanged: (newvalue) {
+                      data.unexcused = newvalue;
+                      notifier.value = data;
+                      notifier.notifyListeners();
+                    },
+                    title: Text(getString(context).unexcused),
+                  ),
+                  ListTile(
+                    title: Text(getString(context).amountoflessons),
+                    subtitle: Text(data.amount == null
+                        ? '-'
+                        : (data.amount.toString() +
+                            ' ' +
+                            getString(context).lessons)),
+                    onTap: () {
+                      selectItem<int>(
+                          context: context,
+                          items: buildIntList(database.getSettings().maxlessons,
+                              start: 1),
+                          builder: (context, item) {
+                            bool isSelected = item == data.amount;
+                            return ListTile(
+                              title: Text(item.toString() +
+                                  ' ' +
+                                  getString(context).lessons),
+                              enabled: !isSelected,
+                              trailing: isSelected
+                                  ? Icon(
+                                      Icons.done,
+                                      color: Colors.green,
+                                    )
+                                  : null,
+                              onTap: () {
+                                Navigator.pop(context);
+                                data.amount = item;
+                                notifier.value = data;
+                                notifier.notifyListeners();
+                              },
+                            );
+                          });
+                    },
+                  ),
+                  FormDivider(),
+                  EditAttachementsView(
+                    database: database,
+                    attachments: data.files,
+                    onAdded: (file) {
+                      if (data.files == null) data.files = {};
+                      data.files![file.fileid!] = file;
+                      notifier.notifyListeners();
+                    },
+                    onRemoved: (file) {
+                      if (data.files == null) data.files = {};
+                      data.files![file.fileid!] = null;
+                      notifier.notifyListeners();
+                    },
+                  ),
+                  FormDivider(),
+                  FormSpace(64.0),
+                ],
+              )),
+              floatingActionButton: FloatingActionButton.extended(
+                onPressed: () {
+                  if (data.validate()) {
+                    var sheet = showPermissionStateSheet(context: context);
+                    Future.value(true).then((result) {
+                      if (result) {
+                        if (editmode) {
+                          database.dataManager.ModifyAbsentTime(data);
+                        } else {
+                          database.dataManager.CreateAbsentTime(data);
+                        }
+                        sheet.value = true;
+                        Future.delayed(Duration(milliseconds: 500)).then((_) {
+                          Navigator.pop(context);
+                          Navigator.pop(context);
+                        });
+                      } else {
+                        sheet.value = false;
+                      }
+                    });
+                  } else {
+                    final infoDialog = InfoDialog(
+                      title: getString(context).failed,
+                      message: getString(context).pleasecheckdata,
+                    );
+                    // ignore: unawaited_futures
+                    infoDialog.show(context);
+                  }
+                },
+                icon: Icon(Icons.done),
+                label: Text(
+                  getString(context).done,
+                ),
+              ),
+            ),
+          );
+        },
+      ),
+    );
   }
 }
 
@@ -340,27 +340,28 @@ void showAbsentTimeDetailSheetCritical(
   required PlannerDatabase plannerdatabase,
 }) {
   showDetailSheetBuilder(
-      context: context,
-      body: (context) {
-        return StreamBuilder<AbsentTime?>(
-            stream: plannerdatabase.dataManager.absentTimeRef
-                .doc(absentTimeData.id)
-                .snapshots()
-                .map((snap) => snap.data != null
-                    ? AbsentTime.fromData(snap.data()!)
-                    : null),
-            builder: (context, snapshot) {
-              AbsentTime? absenttime = snapshot.data;
-              if (absenttime == null) return loadedView();
-              return Expanded(
-                  child: Column(
-                children: <Widget>[
-                  getSheetText(
-                      context,
-                      absenttime.amount.toString() +
-                              ' ${getString(context).absentlessons}' ??
-                          '-'),
-                  getExpandList([
+    context: context,
+    body: (context) {
+      return StreamBuilder<AbsentTime?>(
+        stream: plannerdatabase.dataManager.absentTimeRef
+            .doc(absentTimeData.id)
+            .snapshots()
+            .map((snap) =>
+                snap.data != null ? AbsentTime.fromData(snap.data()!) : null),
+        builder: (context, snapshot) {
+          AbsentTime? absenttime = snapshot.data;
+          if (absenttime == null) return loadedView();
+          return Expanded(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                getSheetText(
+                  context,
+                  absenttime.amount.toString() +
+                      ' ${getString(context).absentlessons}',
+                ),
+                getExpandList(
+                  [
                     absenttime.date == null
                         ? nowidget()
                         : ListTile(
@@ -405,65 +406,68 @@ void showAbsentTimeDetailSheetCritical(
                                     ))
                                 .toList(),
                           ),
-                  ]),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: ButtonBar(
-                      children: <Widget>[
-                        RButton(
-                            text: getString(context).more,
-                            onTap: () {
-                              showSheetBuilder(
-                                  context: context,
-                                  child: (context) {
-                                    return getFlexList([
-                                      ListTile(
-                                        leading: Icon(Icons.edit),
-                                        title: Text(getString(context).edit),
-                                        onTap: () {
-                                          Navigator.pop(context);
-                                          pushWidget(
-                                              context,
-                                              NewAbsentTimeView.Edit(
-                                                database: plannerdatabase,
-                                                absenttimedata: absenttime,
-                                              ));
-                                        },
+                  ],
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: ButtonBar(
+                    children: <Widget>[
+                      RButton(
+                          text: getString(context).more,
+                          onTap: () {
+                            showSheetBuilder(
+                                context: context,
+                                child: (context) {
+                                  return getFlexList([
+                                    ListTile(
+                                      leading: Icon(Icons.edit),
+                                      title: Text(getString(context).edit),
+                                      onTap: () {
+                                        Navigator.pop(context);
+                                        pushWidget(
+                                            context,
+                                            NewAbsentTimeView.Edit(
+                                              database: plannerdatabase,
+                                              absenttimedata: absenttime,
+                                            ));
+                                      },
+                                    ),
+                                    ListTile(
+                                      leading: Icon(
+                                        Icons.delete_sweep,
+                                        color: Colors.red,
                                       ),
-                                      ListTile(
-                                        leading: Icon(
-                                          Icons.delete_sweep,
-                                          color: Colors.red,
-                                        ),
-                                        title: Text(getString(context).delete),
-                                        onTap: () {
-                                          showConfirmDialog(
-                                            context: context,
-                                            title: getString(context).delete,
-                                          ).then((delete) {
-                                            if (delete == true) {
-                                              plannerdatabase.dataManager
-                                                  .DeleteAbsentTime(absenttime);
-                                              popNavigatorBy(context,
-                                                  text: 'absenttimeid');
-                                            }
-                                          });
-                                        },
-                                      ),
-                                    ]);
-                                  },
-                                  title: getString(context).more,
-                                  routname: 'absenttimeid');
-                            },
-                            iconData: Icons.more_horiz),
-                      ],
-                    ),
+                                      title: Text(getString(context).delete),
+                                      onTap: () {
+                                        showConfirmDialog(
+                                          context: context,
+                                          title: getString(context).delete,
+                                        ).then((delete) {
+                                          if (delete == true) {
+                                            plannerdatabase.dataManager
+                                                .DeleteAbsentTime(absenttime);
+                                            popNavigatorBy(context,
+                                                text: 'absenttimeid');
+                                          }
+                                        });
+                                      },
+                                    ),
+                                  ]);
+                                },
+                                title: getString(context).more,
+                                routname: 'absenttimeid');
+                          },
+                          iconData: Icons.more_horiz),
+                    ],
                   ),
-                  FormSpace(16.0),
-                ],
-                mainAxisSize: MainAxisSize.min,
-              ));
-            });
-      },
-      routname: 'absenttimeid');
+                ),
+                FormSpace(16.0),
+              ],
+            ),
+          );
+        },
+      );
+    },
+    routname: 'absenttimeid',
+  );
 }

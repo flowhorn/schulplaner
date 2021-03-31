@@ -1,9 +1,7 @@
-//
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/app_base/src/blocs/planner_loader_bloc.dart';
 import 'package:schulplaner8/app_base/src/models/load_all_planner_status.dart';
 import 'package:schulplaner8/models/planner.dart';
-import 'package:schulplaner_widgets/schulplaner_common.dart';
 
 class OrderableExample extends StatefulWidget {
   final LoadAllPlannerStatus loadAllPlannerStatus;
@@ -46,23 +44,21 @@ class _OrderableExampleState extends State<OrderableExample> {
           account,
         )));
     _items.sort((ItemData a, ItemData b) {
-      return ((accountorder ?? {})[b.id] ?? -1)
-          .compareTo((accountorder ?? {})[a.id] ?? -1);
+      return ((accountorder)[b.id] ?? -1).compareTo((accountorder)[a.id] ?? -1);
     });
   }
 
-  bool _reorderCallback(int item, int newPosition) {
-    int draggingIndex = item;
-    int newPositionIndex = newPosition;
-
+  bool _reorderCallback(int draggingIndex, int newPositionIndex) {
     // Uncomment to allow only even target reorder possition
     // if (newPositionIndex % 2 == 1)
     //   return false;
-
+    print('Reordering');
     final draggedItem = _items[draggingIndex];
     setState(() {
-      debugPrint(
-          'Reordering ' + item.toString() + ' -> ' + newPosition.toString());
+      debugPrint('Reordering ' +
+          draggingIndex.toString() +
+          ' -> ' +
+          newPositionIndex.toString());
       _items.removeAt(draggingIndex);
       _items.insert(newPositionIndex, draggedItem);
 
@@ -83,36 +79,35 @@ class _OrderableExampleState extends State<OrderableExample> {
   //
   @override
   Widget build(BuildContext context) {
-    return ReorderableList(
+    return ReorderableListView(
       onReorder: _reorderCallback,
-      itemBuilder: (context, index) {
-        return Item(
-          data: _items[index],
-          // first and last attributes affect border drawn during dragging
-          first: index == 0,
-          last: index == _items.length - 1,
-          child: builder(context, _items[index].planner, null),
-        );
-      },
-      itemCount: _items.length,
+      children: [
+        for (final item in _items)
+          Item(
+            key: ValueKey(item.id),
+            data: item,
+            // first and last attributes affect border drawn during dragging
+            child: builder(context, item.planner, null),
+          )
+      ],
+    
     );
   }
 }
 
 class Item extends StatelessWidget {
-  Item(
-      {required this.data,
-      required this.first,
-      required this.last,
-      required this.child});
+  const Item({
+    Key? key,
+    required this.data,
+    required this.child,
+  }) : super(key: key);
 
   final Widget child;
   final ItemData data;
-  final bool first;
-  final bool last;
 
   // Builds decoration for list item; During dragging we don't want top border on first item
   // and bottom border on last item
+/*
   BoxDecoration _buildDecoration(BuildContext context, bool dragging) {
     return BoxDecoration(
         border: Border(
@@ -127,9 +122,10 @@ class Item extends StatelessWidget {
   Widget _buildChild(BuildContext context, bool dragging) {
     return child;
   }
+*/
 
   @override
   Widget build(BuildContext context) {
-    return _buildChild(context, false);
+    return child;
   }
 }

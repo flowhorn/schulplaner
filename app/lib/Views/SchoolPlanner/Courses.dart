@@ -88,7 +88,7 @@ void showCourseMoreSheet(BuildContext context,
               if (courseInfo == null) return loadedView();
               return Column(
                 children: <Widget>[
-                  getSheetText(context, courseInfo.getName() ?? '-'),
+                  getSheetText(context, courseInfo.getName()),
                   SingleChildScrollView(
                     child: Column(children: [
                       ListTile(
@@ -267,7 +267,7 @@ class CourseSecurityView extends StatelessWidget {
             child: CircularProgressIndicator(),
           );
         }
-        Design? courseDesign = courseInfo?.getDesign();
+        Design? courseDesign = courseInfo.getDesign();
         return Theme(
           data: newAppThemeDesign(context, courseDesign),
           child: Scaffold(
@@ -328,7 +328,7 @@ class CourseTemplatesView extends StatelessWidget {
       body: StreamBuilder<Map<String, Course>>(
           stream: database.courseinfo.stream,
           builder: (context, snapshot) {
-            List<Course> allmycourses = snapshot.data?.values?.toList() ?? [];
+            List<Course> allmycourses = snapshot.data?.values.toList() ?? [];
             return ListView.separated(
               itemBuilder: (context, index) {
                 dynamic item = templates[index];
@@ -458,16 +458,14 @@ class CourseConnectedClassesView extends StatelessWidget {
                           ListTile(
                             leading: Icon(Icons.people),
                             title: Text(
-                                (mClassinfo?.membersData?.length?.toString() ??
-                                        '?') +
+                                (mClassinfo.membersData.length.toString() ) +
                                     bothlang(context,
                                         de: 'Mitglieder', en: 'Members')),
                           ),
                           ListTile(
                             leading: Icon(Icons.widgets),
-                            title: Text((mClassinfo?.courses?.length
-                                        ?.toString() ??
-                                    '?') +
+                            title: Text((mClassinfo.courses.length
+                                        .toString()) +
                                 bothlang(context, de: 'Fächer', en: 'Courses')),
                           ),
                           ButtonBar(
@@ -545,14 +543,13 @@ class CourseConnectedClassesView extends StatelessWidget {
                               ListTile(
                                 leading: Icon(Icons.people),
                                 title: Text(
-                                    (info?.membersData?.length?.toString() ??
-                                            '?') +
+                                    (info.membersData.length.toString() ) +
                                         getString(context).members),
                               ),
                               ListTile(
                                 leading: Icon(Icons.widgets),
                                 title: Text(
-                                    (info?.courses?.length?.toString() ?? '?') +
+                                    (info.courses.length.toString() ) +
                                         getString(context).courses),
                               ),
                               ButtonBar(

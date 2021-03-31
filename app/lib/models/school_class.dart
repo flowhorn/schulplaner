@@ -96,7 +96,7 @@ class SchoolClass {
       id: data['classid'],
       name: data['name'],
       design: Design.fromData(data['design']?.cast<String, dynamic>()),
-      shortname: data['shortname'],
+      shortname: data['shortname'] ?? '',
       courses: courses,
       publiccode: data['publiccode'],
       joinLink: data['joinLink'],
@@ -190,12 +190,12 @@ class SchoolClass {
   }
 
   String getShortname({int length = 2}) {
-    String text = shortname != '' ? shortname :  name ;
+    String text = shortname != '' ? shortname : name;
     return text.substring(0, text.length > length ? length : text.length);
   }
 
   String getShortname_full() {
-    String text = shortname != '' ? shortname :  name ;
+    String text = shortname != '' ? shortname : name;
     return text;
   }
 

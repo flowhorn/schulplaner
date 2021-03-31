@@ -63,297 +63,297 @@ class NewSchoolEventView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    recommendeddates = (_nextlessons ?? [])
+    recommendeddates = (_nextlessons)
         .map((date) =>
             RecommendedDate(date: date, text: getString(context).nextlesson))
         .toList()
           ..addAll(getRecommendedDatesSimple(context));
 
     return WillPopScope(
-        child: ValueListenableBuilder<SchoolEvent>(
-            valueListenable: notifier,
-            builder: (context, _, _2) {
-              if (data == null) return CircularProgressIndicator();
-              return Theme(
-                  data: getEventTheme(context),
-                  child: Scaffold(
-                    appBar: MyAppHeader(
-                        title: editmode
-                            ? getString(context).editevent
-                            : getString(context).newevent),
-                    body: SingleChildScrollView(
-                        child: Column(
-                      children: <Widget>[
-                        FormSpace(12.0),
-                        FormTextField(
-                          text: data.title,
-                          valueChanged: (newtext) {
-                            data.title = newtext;
-                            changedValues = true;
-                          },
-                          labeltext: getString(context).title,
-                          maxLength: 52,
-                          maxLengthEnforced: true,
-                          maxLines: 1,
-                        ),
-                        FormSpace(12.0),
-                        FormDivider(),
-                        ListTile(
-                          title: Text(getString(context).eventtype),
-                          leading: data.type != null
-                              ? Icon(
-                                  eventtype_data(context)[data.type]!.iconData)
-                              : Icon(Icons.warning),
-                          subtitle: Text(data.type != null
-                              ? eventtype_data(context)[data.type]!.name
-                              : '-'),
-                          onTap: () {
-                            selectItem<EventTypeData>(
-                                context: context,
-                                items: eventtype_data(context).values.toList(),
-                                builder: (context, item) {
-                                  bool isSelected = item.id == data.type;
-                                  return ListTile(
-                                    leading: Icon(item.iconData),
-                                    title: Text(item.name),
-                                    trailing: isSelected
-                                        ? Icon(
-                                            Icons.done,
-                                            color: Colors.green,
-                                          )
-                                        : null,
-                                    enabled: !isSelected,
-                                    onTap: () {
-                                      Navigator.pop(context);
-                                      data.type = item.id;
-                                      notifier.value = data;
-                                      notifier.notifyListeners();
-                                    },
-                                  );
-                                });
-                          },
-                        ),
-                        FormDivider(),
-                        EditCourseField(
-                          courseId: data.courseid,
-                          editmode: editmode,
-                          onChanged: (context, newCourse) {
-                            data.courseid = newCourse.id;
-                            data.classid = null;
-                            notifier.value = data;
-                            List<String> nextlessons = getNextLessons(
-                                database, data.courseid!,
-                                count: 1);
-                            if (data.date == null && nextlessons.isNotEmpty) {
-                              data.date = nextlessons[0];
-                            }
-                            recommendeddates = nextlessons
-                                .map((date) => RecommendedDate(
-                                    date: date,
-                                    text: getString(context).nextlesson))
-                                .toList()
-                                  ..addAll(getRecommendedDatesSimple(context));
-                            notifier.notifyListeners();
-                          },
-                        ),
-                        SwitchListTile(
-                          title: Text(getString(context).saveprivately),
-                          value: data.private ?? false,
-                          onChanged: editmode
-                              ? null
-                              : (newvalue) {
-                                  data.private = newvalue;
+      onWillPop: () async {
+        if (changedValues == false) return true;
+        return showConfirmDialog(
+                context: context,
+                title: getString(context).discardchanges,
+                action: getString(context).confirm,
+                richtext: RichText(
+                    text: TextSpan(text: getString(context).pleasecheckdata)))
+            .then((value) {
+          if (value == true) {
+            return true;
+          } else {
+            return false;
+          }
+        });
+      },
+      child: ValueListenableBuilder<SchoolEvent>(
+        valueListenable: notifier,
+        builder: (context, _, _2) {
+          if (data == null) return CircularProgressIndicator();
+          return Theme(
+            data: getEventTheme(context),
+            child: Scaffold(
+              appBar: MyAppHeader(
+                  title: editmode
+                      ? getString(context).editevent
+                      : getString(context).newevent),
+              body: SingleChildScrollView(
+                child: Column(
+                  children: <Widget>[
+                    FormSpace(12.0),
+                    FormTextField(
+                      text: data.title,
+                      valueChanged: (newtext) {
+                        data.title = newtext;
+                        changedValues = true;
+                      },
+                      labeltext: getString(context).title,
+                      maxLength: 52,
+                      maxLengthEnforced: true,
+                      maxLines: 1,
+                    ),
+                    FormSpace(12.0),
+                    FormDivider(),
+                    ListTile(
+                      title: Text(getString(context).eventtype),
+                      leading: data.type != null
+                          ? Icon(eventtype_data(context)[data.type]!.iconData)
+                          : Icon(Icons.warning),
+                      subtitle: Text(data.type != null
+                          ? eventtype_data(context)[data.type]!.name
+                          : '-'),
+                      onTap: () {
+                        selectItem<EventTypeData>(
+                            context: context,
+                            items: eventtype_data(context).values.toList(),
+                            builder: (context, item) {
+                              bool isSelected = item.id == data.type;
+                              return ListTile(
+                                leading: Icon(item.iconData),
+                                title: Text(item.name),
+                                trailing: isSelected
+                                    ? Icon(
+                                        Icons.done,
+                                        color: Colors.green,
+                                      )
+                                    : null,
+                                enabled: !isSelected,
+                                onTap: () {
+                                  Navigator.pop(context);
+                                  data.type = item.id;
                                   notifier.value = data;
                                   notifier.notifyListeners();
                                 },
-                        ),
-                        FormDivider(),
-                        ListTile(
-                          leading: Icon(Icons.event),
-                          title: Text(getString(context).date),
-                          subtitle: Text(data.date != null
-                              ? getDateText(data.date!)
-                              : '-'),
-                          onTap: () {
-                            selectDateString(context, data.date)
-                                .then((newDateString) {
-                              if (newDateString != null) {
-                                data.date = newDateString;
-                                notifier.value = data;
-                                notifier.notifyListeners();
-                              }
+                              );
                             });
-                          },
-                          trailing: IconButton(
-                              icon: Icon(showenddate.value
-                                  ? Icons.expand_less
-                                  : Icons.expand_more),
-                              onPressed: () {
-                                showenddate.value = !(showenddate.value);
-                                notifier.notifyListeners();
-                              }),
-                        ),
-                        showenddate.value
-                            ? ListTile(
-                                leading: Icon(Icons.date_range),
-                                title: Text(getString(context).end),
-                                subtitle: Text(data.enddate != null
-                                    ? getDateText(data.enddate!)
-                                    : '-'),
+                      },
+                    ),
+                    FormDivider(),
+                    EditCourseField(
+                      courseId: data.courseid,
+                      editmode: editmode,
+                      onChanged: (context, newCourse) {
+                        data.courseid = newCourse.id;
+                        data.classid = null;
+                        notifier.value = data;
+                        List<String> nextlessons =
+                            getNextLessons(database, data.courseid!, count: 1);
+                        if (data.date == null && nextlessons.isNotEmpty) {
+                          data.date = nextlessons[0];
+                        }
+                        recommendeddates = nextlessons
+                            .map((date) => RecommendedDate(
+                                date: date,
+                                text: getString(context).nextlesson))
+                            .toList()
+                              ..addAll(getRecommendedDatesSimple(context));
+                        notifier.notifyListeners();
+                      },
+                    ),
+                    SwitchListTile(
+                      title: Text(getString(context).saveprivately),
+                      value: data.private,
+                      onChanged: editmode
+                          ? null
+                          : (newvalue) {
+                              data.private = newvalue;
+                              notifier.value = data;
+                              notifier.notifyListeners();
+                            },
+                    ),
+                    FormDivider(),
+                    ListTile(
+                      leading: Icon(Icons.event),
+                      title: Text(getString(context).date),
+                      subtitle: Text(
+                          data.date != null ? getDateText(data.date!) : '-'),
+                      onTap: () {
+                        selectDateString(context, data.date)
+                            .then((newDateString) {
+                          if (newDateString != null) {
+                            data.date = newDateString;
+                            notifier.value = data;
+                            notifier.notifyListeners();
+                          }
+                        });
+                      },
+                      trailing: IconButton(
+                          icon: Icon(showenddate.value
+                              ? Icons.expand_less
+                              : Icons.expand_more),
+                          onPressed: () {
+                            showenddate.value = !(showenddate.value);
+                            notifier.notifyListeners();
+                          }),
+                    ),
+                    showenddate.value
+                        ? ListTile(
+                            leading: Icon(Icons.date_range),
+                            title: Text(getString(context).end),
+                            subtitle: Text(data.enddate != null
+                                ? getDateText(data.enddate!)
+                                : '-'),
+                            onTap: () {
+                              selectDateString(context, data.enddate)
+                                  .then((newDateString) {
+                                if (newDateString != null) {
+                                  data.enddate = newDateString;
+                                  notifier.value = data;
+                                  notifier.notifyListeners();
+                                }
+                              });
+                            },
+                          )
+                        : nowidget(),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: ButtonBar(
+                        children: (recommendeddates).map(
+                          (rec) {
+                            return RButton(
+                                text: rec.text,
                                 onTap: () {
-                                  selectDateString(context, data.enddate)
-                                      .then((newDateString) {
-                                    if (newDateString != null) {
-                                      data.enddate = newDateString;
-                                      notifier.value = data;
+                                  data.date = rec.date;
+                                  notifier.value = data;
+                                  notifier.notifyListeners();
+                                },
+                                enabled: rec.date != data.date,
+                                disabledColor: Colors.green,
+                                iconData:
+                                    rec.date == data.date ? Icons.done : null);
+                          },
+                        ).toList(),
+                      ),
+                    ),
+                    FormDivider(),
+                    FormHideable(
+                        title: getString(context).timeofday,
+                        notifier: showtimeofday,
+                        builder: (context) {
+                          return Column(
+                            children: <Widget>[
+                              ListTile(
+                                title: Text(getString(context).starttime),
+                                subtitle: Text(data.starttime ?? '-'),
+                                onTap: () {
+                                  showTimePicker(
+                                          context: context,
+                                          initialTime:
+                                              parseTimeOfDay(data.starttime))
+                                      .then((TimeOfDay? newtime) {
+                                    if (newtime != null) {
+                                      data.starttime = parseTimeString(newtime);
                                       notifier.notifyListeners();
                                     }
                                   });
                                 },
-                              )
-                            : nowidget(),
-                        SingleChildScrollView(
-                          child: ButtonBar(
-                            children: (recommendeddates ??
-                                    getRecommendedDatesSimple(context))
-                                .map((rec) {
-                              return RButton(
-                                  text: rec.text,
-                                  onTap: () {
-                                    data.date = rec.date;
-                                    notifier.value = data;
-                                    notifier.notifyListeners();
-                                  },
-                                  enabled: rec.date != data.date,
-                                  disabledColor: Colors.green,
-                                  iconData: rec.date == data.date
-                                      ? Icons.done
-                                      : null);
-                            }).toList(),
-                          ),
-                          scrollDirection: Axis.horizontal,
-                        ),
-                        FormDivider(),
-                        FormHideable(
-                            title: getString(context).timeofday,
-                            notifier: showtimeofday,
-                            builder: (context) {
-                              return Column(
-                                children: <Widget>[
-                                  ListTile(
-                                    title: Text(getString(context).starttime),
-                                    subtitle: Text(data.starttime ?? '-'),
-                                    onTap: () {
-                                      showTimePicker(
-                                              context: context,
-                                              initialTime: parseTimeOfDay(
-                                                  data.starttime))
-                                          .then((TimeOfDay? newtime) {
-                                        if (newtime != null) {
-                                          data.starttime =
-                                              parseTimeString(newtime);
-                                          notifier.notifyListeners();
-                                        }
-                                      });
-                                    },
-                                  ),
-                                  ListTile(
-                                    title: Text(getString(context).endtime),
-                                    subtitle: Text(data.endtime ?? '-'),
-                                    onTap: () {
-                                      showTimePicker(
-                                              context: context,
-                                              initialTime:
-                                                  parseTimeOfDay(data.endtime))
-                                          .then((TimeOfDay? newtime) {
-                                        if (newtime != null) {
-                                          data.endtime =
-                                              parseTimeString(newtime);
-                                          notifier.notifyListeners();
-                                        }
-                                      });
-                                    },
-                                  ),
-                                ],
-                              );
-                            }),
-                        FormDivider(),
-                        FormHeader(getString(context).more),
-                        FormTextField(
-                          text: data.detail,
-                          valueChanged: (newtext) {
-                            data.detail = newtext;
-                            changedValues = true;
-                          },
-                          labeltext: getString(context).detail,
-                        ),
-                        FormSpace(16.0),
-                        FormDivider(),
-                        EditAttachementsView(
-                          database: database,
-                          attachments: data.files,
-                          onAdded: (file) {
-                            if (data.files == null) data.files = {};
-                            data.files[file.fileid!] = file;
-                            notifier.notifyListeners();
-                          },
-                          onRemoved: (file) {
-                            if (data.files == null) data.files = {};
-                            data.files[file.fileid!] = null;
-                            notifier.notifyListeners();
-                          },
-                        ),
-                        FormDivider(),
-                        FormSpace(64.0),
-                      ],
-                    )),
-                    floatingActionButton: FloatingActionButton.extended(
-                        onPressed: () {
-                          if ((editmode && data.validate()) ||
-                              (editmode == false && data.validateCreate())) {
-                            requestPermission().then((result) {
-                              if (result) {
-                                if (editmode) {
-                                  database.dataManager.ModifySchoolEvent(data);
-                                } else {
-                                  database.dataManager.CreateSchoolEvent(data);
-                                }
-                                Navigator.pop(context);
-                              } else {
-                                var sheet =
-                                    showPermissionStateSheet(context: context);
-                                sheet.value = false;
-                              }
-                            });
+                              ),
+                              ListTile(
+                                title: Text(getString(context).endtime),
+                                subtitle: Text(data.endtime ?? '-'),
+                                onTap: () {
+                                  showTimePicker(
+                                          context: context,
+                                          initialTime:
+                                              parseTimeOfDay(data.endtime))
+                                      .then((TimeOfDay? newtime) {
+                                    if (newtime != null) {
+                                      data.endtime = parseTimeString(newtime);
+                                      notifier.notifyListeners();
+                                    }
+                                  });
+                                },
+                              ),
+                            ],
+                          );
+                        }),
+                    FormDivider(),
+                    FormHeader(getString(context).more),
+                    FormTextField(
+                      text: data.detail,
+                      valueChanged: (newtext) {
+                        data.detail = newtext;
+                        changedValues = true;
+                      },
+                      labeltext: getString(context).detail,
+                    ),
+                    FormSpace(16.0),
+                    FormDivider(),
+                    EditAttachementsView(
+                      database: database,
+                      attachments: data.files,
+                      onAdded: (file) {
+                        if (data.files == null) data.files = {};
+                        data.files[file.fileid!] = file;
+                        notifier.notifyListeners();
+                      },
+                      onRemoved: (file) {
+                        if (data.files == null) data.files = {};
+                        data.files[file.fileid!] = null;
+                        notifier.notifyListeners();
+                      },
+                    ),
+                    FormDivider(),
+                    FormSpace(64.0),
+                  ],
+                ),
+              ),
+              floatingActionButton: FloatingActionButton.extended(
+                  onPressed: () {
+                    if ((editmode && data.validate()) ||
+                        (editmode == false && data.validateCreate())) {
+                      requestPermission().then(
+                        (result) {
+                          if (result) {
+                            if (editmode) {
+                              database.dataManager.ModifySchoolEvent(data);
+                            } else {
+                              database.dataManager.CreateSchoolEvent(data);
+                            }
+                            Navigator.pop(context);
                           } else {
-                            final infoDialog = InfoDialog(
-                              title: getString(context).failed,
-                              message: getString(context).pleasecheckdata,
-                            );
-                            // ignore: unawaited_futures
-                            infoDialog.show(context);
+                            var sheet =
+                                showPermissionStateSheet(context: context);
+                            sheet.value = false;
                           }
                         },
-                        icon: Icon(Icons.done),
-                        label: Text(getString(context).done)),
-                  ));
-            }),
-        onWillPop: () async {
-          if (changedValues == false) return true;
-          return showConfirmDialog(
-                  context: context,
-                  title: getString(context).discardchanges,
-                  action: getString(context).confirm,
-                  richtext: RichText(
-                      text: TextSpan(text: getString(context).pleasecheckdata)))
-              .then((value) {
-            if (value == true) {
-              return true;
-            } else {
-              return false;
-            }
-          });
-        });
+                      );
+                    } else {
+                      final infoDialog = InfoDialog(
+                        title: getString(context).failed,
+                        message: getString(context).pleasecheckdata,
+                      );
+                      // ignore: unawaited_futures
+                      infoDialog.show(context);
+                    }
+                  },
+                  icon: Icon(Icons.done),
+                  label: Text(getString(context).done)),
+            ),
+          );
+        },
+      ),
+    );
   }
 
   ThemeData getEventTheme(BuildContext context) {

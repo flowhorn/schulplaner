@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:schulplaner8/OldGrade/Grade.dart';
+import 'package:schulplaner8/OldGrade/models/choice.dart';
+import 'package:schulplaner8/OldGrade/models/grade.dart';
+
 import 'package:schulplaner8/models/helper_functions.dart';
 import 'package:schulplaner8/utils/models/coder.dart';
 

@@ -1,6 +1,8 @@
 //
 import 'package:bloc/bloc_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:schulplaner8/OldGrade/models/average_display.dart';
+import 'package:schulplaner8/OldGrade/models/choice.dart';
 import 'package:schulplaner8/Views/SchoolPlanner/planner_settings/notification_settings.dart';
 import 'package:schulplaner8/app_base/src/blocs/app_settings_bloc.dart';
 import 'package:schulplaner8/app_base/src/blocs/planner_database_bloc.dart';
@@ -24,7 +26,7 @@ import 'package:schulplaner8/Helper/helper_data.dart';
 import 'package:schulplaner_widgets/schulplaner_forms.dart';
 import 'package:schulplaner8/Helper/helper_views.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:schulplaner8/OldGrade/Grade.dart';
+
 import 'package:schulplaner8/OldGrade/GradeDetail.dart';
 import 'package:schulplaner8/OldGrade/GradePackage.dart';
 import 'package:schulplaner8/Views/SchoolPlanner/planner_settings/holiday_settings.dart';
@@ -801,194 +803,195 @@ class EditGradeProfileSettings extends StatelessWidget {
   Widget build(BuildContext context) {
     final PlannerSettingsData settings = database.settings.data!;
     return WillPopScope(
-        child: Scaffold(
-          appBar: MyAppHeader(title: getString(context).editgradeprofile),
-          body: ValueListenableBuilder<GradeProfile>(
-              valueListenable: notifier,
-              builder: (context, _, _2) {
-                print(gradeprofile.toJson());
-                return getDefaultList([
-                  FormSpace(8.0),
-                  FormTextField(
-                    text: gradeprofile.name ?? '',
-                    valueChanged: (newtext) {
-                      gradeprofile = gradeprofile.copyWith(name: newtext);
-                    },
-                  ),
-                  FormSpace(8.0),
-                  FormDivider(),
-                  FormHideable(
-                      title: getString(context).weight,
-                      notifier: showWeight,
-                      builder: (context) {
-                        return FormTextField(
-                          iconData: Icons.line_weight,
-                          labeltext: getString(context).weight,
-                          text: gradeprofile.weight_totalaverage.toString(),
-                          valueChanged: (String s) {
-                            try {
-                              double possibledouble = double.parse(s);
-                              gradeprofile = gradeprofile.copyWith(
-                                  weight_totalaverage: possibledouble);
-                            } catch (exception) {
-                              //bool correct_double = false;
-                            }
-                          },
-                          keyBoardType: TextInputType.numberWithOptions(),
-                          maxLines: 1,
-                        );
-                      }),
-                  FormDivider(),
-                  FormHeader(getString(context).average),
-                  SwitchListTile(
-                    value: gradeprofile.averagebytype,
-                    onChanged: (newvalue) {
-                      gradeprofile =
-                          gradeprofile.copyWith(averagebytype: newvalue);
-                      notifier.value = gradeprofile;
-                    },
-                    title: Text(getString(context).averagebytype),
-                  ),
-                  gradeprofile.averagebytype == false
-                      ? nowidget()
-                      : Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: getTitleCard(
-                            iconData: Icons.merge_type,
-                            title: getString(context).types,
-                            content: gradeprofile.types.values
-                                .where((it) => it != null)
-                                .map<Widget>(
-                              (gradetypeitem) {
-                                String inPercent() {
-                                  double total = gradeprofile.types.values
-                                      .where((it) => it != null)
-                                      .map((item) => item!.weight)
-                                      .reduce((a, b) => a + b);
-                                  return ((Decimal.parse(gradetypeitem!.weight
-                                                  .toString()) /
-                                              Decimal.parse(total.toString())) *
-                                          Decimal.fromInt(100))
-                                      .toStringAsFixed(1);
-                                }
-
-                                return ListTile(
-                                  leading: Text(
-                                      gradetypeitem!.weight.toString() +
-                                          '\n(${inPercent()}%)'),
-                                  title: Text(gradetypeitem.name ?? '-'),
-                                  subtitle: Text(
-                                    gradetypeitem.getGradeTypesListed(context),
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 2,
-                                  ),
-                                  trailing: Row(
-                                    children: <Widget>[
-                                      IconButton(
-                                          icon: Icon(Icons.edit),
-                                          onPressed: () {
-                                            pushWidget(
-                                                context,
-                                                EditGradeTypeItemSettings(
-                                                  gradetypeitem: gradetypeitem,
-                                                )).then((newdata) {
-                                              if (newdata != null &&
-                                                  newdata is GradeTypeItem) {
-                                                gradeprofile =
-                                                    gradeprofile.copyWith();
-                                                gradeprofile.types[newdata.id] =
-                                                    newdata;
-                                                notifier.value = gradeprofile;
-                                              }
-                                            });
-                                          }),
-                                      IconButton(
-                                          icon: Icon(Icons.delete_outline),
-                                          onPressed: () {
-                                            showConfirmDialog(
-                                                    context: context,
-                                                    title: getString(context)
-                                                        .delete)
-                                                .then((result) {
-                                              if (result == true) {
-                                                gradeprofile =
-                                                    gradeprofile.copyWith();
-                                                gradeprofile.types[
-                                                    gradetypeitem.id] = null;
-                                                notifier.value = gradeprofile;
-                                              }
-                                            });
-                                          })
-                                    ],
-                                    mainAxisSize: MainAxisSize.min,
-                                  ),
-                                );
-                              },
-                            ).toList()
-                                  ..add(
-                                    FormButton(
-                                      getString(context).newtype,
-                                      () {
-                                        String newid =
-                                            gradeprofile.getNewTypeId()!;
-                                        gradeprofile = gradeprofile.copyWith();
-                                        gradeprofile.types[newid] =
-                                            GradeTypeItem.Create(newid)
-                                                .copyWith(
-                                                    name: getString(context)
-                                                        .newtype);
-                                        notifier.value = gradeprofile;
-                                        pushWidget(
-                                            context,
-                                            EditGradeTypeItemSettings(
-                                              gradetypeitem:
-                                                  gradeprofile.types[newid]!,
-                                            )).then((newdata) {
-                                          if (newdata != null &&
-                                              newdata is GradeTypeItem) {
-                                            gradeprofile =
-                                                gradeprofile.copyWith();
-                                            gradeprofile.types[newdata.id] =
-                                                newdata;
-                                            notifier.value = gradeprofile;
-                                          }
-                                        });
-                                      },
-                                    ),
-                                  ),
-                          ),
-                        ),
-                  FormDivider(),
-                  FormSpace(64.0),
-                ]);
-              }),
-          floatingActionButton: FloatingActionButton.extended(
-              onPressed: () {
-                PlannerSettingsData newdata = settings.copy();
-                newdata.gradeprofiles[gradeprofile.profileid] = gradeprofile;
-                _updateSettings(newdata, database);
-                Navigator.pop(context);
-              },
-              icon: Icon(Icons.done),
-              label: Text(getString(context).done)),
-        ),
-        onWillPop: () async {
-          if (changedValues == false) return true;
-          return showConfirmDialog(
-                  context: context,
-                  title: getString(context).discardchanges,
-                  action: getString(context).confirm,
-                  richtext: RichText(
-                      text: TextSpan(
-                          text: getString(context).currentchangesnotsaved)))
-              .then((value) {
+      onWillPop: () async {
+        if (changedValues == false) return true;
+        return showConfirmDialog(
+                context: context,
+                title: getString(context).discardchanges,
+                action: getString(context).confirm,
+                richtext: RichText(
+                    text: TextSpan(
+                        text: getString(context).currentchangesnotsaved)))
+            .then(
+          (value) {
             if (value == true) {
               return true;
             } else {
               return false;
             }
-          });
-        });
+          },
+        );
+      },
+      child: Scaffold(
+        appBar: MyAppHeader(title: getString(context).editgradeprofile),
+        body: ValueListenableBuilder<GradeProfile>(
+            valueListenable: notifier,
+            builder: (context, _, _2) {
+              print(gradeprofile.toJson());
+              return getDefaultList([
+                FormSpace(8.0),
+                FormTextField(
+                  text: gradeprofile.name,
+                  valueChanged: (newtext) {
+                    gradeprofile = gradeprofile.copyWith(name: newtext);
+                  },
+                ),
+                FormSpace(8.0),
+                FormDivider(),
+                FormHideable(
+                    title: getString(context).weight,
+                    notifier: showWeight,
+                    builder: (context) {
+                      return FormTextField(
+                        iconData: Icons.line_weight,
+                        labeltext: getString(context).weight,
+                        text: gradeprofile.weight_totalaverage.toString(),
+                        valueChanged: (String s) {
+                          try {
+                            double possibledouble = double.parse(s);
+                            gradeprofile = gradeprofile.copyWith(
+                                weight_totalaverage: possibledouble);
+                          } catch (exception) {
+                            //bool correct_double = false;
+                          }
+                        },
+                        keyBoardType: TextInputType.numberWithOptions(),
+                        maxLines: 1,
+                      );
+                    }),
+                FormDivider(),
+                FormHeader(getString(context).average),
+                SwitchListTile(
+                  value: gradeprofile.averagebytype,
+                  onChanged: (newvalue) {
+                    gradeprofile =
+                        gradeprofile.copyWith(averagebytype: newvalue);
+                    notifier.value = gradeprofile;
+                  },
+                  title: Text(getString(context).averagebytype),
+                ),
+                gradeprofile.averagebytype == false
+                    ? nowidget()
+                    : Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: getTitleCard(
+                          iconData: Icons.merge_type,
+                          title: getString(context).types,
+                          content: gradeprofile.types.values
+                              .where((it) => it != null)
+                              .map<Widget>(
+                            (gradetypeitem) {
+                              String inPercent() {
+                                double total = gradeprofile.types.values
+                                    .where((it) => it != null)
+                                    .map((item) => item!.weight)
+                                    .reduce((a, b) => a + b);
+                                return ((Decimal.parse(gradetypeitem!.weight
+                                                .toString()) /
+                                            Decimal.parse(total.toString())) *
+                                        Decimal.fromInt(100))
+                                    .toStringAsFixed(1);
+                              }
+
+                              return ListTile(
+                                leading: Text(gradetypeitem!.weight.toString() +
+                                    '\n(${inPercent()}%)'),
+                                title: Text(gradetypeitem.name),
+                                subtitle: Text(
+                                  gradetypeitem.getGradeTypesListed(context),
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 2,
+                                ),
+                                trailing: Row(
+                                  children: <Widget>[
+                                    IconButton(
+                                        icon: Icon(Icons.edit),
+                                        onPressed: () {
+                                          pushWidget(
+                                              context,
+                                              EditGradeTypeItemSettings(
+                                                gradetypeitem: gradetypeitem,
+                                              )).then((newdata) {
+                                            if (newdata != null &&
+                                                newdata is GradeTypeItem) {
+                                              gradeprofile =
+                                                  gradeprofile.copyWith();
+                                              gradeprofile.types[newdata.id] =
+                                                  newdata;
+                                              notifier.value = gradeprofile;
+                                            }
+                                          });
+                                        }),
+                                    IconButton(
+                                        icon: Icon(Icons.delete_outline),
+                                        onPressed: () {
+                                          showConfirmDialog(
+                                                  context: context,
+                                                  title:
+                                                      getString(context).delete)
+                                              .then((result) {
+                                            if (result == true) {
+                                              gradeprofile =
+                                                  gradeprofile.copyWith();
+                                              gradeprofile
+                                                      .types[gradetypeitem.id] =
+                                                  null;
+                                              notifier.value = gradeprofile;
+                                            }
+                                          });
+                                        })
+                                  ],
+                                  mainAxisSize: MainAxisSize.min,
+                                ),
+                              );
+                            },
+                          ).toList()
+                                ..add(
+                                  FormButton(
+                                    getString(context).newtype,
+                                    () {
+                                      String newid =
+                                          gradeprofile.getNewTypeId()!;
+                                      gradeprofile = gradeprofile.copyWith();
+                                      gradeprofile.types[newid] =
+                                          GradeTypeItem.Create(newid).copyWith(
+                                              name: getString(context).newtype);
+                                      notifier.value = gradeprofile;
+                                      pushWidget(
+                                          context,
+                                          EditGradeTypeItemSettings(
+                                            gradetypeitem:
+                                                gradeprofile.types[newid]!,
+                                          )).then((newdata) {
+                                        if (newdata != null &&
+                                            newdata is GradeTypeItem) {
+                                          gradeprofile =
+                                              gradeprofile.copyWith();
+                                          gradeprofile.types[newdata.id] =
+                                              newdata;
+                                          notifier.value = gradeprofile;
+                                        }
+                                      });
+                                    },
+                                  ),
+                                ),
+                        ),
+                      ),
+                FormDivider(),
+                FormSpace(64.0),
+              ]);
+            }),
+        floatingActionButton: FloatingActionButton.extended(
+            onPressed: () {
+              PlannerSettingsData newdata = settings.copy();
+              newdata.gradeprofiles[gradeprofile.profileid] = gradeprofile;
+              _updateSettings(newdata, database);
+              Navigator.pop(context);
+            },
+            icon: Icon(Icons.done),
+            label: Text(getString(context).done)),
+      ),
+    );
   }
 }
 
@@ -1008,114 +1011,117 @@ class EditGradeTypeItemSettings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-        child: Scaffold(
-          appBar: MyAppHeader(title: getString(context).type),
-          body: ValueListenableBuilder<GradeTypeItem>(
-              valueListenable: notifier,
-              builder: (context, _, _2) {
-                return getDefaultList([
-                  FormSpace(8.0),
-                  FormTextField(
-                    text: gradetypeitem.name ?? '',
-                    valueChanged: (newtext) {
-                      gradetypeitem = gradetypeitem.copyWith(name: newtext);
-                    },
-                  ),
-                  FormSpace(8.0),
-                  FormDivider(),
-                  FormHideable(
-                      title: getString(context).weight,
-                      notifier: showWeight,
-                      builder: (context) {
-                        return FormTextField(
-                          iconData: Icons.line_weight,
-                          labeltext: getString(context).weight,
-                          text: gradetypeitem.weight.toString(),
-                          valueChanged: (String s) {
-                            try {
-                              double possibledouble = double.parse(s);
-                              gradetypeitem = gradetypeitem.copyWith(
-                                  weight: possibledouble);
-                              // bool correct_double = true;
-                            } catch (exception) {
-                              //bool correct_double = false;
-                            }
-                          },
-                          keyBoardType: TextInputType.numberWithOptions(),
-                          maxLines: 1,
-                        );
-                      }),
-                  FormDivider(),
-                  FormHeader(getString(context).gradetypes),
-                  Column(
-                    children: getGradeTypes(context).map((item) {
-                      bool getCurrentValue() {
-                        if (GradeType.values[item.id] == GradeType.TEST &&
-                            gradetypeitem.testsasoneexam == true) return true;
-                        return gradetypeitem
-                                .gradetypes[GradeType.values[item.id]] ??
-                            false;
-                      }
-
-                      return CheckboxListTile(
-                        value: getCurrentValue(),
-                        onChanged: (newvalue) {
-                          gradetypeitem = gradetypeitem.copyWith();
-                          gradetypeitem.gradetypes[GradeType.values[item.id]] =
-                              newvalue!;
-                          notifier.value = gradetypeitem;
-                        },
-                        title: Text(item.name),
-                      );
-                    }).toList(),
-                  ),
-                  FormDivider(),
-                  FormHideable(
-                      title: getString(context).extras,
-                      notifier: showextras,
-                      builder: (context) {
-                        return Column(
-                          children: <Widget>[
-                            SwitchListTile(
-                              title: Text(getString(context).testsasoneexam),
-                              value: gradetypeitem.testsasoneexam ?? false,
-                              onChanged: (newvalue) {
-                                gradetypeitem = gradetypeitem.copyWith(
-                                    testsasoneexam: newvalue);
-                                notifier.value = gradetypeitem;
-                              },
-                            ),
-                          ],
-                        );
-                      }),
-                  FormDivider(),
-                  FormSpace(64.0),
-                ]);
-              }),
-          floatingActionButton: FloatingActionButton.extended(
-              onPressed: () {
-                Navigator.pop(context, gradetypeitem);
-              },
-              icon: Icon(Icons.done),
-              label: Text(getString(context).done)),
-        ),
-        onWillPop: () async {
-          if (changedValues == false) return true;
-          return showConfirmDialog(
-                  context: context,
-                  title: getString(context).discardchanges,
-                  action: getString(context).confirm,
-                  richtext: RichText(
-                      text: TextSpan(
-                          text: getString(context).currentchangesnotsaved)))
-              .then((value) {
+      onWillPop: () async {
+        if (changedValues == false) return true;
+        return showConfirmDialog(
+                context: context,
+                title: getString(context).discardchanges,
+                action: getString(context).confirm,
+                richtext: RichText(
+                    text: TextSpan(
+                        text: getString(context).currentchangesnotsaved)))
+            .then(
+          (value) {
             if (value == true) {
               return true;
             } else {
               return false;
             }
-          });
-        });
+          },
+        );
+      },
+      child: Scaffold(
+        appBar: MyAppHeader(title: getString(context).type),
+        body: ValueListenableBuilder<GradeTypeItem>(
+            valueListenable: notifier,
+            builder: (context, _, _2) {
+              return getDefaultList([
+                FormSpace(8.0),
+                FormTextField(
+                  text: gradetypeitem.name,
+                  valueChanged: (newtext) {
+                    gradetypeitem = gradetypeitem.copyWith(name: newtext);
+                  },
+                ),
+                FormSpace(8.0),
+                FormDivider(),
+                FormHideable(
+                    title: getString(context).weight,
+                    notifier: showWeight,
+                    builder: (context) {
+                      return FormTextField(
+                        iconData: Icons.line_weight,
+                        labeltext: getString(context).weight,
+                        text: gradetypeitem.weight.toString(),
+                        valueChanged: (String s) {
+                          try {
+                            double possibledouble = double.parse(s);
+                            gradetypeitem =
+                                gradetypeitem.copyWith(weight: possibledouble);
+                            // bool correct_double = true;
+                          } catch (exception) {
+                            //bool correct_double = false;
+                          }
+                        },
+                        keyBoardType: TextInputType.numberWithOptions(),
+                        maxLines: 1,
+                      );
+                    }),
+                FormDivider(),
+                FormHeader(getString(context).gradetypes),
+                Column(
+                  children: getGradeTypes(context).map((item) {
+                    bool getCurrentValue() {
+                      if (GradeType.values[item.id] == GradeType.TEST &&
+                          gradetypeitem.testsasoneexam == true) return true;
+                      return gradetypeitem
+                              .gradetypes[GradeType.values[item.id]] ??
+                          false;
+                    }
+
+                    return CheckboxListTile(
+                      value: getCurrentValue(),
+                      onChanged: (newvalue) {
+                        gradetypeitem = gradetypeitem.copyWith();
+                        gradetypeitem.gradetypes[GradeType.values[item.id]] =
+                            newvalue!;
+                        notifier.value = gradetypeitem;
+                      },
+                      title: Text(item.name),
+                    );
+                  }).toList(),
+                ),
+                FormDivider(),
+                FormHideable(
+                    title: getString(context).extras,
+                    notifier: showextras,
+                    builder: (context) {
+                      return Column(
+                        children: <Widget>[
+                          SwitchListTile(
+                            title: Text(getString(context).testsasoneexam),
+                            value: gradetypeitem.testsasoneexam,
+                            onChanged: (newvalue) {
+                              gradetypeitem = gradetypeitem.copyWith(
+                                  testsasoneexam: newvalue);
+                              notifier.value = gradetypeitem;
+                            },
+                          ),
+                        ],
+                      );
+                    }),
+                FormDivider(),
+                FormSpace(64.0),
+              ]);
+            }),
+        floatingActionButton: FloatingActionButton.extended(
+            onPressed: () {
+              Navigator.pop(context, gradetypeitem);
+            },
+            icon: Icon(Icons.done),
+            label: Text(getString(context).done)),
+      ),
+    );
   }
 }
 

@@ -424,7 +424,7 @@ void showEventDetailSheet(
         return StreamBuilder<SchoolEvent?>(
             stream: identifyEventRef(plannerdatabase, eventdata)!
                 .snapshots()
-                .map((snap) => snap.data != null
+                .map((snap) => snap.data() != null
                     ? SchoolEvent.fromData(snap.data()!)
                     : null),
             builder: (context, snapshot) {
@@ -432,8 +432,9 @@ void showEventDetailSheet(
               if (schoolEvent == null) return loadedView();
               return Expanded(
                   child: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  getSheetText(context, schoolEvent.title ?? '-'),
+                  getSheetText(context, schoolEvent.title),
                   getExpandList([
                     schoolEvent.private == true
                         ? ListTile(
@@ -648,7 +649,6 @@ void showEventDetailSheet(
                   ),
                   FormSpace(16.0),
                 ],
-                mainAxisSize: MainAxisSize.min,
               ));
             });
       },

@@ -51,7 +51,7 @@ class ShortSchoolClassView extends StatelessWidget {
                           context, classinfo.getShortname_full()),
                       color: classinfo.getDesign().primary,
                       radius: 22.0)),
-              title: Text(classinfo.name ?? '-'),
+              title: Text(classinfo.name),
               trailing: IconButton(
                   icon: Icon(Icons.more_horiz),
                   onPressed: () {
@@ -125,7 +125,7 @@ class LibraryView extends StatelessWidget {
                                     context, classinfo.getShortname_full()),
                                 color: classinfo.getDesign().primary,
                                 radius: 22.0)),
-                        title: Text(classinfo.name ?? '-'),
+                        title: Text(classinfo.name),
                         trailing: IconButton(
                             icon: Icon(Icons.more_horiz),
                             onPressed: () {
@@ -753,7 +753,7 @@ class _SchoolClassSection extends StatelessWidget {
                                   context, classinfo.getShortname_full()),
                               color: classinfo.getDesign().primary,
                               radius: 22.0)),
-                      title: Text(classinfo.name ?? '-'),
+                      title: Text(classinfo.name),
                       trailing: IconButton(
                           icon: Icon(Icons.more_horiz),
                           onPressed: () {

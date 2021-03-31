@@ -13,8 +13,9 @@ import 'package:schulplaner8/Data/Planner/Task.dart';
 import 'package:schulplaner8/Data/planner_database/planner_connections.dart';
 import 'package:schulplaner8/Helper/DateAPI.dart';
 import 'package:schulplaner8/Helper/database_foundation.dart';
-import 'package:schulplaner8/OldGrade/Grade.dart';
+
 import 'package:schulplaner8/OldGrade/SchoolReport.dart';
+import 'package:schulplaner8/OldGrade/models/grade.dart';
 import 'package:schulplaner8/OldLessonInfo/LessonInfo.dart';
 import 'package:schulplaner8/app_base/src/blocs/app_settings_bloc.dart';
 import 'package:schulplaner8/grades/grade_span_package.dart';

@@ -108,7 +108,7 @@ Future<Place?> selectPlace(
       builder: (context, item) {
         bool isSelected = ((current ?? {})[item.placeid] != null);
         return ListTile(
-          title: Text(item.name ?? '-'),
+          title: Text(item.name),
           trailing: selectedView(isSelected),
           onTap: isSelected
               ? null

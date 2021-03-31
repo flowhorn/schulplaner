@@ -31,7 +31,7 @@ class CourseMemberView extends StatelessWidget {
             child: CircularProgressIndicator(),
           );
         }
-        Design? courseDesign = courseInfo?.getDesign();
+        Design? courseDesign = courseInfo.getDesign();
         return Theme(
             data: newAppThemeDesign(context, courseDesign),
             child: Scaffold(

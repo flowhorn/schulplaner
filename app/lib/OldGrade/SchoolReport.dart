@@ -1,4 +1,3 @@
-//
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -8,10 +7,12 @@ import 'package:schulplaner_translations/schulplaner_translations.dart';
 import 'package:schulplaner_widgets/schulplaner_forms.dart';
 import 'package:schulplaner_widgets/schulplaner_theme.dart';
 import 'package:schulplaner8/Helper/helper_views.dart';
-import 'package:schulplaner8/OldGrade/Grade.dart';
 import 'package:schulplaner8/OldGrade/NewSchoolReportView.dart';
 import 'package:schulplaner8/groups/src/models/course.dart';
 import 'package:share/share.dart';
+
+import 'models/average_report.dart';
+import 'models/grade.dart';
 
 class ReportValue {
   late String? grade_key;
@@ -125,7 +126,7 @@ class ReportViewState extends State<ReportView> {
   Widget build(BuildContext context) {
     List<Course> courses = database.getCourseList();
 
-    AverageReport averageReport =
+    final AverageReport averageReport =
         AverageReport(database.getSettings(), values: getValue());
 
     return Scaffold(

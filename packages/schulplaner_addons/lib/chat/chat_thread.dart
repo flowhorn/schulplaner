@@ -19,7 +19,7 @@ class ChatThread extends StatelessWidget {
     final bloc = BlocProvider.of<ChatPageBloc>(context);
     return Scaffold(
       appBar: ChatAppBar(
-        title: chatRoom.name ?? '',
+        title: chatRoom.name,
       ),
       body: Column(children: [
         Expanded(

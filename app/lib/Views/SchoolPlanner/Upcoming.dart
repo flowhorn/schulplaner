@@ -178,8 +178,8 @@ class UpcomingTasksEventsView extends StatelessWidget {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
-                subtitle:
-                    Text(getString(context).due + ': ' + getDateText(item.due!)),
+                subtitle: Text(
+                    getString(context).due + ': ' + getDateText(item.due!)),
                 trailing: isFinished
                     ? IconButton(
                         icon: Icon(
@@ -279,8 +279,8 @@ Stream<List<dynamic>> getTaskEventUpcomingStream(PlannerDatabase database) {
   final controller = StreamController<List<dynamic>>();
   final subs = <StreamSubscription>[];
 
-  late Iterable<SchoolTask>? tasks;
-  late Iterable<SchoolEvent>? events;
+  Iterable<SchoolTask>? tasks;
+  Iterable<SchoolEvent>? events;
 
   void update() {
     final newlist = <dynamic>[];

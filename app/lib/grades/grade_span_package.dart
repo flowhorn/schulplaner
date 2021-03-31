@@ -3,7 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:schulplaner8/Helper/database_foundation.dart';
-import 'package:schulplaner8/OldGrade/Grade.dart';
+
+import 'package:schulplaner8/OldGrade/models/grade_span.dart';
 import 'package:schulplaner8/app_base/src/blocs/app_settings_bloc.dart';
 import 'package:schulplaner8/app_base/src/models/app_settings_data.dart';
 import 'package:schulplaner8/models/planner_settings.dart';

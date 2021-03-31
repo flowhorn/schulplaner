@@ -253,58 +253,63 @@ class TimetableFragment extends StatelessWidget {
                     }).toList(),
                   ),
                 ),
-                ...List.generate(daysOfWeek, (d) {
-                  return Expanded(
-                    child: Stack(
-                      children: List.generate(
+                ...List.generate(
+                  daysOfWeek,
+                  (d) {
+                    return Expanded(
+                      child: Stack(
+                        children: List.generate(
                           (((endtime_calendar) - starttime_calendar)
-                                  .toInt()
-                                  ?.abs() ??
-                              12),
+                              .toInt()
+                              .abs()),
                           (x) => Positioned(
-                                left: 0.0,
-                                top: lessonheight * x,
-                                right: 0.0,
-                                height: lessonheight,
-                                child: InkWell(
-                                  child: Container(
-                                    decoration: show_grid(context)
-                                        ? BoxDecoration(
-                                            border: Border.all(
-                                                color: getDividerColor(context),
-                                                width: 0.1))
-                                        : null,
-                                  ),
-                                  onTap: timemode
-                                      ? null
-                                      : () {
-                                          onTapEmpty(TwoObjects(
-                                              item: (d + 1),
-                                              item2:
-                                                  haszerolesson ? x : (x + 1)));
-                                        },
-                                ),
-                              ))
-                        ..addAll(events
-                            .where((t) => t.lesson.day == (d + 1))
-                            .map((t) {
-                          double topposition =
-                              lessonheight * (t.startpos - starttime_calendar);
-                          return Positioned(
                             left: 0.0,
-                            top: topposition <= 0 ? 0 : topposition,
+                            top: lessonheight * x,
                             right: 0.0,
-                            height: topposition <= 0
-                                ? (lessonheight * t.duration + topposition)
-                                : (lessonheight * t.duration),
-                            child: WeekView_LessonView(t.lesson, t.course, () {
-                              onTapLesson(t.lesson);
-                            }),
-                          );
-                        })),
-                    ),
-                  );
-                }),
+                            height: lessonheight,
+                            child: InkWell(
+                              onTap: timemode
+                                  ? null
+                                  : () {
+                                      onTapEmpty(TwoObjects(
+                                          item: (d + 1),
+                                          item2: haszerolesson ? x : (x + 1)));
+                                    },
+                              child: Container(
+                                decoration: show_grid(context)
+                                    ? BoxDecoration(
+                                        border: Border.all(
+                                            color: getDividerColor(context),
+                                            width: 0.1))
+                                    : null,
+                              ),
+                            ),
+                          ),
+                        )..addAll(
+                            events.where((t) => t.lesson.day == (d + 1)).map(
+                              (t) {
+                                double topposition = lessonheight *
+                                    (t.startpos - starttime_calendar);
+                                return Positioned(
+                                  left: 0.0,
+                                  top: topposition <= 0 ? 0 : topposition,
+                                  right: 0.0,
+                                  height: topposition <= 0
+                                      ? (lessonheight * t.duration +
+                                          topposition)
+                                      : (lessonheight * t.duration),
+                                  child: WeekView_LessonView(t.lesson, t.course,
+                                      () {
+                                    onTapLesson(t.lesson);
+                                  }),
+                                );
+                              },
+                            ),
+                          ),
+                      ),
+                    );
+                  },
+                ),
               ],
             ),
           ),

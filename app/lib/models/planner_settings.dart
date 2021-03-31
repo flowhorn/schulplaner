@@ -1,11 +1,12 @@
-//
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Data/Objects.dart';
 import 'package:schulplaner8/Helper/DateAPI.dart';
-import 'package:schulplaner8/OldGrade/Grade.dart';
 import 'package:schulplaner8/OldGrade/GradePackage.dart';
+import 'package:schulplaner8/OldGrade/models/average_display.dart';
+import 'package:schulplaner8/OldGrade/models/average_settings.dart';
+import 'package:schulplaner8/OldGrade/models/grade_span.dart';
 import 'package:schulplaner8/grades/models/default_grade_profile.dart';
 import 'package:schulplaner8/grades/models/grade_profile.dart';
 import 'package:schulplaner8/grades/models/grade_type_item.dart';
@@ -155,7 +156,7 @@ class PlannerSettingsData {
     };
   }
 
-  GradeProfile getGradeProfile(String profileid) {
+  GradeProfile getGradeProfile(String? profileid) {
     if (profileid == null) return gradeprofiles['default']!;
     var item = gradeprofiles[profileid];
     return item ?? gradeprofiles['default']!;

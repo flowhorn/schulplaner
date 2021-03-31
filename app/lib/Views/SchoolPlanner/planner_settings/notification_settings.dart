@@ -73,6 +73,7 @@ class _Inner extends StatelessWidget {
           }
           return SingleChildScrollView(
             child: Column(
+                mainAxisSize: MainAxisSize.min,
               children: [
                 SwitchListTile(
                   value: notificationSettings.notifycreatetasks,
@@ -183,7 +184,7 @@ class _Inner extends StatelessWidget {
                       ),
                       title: Text(device.devicename ?? '-'),
                       subtitle: Text(
-                        device.devicetoken.toString() ?? '-',
+                        device.devicetoken.toString(),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -205,10 +206,10 @@ class _Inner extends StatelessWidget {
                 FormDivider(),
                 FormSpace(64.0),
               ],
-              mainAxisSize: MainAxisSize.min,
+            
             ),
           );
-        });
+        },);
   }
 }
 

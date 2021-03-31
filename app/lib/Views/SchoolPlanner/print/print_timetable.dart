@@ -229,7 +229,7 @@ class LessonPdfTile extends StatelessWidget {
       child: Stack(children: [
         Center(
             child: Text(
-          course.getName() ?? '/',
+          course.getName(),
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 14.0,

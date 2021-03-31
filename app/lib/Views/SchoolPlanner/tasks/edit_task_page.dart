@@ -66,7 +66,14 @@ class NewSchoolTaskView extends StatelessWidget {
       {required this.database, String? due, String? courseid})
       : editmode = false,
         editmode_taskid = null {
-    data = SchoolTask(due: due, courseid: courseid, title: '', files: {}, finished: {}, detail: '',);
+    data = SchoolTask(
+      due: due,
+      courseid: courseid,
+      title: '',
+      files: {},
+      finished: {},
+      detail: '',
+    );
     if (data.due == null && data.courseid != null) {
       _nextlessons = getNextLessons(database, data.courseid!, count: 2);
       if (_nextlessons?.isNotEmpty ?? false) {
@@ -101,6 +108,23 @@ class NewSchoolTaskView extends StatelessWidget {
         ..addAll(getRecommendedDatesSimple(null));
     }
     return WillPopScope(
+      onWillPop: () async {
+          if (changedValues == false) return true;
+          return showConfirmDialog(
+                  context: context,
+                  title: getString(context).discardchanges,
+                  action: getString(context).confirm,
+                  richtext: RichText(
+                      text: TextSpan(
+                          text: getString(context).currentchangesnotsaved)))
+              .then((value) {
+            if (value == true) {
+              return true;
+            } else {
+              return false;
+            }
+          });
+        },
         child: ValueListenableBuilder<SchoolTask>(
             valueListenable: notifier,
             builder: (context, _, _2) {
@@ -154,7 +178,7 @@ class NewSchoolTaskView extends StatelessWidget {
                         const Divider(),
                         SwitchListTile(
                           title: Text(getString(context).saveprivately),
-                          value: data.private ?? false,
+                          value: data.private,
                           onChanged: editmode
                               ? null
                               : (newvalue) {
@@ -262,25 +286,9 @@ class NewSchoolTaskView extends StatelessWidget {
                         },
                         icon: Icon(Icons.done),
                         label: Text(getString(context).done)),
-                  ));
-            }),
-        onWillPop: () async {
-          if (changedValues == false) return true;
-          return showConfirmDialog(
-                  context: context,
-                  title: getString(context).discardchanges,
-                  action: getString(context).confirm,
-                  richtext: RichText(
-                      text: TextSpan(
-                          text: getString(context).currentchangesnotsaved)))
-              .then((value) {
-            if (value == true) {
-              return true;
-            } else {
-              return false;
-            }
-          });
-        });
+                  ),);
+            },),
+        );
   }
 
   ThemeData getTaskTheme(BuildContext context) {

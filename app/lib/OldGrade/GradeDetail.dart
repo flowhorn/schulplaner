@@ -1,4 +1,3 @@
-//
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -11,9 +10,12 @@ import 'package:schulplaner_translations/schulplaner_translations.dart';
 import 'package:schulplaner_widgets/schulplaner_forms.dart';
 import 'package:schulplaner_widgets/schulplaner_common.dart';
 import 'package:schulplaner8/Helper/helper_views.dart';
-import 'package:schulplaner8/OldGrade/Grade.dart';
 import 'package:schulplaner8/Views/SchoolPlanner/Pickers.dart';
 import 'package:schulplaner8/groups/src/models/course.dart';
+
+import 'models/choice.dart';
+import 'models/grade.dart';
+import 'models/grade_span.dart';
 
 void showGradeSpanSheet(BuildContext context, PlannerDatabase database) {
   showSheetBuilder(

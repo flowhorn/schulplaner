@@ -6,8 +6,8 @@ class Place {
 
   Place.fromData(Map<String, dynamic> data) {
     placeid = data['placeid'];
-    name = data['name'];
-    address = data['address'];
+    name = data['name'] ?? '';
+    address = data['address'] ?? '';
   }
 
   Map<String, dynamic> toJson() {

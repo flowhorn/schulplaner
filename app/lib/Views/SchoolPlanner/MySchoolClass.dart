@@ -37,7 +37,7 @@ void showSchoolClassMoreSheet(BuildContext context,
               if (info == null) return loadedView();
               return Column(
                 children: <Widget>[
-                  getSheetText(context, info.getName() ?? '-'),
+                  getSheetText(context, info.getName()),
                   ListTile(
                     leading: Icon(Icons.edit),
                     title: Text(getString(context).edit),
@@ -112,147 +112,148 @@ class NewSchoolClassView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-        child: ValueListenableBuilder<SchoolClass>(
-            valueListenable: notifier,
-            builder: (context, _, _2) {
-              if (data == null) return CircularProgressIndicator();
-              return Theme(
-                  data: newAppThemeDesign(context, data?.design),
-                  child: Scaffold(
-                    appBar: MyAppHeader(
-                        title: editmode
-                            ? getString(context).editschoolclass
-                            : getString(context).newschoolclass),
-                    body: SingleChildScrollView(
-                        child: Column(
-                      children: <Widget>[
-                        FormHeader(getString(context).general),
-                        FormTextField(
-                          text: data.name,
-                          valueChanged: (newtext) {
-                            data = data.copyWith(name: newtext);
-                            changedValues = true;
-                          },
-                          labeltext: getString(context).name,
-                        ),
-                        FormSpace(12.0),
-                        FormTextField(
-                          text: data.shortname,
-                          valueChanged: (newtext) {
-                            data = data.copyWith(shortname: newtext);
-                            changedValues = true;
-                          },
-                          iconData: Icons.short_text,
-                          labeltext: getString(context).shortname,
-                          maxLengthEnforced: true,
-                          maxLength: 5,
-                        ),
-                        FormSpace(6.0),
-                        ListTile(
-                          leading: Icon(
-                            Icons.color_lens,
-                            color: data.design?.primary ?? Colors.grey,
-                          ),
-                          title: Text(getString(context).design),
-                          subtitle: Text(data.design?.name ?? '-'),
-                          trailing: IconButton(
-                              icon: Icon(Icons.autorenew),
-                              onPressed: () {
-                                changedValues = true;
-                                SchoolClass newdata =
-                                    data.copyWith(design: getRandomDesign());
-                                data = newdata;
-                                notifier.value = newdata;
-                              }),
-                          onTap: () {
-                            selectDesign(context, data.design?.id)
-                                .then((newdesign) {
-                              if (newdesign != null) {
-                                changedValues = true;
-                                SchoolClass newdata =
-                                    data.copyWith(design: newdesign);
-                                data = newdata;
-                                notifier.value = newdata;
-                              }
-                            });
-                          },
-                        ),
-                        FormSpace(6.0),
-                        FormDivider(),
-                        FormHideable(
-                            title: getString(context).advanced,
-                            notifier: showSeveralForm,
-                            builder: (context) => Column(
-                                  children: <Widget>[
-                                    FormSpace(8.0),
-                                    FormTextField(
-                                      text: data.description,
-                                      valueChanged: (newtext) {
-                                        data = data.copyWith(
-                                          description: newtext,
-                                        );
-                                        changedValues = true;
-                                      },
-                                      labeltext: getString(context).description,
-                                    ),
-                                    FormSpace(8.0),
-                                  ],
-                                )),
-                        FormDivider(),
-                        FormSpace(64.0),
-                      ],
-                    )),
-                    floatingActionButton: FloatingActionButton.extended(
-                        onPressed: () {
-                          if (data.validate()) {
-                            if (editmode) {
-                              requestSimplePermission(
-                                      context: context,
-                                      database: database,
-                                      category: PermissionAccessType.edit,
-                                      id: data.id,
-                                      type: 1)
-                                  .then((result) {
-                                if (result == true) {
-                                  database.dataManager.ModifySchoolClass(data);
-                                  Navigator.pop(context);
-                                }
-                              });
-                            } else {
-                              database.schoolClassGateway
-                                  .CreateSchoolClassAsCreator(data);
-                              Navigator.pop(context);
-                            }
-                          } else {
-                            final infoDialog = InfoDialog(
-                              title: getString(context).failed,
-                              message: getString(context).pleasecheckdata,
-                            );
-                            // ignore: unawaited_futures
-                            infoDialog.show(context);
-                          }
-                        },
-                        icon: Icon(Icons.done),
-                        label: Text(getString(context).done)),
-                  ));
-            }),
-        onWillPop: () async {
-          if (changedValues == false) return true;
-          return showConfirmDialog(
-              context: context,
-              title: getString(context).discardchanges,
-              action: getString(context).confirm,
-              richtext: RichText(
-                  text: TextSpan(
-                text: getString(context).currentchangesnotsaved,
-              ))).then((value) {
-            if (value == true) {
-              return true;
-            } else {
-              return false;
-            }
-          });
+      onWillPop: () async {
+        if (changedValues == false) return true;
+        return showConfirmDialog(
+            context: context,
+            title: getString(context).discardchanges,
+            action: getString(context).confirm,
+            richtext: RichText(
+                text: TextSpan(
+              text: getString(context).currentchangesnotsaved,
+            ))).then((value) {
+          if (value == true) {
+            return true;
+          } else {
+            return false;
+          }
         });
+      },
+      child: ValueListenableBuilder<SchoolClass>(
+        valueListenable: notifier,
+        builder: (context, _, _2) {
+          return Theme(
+            data: newAppThemeDesign(context, data.design),
+            child: Scaffold(
+              appBar: MyAppHeader(
+                  title: editmode
+                      ? getString(context).editschoolclass
+                      : getString(context).newschoolclass),
+              body: SingleChildScrollView(
+                  child: Column(
+                children: <Widget>[
+                  FormHeader(getString(context).general),
+                  FormTextField(
+                    text: data.name,
+                    valueChanged: (newtext) {
+                      data = data.copyWith(name: newtext);
+                      changedValues = true;
+                    },
+                    labeltext: getString(context).name,
+                  ),
+                  FormSpace(12.0),
+                  FormTextField(
+                    text: data.shortname,
+                    valueChanged: (newtext) {
+                      data = data.copyWith(shortname: newtext);
+                      changedValues = true;
+                    },
+                    iconData: Icons.short_text,
+                    labeltext: getString(context).shortname,
+                    maxLengthEnforced: true,
+                    maxLength: 5,
+                  ),
+                  FormSpace(6.0),
+                  ListTile(
+                    leading: Icon(
+                      Icons.color_lens,
+                      color: data.design.primary,
+                    ),
+                    title: Text(getString(context).design),
+                    subtitle: Text(data.design.name),
+                    trailing: IconButton(
+                        icon: Icon(Icons.autorenew),
+                        onPressed: () {
+                          changedValues = true;
+                          SchoolClass newdata =
+                              data.copyWith(design: getRandomDesign());
+                          data = newdata;
+                          notifier.value = newdata;
+                        }),
+                    onTap: () {
+                      selectDesign(context, data.design.id).then((newdesign) {
+                        if (newdesign != null) {
+                          changedValues = true;
+                          SchoolClass newdata =
+                              data.copyWith(design: newdesign);
+                          data = newdata;
+                          notifier.value = newdata;
+                        }
+                      });
+                    },
+                  ),
+                  FormSpace(6.0),
+                  FormDivider(),
+                  FormHideable(
+                      title: getString(context).advanced,
+                      notifier: showSeveralForm,
+                      builder: (context) => Column(
+                            children: <Widget>[
+                              FormSpace(8.0),
+                              FormTextField(
+                                text: data.description,
+                                valueChanged: (newtext) {
+                                  data = data.copyWith(
+                                    description: newtext,
+                                  );
+                                  changedValues = true;
+                                },
+                                labeltext: getString(context).description,
+                              ),
+                              FormSpace(8.0),
+                            ],
+                          )),
+                  FormDivider(),
+                  FormSpace(64.0),
+                ],
+              )),
+              floatingActionButton: FloatingActionButton.extended(
+                  onPressed: () {
+                    if (data.validate()) {
+                      if (editmode) {
+                        requestSimplePermission(
+                                context: context,
+                                database: database,
+                                category: PermissionAccessType.edit,
+                                id: data.id,
+                                type: 1)
+                            .then((result) {
+                          if (result == true) {
+                            database.dataManager.ModifySchoolClass(data);
+                            Navigator.pop(context);
+                          }
+                        });
+                      } else {
+                        database.schoolClassGateway
+                            .CreateSchoolClassAsCreator(data);
+                        Navigator.pop(context);
+                      }
+                    } else {
+                      final infoDialog = InfoDialog(
+                        title: getString(context).failed,
+                        message: getString(context).pleasecheckdata,
+                      );
+                      // ignore: unawaited_futures
+                      infoDialog.show(context);
+                    }
+                  },
+                  icon: Icon(Icons.done),
+                  label: Text(getString(context).done)),
+            ),
+          );
+        },
+      ),
+    );
   }
 }
 
@@ -271,8 +272,7 @@ class SchoolClassCoursesView extends StatelessWidget {
         Map<String, Course> allcourses = snapshot.data!.item3!;
         Future.value(null).then((_) {
           classInfo.courses.forEach((key, value) {
-            if (classInfo?.id == null) return;
-            Course courseinfo = database.courseinfo.data[key]!;
+            Course? courseinfo = database.courseinfo.data[key];
             if (courseinfo != null) {
               if (courseinfo.connectedclasses.containsKey(classInfo.id) ==
                   false) {
@@ -282,7 +282,7 @@ class SchoolClassCoursesView extends StatelessWidget {
             }
           });
         });
-        Design? classDesign = classInfo?.getDesign();
+        Design? classDesign = classInfo.getDesign();
         return Theme(
             data: newAppThemeDesign(context, classDesign),
             child: Scaffold(

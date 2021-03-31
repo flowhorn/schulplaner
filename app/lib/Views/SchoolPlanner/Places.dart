@@ -27,12 +27,10 @@ class PlaceList extends StatelessWidget {
                 return ListTile(
                   title: Text(item.name),
                   subtitle: Column(
-                    children: <Widget>[
-                      Text(getString(context).address +
-                          ': ' +
-                          (item.address ?? '-')),
-                    ],
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(getString(context).address + ': ' + (item.address),),
+                    ],
                   ),
                   isThreeLine: true,
                   onTap: () {
@@ -182,7 +180,7 @@ Future<void> showPlaceDetail(
                   FormSpace(12.0),
                   ListTile(
                     leading: Icon(Icons.map),
-                    title: Text(item.address ?? '-'),
+                    title: Text(item.address),
                   ),
                   ButtonBar(
                     children: <Widget>[

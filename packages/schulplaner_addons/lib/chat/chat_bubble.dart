@@ -54,30 +54,10 @@ class _ChatBubbleLeft extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return _BubbleBase(
+      background: color,
+      borderColor: ColorUtils.of(context).getClearBorderColor(context, color),
+      alignment: _BubbleAlignment.left,
       child: BubbleInner(
-        child: Column(
-          children: <Widget>[
-            if (!isSingleChat)
-              InkWell(
-                child: Container(
-                  child: Text(
-                    name ?? '???',
-                    style: TextStyle(
-                      color: Colors.blueGrey,
-                      fontSize: 13.5,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-                ),
-                onTap: () {},
-              ),
-            MessageInner(
-              message: message,
-              color: ColorUtils.getTextColor(color),
-            ),
-          ],
-          crossAxisAlignment: CrossAxisAlignment.start,
-        ),
         isBigChild: message.contentType == ContentType.none
             ? message.text.length > 15
             : true,
@@ -85,10 +65,30 @@ class _ChatBubbleLeft extends StatelessWidget {
           timeOfDay: TimeOfDay.fromDateTime(message.createdOn.toDate()),
           color: ColorUtils.getTextColor(color).withAlpha(90),
         ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            if (!isSingleChat)
+              InkWell(
+                onTap: () {},
+                child: Container(
+                  child: Text(
+                    name,
+                    style: TextStyle(
+                      color: Colors.blueGrey,
+                      fontSize: 13.5,
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                ),
+              ),
+            MessageInner(
+              message: message,
+              color: ColorUtils.getTextColor(color),
+            ),
+          ],
+        ),
       ),
-      background: color,
-      borderColor: ColorUtils.of(context).getClearBorderColor(context, color),
-      alignment: _BubbleAlignment.left,
     );
   }
 }
@@ -286,7 +286,7 @@ class MessageInner extends StatelessWidget {
             leading: CircleAvatar(
               child: Icon(Icons.insert_drive_file),
             ),
-            title: Text(message.content ?? '???'),
+            title: Text(message.content),
             onTap: () {
               launch(message.content);
             },

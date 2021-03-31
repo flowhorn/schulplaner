@@ -295,7 +295,7 @@ List<SimpleItem> availableLanguages(BuildContext context) {
   ];
 }
 
-SimpleItem getLanguage(BuildContext context, String languagecode) {
+SimpleItem getLanguage(BuildContext context, String? languagecode) {
   return availableLanguages(context).firstWhere(
     (it) => it.id == languagecode,
     orElse: () => availableLanguages(context)[0],

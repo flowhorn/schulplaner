@@ -1,8 +1,9 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Helper/helper_data.dart';
-import 'package:schulplaner8/OldGrade/Grade.dart';
+
 import 'package:schulplaner8/OldGrade/GradePackage.dart';
+import 'package:schulplaner8/OldGrade/models/grade.dart';
 import 'package:schulplaner_widgets/schulplaner_forms.dart';
 
 class GradeDevelopmentView extends StatelessWidget {

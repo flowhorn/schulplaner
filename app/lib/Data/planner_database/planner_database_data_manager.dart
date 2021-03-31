@@ -10,8 +10,9 @@ import 'package:schulplaner8/Data/Planner/Notes.dart';
 import 'package:schulplaner8/Data/Planner/SchoolEvent.dart';
 import 'package:schulplaner8/Data/Planner/Task.dart';
 import 'package:schulplaner8/Helper/LogAnalytics.dart';
-import 'package:schulplaner8/OldGrade/Grade.dart';
+
 import 'package:schulplaner8/OldGrade/SchoolReport.dart';
+import 'package:schulplaner8/OldGrade/models/grade.dart';
 import 'package:schulplaner8/OldLessonInfo/LessonInfo.dart';
 import 'package:schulplaner8/groups/src/models/place.dart';
 import 'package:schulplaner8/groups/src/models/teacher.dart';

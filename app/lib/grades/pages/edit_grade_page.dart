@@ -1,5 +1,8 @@
 //
 import 'package:flutter/material.dart';
+import 'package:schulplaner8/OldGrade/models/choice.dart';
+import 'package:schulplaner8/OldGrade/models/grade.dart';
+import 'package:schulplaner8/OldGrade/models/grade_value.dart';
 import 'package:schulplaner8/grades/models/grade_type.dart';
 import 'package:schulplaner8/models/planner_settings.dart';
 import 'package:schulplaner_addons/common/widgets/editpage.dart';
@@ -9,7 +12,7 @@ import 'package:schulplaner8/Helper/EasyWidget.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
 import 'package:schulplaner_widgets/schulplaner_forms.dart';
 import 'package:schulplaner8/Helper/helper_views.dart';
-import 'package:schulplaner8/OldGrade/Grade.dart';
+
 import 'package:schulplaner8/OldGrade/GradePackage.dart';
 import 'package:schulplaner8/Views/SchoolPlanner/MyTasks.dart';
 import 'package:schulplaner8/Views/SchoolPlanner/common/edit_page.dart';

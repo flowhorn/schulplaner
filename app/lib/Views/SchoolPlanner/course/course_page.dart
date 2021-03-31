@@ -122,12 +122,12 @@ class CourseView extends StatelessWidget {
                           children: courseInfo.places.values.map((it) {
                             return ListTile(
                               leading: Icon(Icons.place),
-                              title: Text(it!.name ?? '-'),
+                              title: Text(it?.name ?? '-'),
                               onTap: () {
                                 showPlaceDetail(
                                     context: context,
                                     plannerdatabase: database,
-                                    placeid: it.placeid);
+                                    placeid: it!.placeid);
                               },
                             );
                           }).toList(),

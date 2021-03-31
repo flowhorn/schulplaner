@@ -1,4 +1,3 @@
-//
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Data/planner_database/planner_database.dart';
@@ -8,10 +7,12 @@ import 'package:schulplaner_widgets/schulplaner_common.dart';
 import 'package:schulplaner_widgets/schulplaner_forms.dart';
 import 'package:schulplaner_widgets/schulplaner_theme.dart';
 import 'package:schulplaner8/Helper/helper_views.dart';
-import 'package:schulplaner8/OldGrade/Grade.dart';
 import 'package:schulplaner8/OldGrade/GradePackage.dart';
 import 'package:schulplaner8/OldGrade/SchoolReport.dart';
 import 'package:schulplaner8/groups/src/models/course.dart';
+
+import 'models/grade.dart';
+import 'models/grade_value.dart';
 
 class NewSchoolReportView extends StatefulWidget {
   final PlannerDatabase database;
@@ -131,7 +132,7 @@ class NewReportValueViewiewState extends State<NewReportValueView> {
       if (reportValue == null) reportValue = ReportValue(weight: 1.0);
     }
     prefilled_grade = reportValue.grade_key ?? '';
-    prefilled_weight = reportValue.weight ;
+    prefilled_weight = reportValue.weight;
     if (getGradePackage(database.getSettings().gradepackageid).inputSupport) {
       if (reportValue.grade_key != null) {
         prefilled_grade = DataUtil_Grade()

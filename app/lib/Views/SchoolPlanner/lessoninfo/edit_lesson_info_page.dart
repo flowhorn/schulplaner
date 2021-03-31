@@ -1,5 +1,6 @@
 //
 import 'package:flutter/material.dart';
+import 'package:schulplaner8/OldGrade/models/choice.dart';
 import 'package:schulplaner8/groups/src/models/place_link.dart';
 import 'package:schulplaner8/groups/src/models/teacher_link.dart';
 import 'package:schulplaner_addons/common/widgets/editpage.dart';
@@ -12,7 +13,7 @@ import 'package:schulplaner_translations/schulplaner_translations.dart';
 import 'package:schulplaner_widgets/schulplaner_common.dart';
 import 'package:schulplaner_widgets/schulplaner_forms.dart';
 import 'package:schulplaner8/Helper/helper_views.dart';
-import 'package:schulplaner8/OldGrade/Grade.dart';
+
 import 'package:schulplaner8/OldLessonInfo/LessonInfo.dart';
 import 'package:schulplaner8/Views/SchoolPlanner/Pickers.dart';
 import 'package:schulplaner8/Views/SchoolPlanner/Timetable.dart';
@@ -208,8 +209,7 @@ class NewLessonInfoViewState extends State<NewLessonInfoView> {
                     getString(context).type +
                         ': ' +
                         (getLessonInfoTypes(context)[lessoninfo.type.index]
-                                .name ??
-                            '-'),
+                            .name),
                   ),
                   trailing: Icon(
                       getLessonInfoTypes(context)[lessoninfo.type.index]

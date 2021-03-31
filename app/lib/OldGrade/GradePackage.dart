@@ -1,9 +1,10 @@
-//
 import 'package:flutter/material.dart';
-import 'package:schulplaner8/OldGrade/Grade.dart';
 import 'package:schulplaner8/Helper/helper_data.dart';
 import 'package:schulplaner8/grades/grade_package/package_9_1.dart';
 import 'package:schulplaner8/grades/grade_package/package_switzerland.dart';
+
+import 'models/average_display.dart';
+import 'models/grade_value.dart';
 
 class GradePackage {
   int id;
