@@ -29,8 +29,8 @@ class PlannerSettingsData {
   late Map<String, GradeSpan> gradespans;
 
   //data
-  late String gradedataid;
-  late String? vacationpackageid;
+  String? gradedataid;
+  String? vacationpackageid;
 
   //GRADES:::
   late AverageSettings averageSettings;

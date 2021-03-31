@@ -46,7 +46,7 @@ class NewGradeViewState extends State<NewGradeView> {
         id: database.dataManager.gradesRef.doc().id,
         courseid: courseid,
         type: GradeType.EXAM,
-        date: date!,
+        date: date,
       );
     }
     prefilled_title = grade.title ?? '';

@@ -60,8 +60,11 @@ class NewLessonInfoViewState extends State<NewLessonInfoView> {
       if (courseid == null) {
         lessoninfo = LessonInfo(
           type: LessonInfoType.NONE,
-          date: datestring!,
-          id: database.dataManager.getLessonInfoRefCourse(courseid!).doc().id,
+          date: datestring,
+          id: database.dataManager
+              .getLessonInfoRefCourse('randomCourse')
+              .doc()
+              .id,
         );
       } else {
         if (lessonid == null) {
@@ -76,9 +79,9 @@ class NewLessonInfoViewState extends State<NewLessonInfoView> {
         } else {
           lessoninfo = LessonInfo(
             id: database.dataManager.getLessonInfoRefCourse(courseid!).doc().id,
-            courseid: courseid!,
-            lessonid: lessonid!,
-            date: datestring!,
+            courseid: courseid,
+            lessonid: lessonid,
+            date: datestring,
             type: LessonInfoType.NONE,
           );
         }
@@ -232,7 +235,7 @@ class NewLessonInfoViewState extends State<NewLessonInfoView> {
                                   lesson.end.toString() +
                                   '. '
                               : lesson.start.toString() + '. '))
-                      : null)!,
+                      : null),
                   onClicked: (context) {
                     if (lessoninfo.courseid != null) {
                       return showLessonPicker(
@@ -266,12 +269,15 @@ class NewLessonInfoViewState extends State<NewLessonInfoView> {
                   subtitle: Text(lessoninfo.teacher?.name ?? '-'),
                   onTap: () {
                     selectTeacher(
-                        context,
-                        database,
-                        singleToMap(
-                          lessoninfo.teacher,
-                          lessoninfo.teacher!.teacherid,
-                        )).then((newteacher) {
+                            context,
+                            database,
+                            lessoninfo.teacher == null
+                                ? {}
+                                : singleToMap(
+                                    lessoninfo.teacher,
+                                    lessoninfo.teacher!.teacherid,
+                                  ))
+                        .then((newteacher) {
                       if (newteacher != null) {
                         setState(() => lessoninfo = lessoninfo.copy(
                             teacher: TeacherLink.fromTeacher(newteacher)));
@@ -289,8 +295,12 @@ class NewLessonInfoViewState extends State<NewLessonInfoView> {
                     selectPlace(
                             context,
                             database,
-                            singleToMap(
-                                lessoninfo.place, lessoninfo.place!.placeid))
+                            lessoninfo.place == null
+                                ? {}
+                                : singleToMap(
+                                    lessoninfo.place,
+                                    lessoninfo.place!.placeid,
+                                  ))
                         .then((newplace) {
                       if (newplace != null) {
                         setState(() => lessoninfo = lessoninfo.copy(

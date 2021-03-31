@@ -86,6 +86,22 @@ class AppSettingsData {
     );
   }
 
+  AppSettingsData copyWithNullable({
+    String? languagecode,
+  }) {
+    return AppSettingsData._(
+      darkmode: darkmode,
+      autodark: autodark,
+      coloredAppBar: coloredAppBar,
+      primary: primary,
+      accent: accent,
+      languagecode: languagecode,
+      configurationData: configurationData,
+      gradespan: gradespan,
+      appwidgetsettings: appwidgetsettings,
+    );
+  }
+
   ThemeData getThemeData() {
     final newbrightness = darkmode == true
         ? Brightness.dark

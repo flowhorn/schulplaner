@@ -307,8 +307,8 @@ class NewLessonView extends StatelessWidget {
                                 return selectTeacher(
                                         context,
                                         database,
-                                        singleToMap(data.teacher,
-                                            data.teacher!.teacherid))
+                                        data.teacher == null ? {} :singleToMap(data.teacher,
+                                            data.teacher!.teacherid,))
                                     .then((newteacher) {
                                   if (newteacher != null) {
                                     data.teacher =

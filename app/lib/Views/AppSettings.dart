@@ -120,7 +120,8 @@ class AppSettingsView extends StatelessWidget {
                                           BlocProvider.of<AppSettingsBloc>(
                                               context);
                                       final newData = bloc.currentValue
-                                          .copyWith(languagecode: item.id);
+                                          .copyWithNullable(
+                                              languagecode: item.id);
 
                                       bloc.setAppSettings(newData);
                                     },

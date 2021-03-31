@@ -260,6 +260,12 @@ class EditCustomField extends StatelessWidget {
         valueListenable: isSelected,
         builder: (context, selected, _) {
           return InkWell(
+             onTap: () {
+              isSelected.value = true;
+              onClicked(context).then((_) {
+                isSelected.value = false;
+              });
+            },
             child: InputDecorator(
               isEmpty: value == null,
               isFocused: selected,
@@ -283,12 +289,6 @@ class EditCustomField extends StatelessWidget {
                 ),
               ),
             ),
-            onTap: () {
-              isSelected.value = true;
-              onClicked(context).then((_) {
-                isSelected.value = false;
-              });
-            },
           );
         },
       ),

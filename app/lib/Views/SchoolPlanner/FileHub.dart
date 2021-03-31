@@ -49,6 +49,7 @@ class FileHub extends StatelessWidget {
                             context, PersonalStorageView(database: database));
                       },
                     )),
+                /*
                 FormSection(
                     title: getString(context).coursestorage,
                     child: Column(
@@ -85,6 +86,7 @@ class FileHub extends StatelessWidget {
                               ))
                           .toList(),
                     )),
+             */
                 FormSpace(64.0),
               ],
             ),

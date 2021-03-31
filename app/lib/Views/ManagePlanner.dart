@@ -73,7 +73,6 @@ class ManagePlannerView extends StatelessWidget {
                             child: Column(
                               children: <Widget>[
                                 ListTile(
-                                  leading: Icon(Icons.reorder),
                                   title: Text(it.name),
                                   trailing: it.id ==
                                           (loadAllPlannerStatus

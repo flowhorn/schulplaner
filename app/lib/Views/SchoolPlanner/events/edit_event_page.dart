@@ -1,4 +1,3 @@
-//
 import 'package:schulplaner8/Helper/DateAPI.dart';
 import 'package:schulplaner8/Helper/EasyWidget.dart';
 import 'package:schulplaner8/Helper/PermissionManagement.dart';
@@ -25,7 +24,7 @@ class NewSchoolEventView extends StatelessWidget {
   final bool editmode;
   bool changedValues = false;
 
-  late List<String> _nextlessons;
+  List<String> _nextlessons = [];
   late List<RecommendedDate> recommendeddates;
   late SchoolEvent data;
   late ValueNotifier<SchoolEvent> notifier;
