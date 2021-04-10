@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "target": "beta-web-app",
+    "target": "alpha-web-app",
     "public": "build/web",
     "ignore": [
       "firebase.json",

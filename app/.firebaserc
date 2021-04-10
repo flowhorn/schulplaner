@@ -5,6 +5,9 @@
   "targets": {
     "mainprojects-32581": {
       "hosting": {
+        "alpha-web-app": [
+          "schulplaner-alpha"
+        ],
         "beta-web-app": [
           "schulplaner-beta"
         ]

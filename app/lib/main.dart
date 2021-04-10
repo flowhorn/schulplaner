@@ -1,4 +1,3 @@
-// @dart=2.11
 import 'package:authentification/authentification_blocs.dart';
 import 'package:bloc/bloc_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -23,6 +22,7 @@ void main() async {
   runApp(
     SchulplanerBlocs.create(
       dynamicLinksBloc: dynamicLinksLogic,
+      firebaseAuth: FirebaseAuth.instance,
       child: Builder(
         builder: (context) {
           final authentificationBloc =
@@ -35,7 +35,6 @@ void main() async {
           );
         },
       ),
-      firebaseAuth: FirebaseAuth.instance,
     ),
   );
 }

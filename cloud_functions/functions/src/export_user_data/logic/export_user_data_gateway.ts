@@ -3,7 +3,8 @@ import { SchulplanerReferences } from "../../schulplaner_globals";
 import { UserId } from "../../user/models/user_id";
 import { RequestMetaData } from "../models/request_meta_data";
 import { BuildUserDataWorkbook } from "./build_user_data_workbook";
-import { FileArchiver } from "./file_archiver";
+import { ArchiveableFile, FileArchiver } from "./file_archiver";
+import { UserDataGateway } from "./user_data_gateway";
 import { UserDataToStorageUploader } from "./user_data_to_storage_uploader";
 
 export class ExportUserDataGateway {
@@ -46,13 +47,15 @@ export class ExportUserDataGateway {
 
 
     async createExportUserData(userId: UserId): Promise<RequestMetaData | null> {
-        const workbookBuilder = new BuildUserDataWorkbook();
+        const workbookBuilder = new BuildUserDataWorkbook({
+            userDataGateway: new UserDataGateway()
+        });
         const fileArchiver = new FileArchiver();
         const userDataToStorageUploader = new UserDataToStorageUploader({
             firebaseStorage: admin.storage(),
         });
-        const workbookBuffer: any = await workbookBuilder.buildUserDataWorkbook();
-        const archive = await fileArchiver.archiveFiles(workbookBuffer, 'Schulplaner Exportdaten');
+        const files: ArchiveableFile[] = await workbookBuilder.buildUserDataWorkbook(userId);
+        const archive = await fileArchiver.archiveFiles(files, 'Schulplaner Exportdaten');
         return userDataToStorageUploader.upload(userId.uid, archive);
     }
 
