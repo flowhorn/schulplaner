@@ -49,7 +49,7 @@ dependencies:
   firebase_messaging: 9.1.0
   firebase_storage: 8.0.1
   firebase_analytics: ^8.0.0-dev.0
-  firebase_database: 6.1.1
+  firebase_database: 6.1.2
   firebase_performance: 0.6.0+1
   firebase_crashlytics: 1.0.0
   firebase_dynamic_links: ^2.0.0-dev.0

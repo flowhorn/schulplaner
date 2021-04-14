@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_material_color_picker/flutter_material_color_picker.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:schulplaner8/Helper/helper_data.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
 
@@ -23,17 +23,12 @@ class _ColorPicker extends StatelessWidget {
     return AlertDialog(
       title: Text(bothlang(context, de: 'Farbe', en: 'Color')),
       contentPadding: EdgeInsets.zero,
-      content: MaterialColorPicker(
-        selectedColor: selectedColor,
-        onColorChange: (newColor) {
+      content: MaterialPicker(
+        pickerColor: selectedColor ?? Colors.teal,
+        onColorChanged: (newColor) {
           color.value = newColor;
           Navigator.pop(context, color.value);
         },
-        onMainColorChange: (newMainColor) {
-          color.value = newMainColor;
-        },
-        shrinkWrap: true,
-        onlyShadeSelection: true,
       ),
       actions: <Widget>[
         TextButton(
