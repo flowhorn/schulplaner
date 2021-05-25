@@ -21,7 +21,7 @@ class ExportUserDataClientBloc extends BlocBase {
   }
 
   List<ExportUserDataRequestView> get exportUserDataRequestInitialData =>
-      _exportUserDataSubject.valueWrapper!.value;
+      _exportUserDataSubject.value;
 
   Stream<List<ExportUserDataRequestView>> get exportUserDataRequests =>
       _exportUserDataSubject;

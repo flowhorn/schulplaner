@@ -51,6 +51,8 @@ class TimetableView extends StatelessWidget {
             child: Scaffold(
               appBar: plannerDatabase.settings.data!.multiple_weektypes
                   ? PreferredSize(
+                      preferredSize:
+                          Size(100.0, MediaQuery.of(context).size.width),
                       child: TabBar(
                         tabs: getListOfWeekTypes(
                           context,
@@ -68,16 +70,14 @@ class TimetableView extends StatelessWidget {
                         unselectedLabelColor: getDividerColor(context),
                         indicatorWeight: 3.0,
                       ),
-                      preferredSize:
-                          Size(100.0, MediaQuery.of(context).size.width),
                     )
                   : PreferredSize(
-                      child: Container(),
                       preferredSize: Size(0.0, 0.0),
+                      child: Container(),
                     ),
               body: TabBarView(
                   children: getTimetableFragments(
-                      plannerDatabase, context, snapshot.data!)),
+                      plannerDatabase, context, snapshot.data ?? {})),
               backgroundColor: backgroundcolor,
               floatingActionButton: FloatingActionButton(
                 onPressed: () {

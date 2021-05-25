@@ -28,19 +28,20 @@ class DataManager {
   final String plannerid, uid;
 
   FirebaseFirestore get instance => FirebaseFirestore.instance;
-  DocumentReference get userRoot => instance.collection('users').doc(uid);
+  DocumentReference<Map<String, dynamic>> get userRoot =>
+      instance.collection('users').doc(uid);
 
-  DocumentReference userOtherRoot(String userID) =>
+  DocumentReference<Map<String, dynamic>> userOtherRoot(String userID) =>
       instance.collection('users').doc(userID);
-  DocumentReference get plannerRoot =>
+  DocumentReference<Map<String, dynamic>> get plannerRoot =>
       userRoot.collection('planner').doc(plannerid);
-  DocumentReference get settingsReference =>
+  DocumentReference<Map<String, dynamic>> get settingsReference =>
       plannerRoot.collection('data').doc('settings');
-  DocumentReference courseRoot(String courseid) =>
+  DocumentReference<Map<String, dynamic>> courseRoot(String courseid) =>
       instance.collection('courses').doc(courseid);
-  DocumentReference schoolClassRoot(String classid) =>
+  DocumentReference<Map<String, dynamic>> schoolClassRoot(String classid) =>
       instance.collection('schoolclasses').doc(classid);
-  DocumentReference get notificationSettings =>
+  DocumentReference<Map<String, dynamic>> get notificationSettings =>
       instance.collection('notifications').doc(getMemberId());
 
   DataManager({
@@ -56,46 +57,56 @@ class DataManager {
   String generatePlaceId() => placesRef.doc().id;
   String generateVacationId() => vacationsRef.doc().id;
 
-  static CollectionReference get publiccodeRef {
+  static CollectionReference<Map<String, dynamic>> get publiccodeRef {
     return FirebaseFirestore.instance.collection('publiccodes');
   }
 
-  CollectionReference get filesPersonalRef => userRoot.collection('files');
+  CollectionReference<Map<String, dynamic>> get filesPersonalRef =>
+      userRoot.collection('files');
 
-  CollectionReference get teachersRef => plannerRoot.collection('teachers');
-  CollectionReference get placesRef => plannerRoot.collection('places');
-  CollectionReference get notesRef => plannerRoot.collection('notes');
-  CollectionReference get gradesRef => plannerRoot.collection('grades');
-  CollectionReference get absentTimeRef =>
+  CollectionReference<Map<String, dynamic>> get teachersRef =>
+      plannerRoot.collection('teachers');
+  CollectionReference<Map<String, dynamic>> get placesRef =>
+      plannerRoot.collection('places');
+  CollectionReference<Map<String, dynamic>> get notesRef =>
+      plannerRoot.collection('notes');
+  CollectionReference<Map<String, dynamic>> get gradesRef =>
+      plannerRoot.collection('grades');
+  CollectionReference<Map<String, dynamic>> get absentTimeRef =>
       plannerRoot.collection('absenttimes');
-  CollectionReference get schoolReportsRef =>
+  CollectionReference<Map<String, dynamic>> get schoolReportsRef =>
       plannerRoot.collection('schoolreports');
-  CollectionReference get vacationsRef => plannerRoot.collection('vacations');
-  CollectionReference get vacationpackagesRef =>
+  CollectionReference<Map<String, dynamic>> get vacationsRef =>
+      plannerRoot.collection('vacations');
+  CollectionReference<Map<String, dynamic>> get vacationpackagesRef =>
       instance.collection('vacationpackages');
-  DocumentReference get coursePersonalRef =>
+  DocumentReference<Map<String, dynamic>> get coursePersonalRef =>
       plannerRoot.collection('data').doc('coursepersonal');
-  DocumentReference get plannerConnections =>
+  DocumentReference<Map<String, dynamic>> get plannerConnections =>
       plannerRoot.collection('data').doc('connections');
 
-  DocumentReference getMemberInfo(String memberid) =>
+  DocumentReference<Map<String, dynamic>> getMemberInfo(String memberid) =>
       instance.collection('users').doc(memberid).collection('data').doc('info');
-  DocumentReference getCourseInfo(String courseid) => courseRoot(courseid);
+  DocumentReference<Map<String, dynamic>> getCourseInfo(String courseid) =>
+      courseRoot(courseid);
 
-  CollectionReference getTaskRefPrivate() => plannerRoot.collection('tasks');
-  CollectionReference getTaskRefCourse(String courseid) =>
+  CollectionReference<Map<String, dynamic>> getTaskRefPrivate() =>
+      plannerRoot.collection('tasks');
+  CollectionReference<Map<String, dynamic>> getTaskRefCourse(String courseid) =>
       courseRoot(courseid).collection('tasks');
-  CollectionReference getLessonRefCourse(String courseid) =>
+  CollectionReference<Map<String, dynamic>> getLessonRefCourse(
+          String courseid) =>
       courseRoot(courseid).collection('lessons');
-  CollectionReference getTaskRefClass(String classid) =>
+  CollectionReference<Map<String, dynamic>> getTaskRefClass(String classid) =>
       schoolClassRoot(classid).collection('tasks');
 
-  CollectionReference getLetterRefCourse(String courseid) =>
+  CollectionReference<Map<String, dynamic>> getLetterRefCourse(
+          String courseid) =>
       courseRoot(courseid).collection('letter');
-  CollectionReference getLetterRefClass(String classid) =>
+  CollectionReference<Map<String, dynamic>> getLetterRefClass(String classid) =>
       schoolClassRoot(classid).collection('letter');
 
-  DocumentReference? getLetterRef(Letter letter) {
+  DocumentReference<Map<String, dynamic>>? getLetterRef(Letter letter) {
     if (letter.savedin == null) return null;
     if (letter.savedin?.type == SavedInType.COURSE) {
       return getLetterRefCourse(letter.savedin!.id!).doc(letter.id);
@@ -107,16 +118,19 @@ class DataManager {
   }
 
   //EVENTS
-  CollectionReference getEventRefPrivate() => plannerRoot.collection('events');
-  CollectionReference getEventRefCourse(String courseid) =>
+  CollectionReference<Map<String, dynamic>> getEventRefPrivate() =>
+      plannerRoot.collection('events');
+  CollectionReference<Map<String, dynamic>> getEventRefCourse(
+          String courseid) =>
       courseRoot(courseid).collection('events');
-  CollectionReference getEventRefClass(String courseid) =>
+  CollectionReference<Map<String, dynamic>> getEventRefClass(String courseid) =>
       schoolClassRoot(courseid).collection('events');
 
-  CollectionReference getLessonInfoRefCourse(String courseid) =>
+  CollectionReference<Map<String, dynamic>> getLessonInfoRefCourse(
+          String courseid) =>
       courseRoot(courseid).collection('lessoninfos');
 
-  DocumentReference getSchoolClassInfo(String classid) =>
+  DocumentReference<Map<String, dynamic>> getSchoolClassInfo(String classid) =>
       schoolClassRoot(classid);
 
   String getMemberId() => uid + '::' + plannerid;

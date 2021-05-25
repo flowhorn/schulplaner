@@ -29,14 +29,7 @@ class _NewFilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final bloc = BlocProvider.of<NewFileBloc>(context);
     return WillPopScope(
-      child: Scaffold(
-        appBar: MyAppHeader(title: getString(context).newfile),
-        body: SingleChildScrollView(
-          child: _Inner(),
-        ),
-        floatingActionButton: _Fab(),
-      ),
-      onWillPop: () async {
+        onWillPop: () async {
         if (bloc.hasChangedValues == false) return true;
         return showConfirmDialog(
             context: context,
@@ -53,6 +46,14 @@ class _NewFilePage extends StatelessWidget {
           }
         });
       },
+      child: Scaffold(
+        appBar: MyAppHeader(title: getString(context).newfile),
+        body: SingleChildScrollView(
+          child: _Inner(),
+        ),
+        floatingActionButton: _Fab(),
+      ),
+    
     );
   }
 }

@@ -26,7 +26,7 @@ class SchoolClass {
   final Map<String, MemberRole> userRoles;
 
   final CourseSettings settings;
-  final SharedSettings sharedSettings;
+  final SharedSettings? sharedSettings;
   final GroupVersion groupVersion;
 
   const SchoolClass._({
@@ -74,6 +74,7 @@ class SchoolClass {
     //MAPS:
     Map<String, dynamic>? predata_courses =
         data['courses']?.cast<String, dynamic>();
+    predata_courses?.removeWhere((key, value) => value == null);
     final Map<String, bool> courses = (predata_courses ?? {}).map<String, bool>(
         (String key, dynamic value) => MapEntry<String, bool>(key, value));
     courses.removeWhere((key, value) => value != true);
@@ -110,9 +111,11 @@ class SchoolClass {
       creatorRequiresAdmin: data['creatorrequiresadmin'] ?? false,
       enablechat: data['enablechat'] ?? false,
       settings: CourseSettings.fromData(data['settings']),
-      sharedSettings: SharedSettings.FromData(
-        data['sharedSettings'],
-      ),
+      sharedSettings: data['sharedSettings'] == null
+          ? null
+          : SharedSettings.FromData(
+              data['sharedSettings'],
+            ),
       groupVersion: groupVersionFromData(data['groupVersion']),
     );
   }
@@ -133,7 +136,7 @@ class SchoolClass {
       'userRoles':
           encodeMap<MemberRole>(userRoles, (it) => memberRoleEnumToString(it)),
       'settings': settings.toJson(),
-      'sharedSettings': sharedSettings.toJson(),
+      'sharedSettings': sharedSettings?.toJson(),
       'groupVersion': groupVersionToData(groupVersion),
     };
   }

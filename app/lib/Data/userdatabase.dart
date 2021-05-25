@@ -5,7 +5,7 @@ import 'package:schulplaner8/models/user.dart';
 class UserDatabase {
   final String uid;
 
-  late DocumentReference _root;
+  late DocumentReference<Map<String, dynamic>> _root;
 
   late DataDocumentPackage<UserProfile> userprofile;
   late DataDocumentPackage<User> user;
@@ -41,7 +41,7 @@ class User {
     if (data != null) {
       return User(
         id: id,
-        name: data['name'],
+        name: data['name'] ?? 'Anonym',
       );
     } else {
       return User(

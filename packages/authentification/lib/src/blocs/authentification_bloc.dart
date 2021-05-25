@@ -40,7 +40,7 @@ class AuthentificationBloc extends BlocBase {
       _authentificationStatusSubject;
 
   AuthentificationStatus get authentificationStatusValue =>
-      _authentificationStatusSubject.valueWrapper!.value;
+      _authentificationStatusSubject.value;
 
   UserId? get userId => _firebaseAuth.currentUser != null
       ? UserId(_firebaseAuth.currentUser!.uid)

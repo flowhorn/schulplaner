@@ -30,13 +30,13 @@ class NewFileBloc extends BlocBase {
   }
 
   Stream<CloudFile> get cloudFile => _cloudFileSubject;
-  CloudFile get cloudFileValue => _cloudFileSubject.value!;
-  bool get hasChangedValues => _hasChangedValuesSubject.value!;
+  CloudFile get cloudFileValue => _cloudFileSubject.value;
+  bool get hasChangedValues => _hasChangedValuesSubject.value;
 
   Stream<bool> get isFileFormLocked => _isFileFormLockedSubject;
   Stream<TaskSnapshot> get uploadEvents => _uploadEventsSubject;
   Stream<int> get uploadState => _uploadStateSubject;
-  bool get isFileFormLockedValue => _isFileFormLockedSubject.value!;
+  bool get isFileFormLockedValue => _isFileFormLockedSubject.value;
 
   void _updateFile(CloudFile newFile) {
     _hasChangedValuesSubject.add(true);

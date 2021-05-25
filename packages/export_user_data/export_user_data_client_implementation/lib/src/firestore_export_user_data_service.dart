@@ -11,12 +11,14 @@ class FirestoreExportUserDataService implements ExportUserDataService {
     required this.userId,
   }) : _firestore = firestore;
 
-  CollectionReference get _exportUserDataRequestsCollection =>
-      _firestore.collection('ExportUserDataRequests');
+  CollectionReference<Map<String, dynamic>>
+      get _exportUserDataRequestsCollection =>
+          _firestore.collection('ExportUserDataRequests');
 
   String get generateNewId => _exportUserDataRequestsCollection.doc().id;
 
-  DocumentReference exportUserDataRequestsDocument(String id) =>
+  DocumentReference<Map<String, dynamic>> exportUserDataRequestsDocument(
+          String id) =>
       _exportUserDataRequestsCollection.doc(id);
   @override
   Future<bool> sendExportUserDataRequest() async {
@@ -36,7 +38,7 @@ class FirestoreExportUserDataService implements ExportUserDataService {
       (querySnap) => querySnap.docs
           .map(
             (docSnap) =>
-                ExportUserDataRequest.fromData(docSnap.id, docSnap.data()!)
+                ExportUserDataRequest.fromData(docSnap.id, docSnap.data())
                     .toView(),
           )
           .toList()

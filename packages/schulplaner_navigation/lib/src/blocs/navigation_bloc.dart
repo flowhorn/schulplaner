@@ -25,7 +25,7 @@ class NavigationBloc extends BlocBase {
 
   Stream<NavigationState> get currentMainPage => _currentPageSubject;
 
-  NavigationState get currentMainPageValue => _currentPageSubject.value!;
+  NavigationState get currentMainPageValue => _currentPageSubject.value;
 
   Function(NavigationState) get setMainPage => _currentPageSubject.add;
 

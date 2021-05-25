@@ -20,7 +20,7 @@ ChangeType fromDocumentChange(DocumentChangeType type) {
 }
 
 class DataDocumentPackage<T> {
-  DocumentReference reference;
+  DocumentReference<Map<String, dynamic>> reference;
   final bool directlyLoad, lockedOnStart, loadNullData;
   final ObjectBuilder<T?> objectBuilder;
   bool _isinitiated = false;
@@ -102,7 +102,7 @@ class DataDocumentPackage<T> {
     }
   }
 
-  void unlock({DocumentReference? newreference}) {
+  void unlock({DocumentReference<Map<String, dynamic>>? newreference}) {
     _islocked = false;
     if (newreference != null) reference = newreference;
     if (_list_streamcontroller.isNotEmpty && _isinitiated == false) {
@@ -400,7 +400,7 @@ class DataCombinedPackageSpecial<T, T2> {
 }
 
 class DataCollectionPackage<T> {
-  Query reference;
+  Query<Map<String, dynamic>> reference;
   final bool directlyLoad, lockedOnStart;
   final ObjectBuilder<T> objectBuilder;
   final GetKey<T> getKey;
@@ -499,7 +499,7 @@ class DataCollectionPackage<T> {
           querySnapshot.docs.where((docSnapshot) => docSnapshot.exists);
       final dataObjects = documents
           .map((docSnapshot) =>
-              objectBuilder(docSnapshot.id, docSnapshot.data()!))
+              objectBuilder(docSnapshot.id, docSnapshot.data()))
           .toList();
       dataObjects.removeWhere((it) => it == null);
       if (sorter != null) dataObjects.sort(sorter);
@@ -520,7 +520,7 @@ class DataCollectionPackage<T> {
     }
   }
 
-  void unlock({Query? newreference}) {
+  void unlock({Query<Map<String, dynamic>>? newreference}) {
     _islocked = false;
     if (newreference != null) reference = newreference;
     if (_list_streamcontroller.isNotEmpty && _isinitiated == false) {

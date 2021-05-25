@@ -14,7 +14,7 @@ Map<String, T> decodeMap<T>(dynamic data, ObjectMapBuilder<T> builder) {
 }
 
 List<T> decodeList<T>(dynamic data, ObjectBuilder<T> builder) {
-  List<dynamic> originaldata = data;
+  List<dynamic>? originaldata = data;
   if (originaldata == null) return [];
   return originaldata.map((dynamic value) => builder(value)).toList();
 }

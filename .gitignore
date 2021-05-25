@@ -4,3 +4,4 @@ key-release.properties
 service_account_key_production.json
 firebase_init_release.js
 GoogleService-Info.plist
+.env

@@ -16,11 +16,13 @@ class PlannerConnections {
       //datamaps
       Map<String, dynamic> predata_mycourses =
           data['mycourses']?.cast<String, dynamic>() ?? {};
+      predata_mycourses.removeWhere((key, value) => value == null);
       final mycourses = predata_mycourses.map<String, bool>(
           (String key, dynamic value) => MapEntry<String, bool>(key, value));
       mycourses.removeWhere((key, value) => value != true);
       Map<String, dynamic> predata_myclasses =
           data['myclasses']?.cast<String, dynamic>() ?? {};
+      predata_myclasses.removeWhere((key, value) => value == null);
       final myclasses = predata_myclasses.map<String, bool>(
           (String key, dynamic value) => MapEntry<String, bool>(key, value));
       myclasses.removeWhere((key, value) => value != true);
@@ -30,7 +32,7 @@ class PlannerConnections {
       predata_myclasssettings.removeWhere((key, value) => value == null);
       final myclasssettings =
           predata_myclasssettings.map<String, ClassSettings>(
-        (String key, dynamic? value) => MapEntry(
+        (String key, dynamic value) => MapEntry(
           key,
           ClassSettings.fromData(
             classid: key,

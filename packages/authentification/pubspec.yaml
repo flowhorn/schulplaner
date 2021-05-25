@@ -20,12 +20,17 @@ dependencies:
     path: ../schulplaner_translations
   universal_commons:
     path: ../universal_commons
-  firebase_auth: 1.0.1
-  google_sign_in: 5.0.1
+  firebase_auth: 1.2.0
+  google_sign_in: 5.0.3
   sign_in_with_apple: ^3.0.0
   firebase_auth_oauth: 1.0.1
-  rxdart: ^0.26.0
+  rxdart: ^0.27.0
   community_material_icon: 5.9.55
+  url_launcher: any
+  googleapis_auth: 1.1.0
+  flutter_dotenv: ^4.0.0-nullsafety.1
+
+
 
 dev_dependencies:
   flutter_test:
@@ -33,6 +38,7 @@ dev_dependencies:
 
 dependency_overrides:
   intl: ^0.17.0
+  crypto: ^3.0.0
   intl_translation:
     git:
       url: https://github.com/Zazo032/intl_translation.git

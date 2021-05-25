@@ -252,11 +252,12 @@ class SchoolReportList extends StatelessWidget {
                   title: Text(item.name),
                   onTap: () {
                     pushWidget(
-                        context,
-                        ReportView(
-                          database: plannerDatabase,
-                          reportid: item.id,
-                        ));
+                      context,
+                      ReportView(
+                        database: plannerDatabase,
+                        reportid: item.id,
+                      ),
+                    );
                   },
                   trailing: IconButton(
                       icon: Icon(Icons.more_horiz),

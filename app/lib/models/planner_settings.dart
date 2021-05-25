@@ -63,7 +63,7 @@ class PlannerSettingsData {
 
       //datamaps
       Map<String, dynamic> predata_lessontimes =
-          data['lessontimes']?.cast<String, dynamic>();
+          data['lessontimes']?.cast<String, dynamic>() ?? {};
 
       lessontimes = (predata_lessontimes).map<int, LessonTime>(
           (String key, dynamic value) => MapEntry<int, LessonTime>(
@@ -71,7 +71,7 @@ class PlannerSettingsData {
               LessonTime.fromData(value.cast<String, dynamic>())));
 
       Map<String, dynamic> predata_gradespans =
-          data['gradespans']?.cast<String, dynamic>();
+          data['gradespans']?.cast<String, dynamic>() ?? {};
 
       gradespans = (predata_gradespans).map<String, GradeSpan>(
           (String key, dynamic value) => MapEntry<String, GradeSpan>(

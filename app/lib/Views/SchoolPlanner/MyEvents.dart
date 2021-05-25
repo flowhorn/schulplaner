@@ -369,7 +369,7 @@ Stream<Map<String, SchoolEvent>> getArchiveStreamEvents(
         .snapshots()
         .listen((data) {
       unmergeddata_archived[courseid] = data.docs
-          .map((snapshot) => SchoolEvent.fromData(snapshot.data()!))
+          .map((snapshot) => SchoolEvent.fromData(snapshot.data()))
           .toList();
       update();
     }));
@@ -380,7 +380,7 @@ Stream<Map<String, SchoolEvent>> getArchiveStreamEvents(
         .snapshots()
         .listen((data) {
       unmergeddata_tooold[courseid] = data.docs
-          .map((snapshot) => SchoolEvent.fromData(snapshot.data()!))
+          .map((snapshot) => SchoolEvent.fromData(snapshot.data()))
           .toList();
       update();
     }));
@@ -391,7 +391,7 @@ Stream<Map<String, SchoolEvent>> getArchiveStreamEvents(
       .snapshots()
       .listen((data) {
     unmergeddata_archived['private'] = data.docs
-        .map((snapshot) => SchoolEvent.fromData(snapshot.data()!))
+        .map((snapshot) => SchoolEvent.fromData(snapshot.data()))
         .toList();
     update();
   }));
@@ -402,7 +402,7 @@ Stream<Map<String, SchoolEvent>> getArchiveStreamEvents(
       .snapshots()
       .listen((data) {
     unmergeddata_tooold['private'] = data.docs
-        .map((snapshot) => SchoolEvent.fromData(snapshot.data()!))
+        .map((snapshot) => SchoolEvent.fromData(snapshot.data()))
         .toList();
     update();
   }));
@@ -655,7 +655,7 @@ void showEventDetailSheet(
       routname: 'schooleventid');
 }
 
-DocumentReference? identifyEventRef(
+DocumentReference<Map<String, dynamic>>? identifyEventRef(
     PlannerDatabase plannerdatabase, SchoolEvent schoolEvent) {
   if (schoolEvent.private) {
     return plannerdatabase.dataManager

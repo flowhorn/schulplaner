@@ -13,12 +13,12 @@ dependencies:
     path: ../packages/bloc
   design_utils:
     path: ../packages/design_utils
-  cupertino_icons: ^1.0.2
-  url_launcher: 6.0.3
-  flutter_svg: ^0.21.0-nullsafety.0
+  cupertino_icons: ^1.0.3
+  url_launcher: 6.0.4
+  flutter_svg: ^0.22.0
   community_material_icon: ^5.9.55
   carousel_slider: ^4.0.0-nullsafety.0
-  easy_dynamic_theme: ^2.0.0
+  easy_dynamic_theme: ^2.2.0
   #url_strategy: 0.2.0
 
 

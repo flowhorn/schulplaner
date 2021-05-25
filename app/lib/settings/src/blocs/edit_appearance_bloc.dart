@@ -13,14 +13,13 @@ class EditApperanceBloc extends BlocBase {
   }
 
   Future<void> submit() async {
-    final newValue = _appSettingsDataSubject.valueWrapper!.value;
+    final newValue = _appSettingsDataSubject.value;
     appSettingsBloc.setAppSettings(newValue);
   }
 
   Stream<AppSettingsData> get appSettingsData => _appSettingsDataSubject;
 
-  AppSettingsData get currentValue =>
-      _appSettingsDataSubject.valueWrapper!.value;
+  AppSettingsData get currentValue => _appSettingsDataSubject.value;
 
   void setPrimary(Color primary) {
     _appSettingsDataSubject.add(currentValue.copyWith(primary: primary));

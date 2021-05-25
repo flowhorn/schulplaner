@@ -28,7 +28,7 @@ class CourseAllGradeView extends StatefulWidget {
 
 class CourseAllGradeViewState extends State<CourseAllGradeView> {
   late String courseid;
-  late Course? item;
+  Course? item;
   late StreamSubscription<Course?> datalistener;
   late StreamSubscription<List<Grade>?> datalistener_grade;
   final PlannerDatabase database;
@@ -36,24 +36,28 @@ class CourseAllGradeViewState extends State<CourseAllGradeView> {
   CourseAllGradeViewState(this.database, this.courseid) {
     list = (database.grades.data ?? [])
         .where((grade) => grade.courseid == courseid)
-        .toList()
-          ..sort((g1, g2) {
-            return g1.date!.compareTo(g2.date!);
-          });
-    calculator = AverageCourse(database.getSettings(),
-        grades: list,
-        gradeprofileid:
-            database.getCourseInfo(courseid)!.personalgradeprofile!);
+        .toList();
+    list.sort(
+      (g1, g2) {
+        return g1.date!.compareTo(g2.date!);
+      },
+    );
+    calculator = AverageCourse(
+      database.getSettings(),
+      grades: list,
+      gradeprofileid: database.getCourseInfo(courseid)!.personalgradeprofile,
+    );
   }
 
   List<Grade> list = [];
   late AverageCourse calculator;
 
   void _newCalculation() {
-    calculator = AverageCourse(database.getSettings(),
-        grades: list,
-        gradeprofileid:
-            database.getCourseInfo(courseid)!.personalgradeprofile!);
+    calculator = AverageCourse(
+      database.getSettings(),
+      grades: list,
+      gradeprofileid: database.getCourseInfo(courseid)!.personalgradeprofile,
+    );
   }
 
   @override

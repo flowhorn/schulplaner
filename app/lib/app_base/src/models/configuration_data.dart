@@ -36,7 +36,8 @@ class ConfigurationData {
       );
     } else {
       Map<String, dynamic> premap_navactions =
-          data['navigationactions']?.cast<String, int>() ?? {};
+          data['navigationactions']?.cast<String, int?>() ?? {};
+      premap_navactions.removeWhere((key, value) => value == null);
       var navactions = premap_navactions.map<int, int>(
           (String key, value) => MapEntry(int.parse(key), value));
 

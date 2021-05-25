@@ -320,7 +320,7 @@ Map<String, Lesson> _getLessonsMap(dynamic data) {
 
 extension CourseConverter on Course {
   static Course fromData(dynamic data) {
-    String mShortname = data['shortname'];
+    final String? mShortname = data['shortname'];
 
     Map<String, MemberData> membersData = decodeMap(data['membersData'],
         (key, value) => MemberData.fromData(id: key, data: value));
@@ -337,7 +337,7 @@ extension CourseConverter on Course {
     return Course._(
       id: data['id'] ?? data['courseid'],
       name: data['name'],
-      title: data['title'],
+      title: data['title'] ?? data['name'],
       description: data['description'],
       shortname: data['shortname'] ?? mShortname,
       publiccode: data['publiccode'],

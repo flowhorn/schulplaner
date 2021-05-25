@@ -269,12 +269,12 @@ class ArchivedPlanner extends StatelessWidget {
     final plannerLoaderBloc = BlocProvider.of<PlannerLoaderBloc>(context);
     return Scaffold(
       appBar: MyAppHeader(title: getString(context).archivedplanners),
-      body: StreamBuilder<QuerySnapshot>(
+      body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return ListView(
               children: snapshot.data!.docs.map((data) {
-                final planner = Planner.fromData(data.data()!);
+                final planner = Planner.fromData(data.data());
                 return Padding(
                   padding: EdgeInsets.only(
                       left: 8.0, right: 8.0, top: 5.0, bottom: 0.0),

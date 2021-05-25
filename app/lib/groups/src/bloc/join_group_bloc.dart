@@ -17,7 +17,7 @@ class JoinGroupBloc extends BlocBase {
   }
 
   Stream<String> get enteredCode => _enteredCodeSubject;
-  String get enteredCodeValue => _enteredCodeSubject.valueWrapper!.value;
+  String get enteredCodeValue => _enteredCodeSubject.value;
   Stream<PublicCode?> get publicCodeResult => _publicCodeResultSubject;
 
   Function(String) get changeEnteredCode => _enteredCodeSubject.add;

@@ -191,6 +191,7 @@ class ChatThreadState extends State<ChatThread> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
+      onWillPop: onBackPress,
       child: Stack(
         children: <Widget>[
           Column(
@@ -279,7 +280,6 @@ class ChatThreadState extends State<ChatThread> {
           ),
         ],
       ),
-      onWillPop: onBackPress,
     );
   }
 
@@ -298,12 +298,12 @@ class ChatLoading extends StatelessWidget {
     return Positioned(
       child: isLoading
           ? Container(
+              color: Colors.white.withOpacity(0.8),
               child: Center(
                 child: CircularProgressIndicator(
                     valueColor: AlwaysStoppedAnimation<Color>(
                         ColorUtils.of(context).getAccentColor())),
               ),
-              color: Colors.white.withOpacity(0.8),
             )
           : Container(),
     );

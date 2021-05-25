@@ -8,7 +8,7 @@ class ClassSettings {
   });
 
   factory ClassSettings.fromData({
-    required dynamic? data,
+    required dynamic data,
     required String classid,
   }) {
     if (data != null) {

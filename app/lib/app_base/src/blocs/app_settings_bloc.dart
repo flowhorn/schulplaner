@@ -24,8 +24,7 @@ class AppSettingsBloc extends BlocBase {
     }
   }
 
-  AppSettingsData get currentValue =>
-      _appSettingsDataSubject.valueWrapper!.value;
+  AppSettingsData get currentValue => _appSettingsDataSubject.value;
 
   Stream<AppSettingsData> get appSettingsData => _appSettingsDataSubject;
 

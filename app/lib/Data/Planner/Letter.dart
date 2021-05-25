@@ -76,7 +76,7 @@ class LetterResponse {
 
 class Letter {
   final String id, title, content;
-  final String authorid;
+  final String? authorid;
   final SavedIn? savedin;
   final Timestamp published, lastchanged;
   final bool archived, deleted, sendpush, allowreply;

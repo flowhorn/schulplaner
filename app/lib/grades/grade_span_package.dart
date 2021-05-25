@@ -43,10 +43,9 @@ class GradeSpanPackage {
   late StreamSubscription<PlannerSettingsData?> _listener;
   late StreamSubscription<AppSettingsData> _listenerappsettings;
 
-  GradeSpan? get _current => _currentGradeSpanSubject.valueWrapper?.value;
+  GradeSpan? get _current => _currentGradeSpanSubject.valueOrNull;
 
-  GradeSpan? getCurrent(BuildContext context) =>
-      _currentGradeSpanSubject.valueWrapper!.value;
+  GradeSpan? getCurrent(BuildContext context) => _currentGradeSpanSubject.value;
 
   Stream<GradeSpan?> streamcurrent() => _currentGradeSpanSubject;
 
@@ -86,7 +85,7 @@ class GradeSpanPackage {
   }
 
   void sortAndSetActivatedCorrectly() {
-    final list = _gradeSpanListSubject.valueWrapper!.value
+    final list = _gradeSpanListSubject.value
         .map(
           (gradeSpan) => gradeSpan.copyWith(
             activated: gradeSpan.id == _current?.id,

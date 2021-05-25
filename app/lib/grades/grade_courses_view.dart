@@ -17,13 +17,13 @@ class GradeCoursesView extends StatelessWidget {
   final List<Course> courseList;
   final AverageCalculator calculator;
 
-  const GradeCoursesView(
-      {Key? key,
-      required this.database,
-      required this.list,
-      required this.calculator,
-      required this.courseList})
-      : super(key: key);
+  const GradeCoursesView({
+    Key? key,
+    required this.database,
+    required this.list,
+    required this.calculator,
+    required this.courseList,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,10 @@ class GradeCoursesView extends StatelessWidget {
           ),
           title: Text(course.getName()),
           onTap: () {
-            pushWidget(context, CourseAllGradeView(database, course.id));
+            pushWidget(
+              context,
+              CourseAllGradeView(database, course.id),
+            );
           },
           trailing: Text(
             calculator.averageperCourse[course.id]?.totalaverage != null

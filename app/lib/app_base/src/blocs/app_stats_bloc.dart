@@ -15,7 +15,7 @@ class AppStatsBloc extends BlocBase {
 
   Stream<AppStats> get appStats => _appStatsSubject;
 
-  AppStats get currentAppStats => _appStatsSubject.value!;
+  AppStats get currentAppStats => _appStatsSubject.value;
 
   Future<void> _initializeAppStats() async {
     final instance = await SharedPreferences.getInstance();

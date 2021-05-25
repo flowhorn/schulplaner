@@ -46,7 +46,7 @@ class MemberData {
   factory MemberData.fromData({required String id, required dynamic data}) {
     return MemberData(
       id: id,
-      name: data['name'],
+      name: data['name'] ?? 'Anonym',
       role: memberRoleEnumFromString(data['role'] ?? 'standard'),
       pic: data['pic'],
       picThumb: data['picThumb'],

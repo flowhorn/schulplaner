@@ -69,14 +69,12 @@ class EditCourseBloc extends BlocBase {
   Stream<bool> get showSeveralForm => _showSeveralFormSubject;
 
   Stream<Course> get currentCourse => _currentCourseSubject;
-  Course get _currentCourseValue => _currentCourseSubject.valueWrapper!.value;
-  bool get isEditMode => _editModeSubject.valueWrapper!.value;
-  bool get hasChangedValues => _hasChangedValuesSubject.valueWrapper!.value;
+  Course get _currentCourseValue => _currentCourseSubject.value;
+  bool get isEditMode => _editModeSubject.value;
+  bool get hasChangedValues => _hasChangedValuesSubject.value;
 
-  bool get addToPrivateCourses =>
-      _addToPrivateCoursesSubject.valueWrapper!.value;
-  bool get addToSchoolClass =>
-      _addToSchoolClassSubject.valueWrapper!.value != null;
+  bool get addToPrivateCourses => _addToPrivateCoursesSubject.value;
+  bool get addToSchoolClass => _addToSchoolClassSubject.value != null;
   Stream<String?> get schoolClassId => _addToSchoolClassSubject;
 
   void _updateCourse(Course newCourse) {
@@ -144,8 +142,8 @@ class EditCourseBloc extends BlocBase {
   Future<bool> submit({
     required BuildContext context,
   }) async {
-    final course = _currentCourseSubject.valueWrapper!.value;
-    final schoolClassId = _addToSchoolClassSubject.valueWrapper!.value;
+    final course = _currentCourseSubject.value;
+    final schoolClassId = _addToSchoolClassSubject.value;
     if (course.validate() == true) {
       if (isEditMode) {
         await requestSimplePermission(

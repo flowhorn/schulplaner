@@ -17,7 +17,7 @@ class DrawerBloc extends BlocBase {
 
   Stream<bool> get isCollapsed => _isCollapsedSubject;
 
-  bool get isCollapsedValue => _isCollapsedSubject.valueWrapper!.value;
+  bool get isCollapsedValue => _isCollapsedSubject.value;
 
   Future<void> setCollapsed(bool value) async {
     _isCollapsedSubject.add(value);

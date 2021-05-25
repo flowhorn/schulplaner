@@ -358,7 +358,7 @@ Stream<Map<String, SchoolTask>> getArchiveStream(PlannerDatabase database) {
         .snapshots()
         .listen((data) {
       unmergeddata_archived[courseid] = data.docs
-          .map((snapshot) => SchoolTask.fromData(snapshot.data()!))
+          .map((snapshot) => SchoolTask.fromData(snapshot.data()))
           .toList();
       update();
     }));
@@ -369,7 +369,7 @@ Stream<Map<String, SchoolTask>> getArchiveStream(PlannerDatabase database) {
         .snapshots()
         .listen((data) {
       unmergeddata_tooold[courseid] = data.docs
-          .map((snapshot) => SchoolTask.fromData(snapshot.data()!))
+          .map((snapshot) => SchoolTask.fromData(snapshot.data()))
           .toList();
       update();
     }));
@@ -380,7 +380,7 @@ Stream<Map<String, SchoolTask>> getArchiveStream(PlannerDatabase database) {
       .snapshots()
       .listen((data) {
     unmergeddata_archived['private'] = data.docs
-        .map((snapshot) => SchoolTask.fromData(snapshot.data()!))
+        .map((snapshot) => SchoolTask.fromData(snapshot.data()))
         .toList();
     update();
   }));
@@ -391,7 +391,7 @@ Stream<Map<String, SchoolTask>> getArchiveStream(PlannerDatabase database) {
       .snapshots()
       .listen((data) {
     unmergeddata_tooold['private'] = data.docs
-        .map((snapshot) => SchoolTask.fromData(snapshot.data()!))
+        .map((snapshot) => SchoolTask.fromData(snapshot.data()))
         .toList();
     update();
   }));
@@ -906,7 +906,7 @@ void showTaskDetailSheetCritical(BuildContext context,
       routname: 'schooltaskid');
 }
 
-DocumentReference? identifyTaskRef(
+DocumentReference<Map<String, dynamic>>? identifyTaskRef(
     PlannerDatabase plannerdatabase, SchoolTask schoolTask) {
   if (schoolTask.private) {
     return plannerdatabase.dataManager

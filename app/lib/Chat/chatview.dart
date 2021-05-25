@@ -45,6 +45,7 @@ class Chat extends StatelessWidget {
                 } else {
                   return Center(
                     child: Column(
+                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         ListTile(
                           title: Text(
@@ -73,7 +74,7 @@ class Chat extends StatelessWidget {
                               });
                             })
                       ],
-                      mainAxisSize: MainAxisSize.min,
+                     
                     ),
                   );
                 }

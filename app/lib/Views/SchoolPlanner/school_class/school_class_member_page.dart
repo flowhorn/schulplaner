@@ -40,7 +40,7 @@ class SchoolClassMemberView extends StatelessWidget {
               body: ListView(
                 children: schoolClassInfo.membersData.values.map((memberData) {
                   String memberuid = memberData.getUid();
-                  return FutureBuilder<DocumentSnapshot>(
+                  return FutureBuilder<DocumentSnapshot<Map<String, dynamic>>>(
                     builder: (context, snapshot) {
                       Map<String, dynamic>? data = snapshot.data?.data();
                       UserProfile? userProfile =
