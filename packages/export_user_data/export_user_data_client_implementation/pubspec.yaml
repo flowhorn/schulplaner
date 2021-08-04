@@ -9,7 +9,7 @@ dependencies:
     path: ../export_user_data_models
   export_user_data_client:
     path: ../export_user_data_client
-  cloud_firestore: 2.2.0
+  cloud_firestore: 2.4.0
   
   flutter:
     sdk: flutter

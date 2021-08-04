@@ -36,8 +36,8 @@ class GoogleSignInLogic {
   Future<AuthCredential?> _signInWithGoogleMacOS() async {
     try {
       final id = ClientId(
-        env['GOOGLE_SIGN_IN_CLIENT_ID'] ?? 'MissingENVClientID',
-        env['GOOGLE_SIGN_IN_CLIENT_SECRET'] ?? 'MissingENVClientSecret',
+        dotenv.env['GOOGLE_SIGN_IN_CLIENT_ID'] ?? 'MissingENVClientID',
+        dotenv.env['GOOGLE_SIGN_IN_CLIENT_SECRET'] ?? 'MissingENVClientSecret',
       );
       final scopes = [
         'email',
