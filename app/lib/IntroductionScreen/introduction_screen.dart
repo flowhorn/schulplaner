@@ -122,17 +122,17 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
 
     final skipBtn = Opacity(
       opacity: isSkipBtn ? 1.0 : 0.0,
-      child: IntroButton(child: widget.skip!, onPressed: _onSkip),
+      child: IntroButton(onPressed: _onSkip, child: widget.skip!),
     );
 
     final nextBtn = IntroButton(
-      child: widget.next!,
       onPressed: _isScrolling ? null : _onNext,
+      child: widget.next!,
     );
 
     final doneBtn = IntroButton(
-      child: widget.done,
       onPressed: widget.onDone,
+      child: widget.done,
     );
 
     return Scaffold(
@@ -159,6 +159,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                 children: [
                   skipBtn,
                   Expanded(
+                    flex: 36,
                     child: Center(
                       child: widget.isProgress
                           ? DotsIndicator(
@@ -172,7 +173,6 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                               ))
                           : const SizedBox(),
                     ),
-                    flex: 36,
                   ),
                   isLastPage ? doneBtn : nextBtn,
                 ],

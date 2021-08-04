@@ -1,5 +1,3 @@
-//
-import 'package:meta/meta.dart';
 import 'package:schulplaner8/groups/src/models/place.dart';
 
 class PlaceLink {

@@ -41,22 +41,22 @@ class ManagePlannerView extends StatelessWidget {
                     child: Card(
                       child: ListTile(
                         leading: CircleAvatar(
+                          backgroundColor: getAccentColor(context),
                           child: Icon(
                             Icons.archive,
                             color: getTextColor(getAccentColor(context)),
                           ),
-                          backgroundColor: getAccentColor(context),
                         ),
                         title: Text(getString(context).archivedplanners),
                         trailing: TextButton(
                           onPressed: () {
                             pushWidget(context, ArchivedPlanner());
                           },
-                          child: Text(getString(context).view.toUpperCase()),
                           style: ButtonStyle(
                             foregroundColor: MaterialStateProperty.all(
                                 getAccentColor(context)),
                           ),
+                          child: Text(getString(context).view.toUpperCase()),
                         ),
                       ),
                     ),
@@ -285,6 +285,7 @@ class ArchivedPlanner extends StatelessWidget {
                           title: Text(planner.name),
                         ),
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
                             TextButton.icon(
                                 onPressed: () {
@@ -357,7 +358,6 @@ class ArchivedPlanner extends StatelessWidget {
                                 icon: Icon(Icons.more_horiz),
                                 label: Text(getString(context).more)),
                           ],
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         ),
                       ],
                     ),

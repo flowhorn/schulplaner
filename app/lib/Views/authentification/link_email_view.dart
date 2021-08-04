@@ -24,6 +24,7 @@ class LinkEmailView extends StatelessWidget {
             child: Center(
               child: SingleChildScrollView(
                 child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     SizedBox(
                       height: 16.0,
@@ -32,6 +33,12 @@ class LinkEmailView extends StatelessWidget {
                       padding:
                           EdgeInsets.only(left: 4.0, right: 4.0, bottom: 4.0),
                       child: Card(
+                        elevation: 12.0,
+                        margin: EdgeInsets.all(6.0),
+                        shape: RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(16.0))),
+                        clipBehavior: Clip.antiAlias,
                         child: Column(
                           children: <Widget>[
                             Padding(
@@ -70,7 +77,7 @@ class LinkEmailView extends StatelessWidget {
                               obscureText: true,
                               maxLines: 1,
                             ),
-                          ]..add(InkWell(
+                            InkWell(
                               child: Center(
                                 child: TextButton.icon(
                                   icon: Icon(Icons.done),
@@ -132,21 +139,15 @@ class LinkEmailView extends StatelessWidget {
                                   );
                                 });
                               },
-                            )),
+                            ),
+                          ],
                         ),
-                        elevation: 12.0,
-                        margin: EdgeInsets.all(6.0),
-                        shape: RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(16.0))),
-                        clipBehavior: Clip.antiAlias,
                       ),
                     ),
                     SizedBox(
                       height: 16.0,
                     ),
                   ],
-                  mainAxisSize: MainAxisSize.min,
                 ),
               ),
             ),
@@ -154,9 +155,16 @@ class LinkEmailView extends StatelessWidget {
           Align(
             alignment: Alignment.bottomCenter,
             child: Card(
+              elevation: 12.0,
+              margin: EdgeInsets.zero,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(16.0),
+                      topRight: Radius.circular(16.0))),
               child: Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Expanded(
                         child: LabeledIconButtonSmall(
@@ -170,15 +178,8 @@ class LinkEmailView extends StatelessWidget {
                       name: getString(context).help,
                     )),
                   ],
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 ),
               ),
-              elevation: 12.0,
-              margin: EdgeInsets.zero,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(16.0),
-                      topRight: Radius.circular(16.0))),
             ),
           )
         ],

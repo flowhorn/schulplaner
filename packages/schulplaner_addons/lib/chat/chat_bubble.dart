@@ -102,12 +102,13 @@ class _ChatBubbleRight extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return _BubbleBase(
+      background: color,
+      borderColor: ColorUtils.of(context).getClearBorderColor(context, color),
+      alignment: _BubbleAlignment.right,
       child: BubbleInner(
-        child: MessageInner(
-          message: message,
-          color: ColorUtils.getTextColor(color),
-        ),
         subChild: Row(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             _BubbleTimeView(
               timeOfDay: TimeOfDay.fromDateTime(message.createdOn.toDate()),
@@ -119,16 +120,15 @@ class _ChatBubbleRight extends StatelessWidget {
               size: 11.0,
             ),
           ],
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.center,
         ),
         isBigChild: message.contentType == ContentType.none
             ? message.text.length > 15
             : true,
+        child: MessageInner(
+          message: message,
+          color: ColorUtils.getTextColor(color),
+        ),
       ),
-      background: color,
-      borderColor: ColorUtils.of(context).getClearBorderColor(context, color),
-      alignment: _BubbleAlignment.right,
     );
   }
 }
@@ -170,6 +170,9 @@ class BubbleInner extends StatelessWidget {
   Widget build(BuildContext context) {
     if (isBigChild) {
       return Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           child,
           Align(
@@ -177,12 +180,12 @@ class BubbleInner extends StatelessWidget {
             child: subChild,
           ),
         ],
-        mainAxisAlignment: MainAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
       );
     } else {
       return Row(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: <Widget>[
           child,
           SizedBox(
@@ -193,9 +196,6 @@ class BubbleInner extends StatelessWidget {
             child: subChild,
           ),
         ],
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.end,
       );
     }
   }
@@ -259,18 +259,19 @@ class MessageInner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         if (message.contentType == ContentType.imageURL)
           InkWell(
             child: LimitedBox(
+              maxHeight: 400.0,
               child: Hero(
+                tag: message.content,
                 child: CachedNetworkImage(
                   imageUrl: message.content,
                   fit: BoxFit.fill,
                 ),
-                tag: message.content,
               ),
-              maxHeight: 400.0,
             ),
             onTap: () {
               Navigator.push(
@@ -302,7 +303,6 @@ class MessageInner extends StatelessWidget {
             ),
           ),
       ],
-      crossAxisAlignment: CrossAxisAlignment.start,
     );
   }
 }

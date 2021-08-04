@@ -296,6 +296,7 @@ class MyAbsentListInnerState extends State<MyAbsentListInner>
                 overflow: TextOverflow.ellipsis,
               ),
               subtitle: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
                     getString(context).date + ': ' + getDateText(item.date!),
@@ -311,7 +312,6 @@ class MyAbsentListInnerState extends State<MyAbsentListInner>
                     style: TextStyle(color: item.unexcused ? Colors.red : null),
                   ),
                 ],
-                crossAxisAlignment: CrossAxisAlignment.start,
               ),
               isThreeLine: true,
               onTap: () {

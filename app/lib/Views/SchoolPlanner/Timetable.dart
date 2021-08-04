@@ -299,6 +299,7 @@ void showLessonDetailSheet(BuildContext context,
                   plannerdatabase.getCourseInfo(lesson.courseid!);
               return Expanded(
                   child: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   getSheetText(context, getLessonTitle(context, lesson)),
                   getExpandList([
@@ -347,6 +348,11 @@ void showLessonDetailSheet(BuildContext context,
                                               ));
                                         }),
                                     subtitle: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: <Widget>[
                                         mInfo.type == LessonInfoType.CHANGED
                                             ? Text(getString(context).teacher +
@@ -365,11 +371,6 @@ void showLessonDetailSheet(BuildContext context,
                                               )
                                             : nowidget()
                                       ],
-                                      mainAxisSize: MainAxisSize.min,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
                                     ),
                                     isThreeLine:
                                         mInfo.type == LessonInfoType.CHANGED
@@ -509,7 +510,6 @@ void showLessonDetailSheet(BuildContext context,
                   ),
                   FormSpace(16.0),
                 ],
-                mainAxisSize: MainAxisSize.min,
               ));
             });
       },

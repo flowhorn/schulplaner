@@ -90,6 +90,7 @@ class EditProfileView extends StatelessWidget {
                   case ProfileDisplayMode.pic:
                     {
                       return ButtonBar(
+                        alignment: MainAxisAlignment.center,
                         children: <Widget>[
                           RButton(
                               text: bothlang(context,
@@ -126,7 +127,6 @@ class EditProfileView extends StatelessWidget {
                                 update(data.copyWithNoPic());
                               })
                         ],
-                        alignment: MainAxisAlignment.center,
                       );
                     }
                   default:

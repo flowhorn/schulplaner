@@ -131,9 +131,9 @@ class SchulplanerBlocs extends StatelessWidget {
     ];
 
     return SchulplanerBlocs._(
-      child: child,
       authProviders: authProviders,
       mainProviders: mainProviders,
+      child: child,
     );
   }
 
@@ -141,11 +141,11 @@ class SchulplanerBlocs extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       key: const ValueKey('SchulplanerBlocs'),
-      child: child,
       blocProviders: [
         ...mainProviders,
         ...authProviders,
       ],
+      child: child,
     );
   }
 }

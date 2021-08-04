@@ -585,6 +585,7 @@ class LetterDetailedView extends StatelessWidget {
                         ),
                         letter.allowreply
                             ? Card(
+                                margin: EdgeInsets.all(4.0),
                                 child: ListTile(
                                   title: Text(
                                       letter.getMyResponse(database)?.message ??
@@ -612,13 +613,13 @@ class LetterDetailedView extends StatelessWidget {
                                   },
                                   dense: true,
                                 ),
-                                margin: EdgeInsets.all(4.0),
                               )
                             : nowidget(),
                         Padding(
                           padding: EdgeInsets.only(
                               top: 4.0, bottom: 4.0, left: 4.0, right: 4.0),
                           child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
                             children: <Widget>[
                               letter.isRead(database)
                                   ? nowidget()
@@ -643,7 +644,6 @@ class LetterDetailedView extends StatelessWidget {
                                       ),
                                     ),
                             ],
-                            mainAxisAlignment: MainAxisAlignment.end,
                           ),
                         ),
                       ],
@@ -841,7 +841,7 @@ class LetterResponsesView extends StatelessWidget {
                               left: 8.0, right: 8.0, top: 8.0, bottom: 8.0),
                           child: RichText(
                             text: TextSpan(
-                                text: letter.content ,
+                                text: letter.content,
                                 style: TextStyle(
                                     color: getClearTextColor(context),
                                     fontWeight: FontWeight.w400)),
@@ -855,6 +855,7 @@ class LetterResponsesView extends StatelessWidget {
                         padding: EdgeInsets.only(
                             top: 4.0, bottom: 4.0, left: 4.0, right: 4.0),
                         child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
                           children: <Widget>[
                             letter.isRead(database)
                                 ? nowidget()
@@ -879,7 +880,6 @@ class LetterResponsesView extends StatelessWidget {
                                     ),
                                   ),
                           ],
-                          mainAxisAlignment: MainAxisAlignment.end,
                         ),
                       ),
                     ],
@@ -898,6 +898,7 @@ class LetterResponsesView extends StatelessWidget {
                                 : null;
                             return Card(
                               child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
                                   ListTile(
                                     leading: UserImageView(
@@ -932,7 +933,6 @@ class LetterResponsesView extends StatelessWidget {
                                     height: 8.0,
                                   ),
                                 ],
-                                crossAxisAlignment: CrossAxisAlignment.start,
                               ),
                             );
                           },

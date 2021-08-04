@@ -32,7 +32,6 @@ class MyProfile extends StatelessWidget {
                 elevation: 2.0,
                 actions: <Widget>[
                   TextButton(
-                    child: Text(getString(context).edit.toUpperCase()),
                     onPressed: () {
                       pushWidget(
                           context,
@@ -42,9 +41,11 @@ class MyProfile extends StatelessWidget {
                     },
                     style:
                         TextButton.styleFrom(primary: getAccentColor(context)),
+                    child: Text(getString(context).edit.toUpperCase()),
                   ),
                 ],
                 bottom: PreferredSize(
+                  preferredSize: Size(double.infinity, 280.0),
                   child: Column(
                     children: <Widget>[
                       SizedBox(
@@ -78,7 +79,6 @@ class MyProfile extends StatelessWidget {
                       ),
                     ],
                   ),
-                  preferredSize: Size(double.infinity, 280.0),
                 ),
               ),
             );

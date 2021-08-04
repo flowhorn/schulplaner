@@ -27,16 +27,17 @@ class LoginPage extends StatelessWidget {
             child: Center(
               child: SingleChildScrollView(
                 child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     SizedBox(height: 24.0),
                     CircleAvatar(
+                      backgroundColor: getAccentColor(context),
+                      radius: 44.0,
                       child: Icon(
                         Icons.lock,
                         size: 44.0,
                         color: Colors.white,
                       ),
-                      backgroundColor: getAccentColor(context),
-                      radius: 44.0,
                     ),
                     SizedBox(height: 12.0),
                     Text(
@@ -51,7 +52,6 @@ class LoginPage extends StatelessWidget {
                     LoginInnerPage(),
                     SizedBox(height: 32.0),
                   ],
-                  mainAxisSize: MainAxisSize.min,
                 ),
               ),
             ),
@@ -278,20 +278,6 @@ class LoginHelpLinks extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Padding(
-        padding: EdgeInsets.all(8.0),
-        child: Column(
-          children: <Widget>[
-            ListTile(
-              title: Text(getString(context).signinhasadvantages),
-              subtitle: Text(getString(context).signinhasadvantages_desc),
-            ),
-            _HelpActions(),
-          ],
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-        ),
-      ),
       elevation: 12.0,
       margin: EdgeInsets.zero,
       shape: RoundedRectangleBorder(
@@ -301,6 +287,20 @@ class LoginHelpLinks extends StatelessWidget {
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(16.0),
           topRight: Radius.circular(16.0),
+        ),
+      ),
+      child: Padding(
+        padding: EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            ListTile(
+              title: Text(getString(context).signinhasadvantages),
+              subtitle: Text(getString(context).signinhasadvantages_desc),
+            ),
+            _HelpActions(),
+          ],
         ),
       ),
     );
@@ -315,6 +315,7 @@ class _HelpActions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Expanded(
             child: LabeledIconButtonSmall(
@@ -350,7 +351,6 @@ class _HelpActions extends StatelessWidget {
           name: getString(context).settings,
         )),
       ],
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
     );
   }
 }

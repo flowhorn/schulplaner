@@ -1,4 +1,3 @@
-//
 import 'package:schulplaner8/Data/ObjectsPlanner.dart';
 import 'package:schulplaner8/groups/src/models/group_version.dart';
 import 'package:schulplaner8/models/planner_settings.dart';
@@ -6,7 +5,6 @@ import 'package:schulplaner_models/schulplaner_models.dart';
 import 'package:schulplaner_widgets/schulplaner_theme.dart';
 import 'package:schulplaner8/groups/src/models/course_settings.dart';
 import 'package:schulplaner8/models/member.dart';
-import 'package:meta/meta.dart';
 import 'package:schulplaner8/models/shared_settings.dart';
 import 'package:schulplaner8/utils/models/coder.dart';
 import 'helper_functions.dart';

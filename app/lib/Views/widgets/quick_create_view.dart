@@ -26,6 +26,7 @@ class QuickCreateView extends StatelessWidget {
             padding:
                 EdgeInsets.only(left: 8.0, right: 8.0, top: 4.0, bottom: 4.0),
             child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
               child: Row(
                 children: <Widget>[
                   Hero(
@@ -98,7 +99,6 @@ class QuickCreateView extends StatelessWidget {
                   ),
                 ],
               ),
-              scrollDirection: Axis.horizontal,
             ),
           ),
         ),

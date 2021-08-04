@@ -201,6 +201,7 @@ class AppSettingsView extends StatelessWidget {
                 );
               } else {
                 return Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     DataDocumentWidget<UserProfile>(
                       allowNull: true,
@@ -267,7 +268,6 @@ class AppSettingsView extends StatelessWidget {
                           },
                         )),
                   ],
-                  mainAxisSize: MainAxisSize.min,
                 );
               }
             }),

@@ -164,13 +164,13 @@ class SelectPlannerViewState extends State<SelectPlannerView> {
                     height: 16.0,
                   ),
                   CircleAvatar(
+                    backgroundColor: getAccentColor(context),
+                    radius: 44.0,
                     child: Icon(
                       Icons.school,
                       size: 44.0,
                       color: Colors.white,
                     ),
-                    backgroundColor: getAccentColor(context),
-                    radius: 44.0,
                   ),
                   SizedBox(
                     height: 12.0,
@@ -258,11 +258,19 @@ class SelectPlannerViewState extends State<SelectPlannerView> {
           Align(
             alignment: Alignment.bottomCenter,
             child: Card(
+              elevation: 12.0,
+              margin: EdgeInsets.zero,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(16.0),
+                      topRight: Radius.circular(16.0))),
               child: Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Column(
+                    mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Expanded(
                               child: LabeledIconButtonSmall(
@@ -281,17 +289,9 @@ class SelectPlannerViewState extends State<SelectPlannerView> {
                             name: getString(context).settings,
                           )),
                         ],
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       ),
                     ],
-                    mainAxisSize: MainAxisSize.min,
                   )),
-              elevation: 12.0,
-              margin: EdgeInsets.zero,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(16.0),
-                      topRight: Radius.circular(16.0))),
             ),
           ),
         ],

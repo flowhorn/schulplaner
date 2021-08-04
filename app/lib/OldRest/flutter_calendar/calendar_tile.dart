@@ -44,6 +44,7 @@ class CalendarTile extends StatelessWidget {
       return InkWell(
         onTap: onDateSelected,
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             SizedBox(
               height: 6.0,
@@ -58,6 +59,7 @@ class CalendarTile extends StatelessWidget {
                     )
                   : BoxDecoration(),
               alignment: Alignment.center,
+              height: 34.0,
               child: Text(
                 Utils.formatDay(date!).toString(),
                 style: isSelected
@@ -68,10 +70,8 @@ class CalendarTile extends StatelessWidget {
                     : dateStyles,
                 textAlign: TextAlign.center,
               ),
-              height: 34.0,
             ),
           ],
-          mainAxisSize: MainAxisSize.min,
         ),
       );
     }

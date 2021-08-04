@@ -50,6 +50,7 @@ class MyTasksList extends StatelessWidget {
         length: 2,
         child: Scaffold(
           appBar: PreferredSize(
+              preferredSize: Size(double.infinity, 100.0),
               child: Container(
                 child: TabBar(
                   tabs: [
@@ -67,8 +68,7 @@ class MyTasksList extends StatelessWidget {
                   indicatorColor: getAccentColor(context),
                   unselectedLabelColor: getClearTextColor(context),
                 ),
-              ),
-              preferredSize: Size(double.infinity, 100.0)),
+              )),
           body: TabBarView(children: [
             MyTaskListInner(plannerDatabase, false),
             MyTaskListInner(plannerDatabase, true),
@@ -135,6 +135,7 @@ class MyTaskListInnerState extends State<MyTaskListInner>
                   overflow: TextOverflow.ellipsis,
                 ),
                 subtitle: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     item.courseid != null
                         ? Text(
@@ -153,7 +154,6 @@ class MyTaskListInnerState extends State<MyTaskListInner>
                       overflow: TextOverflow.ellipsis,
                     ),
                   ],
-                  crossAxisAlignment: CrossAxisAlignment.start,
                 ),
                 isThreeLine: courseInfo != null,
                 trailing: item.isFinished(plannerDatabase.getMemberId())
@@ -277,6 +277,7 @@ class MyTaskArchive extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
                 subtitle: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     item.courseid != null
                         ? Text(
@@ -295,7 +296,6 @@ class MyTaskArchive extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                     ),
                   ],
-                  crossAxisAlignment: CrossAxisAlignment.start,
                 ),
                 isThreeLine: courseInfo != null,
                 onTap: () {

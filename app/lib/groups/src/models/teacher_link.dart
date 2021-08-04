@@ -1,4 +1,3 @@
-import 'package:meta/meta.dart';
 import 'teacher.dart';
 
 class TeacherLink {

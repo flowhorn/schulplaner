@@ -80,6 +80,7 @@ class CalendarViewState extends State<CalendarView> {
       },
       dayBuilder: (BuildContext context, day) {
         return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             !calsettings.getVacation().enabled
                 ? nowidget()
@@ -140,7 +141,6 @@ class CalendarViewState extends State<CalendarView> {
                         height: 6.0,
                         width: 6.0),
           ],
-          mainAxisAlignment: MainAxisAlignment.center,
         );
       },
     );

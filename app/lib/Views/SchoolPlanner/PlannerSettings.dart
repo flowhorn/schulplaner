@@ -47,6 +47,7 @@ class PlannerSettings extends StatelessWidget {
   Widget build(BuildContext context) {
     final plannerDatabase = PlannerDatabaseBloc.getDatabase(context);
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         ListTile(
           leading: Icon(Icons.stars),
@@ -94,7 +95,6 @@ class PlannerSettings extends StatelessWidget {
           },
         ),
       ],
-      mainAxisSize: MainAxisSize.min,
     );
   }
 }
@@ -482,8 +482,8 @@ class SubSettingsPlanner extends StatelessWidget {
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return Column(
-                  children: builder(context, snapshot.data!),
                   mainAxisSize: MainAxisSize.min,
+                  children: builder(context, snapshot.data!),
                 );
               } else {
                 return Center(
@@ -513,8 +513,8 @@ class SubSettingsPlannerFloating extends StatelessWidget {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return Column(
-                children: builder(context, snapshot.data!),
                 mainAxisSize: MainAxisSize.min,
+                children: builder(context, snapshot.data!),
               );
             } else {
               return Center(
@@ -571,6 +571,9 @@ class LessonTimeSettings extends StatelessWidget {
                                 '. ' +
                                 getString(context).lesson),
                             subtitle: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Text(getString(context).from +
                                     ': ' +
@@ -579,14 +582,12 @@ class LessonTimeSettings extends StatelessWidget {
                                     ': ' +
                                     (time.end ?? '-')),
                               ],
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
                             ),
                             enabled: settings.maxlessons >= value,
                             isThreeLine: true,
                           ),
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: <Widget>[
                               TextButton.icon(
                                 onPressed: () {
@@ -648,7 +649,6 @@ class LessonTimeSettings extends StatelessWidget {
                                     softWrap: true,
                                   )),
                             ],
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           ),
                         ],
                       ),
@@ -709,6 +709,7 @@ class GradeProfileSettings extends StatelessWidget {
                       ListTile(
                         title: Text(profile.name),
                         trailing: Row(
+                          mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
                             IconButton(
                                 icon: Icon(Icons.edit),
@@ -740,7 +741,6 @@ class GradeProfileSettings extends StatelessWidget {
                                         });
                                       }),
                           ],
-                          mainAxisSize: MainAxisSize.min,
                         ),
                       ),
                       ListTile(
@@ -903,6 +903,7 @@ class EditGradeProfileSettings extends StatelessWidget {
                                   maxLines: 2,
                                 ),
                                 trailing: Row(
+                                  mainAxisSize: MainAxisSize.min,
                                   children: <Widget>[
                                     IconButton(
                                         icon: Icon(Icons.edit),
@@ -941,40 +942,36 @@ class EditGradeProfileSettings extends StatelessWidget {
                                           });
                                         })
                                   ],
-                                  mainAxisSize: MainAxisSize.min,
                                 ),
                               );
                             },
                           ).toList()
-                                ..add(
-                                  FormButton(
-                                    getString(context).newtype,
-                                    () {
-                                      String newid =
-                                          gradeprofile.getNewTypeId()!;
+                            ..add(
+                              FormButton(
+                                getString(context).newtype,
+                                () {
+                                  String newid = gradeprofile.getNewTypeId()!;
+                                  gradeprofile = gradeprofile.copyWith();
+                                  gradeprofile.types[newid] =
+                                      GradeTypeItem.Create(newid).copyWith(
+                                          name: getString(context).newtype);
+                                  notifier.value = gradeprofile;
+                                  pushWidget(
+                                      context,
+                                      EditGradeTypeItemSettings(
+                                        gradetypeitem:
+                                            gradeprofile.types[newid]!,
+                                      )).then((newdata) {
+                                    if (newdata != null &&
+                                        newdata is GradeTypeItem) {
                                       gradeprofile = gradeprofile.copyWith();
-                                      gradeprofile.types[newid] =
-                                          GradeTypeItem.Create(newid).copyWith(
-                                              name: getString(context).newtype);
+                                      gradeprofile.types[newdata.id] = newdata;
                                       notifier.value = gradeprofile;
-                                      pushWidget(
-                                          context,
-                                          EditGradeTypeItemSettings(
-                                            gradetypeitem:
-                                                gradeprofile.types[newid]!,
-                                          )).then((newdata) {
-                                        if (newdata != null &&
-                                            newdata is GradeTypeItem) {
-                                          gradeprofile =
-                                              gradeprofile.copyWith();
-                                          gradeprofile.types[newdata.id] =
-                                              newdata;
-                                          notifier.value = gradeprofile;
-                                        }
-                                      });
-                                    },
-                                  ),
-                                ),
+                                    }
+                                  });
+                                },
+                              ),
+                            ),
                         ),
                       ),
                 FormDivider(),

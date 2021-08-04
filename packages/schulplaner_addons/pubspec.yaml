@@ -1,7 +1,6 @@
 name: schulplaner_addons
 description: Simply the flutter workflow:)
 version: 0.1.0
-author: Felix Weuthen
 publish_to: none
 
 environment:

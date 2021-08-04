@@ -25,12 +25,22 @@ class EmailView extends StatelessWidget {
             child: Center(
               child: SingleChildScrollView(
                 child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     SizedBox(height: 16.0),
                     Padding(
                       padding:
                           EdgeInsets.only(left: 4.0, right: 4.0, bottom: 4.0),
                       child: Card(
+                        elevation: 0.0,
+                        margin: EdgeInsets.all(6.0),
+                        shape: RoundedRectangleBorder(
+                            side: BorderSide(
+                              color: getDividerColor(context),
+                            ),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(16.0))),
+                        clipBehavior: Clip.antiAlias,
                         child: Padding(
                           padding: const EdgeInsets.all(4.0),
                           child: Column(
@@ -83,22 +93,12 @@ class EmailView extends StatelessWidget {
                             ],
                           ),
                         ),
-                        elevation: 0.0,
-                        margin: EdgeInsets.all(6.0),
-                        shape: RoundedRectangleBorder(
-                            side: BorderSide(
-                              color: getDividerColor(context),
-                            ),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(16.0))),
-                        clipBehavior: Clip.antiAlias,
                       ),
                     ),
                     SizedBox(
                       height: 16.0,
                     ),
                   ],
-                  mainAxisSize: MainAxisSize.min,
                 ),
               ),
             ),
@@ -174,12 +174,22 @@ class RegisterEmailView extends StatelessWidget {
             child: Center(
               child: SingleChildScrollView(
                 child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     SizedBox(height: 16.0),
                     Padding(
                       padding:
                           EdgeInsets.only(left: 4.0, right: 4.0, bottom: 4.0),
                       child: Card(
+                        elevation: 0.0,
+                        margin: EdgeInsets.all(6.0),
+                        shape: RoundedRectangleBorder(
+                            side: BorderSide(
+                              color: getDividerColor(context),
+                            ),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(16.0))),
+                        clipBehavior: Clip.antiAlias,
                         child: Padding(
                           padding: const EdgeInsets.all(4.0),
                           child: Column(
@@ -232,20 +242,10 @@ class RegisterEmailView extends StatelessWidget {
                             ],
                           ),
                         ),
-                        elevation: 0.0,
-                        margin: EdgeInsets.all(6.0),
-                        shape: RoundedRectangleBorder(
-                            side: BorderSide(
-                              color: getDividerColor(context),
-                            ),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(16.0))),
-                        clipBehavior: Clip.antiAlias,
                       ),
                     ),
                     SizedBox(height: 16.0),
                   ],
-                  mainAxisSize: MainAxisSize.min,
                 ),
               ),
             ),
@@ -312,11 +312,21 @@ class RegisterHelpLinks extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      elevation: 12.0,
+      margin: EdgeInsets.zero,
+      shape: RoundedRectangleBorder(
+          side: BorderSide(
+            color: getDividerColor(context),
+          ),
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(16.0), topRight: Radius.circular(16.0))),
       child: Padding(
           padding: EdgeInsets.all(8.0),
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Expanded(
                     child: LabeledIconButtonSmall(
@@ -331,19 +341,9 @@ class RegisterHelpLinks extends StatelessWidget {
                     ),
                   ),
                 ],
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               ),
             ],
-            mainAxisSize: MainAxisSize.min,
           )),
-      elevation: 12.0,
-      margin: EdgeInsets.zero,
-      shape: RoundedRectangleBorder(
-          side: BorderSide(
-            color: getDividerColor(context),
-          ),
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(16.0), topRight: Radius.circular(16.0))),
     );
   }
 }
@@ -352,11 +352,21 @@ class EmailHelpLinks extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      elevation: 12.0,
+      margin: EdgeInsets.zero,
+      shape: RoundedRectangleBorder(
+          side: BorderSide(
+            color: getDividerColor(context),
+          ),
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(16.0), topRight: Radius.circular(16.0))),
       child: Padding(
           padding: EdgeInsets.all(8.0),
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Expanded(
                       child: LabeledIconButtonSmall(
@@ -392,19 +402,9 @@ class EmailHelpLinks extends StatelessWidget {
                     name: getString(context).forgotpassword,
                   )),
                 ],
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               ),
             ],
-            mainAxisSize: MainAxisSize.min,
           )),
-      elevation: 12.0,
-      margin: EdgeInsets.zero,
-      shape: RoundedRectangleBorder(
-          side: BorderSide(
-            color: getDividerColor(context),
-          ),
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(16.0), topRight: Radius.circular(16.0))),
     );
   }
 }

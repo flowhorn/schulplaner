@@ -20,6 +20,13 @@ class TipsCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 4.0, bottom: 8.0),
       child: Card(
+        borderOnForeground: true,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8.0),
+          side: BorderSide(
+            color: getDividerColor(context),
+          ),
+        ),
         child: Column(
           children: [
             Padding(
@@ -35,11 +42,12 @@ class TipsCard extends StatelessWidget {
                     color: Colors.grey,
                   ),
                   Container(
-                      padding: const EdgeInsets.only(left: 8.0),
-                      child: Text(
-                        title,
-                        style: TextStyle(color: Colors.grey),
-                      ),),
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: Text(
+                      title,
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -52,18 +60,12 @@ class TipsCard extends StatelessWidget {
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
-                    children: bottom!,
-                    mainAxisAlignment: MainAxisAlignment.start),
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: bottom!),
               ),
             FormSpace(4.0),
           ],
         ),
-        borderOnForeground: true,
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8.0),
-            side: BorderSide(
-              color: getDividerColor(context),
-            ),),
       ),
     );
   }

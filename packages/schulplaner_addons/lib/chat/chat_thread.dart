@@ -190,11 +190,6 @@ class ChatInput extends StatelessWidget {
                         enabled ? accentColor : accentColor.withOpacity(0.5),
                     shape: CircleBorder(),
                     elevation: 0.0,
-                    child: Icon(
-                      Icons.send,
-                      size: 28.0,
-                      color: Theme.of(context).canvasColor,
-                    ),
                     onPressed: enabled
                         ? () {
                             bool value =
@@ -204,6 +199,11 @@ class ChatInput extends StatelessWidget {
                             }
                           }
                         : null,
+                    child: Icon(
+                      Icons.send,
+                      size: 28.0,
+                      color: Theme.of(context).canvasColor,
+                    ),
                   );
                 },
               ),

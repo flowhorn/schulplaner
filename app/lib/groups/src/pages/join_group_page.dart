@@ -48,6 +48,9 @@ class _JoinGroupPage extends StatelessWidget {
         child: Column(
           children: <Widget>[
             Card(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16.0)),
+              margin: EdgeInsets.all(8.0),
               child: Column(
                 children: <Widget>[
                   ListTile(
@@ -56,6 +59,8 @@ class _JoinGroupPage extends StatelessWidget {
                     ),
                   ),
                   Row(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         SizedBox(
                           width: 16.0,
@@ -71,9 +76,7 @@ class _JoinGroupPage extends StatelessWidget {
                         SizedBox(
                           width: 16.0,
                         ),
-                      ],
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.center),
+                      ]),
                   FormSpace(16.0),
                   /*
                   ButtonBar(
@@ -84,9 +87,6 @@ class _JoinGroupPage extends StatelessWidget {
                   */
                 ],
               ),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16.0)),
-              margin: EdgeInsets.all(8.0),
             ),
             FormSpace(16.0),
             _Result(),
@@ -212,6 +212,7 @@ class _Course extends StatelessWidget {
                       radius: 22.0),
                   title: Text(courseInfo.name),
                   subtitle: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
                         getString(context).teacher +
@@ -224,7 +225,6 @@ class _Course extends StatelessWidget {
                           ': ' +
                           courseInfo.getPlacesListed()),
                     ],
-                    crossAxisAlignment: CrossAxisAlignment.start,
                   ),
                   isThreeLine: true,
                   trailing: StreamBuilder<Map<String, Course>>(

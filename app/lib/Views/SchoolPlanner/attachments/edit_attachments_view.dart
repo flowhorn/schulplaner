@@ -65,6 +65,7 @@ class EditAttachementsView extends StatelessWidget {
               SizedBox(
                 height: 140.0,
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
                     ActionView(
                         iconData: Icons.add_circle_outline,
@@ -93,7 +94,6 @@ class EditAttachementsView extends StatelessWidget {
                           });
                         }),
                   ],
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 ),
               ),
             ],

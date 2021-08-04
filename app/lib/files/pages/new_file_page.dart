@@ -29,7 +29,7 @@ class _NewFilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final bloc = BlocProvider.of<NewFileBloc>(context);
     return WillPopScope(
-        onWillPop: () async {
+      onWillPop: () async {
         if (bloc.hasChangedValues == false) return true;
         return showConfirmDialog(
             context: context,
@@ -53,7 +53,6 @@ class _NewFilePage extends StatelessWidget {
         ),
         floatingActionButton: _Fab(),
       ),
-    
     );
   }
 }
@@ -105,33 +104,33 @@ class _FileCard extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
                     Expanded(
                         child: InkWell(
-                      child: Tab(
-                        text: getString(context).upload,
-                        icon: Icon(Icons.cloud_upload),
-                      ),
                       onTap: isFileFormLocked
                           ? null
                           : () {
                               bloc.changeFileForm(FileForm.STANDARD);
                             },
+                      child: Tab(
+                        text: getString(context).upload,
+                        icon: Icon(Icons.cloud_upload),
+                      ),
                     )),
                     Expanded(
                         child: InkWell(
-                      child: Tab(
-                        text: 'Web-Link',
-                        icon: Icon(Icons.link),
-                      ),
                       onTap: isFileFormLocked
                           ? null
                           : () {
                               bloc.changeFileForm(FileForm.WEBLINK);
                             },
+                      child: Tab(
+                        text: 'Web-Link',
+                        icon: Icon(Icons.link),
+                      ),
                     )),
                   ],
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 ),
                 Stack(
                   children: <Widget>[

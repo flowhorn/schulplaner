@@ -30,7 +30,7 @@ class CoursePersonal {
   }
 
   bool validate() {
-    if (courseid == null) return false;
+    //if (courseid == null) return false;
     return true;
   }
 

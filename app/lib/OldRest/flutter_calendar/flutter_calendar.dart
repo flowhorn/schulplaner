@@ -101,13 +101,13 @@ class _CalendarState extends State<Calendar> {
 
     if (widget.showTodayAction) {
       leftInnerIcon = InkWell(
+        onTap: resetToToday,
         child: Padding(
           padding: EdgeInsets.all(4.0),
           child: Center(
             child: Text(getString(context).today),
           ),
         ),
-        onTap: resetToToday,
       );
     } else {
       leftInnerIcon = Container();

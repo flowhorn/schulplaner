@@ -1,5 +1,5 @@
 Map<String, T> decodeMap<T>(
-    dynamic data, T Function(String key, dynamic? data) builder) {
+    dynamic data, T Function(String key, dynamic data) builder) {
   final Map<dynamic, dynamic>? originaldata = data?.cast<dynamic, dynamic>();
   if (originaldata != null) {
     originaldata.removeWhere((key, value) => value == null);
@@ -14,7 +14,7 @@ Map<String, dynamic> encodeMap<T>(
   return data.map((key, it) => MapEntry(key, encoder(it)));
 }
 
-List<T> decodeList<T>(dynamic? data, T Function(dynamic data) builder) {
+List<T> decodeList<T>(dynamic data, T Function(dynamic data) builder) {
   List<dynamic>? originaldata = data;
   if (originaldata == null) return [];
   return originaldata.map((dynamic value) => builder(value)).toList();

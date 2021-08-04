@@ -37,12 +37,12 @@ class FileHub extends StatelessWidget {
                       title: Hero(
                           tag: 'personalstorage_text',
                           child: Material(
+                            color: Colors.transparent,
                             child: Text(
                               getString(context).personalstorage,
                               style: TextStyle(
                                   fontSize: 16.0, fontWeight: FontWeight.w400),
                             ),
-                            color: Colors.transparent,
                           )),
                       onTap: () {
                         pushWidget(
@@ -109,11 +109,14 @@ class PersonalStorageView extends StatelessWidget {
       appBar: AppBar(
         title: Text(getString(context).files),
         bottom: PreferredSize(
+            preferredSize: Size(double.infinity, 110.0),
             child: Align(
               alignment: Alignment.center,
               child: Padding(
                 padding: EdgeInsets.all(12.0),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     Hero(
                         tag: 'personalstorage_icon',
@@ -128,6 +131,7 @@ class PersonalStorageView extends StatelessWidget {
                     Hero(
                         tag: 'personalstorage_text',
                         child: Material(
+                          color: Colors.transparent,
                           child: Text(
                             getString(context).personalstorage,
                             textAlign: TextAlign.center,
@@ -136,15 +140,11 @@ class PersonalStorageView extends StatelessWidget {
                                 fontWeight: FontWeight.w500,
                                 color: getTextColor(getPrimaryColor(context))),
                           ),
-                          color: Colors.transparent,
                         )),
                   ],
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
                 ),
               ),
-            ),
-            preferredSize: Size(double.infinity, 110.0)),
+            )),
       ),
       body: StreamBuilder<List<CloudFile>>(
         builder: (context, snapshot) {
@@ -206,11 +206,14 @@ class CourseStorageView extends StatelessWidget {
             appBar: AppBar(
               title: Text(getString(context).files),
               bottom: PreferredSize(
+                  preferredSize: Size(double.infinity, 110.0),
                   child: Align(
                     alignment: Alignment.center,
                     child: Padding(
                       padding: EdgeInsets.all(12.0),
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
                         children: <Widget>[
                           Hero(
                               tag: 'courseicon_' + courseInfo.id,
@@ -223,6 +226,7 @@ class CourseStorageView extends StatelessWidget {
                           Hero(
                               tag: 'coursetext_' + courseInfo.id,
                               child: Material(
+                                color: Colors.transparent,
                                 child: Text(
                                   courseInfo.getName(),
                                   textAlign: TextAlign.center,
@@ -232,15 +236,11 @@ class CourseStorageView extends StatelessWidget {
                                       color: getTextColor(
                                           getPrimaryColor(context))),
                                 ),
-                                color: Colors.transparent,
                               )),
                         ],
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.min,
                       ),
                     ),
-                  ),
-                  preferredSize: Size(double.infinity, 110.0)),
+                  )),
             ),
             body: Center(
               child: Text(bothlang(context,

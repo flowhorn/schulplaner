@@ -109,186 +109,185 @@ class NewSchoolTaskView extends StatelessWidget {
     }
     return WillPopScope(
       onWillPop: () async {
-          if (changedValues == false) return true;
-          return showConfirmDialog(
-                  context: context,
-                  title: getString(context).discardchanges,
-                  action: getString(context).confirm,
-                  richtext: RichText(
-                      text: TextSpan(
-                          text: getString(context).currentchangesnotsaved)))
-              .then((value) {
-            if (value == true) {
-              return true;
-            } else {
-              return false;
-            }
-          });
-        },
-        child: ValueListenableBuilder<SchoolTask>(
-            valueListenable: notifier,
-            builder: (context, _, _2) {
-              if (data == null) return CircularProgressIndicator();
-              return Theme(
-                  data: getTaskTheme(context),
-                  child: Scaffold(
-                    appBar: MyAppHeader(
-                        title: editmode
-                            ? getString(context).edittask
-                            : getString(context).newtask),
-                    body: SingleChildScrollView(
-                        child: Column(
-                      children: <Widget>[
-                        FormSpace(12.0),
-                        FormTextField(
-                          text: data.title,
-                          valueChanged: (newtext) {
-                            data.title = newtext;
-                            changedValues = true;
-                          },
-                          labeltext: getString(context).title,
-                          maxLength: 52,
-                          maxLengthEnforced: true,
-                          maxLines: 1,
-                        ),
-                        FormSpace(12.0),
-                        const Divider(),
-                        EditCourseField(
-                          courseId: data.courseid,
-                          editmode: editmode,
-                          onChanged: (context, newCourse) {
-                            data.courseid = newCourse.id;
-                            notifier.value = data;
+        if (changedValues == false) return true;
+        return showConfirmDialog(
+                context: context,
+                title: getString(context).discardchanges,
+                action: getString(context).confirm,
+                richtext: RichText(
+                    text: TextSpan(
+                        text: getString(context).currentchangesnotsaved)))
+            .then((value) {
+          if (value == true) {
+            return true;
+          } else {
+            return false;
+          }
+        });
+      },
+      child: ValueListenableBuilder<SchoolTask>(
+        valueListenable: notifier,
+        builder: (context, _, _2) {
+          if (data == null) return CircularProgressIndicator();
+          return Theme(
+            data: getTaskTheme(context),
+            child: Scaffold(
+              appBar: MyAppHeader(
+                  title: editmode
+                      ? getString(context).edittask
+                      : getString(context).newtask),
+              body: SingleChildScrollView(
+                  child: Column(
+                children: <Widget>[
+                  FormSpace(12.0),
+                  FormTextField(
+                    text: data.title,
+                    valueChanged: (newtext) {
+                      data.title = newtext;
+                      changedValues = true;
+                    },
+                    labeltext: getString(context).title,
+                    maxLength: 52,
+                    maxLengthEnforced: true,
+                    maxLines: 1,
+                  ),
+                  FormSpace(12.0),
+                  const Divider(),
+                  EditCourseField(
+                    courseId: data.courseid,
+                    editmode: editmode,
+                    onChanged: (context, newCourse) {
+                      data.courseid = newCourse.id;
+                      notifier.value = data;
 
-                            List<String> nextlessons = getNextLessons(
-                                database, data.courseid!,
-                                count: 1);
-                            if (data.due == null && nextlessons.isNotEmpty) {
-                              data.due = nextlessons[0];
-                            }
-                            recommendeddates = nextlessons
-                                .map((date) => RecommendedDate(
-                                    date: date,
-                                    text: getString(context).nextlesson))
-                                .toList()
-                                  ..addAll(getRecommendedDatesSimple(context));
-                            notifier.notifyListeners();
-                          },
-                        ),
-                        const Divider(),
-                        SwitchListTile(
-                          title: Text(getString(context).saveprivately),
-                          value: data.private,
-                          onChanged: editmode
-                              ? null
-                              : (newvalue) {
-                                  data.private = newvalue;
-                                  notifier.value = data;
-                                  notifier.notifyListeners();
-                                },
-                        ),
-                        const Divider(),
-                        FormHeader(getString(context).due),
-                        EditDateField(
-                          date: data.due,
-                          label: getString(context).due,
-                          onChanged: (newDate) {
-                            data.due = newDate;
+                      List<String> nextlessons =
+                          getNextLessons(database, data.courseid!, count: 1);
+                      if (data.due == null && nextlessons.isNotEmpty) {
+                        data.due = nextlessons[0];
+                      }
+                      recommendeddates = nextlessons
+                          .map((date) => RecommendedDate(
+                              date: date, text: getString(context).nextlesson))
+                          .toList()
+                        ..addAll(getRecommendedDatesSimple(context));
+                      notifier.notifyListeners();
+                    },
+                  ),
+                  const Divider(),
+                  SwitchListTile(
+                    title: Text(getString(context).saveprivately),
+                    value: data.private,
+                    onChanged: editmode
+                        ? null
+                        : (newvalue) {
+                            data.private = newvalue;
                             notifier.value = data;
                             notifier.notifyListeners();
                           },
-                        ),
-                        SingleChildScrollView(
-                          child: ButtonBar(
-                            children: (recommendeddates ??
-                                    getRecommendedDatesSimple(context))
-                                .map((rec) {
-                              return RButton(
-                                  text: rec.text,
-                                  onTap: () {
-                                    data.due = rec.date;
-                                    notifier.value = data;
-                                    notifier.notifyListeners();
-                                  },
-                                  enabled: rec.date != data.due,
-                                  disabledColor: Colors.green,
-                                  iconData:
-                                      rec.date == data.due ? Icons.done : null);
-                            }).toList(),
-                          ),
-                          scrollDirection: Axis.horizontal,
-                        ),
-                        FormDivider(),
-                        FormHideable(
-                            title: getString(context).more,
-                            notifier: showmore,
-                            builder: (context) => Column(
-                                  children: <Widget>[
-                                    FormTextField(
-                                      text: data.detail,
-                                      valueChanged: (newtext) {
-                                        data.detail = newtext;
-                                        changedValues = true;
-                                      },
-                                      labeltext: getString(context).detail,
-                                    ),
-                                    FormSpace(16.0)
-                                  ],
-                                )),
-                        FormDivider(),
-                        EditAttachementsView(
-                          database: database,
-                          attachments: data.files,
-                          onAdded: (file) {
-                            if (data.files == null) data.files = {};
-                            data.files[file.fileid!] = file;
-                            notifier.notifyListeners();
-                          },
-                          onRemoved: (file) {
-                            if (data.files == null) data.files = {};
-                            data.files[file.fileid!] = null;
-                            notifier.notifyListeners();
-                          },
-                        ),
-                        FormDivider(),
-                        FormSpace(64.0),
-                      ],
-                    )),
-                    floatingActionButton: FloatingActionButton.extended(
-                        onPressed: () {
-                          if ((editmode && data.validate()) ||
-                              (editmode == false && data.validateCreate())) {
-                            requestPermission().then((result) {
-                              if (result) {
-                                if (editmode) {
-                                  database.dataManager.ModifySchoolTask(data);
-                                  Navigator.pop(context);
-                                } else {
-                                  database.dataManager.CreateSchoolTask(data);
-                                  BlocProvider.of<AppStatsBloc>(context)
-                                      .incrementAddedTask();
-                                  Navigator.pop(context);
-                                }
-                              } else {
-                                var sheet =
-                                    showPermissionStateSheet(context: context);
-                                sheet.value = false;
-                              }
-                            });
+                  ),
+                  const Divider(),
+                  FormHeader(getString(context).due),
+                  EditDateField(
+                    date: data.due,
+                    label: getString(context).due,
+                    onChanged: (newDate) {
+                      data.due = newDate;
+                      notifier.value = data;
+                      notifier.notifyListeners();
+                    },
+                  ),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: ButtonBar(
+                      children: (recommendeddates ??
+                              getRecommendedDatesSimple(context))
+                          .map((rec) {
+                        return RButton(
+                            text: rec.text,
+                            onTap: () {
+                              data.due = rec.date;
+                              notifier.value = data;
+                              notifier.notifyListeners();
+                            },
+                            enabled: rec.date != data.due,
+                            disabledColor: Colors.green,
+                            iconData: rec.date == data.due ? Icons.done : null);
+                      }).toList(),
+                    ),
+                  ),
+                  FormDivider(),
+                  FormHideable(
+                      title: getString(context).more,
+                      notifier: showmore,
+                      builder: (context) => Column(
+                            children: <Widget>[
+                              FormTextField(
+                                text: data.detail,
+                                valueChanged: (newtext) {
+                                  data.detail = newtext;
+                                  changedValues = true;
+                                },
+                                labeltext: getString(context).detail,
+                              ),
+                              FormSpace(16.0)
+                            ],
+                          )),
+                  FormDivider(),
+                  EditAttachementsView(
+                    database: database,
+                    attachments: data.files,
+                    onAdded: (file) {
+                      if (data.files == null) data.files = {};
+                      data.files[file.fileid!] = file;
+                      notifier.notifyListeners();
+                    },
+                    onRemoved: (file) {
+                      if (data.files == null) data.files = {};
+                      data.files[file.fileid!] = null;
+                      notifier.notifyListeners();
+                    },
+                  ),
+                  FormDivider(),
+                  FormSpace(64.0),
+                ],
+              )),
+              floatingActionButton: FloatingActionButton.extended(
+                  onPressed: () {
+                    if ((editmode && data.validate()) ||
+                        (editmode == false && data.validateCreate())) {
+                      requestPermission().then((result) {
+                        if (result) {
+                          if (editmode) {
+                            database.dataManager.ModifySchoolTask(data);
+                            Navigator.pop(context);
                           } else {
-                            final infoDialog = InfoDialog(
-                              title: getString(context).failed,
-                              message: getString(context).pleasecheckdata,
-                            );
-                            // ignore: unawaited_futures
-                            infoDialog.show(context);
+                            database.dataManager.CreateSchoolTask(data);
+                            BlocProvider.of<AppStatsBloc>(context)
+                                .incrementAddedTask();
+                            Navigator.pop(context);
                           }
-                        },
-                        icon: Icon(Icons.done),
-                        label: Text(getString(context).done)),
-                  ),);
-            },),
-        );
+                        } else {
+                          var sheet =
+                              showPermissionStateSheet(context: context);
+                          sheet.value = false;
+                        }
+                      });
+                    } else {
+                      final infoDialog = InfoDialog(
+                        title: getString(context).failed,
+                        message: getString(context).pleasecheckdata,
+                      );
+                      // ignore: unawaited_futures
+                      infoDialog.show(context);
+                    }
+                  },
+                  icon: Icon(Icons.done),
+                  label: Text(getString(context).done)),
+            ),
+          );
+        },
+      ),
+    );
   }
 
   ThemeData getTaskTheme(BuildContext context) {

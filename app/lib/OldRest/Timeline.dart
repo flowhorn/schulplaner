@@ -363,6 +363,12 @@ class TimeLineLessonItem extends StatelessWidget {
       child: Container(
         height: 68.0,
         width: 56.0,
+        decoration: ShapeDecoration(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(6.0)),
+            color: lessoninfo != null
+                ? getLessonInfoColor(lessoninfo!.type)
+                : null),
         child: Column(
           children: <Widget>[
             Align(
@@ -385,12 +391,6 @@ class TimeLineLessonItem extends StatelessWidget {
             ),
           ],
         ),
-        decoration: ShapeDecoration(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(6.0)),
-            color: lessoninfo != null
-                ? getLessonInfoColor(lessoninfo!.type)
-                : null),
       ),
       onTap: () {
         showLessonDetailSheet(

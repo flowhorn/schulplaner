@@ -21,10 +21,12 @@ class QuickActionView extends StatelessWidget {
     return SizedBox(
       height: 72.0,
       child: InkWell(
+        onTap: onTap,
         child: Padding(
           padding:
               EdgeInsets.only(top: 3.0, bottom: 3.0, left: 6.0, right: 6.0),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               ColoredCircleIcon(
                 icon: Icon(
@@ -44,10 +46,8 @@ class QuickActionView extends StatelessWidget {
                 ),
               ),
             ],
-            mainAxisAlignment: MainAxisAlignment.center,
           ),
         ),
-        onTap: onTap,
       ),
     );
   }

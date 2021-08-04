@@ -28,6 +28,8 @@ class SetupView extends StatelessWidget {
     return Scaffold(
       appBar: AppHeaderAdvanced(
         title: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
               bothlang(context, de: 'Einrichtung', en: 'Setup'),
@@ -44,8 +46,6 @@ class SetupView extends StatelessWidget {
               ),
             ),
           ],
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
         ),
         leading: IconButton(
             icon: Icon(Icons.close),
@@ -81,7 +81,6 @@ class SetupView extends StatelessWidget {
                 de: 'Verbinde dich mit deinen Mitschülern und synchronisiere deine Fächer automatisch.',
                 en: 'Connect with your classmates and sync your courses automatically.'),
             body: Card(
-              child: ShortSchoolClassView(),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(
                     Radius.circular(8.0),
@@ -89,6 +88,7 @@ class SetupView extends StatelessWidget {
                   side:
                       BorderSide(color: getDividerColor(context), width: 1.0)),
               elevation: 8.0,
+              child: ShortSchoolClassView(),
             ),
             isDetailed: true,
           ),
@@ -97,7 +97,6 @@ class SetupView extends StatelessWidget {
             body: Expanded(
                 child: Card(
               clipBehavior: Clip.antiAlias,
-              child: CourseList(),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(
                     Radius.circular(8.0),
@@ -105,6 +104,7 @@ class SetupView extends StatelessWidget {
                   side:
                       BorderSide(color: getDividerColor(context), width: 1.0)),
               elevation: 8.0,
+              child: CourseList(),
             )),
             isDetailed: true,
           ),
@@ -112,7 +112,6 @@ class SetupView extends StatelessWidget {
             title: bothlang(context, de: 'Einstellungen', en: 'Settings'),
             body: Expanded(
                 child: Card(
-              child: ShortPlannerSettings(),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(
                     Radius.circular(8.0),
@@ -120,6 +119,7 @@ class SetupView extends StatelessWidget {
                   side:
                       BorderSide(color: getDividerColor(context), width: 1.0)),
               elevation: 8.0,
+              child: ShortPlannerSettings(),
             )),
             isDetailed: true,
           ),
@@ -129,7 +129,6 @@ class SetupView extends StatelessWidget {
             body: Expanded(
                 child: Card(
               clipBehavior: Clip.antiAlias,
-              child: TimetableView(),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(
                     Radius.circular(8.0),
@@ -137,6 +136,7 @@ class SetupView extends StatelessWidget {
                   side:
                       BorderSide(color: getDividerColor(context), width: 1.0)),
               elevation: 8.0,
+              child: TimetableView(),
             )),
           ),
           PageViewModel(

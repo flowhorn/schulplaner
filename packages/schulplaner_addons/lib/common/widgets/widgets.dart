@@ -13,7 +13,6 @@ class RoundButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
-      child: Text(label),
       onPressed: onTap,
       style: ButtonStyle(
         shape: MaterialStateProperty.all(
@@ -24,6 +23,7 @@ class RoundButton extends StatelessWidget {
           ),
         ),
       ),
+      child: Text(label),
     );
   }
 }

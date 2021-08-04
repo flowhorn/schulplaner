@@ -79,6 +79,9 @@ class Weekview_LeftPanel_Lesson extends StatelessWidget {
       child: Container(
         width: 35.0,
         padding: EdgeInsets.all(1.0),
+        height: hourHeight,
+        decoration: BoxDecoration(
+            border: Border.all(color: Colors.grey[600]!, width: 0.2)),
         child: Align(
           alignment: Alignment.center,
           child: Text(
@@ -89,9 +92,6 @@ class Weekview_LeftPanel_Lesson extends StatelessWidget {
             ),
           ),
         ),
-        height: hourHeight,
-        decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey[600]!, width: 0.2)),
       ),
     );
   }
@@ -112,6 +112,9 @@ class Weekview_LeftPanel_LessonTime extends StatelessWidget {
       child: Container(
         width: 45.0,
         padding: EdgeInsets.all(1.0),
+        height: hourHeight,
+        decoration: BoxDecoration(
+            border: Border.all(color: Colors.grey[600]!, width: 0.2)),
         child: Align(
           alignment: Alignment.center,
           child: Text(
@@ -122,9 +125,6 @@ class Weekview_LeftPanel_LessonTime extends StatelessWidget {
             ),
           ),
         ),
-        height: hourHeight,
-        decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey[600]!, width: 0.2)),
       ),
     );
   }
@@ -142,14 +142,29 @@ class WeekView_LessonView extends StatelessWidget {
     final color = course.getDesign()!.primary;
     return Container(
       margin: EdgeInsets.only(left: 1.5, right: 1.5, top: 1.5, bottom: 1.5),
+      decoration: BoxDecoration(
+        shape: BoxShape.rectangle,
+        border: Border.all(
+          color: getVeryEventualBorder(context, color),
+          width: 0.5,
+        ),
+        borderRadius: BorderRadius.circular(8.0),
+        color: color,
+      ),
       child: Material(
         color: color,
         clipBehavior: Clip.antiAlias,
+        borderRadius: BorderRadius.circular(8.0),
         child: InkWell(
+          onTap: onTap,
           child: Padding(
             padding: const EdgeInsets.only(
                 top: 5.0, bottom: 5.0, left: 2.0, right: 2.0),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: center_text(context)
+                  ? CrossAxisAlignment.center
+                  : CrossAxisAlignment.start,
               children: <Widget>[
                 AutoSizeText(
                   use_shortname(context)
@@ -177,24 +192,9 @@ class WeekView_LessonView extends StatelessWidget {
                       center_text(context) ? TextAlign.center : TextAlign.start,
                 ),
               ],
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: center_text(context)
-                  ? CrossAxisAlignment.center
-                  : CrossAxisAlignment.start,
             ),
           ),
-          onTap: onTap,
         ),
-        borderRadius: BorderRadius.circular(8.0),
-      ),
-      decoration: BoxDecoration(
-        shape: BoxShape.rectangle,
-        border: Border.all(
-          color: getVeryEventualBorder(context, color),
-          width: 0.5,
-        ),
-        borderRadius: BorderRadius.circular(8.0),
-        color: color,
       ),
     );
   }
@@ -330,6 +330,7 @@ class WeekViewHeaderDelegate extends SliverPersistentHeaderDelegate {
     return Material(
       child: Container(
         child: Row(
+          mainAxisSize: MainAxisSize.max,
           children: <Widget>[
             SizedBox(width: 40.0),
             Expanded(
@@ -345,7 +346,6 @@ class WeekViewHeaderDelegate extends SliverPersistentHeaderDelegate {
                               ),
                             ))))
           ],
-          mainAxisSize: MainAxisSize.max,
         ),
       ),
     );

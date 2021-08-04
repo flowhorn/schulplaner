@@ -138,12 +138,12 @@ class CourseAllGradeViewState extends State<CourseAllGradeView> {
                 ),
                 title: Text(grade.title!),
                 subtitle: Column(
-                  children: <Widget>[
-                    Text(getDateText(grade.date!)),
-                  ],
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(getDateText(grade.date!)),
+                  ],
                 ),
                 isThreeLine: false,
                 trailing: Text(

@@ -142,10 +142,12 @@ class CourseMemberTile extends StatelessWidget {
               onPressed: onTrailing,
             ),
       subtitle: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           CourseMemberRoleCard(memberRole: memberData.role),
           if (isMe)
             Card(
+              color: Colors.teal,
               child: Padding(
                 padding: EdgeInsets.all(3.0),
                 child: Text(
@@ -153,10 +155,8 @@ class CourseMemberTile extends StatelessWidget {
                   style: TextStyle(color: Colors.white),
                 ),
               ),
-              color: Colors.teal,
             )
         ],
-        crossAxisAlignment: CrossAxisAlignment.start,
       ),
       onLongPress: onLongPress,
     );
@@ -193,6 +193,7 @@ class CourseMemberRoleCard extends StatelessWidget {
   Widget build(BuildContext context) {
     if (memberRole.isAdminOrOwner()) {
       return Card(
+        color: Colors.redAccent,
         child: Padding(
           padding: EdgeInsets.all(3.0),
           child: Text(
@@ -200,10 +201,10 @@ class CourseMemberRoleCard extends StatelessWidget {
             style: TextStyle(color: Colors.white),
           ),
         ),
-        color: Colors.redAccent,
       );
     } else if (memberRole == MemberRole.creator) {
       return Card(
+        color: Colors.orange,
         child: Padding(
           padding: EdgeInsets.all(3.0),
           child: Text(
@@ -211,7 +212,6 @@ class CourseMemberRoleCard extends StatelessWidget {
             style: TextStyle(color: Colors.white),
           ),
         ),
-        color: Colors.orange,
       );
     }
     return Container();

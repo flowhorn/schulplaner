@@ -50,15 +50,15 @@ class GradeAllView extends StatelessWidget {
               ),
               title: Text(grade.title!),
               subtitle: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(courseInfo == null
                       ? 'Fach nicht vorhanden'
                       : courseInfo.name),
                   Text(getDateText(grade.date!)),
                 ],
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
               ),
               isThreeLine: true,
               trailing: Text(

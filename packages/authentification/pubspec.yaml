@@ -1,7 +1,6 @@
 name: authentification
 description:  Authentifizierung für die Schulplaner App
 version: 0.0.1
-author: Felix Weuthen
 homepage:
 publish_to: none
 

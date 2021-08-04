@@ -164,15 +164,15 @@ class LessonInfosList extends StatelessWidget {
                   ),
                   title: Text(courseInfo?.getName() ?? '???'),
                   subtitle: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(getDateText(item.date!)),
                       Text(lesson != null
                           ? getLessonTitle(context, lesson)
                           : '-'),
                     ],
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
                   ),
                   isThreeLine: true,
                 );

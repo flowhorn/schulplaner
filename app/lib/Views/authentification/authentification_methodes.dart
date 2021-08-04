@@ -71,6 +71,7 @@ class AuthenticationMethodes extends StatelessWidget {
                   if (!authProviders.isLinkedWithEmailSignIn())
                     Card(
                       child: Column(
+                        mainAxisSize: MainAxisSize.min,
                         children: <Widget>[
                           ListTile(
                             leading: Icon(
@@ -88,16 +89,15 @@ class AuthenticationMethodes extends StatelessWidget {
                               onPressed: () {
                                 pushWidget(context, LinkEmailView());
                               },
-                              child:
-                                  Text(getString(context).linkit.toUpperCase()),
                               style: ButtonStyle(
                                 foregroundColor: MaterialStateProperty.all(
                                     getAccentColor(context)),
                               ),
+                              child:
+                                  Text(getString(context).linkit.toUpperCase()),
                             ),
                           ),
                         ],
-                        mainAxisSize: MainAxisSize.min,
                       ),
                     ),
                   SizedBox(
@@ -106,6 +106,7 @@ class AuthenticationMethodes extends StatelessWidget {
                   if (!authProviders.isLinkedWithGoogleSignIn())
                     Card(
                       child: Column(
+                        mainAxisSize: MainAxisSize.min,
                         children: <Widget>[
                           ListTile(
                             leading: Icon(
@@ -124,16 +125,15 @@ class AuthenticationMethodes extends StatelessWidget {
                               onPressed: () {
                                 linkAuthentificationGoogle(context);
                               },
-                              child:
-                                  Text(getString(context).linkit.toUpperCase()),
                               style: ButtonStyle(
                                 foregroundColor: MaterialStateProperty.all(
                                     getAccentColor(context)),
                               ),
+                              child:
+                                  Text(getString(context).linkit.toUpperCase()),
                             ),
                           ),
                         ],
-                        mainAxisSize: MainAxisSize.min,
                       ),
                     ),
                   SizedBox(

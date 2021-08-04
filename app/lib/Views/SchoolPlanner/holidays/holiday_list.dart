@@ -69,6 +69,7 @@ class HolidayTile extends StatelessWidget {
       title: Text(holiday.name.text),
       subtitle: holiday.start == holiday.end
           ? Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
                   (holiday.start != null
@@ -76,9 +77,9 @@ class HolidayTile extends StatelessWidget {
                       : '-'),
                 ),
               ],
-              crossAxisAlignment: CrossAxisAlignment.start,
             )
           : Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
                   getString(context).start +
@@ -95,7 +96,6 @@ class HolidayTile extends StatelessWidget {
                           : '-'),
                 ),
               ],
-              crossAxisAlignment: CrossAxisAlignment.start,
             ),
       isThreeLine: holiday.start != holiday.end,
       onTap: () {

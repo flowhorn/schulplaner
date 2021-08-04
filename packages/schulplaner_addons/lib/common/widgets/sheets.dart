@@ -15,6 +15,8 @@ Future<T?> showSheet<T>(
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(24.0), topRight: Radius.circular(24.0)),
           child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               SizedBox(
                 height: 6.0,
@@ -52,8 +54,6 @@ Future<T?> showSheet<T>(
                 height: 16.0,
               ),
             ],
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
           ),
         ),
       );

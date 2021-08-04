@@ -23,6 +23,8 @@ class AboutPageHeader extends StatelessWidget {
             children: <Widget>[
               _Logo(),
               Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   FormSpace(4),
                   _AppTitle(),
@@ -31,8 +33,6 @@ class AboutPageHeader extends StatelessWidget {
                   FormSpace(8.0),
                   _Actions(),
                 ],
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.center,
               ),
             ],
           )
@@ -57,13 +57,13 @@ class _Logo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CircleAvatar(
+      backgroundColor: getBottomAppBarColor(context),
+      radius: 52.0,
       child: Icon(
         Icons.school,
         size: 76.0,
         color: getPrimaryColor(context),
       ),
-      backgroundColor: getBottomAppBarColor(context),
-      radius: 52.0,
     );
   }
 }

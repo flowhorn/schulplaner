@@ -27,13 +27,13 @@ class TeacherList extends StatelessWidget {
                 return ListTile(
                   title: Text(teacher.name),
                   subtitle: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text('Email: ' + (teacher.email ?? '-')),
                       Text(bothlang(context,
                           de: 'Tel: ' + (teacher.tel ?? '-'),
                           en: 'Phone: ' + (teacher.tel ?? '-'))),
                     ],
-                    crossAxisAlignment: CrossAxisAlignment.start,
                   ),
                   isThreeLine: true,
                   onTap: () {

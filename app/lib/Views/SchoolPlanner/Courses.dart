@@ -192,6 +192,7 @@ class QuickCreateCourseView extends StatelessWidget {
             padding:
                 EdgeInsets.only(left: 8.0, right: 8.0, top: 4.0, bottom: 4.0),
             child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
               child: Row(
                 children: <Widget>[
                   QuickActionView(
@@ -244,7 +245,6 @@ class QuickCreateCourseView extends StatelessWidget {
                       }),
                 ],
               ),
-              scrollDirection: Axis.horizontal,
             ),
           ),
         )
@@ -341,6 +341,7 @@ class CourseTemplatesView extends StatelessWidget {
                         radius: 22.0),
                     title: Text(item.name),
                     trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         IconButton(
                           icon: Icon(Icons.add_circle_outline),
@@ -385,7 +386,6 @@ class CourseTemplatesView extends StatelessWidget {
                           tooltip: getString(context).edit,
                         ),
                       ],
-                      mainAxisSize: MainAxisSize.min,
                     ),
                     enabled: enabledtemplate,
                   );
@@ -458,14 +458,13 @@ class CourseConnectedClassesView extends StatelessWidget {
                           ListTile(
                             leading: Icon(Icons.people),
                             title: Text(
-                                (mClassinfo.membersData.length.toString() ) +
+                                (mClassinfo.membersData.length.toString()) +
                                     bothlang(context,
                                         de: 'Mitglieder', en: 'Members')),
                           ),
                           ListTile(
                             leading: Icon(Icons.widgets),
-                            title: Text((mClassinfo.courses.length
-                                        .toString()) +
+                            title: Text((mClassinfo.courses.length.toString()) +
                                 bothlang(context, de: 'Fächer', en: 'Courses')),
                           ),
                           ButtonBar(
@@ -543,14 +542,13 @@ class CourseConnectedClassesView extends StatelessWidget {
                               ListTile(
                                 leading: Icon(Icons.people),
                                 title: Text(
-                                    (info.membersData.length.toString() ) +
+                                    (info.membersData.length.toString()) +
                                         getString(context).members),
                               ),
                               ListTile(
                                 leading: Icon(Icons.widgets),
-                                title: Text(
-                                    (info.courses.length.toString() ) +
-                                        getString(context).courses),
+                                title: Text((info.courses.length.toString()) +
+                                    getString(context).courses),
                               ),
                               ButtonBar(
                                 children: <Widget>[

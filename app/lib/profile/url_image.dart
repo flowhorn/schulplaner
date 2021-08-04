@@ -35,11 +35,11 @@ class StandardIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CircleAvatar(
+      radius: size / 2,
       child: Icon(
         Icons.person,
         size: size / 2,
       ),
-      radius: size / 2,
     );
   }
 }

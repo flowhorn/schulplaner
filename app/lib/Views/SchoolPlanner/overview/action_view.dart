@@ -21,10 +21,12 @@ class ActionView extends StatelessWidget {
     return SizedBox(
       height: 104.0,
       child: InkWell(
+        onTap: onTap,
         child: Padding(
           padding:
               EdgeInsets.only(top: 6.0, bottom: 6.0, left: 8.0, right: 8.0),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               ColoredCircleIcon(
                 icon: Icon(
@@ -44,10 +46,8 @@ class ActionView extends StatelessWidget {
                 ),
               ),
             ],
-            mainAxisAlignment: MainAxisAlignment.center,
           ),
         ),
-        onTap: onTap,
       ),
     );
   }

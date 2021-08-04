@@ -26,7 +26,7 @@ class GradeDevelopmentView extends StatelessWidget {
       final List<double> gradevalues = grades
           .map((it) => gradePackage.getGradeValue!(it.valuekey!).value)
           .toList()
-            ..sort((item1, item2) => item1.compareTo(item2));
+        ..sort((item1, item2) => item1.compareTo(item2));
 
       lowestGradeValue = gradevalues.isNotEmpty ? gradevalues.first : 0.0;
       highestGradeValue = gradevalues.isNotEmpty ? gradevalues.last : 100.0;
@@ -61,6 +61,7 @@ class GradeDevelopmentView extends StatelessWidget {
       child: Builder(
         builder: (context) {
           return Column(
+            mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               FormHeader(
                 bothlang(context,
@@ -160,7 +161,6 @@ class GradeDevelopmentView extends StatelessWidget {
                 ),
               ),
             ],
-            mainAxisSize: MainAxisSize.min,
           );
         },
       ),

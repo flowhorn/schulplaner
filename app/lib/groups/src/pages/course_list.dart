@@ -78,6 +78,7 @@ class _CourseTile extends StatelessWidget {
       ),
       title: Text(courseInfo!.name),
       subtitle: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
             getString(context).teacher + ': ' + courseInfo!.getTeachersListed(),
@@ -86,7 +87,6 @@ class _CourseTile extends StatelessWidget {
           ),
           Text(getString(context).place + ': ' + courseInfo!.getPlacesListed()),
         ],
-        crossAxisAlignment: CrossAxisAlignment.start,
       ),
       isThreeLine: true,
       trailing: IconButton(

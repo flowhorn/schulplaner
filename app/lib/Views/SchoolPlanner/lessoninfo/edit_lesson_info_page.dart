@@ -381,7 +381,7 @@ void showLessonInfotypePicker(
     PlannerDatabase database, BuildContext context, ValueSetter<int> onTapData,
     {int? currentid}) {
   List<Choice> mylist = [];
-  mylist..addAll(getLessonInfoTypes(context));
+  mylist.addAll(getLessonInfoTypes(context));
   selectItem<Choice>(
       context: context,
       items: mylist,

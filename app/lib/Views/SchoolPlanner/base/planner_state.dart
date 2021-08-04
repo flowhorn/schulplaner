@@ -9,9 +9,16 @@ class PlannerState extends StatelessWidget {
   Widget build(BuildContext context) {
     final plannerLoaderBloc = BlocProvider.of<PlannerLoaderBloc>(context);
     return InkWell(
+      onTap: () {
+        showPlannerSheet(context: context);
+      },
+      borderRadius: BorderRadius.all(Radius.circular(16.0)),
       child: Padding(
         padding: EdgeInsets.all(8.0),
         child: Row(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             SizedBox(
               width: 8.0,
@@ -35,15 +42,8 @@ class PlannerState extends StatelessWidget {
               size: 24.0,
             ),
           ],
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
         ),
       ),
-      onTap: () {
-        showPlannerSheet(context: context);
-      },
-      borderRadius: BorderRadius.all(Radius.circular(16.0)),
     );
   }
 }

@@ -77,9 +77,6 @@ class TimelineTile extends StatelessWidget {
               : Builder(builder: (context) {
                   if (dayType.type == DayTypes.WEEKEND) {
                     return Container(
-                      child: ListTile(
-                          leading: Icon(Icons.weekend),
-                          title: Text(getString(context).weekend)),
                       decoration: ShapeDecoration(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8.0),
@@ -88,6 +85,9 @@ class TimelineTile extends StatelessWidget {
                           ),
                         ),
                       ),
+                      child: ListTile(
+                          leading: Icon(Icons.weekend),
+                          title: Text(getString(context).weekend)),
                     );
                   }
                   if (dayType.type == DayTypes.VACATION) {
@@ -197,6 +197,9 @@ class _TimelineTileSectionLessons extends StatelessWidget {
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: (lessons
                   ..sort((l1, l2) {
                     return l1.start.compareTo(l2.start);
@@ -231,9 +234,6 @@ class _TimelineTileSectionLessons extends StatelessWidget {
                 );
               },
             ).toList(),
-            mainAxisAlignment: MainAxisAlignment.start,
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.start,
           ),
         ),
         FormSpace(3.0),
@@ -404,13 +404,6 @@ class HolidayTile_Timeline extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Tile(
-        leading: Icon(Icons.wb_sunny),
-        title: Text(holiday.name.text),
-        subtitle: Text(holiday.start!.parser.toMMMEd +
-            ' - ' +
-            holiday.end!.parser.toMMMEd),
-      ),
       decoration: ShapeDecoration(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8.0),
@@ -418,6 +411,13 @@ class HolidayTile_Timeline extends StatelessWidget {
             color: getDividerColor(context),
           ),
         ),
+      ),
+      child: Tile(
+        leading: Icon(Icons.wb_sunny),
+        title: Text(holiday.name.text),
+        subtitle: Text(holiday.start!.parser.toMMMEd +
+            ' - ' +
+            holiday.end!.parser.toMMMEd),
       ),
     );
   }
@@ -448,19 +448,19 @@ class Tile extends StatelessWidget {
           Expanded(
             child: Column(
               mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 if (title != null)
                   DefaultTextStyle(
-                    child: title!,
                     style: Theme.of(context).textTheme.subtitle1!,
+                    child: title!,
                   ),
                 if (subtitle != null)
                   DefaultTextStyle(
-                    child: subtitle!,
                     style: Theme.of(context).textTheme.bodyText2!,
+                    child: subtitle!,
                   ),
               ],
-              crossAxisAlignment: CrossAxisAlignment.start,
             ),
           ),
           if (trailing != null)

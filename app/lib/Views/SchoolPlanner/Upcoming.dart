@@ -52,6 +52,7 @@ class UpcomingView extends StatelessWidget {
                       showVacationDetail(context: context, holidayID: item.id);
                     },
                     trailing: Card(
+                      color: Colors.redAccent,
                       child: Padding(
                         padding: EdgeInsets.all(3.0),
                         child: Text(
@@ -59,7 +60,6 @@ class UpcomingView extends StatelessWidget {
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
-                      color: Colors.redAccent,
                     ),
                   );
                 }).toList(),

@@ -259,6 +259,7 @@ class _Connect extends StatelessWidget {
         builder: (context, snapshot) {
           final schoolClassId = snapshot.data;
           return Column(
+            mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               SwitchListTile(
                 value: bloc.addToPrivateCourses,
@@ -280,7 +281,6 @@ class _Connect extends StatelessWidget {
                         ' ${bloc.database.schoolClassInfos.data[schoolClassId]?.getName()}'),
               ),
             ],
-            mainAxisSize: MainAxisSize.min,
           );
         });
   }

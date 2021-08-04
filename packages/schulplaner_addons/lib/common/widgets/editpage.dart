@@ -260,7 +260,7 @@ class EditCustomField extends StatelessWidget {
         valueListenable: isSelected,
         builder: (context, selected, _) {
           return InkWell(
-             onTap: () {
+            onTap: () {
               isSelected.value = true;
               onClicked(context).then((_) {
                 isSelected.value = false;
@@ -317,6 +317,9 @@ class EditPhotoField extends StatelessWidget {
       child: Row(
         children: <Widget>[
           CircleAvatar(
+            backgroundColor: Colors.blue,
+            foregroundColor: Colors.white,
+            radius: 48.0,
             child: cloudPhoto == null
                 ? Icon(
                     Icons.person,
@@ -325,11 +328,10 @@ class EditPhotoField extends StatelessWidget {
                 : CachedNetworkImage(
                     imageUrl: cloudPhoto.compUrl!,
                   ),
-            backgroundColor: Colors.blue,
-            foregroundColor: Colors.white,
-            radius: 48.0,
           ),
           Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Align(
                 alignment: Alignment.topLeft,
@@ -363,8 +365,6 @@ class EditPhotoField extends StatelessWidget {
                 ],
               ),
             ],
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
           )
         ],
       ),

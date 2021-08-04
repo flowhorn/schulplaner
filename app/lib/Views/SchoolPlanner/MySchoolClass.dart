@@ -336,6 +336,7 @@ class SchoolClassCoursesView extends StatelessWidget {
                               ),
                               title: Text(courseInfo.name),
                               subtitle: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
                                   Text(
                                     getString(context).teacher +
@@ -348,7 +349,6 @@ class SchoolClassCoursesView extends StatelessWidget {
                                       ': ' +
                                       courseInfo.getPlacesListed()),
                                 ],
-                                crossAxisAlignment: CrossAxisAlignment.start,
                               ),
                               isThreeLine: true,
                               trailing: IconButton(
@@ -599,6 +599,7 @@ class SchoolClassSelectCourses extends StatelessWidget {
                         radius: 22.0),
                     title: Text(courseInfo.name),
                     subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
                           getString(context).teacher +
@@ -611,7 +612,6 @@ class SchoolClassSelectCourses extends StatelessWidget {
                             ': ' +
                             courseInfo.getPlacesListed()),
                       ],
-                      crossAxisAlignment: CrossAxisAlignment.start,
                     ),
                     isThreeLine: true,
                     enabled: enablecourse,
@@ -682,6 +682,7 @@ class SchoolClassCourseTemplatesView extends StatelessWidget {
                         radius: 22.0),
                     title: Text(item.name),
                     trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         IconButton(
                           icon: Icon(Icons.add_circle_outline),
@@ -728,7 +729,6 @@ class SchoolClassCourseTemplatesView extends StatelessWidget {
                           tooltip: getString(context).edit,
                         ),
                       ],
-                      mainAxisSize: MainAxisSize.min,
                     ),
                     enabled: enabledtemplate,
                   );

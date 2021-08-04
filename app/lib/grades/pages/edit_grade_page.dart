@@ -207,6 +207,7 @@ class NewGradeViewState extends State<NewGradeView> {
                       },
                     ),
                     SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
                       child: ButtonBar(
                         children:
                             (getRecommendedDatesSimple(context)).map((rec) {
@@ -223,7 +224,6 @@ class NewGradeViewState extends State<NewGradeView> {
                                   rec.date == grade.date ? Icons.done : null);
                         }).toList(),
                       ),
-                      scrollDirection: Axis.horizontal,
                     ),
                   ],
                 ),

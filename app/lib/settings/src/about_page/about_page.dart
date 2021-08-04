@@ -243,6 +243,9 @@ class _Team extends StatelessWidget {
                 height: 5,
               ),
               Card(
+                  shape: StadiumBorder(
+                      side: BorderSide(
+                          color: getAccentColor(context), width: 1.5)),
                   child: ListTile(
                     leading: Icon(
                       FontAwesomeIcons.arrowRight,
@@ -258,10 +261,7 @@ class _Team extends StatelessWidget {
                       navigationBloc.openSubPage(
                           builder: (context) => AboutContributors());
                     },
-                  ),
-                  shape: StadiumBorder(
-                      side: BorderSide(
-                          color: getAccentColor(context), width: 1.5))),
+                  )),
             ],
           ),
         ],

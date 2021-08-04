@@ -199,6 +199,8 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
                   child: Padding(
                     padding: EdgeInsets.all(4.0),
                     child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         Icon(Icons.date_range),
                         SizedBox(
@@ -235,8 +237,6 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
                           size: 24.0,
                         ),
                       ],
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.center,
                     ),
                   ),
                 ),

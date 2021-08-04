@@ -12,7 +12,7 @@ Future<T?> pushWidget<T>(BuildContext context, Widget widget,
       ));
 }
 
-Future<dynamic?> pushReplaceWidget(BuildContext context, Widget widget,
+Future<dynamic> pushReplaceWidget(BuildContext context, Widget widget,
     {String? routname}) {
   return Navigator.pushReplacement(
     context,

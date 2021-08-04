@@ -6,7 +6,6 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:schulplaner8/Data/Objects.dart';
 import 'package:schulplaner_navigation/schulplaner_navigation.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
-import 'package:schulplaner_widgets/schulplaner_common.dart';
 import 'package:schulplaner_widgets/schulplaner_theme.dart';
 import 'package:schulplaner8/Extras/qrimage2.dart';
 import 'package:schulplaner8/Helper/database_foundation.dart';
@@ -117,7 +116,6 @@ Future<String?> getTextFromInput(
         ),
         actions: <Widget>[
           TextButton(
-            child: Text(getString(context).cancel),
             onPressed: () {
               Navigator.of(context).pop();
             },
@@ -126,9 +124,9 @@ Future<String?> getTextFromInput(
                 getTextPrimary(context),
               ),
             ),
+            child: Text(getString(context).cancel),
           ),
           TextButton(
-            child: Text(getString(context).set),
             onPressed: () {
               Navigator.of(context).pop(inputtext);
             },
@@ -137,6 +135,7 @@ Future<String?> getTextFromInput(
                 getTextPrimary(context),
               ),
             ),
+            child: Text(getString(context).set),
           )
         ],
       );
@@ -176,9 +175,9 @@ Widget getHeadedCardView({
   if (bottom != null) widgetlist.add(bottom);
   return Card(
     child: Column(
-      children: widgetlist,
       mainAxisAlignment: MainAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
+      children: widgetlist,
     ),
   );
 }
@@ -217,9 +216,9 @@ Widget getHeadedCardViewSingle({
   if (bottom != null) widgetlist.add(bottom);
   return Card(
     child: Column(
-      children: widgetlist,
       mainAxisAlignment: MainAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
+      children: widgetlist,
     ),
   );
 }
@@ -321,6 +320,7 @@ class MyAppHeader extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         AppBar(
           centerTitle: true,
@@ -332,7 +332,6 @@ class MyAppHeader extends StatelessWidget implements PreferredSizeWidget {
           color: getDividerColor(context),
         ),
       ],
-      mainAxisSize: MainAxisSize.min,
     );
   }
 
@@ -343,6 +342,7 @@ class MyAppHeader extends StatelessWidget implements PreferredSizeWidget {
 Widget getEmptyView({String? title, IconData? icon}) {
   return Center(
     child: Column(
+      mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         Icon(
           icon ?? Icons.wb_sunny,
@@ -354,7 +354,6 @@ Widget getEmptyView({String? title, IconData? icon}) {
           style: TextStyle(fontSize: 17.0),
         )
       ],
-      mainAxisSize: MainAxisSize.min,
     ),
   );
 }
@@ -435,6 +434,8 @@ void showSheet(
                     topLeft: Radius.circular(24.0),
                     topRight: Radius.circular(24.0)),
                 child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     SizedBox(
                       height: 6.0,
@@ -472,8 +473,8 @@ void showSheet(
                     ),
                     actions != null
                         ? Row(
-                            children: actions,
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: actions,
                           )
                         : SizedBox(
                             height: 0.0,
@@ -482,8 +483,6 @@ void showSheet(
                       height: 16.0,
                     ),
                   ],
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
                 ),
               ),
             ));
@@ -509,6 +508,8 @@ ValueNotifier<bool?> showPermissionStateSheet({required BuildContext context}) {
                             topLeft: Radius.circular(24.0),
                             topRight: Radius.circular(24.0)),
                         child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             SizedBox(
                               height: 6.0,
@@ -567,8 +568,6 @@ ValueNotifier<bool?> showPermissionStateSheet({required BuildContext context}) {
                               height: 6.0,
                             ),
                           ],
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.start,
                         )),
                   );
                 }));
@@ -597,6 +596,8 @@ ValueNotifier<ResultItem> showResultStateSheet(
                             topLeft: Radius.circular(24.0),
                             topRight: Radius.circular(24.0)),
                         child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             SizedBox(
                               height: 6.0,
@@ -653,8 +654,6 @@ ValueNotifier<ResultItem> showResultStateSheet(
                               height: 36.0,
                             ),
                           ],
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.start,
                         )),
                   );
                 }));
@@ -696,6 +695,8 @@ void showLoadingStateSheet({
                             topLeft: Radius.circular(24.0),
                             topRight: Radius.circular(24.0)),
                         child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             SizedBox(
                               height: 6.0,
@@ -753,8 +754,6 @@ void showLoadingStateSheet({
                               height: 6.0,
                             ),
                           ],
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.start,
                         )),
                   );
                 }));
@@ -788,6 +787,8 @@ ValueNotifier<bool?> showLoadingStateSheetFull({
                             topLeft: Radius.circular(24.0),
                             topRight: Radius.circular(24.0)),
                         child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             SizedBox(
                               height: 6.0,
@@ -845,8 +846,6 @@ ValueNotifier<bool?> showLoadingStateSheetFull({
                               height: 6.0,
                             ),
                           ],
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.start,
                         )),
                   );
                 }));
@@ -875,6 +874,8 @@ Future<T?> showSheetBuilder<T>({
                   topLeft: Radius.circular(24.0),
                   topRight: Radius.circular(24.0)),
               child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   SizedBox(
                     height: 6.0,
@@ -913,8 +914,8 @@ Future<T?> showSheetBuilder<T>({
                   ),
                   actions != null
                       ? Row(
-                          children: actions(sheetcontext),
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: actions(sheetcontext),
                         )
                       : SizedBox(
                           height: 0.0,
@@ -923,8 +924,6 @@ Future<T?> showSheetBuilder<T>({
                     height: 6.0,
                   ),
                 ],
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
               ),
             ),
           ));
@@ -960,6 +959,7 @@ void showConfirmationDialog(
             child: AlertDialog(
               title: Text(title),
               content: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   richtext,
                   SizedBox(
@@ -967,12 +967,12 @@ void showConfirmationDialog(
                   ),
                   warning == true
                       ? Card(
+                          color: Colors.redAccent,
                           child: ListTile(
                             leading: Icon(Icons.warning),
                             title: Text(warningtext ??
                                 'Du kannst dies nicht rückgäng machen!'),
                           ),
-                          color: Colors.redAccent,
                         )
                       : SizedBox(
                           height: 0.0,
@@ -981,26 +981,24 @@ void showConfirmationDialog(
                     height: 8.0,
                   ),
                 ],
-                mainAxisSize: MainAxisSize.min,
               ),
               actions: <Widget>[
                 TextButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: Text(getString(context).cancel.toUpperCase()),
                   style: ButtonStyle(
                     foregroundColor: MaterialStateProperty.all(
                       getTextColor(getBackgroundColor(context)),
                     ),
                   ),
+                  child: Text(getString(context).cancel.toUpperCase()),
                 ),
                 TextButton(
                   onPressed: () {
                     Navigator.pop(context);
                     onConfirm();
                   },
-                  child: Text(action.toUpperCase()),
                   style: ButtonStyle(
                     foregroundColor: MaterialStateProperty.all(Colors.white),
                     backgroundColor:
@@ -1010,6 +1008,7 @@ void showConfirmationDialog(
                           borderRadius: BorderRadius.all(Radius.circular(8.0))),
                     ),
                   ),
+                  child: Text(action.toUpperCase()),
                 ),
               ],
             ));
@@ -1028,32 +1027,32 @@ Future<bool?> showConfirmDialog(
         return AlertDialog(
           title: Text(title),
           content: Column(
+            mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               richtext ?? nowidget(),
             ],
-            mainAxisSize: MainAxisSize.min,
           ),
           actions: <Widget>[
             TextButton(
               onPressed: () {
                 Navigator.pop(context, false);
               },
-              child: Text(getString(context).cancel.toUpperCase()),
               style: ButtonStyle(
                 foregroundColor: MaterialStateProperty.all(
                   getClearTextColor(context),
                 ),
               ),
+              child: Text(getString(context).cancel.toUpperCase()),
             ),
             FlatButton(
               onPressed: () {
                 Navigator.pop(context, true);
               },
-              child: Text((action ?? title).toUpperCase()),
               color: Colors.redAccent,
               textColor: Colors.white,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(8.0))),
+              child: Text((action ?? title).toUpperCase()),
             ),
           ],
         );
@@ -1078,6 +1077,8 @@ Future<void> showDetailSheetBuilder(
                   topLeft: Radius.circular(24.0),
                   topRight: Radius.circular(24.0)),
               child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   SizedBox(
                     height: 6.0,
@@ -1097,8 +1098,6 @@ Future<void> showDetailSheetBuilder(
                   ),
                   body(sheetcontext),
                 ],
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
               ),
             ),
           ));
@@ -1137,20 +1136,6 @@ class ColoredCircleText extends StatelessWidget {
   Widget build(BuildContext context) {
     Color finalcolor = color ?? getAccentColor(context);
     return Container(
-      child: Center(
-        child: Material(
-          child: Text(
-            text ?? '-',
-            maxLines: 1,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-                color: getTextColor(finalcolor),
-                fontSize: textsize,
-                fontWeight: FontWeight.w600),
-          ),
-          color: Colors.transparent,
-        ),
-      ),
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         border: Border.all(
@@ -1161,6 +1146,20 @@ class ColoredCircleText extends StatelessWidget {
       ),
       width: radius * 2,
       height: radius * 2,
+      child: Center(
+        child: Material(
+          color: Colors.transparent,
+          child: Text(
+            text ?? '-',
+            maxLines: 1,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                color: getTextColor(finalcolor),
+                fontSize: textsize,
+                fontWeight: FontWeight.w600),
+          ),
+        ),
+      ),
     );
   }
 }
@@ -1175,9 +1174,6 @@ class ColoredCircleIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     Color finalcolor = color ?? getAccentColor(context);
     return Container(
-      child: Center(
-        child: icon,
-      ),
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         border: Border.all(
@@ -1188,6 +1184,9 @@ class ColoredCircleIcon extends StatelessWidget {
       ),
       width: radius * 2,
       height: radius * 2,
+      child: Center(
+        child: icon,
+      ),
     );
   }
 }
@@ -1265,6 +1264,8 @@ class QRCodeViewPublicCode extends StatelessWidget {
                     content: Builder(builder: (context) {
                       double value = MediaQuery.of(context).size.width - 130;
                       return SizedBox(
+                        height: value,
+                        width: value,
                         child: Container(
                           child: QrImage2(
                             data: publiccode!,
@@ -1273,8 +1274,6 @@ class QRCodeViewPublicCode extends StatelessWidget {
                                 getTextColor(getBackgroundColor(context)),
                           ),
                         ),
-                        height: value,
-                        width: value,
                       );
                     }),
                     contentPadding:

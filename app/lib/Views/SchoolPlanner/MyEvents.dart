@@ -33,6 +33,7 @@ class MyEventsList extends StatelessWidget {
         length: 1,
         child: Scaffold(
           appBar: PreferredSize(
+              preferredSize: Size(double.infinity, 0.0),
               child: Container(
                 child: TabBar(
                   tabs: [
@@ -46,8 +47,7 @@ class MyEventsList extends StatelessWidget {
                   indicatorColor: getPrimaryColor(context),
                   unselectedLabelColor: getClearTextColor(context),
                 ),
-              ),
-              preferredSize: Size(double.infinity, 0.0)),
+              )),
           body: TabBarView(children: [
             MyEventsListInner(),
           ]),
@@ -92,7 +92,7 @@ class MyEventsListInnerState extends State<MyEventsListInner>
             .values
             .where((event) => event.archived == false)
             .toList()
-              ..sort((item1, item2) => item1.date!.compareTo(item2.date!));
+          ..sort((item1, item2) => item1.date!.compareTo(item2.date!));
         return ListView.builder(
           itemBuilder: (context, index) {
             SchoolEvent item = list[index];
@@ -124,6 +124,7 @@ class MyEventsListInnerState extends State<MyEventsListInner>
                 overflow: TextOverflow.ellipsis,
               ),
               subtitle: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   item.courseid != null
                       ? Text(
@@ -142,7 +143,6 @@ class MyEventsListInnerState extends State<MyEventsListInner>
                     overflow: TextOverflow.ellipsis,
                   ),
                 ],
-                crossAxisAlignment: CrossAxisAlignment.start,
               ),
               isThreeLine: courseInfo != null,
               onTap: () {
@@ -212,6 +212,7 @@ class MyEventsArchive extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
                 subtitle: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     item.courseid != null
                         ? Text(
@@ -230,7 +231,6 @@ class MyEventsArchive extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                     ),
                   ],
-                  crossAxisAlignment: CrossAxisAlignment.start,
                 ),
                 isThreeLine: courseInfo != null,
                 onTap: () {
@@ -267,14 +267,14 @@ class MyEventsOnlyExams extends StatelessWidget {
           List<SchoolEvent> list = datamap.values
               .where((event) => event.type == 1 && event.archived == false)
               .toList()
-                ..sort((t1, t2) {
-                  int compare = t1.date!.compareTo(t2.date!);
-                  if (compare != null) {
-                    return compare;
-                  } else {
-                    return t1.courseid?.compareTo(t2.courseid!) ?? 0;
-                  }
-                });
+            ..sort((t1, t2) {
+              int compare = t1.date!.compareTo(t2.date!);
+              if (compare != null) {
+                return compare;
+              } else {
+                return t1.courseid?.compareTo(t2.courseid!) ?? 0;
+              }
+            });
           return ListView.builder(
             itemBuilder: (context, index) {
               SchoolEvent item = list[index];
@@ -298,6 +298,7 @@ class MyEventsOnlyExams extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
                 subtitle: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     item.courseid != null
                         ? Text(
@@ -316,7 +317,6 @@ class MyEventsOnlyExams extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                     ),
                   ],
-                  crossAxisAlignment: CrossAxisAlignment.start,
                 ),
                 isThreeLine: courseInfo != null,
                 onTap: () {

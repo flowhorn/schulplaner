@@ -67,8 +67,8 @@ class MySchoolPlanner extends StatefulWidget {
         final newdata = navigationBloc.currentMainPageValue.copy();
         newdata.showSubChild = true;
         newdata.subChild = SlideUp(
-          child: TimetableView(),
           key: Key('Test'),
+          child: TimetableView(),
         );
         newdata.subChildName = '';
         newdata.actions = null;
@@ -78,8 +78,8 @@ class MySchoolPlanner extends StatefulWidget {
         final newdata = navigationBloc.currentMainPageValue.copy();
         newdata.showSubChild = true;
         newdata.subChild = SlideUp(
-          child: MyTasksList(),
           key: Key('Test'),
+          child: MyTasksList(),
         );
         newdata.subChildName = '';
         newdata.actions = null;

@@ -188,16 +188,16 @@ class RegionTileTag extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: Colors.deepOrange,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8.0),
+      ),
       child: Padding(
         padding: EdgeInsets.all(4.0),
         child: Text(
           text,
           style: TextStyle(color: Colors.white),
         ),
-      ),
-      color: Colors.deepOrange,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8.0),
       ),
     );
   }
