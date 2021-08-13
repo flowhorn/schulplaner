@@ -30,19 +30,14 @@ class AuthenticationMethodes extends StatelessWidget {
               final authProviders = snapshot.data ?? [];
               return Column(
                 children: <Widget>[
-                  FormHeader(bothlang(context,
-                      de: 'Meine Anmeldemethoden', en: 'My Sign-In methodes')),
+                  FormHeader(bothlang(context, de: 'Meine Anmeldemethoden', en: 'My Sign-In methodes')),
                   if (!authProviders.containsLinkedProviders())
                     Card(
                       margin: EdgeInsets.all(8.0),
                       child: ListTile(
                         leading: Icon(Icons.person),
-                        title: Text(bothlang(context,
-                            de: 'Anmeldung übersprungen',
-                            en: 'Sign-In skipped')),
-                        subtitle: Text(bothlang(context,
-                            de: 'Du hast noch keine Anmeldemethode hinzugefügt. Füge besser jetzt eine hinzu!',
-                            en: "You haven't added any Sign-In methode. Do it know!")),
+                        title: Text(bothlang(context, de: 'Anmeldung übersprungen', en: 'Sign-In skipped')),
+                        subtitle: Text(bothlang(context, de: 'Du hast noch keine Anmeldemethode hinzugefügt. Füge besser jetzt eine hinzu!', en: "You haven't added any Sign-In methode. Do it now!")),
                         /*
                             trailing: true ? null: TextButton(
                               onPressed: () {
@@ -65,9 +60,7 @@ class AuthenticationMethodes extends StatelessWidget {
                     height: 8.0,
                   ),
                   FormDivider(),
-                  FormHeader(bothlang(context,
-                      de: 'Anmeldemethode hinzufügen',
-                      en: 'Add sign-in method')),
+                  FormHeader(bothlang(context, de: 'Anmeldemethode hinzufügen', en: 'Add sign-in method')),
                   if (!authProviders.isLinkedWithEmailSignIn())
                     Card(
                       child: Column(
@@ -80,8 +73,7 @@ class AuthenticationMethodes extends StatelessWidget {
                             ),
                             title: Text(getString(context).linkemail),
                             subtitle: Text(bothlang(context,
-                                de: 'Melde dich von all deinen Geräten mit deiner Email-Adresse und einem Passwort an',
-                                en: 'Sign in from all your devices using your email & password')),
+                                de: 'Melde dich von all deinen Geräten mit deiner Email-Adresse und einem Passwort an', en: 'Sign in from all your devices using your email & password')),
                           ),
                           SizedBox(
                             height: 52.0,
@@ -90,11 +82,9 @@ class AuthenticationMethodes extends StatelessWidget {
                                 pushWidget(context, LinkEmailView());
                               },
                               style: ButtonStyle(
-                                foregroundColor: MaterialStateProperty.all(
-                                    getAccentColor(context)),
+                                foregroundColor: MaterialStateProperty.all(getAccentColor(context)),
                               ),
-                              child:
-                                  Text(getString(context).linkit.toUpperCase()),
+                              child: Text(getString(context).linkit.toUpperCase()),
                             ),
                           ),
                         ],
@@ -113,11 +103,8 @@ class AuthenticationMethodes extends StatelessWidget {
                               CommunityMaterialIcons.google,
                               color: Colors.blue,
                             ),
-                            title: Text(bothlang(context,
-                                de: 'Google-Verknüpfung', en: 'Google-Link')),
-                            subtitle: Text(bothlang(context,
-                                de: 'Melde dich von all deinen Geräten mit deinem Google-Konto an',
-                                en: 'Sign in from all your devices using your Google account')),
+                            title: Text(bothlang(context, de: 'Google-Verknüpfung', en: 'Google-Link')),
+                            subtitle: Text(bothlang(context, de: 'Melde dich von all deinen Geräten mit deinem Google-Konto an', en: 'Sign in from all your devices using your Google account')),
                           ),
                           SizedBox(
                             height: 52.0,
@@ -126,11 +113,9 @@ class AuthenticationMethodes extends StatelessWidget {
                                 linkAuthentificationGoogle(context);
                               },
                               style: ButtonStyle(
-                                foregroundColor: MaterialStateProperty.all(
-                                    getAccentColor(context)),
+                                foregroundColor: MaterialStateProperty.all(getAccentColor(context)),
                               ),
-                              child:
-                                  Text(getString(context).linkit.toUpperCase()),
+                              child: Text(getString(context).linkit.toUpperCase()),
                             ),
                           ),
                         ],
@@ -159,8 +144,7 @@ class AuthenticationMethodes extends StatelessWidget {
   void linkAuthentificationGoogle(BuildContext context) async {
     final myAuthProvidersBloc = BlocProvider.of<MyAuthProvidersBloc>(context);
     final linkingFuture = myAuthProvidersBloc.tryLinkWithGoogleSignIn();
-    final stateSubject =
-        BehaviorSubject<SheetContent>.seeded(LoadingSheetContent());
+    final stateSubject = BehaviorSubject<SheetContent>.seeded(LoadingSheetContent());
     final stateSheet = StateSheet(stream: stateSubject);
     // ignore: unawaited_futures
     linkingFuture.then((linkingResult) {
@@ -181,17 +165,14 @@ class AuthenticationMethodes extends StatelessWidget {
 class AuthProviderElement extends StatelessWidget {
   final AuthProviderType authProviderType;
 
-  const AuthProviderElement({Key? key, required this.authProviderType})
-      : super(key: key);
+  const AuthProviderElement({Key? key, required this.authProviderType}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     if (authProviderType is EmailAuthProviderType) {
-      return EmailAuthProviderTile(
-          authProviderType: authProviderType as EmailAuthProviderType);
+      return EmailAuthProviderTile(authProviderType: authProviderType as EmailAuthProviderType);
     }
     if (authProviderType is GoogleAuthProviderType) {
-      return GoogleAuthProviderTile(
-          authProviderType: authProviderType as GoogleAuthProviderType);
+      return GoogleAuthProviderTile(authProviderType: authProviderType as GoogleAuthProviderType);
     }
     return Card(
       child: ListTile(
