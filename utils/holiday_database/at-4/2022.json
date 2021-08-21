@@ -1,0 +1,65 @@
+{
+    "2022-winter": {
+        "id": "2022-winter",
+        "name": "Semesterferien",
+        "start": "2022-02-21",
+        "end": "2022-02-26",
+        "type": "holiday"
+    },
+    "2022-ostern": {
+        "id": "2022-ostern",
+        "name": "Osterferien",
+        "start": "2022-04-09",
+        "end": "2022-04-18",
+        "type": "holiday"
+    },
+    "2022-ostern2": {
+        "id": "2022-ostern2",
+        "name": "Ostermontag",
+        "start": "2022-04-18",
+        "end": "2022-04-18",
+        "type": "holiday"
+    },
+    "2022-ostern3": {
+        "id": "2022-ostern3",
+        "name": "Staatsfeiertag",
+        "start": "2022-05-01",
+        "end": "2022-05-01",
+        "type": "holiday"
+    },
+    "2022-ostern4": {
+        "id": "2022-ostern4",
+        "name": "Christi Himmelfahrt",
+        "start": "2022-05-26",
+        "end": "2022-05-26",
+        "type": "holiday"
+    },
+    "2022-pfingsten": {
+        "id": "2022-pfingsten",
+        "name": "Pfingstferien",
+        "start": "2022-06-04",
+        "end": "2022-06-06",
+        "type": "holiday"
+    },
+    "2022-pfingsten2": {
+        "id": "2022-pfingsten2",
+        "name": "Pfingstmontag",
+        "start": "2022-06-06",
+        "end": "2022-06-06",
+        "type": "holiday"
+    },
+    "2022-pfingsten4": {
+        "id": "2022-pfingsten4",
+        "name": "Fronleichnam",
+        "start": "2022-06-16",
+        "end": "2022-06-016",
+        "type": "holiday"
+    },
+    "2022-sommer": {
+        "id": "2022-sommer",
+        "name": "Sommerferien",
+        "start": "2022-07-09",
+        "end": "2022-09-11",
+        "type": "holiday"
+    }
+}
