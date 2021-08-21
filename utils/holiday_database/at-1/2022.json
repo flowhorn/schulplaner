@@ -20,6 +20,20 @@
         "end": "2022-04-18",
         "type": "holiday"
     },
+    "2022-ostern3": {
+        "id": "2022-ostern3",
+        "name": "Staatsfeiertag",
+        "start": "2022-05-01",
+        "end": "2022-05-01",
+        "type": "holiday"
+    },
+    "2022-ostern4": {
+        "id": "2022-ostern4",
+        "name": "Christi Himmelfahrt",
+        "start": "2022-05-26",
+        "end": "2022-05-26",
+        "type": "holiday"
+    },
     "2022-pfingsten": {
         "id": "2022-pfingsten",
         "name": "Pfingstferien",
@@ -32,6 +46,13 @@
         "name": "Pfingstmontag",
         "start": "2022-06-06",
         "end": "2022-06-06",
+        "type": "holiday"
+    },
+    "2022-pfingsten3": {
+        "id": "2022-pfingsten3",
+        "name": "Fronleichnam",
+        "start": "2022-06-16",
+        "end": "2022-06-16",
         "type": "holiday"
     },
     "2022-sommer": {
