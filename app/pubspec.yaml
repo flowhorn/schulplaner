@@ -40,24 +40,24 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
-  shared_preferences: 2.0.6
+  shared_preferences: 2.0.7
   cupertino_icons: 1.0.3
 
   #GOOGLE
-  cloud_firestore: 2.4.0
-  firebase_auth: 2.0.0
-  firebase_messaging: 10.0.4
-  firebase_storage: 10.0.1
-  firebase_analytics: ^8.2.0
-  firebase_database: 7.1.2
-  firebase_performance: 0.7.0+7
-  firebase_crashlytics: 2.1.1
-  firebase_dynamic_links: ^2.0.7
+  cloud_firestore: 2.5.1
+  firebase_auth: 3.1.0
+  firebase_messaging: 10.0.6
+  firebase_storage: 10.0.3
+  firebase_analytics: ^8.3.1
+  firebase_database: 7.2.1
+  firebase_performance: 0.7.0+9
+  firebase_crashlytics: 2.2.1
+  firebase_dynamic_links: ^2.0.9
 
   intl: ^0.17.0
   intl_translation: 0.17.10+1
   rxdart: ^0.27.1
-  flutter_dotenv: ^5.0.0
+  flutter_dotenv: ^5.0.2
   
   community_material_icon: 5.9.55
   font_awesome_flutter: ^9.1.0
@@ -81,9 +81,9 @@ dependencies:
   image: 3.0.2
   dots_indicator: ^2.0.0
   timeago: ^3.1.0
-  fl_chart: ^0.36.3
+  fl_chart: ^0.40.0
   percent_indicator: ^3.3.0-nullsafety.1
-  printing: ^5.4.3
+  printing: ^5.5.0
   pdf: ^3.4.2
   
 dev_dependencies:
@@ -98,7 +98,7 @@ dependency_overrides:
       ref: patch-1
   qr: ^2.0.0
   plugin_platform_interface: ^2.0.0
-  shared_preferences: ^2.0.5
+  shared_preferences: ^2.0.7
   firebase: ^9.0.1
   petitparser: ^4.0.2
   xml: ^5.0.2

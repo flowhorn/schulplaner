@@ -8,7 +8,7 @@
 import 'package:cloud_firestore_web/cloud_firestore_web.dart';
 import 'package:cloud_functions_web/cloud_functions_web.dart';
 import 'package:device_info_plus_web/device_info_plus_web.dart';
-import 'package:file_picker/_internal/file_picker_web.dart';
+import 'package:file_picker/src/file_picker_web.dart';
 import 'package:firebase_analytics_web/firebase_analytics_web.dart';
 import 'package:firebase_auth_oauth_web/firebase_auth_oauth_web.dart';
 import 'package:firebase_auth_web/firebase_auth_web.dart';

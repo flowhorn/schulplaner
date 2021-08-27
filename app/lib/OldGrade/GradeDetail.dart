@@ -273,7 +273,7 @@ Widget getTitleCard(
           ],
         )),
   ];
-  widgetlist..addAll(content);
+  widgetlist.addAll(content);
   if (bottom != null) widgetlist.add(bottom);
   return Padding(
     padding: const EdgeInsets.only(top: 4.0, bottom: 8.0),

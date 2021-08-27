@@ -23,8 +23,8 @@ class FileHub extends StatelessWidget {
       color: getBackgroundColor(context),
       child: StreamBuilder<Map<String, Course>>(
         builder: (context, snapshot) {
-          final courses = snapshot.data!.values.toList()
-            ..sort((c1, c2) => c1.getName().compareTo(c2.getName()));
+          //final courses = snapshot.data!.values.toList()
+          //  ..sort((c1, c2) => c1.getName().compareTo(c2.getName()));
           return SingleChildScrollView(
             child: Column(
               children: <Widget>[

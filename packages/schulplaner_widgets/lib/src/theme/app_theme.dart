@@ -9,21 +9,46 @@ ThemeData newAppTheme(BuildContext context,
   final newAccentColor = accentColor ?? parentTheme.accentColor;
   return ThemeData(
     brightness: parentTheme.brightness,
-    primaryColor: primaryColor ?? parentTheme.primaryColor,
-    accentColor: newAccentColor,
+    colorScheme: getColorScheme(
+      primary: primaryColor ?? parentTheme.primaryColor,
+      secondary: newAccentColor,
+      brightness: parentTheme.brightness,
+    ),
     backgroundColor: backgroundColor ?? getBackgroundColor(context),
     scaffoldBackgroundColor: backgroundColor ?? getBackgroundColor(context),
   );
 }
 
-ThemeData newAppThemeDesign(BuildContext context, Design? design) {
-  ThemeData parentTheme = Theme.of(context);
+ColorScheme getColorScheme(
+    {required Color primary,
+    required Color secondary,
+    required Brightness brightness}) {
+  if (brightness == Brightness.light) {
+    return ColorScheme.light(
+      primary: primary,
+      secondary: secondary,
+      brightness: Brightness.light,
+    );
+  } else
+    return ColorScheme.dark(
+      primary: primary,
+      secondary: secondary,
+      brightness: Brightness.dark,
+    );
+}
 
+ThemeData newAppThemeDesign(BuildContext context, Design? design) {
+  final ThemeData parentTheme = Theme.of(context);
   final newAccentColor = design?.accent ?? parentTheme.accentColor;
+  final colorScheme = getColorScheme(
+    primary: design?.primary ?? parentTheme.primaryColor,
+    secondary: newAccentColor,
+    brightness: parentTheme.brightness,
+  );
+
   return ThemeData(
     brightness: parentTheme.brightness,
-    primaryColor: design?.primary ?? parentTheme.primaryColor,
-    accentColor: newAccentColor,
+    colorScheme: colorScheme,
     backgroundColor: getBackgroundColor(context),
     scaffoldBackgroundColor: getBackgroundColor(context),
     buttonTheme: ButtonThemeData(

@@ -1,5 +1,3 @@
-
-
 typedef GradeValue GetGradeValue(String gradevalueid);
 
 class GradeValue {
@@ -21,7 +19,7 @@ class GradeValue {
     if (name2 == null) {
       return name;
     } else {
-      return name + ' (${name2})';
+      return name + ' ($name2)';
     }
   }
 
