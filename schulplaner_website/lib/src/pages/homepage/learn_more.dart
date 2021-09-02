@@ -68,7 +68,7 @@ class _LearnMoreElement extends StatelessWidget {
         leading: Padding(
           padding: const EdgeInsets.all(4.0),
           child: CircleAvatar(
-            backgroundColor: Theme.of(context).accentColor,
+            backgroundColor: Theme.of(context).colorScheme.secondary,
             child: Icon(
               iconData,
               color: Colors.white,

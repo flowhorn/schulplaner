@@ -31,8 +31,8 @@ class FormTextField extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(left: 8.0, right: 8.0),
       child: Theme(
-          data:
-              newAppTheme(context, primaryColor: Theme.of(context).accentColor),
+          data: newAppTheme(context,
+              primaryColor: Theme.of(context).colorScheme.secondary),
           child: TextField(
             controller: TextEditingController(text: text ?? ''),
             onChanged: valueChanged,

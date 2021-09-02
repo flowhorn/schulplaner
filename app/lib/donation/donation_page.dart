@@ -1,11 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:schulplaner8/Helper/Functions.dart';
+import 'package:schulplaner8/Helper/helper_data.dart';
+import 'package:schulplaner8/ads/get_ad_id.dart';
+import 'package:schulplaner_addons/common/show_toast.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
 import 'package:universal_commons/platform_check.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 Future<void> openDonationPage({required BuildContext context}) async {
   await pushWidget(context, _DonationPage());
+}
+
+Future<void> loadRewardAd(BuildContext context) {
+  return RewardedAd.load(
+    adUnitId: GetAdId.donationRewardAd,
+    request: AdRequest(),
+    rewardedAdLoadCallback: RewardedAdLoadCallback(
+      onAdLoaded: (RewardedAd ad) {
+        // Keep a reference to the ad so you can show it later.
+        ad.show(onUserEarnedReward: (RewardedAd ad, RewardItem rewardItem) {
+          showToastMessage(
+            msg: bothlang(context,
+                de: 'Danke fürs Unterstützen von Schulplaner!',
+                en: 'Thank you for supporting Schoolplanner!'),
+          );
+        });
+      },
+      onAdFailedToLoad: (LoadAdError error) {
+        showToastMessage(
+          msg: bothlang(context, de: 'Fehler!', en: 'Failure!'),
+        );
+      },
+    ),
+  );
 }
 
 class _DonationPage extends StatelessWidget {
@@ -97,6 +125,24 @@ class _DonateButton extends StatelessWidget {
                 ).getText(context),
               ),
               backgroundColor: Colors.blue,
+            ),
+          ),
+          SizedBox(
+            height: 8,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: FloatingActionButton.extended(
+              onPressed: () {
+                loadRewardAd(context);
+              },
+              label: Text(
+                BothLangString(
+                  de: 'Kostenlos einen Werbung schauen',
+                  en: 'Watch one ad for free',
+                ).getText(context),
+              ),
+              backgroundColor: Colors.redAccent,
             ),
           ),
           SizedBox(

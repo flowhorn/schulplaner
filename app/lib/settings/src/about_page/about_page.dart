@@ -26,10 +26,10 @@ class AboutPage extends StatelessWidget {
           children: [
             AboutPageHeader(),
             _AboutApp(),
+            _Financing(),
             _ContactUs(),
             _SocialMedia(),
             _Team(),
-            _Financing(),
             FormSpace(16.0),
           ],
         ),

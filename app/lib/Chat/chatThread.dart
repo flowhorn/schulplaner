@@ -217,9 +217,9 @@ class ChatThreadState extends State<ChatThread> {
                       return data.values
                           .map((value) => Message.fromData(value))
                           .toList()
-                            ..sort((m1, m2) {
-                              return m2.timestamp.compareTo(m1.timestamp);
-                            });
+                        ..sort((m1, m2) {
+                          return m2.timestamp.compareTo(m1.timestamp);
+                        });
                     }
                   }),
                   builder: (context, snapshot) {
@@ -264,7 +264,7 @@ class ChatThreadState extends State<ChatThread> {
 
               // Input content
               ChatInput(
-                accentColor: Theme.of(context).accentColor,
+                secondaryColor: Theme.of(context).colorScheme.secondary,
                 onPressedAdd: () {
                   getAttachment();
                 },

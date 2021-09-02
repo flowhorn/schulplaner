@@ -3,10 +3,10 @@ import 'design.dart';
 
 Brightness getBrightness(BuildContext context) => Theme.of(context).brightness;
 ThemeData newAppTheme(BuildContext context,
-    {Color? primaryColor, Color? accentColor, Color? backgroundColor}) {
+    {Color? primaryColor, Color? secondaryColor, Color? backgroundColor}) {
   ThemeData parentTheme = Theme.of(context);
 
-  final newAccentColor = accentColor ?? parentTheme.accentColor;
+  final newAccentColor = secondaryColor ?? parentTheme.colorScheme.secondary;
   return ThemeData(
     brightness: parentTheme.brightness,
     colorScheme: getColorScheme(
@@ -21,45 +21,81 @@ ThemeData newAppTheme(BuildContext context,
 
 ColorScheme getColorScheme(
     {required Color primary,
-    required Color secondary,
+    Color? secondary,
     required Brightness brightness}) {
-  if (brightness == Brightness.light) {
-    return ColorScheme.light(
-      primary: primary,
-      secondary: secondary,
-      brightness: Brightness.light,
-    );
-  } else
-    return ColorScheme.dark(
-      primary: primary,
-      secondary: secondary,
-      brightness: Brightness.dark,
-    );
+  return ColorScheme.fromSwatch(
+    primarySwatch: MaterialColor(
+      primary.value,
+      {
+        50: primary.withOpacity(.1),
+        100: primary.withOpacity(.2),
+        200: primary.withOpacity(.3),
+        300: primary.withOpacity(.4),
+        400: primary.withOpacity(.5),
+        500: primary.withOpacity(.6),
+        600: primary.withOpacity(.7),
+        700: primary.withOpacity(.8),
+        800: primary.withOpacity(.9),
+        900: primary.withOpacity(1),
+      },
+    ),
+    accentColor: secondary,
+    brightness: brightness,
+  );
 }
 
 ThemeData newAppThemeDesign(BuildContext context, Design? design) {
-  final ThemeData parentTheme = Theme.of(context);
-  final newAccentColor = design?.accent ?? parentTheme.accentColor;
+  return newAppTheme(
+    context,
+    primaryColor: design?.primary,
+    secondaryColor: design?.accent,
+  );
+}
+
+Theme clearAppTheme({required BuildContext context, required Widget child}) {
+  ThemeData parentTheme = Theme.of(context);
+
   final colorScheme = getColorScheme(
-    primary: design?.primary ?? parentTheme.primaryColor,
-    secondary: newAccentColor,
+    primary: parentTheme.brightness == Brightness.light
+        ? Colors.white
+        : Colors.grey[900] ?? parentTheme.primaryColor,
+    secondary: parentTheme.brightness == Brightness.light
+        ? Colors.grey[900]
+        : Colors.white,
     brightness: parentTheme.brightness,
   );
+  return Theme(
+    data: ThemeData(
+      colorScheme: colorScheme,
+      brightness: parentTheme.brightness,
+    ),
+    child: child,
+  );
+}
 
-  return ThemeData(
+ThemeData clearAppThemeData({required BuildContext context}) {
+  ThemeData parentTheme = Theme.of(context);
+
+  final colorScheme = getColorScheme(
+    primary: parentTheme.brightness == Brightness.light
+        ? Colors.white
+        : Colors.grey[900] ?? parentTheme.primaryColor,
+    secondary: parentTheme.brightness == Brightness.light
+        ? Colors.grey[900]
+        : Colors.white,
     brightness: parentTheme.brightness,
+  );
+  return ThemeData(
     colorScheme: colorScheme,
+    brightness: parentTheme.brightness,
     backgroundColor: getBackgroundColor(context),
     scaffoldBackgroundColor: getBackgroundColor(context),
-    buttonTheme: ButtonThemeData(
-      buttonColor: newAccentColor,
-      highlightColor: newAccentColor,
-    ),
   );
 }
 
 Color getPrimaryColor(BuildContext context) => Theme.of(context).primaryColor;
-Color getAccentColor(BuildContext context) => Theme.of(context).accentColor;
+Color getAccentColor(BuildContext context) =>
+    Theme.of(context).colorScheme.secondary;
 
 Color getBackgroundColor(BuildContext context) {
   return getBackgroundColorByBrightness(Theme.of(context).brightness);

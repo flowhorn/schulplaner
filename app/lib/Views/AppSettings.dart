@@ -231,42 +231,43 @@ class AppSettingsView extends StatelessWidget {
                       },
                     ),
                     SizedBox(
-                        height: 52.0,
-                        width: double.infinity,
-                        child: TextButton.icon(
-                          icon: Icon(Icons.exit_to_app),
-                          label: Text(
-                            getString(context).logout,
-                            textAlign: TextAlign.center,
-                          ),
-                          onPressed: () {
-                            showConfirmationDialog(
-                                context: context,
-                                title: getString(context).logout,
-                                onConfirm: () {
-                                  firebase_auth.FirebaseAuth.instance.signOut();
-                                  try {
-                                    GoogleSignIn.standard().signOut();
-                                  } catch (e) {
-                                    print(e);
-                                  }
-                                  Navigator.popUntil(
-                                      context, (route) => route.isFirst);
-                                },
-                                action: getString(context).confirm,
-                                richtext: RichText(
-                                    text: TextSpan(
-                                        text: bothlang(context,
-                                            de:
-                                                'Möchtest du dich wirklich ausloggen?',
-                                            en:
-                                                'Do you really want to log out?'))),
-                                warning: true,
-                                warningtext: bothlang(context,
-                                    de: 'Wenn du keine Anmeldemethode eingerichtet hast, gehen alle Daten verloren!',
-                                    en: 'If you did not set up a login method, all data will get lost.'));
-                          },
-                        )),
+                      height: 52.0,
+                      width: double.infinity,
+                      child: TextButton.icon(
+                        icon: Icon(Icons.exit_to_app),
+                        label: Text(
+                          getString(context).logout,
+                          textAlign: TextAlign.center,
+                        ),
+                        onPressed: () {
+                          showConfirmationDialog(
+                              context: context,
+                              title: getString(context).logout,
+                              onConfirm: () {
+                                firebase_auth.FirebaseAuth.instance.signOut();
+                                try {
+                                  GoogleSignIn.standard().signOut();
+                                } catch (e) {
+                                  print(e);
+                                }
+                                Navigator.popUntil(
+                                    context, (route) => route.isFirst);
+                              },
+                              action: getString(context).confirm,
+                              richtext: RichText(
+                                  text: TextSpan(
+                                      text: bothlang(context,
+                                          de:
+                                              'Möchtest du dich wirklich ausloggen?',
+                                          en:
+                                              'Do you really want to log out?'))),
+                              warning: true,
+                              warningtext: bothlang(context,
+                                  de: 'Wenn du keine Anmeldemethode eingerichtet hast, gehen alle Daten verloren!',
+                                  en: 'If you did not set up a login method, all data will get lost.'));
+                        },
+                      ),
+                    ),
                   ],
                 );
               }

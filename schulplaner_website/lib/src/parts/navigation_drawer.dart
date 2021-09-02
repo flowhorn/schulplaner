@@ -142,14 +142,14 @@ class _DrawerListTile extends StatelessWidget {
         title,
         style: TextStyle(
           color: currentNavigationItem == navigationItem
-              ? Theme.of(context).accentColor
+              ? Theme.of(context).colorScheme.secondary
               : null,
         ),
       ),
       leading: Icon(
         iconData,
         color: currentNavigationItem == navigationItem
-            ? Theme.of(context).accentColor
+            ? Theme.of(context).colorScheme.secondary
             : null,
       ),
       onTap: () {

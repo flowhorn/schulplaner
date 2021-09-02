@@ -358,32 +358,6 @@ Widget getEmptyView({String? title, IconData? icon}) {
   );
 }
 
-Theme clearAppTheme({required BuildContext context, required Widget child}) {
-  ThemeData parentTheme = Theme.of(context);
-  return Theme(
-      data: ThemeData(
-        primaryColor: parentTheme.brightness == Brightness.light
-            ? Colors.white
-            : Colors.grey[900],
-        brightness: parentTheme.brightness,
-        accentColor: parentTheme.accentColor,
-      ),
-      child: child);
-}
-
-ThemeData clearAppThemeData({required BuildContext context}) {
-  ThemeData parentTheme = Theme.of(context);
-  return ThemeData(
-    primaryColor: parentTheme.brightness == Brightness.light
-        ? Colors.white
-        : Colors.grey[900],
-    brightness: parentTheme.brightness,
-    accentColor: parentTheme.accentColor,
-    backgroundColor: getBackgroundColor(context),
-    scaffoldBackgroundColor: getBackgroundColor(context),
-  );
-}
-
 DateTime fromTimeOfDay(TimeOfDay time) {
   return DateTime(0, 0, 0, time.hour, time.minute);
 }

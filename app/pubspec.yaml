@@ -53,6 +53,7 @@ dependencies:
   firebase_performance: 0.7.0+9
   firebase_crashlytics: 2.2.1
   firebase_dynamic_links: ^2.0.9
+  google_mobile_ads: ^0.13.4
 
   intl: ^0.17.0
   intl_translation: 0.17.10+1
@@ -84,7 +85,8 @@ dependencies:
   fl_chart: ^0.40.0
   percent_indicator: ^3.3.0-nullsafety.1
   printing: ^5.5.0
-  pdf: ^3.4.2
+  pdf: ^3.5.0
+  overlay_support: ^1.2.1
   
 dev_dependencies:
   flutter_test:
