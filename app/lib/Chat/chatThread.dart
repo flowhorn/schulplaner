@@ -211,7 +211,6 @@ class ChatThreadState extends State<ChatThread> {
                     if (event.snapshot.value == null) {
                       return [];
                     } else {
-                      print(event.snapshot.value);
                       Map<String, dynamic> data =
                           event.snapshot.value?.cast<String, dynamic>();
                       return data.values

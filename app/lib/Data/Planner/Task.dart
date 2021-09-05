@@ -54,7 +54,7 @@ class SchoolTask {
     classid = data['classid'];
     courseid = data['courseid'];
     creatorid = data['creatorid'];
-    detail = data['detail'];
+    detail = data['detail'] ?? '';
     archived = data['archived'] ?? false;
     private = data['private'] ?? false;
 

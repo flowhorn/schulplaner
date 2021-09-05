@@ -112,39 +112,42 @@ class _DonateButton extends StatelessWidget {
     } else {
       return Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: FloatingActionButton.extended(
-              onPressed: () {
-                launch('https://www.paypal.com/paypalme/felixweuthen');
-              },
-              label: Text(
-                BothLangString(
-                  de: 'Über Paypal spenden',
-                  en: 'Donate with paypal',
-                ).getText(context),
+          if (!PlatformCheck.isMobile)
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: FloatingActionButton.extended(
+                onPressed: () {
+                  launch('https://www.paypal.com/paypalme/felixweuthen');
+                },
+                label: Text(
+                  BothLangString(
+                    de: 'Über Paypal spenden',
+                    en: 'Donate with paypal',
+                  ).getText(context),
+                ),
+                backgroundColor: Colors.blue,
               ),
-              backgroundColor: Colors.blue,
             ),
-          ),
           SizedBox(
             height: 8,
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: FloatingActionButton.extended(
-              onPressed: () {
-                loadRewardAd(context);
-              },
-              label: Text(
-                BothLangString(
-                  de: 'Kostenlos einen Werbung schauen',
-                  en: 'Watch one ad for free',
-                ).getText(context),
+          if (PlatformCheck.isAndroid)
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: FloatingActionButton.extended(
+                heroTag: 'fab3',
+                onPressed: () {
+                  loadRewardAd(context);
+                },
+                label: Text(
+                  BothLangString(
+                    de: 'Kostenlos einen Werbung schauen',
+                    en: 'Watch one ad for free',
+                  ).getText(context),
+                ),
+                backgroundColor: Colors.redAccent,
               ),
-              backgroundColor: Colors.redAccent,
             ),
-          ),
           SizedBox(
             height: 8,
           ),

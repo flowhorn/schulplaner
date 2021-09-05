@@ -308,7 +308,6 @@ class PlannerDatabase {
         .where('due', isGreaterThanOrEqualTo: getDateTwoWeeksAgo())
         .snapshots()
         .listen((snapshot) {
-      print(snapshot.docs.map((e) => (e.data())));
       snapshot.docChanges.forEach((change) {
         tasks.updateData(SchoolTask.fromData(change.doc.data()!),
             fromDocumentChange(change.type));

@@ -19,7 +19,9 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: '.env');
   await Firebase.initializeApp();
-  await FirebaseDatabase.instance.setPersistenceEnabled(true);
+  if (!PlatformCheck.isWeb) {
+    await FirebaseDatabase.instance.setPersistenceEnabled(true);
+  }
 
   try {
     if (PlatformCheck.isAndroid) {
