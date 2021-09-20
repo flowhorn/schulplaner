@@ -8,6 +8,7 @@ import 'package:schulplaner_addons/chat/message.dart';
 import 'package:bloc/bloc_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:schulplaner_addons/utils/color_utils.dart';
+import 'package:schulplaner_widgets/schulplaner_theme.dart';
 
 class ChatThread extends StatelessWidget {
   final ChatRoom chatRoom;
@@ -117,7 +118,7 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
 }
 
 class ChatInput extends StatelessWidget {
-  final Color accentColor;
+  final Color secondaryColor;
   final bool Function(String text) onSendMessage;
   final void Function() onPressedAdd;
   final TextEditingController textEditingController =
@@ -126,16 +127,16 @@ class ChatInput extends StatelessWidget {
     Key? key,
     required this.onSendMessage,
     required this.onPressedAdd,
-    this.accentColor = Colors.blueGrey,
+    this.secondaryColor = Colors.blueGrey,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Theme(
       data: ThemeData(
-        primaryColor: accentColor,
-        accentColor: accentColor,
-      ),
+          colorScheme: getColorScheme(
+              primary: secondaryColor,
+              brightness: Theme.of(context).brightness)),
       child: Padding(
         padding: const EdgeInsets.only(bottom: 8.0),
         child: Row(
@@ -143,13 +144,13 @@ class ChatInput extends StatelessWidget {
             IconButton(
               icon: Icon(Icons.add_circle_outline),
               onPressed: onPressedAdd,
-              color: accentColor,
+              color: secondaryColor,
               iconSize: 30.0,
             ),
             Expanded(
               child: TextField(
                 controller: textEditingController,
-                cursorColor: accentColor,
+                cursorColor: secondaryColor,
                 style: TextStyle(
                     color: ColorUtils.of(context).getDefaultTextColor()),
                 decoration: InputDecoration(
@@ -186,8 +187,9 @@ class ChatInput extends StatelessWidget {
                 builder: (context, data, _) {
                   final bool enabled = data.text.isNotEmpty;
                   return RawMaterialButton(
-                    fillColor:
-                        enabled ? accentColor : accentColor.withOpacity(0.5),
+                    fillColor: enabled
+                        ? secondaryColor
+                        : secondaryColor.withOpacity(0.5),
                     shape: CircleBorder(),
                     elevation: 0.0,
                     onPressed: enabled

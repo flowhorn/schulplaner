@@ -4,6 +4,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:overlay_support/overlay_support.dart';
+//import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:schulplaner8/Views/AppState.dart';
 import 'package:schulplaner8/app_base/src/blocs/app_settings_bloc.dart';
 import 'package:schulplaner8/dynamic_links/src/bloc/dynamic_link_bloc.dart';
@@ -18,23 +21,38 @@ void main() async {
   await Firebase.initializeApp();
   if (!PlatformCheck.isWeb) {
     await FirebaseDatabase.instance.setPersistenceEnabled(true);
-  } else {}
+  }
+
+  try {
+    if (PlatformCheck.isAndroid) {
+      final requestConfiguration = RequestConfiguration(
+          tagForUnderAgeOfConsent: TagForUnderAgeOfConsent.yes);
+      // ignore: unawaited_futures
+      MobileAds.instance.updateRequestConfiguration(requestConfiguration);
+    }
+  } catch (e) {
+    ;
+  }
+
   final dynamicLinksLogic = DynamicLinksBloc(FirebaseDynamicLinks.instance);
+
   runApp(
-    SchulplanerBlocs.create(
-      dynamicLinksBloc: dynamicLinksLogic,
-      firebaseAuth: FirebaseAuth.instance,
-      child: Builder(
-        builder: (context) {
-          final authentificationBloc =
-              BlocProvider.of<AuthentificationBloc>(context);
-          final appSettingsBloc = BlocProvider.of<AppSettingsBloc>(context);
-          return AppSettingsStateHead(
-            appSettingsBloc: appSettingsBloc,
-            dynamicLinksLogic: dynamicLinksLogic,
-            authentificationBloc: authentificationBloc,
-          );
-        },
+    OverlaySupport.global(
+      child: SchulplanerBlocs.create(
+        dynamicLinksBloc: dynamicLinksLogic,
+        firebaseAuth: FirebaseAuth.instance,
+        child: Builder(
+          builder: (context) {
+            final authentificationBloc =
+                BlocProvider.of<AuthentificationBloc>(context);
+            final appSettingsBloc = BlocProvider.of<AppSettingsBloc>(context);
+            return AppSettingsStateHead(
+              appSettingsBloc: appSettingsBloc,
+              dynamicLinksLogic: dynamicLinksLogic,
+              authentificationBloc: authentificationBloc,
+            );
+          },
+        ),
       ),
     ),
   );

@@ -5,6 +5,7 @@ import 'package:schulplaner8/app_base/src/blocs/app_stats_bloc.dart';
 import 'package:schulplaner8/app_base/src/models/app_stats.dart';
 import 'package:schulplaner8/donation/donation_page.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
+import 'package:universal_commons/platform_check.dart';
 
 class DonationCard extends StatelessWidget {
   const DonationCard();
@@ -49,6 +50,21 @@ class DonationCard extends StatelessWidget {
                       openDonationPage(context: context);
                     },
                   ),
+                  if (PlatformCheck.isAndroid)
+                    ListTile(
+                      leading: Icon(Icons.play_circle_fill_rounded,
+                          color: Colors.greenAccent),
+                      title: Text(
+                        BothLangString(
+                          de: 'Eine Werbeanzeige zum Unterstützen schauen',
+                          en: 'Show one ad to support the app',
+                        ).getText(context),
+                        style: TextStyle(color: Colors.greenAccent),
+                      ),
+                      onTap: () {
+                        loadRewardAd(context);
+                      },
+                    ),
                   ListTile(
                     leading: Icon(Icons.cancel_outlined),
                     title: Text(

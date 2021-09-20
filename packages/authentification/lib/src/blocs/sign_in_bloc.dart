@@ -84,6 +84,22 @@ class SignInBloc extends BlocBase {
     }
   }
 
+  Future<void> tryCustomAuthKeySignIn(String customAuthKey) async {
+    _signInSubject.add(SignInState.loading);
+    try {
+      final UserCredential? userCredentials =
+          await _firebaseAuth.signInWithCustomToken(customAuthKey);
+      if (userCredentials != null) {
+        _signInSubject.add(SignInState.successfull);
+      } else {
+        _signInSubject.add(SignInState.failed);
+      }
+    } catch (error) {
+      print(error);
+      _signInSubject.add(SignInState.failed);
+    }
+  }
+
   Future<void> sendPasswordResetRequest({
     required String email,
   }) async {

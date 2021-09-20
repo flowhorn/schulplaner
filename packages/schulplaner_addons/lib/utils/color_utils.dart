@@ -26,7 +26,7 @@ class ColorUtils {
   }
 
   Color getAccentColor() {
-    return theme.accentColor;
+    return theme.colorScheme.secondary;
   }
 
   Color getBackgroundColor() {

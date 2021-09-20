@@ -78,7 +78,7 @@ class _Selected extends StatelessWidget {
               child: IconButton(
                 icon: Icon(
                   iconData,
-                  color: getPrimaryColor(context),
+                  color: getAccentColor(context),
                 ),
                 onPressed: null,
               ),
@@ -86,13 +86,13 @@ class _Selected extends StatelessWidget {
           : ListTile(
               leading: Icon(
                 iconData,
-                color: getPrimaryColor(context),
+                color: getAccentColor(context),
               ),
               title: Text(
                 title,
                 style: TextStyle(
                   fontWeight: FontWeight.w700,
-                  color: getPrimaryColor(context),
+                  color: getAccentColor(context),
                 ),
               ),
             ),

@@ -111,8 +111,9 @@ class EditCourseBloc extends BlocBase {
   }
 
   void removePlace(String placeId) {
-    final newCourse = _currentCourseValue.copyWith();
-    newCourse.places[placeId] = null;
+    Map<String, PlaceLink?> placesMap = Map.of(_currentCourseValue.places);
+    placesMap[placeId] = null;
+    final newCourse = _currentCourseValue.copyWith(places: placesMap);
     _updateCourse(newCourse);
   }
 
@@ -124,8 +125,10 @@ class EditCourseBloc extends BlocBase {
   }
 
   void removeTeacher(String teacherId) {
-    final newCourse = _currentCourseValue.copyWith();
-    newCourse.teachers[teacherId] = null;
+    Map<String, TeacherLink?> teachersMap =
+        Map.of(_currentCourseValue.teachers);
+    teachersMap[teacherId] = null;
+    final newCourse = _currentCourseValue.copyWith(teachers: teachersMap);
     _updateCourse(newCourse);
   }
 

@@ -61,7 +61,7 @@ class SchoolEvent {
     type = data['type'];
     courseid = data['courseid'];
     creatorid = data['creatorid'];
-    detail = data['detail'];
+    detail = data['detail'] ?? '';
 
     enddate = data['enddate'];
     starttime = data['starttime'];

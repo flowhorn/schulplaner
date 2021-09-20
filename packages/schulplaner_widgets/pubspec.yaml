@@ -16,7 +16,7 @@ dependencies:
     path: ../app_functions
   universal_commons:
     path: ../universal_commons
-  rxdart: ^0.27.1
+  rxdart: ^0.27.2
   flutter:
     sdk: flutter
 

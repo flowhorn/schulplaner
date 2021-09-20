@@ -20,6 +20,7 @@ class GoogleSignInLogic {
     try {
       final googleSignInAccount = await googleSignIn.signIn();
       if (googleSignInAccount == null) {
+        print('Google Account is Null');
         return null;
       }
       final credentials = await googleSignInAccount.authentication;
@@ -29,6 +30,8 @@ class GoogleSignInLogic {
         idToken: credentials.idToken,
       );
     } catch (e) {
+      print('Failure!');
+      print(e);
       return null;
     }
   }

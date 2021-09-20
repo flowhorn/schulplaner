@@ -43,7 +43,7 @@ class ImageHelper {
     double? maxWidth,
     double? maxHeight,
   }) async {
-    final image = await ImagePicker().getImage(
+    final image = await ImagePicker().pickImage(
       source: ImageSource.camera,
       maxHeight: maxHeight,
       maxWidth: maxWidth,
@@ -59,7 +59,7 @@ class ImageHelper {
     double? maxWidth,
     double? maxHeight,
   }) async {
-    final image = await ImagePicker().getImage(
+    final image = await ImagePicker().pickImage(
       source: ImageSource.gallery,
       maxHeight: maxHeight,
       maxWidth: maxWidth,

@@ -172,7 +172,7 @@ class _AppBarAction extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(16.0)),
             side: BorderSide(
               color: currentNavigationItem == navigationItem
-                  ? Theme.of(context).accentColor
+                  ? Theme.of(context).colorScheme.secondary
                   : Colors.black,
             ),
           ),
@@ -198,8 +198,8 @@ class _AppBarActionText extends StatelessWidget {
         style: TextStyle(
           fontSize: 16,
           color: isCurrentPage
-              ? Theme.of(context).accentColor
-              : Theme.of(context).primaryTextTheme.bodyText1?.color,
+              ? Theme.of(context).colorScheme.secondary
+              : Theme.of(context).textTheme.bodyText1?.color,
         ),
       ),
     );

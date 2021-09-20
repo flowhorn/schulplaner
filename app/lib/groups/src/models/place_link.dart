@@ -12,7 +12,7 @@ class PlaceLink {
 
   factory PlaceLink.fromData({String? id, required dynamic data}) {
     return PlaceLink(
-      placeid: id ?? data['teacherid'],
+      placeid: id ?? data['placeid'] ?? 'null',
       name: data['name'],
     );
   }

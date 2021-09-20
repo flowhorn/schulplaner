@@ -294,7 +294,9 @@ class PlannerDatabase {
     List<StreamSubscription> mCourseListeners = [];
     mCourseListeners
         .add(dataManager.getCourseInfo(courseid).snapshots().listen((snapshot) {
-      if (snapshot.exists) {
+      if (snapshot.exists &&
+          snapshot.data() != null &&
+          snapshot.data()?['name'] != null) {
         courseinfo.updateData(
           Course.fromData(snapshot.data()!),
           ChangeType.MODIFIED,
@@ -308,7 +310,6 @@ class PlannerDatabase {
         .where('due', isGreaterThanOrEqualTo: getDateTwoWeeksAgo())
         .snapshots()
         .listen((snapshot) {
-      print(snapshot.docs.map((e) => (e.data())));
       snapshot.docChanges.forEach((change) {
         tasks.updateData(SchoolTask.fromData(change.doc.data()!),
             fromDocumentChange(change.type));

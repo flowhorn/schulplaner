@@ -30,13 +30,18 @@ class LoginPage extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     SizedBox(height: 24.0),
-                    CircleAvatar(
-                      backgroundColor: getAccentColor(context),
-                      radius: 44.0,
-                      child: Icon(
-                        Icons.lock,
-                        size: 44.0,
-                        color: Colors.white,
+                    GestureDetector(
+                      onDoubleTap: () {
+                        openAlternativeSignInPopup(context);
+                      },
+                      child: CircleAvatar(
+                        backgroundColor: getAccentColor(context),
+                        radius: 44.0,
+                        child: Icon(
+                          Icons.lock,
+                          size: 44.0,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                     SizedBox(height: 12.0),
@@ -63,6 +68,22 @@ class LoginPage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Future<void> openAlternativeSignInPopup(BuildContext context) async {
+    final authKey = await getTextFromInput(
+      context: context,
+      previousText: '',
+      title: bothlang(
+        context,
+        de: '[DEV] Alternatives Sign In',
+        en: '[DEV] Alternative Sign In',
+      ),
+    );
+    if (authKey != null) {
+      final signInBloc = BlocProvider.of<SignInBloc>(context);
+      await signInBloc.tryCustomAuthKeySignIn(authKey);
+    }
   }
 }
 

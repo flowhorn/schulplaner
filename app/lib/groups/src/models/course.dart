@@ -135,8 +135,8 @@ class Course {
     Design? design,
     personaldesign,
     Map<String, bool>? connectedclasses,
-    Map<String, TeacherLink>? teachers,
-    Map<String, PlaceLink>? places,
+    Map<String, TeacherLink?>? teachers,
+    Map<String, PlaceLink?>? places,
   }) {
     return Course._(
       id: id,
@@ -214,12 +214,17 @@ class Course {
   }
 
   List<TeacherLink> getTeacherLinks() {
-    return teachers.values.where((it) => it != null).toList()
-        as List<TeacherLink>;
+    return teachers.values
+        .where((it) => it != null)
+        .whereType<TeacherLink>()
+        .toList();
   }
 
   List<PlaceLink> getPlaceLinks() {
-    return places.values.where((it) => it != null).toList() as List<PlaceLink>;
+    return places.values
+        .where((it) => it != null)
+        .whereType<PlaceLink>()
+        .toList();
   }
 
   String getTeachersListed() {

@@ -106,13 +106,17 @@ class AppSettingsData {
     final newbrightness = darkmode == true
         ? Brightness.dark
         : (autodark ? autoBrightness() : Brightness.light);
+
     return ThemeData(
-      primaryColor: coloredAppBar
-          ? primary
-          : (newbrightness == Brightness.light
-              ? Colors.white
-              : Colors.grey[900]),
-      accentColor: accent,
+      colorScheme: getColorScheme(
+        primary: coloredAppBar
+            ? primary
+            : (newbrightness == Brightness.light
+                ? Colors.white
+                : Colors.grey[900]!),
+        secondary: accent,
+        brightness: newbrightness,
+      ),
       brightness: newbrightness,
       bottomSheetTheme: bottomSheetTheme,
       dialogTheme: dialogTheme,

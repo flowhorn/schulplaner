@@ -39,9 +39,12 @@ class MyProfile extends StatelessWidget {
                             userDatabase: userDatabaseBloc.userDatabase!,
                           ));
                     },
-                    style:
-                        TextButton.styleFrom(primary: getAccentColor(context)),
-                    child: Text(getString(context).edit.toUpperCase()),
+                    child: Text(
+                      getString(context).edit.toUpperCase(),
+                      style: TextStyle(
+                        color: getAccentColor(context),
+                      ),
+                    ),
                   ),
                 ],
                 bottom: PreferredSize(

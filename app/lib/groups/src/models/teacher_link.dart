@@ -8,7 +8,7 @@ class TeacherLink {
 
   factory TeacherLink.fromData({String? id, required dynamic data}) {
     return TeacherLink(
-      teacherid: id ?? data['teacherid'],
+      teacherid: id ?? data['teacherid'] ?? 'null??',
       name: data['name'],
     );
   }

@@ -62,15 +62,15 @@ service cloud.firestore {
 
       match /events/{document=**} {
         allow read: if isSchoolClassMember(schoolClassID);
-        allow write: if isCourseMember(schoolClassID);
+        allow write: if isSchoolClassMember(schoolClassID);
       }
       match /letter/{document=**} {
         allow read: if isSchoolClassMember(schoolClassID);
-        allow write: if isCourseMember(schoolClassID);
+        allow write: if isSchoolClassMember(schoolClassID);
       }
       match /tasks/{document=**} {
         allow read: if isSchoolClassMember(schoolClassID);
-        allow write: if isCourseMember(schoolClassID);
+        allow write: if isSchoolClassMember(schoolClassID);
       }
     }
 

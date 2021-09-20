@@ -297,7 +297,7 @@ class EditCustomField extends StatelessWidget {
 }
 
 class EditPhotoField extends StatelessWidget {
-  final CloudPhoto cloudPhoto;
+  final CloudPhoto? cloudPhoto;
   final void Function() onClickedRemove;
   final void Function(LocalFile file) onAddedFile;
   EditPhotoField(
@@ -326,7 +326,7 @@ class EditPhotoField extends StatelessWidget {
                     size: 48.0,
                   )
                 : CachedNetworkImage(
-                    imageUrl: cloudPhoto.compUrl!,
+                    imageUrl: cloudPhoto!.compUrl!,
                   ),
           ),
           Column(

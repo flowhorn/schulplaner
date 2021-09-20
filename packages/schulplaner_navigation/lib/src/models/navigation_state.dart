@@ -36,7 +36,7 @@ class NavigationState {
     );
   }
 
-  bool isSelected(NavigationItem other) {
+  bool isSelected(NavigationItem? other) {
     if (other == null) return false;
     if (showSubChild) {
       return other == subChildNavigationItem;
