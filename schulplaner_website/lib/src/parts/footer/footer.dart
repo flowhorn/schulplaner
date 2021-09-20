@@ -92,9 +92,7 @@ class _Instagram extends StatelessWidget {
     return IconButton(
       icon: Icon(CommunityMaterialIcons.instagram),
       onPressed: () {
-        openUrl(
-            urlString: 'https://instagram.com/schulplaner.app',
-            openInNewWindow: true);
+        openUrl(urlString: 'https://instagram.com/schulplaner.app', openInNewWindow: true);
       },
     );
   }
@@ -106,9 +104,7 @@ class _Twitter extends StatelessWidget {
     return IconButton(
       icon: Icon(CommunityMaterialIcons.twitter),
       onPressed: () {
-        openUrl(
-            urlString: 'https://twitter.com/schulplanerapp',
-            openInNewWindow: true);
+        openUrl(urlString: 'https://twitter.com/schulplanerapp', openInNewWindow: true);
       },
     );
   }
@@ -120,9 +116,7 @@ class _Discord extends StatelessWidget {
     return IconButton(
       icon: Icon(CommunityMaterialIcons.discord),
       onPressed: () {
-        openUrl(
-            urlString: 'https://discord.com/invite/uZyK7Tf',
-            openInNewWindow: true);
+        openUrl(urlString: 'https://schulplaner.pro/discord', openInNewWindow: true);
       },
     );
   }

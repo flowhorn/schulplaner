@@ -88,9 +88,7 @@ class _OpenGithub extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialButton(
       onPressed: () {
-        openUrl(
-            urlString: 'https://github.com/flowhorn/schulplaner',
-            openInNewWindow: true);
+        openUrl(urlString: 'https://github.com/flowhorn/schulplaner', openInNewWindow: true);
       },
       child: Padding(
         padding: const EdgeInsets.all(8),
@@ -107,9 +105,7 @@ class _OpenDiscord extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialButton(
       onPressed: () {
-        openUrl(
-            urlString: 'https://discord.com/invite/uZyK7Tf',
-            openInNewWindow: true);
+        openUrl(urlString: 'https://schulplaner.pro/discord', openInNewWindow: true);
       },
       child: Padding(
         padding: const EdgeInsets.all(8),
