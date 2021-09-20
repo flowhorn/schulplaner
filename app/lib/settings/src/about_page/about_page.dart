@@ -106,8 +106,7 @@ class _ContactUs extends StatelessWidget {
             subtitle: Text('danielfelixplay@gmail.com'),
             onTap: () {
               Future<void> _launchURL() async {
-                final url =
-                    'mailto:danielfelixplay@gmail.com?subject=${getString(context).apptitle}';
+                final url = 'mailto:danielfelixplay@gmail.com?subject=${getString(context).apptitle}';
                 if (await canLaunch(url)) {
                   await launch(url);
                 } else {
@@ -122,7 +121,7 @@ class _ContactUs extends StatelessWidget {
             leading: Icon(CommunityMaterialIcons.discord),
             title: Text('Support-Server'),
             onTap: () {
-              launch('https://discord.gg/uZyK7Tf');
+              launch('https://schulplaner.pro/discord');
             },
           ),
           ListTile(
@@ -133,8 +132,7 @@ class _ContactUs extends StatelessWidget {
               en: 'Create an issue (GitHub)',
             )),
             onTap: () {
-              launch(
-                  'https://github.com/flowhorn/schulplaner/issues/new/choose');
+              launch('https://github.com/flowhorn/schulplaner/issues/new/choose');
             },
           )
         ],
@@ -195,10 +193,7 @@ class _Team extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FormSection(
-      title: BothLangString(
-              de: 'Das Team (Klicke für mehr 😉)',
-              en: 'The team (Click for more 😉)')
-          .getText(context),
+      title: BothLangString(de: 'Das Team (Klicke für mehr 😉)', en: 'The team (Click for more 😉)').getText(context),
       child: Column(
         children: <Widget>[
           Column(
@@ -243,23 +238,18 @@ class _Team extends StatelessWidget {
                 height: 5,
               ),
               Card(
-                  shape: StadiumBorder(
-                      side: BorderSide(
-                          color: getAccentColor(context), width: 1.5)),
+                  shape: StadiumBorder(side: BorderSide(color: getAccentColor(context), width: 1.5)),
                   child: ListTile(
                     leading: Icon(
                       FontAwesomeIcons.arrowRight,
                       size: 30,
                     ),
-                    title: Text(bothlang(context,
-                        de: 'Alle Mitwirkenden', en: 'All contributors')),
+                    title: Text(bothlang(context, de: 'Alle Mitwirkenden', en: 'All contributors')),
                     subtitle: Text(bothlang(context,
-                        de: 'Schaue dir eine Liste aller Mitwirkenden an!',
-                        en: 'View a list of all contributors!')),
+                        de: 'Schaue dir eine Liste aller Mitwirkenden an!', en: 'View a list of all contributors!')),
                     onTap: () {
                       final navigationBloc = NavigationBloc.of(context);
-                      navigationBloc.openSubPage(
-                          builder: (context) => AboutContributors());
+                      navigationBloc.openSubPage(builder: (context) => AboutContributors());
                     },
                   )),
             ],

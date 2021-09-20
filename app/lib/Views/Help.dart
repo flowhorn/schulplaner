@@ -34,14 +34,13 @@ class HelpView extends StatelessWidget {
                 trailing: RButton(
                     text: getString(context).openinbrowser,
                     onTap: () {
-                      launch('https://discord.gg/uZyK7Tf');
+                      launch('https://schulplaner.pro/discord');
                     }),
               ),
             ],
           )),
           FormSection(title: 'FAQ', child: FAQ_ListView()),
-          FormHeader2(bothlang(context,
-              de: 'Credits: Danke Elias🙏', en: 'Credits: Thank you Elias🙏'))
+          FormHeader2(bothlang(context, de: 'Credits: Danke Elias🙏', en: 'Credits: Thank you Elias🙏'))
         ],
       ),
     );
