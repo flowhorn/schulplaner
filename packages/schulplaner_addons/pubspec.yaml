@@ -21,18 +21,18 @@ dependencies:
   uuid: ^3.0.0
   #FILES AND IMAGES
   cached_network_image: 3.1.0
-  path_provider: ^2.0.2
-  image: 3.0.2
+  path_provider: ^2.0.3
+  image: 3.0.3
   image_cropper: ^1.4.1
   flutter_image_compress: ^1.1.0
   image_picker: ^0.8.4
-  file_picker: ^4.0.1
+  file_picker: ^4.0.2
   photo_view: ^0.12.0
   #FIREBASE
   firebase_storage: ^10.0.3
-  cloud_firestore: ^2.5.1
+  cloud_firestore: ^2.5.3
   #MORE
-  url_launcher: 6.0.9
+  url_launcher: 6.0.10
   universal_io: ^2.0.4
   overlay_support: ^1.2.1
 

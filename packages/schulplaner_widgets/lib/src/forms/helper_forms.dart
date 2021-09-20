@@ -36,7 +36,6 @@ class _FormHideableState extends State<FormHideable>
             ),
             AnimatedSize(
               duration: Duration(milliseconds: 250),
-              vsync: this,
               child: value ? widget.builder(context) : Container(),
             ),
           ],
@@ -86,7 +85,6 @@ class _FormStreamHideableState extends State<FormStreamHideable>
               ),
               AnimatedSize(
                 duration: Duration(milliseconds: 250),
-                vsync: this,
                 child: shouldShowValue ? widget.builder(context) : Container(),
               ),
             ],

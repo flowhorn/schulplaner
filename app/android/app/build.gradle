@@ -25,13 +25,13 @@ apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
     signingConfigs {
-        config1 {
+        releaseConfig {
             keyAlias keystoreProperties['keyAlias']
             keyPassword keystoreProperties['keyPassword']
             storeFile file(keystoreProperties['storeFile'])
             storePassword keystoreProperties['storePassword']
         }
-        config2 {
+        devConfig {
             keyAlias keystoreDebugProperties['keyAlias']
             keyPassword keystoreDebugProperties['keyPassword']
             storeFile file(keystoreDebugProperties['storeFile'])
@@ -55,8 +55,8 @@ android {
         applicationId "com.xla.school"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 629
-        versionName "11.5.2"
+        versionCode 632
+        versionName "11.6.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -64,9 +64,10 @@ android {
         release {
             shrinkResources false
             minifyEnabled false
-            signingConfig signingConfigs.config1
+            signingConfig signingConfigs.releaseConfig
         }
         debug {
+            signingConfig signingConfigs.devConfig
         }
     }
 
@@ -75,12 +76,9 @@ android {
     productFlavors {
         development {
             dimension "flavor-type"
-            //applicationIdSuffix ".dev"
             versionNameSuffix "-dev"
-            //signingConfig signingConfigs.config2
         }
         production {
-            signingConfig signingConfigs.config1
             dimension "flavor-type"
         }
 
@@ -99,14 +97,14 @@ configurations {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     testImplementation 'junit:junit:4.13.1'
-    androidTestImplementation 'androidx.test:runner:1.3.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    androidTestImplementation 'androidx.test:runner:1.4.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
-    implementation 'androidx.core:core:1.3.2'
+    implementation 'androidx.core:core:1.6.0'
     implementation 'androidx.preference:preference:1.1.1'
-    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.appcompat:appcompat:1.3.1'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'com.google.android.material:material:1.3.0'
+    implementation 'com.google.android.material:material:1.4.0'
     implementation 'com.google.firebase:firebase-firestore-ktx:22.1.1'
     
     implementation 'com.google.code.gson:gson:2.8.6'

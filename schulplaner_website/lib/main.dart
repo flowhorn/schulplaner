@@ -13,22 +13,51 @@ void main() {
   );
 }
 
+ColorScheme getColorScheme(
+    {required Color primary,
+    Color? secondary,
+    required Brightness brightness}) {
+  return ColorScheme.fromSwatch(
+    primarySwatch: MaterialColor(
+      primary.value,
+      {
+        50: primary.withOpacity(.1),
+        100: primary.withOpacity(.2),
+        200: primary.withOpacity(.3),
+        300: primary.withOpacity(.4),
+        400: primary.withOpacity(.5),
+        500: primary.withOpacity(.6),
+        600: primary.withOpacity(.7),
+        700: primary.withOpacity(.8),
+        800: primary.withOpacity(.9),
+        900: primary.withOpacity(1),
+      },
+    ),
+    accentColor: secondary,
+    brightness: brightness,
+  );
+}
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Schulplaner',
       theme: ThemeData(
-        primaryColor: Colors.white,
-        accentColor: Colors.teal,
-        brightness: Brightness.light,
+        colorScheme: getColorScheme(
+          primary: Colors.white,
+          secondary: Colors.teal,
+          brightness: Brightness.light,
+        ),
         visualDensity: VisualDensity.adaptivePlatformDensity,
         pageTransitionsTheme: NoTransitionsOnWeb(),
       ),
       darkTheme: ThemeData(
-        primaryColor: Colors.grey[850],
-        accentColor: Colors.teal,
-        brightness: Brightness.dark,
+        colorScheme: getColorScheme(
+          primary: Colors.grey[850]!,
+          secondary: Colors.teal,
+          brightness: Brightness.dark,
+        ),
         visualDensity: VisualDensity.adaptivePlatformDensity,
         pageTransitionsTheme: NoTransitionsOnWeb(),
       ),

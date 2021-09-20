@@ -75,6 +75,7 @@ class CloudFile {
   }
 
   bool validate() {
+    print(toJson());
     if (fileid == null) return false;
     if (name == null || name == '') return false;
     if (savedin == null) return false;
@@ -103,19 +104,19 @@ class CloudFile {
 
   CloudFile copyWith({
     String? fileid,
-    name,
+    String? name,
     FileForm? fileform,
     String? url,
     SavedIn? savedin,
     String? type,
   }) {
     return CloudFile(
-      fileid: this.fileid,
-      name: this.name,
-      fileform: this.fileform,
-      url: this.url,
-      type: this.type,
-      savedin: this.savedin,
+      fileid: fileid ?? this.fileid,
+      name: name ?? this.name,
+      fileform: fileform ?? this.fileform,
+      url: url ?? this.url,
+      type: type ?? this.type,
+      savedin: savedin ?? this.savedin,
     );
   }
 }
@@ -203,7 +204,10 @@ void showImage(BuildContext context, String url, String? name) {
         appBar: MyAppHeader(title: name ?? 'Image'),
         backgroundColor: Colors.black,
         body: Center(
-          child: PhotoView(imageProvider: NetworkImage(url)),
+          child: PhotoView(
+            imageProvider: NetworkImage(url),
+            loadingBuilder: (context, _) => CircularProgressIndicator(),
+          ),
         ),
         bottomNavigationBar: SingleChildScrollView(
           scrollDirection: Axis.horizontal,

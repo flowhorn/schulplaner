@@ -41,9 +41,8 @@ class AbsentTime {
       };
 
   bool validate() {
-    if (id == null || id == '') return false;
+    if (id == '') return false;
     if (date == null || date == '') return false;
-    if (unexcused == null) return false;
     if (amount == null || (amount ?? -1) < 0) return false;
     return true;
   }

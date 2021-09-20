@@ -81,9 +81,11 @@ class NewFileBloc extends BlocBase {
     await uploadTask.then(
       (event) {
         cloudFile = cloudFile.copyWith(type: event.metadata!.contentType);
+        _updateFile(cloudFile);
         event.ref.getDownloadURL().then(
           (downloadurl) {
             cloudFile = cloudFile.copyWith(url: downloadurl);
+            _updateFile(cloudFile);
           },
         );
       },

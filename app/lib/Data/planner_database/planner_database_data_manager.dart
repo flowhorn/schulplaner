@@ -498,7 +498,7 @@ class DataManager {
         ),
       );
     } else {
-      throw Exception('NO PLACE TO SAVE TASK???');
+      throw Exception('NO PLACE TO SAVE LESSON???');
     }
   }
 

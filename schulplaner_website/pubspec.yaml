@@ -14,7 +14,7 @@ dependencies:
   design_utils:
     path: ../packages/design_utils
   cupertino_icons: ^1.0.3
-  url_launcher: 6.0.9
+  url_launcher: 6.0.10
   flutter_svg: ^0.22.0
   community_material_icon: ^5.9.55
   carousel_slider: ^4.0.0

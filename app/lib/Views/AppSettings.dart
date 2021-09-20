@@ -30,6 +30,7 @@ import 'package:schulplaner8/Views/SchoolPlanner/Pickers.dart';
 import 'package:schulplaner8/Views/SchoolPlanner/PlannerSettings.dart';
 import 'package:schulplaner8/Views/settings/pages/settings_privacy_page.dart';
 import 'package:schulplaner8/models/user.dart';
+import 'package:schulplaner_widgets/schulplaner_theme.dart';
 
 import 'NavigationActions.dart';
 import 'authentification/authentification_methodes.dart';
@@ -234,11 +235,15 @@ class AppSettingsView extends StatelessWidget {
                       height: 52.0,
                       width: double.infinity,
                       child: TextButton.icon(
-                        icon: Icon(Icons.exit_to_app),
-                        label: Text(
-                          getString(context).logout,
-                          textAlign: TextAlign.center,
+                        icon: Icon(
+                          Icons.exit_to_app,
+                          color: getAccentColor(context),
                         ),
+                        label: Text(getString(context).logout,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: getAccentColor(context),
+                            )),
                         onPressed: () {
                           showConfirmationDialog(
                               context: context,

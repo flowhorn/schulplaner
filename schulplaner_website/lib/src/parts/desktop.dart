@@ -199,7 +199,7 @@ class _AppBarActionText extends StatelessWidget {
           fontSize: 16,
           color: isCurrentPage
               ? Theme.of(context).colorScheme.secondary
-              : Theme.of(context).primaryTextTheme.bodyText1?.color,
+              : Theme.of(context).textTheme.bodyText1?.color,
         ),
       ),
     );

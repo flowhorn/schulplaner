@@ -346,8 +346,8 @@ List<dynamic> getTaskEventUpcomingStream_initialdata(PlannerDatabase database) {
   });
 
   final newlist = <dynamic>[];
-  if (tasks != null) newlist.addAll(tasks);
-  if (events != null) newlist.addAll(events);
+  newlist.addAll(tasks);
+  newlist.addAll(events);
   newlist.sort((e1, e2) {
     String getdate(dynamic e) {
       if (e is SchoolTask) return e.due!;
