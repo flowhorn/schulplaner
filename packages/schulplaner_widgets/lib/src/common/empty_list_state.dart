@@ -15,6 +15,7 @@ class EmptyListState extends StatelessWidget {
           child: Icon(
             Icons.lightbulb_outline,
             size: 96,
+            color: getBackgroundColor(context),
           ),
         ),
         SizedBox(height: 6),

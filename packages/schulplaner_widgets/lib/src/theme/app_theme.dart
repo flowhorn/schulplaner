@@ -53,22 +53,8 @@ ThemeData newAppThemeDesign(BuildContext context, Design? design) {
 }
 
 Theme clearAppTheme({required BuildContext context, required Widget child}) {
-  ThemeData parentTheme = Theme.of(context);
-
-  final colorScheme = getColorScheme(
-    primary: parentTheme.brightness == Brightness.light
-        ? Colors.white
-        : Colors.grey[900] ?? parentTheme.primaryColor,
-    secondary: parentTheme.brightness == Brightness.light
-        ? Colors.grey[900]
-        : Colors.white,
-    brightness: parentTheme.brightness,
-  );
   return Theme(
-    data: ThemeData(
-      colorScheme: colorScheme,
-      brightness: parentTheme.brightness,
-    ),
+    data: clearAppThemeData(context: context),
     child: child,
   );
 }
@@ -90,6 +76,13 @@ ThemeData clearAppThemeData({required BuildContext context}) {
     brightness: parentTheme.brightness,
     backgroundColor: getBackgroundColor(context),
     scaffoldBackgroundColor: getBackgroundColor(context),
+    textButtonTheme: TextButtonThemeData(
+      style: TextButton.styleFrom(
+        primary: parentTheme.brightness == Brightness.light
+            ? Colors.grey[900]
+            : Colors.white,
+      ),
+    ),
   );
 }
 

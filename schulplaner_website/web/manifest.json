@@ -1,11 +1,11 @@
 {
-    "name": "Schulplaner",
-    "short_name": "Schulplaner",
+    "name": "Schulplaner Pro",
+    "short_name": "Schulplaner Pro",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "Der intelligente Schulplaner",
+    "description": "Schulplaner Pro - Der intelligente Schulplaner: Verwalte Hausaufgaben, Stundenplan & mehr, gemeinsam mit deinen Mitschülern!",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

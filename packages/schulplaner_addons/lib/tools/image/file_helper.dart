@@ -9,7 +9,7 @@ class FileHelper {
       withData: true,
     );
     if (filePickerResult?.files.isNotEmpty ?? false) {
-      return File(filePickerResult!.files.first.path);
+      return File(filePickerResult!.files.first.path!);
     } else {
       return null;
     }
