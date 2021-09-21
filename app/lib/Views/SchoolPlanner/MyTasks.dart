@@ -100,21 +100,14 @@ class MyTaskListInnerState extends State<MyTaskListInner>
     super.build(context);
     return StreamBuilder<Map<String, SchoolTask>>(
       stream: streamFinished(widget.plannerDatabase, widget.finished),
-      builder: (context, data) {
-        if (data != null) {
-          List<SchoolTask> tasklist = (data.data ?? {}).values.toList()
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          List<SchoolTask> tasklist = (snapshot.data ?? {}).values.toList()
             ..sort((item1, item2) => item1.due!.compareTo(item2.due!));
-          return ListView.builder(
-            itemBuilder: (context, index) {
-              SchoolTask item = tasklist[index];
-              if (item == null) {
-                return SizedBox(
-                  height: 52.0,
-                  child: Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                );
-              }
+          return UpListView<SchoolTask>(
+            items: tasklist,
+            emptyViewBuilder: (context) => EmptyListState(),
+            builder: (context, item) {
               Course? courseInfo = item.courseid != null
                   ? plannerDatabase.getCourseInfo(item.courseid!)
                   : null;
@@ -214,7 +207,6 @@ class MyTaskListInnerState extends State<MyTaskListInner>
                     )
                   : listTile;
             },
-            itemCount: tasklist.length,
           );
         } else {
           return CircularProgressIndicator();
@@ -254,9 +246,10 @@ class MyTaskArchive extends StatelessWidget {
                 return t1.courseid!.compareTo(t2.courseid!);
               }
             });
-          return ListView.builder(
-            itemBuilder: (context, index) {
-              SchoolTask item = list[index];
+          return UpListView<SchoolTask>(
+            items: list,
+            emptyViewBuilder: (context) => EmptyListState(),
+            builder: (context, item) {
               Course? courseInfo = item.courseid != null
                   ? plannerDatabase.getCourseInfo(item.courseid!)
                   : null;
@@ -327,7 +320,6 @@ class MyTaskArchive extends StatelessWidget {
               );
               return listTile;
             },
-            itemCount: list.length,
           );
         },
         stream: getArchiveStream(plannerDatabase),

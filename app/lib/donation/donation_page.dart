@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:schulplaner8/Helper/Functions.dart';
 import 'package:schulplaner8/Helper/helper_data.dart';
+import 'package:schulplaner8/ads/ad_support.dart';
 import 'package:schulplaner8/ads/get_ad_id.dart';
 import 'package:schulplaner_addons/common/show_toast.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
+import 'package:schulplaner_widgets/schulplaner_theme.dart';
 import 'package:universal_commons/platform_check.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -13,6 +15,7 @@ Future<void> openDonationPage({required BuildContext context}) async {
 }
 
 Future<void> loadRewardAd(BuildContext context) {
+  pushWidget(context, _ThankYouPage());
   return RewardedAd.load(
     adUnitId: GetAdId.donationRewardAd,
     request: AdRequest(),
@@ -36,6 +39,63 @@ Future<void> loadRewardAd(BuildContext context) {
   );
 }
 
+class _ThankYouPage extends StatelessWidget {
+  const _ThankYouPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          bothlang(context, de: 'Danke!', en: 'Thanks!'),
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Center(
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                CircleAvatar(
+                  radius: 64,
+                  child: Center(
+                    child: Icon(
+                      Icons.celebration_outlined,
+                      size: 96,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 32),
+                ListTile(
+                  title: Text(
+                    bothlang(context,
+                        de: 'Danke dir für das Unterstützen dieser App. Dies hilf das Projekt am Leben zu halten.',
+                        en: 'Thank you for supporting this app!'),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                SizedBox(height: 32),
+                MaterialButton(
+                  color: getAccentColor(context),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Text(
+                        bothlang(context, de: 'Geh zurück', en: 'Go back')),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class _DonationPage extends StatelessWidget {
   const _DonationPage();
 
@@ -45,7 +105,7 @@ class _DonationPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Schulplaner unterstützen'),
       ),
-      body: _Body(),
+      body: SingleChildScrollView(child: _Body()),
     );
   }
 }
@@ -89,6 +149,7 @@ class _Body extends StatelessWidget {
         ),
         SizedBox(height: 32),
         _DonateButton(),
+        SizedBox(height: 64),
       ],
     );
   }
@@ -100,6 +161,7 @@ class _DonateButton extends StatelessWidget {
     if (PlatformCheck.isIOS) {
       return FloatingActionButton.extended(
         onPressed: () {
+          pushWidget(context, _ThankYouPage());
           launch('https://schulplaner.web.app/support');
         },
         label: Text(
@@ -117,6 +179,7 @@ class _DonateButton extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: FloatingActionButton.extended(
                 onPressed: () {
+                  pushWidget(context, _ThankYouPage());
                   launch('https://www.paypal.com/paypalme/felixweuthen');
                 },
                 label: Text(
@@ -131,7 +194,7 @@ class _DonateButton extends StatelessWidget {
           SizedBox(
             height: 8,
           ),
-          if (PlatformCheck.isAndroid)
+          if (AdSupport.areAdsSupported)
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: FloatingActionButton.extended(
@@ -141,7 +204,7 @@ class _DonateButton extends StatelessWidget {
                 },
                 label: Text(
                   BothLangString(
-                    de: 'Kostenlos einen Werbung schauen',
+                    de: 'Kostenlos eine Werbung schauen',
                     en: 'Watch one ad for free',
                   ).getText(context),
                 ),
@@ -154,6 +217,7 @@ class _DonateButton extends StatelessWidget {
           FloatingActionButton.extended(
             heroTag: 'fab2',
             onPressed: () {
+              pushWidget(context, _ThankYouPage());
               launch('https://schulplaner.web.app/support');
             },
             label: Text(

@@ -6,6 +6,7 @@ import 'package:schulplaner8/Helper/helper_data.dart';
 import 'package:schulplaner8/Helper/helper_views.dart';
 import 'package:schulplaner8/teachers/teacher_detail_sheet.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
+import 'package:schulplaner_widgets/schulplaner_common.dart';
 import 'package:schulplaner_widgets/schulplaner_forms.dart';
 import 'package:schulplaner8/groups/src/models/teacher.dart';
 import 'package:schulplaner_widgets/schulplaner_dialogs.dart';
@@ -21,9 +22,10 @@ class TeacherList extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             List<Teacher> teacherlist = snapshot.data ?? [];
-            return ListView.builder(
-              itemBuilder: (context, index) {
-                Teacher teacher = teacherlist[index];
+            return UpListView<Teacher>(
+              items: teacherlist,
+              emptyViewBuilder: (context) => EmptyListState(),
+              builder: (context, teacher) {
                 return ListTile(
                   title: Text(teacher.name),
                   subtitle: Column(
@@ -44,7 +46,6 @@ class TeacherList extends StatelessWidget {
                   },
                 );
               },
-              itemCount: teacherlist.length,
             );
           } else {
             return CircularProgressIndicator();

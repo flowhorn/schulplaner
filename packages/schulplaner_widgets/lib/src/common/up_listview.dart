@@ -5,12 +5,14 @@ class UpListView<T> extends StatelessWidget {
   final List<T> items;
   final Widget Function(BuildContext context, T item) builder;
   final Widget Function(BuildContext context)? emptyViewBuilder;
+  final bool shrinkWrap;
 
   const UpListView({
     Key? key,
     required this.items,
     required this.builder,
     this.emptyViewBuilder,
+    this.shrinkWrap = false,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -26,11 +28,15 @@ class UpListView<T> extends StatelessWidget {
             return builder(context, items[index]);
           }
         },
+        shrinkWrap: shrinkWrap,
       );
     } else {
       return Center(
-        child:
-            emptyViewBuilder != null ? emptyViewBuilder!(context) : Container(),
+        child: SingleChildScrollView(
+          child: emptyViewBuilder != null
+              ? emptyViewBuilder!(context)
+              : Container(),
+        ),
       );
     }
   }

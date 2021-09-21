@@ -24,6 +24,7 @@ class HolidayList extends StatelessWidget {
             });
             return UpListView<Holiday>(
               items: vacationlist,
+              emptyViewBuilder: (context) => EmptyListState(),
               builder: (context, holiday) {
                 if (holiday == null ||
                     holiday.start == null ||

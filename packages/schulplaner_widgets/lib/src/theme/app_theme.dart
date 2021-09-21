@@ -93,7 +93,8 @@ ThemeData clearAppThemeData({required BuildContext context}) {
   );
 }
 
-Color getPrimaryColor(BuildContext context) => Theme.of(context).primaryColor;
+Color getPrimaryColor(BuildContext context) =>
+    Theme.of(context).colorScheme.primary;
 Color getAccentColor(BuildContext context) =>
     Theme.of(context).colorScheme.secondary;
 

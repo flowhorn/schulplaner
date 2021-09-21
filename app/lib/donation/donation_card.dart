@@ -1,11 +1,11 @@
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Views/SchoolPlanner/overview/tips_card.dart';
+import 'package:schulplaner8/ads/ad_support.dart';
 import 'package:schulplaner8/app_base/src/blocs/app_stats_bloc.dart';
 import 'package:schulplaner8/app_base/src/models/app_stats.dart';
 import 'package:schulplaner8/donation/donation_page.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
-import 'package:universal_commons/platform_check.dart';
 
 class DonationCard extends StatelessWidget {
   const DonationCard();
@@ -50,7 +50,7 @@ class DonationCard extends StatelessWidget {
                       openDonationPage(context: context);
                     },
                   ),
-                  if (PlatformCheck.isAndroid)
+                  if (AdSupport.areAdsSupported)
                     ListTile(
                       leading: Icon(Icons.play_circle_fill_rounded,
                           color: Colors.greenAccent),

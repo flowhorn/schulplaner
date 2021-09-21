@@ -93,17 +93,10 @@ class MyEventsListInnerState extends State<MyEventsListInner>
             .where((event) => event.archived == false)
             .toList()
           ..sort((item1, item2) => item1.date!.compareTo(item2.date!));
-        return ListView.builder(
-          itemBuilder: (context, index) {
-            SchoolEvent item = list[index];
-            if (item == null) {
-              return SizedBox(
-                height: 52.0,
-                child: Center(
-                  child: CircularProgressIndicator(),
-                ),
-              );
-            }
+        return UpListView<SchoolEvent>(
+          items: list,
+          emptyViewBuilder: (context) => EmptyListState(),
+          builder: (context, item) {
             final courseInfo = item.courseid != null
                 ? plannerDatabase.getCourseInfo(item.courseid!)
                 : null;
@@ -155,7 +148,6 @@ class MyEventsListInnerState extends State<MyEventsListInner>
             );
             return listTile;
           },
-          itemCount: list.length,
         );
       },
     );
@@ -189,9 +181,10 @@ class MyEventsArchive extends StatelessWidget {
                 return t1.courseid?.compareTo(t2.courseid!) ?? 0;
               }
             });
-          return ListView.builder(
-            itemBuilder: (context, index) {
-              SchoolEvent item = list[index];
+          return UpListView<SchoolEvent>(
+            items: list,
+            emptyViewBuilder: (context) => EmptyListState(),
+            builder: (context, item) {
               Course? courseInfo = item.courseid != null
                   ? plannerDatabase.getCourseInfo(item.courseid!)
                   : null;
@@ -240,7 +233,6 @@ class MyEventsArchive extends StatelessWidget {
               );
               return listTile;
             },
-            itemCount: list.length,
           );
         },
         stream: getArchiveStreamEvents(plannerDatabase),
@@ -275,9 +267,10 @@ class MyEventsOnlyExams extends StatelessWidget {
                 return t1.courseid?.compareTo(t2.courseid!) ?? 0;
               }
             });
-          return ListView.builder(
-            itemBuilder: (context, index) {
-              SchoolEvent item = list[index];
+          return UpListView<SchoolEvent>(
+            items: list,
+            emptyViewBuilder: (context) => EmptyListState(),
+            builder: (context, item) {
               Course? courseInfo = item.courseid != null
                   ? plannerDatabase.getCourseInfo(item.courseid!)
                   : null;
@@ -326,7 +319,6 @@ class MyEventsOnlyExams extends StatelessWidget {
               );
               return listTile;
             },
-            itemCount: list.length,
           );
         },
       ),

@@ -21,15 +21,18 @@ class PlaceList extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             List<Place> itemlist = snapshot.data ?? [];
-            return ListView.builder(
-              itemBuilder: (context, index) {
-                Place item = itemlist[index];
+            return UpListView<Place>(
+              items: itemlist,
+              emptyViewBuilder: (context) => EmptyListState(),
+              builder: (context, item) {
                 return ListTile(
                   title: Text(item.name),
                   subtitle: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(getString(context).address + ': ' + (item.address),),
+                      Text(
+                        getString(context).address + ': ' + (item.address),
+                      ),
                     ],
                   ),
                   isThreeLine: true,
@@ -41,7 +44,6 @@ class PlaceList extends StatelessWidget {
                   },
                 );
               },
-              itemCount: itemlist.length,
             );
           } else {
             return CircularProgressIndicator();

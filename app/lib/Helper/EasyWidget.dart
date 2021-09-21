@@ -1,4 +1,5 @@
 import 'package:schulplaner_navigation/schulplaner_navigation.dart';
+import 'package:schulplaner_widgets/schulplaner_common.dart';
 
 import 'helper_views.dart';
 import 'package:flutter/material.dart';
@@ -14,10 +15,11 @@ Future<T?> selectItem<T>({
   return showSheetBuilder<T>(
     context: context,
     child: (context) => Flexible(
-        child: ListView.builder(
-      itemCount: items.length,
-      itemBuilder: (BuildContext context, int index) {
-        return builder(context, items[index]);
+        child: UpListView<T>(
+      items: items,
+      emptyViewBuilder: (context) => EmptyListState(),
+      builder: (BuildContext context, item) {
+        return builder(context, item);
       },
       shrinkWrap: true,
     )),
@@ -38,10 +40,11 @@ Future<void> selectItemAsync<T>({
         if (snapshot.hasData) {
           final List<T> items = snapshot.data ?? [];
           return Flexible(
-              child: ListView.builder(
-            itemCount: items.length,
-            itemBuilder: (BuildContext context, int index) {
-              return builder(context, items[index]);
+              child: UpListView<T>(
+            items: items,
+            emptyViewBuilder: (context) => EmptyListState(),
+            builder: (BuildContext context, item) {
+              return builder(context, item);
             },
           ));
         } else {

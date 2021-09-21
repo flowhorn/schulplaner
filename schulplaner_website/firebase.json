@@ -66,6 +66,11 @@
         "type": 302
       },
       {
+        "regex": "/discord*",
+        "destination": "https://discord.gg/m6fhx2RSTh",
+        "type": 302
+      },
+      {
         "regex": "/assets/logo",
         "destination": "https://firebasestorage.googleapis.com/v0/b/mainprojects-32581.appspot.com/o/appdata%2Fappicon_schulplaner_png.png?alt=media&token=e0eacab3-2884-48f7-be33-7fced4d38366",
         "type": 301

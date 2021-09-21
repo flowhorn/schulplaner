@@ -101,7 +101,6 @@ dependency_overrides:
   qr: ^2.0.0
   plugin_platform_interface: ^2.0.0
   shared_preferences: ^2.0.7
-  firebase: ^9.0.1
   petitparser: ^4.0.2
   xml: ^5.0.2
   crypto: ^3.0.0

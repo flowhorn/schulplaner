@@ -26,13 +26,7 @@ class CourseList extends StatelessWidget {
                 (item1, item2) => item1.getName().compareTo(item2.getName()));
           return UpListView<Course>(
             items: courselist,
-            emptyViewBuilder: (context) {
-              return getEmptyView(
-                title: bothlang(context,
-                    de: 'Noch keine Fächer...', en: 'No courses...'),
-                icon: Icons.hourglass_empty,
-              );
-            },
+            emptyViewBuilder: (context) => EmptyListState(),
             builder: (context, courseInfo) {
               return _CourseTile(courseInfo: courseInfo);
             },
