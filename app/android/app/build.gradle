@@ -15,7 +15,7 @@ def keystorePropertiesFile = rootProject.file("../../keys/key-release.properties
 def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
-def keystoreDebugPropertiesFile = rootProject.file("./key-debug.properties")
+def keystoreDebugPropertiesFile = rootProject.file("./schulplaner-debug-key.properties")
 def keystoreDebugProperties = new Properties()
 keystoreDebugProperties.load(new FileInputStream(keystoreDebugPropertiesFile))
 
