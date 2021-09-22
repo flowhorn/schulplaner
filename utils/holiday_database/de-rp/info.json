@@ -1,13 +1,14 @@
 {
-    "id": "de-rp",
-    "name": "Rheinland-Pfalz",
-    "country": "germany",
-    "lastRefreshed": "2020-09-06",
-    "years": [
-        "2019",
-        "2020",
-        "2021"
-    ],
-    "isOfficial": true,
-    "published": true
+  "id": "de-rp",
+  "name": "Rheinland-Pfalz",
+  "country": "germany",
+  "lastRefreshed": "2021-09-22",
+  "years": [
+    "2019",
+    "2020",
+    "2021",
+    "2022"
+  ],
+  "isOfficial": true,
+  "published": true
 }

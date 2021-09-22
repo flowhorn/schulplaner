@@ -1,46 +1,46 @@
 {
-   "2020-winter": {
-        "id": "2020-winter",
-        "name": "Winterferien",
-        "start": "2020-02-03",
-        "end": "2020-02-07",
-        "type": "holiday"
-    },
-    "2020-ostern": {
-        "id": "2020-ostern",
-        "name": "Osterferien",
-        "start": "2020-04-06",
-        "end": "2020-04-17",
-        "type": "holiday"
-    },
-   "2020-ostern2": {
-        "id": "2020-ostern2",
-        "name": "Tag der Arbeit",
-        "start": "2020-05-01",
-        "end": "2020-05-01",
-        "type": "holiday"
-    },
-   "2020-ostern3": {
-        "id": "2020-ostern3",
-        "name": "Christi Himmelfahrt",
-        "start": "2020-05-21",
-        "end": "2020-05-21",
-        "type": "holiday"
-    },
-   "2020-pfingsten": {
-        "id": "2020-pfingsten",
-        "name": "Pfingstmontag",
-        "start": "2020-06-01",
-        "end": "2020-06-01",
-        "type": "holiday"
-    },
-    "2020-sommer": {
-        "id": "2020-sommer",
-        "name": "Sommerferien",
-        "start": "2020-06-25",
-        "end": "2020-08-07",
-        "type": "holiday"
-    },
+  "2020-winter": {
+    "id": "2020-winter",
+    "name": "Winterferien",
+    "start": "2020-02-03",
+    "end": "2020-02-07",
+    "type": "holiday"
+  },
+  "2020-ostern": {
+    "id": "2020-ostern",
+    "name": "Osterferien",
+    "start": "2020-04-06",
+    "end": "2020-04-17",
+    "type": "holiday"
+  },
+  "2020-ostern2": {
+    "id": "2020-ostern2",
+    "name": "Tag der Arbeit",
+    "start": "2020-05-01",
+    "end": "2020-05-01",
+    "type": "holiday"
+  },
+  "2020-ostern3": {
+    "id": "2020-ostern3",
+    "name": "Christi Himmelfahrt",
+    "start": "2020-05-21",
+    "end": "2020-05-21",
+    "type": "holiday"
+  },
+  "2020-pfingsten": {
+    "id": "2020-pfingsten",
+    "name": "Pfingstmontag",
+    "start": "2020-06-01",
+    "end": "2020-06-01",
+    "type": "holiday"
+  },
+  "2020-sommer": {
+    "id": "2020-sommer",
+    "name": "Sommerferien",
+    "start": "2020-06-25",
+    "end": "2020-08-07",
+    "type": "holiday"
+  },
   "2020-herbst": {
     "id": "2020-herbst",
     "name": "Herbstferien",

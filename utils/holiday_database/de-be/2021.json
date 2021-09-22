@@ -1,58 +1,114 @@
 {
-  "2021-winter": {
-    "id": "2021-winter",
+  "2021-winterferien": {
+    "id": "2021-winterferien",
     "name": "Winterferien",
-    "start": "2021-02-01",
     "end": "2021-02-06",
+    "start": "2021-02-01",
     "type": "holiday"
   },
-  "2021-ostern": {
-    "id": "2021-ostern",
+  "2021-osterferien": {
+    "id": "2021-osterferien",
     "name": "Osterferien",
-    "start": "2020-03-29",
-    "end": "2020-04-10",
+    "end": "2021-04-10",
+    "start": "2021-03-29",
     "type": "holiday"
   },
-  "2021-ostern2": {
-    "id": "2021-ostern2",
-    "name": "Tag der Arbeit",
-    "start": "2021-05-01",
-    "end": "2021-05-01",
-    "type": "holiday"
-  },
-  "2021-ostern3": {
-    "id": "2021-ostern3",
-    "name": "Tag der Befreiung",
-    "start": "2021-05-08",
-    "end": "2021-05-08",
-    "type": "holiday"
-  },
-  "2021-ostern4": {
-    "id": "2021-ostern4",
-    "name": "Christi Himmelfahrt",
-    "start": "2021-05-13",
-    "end": "2021-05-13",
-    "type": "holiday"
-  },
-  "2021-pfingsten": {
-    "id": "2021-pfingsten",
+  "2021-pfingstferien": {
+    "id": "2021-pfingstferien",
     "name": "Pfingstferien",
-    "start": "2021-05-14",
     "end": "2021-05-14",
+    "start": "2021-05-14",
     "type": "holiday"
   },
-  "2021-pfingsten2": {
-    "id": "2021-pfingsten2",
-    "name": "Pfingstmontag",
-    "start": "2021-05-24",
-    "end": "2021-05-24",
-    "type": "holiday"
-  },
-  "2021-sommer": {
-    "id": "2021-sommer",
+  "2021-sommerferien": {
+    "id": "2021-sommerferien",
     "name": "Sommerferien",
-    "start": "2021-06-24",
     "end": "2021-08-06",
+    "start": "2021-06-24",
     "type": "holiday"
+  },
+  "2021-herbstferien": {
+    "id": "2021-herbstferien",
+    "name": "Herbstferien",
+    "end": "2021-10-23",
+    "start": "2021-10-11",
+    "type": "holiday"
+  },
+  "2021-weihnachtsferien": {
+    "id": "2021-weihnachtsferien",
+    "name": "Weihnachtsferien",
+    "end": "2021-12-31",
+    "start": "2021-12-24",
+    "type": "holiday"
+  },
+  "2021-neujahr": {
+    "id": "neujahr",
+    "name": "Neujahr",
+    "end": "2021-01-01",
+    "start": "2021-01-01",
+    "type": "celebration"
+  },
+  "2021-2_weihnachtsfeiertag": {
+    "id": "2_weihnachtsfeiertag",
+    "name": "2. Weihnachtsfeiertag",
+    "end": "2021-12-26",
+    "start": "2021-12-26",
+    "type": "celebration"
+  },
+  "2021-karfreitag": {
+    "id": "karfreitag",
+    "name": "Karfreitag",
+    "end": "2021-04-02",
+    "start": "2021-04-02",
+    "type": "celebration"
+  },
+  "2021-internationaler_frauentag": {
+    "id": "internationaler_frauentag",
+    "name": "Internationaler Frauentag",
+    "end": "2021-03-08",
+    "start": "2021-03-08",
+    "type": "celebration"
+  },
+  "2021-ostermontag": {
+    "id": "ostermontag",
+    "name": "Ostermontag",
+    "end": "2021-04-05",
+    "start": "2021-04-05",
+    "type": "celebration"
+  },
+  "2021-tag_der_arbeit": {
+    "id": "tag_der_arbeit",
+    "name": "Tag der Arbeit",
+    "end": "2021-05-01",
+    "start": "2021-05-01",
+    "type": "celebration"
+  },
+  "2021-christi_himmelfahrt": {
+    "id": "christi_himmelfahrt",
+    "name": "Christi Himmelfahrt",
+    "end": "2021-05-13",
+    "start": "2021-05-13",
+    "type": "celebration"
+  },
+  "2021-pfingstmontag": {
+    "id": "pfingstmontag",
+    "name": "Pfingstmontag",
+    "end": "2021-05-24",
+    "start": "2021-05-24",
+    "type": "celebration"
+  },
+  "2021-tag_der_deutschen_einheit": {
+    "id": "tag_der_deutschen_einheit",
+    "name": "Tag der Deutschen Einheit",
+    "end": "2021-10-03",
+    "start": "2021-10-03",
+    "type": "celebration"
+  },
+  "2021-1_weihnachtsfeiertag": {
+    "id": "1_weihnachtsfeiertag",
+    "name": "1. Weihnachtsfeiertag",
+    "end": "2021-12-25",
+    "start": "2021-12-25",
+    "type": "celebration"
   }
 }

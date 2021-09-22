@@ -1,13 +1,14 @@
 {
-    "id": "de-he",
-    "name": "Hessen",
-    "country": "germany",
-    "lastRefreshed": "2021-03-29",
-    "years": [
-        "2019",
-        "2020",
-        "2021"
-    ],
-    "isOfficial": true,
-    "published": true
+  "id": "de-he",
+  "name": "Hessen",
+  "country": "germany",
+  "lastRefreshed": "2021-09-22",
+  "years": [
+    "2019",
+    "2020",
+    "2021",
+    "2022"
+  ],
+  "isOfficial": true,
+  "published": true
 }
