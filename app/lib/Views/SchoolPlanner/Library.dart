@@ -72,8 +72,8 @@ class ShortSchoolClassView extends StatelessWidget {
             ..add(data.isNotEmpty
                 ? FormSpace(0.0)
                 : ButtonBar(
+                    alignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      alignment: MainAxisAlignment.center,
                       RButton(
                           text: getString(context).create,
                           onTap: () {
@@ -147,7 +147,7 @@ class LibraryView extends StatelessWidget {
                       ..add(data.isNotEmpty
                           ? FormSpace(0.0)
                           : ButtonBar(
-                            alignment: MainAxisAlignment.center,
+                              alignment: MainAxisAlignment.center,
                               children: <Widget>[
                                 RButton(
                                     text: getString(context).create,

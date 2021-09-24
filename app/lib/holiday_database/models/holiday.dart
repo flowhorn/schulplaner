@@ -37,6 +37,8 @@ class Holiday {
       isFromDatabase: isFromDatabase ?? this.isFromDatabase,
     );
   }
+
+  bool? get isHolidayInThePast => end?.isBefore(Date.today());
 }
 
 class HolidayValidator {
