@@ -1,5 +1,5 @@
-import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cross_file/cross_file.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -92,11 +92,11 @@ class ChatThreadState extends State<ChatThread> {
     }
   }
 
-  Future uploadImage(File imageFile) async {
+  Future uploadImage(XFile imageFile) async {
     final fileName = DateTime.now().millisecondsSinceEpoch.toString();
     final reference =
         FirebaseStorage.instance.ref().child('chat').child(fileName);
-    final uploadTask = reference.putFile(imageFile);
+    final uploadTask = reference.putData(await imageFile.readAsBytes());
     final storageTaskSnapshot = await uploadTask;
     try {
       final downloadUrl = await storageTaskSnapshot.ref.getDownloadURL();
@@ -113,11 +113,11 @@ class ChatThreadState extends State<ChatThread> {
     }
   }
 
-  Future uploadFile(File documentFile) async {
+  Future uploadFile(XFile documentFile) async {
     final fileName = DateTime.now().millisecondsSinceEpoch.toString();
     final reference =
         FirebaseStorage.instance.ref().child('chat').child(fileName);
-    final uploadTask = reference.putFile(documentFile);
+    final uploadTask = reference.putData(await documentFile.readAsBytes());
     final storageTaskSnapshot = await uploadTask;
     try {
       final downloadUrl = await storageTaskSnapshot.ref.getDownloadURL();

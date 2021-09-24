@@ -27,7 +27,7 @@ dev_dependencies:
     sdk: flutter
 
 dependency_overrides:
-  shared_preferences: ^2.0.7
+  shared_preferences: ^2.0.8
   plugin_platform_interface: ^2.0.0
 
 

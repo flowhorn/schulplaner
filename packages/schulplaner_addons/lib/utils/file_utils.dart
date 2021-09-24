@@ -1,7 +1,7 @@
-import 'dart:io';
+import 'package:cross_file/cross_file.dart';
 
 class LocalFile {
-  final File file;
+  final XFile file;
 
   LocalFile(this.file);
 }

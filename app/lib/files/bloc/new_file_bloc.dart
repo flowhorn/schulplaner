@@ -1,10 +1,11 @@
-import 'dart:io';
 import 'package:bloc/bloc_base.dart';
+import 'package:cross_file/cross_file.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:schulplaner8/Data/Planner/File.dart';
 import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 import 'package:schulplaner_addons/schulplaner_utils.dart';
+import 'package:universal_commons/platform_check.dart';
 
 class NewFileBloc extends BlocBase {
   final PlannerDatabase database;
@@ -59,10 +60,12 @@ class NewFileBloc extends BlocBase {
     var cloudFile = cloudFileValue;
     final pickedFile = await FileHelper().pickFile();
     if (pickedFile == null) return;
-    File newFile;
+    XFile newFile = pickedFile;
     try {
-      final compressedFile = await ImageCompresser.compressImage(pickedFile);
-      newFile = compressedFile ?? pickedFile;
+      if (!PlatformCheck.isWeb) {
+        final compressedFile = await ImageCompresser.compressImage(pickedFile);
+        newFile = compressedFile ?? pickedFile;
+      }
     } catch (e) {
       newFile = pickedFile;
     }
@@ -74,7 +77,7 @@ class NewFileBloc extends BlocBase {
         .child('personal')
         .child(cloudFile.savedin!.id!)
         .child(cloudFile.fileid!)
-        .putFile(newFile);
+        .putData(await newFile.readAsBytes());
     // ignore: unawaited_futures
     _uploadEventsSubject.addStream(uploadTask.snapshotEvents);
 

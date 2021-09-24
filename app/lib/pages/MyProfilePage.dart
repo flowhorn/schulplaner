@@ -169,7 +169,7 @@ class EditProfileView extends StatelessWidget {
               .child(data.uid)
               .child('profilepicture')
               .child('pic.jpg');
-          final upload = ref.putFile(croppedFile);
+          final upload = ref.putData(await croppedFile.readAsBytes());
           await upload.then((result) async {
             final picurl = await ref.getDownloadURL();
             update(data.copyWith(pic: picurl));
@@ -193,7 +193,7 @@ class EditProfileView extends StatelessWidget {
               .child(data.uid)
               .child('profilepicture')
               .child('pic.jpg');
-          final upload = ref.putFile(croppedFile);
+          final upload = ref.putData(await croppedFile.readAsBytes());
           await upload.then((result) async {
             final picurl = await ref.getDownloadURL();
             update(data.copyWith(pic: picurl));

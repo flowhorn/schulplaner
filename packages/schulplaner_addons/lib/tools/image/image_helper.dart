@@ -1,45 +1,38 @@
-import 'dart:io';
-
 import 'package:flutter_image_compress/flutter_image_compress.dart';
-import 'package:image/image.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 
 class ImageCompresser {
-  static Future<File?> compressImage(File image,
+  static Future<XFile?> compressImage(XFile image,
       {int compressionRate = 95}) async {
+    final fileUri = Uri.file(image.path);
     String temporaryPath =
-        (await getTemporaryDirectory()).path + image.uri.pathSegments.last;
-    return FlutterImageCompress.compressAndGetFile(image.path, temporaryPath,
+        (await getTemporaryDirectory()).path + fileUri.pathSegments.last;
+    final file = await FlutterImageCompress.compressAndGetFile(
+        image.path, temporaryPath,
         quality: compressionRate);
+    return file != null ? XFile(file.path) : null;
   }
 
-  static Future<File> compressVideo(File video,
+  static Future<XFile> compressVideo(XFile video,
       {int compressionRate = 95}) async {
     return video;
   }
 }
 
 class ImageHelper {
-  static Future<File> resizeImage(File file, {int? width, int? height}) async {
-    final image = decodeImage(file.readAsBytesSync());
-    final thumbnail = copyResize(image!, width: width, height: height);
-    String path =
-        (await getTemporaryDirectory()).path + file.uri.pathSegments.last;
-    return File(path)..writeAsBytesSync(encodePng(thumbnail));
-  }
-
-  static Future<File?> cropImage(File file) {
-    return ImageCropper.cropImage(
+  static Future<XFile?> cropImage(XFile file) async {
+    final croppedFile = await ImageCropper.cropImage(
       sourcePath: file.path,
       aspectRatioPresets: [
         CropAspectRatioPreset.square,
       ],
     );
+    return croppedFile != null ? XFile(croppedFile.path) : null;
   }
 
-  static Future<File?> pickImageCamera({
+  static Future<XFile?> pickImageCamera({
     double? maxWidth,
     double? maxHeight,
   }) async {
@@ -48,14 +41,10 @@ class ImageHelper {
       maxHeight: maxHeight,
       maxWidth: maxWidth,
     );
-    if (image != null) {
-      return File(image.path);
-    } else {
-      return null;
-    }
+    return image;
   }
 
-  static Future<File?> pickImageGallery({
+  static Future<XFile?> pickImageGallery({
     double? maxWidth,
     double? maxHeight,
   }) async {
@@ -64,10 +53,6 @@ class ImageHelper {
       maxHeight: maxHeight,
       maxWidth: maxWidth,
     );
-    if (image != null) {
-      return File(image.path);
-    } else {
-      return null;
-    }
+    return image;
   }
 }
