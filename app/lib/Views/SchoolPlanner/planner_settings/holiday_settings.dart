@@ -75,8 +75,8 @@ class HolidaySettings extends StatelessWidget {
                       ),
                       Text(
                         bothlang(context,
-                            en: 'The cache automatically refreshes every 7 days',
-                            de: 'Der Cache aktualisiert sich automatisch alle 7 Tage'),
+                            en: 'The cache automatically refreshes every 21 days',
+                            de: 'Der Cache aktualisiert sich automatisch alle 21 Tage'),
                         style: TextStyle(
                           fontStyle: FontStyle.italic,
                         ),

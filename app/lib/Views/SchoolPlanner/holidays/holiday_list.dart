@@ -26,9 +26,7 @@ class HolidayList extends StatelessWidget {
               items: vacationlist,
               emptyViewBuilder: (context) => EmptyListState(),
               builder: (context, holiday) {
-                if (holiday == null ||
-                    holiday.start == null ||
-                    holiday.name == null) {
+                if (holiday.start == null) {
                   return CircularProgressIndicator();
                 }
                 return HolidayTile(
@@ -63,7 +61,9 @@ class HolidayTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isHolidayInThePast = holiday.isHolidayInThePast ?? false;
     return ListTile(
+      enabled: isHolidayInThePast == false,
       leading: ColoredCircleIcon(
         icon: Icon(Icons.wb_sunny),
       ),

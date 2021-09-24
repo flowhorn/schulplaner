@@ -82,8 +82,9 @@ class HolidayGateway {
 
   Future<List<Holiday>?> loadHolidaysFromFirestore(String regionID,
       {Source source = Source.serverAndCache}) async {
-    final snapshot =
-        await _regionsDataReference(regionID).get(GetOptions(source: source));
+    final snapshot = await _regionsDataReference(regionID)
+        .where(FieldPath.documentId, isGreaterThanOrEqualTo: lastYearAsAString)
+        .get(GetOptions(source: source));
     final documents = snapshot.docs;
     final holidaysMaps = documents
         .map((queryDocSnapshot) => decodeMap(queryDocSnapshot.data(),
@@ -94,6 +95,8 @@ class HolidayGateway {
     final holidays = holidaysMaps.reduce((map1, map2) => map1..addAll(map2));
     return holidays.values.toList();
   }
+
+  String get lastYearAsAString => (DateTime.now().year - 1).toString();
 }
 
 class HolidayCacheManager {
@@ -111,7 +114,7 @@ class HolidayCacheManager {
       final lastRefreshed =
           DateTime.fromMillisecondsSinceEpoch(json[_lastRefreshed]);
       final bool isUpToDate =
-          lastRefreshed.isAfter(DateTime.now().subtract(Duration(days: 7)));
+          lastRefreshed.isAfter(DateTime.now().subtract(Duration(days: 21)));
       lastRefreshedNotifier.value = lastRefreshed.millisecondsSinceEpoch;
       return Tuple2(
           decodeList(
