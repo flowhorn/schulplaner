@@ -1,13 +1,14 @@
 {
-    "id": "de-hb",
-    "name": "Bremen",
-    "country": "germany",
-    "lastRefreshed": "2019-09-09",
-    "years": [
-        "2019",
-        "2020",
-        "2021"
-    ],
-    "isOfficial": true,
-    "published": true
+  "id": "de-hb",
+  "name": "Bremen",
+  "country": "germany",
+  "lastRefreshed": "2021-09-22",
+  "years": [
+    "2019",
+    "2020",
+    "2021",
+    "2022"
+  ],
+  "isOfficial": true,
+  "published": true
 }
