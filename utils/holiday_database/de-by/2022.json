@@ -27,8 +27,15 @@
     "start": "2022-08-01",
     "type": "holiday"
   },
-  "2022-herbstferien": {
+    "2022-herbstferien": {
     "id": "2022-herbstferien",
+    "name": "Herbstferien",
+    "end": "2022-11-04",
+    "start": "2022-10-31",
+    "type": "holiday"
+  },
+  "2022-herbstferien2": {
+    "id": "2022-herbstferien2",
     "name": "Herbstferien",
     "end": "2022-11-16",
     "start": "2022-11-16",
