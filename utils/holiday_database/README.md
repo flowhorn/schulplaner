@@ -7,16 +7,16 @@ Beispiel NRW:
 
 ```json
 {
-    "id": "de-nw",
-    "name": "Nordrhein Westfalen",
-    "country": "germany",
-    "lastRefreshed": "2019-08-29",
-    "years": [
-        "2019",
-        "2020"
-    ],
-    "isOfficial": true,
-    "published": true
+  "id": "de-nw",
+  "name": "Nordrhein Westfalen",
+  "country": "germany",
+  "lastRefreshed": "2019-08-29",
+  "years": [
+    "2019",
+    "2020"
+  ],
+  "isOfficial": true,
+  "published": true
 }
 ```
 
@@ -27,20 +27,20 @@ Folgendes format wird für die Feriendaten verwendet (Beispiel NRW):
 
 ```json
 {
-    "2019-herbst": {
-        "id": "2019-herbst",
-        "name": "Herbstferien",
-        "start": "2019-10-14",
-        "end": "2019-10-26",
-        "type": "holiday"
-    },
-    "2019-weihnachten": {
-        "id": "2019-weihnachten",
-        "name": "Weihnachtsferien",
-        "start": "2019-12-23",
-        "end": "2020-01-06",
-        "type": "holiday"
-    }
+  "2019-herbst": {
+    "id": "2019-herbst",
+    "name": "Herbstferien",
+    "start": "2019-10-14",
+    "end": "2019-10-26",
+    "type": "holiday"
+  },
+  "2019-weihnachten": {
+    "id": "2019-weihnachten",
+    "name": "Weihnachtsferien",
+    "start": "2019-12-23",
+    "end": "2020-01-06",
+    "type": "holiday"
+  }
 }
 ```
 

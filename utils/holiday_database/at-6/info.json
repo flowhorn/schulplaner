@@ -1,1 +1,12 @@
-{"id":"at-6","name":"Steiermark","country":"austria","lastRefreshed":"2021-10-11","years":["2021","2022"],"isOfficial":true,"published":true}
+{
+  "id": "at-6",
+  "name": "Steiermark",
+  "country": "austria",
+  "lastRefreshed": "2021-10-11",
+  "years": [
+    "2021",
+    "2022"
+  ],
+  "isOfficial": true,
+  "published": true
+}
