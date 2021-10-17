@@ -307,8 +307,12 @@ class NewLessonView extends StatelessWidget {
                                 return selectTeacher(
                                         context,
                                         database,
-                                        data.teacher == null ? {} :singleToMap(data.teacher,
-                                            data.teacher!.teacherid,))
+                                        data.teacher == null
+                                            ? {}
+                                            : singleToMap(
+                                                data.teacher,
+                                                data.teacher!.teacherid,
+                                              ))
                                     .then((newteacher) {
                                   if (newteacher != null) {
                                     data.teacher =
@@ -338,8 +342,10 @@ class NewLessonView extends StatelessWidget {
                                 return selectPlace(
                                         context,
                                         database,
-                                        singleToMap(
-                                            data.place, data.place!.placeid))
+                                        data.place == null
+                                            ? {}
+                                            : singleToMap(data.place,
+                                                data.place!.placeid))
                                     .then((newplace) {
                                   if (newplace != null) {
                                     data.place = PlaceLink.fromPlace(newplace);
