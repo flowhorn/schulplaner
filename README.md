@@ -146,7 +146,12 @@ Distributed under the GPL-3.0 License. See `LICENSE` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Felix Weuthen - [Discord](https://discord.gg/invite/uZyK7Tf) - danielfelixplay@gmail.com
+Since Felix has little time besides his studies, the community discord and Henrik are the fastest ways to get in touch with the school planner team.
+
+- [Community Discord](https://schulplaner.pro/discord)
+
+- Felix Weuthen, App-Founder: danielfelixplay@gmail.com
+- Henrik Steffens, Developer: hey@th3ph4nt0m.de
 
 Project Link: [https://github.com/flowhorn/schulplaner](https://github.com/flowhorn/schulplaner)
 
