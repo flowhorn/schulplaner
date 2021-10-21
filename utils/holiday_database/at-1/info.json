@@ -1,13 +1,12 @@
 {
-    "id": "at-1",
-    "name": "Burgenland",
-    "country": "austria",
-    "lastRefreshed": "2020-09-06",
-    "years": [
-        "2019",
-        "2020",
-        "2021"
-    ],
-    "isOfficial": true,
-    "published": true
+  "id": "at-1",
+  "name": "Burgenland",
+  "country": "austria",
+  "lastRefreshed": "2021-10-11",
+  "years": [
+    "2021",
+    "2022"
+  ],
+  "isOfficial": true,
+  "published": true
 }

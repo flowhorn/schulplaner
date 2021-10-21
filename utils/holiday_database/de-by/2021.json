@@ -20,8 +20,15 @@
     "start": "2021-07-30",
     "type": "holiday"
   },
-  "2021-herbstferien": {
+    "2021-herbstferien": {
     "id": "2021-herbstferien",
+    "name": "Herbstferien",
+    "end": "2021-11-05",
+    "start": "2021-11-01",
+    "type": "holiday"
+  },
+  "2021-herbstferien2": {
+    "id": "2021-herbstferien2",
     "name": "Herbstferien",
     "end": "2021-11-17",
     "start": "2021-11-17",

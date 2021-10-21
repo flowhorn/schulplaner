@@ -1,50 +1,43 @@
 {
-  "2022-winterferien": {
-    "id": "2022-winterferien",
-    "name": "Winterferien",
-    "end": "2022-03-04",
-    "start": "2022-02-28",
+  "2022-semesterferien": {
+    "id": "2022-semesterferien",
+    "name": "Semesterferien",
+    "end": "2022-02-27",
+    "start": "2022-02-21",
     "type": "holiday"
   },
   "2022-osterferien": {
     "id": "2022-osterferien",
     "name": "Osterferien",
-    "end": "2022-04-23",
-    "start": "2022-04-11",
+    "end": "2022-04-18",
+    "start": "2022-04-09",
     "type": "holiday"
   },
   "2022-pfingstferien": {
     "id": "2022-pfingstferien",
     "name": "Pfingstferien",
-    "end": "2022-06-18",
-    "start": "2022-06-07",
+    "end": "2022-06-06",
+    "start": "2022-06-04",
     "type": "holiday"
   },
   "2022-sommerferien": {
     "id": "2022-sommerferien",
     "name": "Sommerferien",
-    "end": "2022-09-12",
-    "start": "2022-08-01",
+    "end": "2022-09-11",
+    "start": "2022-07-09",
     "type": "holiday"
   },
-    "2022-herbstferien": {
+  "2022-herbstferien": {
     "id": "2022-herbstferien",
     "name": "Herbstferien",
-    "end": "2022-11-04",
-    "start": "2022-10-31",
-    "type": "holiday"
-  },
-  "2022-herbstferien2": {
-    "id": "2022-herbstferien2",
-    "name": "Herbstferien",
-    "end": "2022-11-16",
-    "start": "2022-11-16",
+    "end": "2022-10-31",
+    "start": "2022-10-27",
     "type": "holiday"
   },
   "2022-weihnachtsferien": {
     "id": "2022-weihnachtsferien",
     "name": "Weihnachtsferien",
-    "end": "2023-01-07",
+    "end": "2023-01-06",
     "start": "2022-12-24",
     "type": "holiday"
   },
@@ -55,25 +48,11 @@
     "start": "2022-01-01",
     "type": "celebration"
   },
-  "2022-2_weihnachtsfeiertag": {
-    "id": "2_weihnachtsfeiertag",
-    "name": "2. Weihnachtsfeiertag",
-    "end": "2022-12-26",
-    "start": "2022-12-26",
-    "type": "celebration"
-  },
   "2022-heilige_drei_könige": {
     "id": "heilige_drei_könige",
     "name": "Heilige Drei Könige",
     "end": "2022-01-06",
     "start": "2022-01-06",
-    "type": "celebration"
-  },
-  "2022-karfreitag": {
-    "id": "karfreitag",
-    "name": "Karfreitag",
-    "end": "2022-04-15",
-    "start": "2022-04-15",
     "type": "celebration"
   },
   "2022-ostermontag": {
@@ -83,9 +62,9 @@
     "start": "2022-04-18",
     "type": "celebration"
   },
-  "2022-tag_der_arbeit": {
-    "id": "tag_der_arbeit",
-    "name": "Tag der Arbeit",
+  "2022-staatsfeiertag": {
+    "id": "staatsfeiertag",
+    "name": "Staatsfeiertag",
     "end": "2022-05-01",
     "start": "2022-05-01",
     "type": "celebration"
@@ -118,11 +97,11 @@
     "start": "2022-08-15",
     "type": "celebration"
   },
-  "2022-tag_der_deutschen_einheit": {
-    "id": "tag_der_deutschen_einheit",
-    "name": "Tag der Deutschen Einheit",
-    "end": "2022-10-03",
-    "start": "2022-10-03",
+  "2022-nationalfeiertag": {
+    "id": "nationalfeiertag",
+    "name": "Nationalfeiertag",
+    "end": "2022-10-26",
+    "start": "2022-10-26",
     "type": "celebration"
   },
   "2022-allerheiligen": {
@@ -132,11 +111,25 @@
     "start": "2022-11-01",
     "type": "celebration"
   },
-  "2022-1_weihnachtsfeiertag": {
-    "id": "1_weihnachtsfeiertag",
-    "name": "1. Weihnachtsfeiertag",
+  "2022-mariä_empfängnis": {
+    "id": "mariä_empfängnis",
+    "name": "Mariä Empfängnis",
+    "end": "2022-12-08",
+    "start": "2022-12-08",
+    "type": "celebration"
+  },
+  "2022-weihnachten": {
+    "id": "weihnachten",
+    "name": "Weihnachten",
     "end": "2022-12-25",
     "start": "2022-12-25",
+    "type": "celebration"
+  },
+  "2022-stefanitag": {
+    "id": "stefanitag",
+    "name": "Stefanitag",
+    "end": "2022-12-26",
+    "start": "2022-12-26",
     "type": "celebration"
   }
 }
