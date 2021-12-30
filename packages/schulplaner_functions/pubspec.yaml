@@ -23,9 +23,9 @@ dev_dependencies:
 
 dependency_overrides:
   intl: ^0.17.0
-  petitparser: ^4.0.2
+  petitparser: ^4.4.0
   xml: ^5.0.2
-  crypto: ^3.0.0
+  crypto: ^3.0.1
   intl_translation:
     git:
       url: https://github.com/Zazo032/intl_translation.git

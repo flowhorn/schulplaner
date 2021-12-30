@@ -6,7 +6,8 @@ class LogAnalytics {
 
   static void OpenedJoinLink(String publicKey) {
     if (enabled) {
-      FirebaseAnalytics().logEvent(name: 'opened_joinbykey_link', parameters: {
+      FirebaseAnalytics.instance
+          .logEvent(name: 'opened_joinbykey_link', parameters: {
         'publicKey': publicKey,
       });
     }
@@ -14,92 +15,96 @@ class LogAnalytics {
 
   static void LetterCreated() {
     if (enabled) {
-      FirebaseAnalytics().logEvent(name: 'lettercreated');
+      FirebaseAnalytics.instance.logEvent(name: 'lettercreated');
     }
   }
 
   static void LetterRead() {
     if (enabled) {
-      FirebaseAnalytics().logEvent(name: 'letterread');
+      FirebaseAnalytics.instance.logEvent(name: 'letterread');
     }
   }
 
   static void LetterAnswered() {
     if (enabled) {
-      FirebaseAnalytics().logEvent(name: 'letteranswered');
+      FirebaseAnalytics.instance.logEvent(name: 'letteranswered');
     }
   }
 
   static void LetterResponse() {
     if (enabled) {
-      FirebaseAnalytics().logEvent(name: 'letterresponse');
+      FirebaseAnalytics.instance.logEvent(name: 'letterresponse');
     }
   }
 
   static void LetterResponseReset() {
     if (enabled) {
-      FirebaseAnalytics().logEvent(name: 'letterresponsereset');
+      FirebaseAnalytics.instance.logEvent(name: 'letterresponsereset');
     }
   }
 
   static void LetterArchived(bool archived) {
     if (enabled) {
-      FirebaseAnalytics()
+      FirebaseAnalytics.instance
           .logEvent(name: 'letterarchived', parameters: {'value': archived});
     }
   }
 
   static void LetterChanged() {
-    if (enabled) FirebaseAnalytics().logEvent(name: 'letterchanged');
+    if (enabled) FirebaseAnalytics.instance.logEvent(name: 'letterchanged');
   }
 
   static void LetterRemoved() {
-    if (enabled) FirebaseAnalytics().logEvent(name: 'letterremoved');
+    if (enabled) FirebaseAnalytics.instance.logEvent(name: 'letterremoved');
   }
 
   static void TaskCreated() {
-    if (enabled) FirebaseAnalytics().logEvent(name: 'taskcreated');
+    if (enabled) FirebaseAnalytics.instance.logEvent(name: 'taskcreated');
   }
 
   static void TaskChanged() {
-    if (enabled) FirebaseAnalytics().logEvent(name: 'taskchanged');
+    if (enabled) FirebaseAnalytics.instance.logEvent(name: 'taskchanged');
   }
 
   static void TaskRemoved() {
-    if (enabled) FirebaseAnalytics().logEvent(name: 'taskremoved');
+    if (enabled) FirebaseAnalytics.instance.logEvent(name: 'taskremoved');
   }
 
   static void CourseCreated() {
-    if (enabled) FirebaseAnalytics().logEvent(name: 'coursecreated');
+    if (enabled) FirebaseAnalytics.instance.logEvent(name: 'coursecreated');
   }
 
   static void CourseChanged() {
-    if (enabled) FirebaseAnalytics().logEvent(name: 'coursechanged');
+    if (enabled) FirebaseAnalytics.instance.logEvent(name: 'coursechanged');
   }
 
   static void CourseRemoved() {
-    if (enabled) FirebaseAnalytics().logEvent(name: 'courseremoved');
+    if (enabled) FirebaseAnalytics.instance.logEvent(name: 'courseremoved');
   }
 
   static void CourseJoined() {
-    if (enabled) FirebaseAnalytics().logEvent(name: 'coursejoined');
+    if (enabled) FirebaseAnalytics.instance.logEvent(name: 'coursejoined');
   }
 
   static void SupportAppClickMainScreen() {
     if (enabled) {
-      FirebaseAnalytics().logEvent(name: 'supportapp_click_mainscreen');
+      FirebaseAnalytics.instance.logEvent(name: 'supportapp_click_mainscreen');
     }
   }
 
   static void SupportAppClickAbout() {
-    if (enabled) FirebaseAnalytics().logEvent(name: 'supportapp_click_about');
+    if (enabled) {
+      FirebaseAnalytics.instance.logEvent(name: 'supportapp_click_about');
+    }
   }
 
   static void SupportAppHide() {
-    if (enabled) FirebaseAnalytics().logEvent(name: 'supportapp_hide');
+    if (enabled) FirebaseAnalytics.instance.logEvent(name: 'supportapp_hide');
   }
 
   static void SupportAppScreenDisplay() {
-    if (enabled) FirebaseAnalytics().logEvent(name: 'supportapp_screendisplay');
+    if (enabled) {
+      FirebaseAnalytics.instance.logEvent(name: 'supportapp_screendisplay');
+    }
   }
 }

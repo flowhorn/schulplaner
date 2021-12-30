@@ -8,7 +8,6 @@ import 'package:schulplaner_addons/chat/chat_bubble.dart';
 import 'package:schulplaner_addons/chat/chat_thread.dart';
 import 'package:schulplaner_addons/chat/chat_threadlist.dart';
 import 'package:schulplaner_addons/schulplaner_utils.dart';
-import 'package:schulplaner_addons/utils/color_utils.dart';
 import 'package:schulplaner8/Chat/message.dart';
 import 'package:schulplaner8/Data/Planner/File.dart';
 import 'package:schulplaner8/Data/planner_database/planner_database.dart';
@@ -140,14 +139,14 @@ class ChatThreadState extends State<ChatThread> {
       textEditingController.clear();
 
       var documentReference = FirebaseDatabase.instance
-          .reference()
+          .ref()
           .child('chats')
           .child(groupid)
           .child('messages')
           .push();
 
       documentReference.set(Message(
-              id: documentReference.key,
+              id: documentReference.key!,
               uid: uid,
               timestamp: Timestamp.now(),
               content: content,
@@ -200,7 +199,7 @@ class ChatThreadState extends State<ChatThread> {
               Flexible(
                 child: StreamBuilder<List<Message>>(
                   stream: FirebaseDatabase.instance
-                      .reference()
+                      .ref()
                       .child('chats')
                       .child(groupid)
                       .child('messages')
@@ -212,7 +211,8 @@ class ChatThreadState extends State<ChatThread> {
                       return [];
                     } else {
                       Map<String, dynamic> data =
-                          event.snapshot.value?.cast<String, dynamic>();
+                          (event.snapshot.value as dynamic)
+                              .cast<String, dynamic>();
                       return data.values
                           .map((value) => Message.fromData(value))
                           .toList()

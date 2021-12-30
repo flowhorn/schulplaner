@@ -68,8 +68,7 @@ class GradeDevelopmentView extends StatelessWidget {
                     de: 'Notenentwicklung', en: 'Development of grades'),
                 color: Colors.white,
               ),
-              AspectRatio(
-                aspectRatio: 1.70,
+              Expanded(
                 child: Container(
                   child: Padding(
                     padding: const EdgeInsets.only(

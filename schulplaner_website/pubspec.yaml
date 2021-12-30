@@ -13,9 +13,9 @@ dependencies:
     path: ../packages/bloc
   design_utils:
     path: ../packages/design_utils
-  cupertino_icons: ^1.0.3
-  url_launcher: 6.0.11
-  flutter_svg: ^0.22.0
+  cupertino_icons: ^1.0.4
+  url_launcher: 6.0.17
+  flutter_svg: ^1.0.0
   community_material_icon: ^5.9.55
   carousel_slider: ^4.0.0
   easy_dynamic_theme: ^2.2.0
@@ -23,12 +23,13 @@ dependencies:
 
 
 dev_dependencies:
+  flutter_lints: ^1.0.0
   flutter_test:
     sdk: flutter
 
 dependency_overrides:
-  shared_preferences: ^2.0.7
-  plugin_platform_interface: ^2.0.0
+  shared_preferences: ^2.0.11
+  plugin_platform_interface: ^2.0.2
 
 
 flutter:

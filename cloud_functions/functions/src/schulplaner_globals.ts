@@ -16,6 +16,8 @@ export class SchulplanerReferences {
 
     static firestoreReference = firestore;
     static coursesCollection = firestore.collection('courses');
+    static serverRequests = firestore.collection('ServerRequests');
+    static notificationsCollection = firestore.collection('notifications');
     static usersCollection = firestore.collection('users');
     static schoolClassesCollection = firestore.collection('schoolclasses');
 

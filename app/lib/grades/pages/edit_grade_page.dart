@@ -324,7 +324,7 @@ void showGradetypePicker(
     PlannerDatabase database, BuildContext context, ValueSetter<int> onTapData,
     {int? currentid}) {
   List<Choice> mylist = [];
-  mylist..addAll(getGradeTypes(context));
+  mylist.addAll(getGradeTypes(context));
   selectItem<Choice>(
     context: context,
     items: mylist,

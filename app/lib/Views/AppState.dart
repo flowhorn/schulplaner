@@ -2,7 +2,6 @@
 import 'dart:async';
 import 'package:bloc/bloc_provider.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:firebase_analytics/observer.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/material.dart';
 
@@ -126,8 +125,8 @@ class _AppSettingsState extends State<AppSettingsStateHead>
                 scaffoldBackgroundColor: getBackgroundColor(context),
               ),
           navigatorObservers: [
-            if (!PlatformCheck.isMacOS)
-              FirebaseAnalyticsObserver(analytics: FirebaseAnalytics()),
+            //if (!PlatformCheck.isMacOS)
+            // FirebaseAnalyticsObserver(analytics: FirebaseAnalytics()),
           ],
           debugShowCheckedModeBanner: false,
           home: HomeOfApp(),

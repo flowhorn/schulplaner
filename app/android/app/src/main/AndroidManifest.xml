@@ -9,7 +9,7 @@
 
 
     <application
-        android:name="io.flutter.app.FlutterApplication"
+        android:name="${applicationName}"
         tools:replace="android:allowBackup"
         android:allowBackup="false"
         android:fullBackupContent="false"

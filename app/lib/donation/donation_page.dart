@@ -214,19 +214,20 @@ class _DonateButton extends StatelessWidget {
           SizedBox(
             height: 8,
           ),
-          FloatingActionButton.extended(
-            heroTag: 'fab2',
-            onPressed: () {
-              pushWidget(context, _ThankYouPage());
-              launch('https://schulplaner.web.app/support');
-            },
-            label: Text(
-              BothLangString(
-                      de: 'Mehr auf der Webseite erfahren',
-                      en: 'Learn more on the web page')
-                  .getText(context),
+          if (DateTime.now().isAfter(DateTime.parse('2021-12-18')))
+            FloatingActionButton.extended(
+              heroTag: 'fab2',
+              onPressed: () {
+                pushWidget(context, _ThankYouPage());
+                launch('https://schulplaner.web.app/support');
+              },
+              label: Text(
+                BothLangString(
+                        de: 'Mehr auf der Webseite erfahren',
+                        en: 'Learn more on the web page')
+                    .getText(context),
+              ),
             ),
-          ),
         ],
       );
     }

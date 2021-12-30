@@ -3,6 +3,7 @@ import { loadSchoolTasksForUser } from './load_tasks';
 import { isTaskFinished } from './is_task_finished';
 import { notFinishedTasks } from './not_finished';
 import { firebaseMessaging } from '../schulplaner_globals';
+import { addServerRequest, ServerRequestTypes } from '../server_requests/add_server_request';
 
 export async function sendDailyNotification(memberid: string, notifactiondata: admin.firestore.DocumentSnapshot): Promise<boolean> {
     try {
@@ -23,8 +24,10 @@ export async function sendDailyNotification(memberid: string, notifactiondata: a
 
         for (const key of Object.keys(notificationdevices)) {
             const device = notificationdevices[key];
-            if (device == null) break;
-            if (device.enabled === true) {
+            if (device == null) {
+                await addServerRequest(ServerRequestTypes.REMOVE_NOTIFICATION_REMINDER, { 'id': memberid });
+                return false;
+            } else if (device.enabled === true) {
                 const messageData = {
                     notdata: notifactiondata.data().toString(),
                     memberid: memberid,
@@ -44,7 +47,10 @@ export async function sendDailyNotification(memberid: string, notifactiondata: a
                 await firebaseMessaging.send(message).then((response) => {
                     // Response is a message ID string.
                     console.log('Successfully sent message: ' + response);
-                }).catch((error) => {
+                }).catch(async (error) => {
+                    if (error.toString().includes('Requested entity was not found')) {
+                        await addServerRequest(ServerRequestTypes.REMOVE_NOTIFICATION_REMINDER, { 'id': memberid });
+                    }
                     console.log('Error sending message: ' + error);
                 });
             }

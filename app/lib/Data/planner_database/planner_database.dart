@@ -82,7 +82,7 @@ class PlannerDatabase {
 
   void requestCourseLink(String courseID) {
     FirebaseDatabase.instance
-        .reference()
+        .ref()
         .child('requests/incoming')
         .push()
         .set({'type': 'no_course_link', 'userID': uid, 'courseID': courseID});
@@ -90,7 +90,7 @@ class PlannerDatabase {
 
   void requestClassLink(String classID) {
     FirebaseDatabase.instance
-        .reference()
+        .ref()
         .child('requests/incoming')
         .push()
         .set({'type': 'no_class_link', 'userID': uid, 'classID': classID});

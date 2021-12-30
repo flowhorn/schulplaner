@@ -20,7 +20,7 @@ class CourseSettings {
       onlyVerifiedMembers: false,
       defaultRole: MemberRole.standard);
 
-  factory CourseSettings.fromData(dynamic? data) {
+  factory CourseSettings.fromData(dynamic data) {
     if (data == null) return standard;
     return CourseSettings._(
         isPublic: data['isPublic'] ?? true,

@@ -105,6 +105,12 @@ service cloud.firestore {
       allow  read: if isLoggedIn() && resource.data.userId == currentUID();
     }
 
+    // ExportUserDataRequests
+    match /ServerRequests/{document=**} {
+      allow create: if isLoggedIn();
+      allow  read: if isLoggedIn();
+    }
+
     //Functions
 
     function isOwnerAdminOrCreator(role) {

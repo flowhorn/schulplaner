@@ -6,7 +6,6 @@ import 'package:schulplaner_widgets/schulplaner_theme.dart';
 import 'package:schulplaner8/Data/planner_database/planner_database.dart';
 import 'package:schulplaner8/Helper/PermissionManagement.dart';
 import 'package:schulplaner8/Helper/helper_views.dart';
-import 'package:schulplaner8/models/coursepermission.dart';
 import 'package:schulplaner8/models/school_class.dart';
 
 class Chat extends StatelessWidget {
@@ -45,7 +44,7 @@ class Chat extends StatelessWidget {
                 } else {
                   return Center(
                     child: Column(
-                       mainAxisSize: MainAxisSize.min,
+                      mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         ListTile(
                           title: Text(
@@ -74,7 +73,6 @@ class Chat extends StatelessWidget {
                               });
                             })
                       ],
-                     
                     ),
                   );
                 }

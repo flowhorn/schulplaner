@@ -31,15 +31,12 @@ class DynamicLinksBloc extends BlocBase {
       final initData = await dynamicLinks.getInitialLink();
       addDynamicLinkDataFromFirebase(initData);
 
-      dynamicLinks.onLink(
-        onSuccess: (incomingLink) async {
-          addDynamicLinkDataFromFirebase(incomingLink);
-        },
-        onError: (e) async {
-          print(
-              'DynamicLink Error - Details: ${e.details}, Code: ${e.code}, Message: ${e.message}');
-        },
-      );
+      dynamicLinks.onLink.listen((event) {
+        addDynamicLinkDataFromFirebase(event);
+      }).onError((e) async {
+        print(
+            'DynamicLink Error - Details: ${e.details}, Code: ${e.code}, Message: ${e.message}');
+      });
     } catch (e) {
       // print(e);
     }
@@ -78,7 +75,6 @@ class DynamicLinksBloc extends BlocBase {
 
   @override
   void dispose() {
-    dynamicLinks.onLink(onSuccess: null, onError: null);
     _dynamicLinksDataSubject.close();
   }
 }

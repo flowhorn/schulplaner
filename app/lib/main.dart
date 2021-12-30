@@ -20,7 +20,7 @@ void main() async {
   await dotenv.load(fileName: '.env');
   await Firebase.initializeApp();
   if (!PlatformCheck.isWeb) {
-    await FirebaseDatabase.instance.setPersistenceEnabled(true);
+    FirebaseDatabase.instance.setPersistenceEnabled(true);
   }
 
   try {

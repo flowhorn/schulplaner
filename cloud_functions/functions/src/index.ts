@@ -13,6 +13,7 @@ import { schoolClassUpdateMemberRoleFunction } from './groups/cloud_functions/sc
 import { schoolClassAddCourseFunction } from './groups/cloud_functions/school_class_add_course';
 import { schoolClassRemoveCourseFunction } from './groups/cloud_functions/school_class_remove_course';
 import { exportUserDataRequestTriggerFunction } from './export_user_data/cloud_functions/export_user_data_request_trigger';
+import { handleServerRequestsFunction } from './server_requests/handle_server_requests';
 
 
 export const onCourseCreated = functions.firestore.document("courses/{id}").onCreate(async (snapshot, context) => {
@@ -133,7 +134,7 @@ export const userChangeMemberTypeClass = schoolClassUpdateMemberRoleFunction;
 
 export const schoolClassAddCourse = schoolClassAddCourseFunction;
 export const schoolClassRemoveCourse = schoolClassRemoveCourseFunction;
-
+export const handleServerRequests = handleServerRequestsFunction;
 
 async function getdatacourse(courseid: string): Promise<FirebaseFirestore.DocumentData> {
     const coursedataref = firestore.collection("courses").doc(courseid);

@@ -1,11 +1,10 @@
 #!/bin/sh
 # This is a generated file; do not edit or check into version control.
-export "FLUTTER_ROOT=/home/th3/snap/flutter/common/flutter"
-export "FLUTTER_APPLICATION_PATH=/home/th3/Dev/flutter/schulplaner/app"
+export "FLUTTER_ROOT=/Users/felixweuthen/Weiteres/Flutter/flutter"
+export "FLUTTER_APPLICATION_PATH=/Users/felixweuthen/Projekte/schulplaner/app"
 export "COCOAPODS_PARALLEL_CODE_SIGN=true"
 export "FLUTTER_TARGET=lib/main.dart"
 export "FLUTTER_BUILD_DIR=build"
-export "SYMROOT=${SOURCE_ROOT}/../build/ios"
 export "FLUTTER_BUILD_NAME=10.0.1"
 export "FLUTTER_BUILD_NUMBER=611"
 export "DART_OBFUSCATION=false"

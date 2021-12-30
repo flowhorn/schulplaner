@@ -2,6 +2,7 @@ import * as functions from 'firebase-functions';
 import admin = require('firebase-admin');
 import { firestore, europeRegion } from '../schulplaner_globals';
 import { sendDailyNotification } from '../homework_reminder/send_daily_notification';
+import { addServerRequest, ServerRequestTypes } from '../server_requests/add_server_request';
 
 
 export const hourlyReminderFunction = functions.region(europeRegion).runWith({
@@ -10,7 +11,7 @@ export const hourlyReminderFunction = functions.region(europeRegion).runWith({
 }).pubsub.schedule('every 60 minutes from 00:00 to 23:55').onRun(async (context) => {
     try {
         const currenttime = getCurrentUtcTime();
-        console.log("Loading Push-Notifications for CurrentTime:" + currenttime);
+        console.log("Loading Push-Notification for CurrentTime:" + currenttime);
         const results = await firestore.collection("notifications")
             .where("notifydaily", "==", true)
             .where("dailytime", "==", currenttime)
@@ -18,9 +19,15 @@ export const hourlyReminderFunction = functions.region(europeRegion).runWith({
         console.log("Notify " + results.size.toString() + " Users");
         const promises = [];
         for (const notifydoc of results.docs) {
-            if (notifydoc.data().devices == null) break;
+            const devicesOfNotifyDoc = notifydoc.data().devices;
             const memberId = notifydoc.id;
-            promises.push(sendDailyNotification(memberId, notifydoc));
+            if (devicesOfNotifyDoc == null || devicesOfNotifyDoc == {}) {
+                console.log("Empty Notifications Devices!");
+                promises.push(addServerRequest(ServerRequestTypes.REMOVE_NOTIFICATION_REMINDER, { 'id': memberId }));
+            } else {
+                promises.push(sendDailyNotification(memberId, notifydoc));
+            }
+
         }
         await Promise.all(promises);
         console.log("Notifications finished!");

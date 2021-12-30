@@ -114,7 +114,7 @@ class HolidayCacheManager {
       final lastRefreshed =
           DateTime.fromMillisecondsSinceEpoch(json[_lastRefreshed]);
       final bool isUpToDate =
-          lastRefreshed.isAfter(DateTime.now().subtract(Duration(days: 21)));
+          lastRefreshed.isAfter(DateTime.now().subtract(Duration(days: 90)));
       lastRefreshedNotifier.value = lastRefreshed.millisecondsSinceEpoch;
       return Tuple2(
           decodeList(
