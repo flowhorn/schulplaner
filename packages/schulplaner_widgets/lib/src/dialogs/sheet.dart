@@ -7,6 +7,13 @@ abstract class SchulplanerSheet {
 
   Future<T?> show<T>(BuildContext context) async {
     return showModalBottomSheet<T>(
+      constraints: const BoxConstraints(maxWidth: 600, minHeight: 200),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(16),
+          topRight: Radius.circular(16),
+        ),
+      ),
       context: context,
       builder: (context) => build(context),
     );

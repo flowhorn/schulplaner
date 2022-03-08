@@ -11,6 +11,7 @@ import 'package:schulplaner8/Views/ManagePlanner.dart';
 import 'package:schulplaner8/app_base/src/blocs/app_settings_bloc.dart';
 import 'package:schulplaner8/app_base/src/blocs/planner_loader_bloc.dart';
 import 'package:schulplaner8/app_base/src/models/app_settings_data.dart';
+import 'package:schulplaner8/configuration/configuration_bloc.dart';
 import 'package:schulplaner8/dynamic_links/src/bloc/dynamic_link_bloc.dart';
 import 'package:schulplaner_navigation/schulplaner_navigation.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
@@ -18,6 +19,7 @@ import 'package:schulplaner_widgets/schulplaner_theme.dart';
 import 'package:authentification/authentification_blocs.dart';
 
 import 'home_of_app.dart';
+import 'sign_in_notice.dart';
 
 class SimpleItem {
   IconData? iconData;
@@ -147,6 +149,7 @@ class SelectPlannerViewState extends State<SelectPlannerView> {
   @override
   Widget build(BuildContext context) {
     final plannerLoaderBloc = BlocProvider.of<PlannerLoaderBloc>(context);
+    final configurationBloc = ConfigurationBloc.get(context);
     return Scaffold(
       body: Column(
         mainAxisSize: MainAxisSize.min,
@@ -159,6 +162,7 @@ class SelectPlannerViewState extends State<SelectPlannerView> {
                   SizedBox(
                     height: 16.0,
                   ),
+                  SignInNotice(),
                   CircleAvatar(
                     backgroundColor: getAccentColor(context),
                     radius: 44.0,
@@ -213,33 +217,45 @@ class SelectPlannerViewState extends State<SelectPlannerView> {
                                 textAlign: TextAlign.start,
                               ),
                             ),
-                          InkWell(
-                            onTap: () {
-                              pushWidget(
-                                  context,
-                                  NewPlannerView(
-                                    plannerLoaderBloc: plannerLoaderBloc,
-                                    activateplanner: true,
-                                  ));
-                            },
-                            child: SizedBox(
-                              height: 72.0,
-                              child: Center(
-                                child: FlatButton.icon(
-                                  icon: Icon(
-                                    Icons.add,
-                                    size: 28.0,
+                          StreamBuilder<bool>(
+                              stream: configurationBloc.isSignInPossibleStream,
+                              initialData:
+                                  configurationBloc.isSignInPossibleValue,
+                              builder: (context, isSignInPossibleSnapshot) {
+                                final isSignInPossible =
+                                    isSignInPossibleSnapshot.data!;
+                                if (!isSignInPossible) {
+                                  return Container();
+                                }
+                                return InkWell(
+                                  onTap: () {
+                                    pushWidget(
+                                        context,
+                                        NewPlannerView(
+                                          plannerLoaderBloc: plannerLoaderBloc,
+                                          activateplanner: true,
+                                        ));
+                                  },
+                                  child: SizedBox(
+                                    height: 72.0,
+                                    child: Center(
+                                      child: FlatButton.icon(
+                                        icon: Icon(
+                                          Icons.add,
+                                          size: 28.0,
+                                        ),
+                                        label: Text(
+                                          getString(context).newplanner,
+                                          style: TextStyle(fontSize: 18.0),
+                                        ),
+                                        onPressed: null,
+                                        disabledTextColor:
+                                            getAccentColor(context),
+                                      ),
+                                    ),
                                   ),
-                                  label: Text(
-                                    getString(context).newplanner,
-                                    style: TextStyle(fontSize: 18.0),
-                                  ),
-                                  onPressed: null,
-                                  disabledTextColor: getAccentColor(context),
-                                ),
-                              ),
-                            ),
-                          ),
+                                );
+                              }),
                         ],
                       ),
                     ),

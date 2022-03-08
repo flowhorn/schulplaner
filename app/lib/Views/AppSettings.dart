@@ -48,238 +48,241 @@ class AppSettingsView extends StatelessWidget {
       appBar: MyAppHeader(
         title: getString(context).settings,
       ),
-      body: ListView(
-        children: <Widget>[
-          FormSection(
-              title: getString(context).general,
-              child: Column(
-                children: <Widget>[
-                  ListTile(
-                    leading: Icon(Icons.color_lens),
-                    title: Text(getString(context).appearance),
-                    onTap: () {
-                      openEditAppearancePage(context);
-                    },
-                  ),
-                  ListTile(
-                    leading: Icon(Icons.adjust),
-                    title: Text(getString(context).configure),
-                    onTap: () {
-                      pushWidget(
-                        context,
-                        AppConfigurationView(
-                          appSettingsBloc: appSettingsBloc,
-                          userDatabase: userDatabaseBloc.userDatabase!,
-                        ),
-                      );
-                    },
-                  ),
-                  ListTile(
-                    leading: Icon(Icons.school),
-                    title: Text(getString(context).manageplanner),
-                    enabled: userDatabaseBloc.userDatabase != null,
-                    onTap: userDatabaseBloc.userDatabase != null
-                        ? () {
-                            pushWidget(context, ManagePlannerView());
-                          }
-                        : null,
-                  ),
-                  ListTile(
-                    leading: Icon(Icons.language),
-                    title: Text(getString(context).language +
-                        ': ' +
-                        (getLanguage(
-                              context,
-                              getAppSettingsData(context).languagecode,
-                            ).name ??
-                            '-')),
-                    onTap: () {
-                      selectItem<SimpleItem>(
-                          context: context,
-                          items: availableLanguages(context),
-                          builder: (BuildContext context, SimpleItem item) {
-                            final languageCode =
-                                getAppSettingsData(context).languagecode;
-                            return ListTile(
-                              leading: item.iconData != null
-                                  ? Icon(item.iconData)
-                                  : null,
-                              title: Text(
-                                item.name ?? '-',
-                              ),
-                              trailing: item.id == languageCode
-                                  ? Icon(
-                                      Icons.done,
-                                      color: Colors.green,
-                                    )
-                                  : null,
-                              onTap: item.id == languageCode
-                                  ? null
-                                  : () {
-                                      Navigator.pop(context);
-                                      final bloc =
-                                          BlocProvider.of<AppSettingsBloc>(
-                                              context);
-                                      final newData = bloc.currentValue
-                                          .copyWithNullable(
-                                              languagecode: item.id);
-
-                                      bloc.setAppSettings(newData);
-                                    },
-                              enabled: item.id != languageCode,
-                            );
-                          });
-                    },
-                  ),
-                ],
-              )),
-          //FormDivider(),
-
-          FormSection(
-            title: plannerLoaderBloc.loadAllPlannerStatusValue
-                    .getPlanner()
-                    ?.name ??
-                getString(context).apptitle,
-            child: Builder(builder: (BuildContext context) {
-              if (plannerDatabaseBloc.plannerDatabase == null ||
-                  plannerDatabaseBloc.plannerDatabase!.isClosed() ||
-                  plannerDatabaseBloc.plannerDatabase!.plannerid !=
-                      plannerLoaderBloc.loadAllPlannerStatusValue
-                          .getPlanner()
-                          ?.id) {
-                return ListTile(
-                  title: Text(
-                    getString(context).functionnotavailable,
-                    textAlign: TextAlign.center,
-                  ),
-                  enabled: false,
-                );
-              } else {
-                return PlannerSettings();
-              }
-            }),
-          ),
-          //FormDivider(),
-
-          FormSection(
-            title: getString(context).further,
-            child: Column(
-              children: <Widget>[
-                ListTile(
-                  leading: Icon(Icons.security),
-                  title: Text(getString(context).privacy),
-                  onTap: () {
-                    pushWidget(context, PrivacyView());
-                  },
-                ),
-                ListTile(
-                    leading: Icon(Icons.help),
-                    title: Text(getString(context).help),
-                    onTap: () {
-                      pushWidget(context, HelpView());
-                    }),
-                ListTile(
-                  leading: Icon(Icons.info_outline),
-                  title: Text(getString(context).about),
-                  onTap: () {
-                    pushWidget(context, AboutPage());
-                  },
-                ),
-              ],
-            ),
-          ),
-
-          FormSection(
-            title: getString(context).registration,
-            child: Builder(builder: (BuildContext context) {
-              if (userDatabaseBloc.userDatabase == null) {
-                return ListTile(
-                  title: Text(
-                    getString(context).functionnotavailable,
-                    textAlign: TextAlign.center,
-                  ),
-                  enabled: false,
-                );
-              } else {
-                return Column(
-                  mainAxisSize: MainAxisSize.min,
+      body: LimitedContainer(
+        child: ListView(
+          children: <Widget>[
+            FormSection(
+                title: getString(context).general,
+                child: Column(
                   children: <Widget>[
-                    DataDocumentWidget<UserProfile>(
-                      allowNull: true,
-                      package: userDatabaseBloc.userDatabase!.userprofile,
-                      builder: (context, data) {
-                        return ListTile(
-                          leading: UserImageView(
-                            userProfile: data,
-                            size: 36.0,
-                          ),
-                          title: Text(
-                              data?.name ?? getString(context).anonymoususer),
-                          trailing: RButton(
-                            onTap: () {
-                              pushWidget(context, MyProfile());
-                            },
-                            text: getString(context).gotoprofile.toUpperCase(),
+                    ListTile(
+                      leading: Icon(Icons.color_lens),
+                      title: Text(getString(context).appearance),
+                      onTap: () {
+                        openEditAppearancePage(context);
+                      },
+                    ),
+                    ListTile(
+                      leading: Icon(Icons.adjust),
+                      title: Text(getString(context).configure),
+                      onTap: () {
+                        pushWidget(
+                          context,
+                          AppConfigurationView(
+                            appSettingsBloc: appSettingsBloc,
+                            userDatabase: userDatabaseBloc.userDatabase!,
                           ),
                         );
                       },
                     ),
                     ListTile(
-                      leading: Icon(Icons.lock),
-                      title: Text(getString(context).signinmethodes),
+                      leading: Icon(Icons.school),
+                      title: Text(getString(context).manageplanner),
+                      enabled: userDatabaseBloc.userDatabase != null,
+                      onTap: userDatabaseBloc.userDatabase != null
+                          ? () {
+                              pushWidget(context, ManagePlannerView());
+                            }
+                          : null,
+                    ),
+                    ListTile(
+                      leading: Icon(Icons.language),
+                      title: Text(getString(context).language +
+                          ': ' +
+                          (getLanguage(
+                                context,
+                                getAppSettingsData(context).languagecode,
+                              ).name ??
+                              '-')),
                       onTap: () {
-                        pushWidget(context, AuthenticationMethodes());
+                        selectItem<SimpleItem>(
+                            context: context,
+                            items: availableLanguages(context),
+                            builder: (BuildContext context, SimpleItem item) {
+                              final languageCode =
+                                  getAppSettingsData(context).languagecode;
+                              return ListTile(
+                                leading: item.iconData != null
+                                    ? Icon(item.iconData)
+                                    : null,
+                                title: Text(
+                                  item.name ?? '-',
+                                ),
+                                trailing: item.id == languageCode
+                                    ? Icon(
+                                        Icons.done,
+                                        color: Colors.green,
+                                      )
+                                    : null,
+                                onTap: item.id == languageCode
+                                    ? null
+                                    : () {
+                                        Navigator.pop(context);
+                                        final bloc =
+                                            BlocProvider.of<AppSettingsBloc>(
+                                                context);
+                                        final newData = bloc.currentValue
+                                            .copyWithNullable(
+                                                languagecode: item.id);
+
+                                        bloc.setAppSettings(newData);
+                                      },
+                                enabled: item.id != languageCode,
+                              );
+                            });
                       },
                     ),
-                    SizedBox(
-                      height: 52.0,
-                      width: double.infinity,
-                      child: TextButton.icon(
-                        icon: Icon(
-                          Icons.exit_to_app,
-                          color: getAccentColor(context),
-                        ),
-                        label: Text(getString(context).logout,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: getAccentColor(context),
-                            )),
-                        onPressed: () {
-                          showConfirmationDialog(
-                              context: context,
-                              title: getString(context).logout,
-                              onConfirm: () {
-                                firebase_auth.FirebaseAuth.instance.signOut();
-                                try {
-                                  GoogleSignIn.standard().signOut();
-                                } catch (e) {
-                                  print(e);
-                                }
-                                Navigator.popUntil(
-                                    context, (route) => route.isFirst);
+                  ],
+                )),
+            //FormDivider(),
+
+            FormSection(
+              title: plannerLoaderBloc.loadAllPlannerStatusValue
+                      .getPlanner()
+                      ?.name ??
+                  getString(context).apptitle,
+              child: Builder(builder: (BuildContext context) {
+                if (plannerDatabaseBloc.plannerDatabase == null ||
+                    plannerDatabaseBloc.plannerDatabase!.isClosed() ||
+                    plannerDatabaseBloc.plannerDatabase!.plannerid !=
+                        plannerLoaderBloc.loadAllPlannerStatusValue
+                            .getPlanner()
+                            ?.id) {
+                  return ListTile(
+                    title: Text(
+                      getString(context).functionnotavailable,
+                      textAlign: TextAlign.center,
+                    ),
+                    enabled: false,
+                  );
+                } else {
+                  return PlannerSettings();
+                }
+              }),
+            ),
+            //FormDivider(),
+
+            FormSection(
+              title: getString(context).further,
+              child: Column(
+                children: <Widget>[
+                  ListTile(
+                    leading: Icon(Icons.security),
+                    title: Text(getString(context).privacy),
+                    onTap: () {
+                      pushWidget(context, PrivacyView());
+                    },
+                  ),
+                  ListTile(
+                      leading: Icon(Icons.help),
+                      title: Text(getString(context).help),
+                      onTap: () {
+                        pushWidget(context, HelpView());
+                      }),
+                  ListTile(
+                    leading: Icon(Icons.info_outline),
+                    title: Text(getString(context).about),
+                    onTap: () {
+                      pushWidget(context, AboutPage());
+                    },
+                  ),
+                ],
+              ),
+            ),
+
+            FormSection(
+              title: getString(context).registration,
+              child: Builder(builder: (BuildContext context) {
+                if (userDatabaseBloc.userDatabase == null) {
+                  return ListTile(
+                    title: Text(
+                      getString(context).functionnotavailable,
+                      textAlign: TextAlign.center,
+                    ),
+                    enabled: false,
+                  );
+                } else {
+                  return Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      DataDocumentWidget<UserProfile>(
+                        allowNull: true,
+                        package: userDatabaseBloc.userDatabase!.userprofile,
+                        builder: (context, data) {
+                          return ListTile(
+                            leading: UserImageView(
+                              userProfile: data,
+                              size: 36.0,
+                            ),
+                            title: Text(
+                                data?.name ?? getString(context).anonymoususer),
+                            trailing: RButton(
+                              onTap: () {
+                                pushWidget(context, MyProfile());
                               },
-                              action: getString(context).confirm,
-                              richtext: RichText(
-                                  text: TextSpan(
-                                      text: bothlang(context,
-                                          de:
-                                              'Möchtest du dich wirklich ausloggen?',
-                                          en:
-                                              'Do you really want to log out?'))),
-                              warning: true,
-                              warningtext: bothlang(context,
-                                  de: 'Wenn du keine Anmeldemethode eingerichtet hast, gehen alle Daten verloren!',
-                                  en: 'If you did not set up a login method, all data will get lost.'));
+                              text:
+                                  getString(context).gotoprofile.toUpperCase(),
+                            ),
+                          );
                         },
                       ),
-                    ),
-                  ],
-                );
-              }
-            }),
-          ),
-          FormSpace(32.0),
-        ],
+                      ListTile(
+                        leading: Icon(Icons.lock),
+                        title: Text(getString(context).signinmethodes),
+                        onTap: () {
+                          pushWidget(context, AuthenticationMethodes());
+                        },
+                      ),
+                      SizedBox(
+                        height: 52.0,
+                        width: double.infinity,
+                        child: TextButton.icon(
+                          icon: Icon(
+                            Icons.exit_to_app,
+                            color: getAccentColor(context),
+                          ),
+                          label: Text(getString(context).logout,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: getAccentColor(context),
+                              )),
+                          onPressed: () {
+                            showConfirmationDialog(
+                                context: context,
+                                title: getString(context).logout,
+                                onConfirm: () {
+                                  firebase_auth.FirebaseAuth.instance.signOut();
+                                  try {
+                                    GoogleSignIn.standard().signOut();
+                                  } catch (e) {
+                                    print(e);
+                                  }
+                                  Navigator.popUntil(
+                                      context, (route) => route.isFirst);
+                                },
+                                action: getString(context).confirm,
+                                richtext: RichText(
+                                    text: TextSpan(
+                                        text: bothlang(context,
+                                            de:
+                                                'Möchtest du dich wirklich ausloggen?',
+                                            en:
+                                                'Do you really want to log out?'))),
+                                warning: true,
+                                warningtext: bothlang(context,
+                                    de: 'Wenn du keine Anmeldemethode eingerichtet hast, gehen alle Daten verloren!',
+                                    en: 'If you did not set up a login method, all data will get lost.'));
+                          },
+                        ),
+                      ),
+                    ],
+                  );
+                }
+              }),
+            ),
+            FormSpace(32.0),
+          ],
+        ),
       ),
     );
   }

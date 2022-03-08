@@ -11,6 +11,8 @@ import 'package:authentification/authentification_models.dart';
 import 'package:authentification/authentification_widgets.dart';
 import 'package:schulplaner8/Views/authentification/email_page.dart';
 import 'package:schulplaner8/Views/settings/pages/settings_privacy_page.dart';
+import 'package:schulplaner8/Views/sign_in_notice.dart';
+import 'package:schulplaner8/configuration/configuration_bloc.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
 import 'package:schulplaner_widgets/schulplaner_forms.dart';
 import 'package:schulplaner_widgets/schulplaner_theme.dart';
@@ -29,7 +31,8 @@ class LoginPage extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    SizedBox(height: 24.0),
+                    SizedBox(height: 16.0),
+                    _IsSignInPossible(),
                     GestureDetector(
                       onDoubleTap: () {
                         openAlternativeSignInPopup(context);
@@ -84,6 +87,64 @@ class LoginPage extends StatelessWidget {
       final signInBloc = BlocProvider.of<SignInBloc>(context);
       await signInBloc.tryCustomAuthKeySignIn(authKey);
     }
+  }
+}
+
+class _IsSignInPossible extends StatelessWidget {
+  const _IsSignInPossible({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final configurationBloc = ConfigurationBloc.get(context);
+    return StreamBuilder<bool>(
+      stream: configurationBloc.isSignInPossibleStream,
+      initialData: configurationBloc.isSignInPossibleValue,
+      builder: (context, snapshot) {
+        final data = snapshot.data!;
+        if (data == true) {
+          return SignInNotice();
+        }
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Card(
+            color: Colors.orange.withOpacity(0.3),
+            elevation: 0.0,
+            shape: RoundedRectangleBorder(
+              side: BorderSide(
+                color: Colors.orange,
+              ),
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.warning,
+                    size: 64,
+                  ),
+                  Text(
+                    bothlang(
+                      context,
+                      de: 'Schulplaner ist von nun an nur noch für bestehende Nutzer verfügbar. '
+                          'Neue Nutzer können die App leider nicht mehr benutzen!',
+                      en: 'Schoolplanner is only available for existing users.'
+                          'Unfortunately new users can not use the app anymore!',
+                    ),
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
   }
 }
 

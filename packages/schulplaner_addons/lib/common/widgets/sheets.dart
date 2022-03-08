@@ -5,6 +5,13 @@ Future<T?> showSheet<T>(
     required Widget child,
     String? title}) async {
   return showModalBottomSheet<T>(
+    constraints: const BoxConstraints(maxWidth: 600, minHeight: 200),
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(16),
+        topRight: Radius.circular(16),
+      ),
+    ),
     context: context,
     builder: (BuildContext context) {
       return Opacity(

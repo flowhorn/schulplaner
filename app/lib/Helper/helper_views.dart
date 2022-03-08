@@ -395,6 +395,13 @@ void showSheet(
     required String? title,
     List<Widget>? actions}) {
   showModalBottomSheet(
+      constraints: const BoxConstraints(maxWidth: 600, minHeight: 200),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(16),
+          topRight: Radius.circular(16),
+        ),
+      ),
       context: context,
       builder: (BuildContext context) {
         return clearAppTheme(
@@ -466,6 +473,13 @@ void showSheet(
 ValueNotifier<bool?> showPermissionStateSheet({required BuildContext context}) {
   ValueNotifier<bool?> mNotifier = ValueNotifier(null);
   showModalBottomSheet(
+      constraints: const BoxConstraints(maxWidth: 600, minHeight: 200),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(16),
+          topRight: Radius.circular(16),
+        ),
+      ),
       context: context,
       builder: (BuildContext context) {
         return clearAppTheme(
@@ -554,6 +568,13 @@ ValueNotifier<ResultItem> showResultStateSheet(
   ValueNotifier<ResultItem> mNotifier =
       ValueNotifier(ResultItem(loading: true));
   showModalBottomSheet(
+      constraints: const BoxConstraints(maxWidth: 600, minHeight: 200),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(16),
+          topRight: Radius.circular(16),
+        ),
+      ),
       context: context,
       builder: (BuildContext context) {
         return clearAppTheme(
@@ -653,6 +674,13 @@ void showLoadingStateSheet({
   required ValueNotifier<bool?> sheetUpdate,
 }) {
   showModalBottomSheet(
+      constraints: const BoxConstraints(maxWidth: 600, minHeight: 200),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(16),
+          topRight: Radius.circular(16),
+        ),
+      ),
       context: context,
       builder: (BuildContext context) {
         return clearAppTheme(
@@ -739,6 +767,13 @@ ValueNotifier<bool?> showLoadingStateSheetFull({
 }) {
   ValueNotifier<bool?> sheetUpdate = ValueNotifier(null);
   showModalBottomSheet(
+      constraints: const BoxConstraints(maxWidth: 600, minHeight: 200),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(16),
+          topRight: Radius.circular(16),
+        ),
+      ),
       routeSettings: RouteSettings(name: 'loadingsheet'),
       context: context,
       builder: (BuildContext context) {
@@ -835,6 +870,13 @@ Future<T?> showSheetBuilder<T>({
   String? routname,
 }) {
   return showModalBottomSheet<T>(
+    constraints: const BoxConstraints(maxWidth: 600, minHeight: 200),
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(16),
+        topRight: Radius.circular(16),
+      ),
+    ),
     context: context,
     builder: (BuildContext sheetcontext) {
       return clearAppTheme(
@@ -1038,6 +1080,13 @@ Future<void> showDetailSheetBuilder(
     required WidgetBuilder body,
     String? routname}) {
   return showModalBottomSheet(
+    constraints: const BoxConstraints(maxWidth: 600, minHeight: 200),
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(16),
+        topRight: Radius.circular(16),
+      ),
+    ),
     context: context,
     builder: (BuildContext sheetcontext) {
       return clearAppTheme(

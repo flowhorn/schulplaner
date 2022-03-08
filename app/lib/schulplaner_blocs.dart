@@ -12,6 +12,7 @@ import 'package:schulplaner8/app_base/src/blocs/app_logic_controller_bloc.dart';
 import 'package:schulplaner8/app_base/src/blocs/app_settings_bloc.dart';
 import 'package:schulplaner8/app_base/src/blocs/app_stats_bloc.dart';
 import 'package:schulplaner8/app_base/src/blocs/user_database_bloc.dart';
+import 'package:schulplaner8/configuration/configuration_bloc.dart';
 import 'package:schulplaner8/dynamic_links/src/bloc/dynamic_link_bloc.dart';
 import 'package:schulplaner_functions/schulplaner_functions.dart';
 import 'package:schulplaner_navigation/schulplaner_navigation.dart';
@@ -56,6 +57,9 @@ class SchulplanerBlocs extends StatelessWidget {
           authentificationBloc: authentificationBloc,
           firebaseAuth: firebaseAuth,
         ),
+      ),
+      BlocProvider<ConfigurationBloc>(
+        bloc: ConfigurationBloc(),
       ),
     ];
 

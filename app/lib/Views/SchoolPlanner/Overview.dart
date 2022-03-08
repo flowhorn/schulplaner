@@ -1,6 +1,7 @@
 //
 import 'package:bloc/bloc_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:schulplaner8/Views/sign_in_notice.dart';
 import 'package:schulplaner8/Views/widgets/overview_tips.dart';
 import 'package:schulplaner8/Views/widgets/quick_create_view.dart';
 import 'package:schulplaner8/app_base/src/blocs/app_stats_bloc.dart';
@@ -27,6 +28,9 @@ class OverviewView extends StatelessWidget {
     return SingleChildScrollView(
       child: LimitedContainer(
         child: Column(children: <Widget>[
+          SignInNotice(
+            isHideable: true,
+          ),
           QuickCreateView(),
           OverviewTips(),
           StreamBuilder<Map<String, Letter>>(
