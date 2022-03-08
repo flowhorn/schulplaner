@@ -886,10 +886,11 @@ class EditGradeProfileSettings extends StatelessWidget {
                                     .where((it) => it != null)
                                     .map((item) => item!.weight)
                                     .reduce((a, b) => a + b);
-                                return ((Decimal.parse(gradetypeitem!.weight
+                                return (((Decimal.parse(gradetypeitem!.weight
                                                 .toString()) /
                                             Decimal.parse(total.toString())) *
-                                        Decimal.fromInt(100))
+                                        Decimal.fromInt(100).toRational()))
+                                    .toDecimal()
                                     .toStringAsFixed(1);
                               }
 

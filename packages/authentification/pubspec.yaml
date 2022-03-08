@@ -19,13 +19,13 @@ dependencies:
     path: ../schulplaner_translations
   universal_commons:
     path: ../universal_commons
-  firebase_auth: 3.3.5
-  google_sign_in: 5.2.3
+  firebase_auth: 3.3.9
+  google_sign_in: 5.2.4
   sign_in_with_apple: ^3.3.0
   rxdart: ^0.27.3
   community_material_icon: 5.9.55
   url_launcher: any
-  googleapis_auth: 1.1.0
+  googleapis_auth: 1.3.0
   flutter_dotenv: ^5.0.2
 
 

@@ -62,7 +62,7 @@ class DonationCard extends StatelessWidget {
                         style: TextStyle(color: Colors.greenAccent),
                       ),
                       onTap: () {
-                        loadRewardAd(context);
+                        // loadRewardAd(context);
                       },
                     ),
                   ListTile(

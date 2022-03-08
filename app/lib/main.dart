@@ -4,7 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:overlay_support/overlay_support.dart';
 //import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:schulplaner8/Views/AppState.dart';
@@ -25,10 +24,12 @@ void main() async {
 
   try {
     if (PlatformCheck.isAndroid) {
+      /*
       final requestConfiguration = RequestConfiguration(
           tagForUnderAgeOfConsent: TagForUnderAgeOfConsent.yes);
       // ignore: unawaited_futures
       MobileAds.instance.updateRequestConfiguration(requestConfiguration);
+    */
     }
   } catch (e) {
     ;

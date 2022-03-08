@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
+// import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:schulplaner8/Helper/Functions.dart';
 import 'package:schulplaner8/Helper/helper_data.dart';
 import 'package:schulplaner8/ads/ad_support.dart';
@@ -13,6 +13,8 @@ import 'package:url_launcher/url_launcher.dart';
 Future<void> openDonationPage({required BuildContext context}) async {
   await pushWidget(context, _DonationPage());
 }
+
+/*
 
 Future<void> loadRewardAd(BuildContext context) {
   pushWidget(context, _ThankYouPage());
@@ -39,6 +41,7 @@ Future<void> loadRewardAd(BuildContext context) {
   );
 }
 
+*/
 class _ThankYouPage extends StatelessWidget {
   const _ThankYouPage({Key? key}) : super(key: key);
 
@@ -200,7 +203,7 @@ class _DonateButton extends StatelessWidget {
               child: FloatingActionButton.extended(
                 heroTag: 'fab3',
                 onPressed: () {
-                  loadRewardAd(context);
+                  // loadRewardAd(context);
                 },
                 label: Text(
                   BothLangString(

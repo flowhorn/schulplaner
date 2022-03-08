@@ -107,8 +107,9 @@ class AverageCourse {
 
             if (typetest_total_weight != 0) {
               Decimal average_oftypetest =
-                  Decimal.parse(typetest_total_value.toString()) /
-                      Decimal.parse(typetest_total_weight.toString());
+                  (Decimal.parse(typetest_total_value.toString()) /
+                          Decimal.parse(typetest_total_weight.toString()))
+                      .toDecimal();
               eachtype_total_weight = eachtype_total_weight + 1.0;
               eachtype_total_value =
                   eachtype_total_value + average_oftypetest.toDouble();
@@ -116,8 +117,9 @@ class AverageCourse {
           }
           if (eachtype_total_weight != 0.0) {
             Decimal type_average =
-                Decimal.parse(eachtype_total_value.toString()) /
-                    Decimal.parse(eachtype_total_weight.toString());
+                (Decimal.parse(eachtype_total_value.toString()) /
+                        Decimal.parse(eachtype_total_weight.toString()))
+                    .toDecimal();
             averageperType[mTypeItem] = type_average.toDouble();
 
             total_value =
