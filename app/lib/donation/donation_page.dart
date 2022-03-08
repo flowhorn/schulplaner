@@ -217,7 +217,7 @@ class _DonateButton extends StatelessWidget {
           SizedBox(
             height: 8,
           ),
-          if (DateTime.now().isAfter(DateTime.parse('2021-12-18')))
+          if (DateTime.now().isAfter(DateTime.parse('2022-03-25')))
             FloatingActionButton.extended(
               heroTag: 'fab2',
               onPressed: () {

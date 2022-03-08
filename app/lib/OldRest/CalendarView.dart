@@ -253,10 +253,10 @@ Stream<Map<String, dynamic>> getAdvancedCalendarStream(
     PlannerDatabase database, String date) {
   StreamController<Map<String, dynamic>> controller = StreamController();
   List<StreamSubscription> subs = [];
-  late Map<String, Lesson>? lessons;
-  late Map<String, LessonInfo>? lessoninfos;
-  late Map<String, SchoolEvent>? schoolevents;
-  late Map<String, SchoolTask>? schooltasks;
+  Map<String, Lesson>? lessons;
+  Map<String, LessonInfo>? lessoninfos;
+  Map<String, SchoolEvent>? schoolevents;
+  Map<String, SchoolTask>? schooltasks;
 
   void update() {
     controller.add({
