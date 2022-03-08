@@ -4,7 +4,7 @@ import 'package:schulplaner_website/src/routes.dart';
 import 'package:schulplaner_website/src/widgets/dark_mode_switch.dart';
 
 class FooterLinks extends StatelessWidget {
-  const FooterLinks();
+  const FooterLinks({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -25,7 +25,7 @@ class _PrivacyPolicy extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      child: Text('-> Datenschutzerklärung'),
+      child: const Text('-> Datenschutzerklärung'),
       onPressed: () {
         openNavigationPage(context, NavigationItem.privacy);
       },
@@ -41,7 +41,7 @@ class _Imprint extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      child: Text('-> Impressum'),
+      child: const Text('-> Impressum'),
       onPressed: () {
         openNavigationPage(context, NavigationItem.impressum);
       },
@@ -57,7 +57,7 @@ class _About extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      child: Text(
+      child: const Text(
         '-> Über',
       ),
       onPressed: () {

@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 
 /// Zeigt einzelne Screenshots der App auf der Homepage
 class ScreenshotCarousel extends StatelessWidget {
-  const ScreenshotCarousel();
+  const ScreenshotCarousel({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(

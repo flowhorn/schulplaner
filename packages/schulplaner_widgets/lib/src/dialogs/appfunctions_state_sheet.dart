@@ -2,8 +2,6 @@ import 'package:app_functions/app_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:schulplaner_widgets/schulplaner_dialogs.dart';
-import 'sheet_content/sheet_content.dart';
-import 'state_sheet.dart';
 
 Future<AppFunctionsResult<bool>> showAppFunctionStateSheet(BuildContext context,
     Future<AppFunctionsResult<bool>> appFunctionsResult) async {

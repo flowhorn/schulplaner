@@ -3,13 +3,15 @@ import 'package:flutter/material.dart';
 
 class DarkmodeSwitch extends StatelessWidget {
   final double? width;
-  const DarkmodeSwitch({this.width});
+
+  const DarkmodeSwitch({Key? key, this.width}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: width,
       child: ListTile(
-        title: Text('Dunkelmodus'),
+        title: const Text('Dunkelmodus'),
         trailing: EasyDynamicThemeSwitch(),
       ),
     );

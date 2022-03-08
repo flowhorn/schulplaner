@@ -503,7 +503,7 @@ class AppConfigurationView extends StatelessWidget {
                     try {
                       newtext = newtext.replaceAll(',', '.');
                       double value = double.parse(newtext);
-                      assert(value is double && value > 0.0);
+                      assert(value > 0.0);
                       ConfigurationData newdata = configurationData.copyWith();
                       newdata.timetablesettings.heightfactor = value;
                       appSettingsBloc.setAppConfiguration(newdata);

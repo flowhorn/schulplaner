@@ -1,7 +1,6 @@
 import 'package:authentification/authentification_blocs.dart';
 import 'package:authentification/authentification_models.dart';
 import 'package:authentification/src/logic/google_sign_in_logic.dart';
-import 'package:authentification/src/models/auth_provider.dart';
 import 'package:bloc/bloc_base.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:rxdart/subjects.dart';
@@ -45,11 +44,11 @@ class MyAuthProvidersBloc extends BlocBase {
             _linkingStateSubject.add(SignInState.successfull);
             return true;
           } else {
-            _linkingStateSubject.add(SignInState.failed);
+            _linkingStateSubject.add(FailedSignInState(''));
           }
         }
-      } catch (_) {
-        _linkingStateSubject.add(SignInState.failed);
+      } catch (e) {
+        _linkingStateSubject.add(FailedSignInState(e.toString()));
       }
     }
     return false;

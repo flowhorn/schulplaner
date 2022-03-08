@@ -4,11 +4,11 @@ import 'package:schulplaner_website/src/logic/website_utils.dart';
 import 'package:schulplaner_website/src/parts/inner_layout.dart';
 
 class OpenSourcePage extends StatelessWidget {
-  const OpenSourcePage();
+  const OpenSourcePage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return InnerLayout(
-      key: ValueKey('OpenSourceContent'),
+      key: const ValueKey('OpenSourceContent'),
       content: Column(
         children: const [
           SizedBox(height: 128),
@@ -21,11 +21,11 @@ class OpenSourcePage extends StatelessWidget {
 }
 
 class _FirstSection extends StatelessWidget {
-  const _FirstSection();
+  const _FirstSection({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return ResponsiveSides(
-      first: Center(
+      first: const Center(
         child: CircleAvatar(
           child: Icon(
             Icons.code_outlined,
@@ -70,9 +70,9 @@ class _RedirectButtons extends StatelessWidget {
   const _RedirectButtons();
   @override
   Widget build(BuildContext context) {
-    return ResponsiveList(
+    return const ResponsiveList(
       breakPoint: 350,
-      children: const [
+      children: [
         _OpenGithub(),
         SizedBox(width: 12, height: 12),
         _OpenDiscord(),
@@ -88,10 +88,12 @@ class _OpenGithub extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialButton(
       onPressed: () {
-        openUrl(urlString: 'https://github.com/flowhorn/schulplaner', openInNewWindow: true);
+        openUrl(
+            urlString: 'https://github.com/flowhorn/schulplaner',
+            openInNewWindow: true);
       },
-      child: Padding(
-        padding: const EdgeInsets.all(8),
+      child: const Padding(
+        padding: EdgeInsets.all(8),
         child: Text('Github (Source Code)'),
       ),
       color: Colors.green,
@@ -105,10 +107,12 @@ class _OpenDiscord extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialButton(
       onPressed: () {
-        openUrl(urlString: 'https://schulplaner.pro/discord', openInNewWindow: true);
+        openUrl(
+            urlString: 'https://schulplaner.pro/discord',
+            openInNewWindow: true);
       },
-      child: Padding(
-        padding: const EdgeInsets.all(8),
+      child: const Padding(
+        padding: EdgeInsets.all(8),
         child: Text('Discord (Community)'),
       ),
       color: Colors.orange,

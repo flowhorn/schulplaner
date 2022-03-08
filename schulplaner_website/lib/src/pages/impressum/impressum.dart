@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:schulplaner_website/src/parts/inner_layout.dart';
 
 class ImpressumPage extends StatelessWidget {
-  const ImpressumPage();
+  const ImpressumPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return InnerLayout(
-      key: ValueKey('ImprintContent'),
+      key: const ValueKey('ImprintContent'),
       content: Column(
         children: const [
           SizedBox(height: 128),
           ResponsiveSides(
-            first: const Center(
+            first: Center(
               child: CircleAvatar(
                 child: Icon(
                   Icons.contact_mail_outlined,

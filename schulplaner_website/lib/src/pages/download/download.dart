@@ -5,10 +5,12 @@ import 'package:schulplaner_website/src/parts/inner_layout.dart';
 import 'download_buttons.dart';
 
 class DownloadPage extends StatelessWidget {
+  const DownloadPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return InnerLayout(
-      key: ValueKey('DownloadPageContent'),
+      key: const ValueKey('DownloadPageContent'),
       content: Column(
         children: const [
           SizedBox(height: 128),
@@ -29,7 +31,7 @@ class _FirstSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ResponsiveSides(
-      first: Center(
+      first: const Center(
         child: CircleAvatar(
           child: Icon(
             Icons.download_outlined,

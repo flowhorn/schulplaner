@@ -3,11 +3,12 @@ import 'package:schulplaner_website/src/models/navigation_item.dart';
 import 'package:schulplaner_website/src/routes.dart';
 
 class WebsiteTitle extends StatelessWidget {
-  const WebsiteTitle();
+  const WebsiteTitle({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      child: Text('Schulplaner'),
+      child: const Text('Schulplaner'),
       onTap: () {
         openNavigationPage(context, NavigationItem.homepage);
       },

@@ -4,19 +4,20 @@ import 'package:schulplaner_website/src/logic/website_utils.dart';
 import 'package:schulplaner_website/src/widgets/assets_button.dart';
 import 'package:schulplaner_website/src/widgets/svg_button.dart';
 
-final kPlayStoreURL =
+const kPlayStoreURL =
     'https://play.google.com/store/apps/details?id=com.xla.school&hl=de';
-final kAppstoreURL =
+const kAppstoreURL =
     'https://apps.apple.com/de/app/schulplaner-pro/id1425606459';
-final kWebAppURL = 'https://web.schulplaner.pro';
+const kWebAppURL = 'https://web.schulplaner.pro';
 
 class DownloadButtons extends StatelessWidget {
-  const DownloadButtons();
+  const DownloadButtons({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return ResponsiveList(
+    return const ResponsiveList(
       breakPoint: 430,
-      children: const [
+      children: [
         _DownloadAndroid(),
         SizedBox(
           width: 4,

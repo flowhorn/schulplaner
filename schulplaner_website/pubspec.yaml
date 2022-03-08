@@ -14,8 +14,8 @@ dependencies:
   design_utils:
     path: ../packages/design_utils
   cupertino_icons: ^1.0.4
-  url_launcher: 6.0.17
-  flutter_svg: ^1.0.0
+  url_launcher: 6.0.18
+  flutter_svg: ^1.0.3
   community_material_icon: ^5.9.55
   carousel_slider: ^4.0.0
   easy_dynamic_theme: ^2.2.0
@@ -28,8 +28,7 @@ dev_dependencies:
     sdk: flutter
 
 dependency_overrides:
-  shared_preferences: ^2.0.11
-  plugin_platform_interface: ^2.0.2
+  plugin_platform_interface: ^2.1.2
 
 
 flutter:

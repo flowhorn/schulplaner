@@ -13,6 +13,7 @@ import 'package:schulplaner8/groups/src/models/course.dart';
 
 import 'models/grade.dart';
 import 'models/grade_value.dart';
+import 'models/school_report.dart';
 
 class NewSchoolReportView extends StatefulWidget {
   final PlannerDatabase database;
@@ -125,11 +126,10 @@ class NewReportValueViewiewState extends State<NewReportValueView> {
   ValueNotifier<bool> showWeight = ValueNotifier(false);
 
   NewReportValueViewiewState(this.database, this.report, this.courseid) {
-    if (report.values == null || report.values[courseid] == null) {
+    if (report.values[courseid] == null) {
       reportValue = ReportValue(weight: 1.0);
     } else {
       reportValue = report.getValue(courseid)!;
-      if (reportValue == null) reportValue = ReportValue(weight: 1.0);
     }
     prefilled_grade = reportValue.grade_key ?? '';
     prefilled_weight = reportValue.weight;
@@ -171,29 +171,31 @@ class NewReportValueViewiewState extends State<NewReportValueView> {
               icon: Icon(Icons.done),
               label: Text(getString(context).done),
               onPressed: () {
+                var finalReportValue = reportValue.copyWith();
                 if (database
                     .getSettings()
                     .getCurrentGradePackage()
                     .inputSupport) {
                   try {
                     double mValue = double.parse(prefilled_grade);
-                    reportValue.grade_key = database
-                            .getSettings()
-                            .getCurrentGradePackage()
-                            .id
-                            .toString() +
-                        '-' +
-                        mValue.toString();
+                    finalReportValue = finalReportValue.copyWith(
+                        grade_key: database
+                                .getSettings()
+                                .getCurrentGradePackage()
+                                .id
+                                .toString() +
+                            '-' +
+                            mValue.toString());
                   } catch (exception) {
                     print(exception);
                   }
                 }
-                reportValue.weight = prefilled_weight;
+                finalReportValue.copyWith(weight: prefilled_weight);
                 if (reportValue.validate()) {
                   database.dataManager.schoolReportsRef.doc(report.id).set(
                     {
                       'values': {
-                        courseid: reportValue.toJson(),
+                        courseid: finalReportValue.toJson(),
                       },
                     },
                     SetOptions(
@@ -241,7 +243,9 @@ class NewReportValueViewiewState extends State<NewReportValueView> {
                           showGradeValuePicker(database, context,
                               (GradeValue gradevalue) {
                             setState(() {
-                              reportValue.grade_key = gradevalue.getKey();
+                              reportValue = reportValue.copyWith(
+                                grade_key: gradevalue.getKey(),
+                              );
                             });
                           }, currentid: reportValue.grade_key);
                         },

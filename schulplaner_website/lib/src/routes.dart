@@ -20,41 +20,41 @@ final Map<String, WidgetBuilder> navigationRoutes = {
   opensourceWebsiteRoute: (context) => opensourceWebsite,
 };
 
-final homepageWebsiteRoute = '/';
-final aboutWebsiteRoute = '/about';
-final donateWebsiteRoute = '/donate';
-final downloadWebsiteRoute = '/download';
-final impressumWebsiteRoute = '/impressum';
-final privacyWebsiteRoute = '/privacy';
-final opensourceWebsiteRoute = '/opensource';
+const homepageWebsiteRoute = '/';
+const aboutWebsiteRoute = '/about';
+const donateWebsiteRoute = '/donate';
+const downloadWebsiteRoute = '/download';
+const impressumWebsiteRoute = '/impressum';
+const privacyWebsiteRoute = '/privacy';
+const opensourceWebsiteRoute = '/opensource';
 
-final homepageWebsite = WebsiteScaffold(
+const homepageWebsite = WebsiteScaffold(
   navigationItem: NavigationItem.homepage,
   body: HomePage(),
 );
 
-final aboutWebsite = WebsiteScaffold(
+const aboutWebsite = WebsiteScaffold(
   navigationItem: NavigationItem.about,
   body: AboutPage(),
 );
-final donateWebsite = WebsiteScaffold(
+const donateWebsite = WebsiteScaffold(
   navigationItem: NavigationItem.donate,
   body: DonatePage(),
 );
-final downloadWebsite = WebsiteScaffold(
+const downloadWebsite = WebsiteScaffold(
   navigationItem: NavigationItem.download,
   body: DownloadPage(),
 );
-final impressumWebsite = WebsiteScaffold(
+const impressumWebsite = WebsiteScaffold(
   navigationItem: NavigationItem.impressum,
   body: ImpressumPage(),
 );
-final privacyWebsite = WebsiteScaffold(
+const privacyWebsite = WebsiteScaffold(
   navigationItem: NavigationItem.privacy,
   body: PrivacyPage(),
 );
 
-final opensourceWebsite = WebsiteScaffold(
+const opensourceWebsite = WebsiteScaffold(
   navigationItem: NavigationItem.opensource,
   body: OpenSourcePage(),
 );

@@ -4,7 +4,8 @@ import 'package:schulplaner_website/src/parts/layout_title.dart';
 import 'package:schulplaner_website/src/routes.dart';
 
 class LearnMoreSection extends StatelessWidget {
-  const LearnMoreSection();
+  const LearnMoreSection({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Column(

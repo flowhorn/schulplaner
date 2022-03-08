@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:schulplaner_widgets/schulplaner_dialogs.dart';
-import 'package:schulplaner_widgets/src/dialogs/sheet_content/simple_item_sheet_content.dart';
-import 'sheet_content/sheet_content.dart';
 
 class StateSheet extends SchulplanerSheet {
   final Stream<SheetContent> stream;

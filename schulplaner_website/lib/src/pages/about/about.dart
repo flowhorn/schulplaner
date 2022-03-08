@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:schulplaner_website/src/parts/inner_layout.dart';
 
 class AboutPage extends StatelessWidget {
+  const AboutPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return InnerLayout(
-      key: ValueKey('AboutPageContent'),
+      key: const ValueKey('AboutPageContent'),
       content: Column(
         children: const [
           SizedBox(height: 128),
@@ -23,7 +25,7 @@ class _FirstSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ResponsiveSides(
-      first: Center(
+      first: const Center(
         child: CircleAvatar(
           child: Icon(
             Icons.info_outline,
@@ -35,7 +37,7 @@ class _FirstSection extends StatelessWidget {
         ),
       ),
       second: Column(
-        children: [
+        children: const [
           Text(
             'Über:',
             style: TextStyle(

@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 typedef ObjectBuilder<T> = T Function(String key, dynamic decodedMapValue);
 typedef ObjectEncoder<T> = dynamic Function(T decodedMapValue);
 
-Map<String, T> decodeMapWithNull<T>(dynamic? data, ObjectBuilder<T> builder) {
+Map<String, T> decodeMapWithNull<T>(dynamic data, ObjectBuilder<T> builder) {
   Map<dynamic, dynamic>? originaldata = data?.cast<dynamic, dynamic>();
   if (originaldata != null) {
     originaldata.removeWhere((key, value) => value == null);

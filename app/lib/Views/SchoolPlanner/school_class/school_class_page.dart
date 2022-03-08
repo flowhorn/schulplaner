@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:schulplaner8/Chat/chatview.dart';
 import 'package:schulplaner8/Views/SchoolPlanner/school_class/school_class_security_settings.dart';
 import 'package:schulplaner8/app_base/src/blocs/planner_database_bloc.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
@@ -77,8 +76,8 @@ class SchoolClassView extends StatelessWidget {
                     FormHeader2(getString(context).schoolletters),
                     StreamBuilder<Map<String, Letter>>(
                       builder: (context, snapshot) {
-                        List<Letter> datalist = snapshot.data!.values.where(
-                            (letter) {
+                        List<Letter> datalist = snapshot.data!.values
+                            .where((letter) {
                           return letter.savedin?.id == info.id;
                         }).toList()
                           ..sort(
@@ -144,24 +143,6 @@ class SchoolClassView extends StatelessWidget {
                                     SchoolClassCoursesView(
                                         classid: classid, database: database));
                               },
-                            ),
-                            ListTile(
-                              leading: Icon(Icons.chat),
-                              title: Text(getString(context).chat),
-                              onTap: () {
-                                pushWidget(
-                                    context,
-                                    Chat(
-                                      database,
-                                      info.getDesign(),
-                                      groupid: classid,
-                                      uid: database.uid,
-                                    ));
-                              },
-                              trailing: RButton(
-                                  text: 'BETA',
-                                  onTap: null,
-                                  disabledColor: Colors.orange),
                             ),
                             ListTile(
                               leading: Icon(Icons.settings_applications),

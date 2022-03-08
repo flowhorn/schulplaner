@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:schulplaner_widgets/schulplaner_theme.dart';
 
 class AppHeaderAdvanced extends StatelessWidget implements PreferredSizeWidget {

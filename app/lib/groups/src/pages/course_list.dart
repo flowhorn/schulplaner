@@ -1,7 +1,6 @@
 import 'package:bloc/bloc_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:schulplaner8/Helper/Functions.dart';
-import 'package:schulplaner8/Helper/helper_data.dart';
 import 'package:schulplaner8/Helper/helper_views.dart';
 import 'package:schulplaner8/Views/SchoolPlanner/Courses.dart';
 import 'package:schulplaner8/Views/SchoolPlanner/course/course_page.dart';

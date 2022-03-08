@@ -4,10 +4,10 @@ import 'package:schulplaner_website/src/logic/download_file/download_file.dart';
 import 'package:schulplaner_website/src/parts/inner_layout.dart';
 
 class PrivacyPage extends StatelessWidget {
-  const PrivacyPage();
+  const PrivacyPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return InnerLayout(
+    return const InnerLayout(
       key: ValueKey('PrivacyPageContent'),
       content: PrivacyPageContent(),
     );
@@ -15,7 +15,7 @@ class PrivacyPage extends StatelessWidget {
 }
 
 class PrivacyPageContent extends StatelessWidget {
-  const PrivacyPageContent();
+  const PrivacyPageContent({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -88,7 +88,7 @@ class _PdfPrivacyPolicy extends StatelessWidget {
             final maxWidth = constraints.maxWidth;
             final containerWidthFactor =
                 (maxWidth > 600 ? 0.7 : 0.98) * maxWidth;
-            return Container(
+            return SizedBox(
               width: containerWidthFactor,
               child: Column(
                 children: const [
@@ -110,10 +110,10 @@ class _DownloadPrivacyPolicyTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Icon(Icons.picture_as_pdf),
-      title: Text('Datenschutzerklärung'),
+      leading: const Icon(Icons.picture_as_pdf),
+      title: const Text('Datenschutzerklärung'),
       trailing: IconButton(
-        icon: Icon(Icons.download_outlined),
+        icon: const Icon(Icons.download_outlined),
         onPressed: () {
           downloadFile('assets/privacy_policy_schulplaner.pdf',
               'Schulplaner Datenschutzerklärung.pdf');
@@ -240,7 +240,7 @@ class _Title extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SelectableText(title, style: TextStyle(fontSize: 22));
+    return SelectableText(title, style: const TextStyle(fontSize: 22));
   }
 }
 
@@ -252,7 +252,7 @@ class _ContentText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SelectableText(subtitle,
-        style: TextStyle(fontWeight: FontWeight.w500));
+        style: const TextStyle(fontWeight: FontWeight.w500));
   }
 }
 
@@ -269,7 +269,7 @@ class _PolicyText extends StatelessWidget {
       children: <Widget>[
         title,
         ...texts,
-        SizedBox(height: 32),
+        const SizedBox(height: 32),
       ],
       crossAxisAlignment: CrossAxisAlignment.start,
     );

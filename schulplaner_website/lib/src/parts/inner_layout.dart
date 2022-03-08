@@ -17,10 +17,10 @@ class InnerLayout extends StatelessWidget {
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               child: content,
             ),
-            Footer(),
+            const Footer(),
           ],
           crossAxisAlignment: CrossAxisAlignment.start,
         ),

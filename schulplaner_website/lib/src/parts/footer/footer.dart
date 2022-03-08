@@ -6,7 +6,7 @@ import 'package:schulplaner_website/src/logic/website_utils.dart';
 import 'footer_links.dart';
 
 class Footer extends StatelessWidget {
-  const Footer();
+  const Footer({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -74,7 +74,7 @@ class _SocialMediaButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      children: [
+      children: const [
         SizedBox(width: 8),
         _Instagram(),
         SizedBox(width: 8),
@@ -87,36 +87,45 @@ class _SocialMediaButtons extends StatelessWidget {
 }
 
 class _Instagram extends StatelessWidget {
+  const _Instagram({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      icon: Icon(CommunityMaterialIcons.instagram),
+      icon: const Icon(CommunityMaterialIcons.instagram),
       onPressed: () {
-        openUrl(urlString: 'https://instagram.com/schulplaner.app', openInNewWindow: true);
+        openUrl(
+            urlString: 'https://instagram.com/schulplaner.app',
+            openInNewWindow: true);
       },
     );
   }
 }
 
 class _Twitter extends StatelessWidget {
+  const _Twitter({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      icon: Icon(CommunityMaterialIcons.twitter),
+      icon: const Icon(CommunityMaterialIcons.twitter),
       onPressed: () {
-        openUrl(urlString: 'https://twitter.com/schulplanerapp', openInNewWindow: true);
+        openUrl(
+            urlString: 'https://twitter.com/schulplanerapp',
+            openInNewWindow: true);
       },
     );
   }
 }
 
 class _Discord extends StatelessWidget {
+  const _Discord({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      icon: Icon(CommunityMaterialIcons.discord),
+      icon: const Icon(CommunityMaterialIcons.discord),
       onPressed: () {
-        openUrl(urlString: 'https://schulplaner.pro/discord', openInNewWindow: true);
+        openUrl(
+            urlString: 'https://schulplaner.pro/discord',
+            openInNewWindow: true);
       },
     );
   }

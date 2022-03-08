@@ -1,7 +1,5 @@
-//
 import 'dart:async';
 import 'package:bloc/bloc_provider.dart';
-import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +16,6 @@ import 'package:schulplaner_navigation/schulplaner_navigation.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
 import 'package:schulplaner_widgets/schulplaner_theme.dart';
 import 'package:authentification/authentification_blocs.dart';
-import 'package:universal_commons/platform_check.dart';
 
 import 'home_of_app.dart';
 

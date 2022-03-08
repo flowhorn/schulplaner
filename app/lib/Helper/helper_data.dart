@@ -22,7 +22,7 @@ String parseDatetime(DateTime date) {
   return DateFormat.yMMMMEEEEd('de').format(date);
 }
 
-Map<String, dynamic> decodeMapNullable(dynamic? data) {
+Map<String, dynamic> decodeMapNullable(dynamic data) {
   Map<dynamic, dynamic>? premapdata = data?.cast<String, dynamic>();
   return (premapdata ?? {}).map<String, dynamic>(
       (dynamic key, dynamic value) => MapEntry<String, dynamic>(key, value));

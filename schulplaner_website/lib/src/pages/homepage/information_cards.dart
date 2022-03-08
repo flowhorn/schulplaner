@@ -5,7 +5,8 @@ import 'package:schulplaner_website/src/routes.dart';
 import 'package:schulplaner_website/src/widgets/information_card.dart';
 
 class InformationCards extends StatelessWidget {
-  const InformationCards();
+  const InformationCards({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return ResponsiveSides(
@@ -47,7 +48,7 @@ class _LearnMoreAboutPrivacyButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      child: Text('-> Erfahre mehr über den Datenschutz'),
+      child: const Text('-> Erfahre mehr über den Datenschutz'),
       onPressed: () {
         openNavigationPage(context, NavigationItem.privacy);
       },

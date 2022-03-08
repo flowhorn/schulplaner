@@ -171,7 +171,7 @@ Widget getHeadedCardView({
           ],
         )),
   ];
-  widgetlist..addAll(content);
+  widgetlist.addAll(content);
   if (bottom != null) widgetlist.add(bottom);
   return Card(
     child: Column(

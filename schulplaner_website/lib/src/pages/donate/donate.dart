@@ -4,10 +4,12 @@ import 'package:schulplaner_website/src/logic/website_utils.dart';
 import 'package:schulplaner_website/src/parts/inner_layout.dart';
 
 class DonatePage extends StatelessWidget {
+  const DonatePage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return InnerLayout(
-      key: ValueKey('DonatePageContent'),
+      key: const ValueKey('DonatePageContent'),
       content: Column(
         children: const [
           SizedBox(height: 128),
@@ -73,8 +75,8 @@ class _PaypalMeButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
-      child: Padding(
-        padding: const EdgeInsets.all(12.0),
+      child: const Padding(
+        padding: EdgeInsets.all(12.0),
         child: Text('Zu Paypal weiterleiten'),
       ),
       onPressed: () {

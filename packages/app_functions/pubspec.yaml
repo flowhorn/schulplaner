@@ -11,7 +11,7 @@ environment:
 dependencies:
   bloc:
     path: ../bloc
-  cloud_functions: 3.2.4
+  cloud_functions: 3.2.5
   flutter:
     sdk: flutter
 

@@ -16,11 +16,11 @@ class DesktopScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _DesktopAppBar(
+      appBar: const _DesktopAppBar(
         key: Key('_DesktopAppBar'),
       ),
       body: body,
-      endDrawer: NavigationDrawer(),
+      endDrawer: const NavigationDrawer(),
     );
   }
 }
@@ -30,7 +30,7 @@ class _DesktopAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: WebsiteTitle(),
+      title: const WebsiteTitle(),
       elevation: 0,
       actions: const [
         _ActionsRow(),
@@ -40,7 +40,7 @@ class _DesktopAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(64);
+  Size get preferredSize => const Size.fromHeight(64);
 }
 
 class _EndDrawerButton extends StatelessWidget {
@@ -48,7 +48,7 @@ class _EndDrawerButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      icon: Icon(Icons.menu),
+      icon: const Icon(Icons.menu),
       onPressed: () {
         Scaffold.of(context).openEndDrawer();
       },
@@ -79,7 +79,7 @@ class _HomepageTile extends StatelessWidget {
   const _HomepageTile();
   @override
   Widget build(BuildContext context) {
-    return _AppBarAction(
+    return const _AppBarAction(
       title: 'Übersicht',
       navigationItem: NavigationItem.homepage,
     );
@@ -90,7 +90,7 @@ class _DownloadTile extends StatelessWidget {
   const _DownloadTile();
   @override
   Widget build(BuildContext context) {
-    return _AppBarAction(
+    return const _AppBarAction(
       title: 'Download',
       navigationItem: NavigationItem.download,
     );
@@ -101,7 +101,7 @@ class _SupportTile extends StatelessWidget {
   const _SupportTile();
   @override
   Widget build(BuildContext context) {
-    return _AppBarAction(
+    return const _AppBarAction(
       iconData: Icons.favorite_outline,
       iconColor: Colors.red,
       title: 'Unterstützen',
@@ -114,7 +114,7 @@ class _AboutTile extends StatelessWidget {
   const _AboutTile();
   @override
   Widget build(BuildContext context) {
-    return _AppBarAction(
+    return const _AppBarAction(
       title: 'Über',
       navigationItem: NavigationItem.about,
     );
@@ -192,7 +192,7 @@ class _AppBarActionText extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       child: Text(
         title,
         style: TextStyle(

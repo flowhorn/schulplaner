@@ -1,12 +1,12 @@
 import 'package:decimal/decimal.dart';
-import 'package:schulplaner8/OldGrade/SchoolReport.dart';
+import 'package:schulplaner8/OldGrade/models/school_report.dart';
 import 'package:schulplaner8/models/planner_settings.dart';
 
 import 'grade.dart';
 import 'grade_value.dart';
 
 class AverageReport {
-  late double? totalaverage;
+  double? totalaverage;
   AverageReport(PlannerSettingsData settingsData, {List<ReportValue>? values}) {
     double total_value = 0.0;
     double total_weight = 0.0;

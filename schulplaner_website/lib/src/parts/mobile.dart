@@ -10,24 +10,24 @@ class MobileScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _MobileAppBar(),
+      appBar: const _MobileAppBar(),
       body: body,
-      endDrawer: NavigationDrawer(),
+      endDrawer: const NavigationDrawer(),
     );
   }
 }
 
 class _MobileAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const _MobileAppBar();
+  const _MobileAppBar({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      key: Key('_MobileAppBar'),
-      title: WebsiteTitle(),
+      key: const Key('_MobileAppBar'),
+      title: const WebsiteTitle(),
       elevation: 0,
     );
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(64);
+  Size get preferredSize => const Size.fromHeight(64);
 }

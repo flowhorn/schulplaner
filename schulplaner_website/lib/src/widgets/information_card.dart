@@ -14,7 +14,7 @@ class InformationCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.all(8),
+      margin: const EdgeInsets.all(8),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -22,23 +22,23 @@ class InformationCard extends StatelessWidget {
           children: [
             Text(
               title,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 16.0,
                 fontWeight: FontWeight.w700,
               ),
             ),
-            SizedBox(height: 6),
+            const SizedBox(height: 6),
             Text(
               description,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 12.0,
                 fontWeight: FontWeight.w500,
               ),
             ),
-            SizedBox(height: 6),
+            const SizedBox(height: 6),
             if (actions != null) ...[
               actions!,
-              SizedBox(height: 6),
+              const SizedBox(height: 6),
             ],
           ],
         ),

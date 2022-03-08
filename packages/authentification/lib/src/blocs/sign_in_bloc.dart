@@ -37,34 +37,25 @@ class SignInBloc extends BlocBase {
       } else {
         _signInSubject.add(SignInState.failed);
       }
-    } catch (_) {
-      _signInSubject.add(SignInState.failed);
+    } catch (e) {
+      _signInSubject.add(FailedSignInState(e.toString()));
     }
   }
 
   Future<void> tryAppleSignIn() async {
     _signInSubject.add(SignInState.loading);
     try {
-      if (PlatformCheck.isAppleOS) {
-        final credentials = await AppleSignInLogic().getAuthCredentials();
-        final userCredentials = credentials != null
-            ? await _firebaseAuth.signInWithCredential(credentials)
-            : null;
-        if (userCredentials != null) {
-          _signInSubject.add(SignInState.successfull);
-        } else {
-          _signInSubject.add(SignInState.failed);
-        }
+      final credentials = await AppleSignInLogic().getAuthCredentials();
+      final userCredentials = credentials != null
+          ? await _firebaseAuth.signInWithCredential(credentials)
+          : null;
+      if (userCredentials != null) {
+        _signInSubject.add(SignInState.successfull);
       } else {
-        final user = await AppleSignInLogic().signInWithFirebaseOAuth();
-        if (user != null) {
-          _signInSubject.add(SignInState.successfull);
-        } else {
-          _signInSubject.add(SignInState.failed);
-        }
+        _signInSubject.add(SignInState.failed);
       }
-    } catch (_) {
-      _signInSubject.add(SignInState.failed);
+    } catch (e) {
+      _signInSubject.add(FailedSignInState(e.toString()));
     }
   }
 
@@ -80,7 +71,7 @@ class SignInBloc extends BlocBase {
       }
     } catch (error) {
       print(error);
-      _signInSubject.add(SignInState.failed);
+      _signInSubject.add(FailedSignInState(error.toString()));
     }
   }
 
@@ -96,7 +87,7 @@ class SignInBloc extends BlocBase {
       }
     } catch (error) {
       print(error);
-      _signInSubject.add(SignInState.failed);
+      _signInSubject.add(FailedSignInState(error.toString()));
     }
   }
 

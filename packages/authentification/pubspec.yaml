@@ -19,10 +19,9 @@ dependencies:
     path: ../schulplaner_translations
   universal_commons:
     path: ../universal_commons
-  firebase_auth: 3.3.4
-  google_sign_in: 5.2.1
+  firebase_auth: 3.3.5
+  google_sign_in: 5.2.3
   sign_in_with_apple: ^3.3.0
-  firebase_auth_oauth: 1.1.0
   rxdart: ^0.27.3
   community_material_icon: 5.9.55
   url_launcher: any

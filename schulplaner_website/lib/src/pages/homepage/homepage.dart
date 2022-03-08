@@ -8,11 +8,12 @@ import 'information_cards.dart';
 import 'learn_more.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage();
+  const HomePage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return InnerLayout(
-      key: ValueKey('HomePageContent'),
+      key: const ValueKey('HomePageContent'),
       content: Column(
         children: const [
           SizedBox(height: 128),
@@ -106,7 +107,7 @@ class _SecondInformation extends StatelessWidget {
         ],
         crossAxisAlignment: CrossAxisAlignment.center,
       ),
-      second: ScreenshotCarousel(),
+      second: const ScreenshotCarousel(),
     );
   }
 }

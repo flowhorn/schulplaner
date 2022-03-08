@@ -5,7 +5,7 @@ import 'package:schulplaner_website/src/routes.dart';
 import 'package:schulplaner_website/src/widgets/dark_mode_switch.dart';
 
 class NavigationDrawer extends StatelessWidget {
-  const NavigationDrawer();
+  const NavigationDrawer({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return const Drawer(
@@ -17,7 +17,7 @@ class NavigationDrawer extends StatelessWidget {
 }
 
 class _DrawerList extends StatelessWidget {
-  const _DrawerList();
+  const _DrawerList({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -40,7 +40,7 @@ class _DrawerList extends StatelessWidget {
 }
 
 class _HomepageTile extends StatelessWidget {
-  const _HomepageTile();
+  const _HomepageTile({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return const _DrawerListTile(
@@ -52,7 +52,7 @@ class _HomepageTile extends StatelessWidget {
 }
 
 class _AboutTile extends StatelessWidget {
-  const _AboutTile();
+  const _AboutTile({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return const _DrawerListTile(
@@ -64,7 +64,7 @@ class _AboutTile extends StatelessWidget {
 }
 
 class _PrivacyTile extends StatelessWidget {
-  const _PrivacyTile();
+  const _PrivacyTile({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return const _DrawerListTile(
@@ -76,7 +76,7 @@ class _PrivacyTile extends StatelessWidget {
 }
 
 class _DownloadTile extends StatelessWidget {
-  const _DownloadTile();
+  const _DownloadTile({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return const _DrawerListTile(
@@ -88,7 +88,7 @@ class _DownloadTile extends StatelessWidget {
 }
 
 class _DonateTile extends StatelessWidget {
-  const _DonateTile();
+  const _DonateTile({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return const _DrawerListTile(
@@ -100,7 +100,7 @@ class _DonateTile extends StatelessWidget {
 }
 
 class _ImpressumTile extends StatelessWidget {
-  const _ImpressumTile();
+  const _ImpressumTile({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return const _DrawerListTile(
@@ -112,7 +112,7 @@ class _ImpressumTile extends StatelessWidget {
 }
 
 class _OpenSourceTile extends StatelessWidget {
-  const _OpenSourceTile();
+  const _OpenSourceTile({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return const _DrawerListTile(
