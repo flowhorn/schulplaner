@@ -2,12 +2,13 @@
   "id": "de-sl",
   "name": "Saarland",
   "country": "germany",
-  "lastRefreshed": "2021-09-22",
+  "lastRefreshed": "2022-11-17",
   "years": [
     "2019",
     "2020",
     "2021",
-    "2022"
+    "2022",
+    "2023"
   ],
   "isOfficial": true,
   "published": true

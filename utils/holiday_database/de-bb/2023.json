@@ -1,0 +1,121 @@
+{
+  "2023-winterferien": {
+    "id": "2023-winterferien",
+    "name": "Winterferien",
+    "end": "2023-02-03",
+    "start": "2023-01-30",
+    "type": "holiday"
+  },
+  "2023-osterferien": {
+    "id": "2023-osterferien",
+    "name": "Osterferien",
+    "end": "2023-04-14",
+    "start": "2023-04-03",
+    "type": "holiday"
+  },
+  "2023-sommerferien": {
+    "id": "2023-sommerferien",
+    "name": "Sommerferien",
+    "end": "2023-08-26",
+    "start": "2023-07-13",
+    "type": "holiday"
+  },
+  "2023-herbstferien": {
+    "id": "2023-herbstferien",
+    "name": "Herbstferien",
+    "end": "2023-11-04",
+    "start": "2023-10-23",
+    "type": "holiday"
+  },
+  "2023-weihnachtsferien": {
+    "id": "2023-weihnachtsferien",
+    "name": "Weihnachtsferien",
+    "end": "2024-01-05",
+    "start": "2023-12-23",
+    "type": "holiday"
+  },
+  "2023-neujahr": {
+    "id": "neujahr",
+    "name": "Neujahr",
+    "end": "2023-01-01",
+    "start": "2023-01-01",
+    "type": "celebration"
+  },
+  "2023-2_weihnachtsfeiertag": {
+    "id": "2_weihnachtsfeiertag",
+    "name": "2. Weihnachtsfeiertag",
+    "end": "2023-12-26",
+    "start": "2023-12-26",
+    "type": "celebration"
+  },
+  "2023-karfreitag": {
+    "id": "karfreitag",
+    "name": "Karfreitag",
+    "end": "2023-04-07",
+    "start": "2023-04-07",
+    "type": "celebration"
+  },
+  "2023-ostersonntag": {
+    "id": "ostersonntag",
+    "name": "Ostersonntag",
+    "end": "2023-04-09",
+    "start": "2023-04-09",
+    "type": "celebration"
+  },
+  "2023-ostermontag": {
+    "id": "ostermontag",
+    "name": "Ostermontag",
+    "end": "2023-04-10",
+    "start": "2023-04-10",
+    "type": "celebration"
+  },
+  "2023-tag_der_arbeit": {
+    "id": "tag_der_arbeit",
+    "name": "Tag der Arbeit",
+    "end": "2023-05-01",
+    "start": "2023-05-01",
+    "type": "celebration"
+  },
+  "2023-christi_himmelfahrt": {
+    "id": "christi_himmelfahrt",
+    "name": "Christi Himmelfahrt",
+    "end": "2023-05-18",
+    "start": "2023-05-18",
+    "type": "celebration"
+  },
+  "2023-pfingstsonntag": {
+    "id": "pfingstsonntag",
+    "name": "Pfingstsonntag",
+    "end": "2023-05-28",
+    "start": "2023-05-28",
+    "type": "celebration"
+  },
+  "2023-pfingstmontag": {
+    "id": "pfingstmontag",
+    "name": "Pfingstmontag",
+    "end": "2023-05-29",
+    "start": "2023-05-29",
+    "type": "celebration"
+  },
+  "2023-tag_der_deutschen_einheit": {
+    "id": "tag_der_deutschen_einheit",
+    "name": "Tag der Deutschen Einheit",
+    "end": "2023-10-03",
+    "start": "2023-10-03",
+    "type": "celebration"
+  },
+  "2023-reformationstag": {
+    "id": "reformationstag",
+    "name": "Reformationstag",
+    "end": "2023-10-31",
+    "start": "2023-10-31",
+    "type": "celebration"
+  },
+  "2023-1_weihnachtsfeiertag": {
+    "id": "1_weihnachtsfeiertag",
+    "name": "1. Weihnachtsfeiertag",
+    "end": "2023-12-25",
+    "start": "2023-12-25",
+    "type": "celebration"
+  }
+}
