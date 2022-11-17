@@ -55,9 +55,9 @@
     "start": "2023-12-26",
     "type": "celebration"
   },
-  "2023-heilige_drei_k�nige": {
-    "id": "heilige_drei_k�nige",
-    "name": "Heilige Drei K�nige",
+  "2023-heilige_drei_könige": {
+    "id": "heilige_drei_könige",
+    "name": "Heilige Drei Könige",
     "end": "2023-01-06",
     "start": "2023-01-06",
     "type": "celebration"
@@ -104,9 +104,9 @@
     "start": "2023-06-08",
     "type": "celebration"
   },
-  "2023-mari�_himmelfahrt": {
-    "id": "mari�_himmelfahrt",
-    "name": "Mari� Himmelfahrt",
+  "2023-mariä_himmelfahrt": {
+    "id": "mariä_himmelfahrt",
+    "name": "Mariä Himmelfahrt",
     "end": "2023-08-15",
     "start": "2023-08-15",
     "type": "celebration"
