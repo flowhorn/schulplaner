@@ -83,16 +83,16 @@ class AppWidgetTasks : AppWidgetProvider() {
 
             widget_toolbar.setBackgroundColor(Color.parseColor("#"+mywidgetsettings.appdesign.primary))
 
-            val pendingIntent_startApp = PendingIntent.getActivity(context, 0, startAppIntent(context, "starttasks"), PendingIntent.FLAG_UPDATE_CURRENT)
+            val pendingIntent_startApp = PendingIntent.getActivity(context, 0, startAppIntent(context, "starttasks"), PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
             views.setOnClickPendingIntent(R.id.widget_toolbar, pendingIntent_startApp)
 
 
             val intent_a =  Intent(context, AppWidgetTasks::class.java)
             intent_a.action = "widget_set_refresh"
-            views.setOnClickPendingIntent(R.id.widget_button_refresh, PendingIntent.getBroadcast(context, 0, intent_a, 0));
+            views.setOnClickPendingIntent(R.id.widget_button_refresh, PendingIntent.getBroadcast(context, 0, intent_a, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT));
 
 
-            val pendingIntent_onLessonClick = PendingIntent.getActivity(context, 0, Intent(context, LessonDialogView::class.java),  PendingIntent.FLAG_UPDATE_CURRENT)
+            val pendingIntent_onLessonClick = PendingIntent.getActivity(context, 0, Intent(context, LessonDialogView::class.java),  PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
 
             views.setPendingIntentTemplate(R.id.widget_listview_tasks, pendingIntent_onLessonClick)
 

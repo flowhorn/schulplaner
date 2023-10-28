@@ -39,7 +39,7 @@ android {
         }
     }
 
-    compileSdkVersion 32
+    compileSdkVersion 31
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
@@ -54,9 +54,9 @@ android {
     defaultConfig {
         applicationId "com.xla.school"
         minSdkVersion 21
-        targetSdkVersion 32
-        versionCode 638
-        versionName "11.7.0"
+        targetSdkVersion 31
+        versionCode 640
+        versionName "11.7.2"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -101,11 +101,12 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     implementation 'androidx.core:core:1.7.0'
-    implementation 'androidx.preference:preference:1.1.1'
-    implementation 'androidx.appcompat:appcompat:1.4.0'
+    implementation 'androidx.preference:preference:1.2.0'
+    implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'com.google.android.material:material:1.5.0'
     implementation 'com.google.firebase:firebase-firestore-ktx:24.0.0'
+    implementation "androidx.work:work-runtime:2.7.1"
     
     implementation 'com.google.code.gson:gson:2.8.6'
 }

@@ -64,7 +64,7 @@ class _AppSettingsState extends State<AppSettingsStateHead>
   void initState() {
     super.initState();
     widget.dynamicLinksLogic.initDynamicLinks();
-    WidgetsBinding.instance!.addObserver(this);
+    WidgetsBinding.instance.addObserver(this);
   }
 
   @override
@@ -79,7 +79,7 @@ class _AppSettingsState extends State<AppSettingsStateHead>
 
   @override
   void dispose() {
-    WidgetsBinding.instance!.removeObserver(this);
+    WidgetsBinding.instance.removeObserver(this);
     if (_timerLink != null) {
       _timerLink.cancel();
     }

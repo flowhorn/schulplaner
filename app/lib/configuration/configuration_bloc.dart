@@ -15,7 +15,7 @@ class ConfigurationBloc extends BlocBase {
   bool get showSignInNoticeValue => _showSignInNoticeSubject.value;
 
   final hideSignInNoticeSubject = BehaviorSubject<bool>.seeded(false);
-
+  final detailedNoticeEnabledSubject = BehaviorSubject<bool>.seeded(true);
   ConfigurationBloc() {
     _init();
   }
@@ -28,6 +28,7 @@ class ConfigurationBloc extends BlocBase {
     await instance.setDefaults({
       'is_sign_in_possible': true,
       'show_sign_in_notice': false,
+      'detailed_notice_enabled': false,
     });
     await instance.fetchAndActivate();
     final configs = instance.getAll();
@@ -36,6 +37,9 @@ class ConfigurationBloc extends BlocBase {
     );
     _showSignInNoticeSubject.add(
       configs['show_sign_in_notice']!.asBool(),
+    );
+    detailedNoticeEnabledSubject.add(
+      configs['detailed_notice_enabled']!.asBool(),
     );
     final sharedPrefInstance = await SharedPreferences.getInstance();
     hideSignInNoticeSubject

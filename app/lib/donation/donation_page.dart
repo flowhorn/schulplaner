@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:schulplaner8/Helper/Functions.dart';
 import 'package:schulplaner8/Helper/helper_data.dart';
 import 'package:schulplaner8/ads/ad_support.dart';
+import 'package:schulplaner8/configuration/configuration_bloc.dart';
 // import 'package:schulplaner8/ads/get_ad_id.dart';
 // import 'package:schulplaner_addons/common/show_toast.dart';
 import 'package:schulplaner_translations/schulplaner_translations.dart';
@@ -197,27 +198,30 @@ class _DonateButton extends StatelessWidget {
           SizedBox(
             height: 8,
           ),
-          if (AdSupport.areAdsSupported)
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: FloatingActionButton.extended(
-                heroTag: 'fab3',
-                onPressed: () {
-                  // loadRewardAd(context);
-                },
-                label: Text(
-                  BothLangString(
-                    de: 'Kostenlos eine Werbung schauen',
-                    en: 'Watch one ad for free',
-                  ).getText(context),
-                ),
-                backgroundColor: Colors.redAccent,
-              ),
-            ),
+          // if (AdSupport.areAdsSupported)
+          //   Padding(
+          //     padding: const EdgeInsets.all(8.0),
+          //     child: FloatingActionButton.extended(
+          //       heroTag: 'fab3',
+          //       onPressed: () {
+          //         // loadRewardAd(context);
+          //       },
+          //       label: Text(
+          //         BothLangString(
+          //           de: 'Kostenlos eine Werbung schauen',
+          //           en: 'Watch one ad for free',
+          //         ).getText(context),
+          //       ),
+          //       backgroundColor: Colors.redAccent,
+          //     ),
+          //   ),
           SizedBox(
             height: 8,
           ),
-          if (DateTime.now().isAfter(DateTime.parse('2022-03-25')))
+          if (ConfigurationBloc.get(context)
+                  .detailedNoticeEnabledSubject
+                  .value ==
+              true)
             FloatingActionButton.extended(
               heroTag: 'fab2',
               onPressed: () {

@@ -50,21 +50,21 @@ class DonationCard extends StatelessWidget {
                       openDonationPage(context: context);
                     },
                   ),
-                  if (AdSupport.areAdsSupported)
-                    ListTile(
-                      leading: Icon(Icons.play_circle_fill_rounded,
-                          color: Colors.greenAccent),
-                      title: Text(
-                        BothLangString(
-                          de: 'Eine Werbeanzeige zum Unterstützen schauen',
-                          en: 'Show one ad to support the app',
-                        ).getText(context),
-                        style: TextStyle(color: Colors.greenAccent),
-                      ),
-                      onTap: () {
-                        // loadRewardAd(context);
-                      },
-                    ),
+                  // if (AdSupport.areAdsSupported)
+                  //   ListTile(
+                  //     leading: Icon(Icons.play_circle_fill_rounded,
+                  //         color: Colors.greenAccent),
+                  //     title: Text(
+                  //       BothLangString(
+                  //         de: 'Eine Werbeanzeige zum Unterstützen schauen',
+                  //         en: 'Show one ad to support the app',
+                  //       ).getText(context),
+                  //       style: TextStyle(color: Colors.greenAccent),
+                  //     ),
+                  //     onTap: () {
+                  //       // loadRewardAd(context);
+                  //     },
+                  //   ),
                   ListTile(
                     leading: Icon(Icons.cancel_outlined),
                     title: Text(

@@ -97,7 +97,7 @@ class AppWidgetTimetable : AppWidgetProvider() {
             widget_toolbar.setBackgroundColor(Color.parseColor("#"+mywidgetsettings.appdesign.primary))
             topPanel.setBackgroundColor(Color.parseColor("#"+mywidgetsettings.appdesign.primary))
 
-            val pendingIntent_startApp = PendingIntent.getActivity(context, 1, startAppIntent(context, "starttimetable"), PendingIntent.FLAG_UPDATE_CURRENT)
+            val pendingIntent_startApp = PendingIntent.getActivity(context, 1, startAppIntent(context, "starttimetable"), PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
             views.setOnClickPendingIntent(R.id.widget_timetable_toolbar, pendingIntent_startApp)
 
             val intent =  Intent(context, ServiceWidgetTimetable::class.java)
@@ -106,7 +106,7 @@ class AppWidgetTimetable : AppWidgetProvider() {
             intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
             intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
 
-            val pendingIntent_onLessonClick = PendingIntent.getActivity(context, 0, Intent(context, LessonDialogView::class.java), 0)
+            val pendingIntent_onLessonClick = PendingIntent.getActivity(context, 0, Intent(context, LessonDialogView::class.java), PendingIntent.FLAG_MUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
             views.setPendingIntentTemplate(R.id.widget_listview, pendingIntent_onLessonClick)
 
             views.setRemoteAdapter(R.id.widget_listview, intent)

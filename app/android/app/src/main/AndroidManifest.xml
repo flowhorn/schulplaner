@@ -106,6 +106,7 @@
             android:documentLaunchMode="always"
             android:launchMode="singleTask"
             android:theme="@style/MyTranslucent"
+            android:exported="true"
             />
 
     <meta-data
