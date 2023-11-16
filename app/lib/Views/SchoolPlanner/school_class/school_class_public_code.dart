@@ -34,7 +34,7 @@ class SchoolClassPublicCodeView extends StatelessWidget {
                   title: Text(getString(context).publiccode),
                 ),
                 ListTile(
-                  title: Text(
+                  title: SelectableText(
                     info.publiccode != null
                         ? ('#' + info.publiccode!)
                         : ('#??????'),

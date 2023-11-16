@@ -43,11 +43,8 @@ ThemeData newAppThemeDesign(BuildContext context, Design? design) {
   );
 }
 
-Theme clearAppTheme({required BuildContext context, required Widget child}) {
-  return Theme(
-    data: clearAppThemeData(context: context),
-    child: child,
-  );
+Widget clearAppTheme({required BuildContext context, required Widget child}) {
+  return child;
 }
 
 ThemeData clearAppThemeData({required BuildContext context}) {
