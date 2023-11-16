@@ -4,8 +4,8 @@ import 'package:schulplaner_website/src/models/navigation_item.dart';
 import 'package:schulplaner_website/src/routes.dart';
 import 'package:schulplaner_website/src/widgets/dark_mode_switch.dart';
 
-class NavigationDrawer extends StatelessWidget {
-  const NavigationDrawer({Key? key}) : super(key: key);
+class WebsiteNavigationDrawer extends StatelessWidget {
+  const WebsiteNavigationDrawer({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return const Drawer(
@@ -20,8 +20,8 @@ class _DrawerList extends StatelessWidget {
   const _DrawerList({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: const [
+    return const Column(
+      children: [
         SizedBox(height: 16),
         _HomepageTile(),
         _DownloadTile(),

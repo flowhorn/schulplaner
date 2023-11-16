@@ -20,7 +20,7 @@ class DesktopScaffold extends StatelessWidget {
         key: Key('_DesktopAppBar'),
       ),
       body: body,
-      endDrawer: const NavigationDrawer(),
+      endDrawer: const WebsiteNavigationDrawer(),
     );
   }
 }

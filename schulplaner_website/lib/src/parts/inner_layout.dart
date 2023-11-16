@@ -11,10 +11,10 @@ class InnerLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scrollbar(
-      hoverThickness: 12,
       thickness: 12,
       child: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
               padding: const EdgeInsets.all(16),
@@ -22,7 +22,6 @@ class InnerLayout extends StatelessWidget {
             ),
             const Footer(),
           ],
-          crossAxisAlignment: CrossAxisAlignment.start,
         ),
       ),
     );

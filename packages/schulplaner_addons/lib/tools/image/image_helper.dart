@@ -7,10 +7,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 
 class ImageCompresser {
-  static Future<File?> compressImage(File image,
+  static Future<XFile?> compressImage(XFile image,
       {int compressionRate = 95}) async {
-    String temporaryPath =
-        (await getTemporaryDirectory()).path + image.uri.pathSegments.last;
+    String temporaryPath = (await getTemporaryDirectory()).path + image.name;
     return FlutterImageCompress.compressAndGetFile(image.path, temporaryPath,
         quality: compressionRate);
   }
@@ -22,15 +21,14 @@ class ImageCompresser {
 }
 
 class ImageHelper {
-  static Future<File> resizeImage(File file, {int? width, int? height}) async {
-    final image = decodeImage(file.readAsBytesSync());
+  static Future<File> resizeImage(XFile file, {int? width, int? height}) async {
+    final image = decodeImage(await file.readAsBytes());
     final thumbnail = copyResize(image!, width: width, height: height);
-    String path =
-        (await getTemporaryDirectory()).path + file.uri.pathSegments.last;
+    String path = (await getTemporaryDirectory()).path + file.name;
     return File(path)..writeAsBytesSync(encodePng(thumbnail));
   }
 
-  static Future<File?> cropImage(File file) {
+  static Future<CroppedFile?> cropImage(XFile file) {
     return ImageCropper().cropImage(
       sourcePath: file.path,
       aspectRatioPresets: [
@@ -39,7 +37,7 @@ class ImageHelper {
     );
   }
 
-  static Future<File?> pickImageCamera({
+  static Future<XFile?> pickImageCamera({
     double? maxWidth,
     double? maxHeight,
   }) async {
@@ -49,13 +47,13 @@ class ImageHelper {
       maxWidth: maxWidth,
     );
     if (image != null) {
-      return File(image.path);
+      return image;
     } else {
       return null;
     }
   }
 
-  static Future<File?> pickImageGallery({
+  static Future<XFile?> pickImageGallery({
     double? maxWidth,
     double? maxHeight,
   }) async {
@@ -65,7 +63,7 @@ class ImageHelper {
       maxWidth: maxWidth,
     );
     if (image != null) {
-      return File(image.path);
+      return image;
     } else {
       return null;
     }

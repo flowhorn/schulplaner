@@ -1,12 +1,11 @@
 name: schulplaner_navigation
 description: A new Flutter package project.
 version: 0.0.1
-homepage:
 publish_to: none
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
-  flutter: ">2.0.0"
+  sdk: ">=3.2.0"
+  flutter: ">=3.16.0"
 
 dependencies:
   bloc:
@@ -15,8 +14,8 @@ dependencies:
     path: ../schulplaner_widgets
   schulplaner_translations:
     path: ../schulplaner_translations
-  rxdart: ^0.27.3
-  shared_preferences: 2.0.13
+  rxdart: ^0.27.7
+  shared_preferences: 2.2.2
   flutter:
     sdk: flutter
 

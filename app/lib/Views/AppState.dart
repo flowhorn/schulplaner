@@ -115,12 +115,14 @@ class _AppSettingsState extends State<AppSettingsStateHead>
               : null,
           theme: appSettingsData?.getThemeData() ??
               ThemeData(
-                primaryColor: Colors.teal,
-                accentColor: Colors.redAccent,
-                brightness: Brightness.light,
+                colorScheme: ColorScheme.fromSeed(
+                  seedColor: Colors.teal,
+                  secondary: Colors.redAccent,
+                  brightness: Brightness.light,
+                  background: getBackgroundColor(context),
+                ),
                 bottomSheetTheme: bottomSheetTheme,
                 dialogTheme: dialogTheme,
-                backgroundColor: getBackgroundColor(context),
                 scaffoldBackgroundColor: getBackgroundColor(context),
               ),
           navigatorObservers: [
@@ -239,7 +241,7 @@ class SelectPlannerViewState extends State<SelectPlannerView> {
                                   child: SizedBox(
                                     height: 72.0,
                                     child: Center(
-                                      child: FlatButton.icon(
+                                      child: TextButton.icon(
                                         icon: Icon(
                                           Icons.add,
                                           size: 28.0,
@@ -249,8 +251,10 @@ class SelectPlannerViewState extends State<SelectPlannerView> {
                                           style: TextStyle(fontSize: 18.0),
                                         ),
                                         onPressed: null,
-                                        disabledTextColor:
-                                            getAccentColor(context),
+                                        style: TextButton.styleFrom(
+                                          disabledForegroundColor:
+                                              getAccentColor(context),
+                                        ),
                                       ),
                                     ),
                                   ),

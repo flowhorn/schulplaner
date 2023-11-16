@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:schulplaner_addons/common/widgets/sheets.dart';
 import 'package:schulplaner_addons/common/widgets/widgets.dart';
 import 'package:schulplaner_addons/tools/image/image_helper.dart';
 import 'package:schulplaner_addons/utils/date_utils.dart' as date_utils;
-import 'package:schulplaner_addons/utils/file_utils.dart';
 
 Future<String?> selectDate(BuildContext context, {String? initialDate}) {
   return showDatePicker(
@@ -35,9 +35,8 @@ Future<TimeOfDay?> selectTime(BuildContext context, {TimeOfDay? initialTime}) {
   });
 }
 
-Future<LocalFile?> selectImage(BuildContext context,
-    {bool resize = false}) async {
-  LocalFile? localFile = await showSheet<LocalFile>(
+Future<XFile?> selectImage(BuildContext context, {bool resize = false}) async {
+  XFile? localFile = await showSheet<XFile>(
       context: context,
       title: 'Bild auswählen',
       child: Row(
@@ -50,7 +49,7 @@ Future<LocalFile?> selectImage(BuildContext context,
             onTap: () {
               ImageHelper.pickImageCamera().then((file) {
                 if (file != null) {
-                  Navigator.pop(context, LocalFile(file));
+                  Navigator.pop(context, file);
                 }
               });
             },
@@ -62,7 +61,7 @@ Future<LocalFile?> selectImage(BuildContext context,
             onTap: () {
               ImageHelper.pickImageGallery().then((file) {
                 if (file != null) {
-                  Navigator.pop(context, LocalFile(file));
+                  Navigator.pop(context, file);
                 }
               });
             },
@@ -73,8 +72,8 @@ Future<LocalFile?> selectImage(BuildContext context,
     return null;
   } else {
     if (resize) {
-      final croppedFile = await ImageHelper.cropImage(localFile.file);
-      return croppedFile != null ? LocalFile(croppedFile) : null;
+      final croppedFile = await ImageHelper.cropImage(localFile);
+      return croppedFile != null ? XFile(croppedFile.path) : null;
     } else {
       return localFile;
     }

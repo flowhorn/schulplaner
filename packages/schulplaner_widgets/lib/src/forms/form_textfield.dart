@@ -31,16 +31,19 @@ class FormTextField extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(left: 8.0, right: 8.0),
       child: Theme(
-          data: newAppTheme(context,
-              primaryColor: Theme.of(context).colorScheme.secondary),
+          data: newAppTheme(
+            context,
+            primaryColor: Theme.of(context).colorScheme.secondary,
+          ),
           child: TextField(
             controller: TextEditingController(text: text ?? ''),
             onChanged: valueChanged,
             decoration: InputDecoration(
-                icon: iconData != null ? Icon(iconData) : null,
-                labelText: labeltext,
-                border: OutlineInputBorder(),
-                prefixText: prefixtext),
+              icon: iconData != null ? Icon(iconData) : null,
+              labelText: labeltext,
+              border: OutlineInputBorder(),
+              prefixText: prefixtext,
+            ),
             keyboardAppearance: Theme.of(context).brightness,
             keyboardType: keyBoardType,
             obscureText: obscureText,

@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:bloc/bloc_base.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:schulplaner8/Data/Planner/File.dart';
 import 'package:schulplaner8/Data/planner_database/planner_database.dart';
@@ -59,7 +60,7 @@ class NewFileBloc extends BlocBase {
     var cloudFile = cloudFileValue;
     final pickedFile = await FileHelper().pickFile();
     if (pickedFile == null) return;
-    File newFile;
+    XFile newFile;
     try {
       final compressedFile = await ImageCompresser.compressImage(pickedFile);
       newFile = compressedFile ?? pickedFile;
@@ -74,7 +75,7 @@ class NewFileBloc extends BlocBase {
         .child('personal')
         .child(cloudFile.savedin!.id!)
         .child(cloudFile.fileid!)
-        .putFile(newFile);
+        .putData(await newFile.readAsBytes());
     // ignore: unawaited_futures
     _uploadEventsSubject.addStream(uploadTask.snapshotEvents);
 

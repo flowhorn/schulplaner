@@ -79,11 +79,14 @@ class EmailView extends StatelessWidget {
                               ),
                               InkWell(
                                 child: Center(
-                                  child: FlatButton.icon(
+                                  child: TextButton.icon(
                                     icon: Icon(Icons.done),
                                     label: Text(getString(context).signin),
                                     onPressed: null,
-                                    disabledTextColor: getAccentColor(context),
+                                    style: TextButton.styleFrom(
+                                      disabledForegroundColor:
+                                          getAccentColor(context),
+                                    ),
                                   ),
                                 ),
                                 onTap: () {
@@ -228,11 +231,14 @@ class RegisterEmailView extends StatelessWidget {
                               ),
                               InkWell(
                                 child: Center(
-                                  child: FlatButton.icon(
+                                  child: TextButton.icon(
                                     icon: Icon(Icons.done),
                                     label: Text(getString(context).register),
                                     onPressed: null,
-                                    disabledTextColor: getAccentColor(context),
+                                    style: TextButton.styleFrom(
+                                      disabledForegroundColor:
+                                          getAccentColor(context),
+                                    ),
                                   ),
                                 ),
                                 onTap: () {

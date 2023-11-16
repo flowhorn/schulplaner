@@ -11,13 +11,16 @@ import 'package:schulplaner8/app_base/src/blocs/app_settings_bloc.dart';
 import 'package:schulplaner8/dynamic_links/src/bloc/dynamic_link_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:universal_commons/platform_check.dart';
+import 'default_firebase_options.dart';
 import 'schulplaner_blocs.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: '.env');
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: defaultFirebaseOptions,
+  );
   if (!PlatformCheck.isWeb) {
     FirebaseDatabase.instance.setPersistenceEnabled(true);
   }

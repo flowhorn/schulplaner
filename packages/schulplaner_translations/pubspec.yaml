@@ -1,21 +1,18 @@
 name: schulplaner_translations
 description: Übersetzungen und Übersetzungs Framework für die Schulplaner App
 version: 0.0.1
-homepage:
 publish_to: none
 
 environment:
-  sdk: ">2.12.0"
-  flutter: ">2.0.0"
+  sdk: ">=3.2.0"
+  flutter: ">=3.16.0"
 
 dependencies:
-  intl: ^0.17.0
-  intl_translation: 
-   git:
-      url: https://github.com/Zazo032/intl_translation.git
-      ref: patch-1
+  intl: 0.18.1
+  intl_translation: 0.18.2
   flutter:
     sdk: flutter
+  
 
 dev_dependencies:
   flutter_test:

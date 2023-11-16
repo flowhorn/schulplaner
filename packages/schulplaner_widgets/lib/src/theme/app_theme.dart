@@ -13,34 +13,25 @@ ThemeData newAppTheme(BuildContext context,
       primary: primaryColor ?? parentTheme.primaryColor,
       secondary: newAccentColor,
       brightness: parentTheme.brightness,
+      background: backgroundColor ?? getBackgroundColor(context),
     ),
-    backgroundColor: backgroundColor ?? getBackgroundColor(context),
     scaffoldBackgroundColor: backgroundColor ?? getBackgroundColor(context),
+    inputDecorationTheme: InputDecorationTheme(focusColor: primaryColor),
   );
 }
 
-ColorScheme getColorScheme(
-    {required Color primary,
-    Color? secondary,
-    required Brightness brightness}) {
-  return ColorScheme.fromSwatch(
-    primarySwatch: MaterialColor(
-      primary.value,
-      {
-        50: primary.withOpacity(.1),
-        100: primary.withOpacity(.2),
-        200: primary.withOpacity(.3),
-        300: primary.withOpacity(.4),
-        400: primary.withOpacity(.5),
-        500: primary.withOpacity(.6),
-        600: primary.withOpacity(.7),
-        700: primary.withOpacity(.8),
-        800: primary.withOpacity(.9),
-        900: primary.withOpacity(1),
-      },
-    ),
-    accentColor: secondary,
+ColorScheme getColorScheme({
+  required Color primary,
+  Color? secondary,
+  required Brightness brightness,
+  Color? background,
+}) {
+  return ColorScheme.fromSeed(
+    primary: primary,
+    seedColor: primary,
+    secondary: secondary,
     brightness: brightness,
+    background: background,
   );
 }
 
@@ -70,15 +61,15 @@ ThemeData clearAppThemeData({required BuildContext context}) {
         ? Colors.grey[900]
         : Colors.white,
     brightness: parentTheme.brightness,
+    background: getBackgroundColor(context),
   );
   return ThemeData(
     colorScheme: colorScheme,
     brightness: parentTheme.brightness,
-    backgroundColor: getBackgroundColor(context),
     scaffoldBackgroundColor: getBackgroundColor(context),
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
-        primary: parentTheme.brightness == Brightness.light
+        foregroundColor: parentTheme.brightness == Brightness.light
             ? Colors.grey[900]
             : Colors.white,
       ),

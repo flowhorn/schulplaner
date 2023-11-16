@@ -1060,14 +1060,19 @@ Future<bool?> showConfirmDialog(
               ),
               child: Text(getString(context).cancel.toUpperCase()),
             ),
-            FlatButton(
+            TextButton(
               onPressed: () {
                 Navigator.pop(context, true);
               },
-              color: Colors.redAccent,
-              textColor: Colors.white,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(8.0))),
+              style: TextButton.styleFrom(
+                backgroundColor: Colors.redAccent,
+                foregroundColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(8.0),
+                  ),
+                ),
+              ),
               child: Text((action ?? title).toUpperCase()),
             ),
           ],
@@ -1270,7 +1275,7 @@ class QRCodeViewPublicCode extends StatelessWidget {
     return publiccode == null
         ? Container()
         : InkWell(
-            child: QrImage(
+            child: QrImageView(
               data: publiccode!,
               size: 112.0,
               foregroundColor: getTextColor(getBackgroundColor(context)),

@@ -12,7 +12,7 @@ class MobileScaffold extends StatelessWidget {
     return Scaffold(
       appBar: const _MobileAppBar(),
       body: body,
-      endDrawer: const NavigationDrawer(),
+      endDrawer: const WebsiteNavigationDrawer(),
     );
   }
 }

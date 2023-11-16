@@ -1,9 +1,8 @@
-//
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:schulplaner_addons/common/widgets/pickers.dart';
 import 'package:schulplaner_addons/common/widgets/widgets.dart';
 import 'package:schulplaner_addons/tools/image/cloud_photo.dart';
 import 'package:schulplaner_addons/utils/date_utils.dart' as date_utils;
-import 'package:schulplaner_addons/utils/file_utils.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
@@ -299,7 +298,7 @@ class EditCustomField extends StatelessWidget {
 class EditPhotoField extends StatelessWidget {
   final CloudPhoto? cloudPhoto;
   final void Function() onClickedRemove;
-  final void Function(LocalFile file) onAddedFile;
+  final void Function(XFile file) onAddedFile;
   EditPhotoField(
       {required this.cloudPhoto,
       required this.onClickedRemove,

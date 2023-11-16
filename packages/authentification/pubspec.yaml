@@ -1,12 +1,11 @@
 name: authentification
 description:  Authentifizierung für die Schulplaner App
 version: 0.0.1
-homepage:
 publish_to: none
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
-  flutter: ">2.0.0"
+  sdk: ">=3.2.0"
+  flutter: ">=3.16.0"
 
 dependencies:
   flutter:
@@ -19,14 +18,14 @@ dependencies:
     path: ../schulplaner_translations
   universal_commons:
     path: ../universal_commons
-  firebase_auth: 3.3.9
-  google_sign_in: 5.2.4
-  sign_in_with_apple: ^3.3.0
-  rxdart: ^0.27.3
+  firebase_auth: 4.14.0
+  google_sign_in: 6.1.6
+  sign_in_with_apple: ^5.0.0
+  rxdart: ^0.27.7
   community_material_icon: 5.9.55
   url_launcher: any
-  googleapis_auth: 1.3.0
-  flutter_dotenv: ^5.0.2
+  googleapis_auth: 1.4.1
+  flutter_dotenv: ^5.1.0
 
 
 
@@ -34,10 +33,3 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-dependency_overrides:
-  intl: ^0.17.0
-  crypto: ^3.0.1
-  intl_translation:
-    git:
-      url: https://github.com/Zazo032/intl_translation.git
-      ref: patch-1
