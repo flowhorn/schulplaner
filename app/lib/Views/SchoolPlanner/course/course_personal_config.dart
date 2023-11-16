@@ -28,7 +28,7 @@ class CoursePersonalPage extends StatelessWidget {
             child: CircularProgressIndicator(),
           );
         }
-        Design courseDesign = courseInfo.getDesign()!;
+        final courseDesign = courseInfo.getDesign();
         return Theme(
             data: newAppThemeDesign(context, courseDesign),
             child: Scaffold(
@@ -103,7 +103,7 @@ class CoursePersonalPage extends StatelessWidget {
                     ),
                     subtitle: Text(database
                         .getSettings()
-                        .getGradeProfile(courseInfo.personalgradeprofile!)
+                        .getGradeProfile(courseInfo.personalgradeprofile)
                         .name),
                     onTap: () {
                       selectItem<GradeProfile?>(
