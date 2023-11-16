@@ -16,6 +16,7 @@
 *.ipr
 *.iws
 .idea/
+default_firebase_options.dart
 
 # Visual Studio Code related
 
