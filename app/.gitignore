@@ -10,7 +10,7 @@
 .buildlog/
 .history
 .svn/
-
+.firebase/
 # IntelliJ related
 *.iml
 *.ipr
