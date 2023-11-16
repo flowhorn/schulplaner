@@ -1,6 +1,6 @@
 class Config {
-  static String versionName = '11.7.2';
-  static int versionCode = 640;
+  static String versionName = '12.0';
+  static int versionCode = 641;
 
   //ignore: avoid_init_to_null
   static String? uid = null;

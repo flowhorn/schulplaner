@@ -21,6 +21,17 @@ class ChangelogItem {
 class ChangelogView extends StatelessWidget {
   final List<ChangelogItem> changeloglist = [
     ChangelogItem(
+      versioncode: 641,
+      versionname: '12',
+      releasedate: '2023-11-16',
+      changes_de: [
+        'Aktualiserung des internen Codes auf eine neue Flutter-Version.',
+      ],
+      changes_en: [
+        'Update of the internal code to a new flutter version.',
+      ],
+    ),
+    ChangelogItem(
       versioncode: 611,
       versionname: '10',
       releasedate: '2020-10-01',
