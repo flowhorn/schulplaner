@@ -78,102 +78,103 @@ void showNewCourseSheet(BuildContext context, PlannerDatabase database) {
 void showCourseMoreSheet(BuildContext context,
     {required String courseid, required PlannerDatabase plannerdatabase}) {
   showDetailSheetBuilder(
-      context: context,
-      body: (context) {
-        return StreamBuilder<Course?>(
-            initialData: plannerdatabase.getCourseInfo(courseid),
-            stream: plannerdatabase.courseinfo.getItemStream(courseid),
-            builder: (context, snapshot) {
-              Course? courseInfo = snapshot.data;
-              if (courseInfo == null) return loadedView();
-              return Column(
-                children: <Widget>[
-                  getSheetText(context, courseInfo.getName()),
-                  SingleChildScrollView(
-                    child: Column(children: [
-                      ListTile(
-                        leading: Icon(Icons.share),
-                        title: Text(getString(context).share),
-                        onTap: () {
-                          pushWidget(
-                              context,
-                              Scaffold(
-                                appBar: AppBar(),
-                                body: CoursePublicCodeView(
-                                    courseid: courseInfo.id,
-                                    database: plannerdatabase),
-                              ));
-                        },
-                      ),
-                      plannerdatabase.connectionsState.directconnections
-                              .containsKey(courseInfo.id)
-                          ? ListTile(
-                              leading: Icon(Icons.delete_outline),
-                              title: Text(getString(context).leavecourse),
-                              onTap: () {
-                                tryToLeaveCourse(context, courseInfo);
-                              },
-                            )
-                          : nowidget(),
-                      FormSpace(16.0),
-                      StreamBuilder<PlannerConnections?>(
-                        builder: (context, snapshot) {
-                          PlannerConnections? connectionsdata = snapshot.data;
-                          if (connectionsdata == null) {
-                            return CircularProgressIndicator();
-                          }
-                          PlannerConnectionsState connectionsstate =
-                              plannerdatabase.connectionsState;
-                          return Column(
-                            children: connectionsstate
-                                .getConnectedSchoolClassesFor(courseid)
-                                .map((classid) {
-                              bool isActivated = connectionsdata
-                                  .isCourseActivated(courseid, classid);
-                              return getTitleCard(
-                                  iconData: Icons.school,
-                                  title: plannerdatabase
-                                          .getClassInfo(classid)
-                                          ?.getName() ??
-                                      '-',
-                                  content: [
-                                    isActivated
-                                        ? ListTile(
-                                            leading: Icon(
-                                                Icons.check_box_outline_blank),
-                                            title: Text(getString(context)
-                                                .deactivate_forme),
-                                            onTap: () {
-                                              Navigator.pop(context);
-                                              plannerdatabase.dataManager
-                                                  .ActivateCourseFromClassForUser(
-                                                      classid, courseid, false);
-                                            },
-                                          )
-                                        : ListTile(
-                                            leading: Icon(Icons.check_box),
-                                            title: Text(getString(context)
-                                                .activate_forme),
-                                            onTap: () {
-                                              Navigator.pop(context);
-                                              plannerdatabase.dataManager
-                                                  .ActivateCourseFromClassForUser(
-                                                      classid, courseid, true);
-                                            },
-                                          ),
-                                  ]);
-                            }).toList(),
-                          );
-                        },
-                        stream: plannerdatabase.connections.stream,
-                        initialData: plannerdatabase.connections.data,
-                      ),
-                    ]),
-                  ),
-                ],
-              );
-            });
-      });
+    context: context,
+    body: (context) {
+      return StreamBuilder<Course?>(
+          initialData: plannerdatabase.getCourseInfo(courseid),
+          stream: plannerdatabase.courseinfo.getItemStream(courseid),
+          builder: (context, snapshot) {
+            Course? courseInfo = snapshot.data;
+            if (courseInfo == null) return loadedView();
+            return Column(
+              children: <Widget>[
+                getSheetText(context, courseInfo.getName()),
+                SingleChildScrollView(
+                  child: Column(children: [
+                    ListTile(
+                      leading: Icon(Icons.share),
+                      title: Text(getString(context).share),
+                      onTap: () {
+                        pushWidget(
+                            context,
+                            Scaffold(
+                              appBar: AppBar(),
+                              body: CoursePublicCodeView(
+                                  courseid: courseInfo.id,
+                                  database: plannerdatabase),
+                            ));
+                      },
+                    ),
+                    plannerdatabase.connectionsState.directconnections
+                            .containsKey(courseInfo.id)
+                        ? ListTile(
+                            leading: Icon(Icons.delete_outline),
+                            title: Text(getString(context).leavecourse),
+                            onTap: () {
+                              tryToLeaveCourse(context, courseInfo);
+                            },
+                          )
+                        : nowidget(),
+                    FormSpace(16.0),
+                    StreamBuilder<PlannerConnections?>(
+                      builder: (context, snapshot) {
+                        PlannerConnections? connectionsdata = snapshot.data;
+                        if (connectionsdata == null) {
+                          return CircularProgressIndicator();
+                        }
+                        PlannerConnectionsState connectionsstate =
+                            plannerdatabase.connectionsState;
+                        return Column(
+                          children: connectionsstate
+                              .getConnectedSchoolClassesFor(courseid)
+                              .map((classid) {
+                            bool isActivated = connectionsdata
+                                .isCourseActivated(courseid, classid);
+                            return getTitleCard(
+                                iconData: Icons.school,
+                                title: plannerdatabase
+                                        .getClassInfo(classid)
+                                        ?.getName() ??
+                                    '-',
+                                content: [
+                                  isActivated
+                                      ? ListTile(
+                                          leading: Icon(
+                                              Icons.check_box_outline_blank),
+                                          title: Text(getString(context)
+                                              .deactivate_forme),
+                                          onTap: () {
+                                            Navigator.pop(context);
+                                            plannerdatabase.dataManager
+                                                .ActivateCourseFromClassForUser(
+                                                    classid, courseid, false);
+                                          },
+                                        )
+                                      : ListTile(
+                                          leading: Icon(Icons.check_box),
+                                          title: Text(getString(context)
+                                              .activate_forme),
+                                          onTap: () {
+                                            Navigator.pop(context);
+                                            plannerdatabase.dataManager
+                                                .ActivateCourseFromClassForUser(
+                                                    classid, courseid, true);
+                                          },
+                                        ),
+                                ]);
+                          }).toList(),
+                        );
+                      },
+                      stream: plannerdatabase.connections.stream,
+                      initialData: plannerdatabase.connections.data,
+                    ),
+                  ]),
+                ),
+              ],
+            );
+          });
+    },
+  );
 }
 
 class QuickCreateCourseView extends StatelessWidget {

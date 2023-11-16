@@ -56,7 +56,7 @@ ThemeData clearAppThemeData({required BuildContext context}) {
   final colorScheme = getColorScheme(
     primary: parentTheme.brightness == Brightness.light
         ? Colors.white
-        : Colors.grey[900] ?? parentTheme.primaryColor,
+        : Colors.grey[900]!,
     secondary: parentTheme.brightness == Brightness.light
         ? Colors.grey[900]
         : Colors.white,
@@ -67,13 +67,6 @@ ThemeData clearAppThemeData({required BuildContext context}) {
     colorScheme: colorScheme,
     brightness: parentTheme.brightness,
     scaffoldBackgroundColor: getBackgroundColor(context),
-    textButtonTheme: TextButtonThemeData(
-      style: TextButton.styleFrom(
-        foregroundColor: parentTheme.brightness == Brightness.light
-            ? Colors.grey[900]
-            : Colors.white,
-      ),
-    ),
   );
 }
 

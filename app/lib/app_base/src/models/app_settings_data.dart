@@ -116,16 +116,12 @@ class AppSettingsData {
                 : Colors.grey[900]!),
         secondary: accent,
         brightness: newbrightness,
+        background: getBackgroundColorByBrightness(newbrightness),
       ),
       brightness: newbrightness,
       bottomSheetTheme: bottomSheetTheme,
       dialogTheme: dialogTheme,
-      backgroundColor: getBackgroundColorByBrightness(newbrightness),
       scaffoldBackgroundColor: getBackgroundColorByBrightness(newbrightness),
-      buttonTheme: ButtonThemeData(
-        buttonColor: accent,
-        highlightColor: accent,
-      ),
     );
   }
 
