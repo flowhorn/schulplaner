@@ -93,34 +93,29 @@ class GradeDevelopmentView extends StatelessWidget {
                         ),
                         titlesData: FlTitlesData(
                           show: true,
-                          bottomTitles: SideTitles(
-                            showTitles: true,
-                            reservedSize: 22,
-                            getTextStyles: (value, _) => TextStyle(
-                                color: const Color(0xff68737d),
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16),
-                            getTitles: (value) {
-                              return '';
-                            },
-                            margin: 8,
-                          ),
-                          leftTitles: SideTitles(
-                            showTitles: true,
-                            getTextStyles: (value, _) => TextStyle(
-                              color: const Color(0xff67727d),
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
+                          bottomTitles: AxisTitles(
+                            sideTitles: SideTitles(
+                              showTitles: true,
+                              reservedSize: 22,
+                              getTitlesWidget: (value, meta) {
+                                return Text('');
+                              },
+                              interval: 1,
                             ),
-                            getTitles: (value) {
-                              if (containsValues) {
-                                return lefttexts[value] ?? '';
-                              } else {
-                                return value.toString();
-                              }
-                            },
-                            reservedSize: 25,
-                            margin: 10,
+                          ),
+                          leftTitles: AxisTitles(
+                            sideTitles: SideTitles(
+                              showTitles: true,
+                              getTitlesWidget: (value, meta) {
+                                if (containsValues) {
+                                  return Text(lefttexts[value] ?? '');
+                                } else {
+                                  return Text(value.toString());
+                                }
+                              },
+                              reservedSize: 25,
+                              interval: 1,
+                            ),
                           ),
                         ),
                         borderData: FlBorderData(
@@ -140,7 +135,7 @@ class GradeDevelopmentView extends StatelessWidget {
                                         .getGradeValue!(grade.valuekey!).value))
                                 .toList(),
                             isCurved: true,
-                            colors: gradientColors,
+                            gradient: LinearGradient(colors: gradientColors),
                             barWidth: 5,
                             isStrokeCapRound: true,
                             dotData: FlDotData(
@@ -148,9 +143,11 @@ class GradeDevelopmentView extends StatelessWidget {
                             ),
                             belowBarData: BarAreaData(
                               show: true,
-                              colors: gradientColors
-                                  .map((color) => color.withOpacity(0.3))
-                                  .toList(),
+                              gradient: LinearGradient(
+                                colors: gradientColors
+                                    .map((color) => color.withOpacity(0.3))
+                                    .toList(),
+                              ),
                             ),
                           ),
                         ],
