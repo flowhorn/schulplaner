@@ -13,17 +13,17 @@ dependencies:
     path: ../packages/bloc
   design_utils:
     path: ../packages/design_utils
-  cupertino_icons: ^1.0.4
-  url_launcher: 6.2.1
-  flutter_svg: ^1.1.6
+  cupertino_icons: ^1.0.8
+  url_launcher: 6.3.2
+  flutter_svg: ^2.2.1
   community_material_icon: ^5.9.55
-  carousel_slider: ^4.2.1
+  carousel_slider: ^5.1.1
   easy_dynamic_theme: ^2.3.1
   #url_strategy: 0.2.0
 
 
 dev_dependencies:
-  flutter_lints: ^3.0.0
+  flutter_lints: ^6.0.0
   flutter_test:
     sdk: flutter
 

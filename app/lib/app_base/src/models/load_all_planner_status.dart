@@ -13,7 +13,7 @@ class LoadAllPlannerStatus {
     required Map<String, Planner> plannerlist,
     required Map<String, int>? plannerorder,
     required bool loadedData,
-  })   : _activePlanner = activePlanner,
+  })  : _activePlanner = activePlanner,
         plannermap = plannerlist,
         _loadedData = loadedData,
         plannerordermap = plannerorder;
@@ -61,6 +61,7 @@ class LoadAllPlannerStatus {
 
   @override
   int get hashCode {
-    return hashList([_activePlanner, _loadedData, plannerordermap, plannermap]);
+    return Object.hashAll(
+        [_activePlanner, _loadedData, plannerordermap, plannermap]);
   }
 }

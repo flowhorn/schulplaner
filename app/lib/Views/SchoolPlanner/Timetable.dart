@@ -445,7 +445,7 @@ void showLessonDetailSheet(BuildContext context,
                   ]),
                   Align(
                     alignment: Alignment.bottomCenter,
-                    child: ButtonBar(
+                    child: OverflowBar(
                       children: <Widget>[
                         RButton(
                             text: getString(context).more,

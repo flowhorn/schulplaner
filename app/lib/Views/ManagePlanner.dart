@@ -53,7 +53,7 @@ class ManagePlannerView extends StatelessWidget {
                             pushWidget(context, ArchivedPlanner());
                           },
                           style: ButtonStyle(
-                            foregroundColor: MaterialStateProperty.all(
+                            foregroundColor: WidgetStateProperty.all(
                                 getAccentColor(context)),
                           ),
                           child: Text(getString(context).view.toUpperCase()),

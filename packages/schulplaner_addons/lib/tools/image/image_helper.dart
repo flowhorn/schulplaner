@@ -31,9 +31,6 @@ class ImageHelper {
   static Future<CroppedFile?> cropImage(XFile file) {
     return ImageCropper().cropImage(
       sourcePath: file.path,
-      aspectRatioPresets: [
-        CropAspectRatioPreset.square,
-      ],
     );
   }
 

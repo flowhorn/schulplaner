@@ -462,7 +462,7 @@ class LetterCard extends StatelessWidget {
                               initialdata: letter, database: database));
                     },
                     style: ButtonStyle(
-                      foregroundColor: MaterialStateProperty.all(
+                      foregroundColor: WidgetStateProperty.all(
                           getEventualTextColor(
                               context, getPrimaryColor(context))),
                     ),
@@ -482,7 +482,7 @@ class LetterCard extends StatelessWidget {
                           label:
                               Text(getString(context).markasread.toUpperCase()),
                           style: ButtonStyle(
-                            foregroundColor: MaterialStateProperty.all(
+                            foregroundColor: WidgetStateProperty.all(
                                 getEventualTextColor(
                                     context, getPrimaryColor(context))),
                           ),
@@ -638,7 +638,7 @@ class LetterDetailedView extends StatelessWidget {
                                           .toUpperCase()),
                                       style: ButtonStyle(
                                         foregroundColor:
-                                            MaterialStateProperty.all(
+                                            WidgetStateProperty.all(
                                                 getEventualTextColor(context,
                                                     getPrimaryColor(context))),
                                       ),
@@ -873,10 +873,9 @@ class LetterResponsesView extends StatelessWidget {
                                         .markasread
                                         .toUpperCase()),
                                     style: ButtonStyle(
-                                      foregroundColor:
-                                          MaterialStateProperty.all(
-                                              getEventualTextColor(context,
-                                                  getPrimaryColor(context))),
+                                      foregroundColor: WidgetStateProperty.all(
+                                          getEventualTextColor(context,
+                                              getPrimaryColor(context))),
                                     ),
                                   ),
                           ],

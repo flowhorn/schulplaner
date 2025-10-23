@@ -120,7 +120,7 @@ Future<String?> getTextFromInput(
               Navigator.of(context).pop();
             },
             style: ButtonStyle(
-              foregroundColor: MaterialStateProperty.all(
+              foregroundColor: WidgetStateProperty.all(
                 getTextPrimary(context),
               ),
             ),
@@ -131,7 +131,7 @@ Future<String?> getTextFromInput(
               Navigator.of(context).pop(inputtext);
             },
             style: ButtonStyle(
-              foregroundColor: MaterialStateProperty.all(
+              foregroundColor: WidgetStateProperty.all(
                 getTextPrimary(context),
               ),
             ),
@@ -1004,7 +1004,7 @@ void showConfirmationDialog(
                     Navigator.pop(context);
                   },
                   style: ButtonStyle(
-                    foregroundColor: MaterialStateProperty.all(
+                    foregroundColor: WidgetStateProperty.all(
                       getTextColor(getBackgroundColor(context)),
                     ),
                   ),
@@ -1016,10 +1016,9 @@ void showConfirmationDialog(
                     onConfirm();
                   },
                   style: ButtonStyle(
-                    foregroundColor: MaterialStateProperty.all(Colors.white),
-                    backgroundColor:
-                        MaterialStateProperty.all(Colors.redAccent),
-                    shape: MaterialStateProperty.all(
+                    foregroundColor: WidgetStateProperty.all(Colors.white),
+                    backgroundColor: WidgetStateProperty.all(Colors.redAccent),
+                    shape: WidgetStateProperty.all(
                       RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(8.0))),
                     ),
@@ -1054,7 +1053,7 @@ Future<bool?> showConfirmDialog(
                 Navigator.pop(context, false);
               },
               style: ButtonStyle(
-                foregroundColor: MaterialStateProperty.all(
+                foregroundColor: WidgetStateProperty.all(
                   getClearTextColor(context),
                 ),
               ),

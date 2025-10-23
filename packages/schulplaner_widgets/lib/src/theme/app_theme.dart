@@ -99,7 +99,10 @@ Color getSheetColor(BuildContext context) {
 }
 
 Color getBottomAppBarColor(BuildContext context) {
-  return Theme.of(context).bottomAppBarColor;
+  return Theme.of(context).bottomAppBarTheme.color ??
+      (Theme.of(context).brightness == Brightness.light
+          ? Colors.white
+          : Colors.grey[900]!);
 }
 
 bool isDarkColor(Color color) {

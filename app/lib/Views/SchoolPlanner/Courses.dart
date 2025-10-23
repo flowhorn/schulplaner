@@ -468,7 +468,7 @@ class CourseConnectedClassesView extends StatelessWidget {
                             title: Text((mClassinfo.courses.length.toString()) +
                                 bothlang(context, de: 'Fächer', en: 'Courses')),
                           ),
-                          ButtonBar(
+                          OverflowBar(
                             children: <Widget>[
                               RButton(
                                   text: getString(context).remove,
@@ -551,7 +551,7 @@ class CourseConnectedClassesView extends StatelessWidget {
                                 title: Text((info.courses.length.toString()) +
                                     getString(context).courses),
                               ),
-                              ButtonBar(
+                              OverflowBar(
                                 children: <Widget>[
                                   RButton(
                                       text: getString(context).remove,

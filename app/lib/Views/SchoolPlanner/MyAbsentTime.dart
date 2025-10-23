@@ -114,7 +114,7 @@ class NewAbsentTimeView extends StatelessWidget {
                   ),
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
-                    child: ButtonBar(
+                    child: OverflowBar(
                       children: (getRecommendedDatesSimple(context)).map(
                         (rec) {
                           return RButton(
@@ -410,7 +410,7 @@ void showAbsentTimeDetailSheetCritical(
                 ),
                 Align(
                   alignment: Alignment.bottomCenter,
-                  child: ButtonBar(
+                  child: OverflowBar(
                     children: <Widget>[
                       RButton(
                           text: getString(context).more,

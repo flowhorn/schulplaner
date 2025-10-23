@@ -84,7 +84,7 @@ class LinkEmailView extends StatelessWidget {
                                   label: Text(getString(context).linkit),
                                   onPressed: null,
                                   style: TextButton.styleFrom(
-                                      onSurface: getAccentColor(context)),
+                                      foregroundColor: getAccentColor(context)),
                                 ),
                               ),
                               onTap: () async {

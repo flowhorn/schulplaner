@@ -73,7 +73,7 @@ class UpcomingView extends StatelessWidget {
         FormSpace(16.0),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
-          child: ButtonBar(
+          child: OverflowBar(
             children: <Widget>[
               RButton(
                   text: getString(context).allevents,

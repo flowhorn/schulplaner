@@ -184,7 +184,7 @@ Future<void> showPlaceDetail(
                     leading: Icon(Icons.map),
                     title: Text(item.address),
                   ),
-                  ButtonBar(
+                  OverflowBar(
                     children: <Widget>[
                       RButton(
                           text: getString(context).navigate,

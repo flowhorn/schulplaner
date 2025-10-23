@@ -94,7 +94,7 @@ class SchoolClassMemberSheet extends SchulplanerSheet {
                     }
                   : null,
             ),
-            ButtonBar(
+            OverflowBar(
               children: <Widget>[
                 RButton(
                     text: getString(context).remove,

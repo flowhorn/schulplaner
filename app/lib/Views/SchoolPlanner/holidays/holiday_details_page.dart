@@ -42,7 +42,7 @@ Future<void> showVacationDetail({
                       item.end!.parser.toYMMMMEEEEd,
                 ),
               ),
-              ButtonBar(
+              OverflowBar(
                 children: <Widget>[
                   RButton(
                     text: getString(context).more,

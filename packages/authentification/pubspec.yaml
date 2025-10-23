@@ -21,11 +21,11 @@ dependencies:
   firebase_auth: 4.14.0
   google_sign_in: 6.1.6
   sign_in_with_apple: ^5.0.0
-  rxdart: ^0.27.7
+  rxdart: ^0.28.0
   community_material_icon: 5.9.55
   url_launcher: any
   googleapis_auth: 1.4.1
-  flutter_dotenv: ^5.1.0
+  flutter_dotenv: ^6.0.0
 
 
 

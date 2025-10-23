@@ -79,7 +79,7 @@ class _JoinGroupPage extends StatelessWidget {
                       ]),
                   FormSpace(16.0),
                   /*
-                  ButtonBar(
+                  OverflowBar(
                     children: <Widget>[
                       RButton(text: "Einladungslink eingeben", onTap: () {})
                     ],

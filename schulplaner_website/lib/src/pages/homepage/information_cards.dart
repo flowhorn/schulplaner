@@ -53,7 +53,7 @@ class _LearnMoreAboutPrivacyButton extends StatelessWidget {
         openNavigationPage(context, NavigationItem.privacy);
       },
       style: ButtonStyle(
-        foregroundColor: MaterialStateProperty.all(Colors.teal),
+        foregroundColor: WidgetStateProperty.all(Colors.teal),
       ),
     );
   }

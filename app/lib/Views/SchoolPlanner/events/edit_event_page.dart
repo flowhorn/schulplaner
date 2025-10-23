@@ -66,7 +66,7 @@ class NewSchoolEventView extends StatelessWidget {
         .map((date) =>
             RecommendedDate(date: date, text: getString(context).nextlesson))
         .toList()
-          ..addAll(getRecommendedDatesSimple(context));
+      ..addAll(getRecommendedDatesSimple(context));
 
     return WillPopScope(
       onWillPop: () async {
@@ -165,7 +165,7 @@ class NewSchoolEventView extends StatelessWidget {
                                 date: date,
                                 text: getString(context).nextlesson))
                             .toList()
-                              ..addAll(getRecommendedDatesSimple(context));
+                          ..addAll(getRecommendedDatesSimple(context));
                         notifier.notifyListeners();
                       },
                     ),
@@ -226,7 +226,7 @@ class NewSchoolEventView extends StatelessWidget {
                         : nowidget(),
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
-                      child: ButtonBar(
+                      child: OverflowBar(
                         children: (recommendeddates).map(
                           (rec) {
                             return RButton(

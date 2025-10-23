@@ -461,7 +461,7 @@ void showTaskDetailSheet(BuildContext context,
                   ]),
                   Align(
                     alignment: Alignment.bottomCenter,
-                    child: ButtonBar(
+                    child: OverflowBar(
                       children: <Widget>[
                         RButton(
                           text: getString(context).finished,
@@ -741,7 +741,7 @@ void showTaskDetailSheetCritical(BuildContext context,
                   ),
                   Align(
                     alignment: Alignment.bottomCenter,
-                    child: ButtonBar(
+                    child: OverflowBar(
                       children: <Widget>[
                         RButton(
                           text: getString(context).finished,

@@ -179,7 +179,7 @@ void showGradeInfoSheet(PlannerDatabase database,
               ]),
               Align(
                 alignment: Alignment.bottomCenter,
-                child: ButtonBar(
+                child: OverflowBar(
                   children: <Widget>[
                     //RButton(text: "Anrufen", onTap: () {}),
                     RButton(
