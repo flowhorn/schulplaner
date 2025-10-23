@@ -167,7 +167,7 @@ class _AppBarAction extends StatelessWidget {
           openNavigationPage(context, navigationItem);
         },
         /* style: ButtonStyle(
-        shape: MaterialStateProperty.all(
+        shape: WidgetStateProperty.all(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(16.0)),
             side: BorderSide(
@@ -199,7 +199,7 @@ class _AppBarActionText extends StatelessWidget {
           fontSize: 16,
           color: isCurrentPage
               ? Theme.of(context).colorScheme.secondary
-              : Theme.of(context).textTheme.bodyText1?.color,
+              : Theme.of(context).textTheme.bodyLarge?.color,
         ),
       ),
     );

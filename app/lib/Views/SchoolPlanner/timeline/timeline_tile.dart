@@ -452,12 +452,12 @@ class Tile extends StatelessWidget {
               children: <Widget>[
                 if (title != null)
                   DefaultTextStyle(
-                    style: Theme.of(context).textTheme.subtitle1!,
+                    style: Theme.of(context).textTheme.titleSmall!,
                     child: title!,
                   ),
                 if (subtitle != null)
                   DefaultTextStyle(
-                    style: Theme.of(context).textTheme.bodyText2!,
+                    style: Theme.of(context).textTheme.bodyMedium!,
                     child: subtitle!,
                   ),
               ],

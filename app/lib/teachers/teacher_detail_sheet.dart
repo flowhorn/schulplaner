@@ -36,7 +36,7 @@ Future<void> showTeacherDetail(
                   ),
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
-                    child: ButtonBar(
+                    child: OverflowBar(
                       children: <Widget>[
                         RButton(
                             text: 'Anrufen',

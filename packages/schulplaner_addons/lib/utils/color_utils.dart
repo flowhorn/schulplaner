@@ -18,7 +18,7 @@ class ColorUtils {
   }
 
   Color getDefaultTextColor() {
-    return getTextColor(theme.backgroundColor);
+    return getTextColor(theme.scaffoldBackgroundColor);
   }
 
   Color getPrimaryColor() {
@@ -30,7 +30,7 @@ class ColorUtils {
   }
 
   Color getBackgroundColor() {
-    return theme.backgroundColor;
+    return theme.scaffoldBackgroundColor;
   }
 
   Color getClearBorderColor(BuildContext context, Color color) {

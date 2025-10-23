@@ -30,7 +30,7 @@ class _PrivacyPolicy extends StatelessWidget {
         openNavigationPage(context, NavigationItem.privacy);
       },
       style: ButtonStyle(
-        foregroundColor: MaterialStateProperty.all(Colors.white),
+        foregroundColor: WidgetStateProperty.all(Colors.white),
       ),
     );
   }
@@ -46,7 +46,7 @@ class _Imprint extends StatelessWidget {
         openNavigationPage(context, NavigationItem.impressum);
       },
       style: ButtonStyle(
-        foregroundColor: MaterialStateProperty.all(Colors.white),
+        foregroundColor: WidgetStateProperty.all(Colors.white),
       ),
     );
   }
@@ -64,7 +64,7 @@ class _About extends StatelessWidget {
         openNavigationPage(context, NavigationItem.about);
       },
       style: ButtonStyle(
-        foregroundColor: MaterialStateProperty.all(Colors.white),
+        foregroundColor: WidgetStateProperty.all(Colors.white),
       ),
     );
   }

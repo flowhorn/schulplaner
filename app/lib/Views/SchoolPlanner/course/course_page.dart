@@ -75,7 +75,7 @@ class CourseView extends StatelessWidget {
                       stream: database.letters.stream.map((datamap) => datamap),
                       initialData: database.letters.data,
                     ),
-                    ButtonBar(
+                    OverflowBar(
                       children: <Widget>[
                         RButton(
                             text: getString(context).create,

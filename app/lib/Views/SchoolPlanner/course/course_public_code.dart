@@ -61,7 +61,7 @@ class CoursePublicCodeView extends StatelessWidget {
                 ),
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
-                  child: ButtonBar(
+                  child: OverflowBar(
                     children: <Widget>[
                       courseInfo.publiccode != null
                           ? nowidget()

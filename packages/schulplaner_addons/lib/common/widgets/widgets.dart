@@ -15,7 +15,7 @@ class RoundButton extends StatelessWidget {
     return OutlinedButton(
       onPressed: onTap,
       style: ButtonStyle(
-        shape: MaterialStateProperty.all(
+        shape: WidgetStateProperty.all(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.all(
               Radius.circular(8.0),

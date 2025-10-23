@@ -89,7 +89,7 @@ class EditProfileView extends StatelessWidget {
                 switch (data.displayMode) {
                   case ProfileDisplayMode.pic:
                     {
-                      return ButtonBar(
+                      return OverflowBar(
                         alignment: MainAxisAlignment.center,
                         children: <Widget>[
                           RButton(

@@ -27,7 +27,7 @@ dependencies:
   image_cropper: ^5.0.0
   flutter_image_compress: ^2.1.0
   image_picker: 1.0.4
-  file_picker: ^6.1.1
+  file_picker: ^10.3.3
   photo_view: ^0.14.0
   #FIREBASE
   firebase_storage: ^11.5.1

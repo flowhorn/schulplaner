@@ -443,7 +443,7 @@ Widget getSubSettingsAdvanced(BuildContext context, PlannerDatabase database) {
             ListTile(
               title: Text('PLANNERID: ' + database.plannerid),
             ),
-            ButtonBar(
+            OverflowBar(
               children: <Widget>[
                 RButton(
                     text: getString(context).addtoclipboard,

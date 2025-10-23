@@ -70,7 +70,7 @@ class Planner {
 
   @override
   int get hashCode {
-    return hashList([
+    return Object.hashAll([
       id,
       uid,
       name,

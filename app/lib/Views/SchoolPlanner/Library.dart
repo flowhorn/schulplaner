@@ -71,7 +71,7 @@ class ShortSchoolClassView extends StatelessWidget {
           }).toList()
             ..add(data.isNotEmpty
                 ? FormSpace(0.0)
-                : ButtonBar(
+                : OverflowBar(
                     alignment: MainAxisAlignment.center,
                     children: <Widget>[
                       RButton(
@@ -146,7 +146,7 @@ class LibraryView extends StatelessWidget {
                     }).toList()
                       ..add(data.isNotEmpty
                           ? FormSpace(0.0)
-                          : ButtonBar(
+                          : OverflowBar(
                               alignment: MainAxisAlignment.center,
                               children: <Widget>[
                                 RButton(
@@ -773,7 +773,7 @@ class _SchoolClassSection extends StatelessWidget {
                       },
                     ),
                   if (data.isEmpty)
-                    ButtonBar(
+                    OverflowBar(
                       alignment: MainAxisAlignment.center,
                       children: <Widget>[
                         RButton(

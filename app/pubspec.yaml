@@ -5,7 +5,7 @@ version: 10.0.1+611
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
-  flutter: ">=3.13.0"
+  flutter: ">=3.29.0"
 
 dependencies:
   schulplaner_addons:
@@ -57,8 +57,8 @@ dependencies:
   firebase_dynamic_links: 5.4.4
   firebase_remote_config: ^4.3.4
 
-  intl: ^0.18.1
-  intl_translation: 0.18.2
+  intl: any
+  intl_translation: any
   rxdart: ^0.27.7
   flutter_dotenv: ^5.1.0
   

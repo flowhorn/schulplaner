@@ -8,6 +8,7 @@ import 'package:photo_view/photo_view.dart';
 import 'package:schulplaner_widgets/schulplaner_common.dart';
 
 enum FileForm { STANDARD, WEBLINK, OLDTTYPE }
+
 enum SavedInType {
   PERSONAL,
   COURSE,
@@ -211,7 +212,7 @@ void showImage(BuildContext context, String url, String? name) {
         ),
         bottomNavigationBar: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
-          child: ButtonBar(
+          child: OverflowBar(
             children: <Widget>[
               RButton(
                   text: getString(context).openinbrowser,

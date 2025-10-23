@@ -342,7 +342,7 @@ class EditPhotoField extends StatelessWidget {
                   ),
                 ),
               ),
-              ButtonBar(
+              OverflowBar(
                 children: <Widget>[
                   RoundButton(
                     label: 'Neues Bild',

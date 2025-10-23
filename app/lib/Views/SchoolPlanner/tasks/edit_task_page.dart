@@ -198,7 +198,7 @@ class NewSchoolTaskView extends StatelessWidget {
                   ),
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
-                    child: ButtonBar(
+                    child: OverflowBar(
                       children: (recommendeddates ??
                               getRecommendedDatesSimple(context))
                           .map((rec) {

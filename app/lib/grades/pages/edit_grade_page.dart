@@ -208,7 +208,7 @@ class NewGradeViewState extends State<NewGradeView> {
                     ),
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
-                      child: ButtonBar(
+                      child: OverflowBar(
                         children:
                             (getRecommendedDatesSimple(context)).map((rec) {
                           return RButton(
