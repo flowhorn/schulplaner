@@ -3,6 +3,8 @@
 .sconsign.dblite
 .svn/
 
+**/Flutter/ephemeral/
+
 .DS_Store
 *.swp
 profile
